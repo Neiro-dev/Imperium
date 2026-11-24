@@ -13,12 +13,18 @@ Sources for the slices: the meaning of the design documents in `docs/` on Imperi
 implementation (constitution, Source Register, "Imperium's own design"). Its unmerged design-draft pull requests are
 not design. Where a design document points to one of them, the slice lists it as open.
 
+Each slice is independently testable, so that implementing it alone leaves something demonstrable (spec-of-specs,
+The roadmap pass, step 2; `.specify/templates/spec-template.md` lines 15-23). Where a design slice has no way to be
+demonstrated on its own, the roadmap also holds the slice that makes it demonstrable. Such a slice is part of the
+development workflow, not of the design, and adds no game content.
+
 **Status legend**: planned · in-progress · done
 
 | ID | Sub-feature | Intent | Scope boundary | Depends on | Status | Sub-spec |
 |----|-------------|--------|----------------|-----------|--------|----------|
 | R1 | Mod foundation | Imperium loads as a mod that requires Royalty and no other expansion, and is complete with Royalty alone (`docs/imperium.md` lines 108-109) | In: a loadable mod and its requirements. Deferred: all content | — | in-progress | specs/001-mod-foundation/ |
-| R2 | Mantle | Mantle generates the world the parts take place in, and runs whether Empire content is on or off (`docs/imperium.md` lines 91-92; glossary "Mantle", "city building") | In: the generation layer and its on/off independence. Open: what it generates beyond R4 (the section Mantle of draft #132) | R1 | planned | — |
+| R13 | Layout preview | A settlement's layout on the game's cells is drawn as a gridded map with coordinates and a legend, outside the game, so that a layout can be checked and changed without starting the game (glossary "city building", "template") | In: drawing a layout description that holds only what the game can place. Deferred: generating layouts (R2), placing them in the game (R4) | — | planned | — |
+| R2 | Mantle | Mantle generates the world the parts take place in, and runs whether Empire content is on or off (`docs/imperium.md` lines 91-92; glossary "Mantle", "city building") | In: the generation layer and its on/off independence. Open: what it generates beyond R4 (the section Mantle of draft #132) | R1, R13 | planned | — |
 | R3 | The Empire faction | The present Empire replaces the base game's Empire, leans toward New Rome, carries no guns (`docs/setting.md` sections Rome, Weapons, Politics) | In: the faction and its rules. Open: mechanoids, appearance, honor guard (drafts #63, #133) | R1 | planned | — |
 | R4 | Starting ruins | A non-expiring quest leads to ruins near the colony that Mantle generates as a decayed town, different each game, which hold the core and disappear once it is taken (`docs/core.md` lines 59-63) | In: quest, site, town generation. Deferred: the core's uses | R2 | planned | — |
 | R5 | The core | The core cannot be destroyed, drops or returns with its building, and can be sold (`docs/core.md` lines 73-80) | In: keeping and selling. Deferred: insignia (R6), analysis device (R7), ultraheavy mechanoid (R9) | R4 | planned | — |
@@ -30,5 +36,7 @@ not design. Where a design document points to one of them, the slice lists it as
 | R11 | Playstyles | Standard, distant empire and custom difficulty for the Empire content (`docs/playstyles.md`) | In: the three playstyles | R4, R8 | planned | — |
 | R12 | The end | One of two ends decides the Empire's rule on this planet (`docs/imperium.md` lines 83-88, 93) | Open: how either end is reached (Imperium-old issue #164) | R6, R8 | planned | — |
 
-The first slice is R1, the only one with no dependencies. City building, Mantle's generation of settlements, starts
-in R2 and is first used by R4.
+R1 and R13 have no dependencies, so they can be built in either order or in parallel (spec-of-specs, The roadmap
+pass, step 4). City building, Mantle's generation of settlements, starts in R2 and is first used by R4. Until R4 places
+a town on a map, the tests in the game (`Readme.txt` line 58, then RimBridgeServer with GABS) have no generated
+settlement to look at, so R2 is demonstrable on its own only outside the game, through R13.
