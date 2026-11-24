@@ -197,7 +197,7 @@ def run(files: list[Path], data: Path, out: Path, mods: list[Path], references: 
         else:
             image = painter.city(item, marked)
             if pictures and item.is_reading and item.scale is not None and item.scale.usable():
-                pictures = [painter.over_picture(pictures[0], item), *pictures[1:]]
+                pictures = [painter.over_picture(pictures[0], item, marked), *pictures[1:]]
         save(image, out / f"{stem}.png")
         if pictures:
             save(side_by_side(image, pictures), out / f"{stem}.side-by-side.png")

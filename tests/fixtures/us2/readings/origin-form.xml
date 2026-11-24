@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LaidOutCity>
+  <reference>TestPicture</reference>
+  <size>(40,40)</size>
+  <scale>
+    <pixelsPerCell>20</pixelsPerCell>
+    <referenceCell>4</referenceCell>
+    <origin>(left,300)</origin>
+    <measured><li><name>door</name><rect>(40,40,59,59)</rect></li></measured>
+  </scale>
+  <terrain>
+    <Soil><rects><li>(0,0,39,39)</li></rects></Soil>
+  </terrain>
+  <roofs />
+  <parts>
+    <li><name>block</name><rects><li>(10,10,19,19)</li></rects><from><li>(50,200,99,249)</li></from><use>Housing</use><basis>Rows of houses with small yards.</basis></li>
+  </parts>
+</LaidOutCity>

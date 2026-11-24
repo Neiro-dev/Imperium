@@ -60,6 +60,7 @@ from, as pixel rects (the form of data-model.md, Common forms; spec FR-048, FR-0
   <scale>
     <pixelsPerCell>9.5</pixelsPerCell>
     <referenceCell>4</referenceCell>
+    <origin>(0,300)</origin>
     <measured><li><name>door</name><rect>(412,288,421,297)</rect></li></measured>
   </scale>
   ...
@@ -71,7 +72,8 @@ from, as pixel rects (the form of data-model.md, Common forms; spec FR-048, FR-0
 </LaidOutCity>
 ```
 
-A building or group holds `use`, one of `Housing`, `ShopFront`, `Workshop`, `Tavern`, `Market`, `Public`,
+`origin` is optional: the pixel `(x,y)` of the picture where the lower left corner of cell (0, 0) lies, the picture's lower
+left corner where it is left out (spec FR-051). A building or group holds `use`, one of `Housing`, `ShopFront`, `Workshop`, `Tavern`, `Market`, `Public`,
 `AnnexOrAttic` or `Unclear`, and `basis`, one sentence (spec FR-049, the design's eight classes). What is done with an area of
 which more than three tenths is unclear has no form (spec FR-049, marked NEEDS CLARIFICATION).
 

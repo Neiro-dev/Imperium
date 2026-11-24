@@ -387,7 +387,8 @@ files, to `Neiro-dev/Imperium-old` at 20a052b, to Spec Kit at v1.4.3 and to Harm
   cells; so no task builds the first two, and no value is taken from the third (spec FR-048, FR-049, FR-051, marked
   NEEDS CLARIFICATION; constitution, Principles IV and V).
 - **Form**: a reading is a laid-out city (R-7), so the record sits in it: the root holds `scale`, the pixels per cell
-  (`pixelsPerCell`), the RimWorld cells one cell of the reference game is (`referenceCell`) and a list of the things
+  (`pixelsPerCell`), the RimWorld cells one cell of the reference game is (`referenceCell`), optionally the pixel where cell (0, 0)'s lower left corner lies (`origin`, the picture's lower left
+  corner where left out) and a list of the things
   measured, at least one, each a `name` and its `rect` in the picture's pixels; each part and feature may
   hold `from`, its region of the picture as `rect`s in pixels, and a part that is a building or group holds `use`, one
   of the design's eight classes, and `basis`, one sentence (data-model.md, `LaidOutCity`). The form records no kind
@@ -395,7 +396,8 @@ files, to `Neiro-dev/Imperium-old` at 20a052b, to Spec Kit at v1.4.3 and to Harm
   building or group its `use` is judged by eye (spec SC-013). The pictures stay what
   R-11 draws, one PNG and one side-by-side PNG; where a reading holds a `scale`, the reference picture in the
   side-by-side PNG carries the reading's cells laid over it where the `scale` places them, so that no picture or file
-  name is added (FR-025, FR-051).
+  name is added, and the cells carry the pieces' names and numbers, the numbers of the problems at them and a legend
+  (FR-025, FR-051).
 - **Rationale**: spec FR-048 to FR-052, which take the steps from the design archive (`cities.md`, The size of a cell;
   `cities-forms.md` lines 123, 199, 475-477 and 487) and keep the effect of the old project's preview tool as the maintainer
   directed (spec, Clarifications). R-7 already gives a reading its form and R-11 the check its pictures, so only the

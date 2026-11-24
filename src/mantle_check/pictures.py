@@ -269,36 +269,74 @@ class Painter:
         self.problems(image, cell, bounds, numbered)
         return self.legend(image, legend, ["Parts are outlined in blue, terrain features in teal, problems in red."])
 
-    def over_picture(self, picture: Image.Image, city: City) -> Image.Image:
+    def over_picture(self, picture: Image.Image, city: City, numbered: list[tuple[int, Problem]]) -> Image.Image:
         """The reference picture with the reading's cells laid over it at the reading's scale: one cell is the
         scale's pixels per cell over its reference cell, cell (0, 0) at the picture's lower left corner and z growing
-        up the picture, as in the drawing. Nothing is marked as matching or not (spec FR-051; research R-17)."""
+        up the picture, as in the drawing, or at the scale's `origin` where it has one. Each piece carries its name and
+        number, the problems at its cells their numbers, and a legend names the colours. Nothing is marked as matching
+        or not (spec FR-051; research R-17)."""
         side = city.scale.pixels_per_rimworld_cell()
-        height = picture.height
+        origin_x, origin_y = city.scale.origin if city.scale.origin is not None else (0, picture.height)
         base = picture.convert("RGBA")
         overlay = Image.new("RGBA", base.size, (0, 0, 0, 0))
         draw = ImageDraw.Draw(overlay)
 
         def box(rect) -> tuple[int, int, int, int]:
             x1, z1, x2, z2 = rect
-            return (round(x1 * side), round(height - (z2 + 1) * side), round((x2 + 1) * side) - 1,
-                    round(height - z1 * side) - 1)
+            return (round(origin_x + x1 * side), round(origin_y - (z2 + 1) * side),
+                    round(origin_x + (x2 + 1) * side) - 1, round(origin_y - z1 * side) - 1)
+
+        legend = Legend()
 
         for layers, short_type, blend in ((city.terrain, "TerrainDef", 0.35), (city.roofs, "RoofDef", 0.2)):
             for entry in layers:
-                colour = self.colour_of(self.definition(entry.ref.name, short_type), entry.ref.name)
+                definition = self.definition(entry.ref.name, short_type)
+                colour = self.colour_of(definition, entry.ref.name)
+                legend.add(short_type[:-3].lower(), entry.ref.name, colour, self.describe(definition, entry.ref.name))
                 for rect in entry.rects:
                     draw.rectangle(box(rect), fill=(*colour, round(255 * blend)))
+        legend.add("feature", "feature", FEATURE, "terrain feature, outlined")
+        legend.add("part", "part", AREA, "part, outlined and numbered")
+        labels = []
         for areas, colour in ((city.features, FEATURE), (city.parts, AREA)):
-            for area in sorted(areas, key=lambda a: a.name):
+            for number, area in enumerate(sorted(areas, key=lambda a: a.name), start=1):
                 for rect in area.rects:
                     draw.rectangle(box(rect), fill=(*colour, 110), outline=(*colour, 255))
+                if area.rects:
+                    labels.append((box(area.rects[0]), f"{number} {area.name}", colour))
         for thing in city.things:
             rect = thing.rect or ((*thing.position, *thing.position) if thing.position is not None else None)
             if rect is not None:
-                colour = self.colour_of(self.definition(thing.ref.name, "ThingDef"), thing.ref.name)
+                definition = self.definition(thing.ref.name, "ThingDef")
+                colour = self.colour_of(definition, thing.ref.name)
+                legend.add("thing", thing.ref.name, colour, self.describe(definition, thing.ref.name))
                 draw.rectangle(box(rect), fill=(*colour, 220), outline=INK)
-        return Image.alpha_composite(base, overlay).convert("RGB")
+        image = Image.alpha_composite(base, overlay).convert("RGB")
+        draw = ImageDraw.Draw(image)
+        for (left, top, _, _), caption, colour in labels:
+            self.write(draw, (left + 3, top + 2), caption, colour, 12)
+        for number, problem in numbered:
+            if problem.cell is not None:
+                left, top, right, bottom = box(problem.cell)
+                draw.rectangle((left, top, right, bottom), outline=PROBLEM, width=2)
+                self.write(draw, (left + 2, top - 14), f"{number}", PROBLEM, 12)
+        self.legend_on(image, legend)
+        return image
+
+    def legend_on(self, image: Image.Image, legend: Legend) -> None:
+        """A legend of the colours used, in the picture's top left corner, with nothing added to the picture's size."""
+        rows = [f"{group}: {label}" for (group, _), (_, label) in sorted(legend.entries.items(), key=lambda i: (i[0][0], i[1][1], i[0][1]))]
+        colours = [colour for _, (colour, _) in sorted(legend.entries.items(), key=lambda i: (i[0][0], i[1][1], i[0][1]))]
+        if not rows:
+            return
+        draw = ImageDraw.Draw(image)
+        small = font(11)
+        width = max(draw.textbbox((0, 0), row, font=small)[2] for row in rows) + 28
+        draw.rectangle([4, 4, 4 + width, 8 + 15 * len(rows)], fill=BACKGROUND, outline=INK)
+        for index, (row, colour) in enumerate(zip(rows, colours)):
+            y = 7 + 15 * index
+            draw.rectangle([8, y + 1, 18, y + 11], fill=colour, outline=INK)
+            self.write(draw, (22, y), row, INK, 11)
 
     def diagram(self, skeleton: Skeleton, kit_skeleton: Skeleton | None, features: list[str], height: int) -> Image.Image:
         parts = {}

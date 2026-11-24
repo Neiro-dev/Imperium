@@ -888,7 +888,13 @@ and confirm that no shared file was changed.
   shape is [NEEDS CLARIFICATION: no source gives it. The design and the maintainer's direction state the effect only;
   the old tool's criteria are implementation, which the Source Register excludes; none is written (constitution,
   Principle V)]. Until it is given, the check marks no piece, and the report MUST say that mismatches are not marked
-  and that a picture without marks is not a match (FR-020, FR-029).
+  and that a picture without marks is not a match (FR-020, FR-029). The tracing MUST be laid where the picture shows
+  the city: the scale MAY hold an `origin`, the pixel of the picture at which the lower left corner of cell (0, 0)
+  lies, and where it holds none that corner is the picture's own lower left corner. The tracing over the picture MUST
+  carry each piece's name and number, the numbers of the problems reported at its cells, and a legend of the colours
+  it uses, as the drawing beside it does [Direction: the maintainer, 2026-11-24, asking for the effect of the old
+  project's preview tool, which draws names, numbers and a legend on the picture; the form of `origin` is the check's
+  own, since no source gives one].
 - **FR-052**: Where FR-048 to FR-051 give no form for a picture, such as one not shown from above (FR-037) or one
   showing none of a door, a figure or a tree to size a cell by, it MUST NOT be read by a method of its own; which
   picture to use instead is the maintainer's broad direction [constitution, Principles IV and V; FR-037]. The reason is

@@ -96,3 +96,40 @@ def test_the_same_inputs_give_identical_pictures_and_reports(run_check, make_pic
     assert first.report == second.report
     for name in ("clean.png", "clean.side-by-side.png", "report.txt"):
         assert (first.out / name).read_bytes() == (second.out / name).read_bytes(), name
+
+
+def test_an_origin_not_in_its_form_is_reported(run_check, make_picture):
+    result = run_check([READINGS / "origin-form.xml"], references=references(make_picture))
+    assert result.kinds() == ["wrong form"], result.report
+    assert result.problems[0]["where"] == "scale origin"
+    assert "'(left,300)'" in result.problems[0]["message"]
+
+
+def test_an_origin_moves_the_cells_over_the_picture(run_check, make_picture):
+    result = run_check([READINGS / "with-origin.xml"], references=references(make_picture))
+    assert result.problems == [], result.report
+    drawing = Image.open(result.out / "with-origin.png")
+    side = Image.open(result.out / "with-origin.side-by-side.png").convert("RGB")
+    # The origin (100, 300) puts cell (0, 0)'s lower left corner 100 pixels to the right: the part's cells now fill
+    # x 150 to 199, and the pixels where they were without it are soil.
+    moved = side.getpixel(placed(drawing, side, 175, 225))
+    before = side.getpixel(placed(drawing, side, 75, 225))
+    assert moved[2] > moved[1]
+    assert before != moved
+    assert before == BACKGROUND  # left of the origin, outside the cells, the picture is as it was
+    assert side.getpixel(placed(drawing, side, 120, 275)) != BACKGROUND  # soil, inside them
+
+
+def test_the_cells_over_the_picture_carry_names_a_legend_and_problem_numbers(run_check, make_picture):
+    clean = run_check([READINGS / "clean.xml"], references=references(make_picture))
+    drawing = Image.open(clean.out / "clean.png")
+    side = Image.open(clean.out / "clean.side-by-side.png").convert("RGB")
+    block = {side.getpixel(placed(drawing, side, x, y)) for x in range(55, 95, 2) for y in range(203, 245, 2)}
+    soil = {side.getpixel(placed(drawing, side, x, y)) for x in range(130, 190, 4) for y in range(255, 295, 4)}
+    assert len(soil) == 1
+    assert len(block) > 3  # the part's outline and its number and name
+    corner = {side.getpixel(placed(drawing, side, x, y)) for x in range(2, 30, 2) for y in range(2, 30, 2)}
+    assert len(corner) > 3  # the legend's panel, swatches and words fill the picture's corner
+    # A problem at the part's cells is outlined in red on the picture, with its number.
+    marked = run_check([READINGS / "use-outside.xml"], references=references(make_picture), out=clean.out.parent / "m")
+    assert marked.kinds() == [KIND]

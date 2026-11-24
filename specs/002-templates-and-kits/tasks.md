@@ -346,7 +346,7 @@ tests come first and fail before the code, as in each story.
   "wrong scale, region or use", as T059 sets (data-model.md `LaidOutCity`, Common forms, What the check reports; spec
   FR-019, FR-048, FR-049; research R-17)
 - [x] T061 In `src/mantle_check/pictures.py`, lay the cells of a reading that holds a `scale` over its reference
-  picture in the side-by-side picture, at the pixels the `scale` gives, adding no picture or file name; in
+  picture in the side-by-side picture, at the pixels the `scale` gives from its `origin`, with each piece's name and number, the numbers of the problems at its cells and a legend, adding no picture or file name; in
   `src/mantle_check/report.py`, say for such a reading that mismatches are not marked and that no picture is reported
   as a match (contracts/check-command.md, Output); and pass T059 (research R-11, R-17; spec FR-020, FR-025, FR-029,
   FR-051; SC-014)

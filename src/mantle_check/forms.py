@@ -45,6 +45,7 @@ _INT = r"\s*(-?\d+)\s*"
 RECT = re.compile(rf"^\({_INT},{_INT},{_INT},{_INT}\)$")
 POSITION = re.compile(rf"^\({_INT},\s*0\s*,{_INT}\)$")
 SIZE = re.compile(rf"^\({_INT},{_INT}\)$")
+PIXEL = re.compile(rf"^\({_INT},{_INT}\)$")
 MIN_MAP_SIZE = re.compile(rf"^\({_INT},\s*1\s*,{_INT}\)$")
 
 
@@ -192,6 +193,8 @@ class Scale:
     pixels_per_cell: float | None
     reference_cell: float | None
     measured: list[Measured]
+    # The pixel of the picture where cell (0, 0)'s lower left corner lies; None puts it at the picture's lower left.
+    origin: tuple[int, int] | None = None
 
     def usable(self) -> bool:
         return (
@@ -382,6 +385,13 @@ class Reader:
             self.number(node, "referenceCell", "scale referenceCell"),
             [],
         )
+        origin_text = node.findtext("origin")
+        if origin_text is not None:
+            match = PIXEL.match(origin_text)
+            if match:
+                scale.origin = (int(match.group(1)), int(match.group(2)))
+            else:
+                self.wrong_form("scale origin", origin_text.strip(), "(x,y) in whole pixels")
         measured = node.findall("measured/li")
         if not measured:
             self.problem(WRONG_SCALE, "scale measured", "the scale holds no thing it was measured from, at least one")
