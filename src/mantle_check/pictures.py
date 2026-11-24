@@ -175,12 +175,25 @@ class Painter:
     def areas(self, image, cell, bounds, areas, colour) -> None:
         w, h = bounds
         draw = ImageDraw.Draw(image)
+        ox, oy = self.origin()
         for area in sorted(areas, key=lambda a: a.name):
+            # The outline of all its cells together, so that an area written as many rects reads as one.
+            cells = set()
             for x1, z1, x2, z2 in area.rects:
-                rect = (max(0, x1), max(0, z1), min(w - 1, x2), min(h - 1, z2))
-                if rect[0] > rect[2] or rect[1] > rect[3]:
-                    continue
-                draw.rectangle(self.rect_box(cell, h, rect), outline=colour, width=2)
+                for x in range(max(0, x1), min(w - 1, x2) + 1):
+                    for z in range(max(0, z1), min(h - 1, z2) + 1):
+                        cells.add((x, z))
+            for x, z in sorted(cells):
+                left, top = ox + x * cell, oy + (h - 1 - z) * cell
+                right, bottom = left + cell, top + cell
+                if (x - 1, z) not in cells:
+                    draw.line([(left, top), (left, bottom)], fill=colour, width=2)
+                if (x + 1, z) not in cells:
+                    draw.line([(right - 1, top), (right - 1, bottom)], fill=colour, width=2)
+                if (x, z + 1) not in cells:
+                    draw.line([(left, top), (right, top)], fill=colour, width=2)
+                if (x, z - 1) not in cells:
+                    draw.line([(left, bottom - 1), (right, bottom - 1)], fill=colour, width=2)
             if area.rects:
                 x1, z1, x2, z2 = area.rects[0]
                 left, top, _, _ = self.rect_box(cell, h, (max(0, x1), max(0, z1), min(w - 1, x2), min(h - 1, z2)))
