@@ -1,5 +1,12 @@
 # Imperium Constitution
 
+This constitution holds Imperium's guiding principles, in Spec Kit's sense: the principles every later
+step is evaluated against. It says where every answer comes from (Principles I to III and the Source
+Register), whom the agent may ask (Principle IV), what the agent does when a source gives no form
+(Principle V), what every conclusion names (Principle VI), and how it is amended (Governance). It is not
+itself a source of answers, because nothing outside the Source Register is a source (Principle I), and it
+holds no rule that no source supports (Principle V).
+
 ## Core Principles
 
 ### I. One Source per Topic
@@ -63,4 +70,4 @@ Versioning follows semantic versioning:
 
 Compliance is reviewed at each plan's Constitution Check and at pull request review.
 
-**Version**: 2.2.1 | **Ratified**: 2026-11-23 | **Last Amended**: 2026-11-24
+**Version**: 2.2.2 | **Ratified**: 2026-11-23 | **Last Amended**: 2026-11-25
