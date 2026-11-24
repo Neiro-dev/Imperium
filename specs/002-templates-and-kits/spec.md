@@ -830,7 +830,10 @@ and confirm that no shared file was changed.
 - **FR-049**: A reference MUST be traced into cells only as far as blocks, house groups, yards and roads, not building
   by building, and a template candidate MUST come only from tracing an accepted reference [Design archive:
   `cities-forms.md` lines 123 and 475]. Each traced piece MUST name the region of the picture it was read from
-  [constitution, Principle VI].
+  [constitution, Principle VI]. The classes a piece is traced in are [NEEDS CLARIFICATION: no source gives them. The
+  design archive names no list; the old project's legend of the river-bend screenshot is classed `research` in the
+  archive (`specs/005-imperium-design-archive/research/C19.md` line 11) and describes that one picture, so it is not
+  design meaning; none is written (constitution, Principle V)].
 - **FR-050**: A reading MUST be made one area at a time, and the maintainer MUST see each area's picture once after it
   is traced and once after it is laid out, before the next area is begun [Design archive: `cities-forms.md` line 199;
   FR-044].
@@ -838,7 +841,10 @@ and confirm that no shared file was changed.
   the colour and shape of the picture where it lies, and mark each piece that does not match as a candidate for the
   maintainer's attention, with what differs. It MUST NOT decide that a piece is wrong or that the reading matches
   (FR-029) [Direction: the effect of the old project's preview tool is kept, 2026-11-24; Design archive: `cities.md`,
-  the Anno sample "kept for side-by-side comparison"].
+  the Anno sample "kept for side-by-side comparison"]. What counts as a piece not matching the picture in colour and
+  shape is [NEEDS CLARIFICATION: no source gives it. The design and the maintainer's direction state the effect only;
+  the old tool's criteria are implementation, which the Source Register excludes; none is written (constitution,
+  Principle V)].
 - **FR-052**: Where FR-048 to FR-051 give no form for a picture, such as one not shown from above (FR-037), it MUST NOT
   be read by a method of its own; which picture to use instead is the maintainer's broad direction [constitution,
   Principles IV and V; FR-037].
