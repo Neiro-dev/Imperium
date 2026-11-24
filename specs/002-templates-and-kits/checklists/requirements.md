@@ -36,7 +36,7 @@
   `/speckit-plan`.
 - Where template layouts come from, what is fixed and what is left to generation beyond the parts the design names,
   and how a template is accepted follow the maintainer's broad direction ([Direction]; Purpose; FR-005, FR-010,
-  FR-029 to FR-032), since the design leaves them open; which templates and kits the alpha holds is deferred to R2
+  FR-029 to FR-035), since the design leaves them open; which templates and kits the alpha holds is deferred to R2
   (constitution, Principle IV).
 - No marker remains. `/speckit-clarify` settled three questions (spec, Clarifications): how a laid-out city is judged
   to match its reference and whether one template serves several cultures, both answered by the maintainer as game

@@ -39,6 +39,13 @@ Odyssey's Traders Guild and Salvagers, whose settlements lie on the Orbit layer 
 This feature holds the Empire kit and the river-bend town's template; the other cultures' kits and templates are later
 work [Direction].
 
+Mantle is a framework that other authors build on too [Design: line 221], so adding a culture asks only for its
+skeletons and its kit [Direction]. Everything else is shared and the same for every culture: the forms of templates
+and kits, the check outside the game and its pictures, generation's picking, mirroring, turning, stretching and
+filling [Roadmap: R2], and the pieces, generic building elements that every kit shares and each faction skins
+[Design: line 194]. An author starts a culture by copying an existing culture's skeletons and kit, and the river-bend
+town is the complete worked example, from reference to skeleton to generated city (FR-033 to FR-035) [Direction].
+
 What is fixed and what is left to generation [Design: lines 184, 209; Direction]:
 
 - **Fixed**, defined by people and abstracted from the reference city: the template, meaning its terrain shape with
@@ -136,6 +143,9 @@ Each requirement below names its source in brackets. The sources are those the c
   - Every faction that has settlements gets its own, on the surface and in orbit: the Empire, tribal, industrial
     (outlander), pirate, medieval (for medieval mods), and Odyssey's Traders Guild and Salvagers. Only the Empire kit
     and the river-bend town belong to this feature; the rest is later work.
+  - Lowering the barrier for other authors is necessary: a new culture needs only its skeletons and kit, everything
+    else is shared and identical across cultures, an author can copy an existing culture as a starting point, and the
+    river-bend town is the complete worked example.
   - The template's skeleton holds the wall line, districts, main streets, plazas and public buildings read from the
     reference, beside the parts the design names; generation only picks, mirrors, turns and stretches a template and
     fills it from a kit.
@@ -265,6 +275,28 @@ compare the report and the two pictures with the cards.
    reports that name and the cell where it is.
 2. **Given** a checked spec card, **When** the developer opens its picture, **Then** its plot, rooms and contents are
    shown on the grid, with a legend.
+
+---
+
+### User Story 5 - Add a culture by copying one (Priority: P5)
+
+Another author adds a culture to Mantle. The author copies an existing culture's skeletons and kit, such as the
+Empire's with the river-bend town's template, changes them for the new culture, and runs the same check, which reports
+problems and draws the pictures as it does for the Empire. The author changes nothing that is shared.
+
+**Why this priority**: Lowering the barrier for other authors is necessary, and a culture adds only its skeletons and
+kit [Direction]. It needs the forms, the check and the pictures of the stories before it.
+
+**Independent Test**: Copy the Empire kit and the river-bend town's template into a test culture, change its word
+list, wall settings and one skeleton relation, and run the check; compare the report and pictures with the changes,
+and confirm that no shared file was changed.
+
+**Acceptance Scenarios**:
+
+1. **Given** a copy of the Empire kit and the river-bend town's template under a new culture's name, **When** the
+   check runs, **Then** it checks and draws them as it does the originals, with the new culture named.
+2. **Given** a new culture whose kit names a piece, **When** the check runs, **Then** it finds the piece among the
+   shared pieces, which the new culture does not have to define again [Design: line 194].
 
 ---
 
@@ -414,6 +446,14 @@ compare the report and the two pictures with the cards.
   on the Orbit layer [Data: `Odyssey/Defs/FactionDefs/Factions_Misc.xml` lines 5, 17, 40-42, 168, 188 and 202-204]
   [Design: line 184; Direction]. This feature MUST hold the Empire kit and the river-bend town's template; the other
   cultures' kits and templates are later work [Direction; Roadmap: R13].
+- **FR-033**: Adding a culture MUST need only its skeletons, in its templates, and its kit [Direction]. Everything else
+  MUST be shared and the same for every culture: the forms of templates and kits, the check outside the game and its
+  pictures, generation's picking, mirroring, turning, stretching and filling [Roadmap: R2], and the pieces, which every
+  kit shares and each faction skins [Design: line 194; Direction].
+- **FR-034**: An author MUST be able to start a culture by copying an existing culture's skeletons and kit, and the
+  check MUST treat the copy as it treats the original [Direction].
+- **FR-035**: The river-bend town MUST serve as the complete worked example, from its reference pictures through its
+  skeleton and the Empire kit to the city generation lays out from them [Direction; FR-031].
 
 ### Key Entities *(include if feature involves data)*
 
@@ -426,6 +466,9 @@ compare the report and the two pictures with the cards.
   possibly a block library.
 - **Block library**: a kit's ready-made blocks, built from spec cards.
 - **Spec card**: one building's plot, rooms and contents.
+- **Piece**: a generic building element of generated settlements that the base game lacks, shared by every kit and
+  skinned by faction [Design: line 194].
+- **Culture**: one kind of settlement with its own kit and its own skeletons and templates, such as the Empire's.
 - **Laid-out city**: the city generation lays out on a map from a template and a kit: each cell's terrain, rock and
   roof, each thing that stands there, and where each part of the skeleton lies.
 - **Reference city**: the player-built city a template is drawn from, and its **reference pictures**, such as a
@@ -456,6 +499,8 @@ compare the report and the two pictures with the cards.
 - **SC-008**: Before any other template of game content is written, a town that generation lays out from the
   river-bend town's template keeps 100% of its skeleton relations, and the maintainer has accepted it beside the
   screenshot and the render (FR-031).
+- **SC-009**: A test culture copied from the Empire kit and the river-bend town's template is checked and drawn with no
+  change to any shared form, check, picture or piece (FR-033, FR-034).
 
 ## Assumptions
 
