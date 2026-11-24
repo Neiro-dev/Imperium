@@ -111,7 +111,7 @@ FR-003, FR-004, FR-006, FR-011).
 - [X] T012 [US3] Check in the cloud that no load-order field in `About/About.xml` names a package that is not Ludeon's
   (data-model.md `Mod metadata.forceLoadAfter`; spec FR-011) and that `README.md` states Imperium's place
   (quickstart.md, Checks in the cloud, 3)
-- [ ] T013 [US3] On the maintainer's computer, run quickstart.md, Checks in the game, 10
+- [X] T013 [US3] On the maintainer's computer, run quickstart.md, Checks in the game, 10
 
 **Checkpoint**: All user stories should now be independently functional
 
@@ -126,7 +126,7 @@ FR-003, FR-004, FR-006, FR-011).
 - [X] T015 [P] Check in the cloud that nothing in `About/About.xml` names Ludeon as maker or adds an `ExpansionDef`,
   and that `README.md` holds the EULA's disclaimer (spec FR-008, FR-009; research.md R-8)
 - [X] T016 On the maintainer's computer, run quickstart.md, Checks in the game, 9
-- [ ] T017 Set R1's status to `done` in `ROADMAP.md` once T001 to T016 pass (Spec Kit `docs/how-to/spec-of-specs.md`
+- [X] T017 Set R1's status to `done` in `ROADMAP.md` once T001 to T016 pass (Spec Kit `docs/how-to/spec-of-specs.md`
   v1.4.3, section Specifying each sub-feature, step 4)
 
 ---
