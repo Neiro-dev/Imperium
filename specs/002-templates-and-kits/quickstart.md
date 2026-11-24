@@ -14,6 +14,8 @@ Source Register). Sources for each step are in [research.md](research.md) R-10 t
 - For the river-bend town: its two reference pictures in `template-references/` in the project's files; for the
   tribal culture, the reference pictures of the three cities the maintainer chose, in
   `template-references/部落城-凯尔特/`.
+- For a reference city that Anno 117 presets, if it is read from the game's own data: its skeleton picture and its
+  overlay on the game's `mapimage.png`, in `template-references/` in the project's files (research R-15).
 - An output folder outside the repository.
 
 ## Outside the game
@@ -46,6 +48,12 @@ Source Register). Sources for each step are in [research.md](research.md) R-10 t
 9. **Speed** (SC-003): on the maintainer's computer, checking and drawing the river-bend town against `Data/` with
    every expansion and `--mod` for `Mantle/` and `Imperium/` finishes before the game, launched there without
    `-quicktest` with Royalty, Mantle and Imperium, reaches its main menu.
+10. **A preset reference read from its game's data** (SC-011, FR-041 to FR-045): its folder in
+    `template-references/` holds the skeleton picture, the overlay, `objects.json` with every object's two categories
+    and position, and a summary; the maintainer saw each step's picture before the next; `git status` and the
+    repository's tree hold none of the game's packages or of what was read or drawn; and the check, given the two
+    pictures with `--reference <name>:skeleton=<path>` and `--reference <name>:overlay=<path>`, sets them beside the
+    reading as it does a screenshot.
 
 ## In the game
 

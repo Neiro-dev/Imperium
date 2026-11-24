@@ -101,7 +101,8 @@ Templates are drawn from reference cities in four steps [Direction]:
 
 1. A reference city is chosen: a player-built city of Anno 117 that is publicly shared, whether Ubisoft features it
    through its channels, such as the Anno Union, or a player shares it, such as on Steam, or a city Anno 117 itself
-   presets for a governor or an AI rival.
+   presets for a governor or an AI rival. A preset city's layout may also be read from Anno 117's own data and drawn
+   from above, and those drawings are then among its pictures (FR-041 to FR-045).
 2. It is read onto the game's cells, and the reading is set beside its pictures until it matches them, as the
    river-bend town's render was. Its layout relationships are then taken apart from the reading as a template, and what
    fills them as its culture's kit, in this feature's form, wherever the design and the maintainer's recorded direction
@@ -129,6 +130,20 @@ maintainer chose among the candidates three cities that a player shared on Steam
 open village, a Celtic oppidum for the fierce tribe's walled stronghold and a small Celtic hillfort for the savage
 tribe's fortress, with an agricultural island looked at beside them as supplementary material only, from which
 nothing is taken (FR-037) [Direction].
+
+A city that Anno 117 presets, on an AI rival's or a third party's island, can be read from the game's own data
+[Direction]. Only the game's own files are read: its file index, `file_h.db`, and its `.rda` packages, which hold each
+preset island as an `.a7m` file; never the index, cfg or cut files the old project left. The packages stay on the
+maintainer's computer, and what is read from them goes into `template-references/` in the project's files, never into
+the repository. Each object takes its category from the game data itself, in two layers: its asset Template, and the
+graphics folder its ConfigFilename names. The island is then drawn from above: each object at its `(x, z)` position on
+the cells, over the island's heightmap, turned to match the game's own top-down image of the island, `mapimage.png`,
+with linear pieces drawn as lines, houses as markers and fields as squares. Each island gives a skeleton picture, the
+same laid over the game's image, a list of every object, `objects.json`, and a summary. The drawing is built in steps,
+and the maintainer sees each step's picture before the next: first the objects as dots by category, then the skeleton,
+then, if wanted, each building's real footprint from the game's `.ifo` files. The old project's output and images, and
+FileDBReader, only cross-check what is read (constitution, Principle II). The pictures drawn this way are the
+reference's pictures, and its reading on RimWorld's cells is set beside them as beside any other (FR-036).
 
 The cultures that come later take their references as follows [Direction]: the industrial (outlander) culture's from
 Anno 1800, Bright Sands for the civil outlanders and Wormways for the rough, and the pirate culture's from Anno 1800's
@@ -192,12 +207,18 @@ template (FR-030), and the check in the game, the final one, still follows [Test
   looks of imperial cities, temperate for temperate and cold regions and arid for hot, dry ones (Imperium-old
   `docs/glossary.md` lines 208 and 162), so the river-bend town suits the cold biomes too, Odyssey's glacial plain among
   them (FR-040).
-- Q: Can a reference city's layout be read from its game's own data, and how? → A: No. Imperium-old's design, the
-  source for Imperium's own design, says nothing on reading a game's data (checked at 20a052b), and no other row of the
-  Source Register covers another game's files. The maintainer is a source only under Principle IV, for game content,
-  and reading another game's files is not game content, which is judged by what the official expansions contain. With
-  no source, it is not done (constitution, Principles I, IV and V; Source Register, rows Imperium's own design and Game
-  content and the released mod).
+- Q: Can a reference city's layout be read from its game's own data, and how? → A: Yes, for a city Anno 117 presets on
+  an AI rival's or a third party's island. Only the game's own `file_h.db` and `.rda` packages are read, which hold the
+  island as an `.a7m` file, never the old project's index, cfg or cut files. The packages stay on the maintainer's
+  computer, and what is read goes into `template-references/` in the project's files, never into the repository. Each
+  object takes its category from the game data in two layers, its asset Template and the graphics folder its
+  ConfigFilename names. The island is drawn from above, each object at its `(x, z)` on the cells over the heightmap,
+  turned to match the game's own `mapimage.png`, with lines for linear pieces, markers for houses and squares for
+  fields, and gives a skeleton picture, the same laid over the game's image, `objects.json` and a summary. It is built
+  in steps, each picture seen by the maintainer before the next: dots by category, then the skeleton, then, optionally,
+  real footprints from `.ifo` files. The old project's output and images, and FileDBReader, only cross-check (the
+  maintainer's broad direction, constitution, Principle IV; Imperium-old's design says nothing on reading a game's data,
+  checked at 20a052b; constitution, Principle II).
 - Q: In what order are a culture's kit and templates derived? → A: First Imperium-old's default-branch design
   meaning, reusing everything it defines; then, where it is silent, the maintainer's broad direction as the merged
   specs and roadmap record it; and only where both are silent, the reference city's reading, marked [Direction] for
@@ -269,6 +290,19 @@ Each requirement below names its source in brackets. The sources are those the c
     Anno's art, names, models or code is used. A reading lies on RimWorld's flat cells, without heights, and is built
     from Imperium's own kits, so it reproduces only the reference's skeleton, the general way the city is laid out,
     and none of Anno's own expression; the template taken from it ships as it is once it passes.
+  - A preset reference may be read from the game's own data, which Imperium-old's design does not address (checked at
+    20a052b). Sources and inputs: only Anno 117's own `file_h.db` and `.rda` packages, and in them the preset AI and
+    third-party islands, `.a7m` files; never the old project's index, cfg or cut files. The raw packages stay on the
+    maintainer's computer, and what is read from them goes into `template-references/` in the project's files, never
+    into the public repository.
+  - Object categories come from the game data itself, in two layers: the asset Template, and the graphics folder its
+    ConfigFilename names.
+  - The top-down skeleton view places each object at its `(x, z)` position on the cells, over a heightmap base, turned
+    to match the game's own `mapimage.png`, and draws linear pieces as lines, houses as markers and fields as squares.
+    Its output for each island is a skeleton PNG, an overlay on the game's image, `objects.json` and a summary.
+  - The view is built in steps, with a picture seen at each step before the next: the objects as dots by category,
+    then the skeleton, then, optionally, real footprints from `.ifo` files.
+  - Old-project output and old images, and FileDBReader, only cross-check what is read (constitution, Principle II).
   - Imperium's city maps are 350×350 cells.
   - Each culture has its own skeletons and templates; slots vary only within a culture. The old design's Roman kit is
     the Empire kit, also in Imperium's files.
@@ -324,7 +358,8 @@ Each requirement below names its source in brackets. The sources are those the c
   (`templates/commands/checklist.md` lines 32-36).
 
 Imperium-old's earlier layout tool and the reverted spec of the earlier R13 are not sources, and nothing is taken from
-them.
+them. The old project's output and old images, and FileDBReader, only cross-check what a reading of a game's data
+gives (constitution, Principle II) [Direction].
 
 ## User Scenarios & Testing *(mandatory)*
 
@@ -483,6 +518,10 @@ and confirm that no shared file was changed.
 - A faction another mod adds, such as a medieval mod's, holds the two attitude fields as every faction's definition
   can, and picks its culture's templates by them; that those mods set the fields as the base game's factions do is an
   inference, to be checked when the medieval culture's kit comes [Direction].
+- A preset reference's island is in a package not yet on the maintainer's computer: its top-down view waits for that
+  package, and the old project's index, cfg or cut files are not used in its place (FR-041).
+- The packages holding the `.ifo` files of a preset island's buildings are not on the maintainer's computer: its view
+  draws houses as markers, and real footprints, the optional third step, wait for those packages (FR-044).
 - Odyssey's orbital settlements take a map of their own size, 200×200 cells, not a city's 350×350 [Data:
   `Odyssey/Defs/WorldObjectDefs/WorldObjects.xml` lines 44 and 50]: how their templates fit it is settled when their
   kit comes, as later work [Direction].
@@ -733,8 +772,28 @@ and confirm that no shared file was changed.
   derived from, and each part filled from a reading MUST be marked [Direction] [constitution, Principle VI;
   Direction].
 
-**The later cultures' references**
+**Reading a reference from its game's data**
 
+- **FR-041**: A reference city that Anno 117 presets, on an AI rival's or a third party's island, MAY be read from the
+  game's own data, and MUST then be read only from the game's own files: its `file_h.db` and its `.rda` packages, and
+  in them the island's `.a7m` file [Direction]. It MUST NOT be read from the old project's index, cfg or cut files
+  [Direction]. The packages MUST stay on the maintainer's computer, and everything read or drawn from them MUST go into
+  `template-references/` in the project's files and MUST NOT go into the repository or either mod's released files
+  [Direction; EULA: line 76; FR-028].
+- **FR-042**: Each object read MUST take its category from the game data itself, in two layers: its asset Template,
+  and the graphics folder its ConfigFilename names [Direction].
+- **FR-043**: A preset reference read from the game's data MUST be drawn from above: each object at its `(x, z)`
+  position on the cells, over the island's heightmap, turned to match the game's own top-down image of the island,
+  `mapimage.png`, with linear pieces drawn as lines, houses as markers and fields as squares. For each island the
+  drawing MUST give a skeleton picture as PNG, the same laid over the game's image, `objects.json` listing every object
+  with its two categories and its position, and a summary [Direction]. The two pictures are the reference's pictures,
+  set beside its reading as any reference picture is (FR-025, FR-036) [Direction].
+- **FR-044**: The drawing MUST be built in steps, and the maintainer MUST have seen each step's picture before the next
+  is built: first the objects as dots coloured by category, then the skeleton, then, optionally, each building's real
+  footprint from the game's `.ifo` files [Direction].
+- **FR-045**: The old project's output and old images, and FileDBReader, MUST be used only to cross-check what a
+  reading of the game's data gives, and MUST NOT be what a reference's drawing is taken from [Direction; constitution,
+  Principle II].
 - **FR-046**: The later cultures' references MUST come from: Anno 1800 for the industrial (outlander) culture, Bright
   Sands for the civil outlanders and Wormways for the rough, and for the pirate culture, Anne Harlow's and Jean La
   Fortune's islands [Direction; Roadmap: R16]; and Odyssey's own form of an orbital settlement, rooms laid off a spine
@@ -768,6 +827,9 @@ and confirm that no shared file was changed.
 - **Reading**: a reference city drawn on the game's cells and set beside its pictures until it matches them, in the
   laid-out city's form, from which a culture's templates and kit are taken; for the river-bend town, its render. It is
   kept in the repository as its template's source; its reference pictures are not.
+- **Top-down view**: a preset reference city read from its game's own data and drawn from above: its objects, each
+  with its two categories and its position, as a skeleton picture, the same laid over the game's image, `objects.json`
+  and a summary, kept in the project's files and used as the reference's pictures (FR-041 to FR-044).
 - **Report**: what one run of the check found, each problem with its place, and the statement that the check in the
   game is still to come.
 - **Picture**: the drawing of one template or laid-out city, with grid, coordinates, legend and marked problems, and
@@ -802,6 +864,10 @@ and confirm that no shared file was changed.
 - **SC-010**: The tribal culture's kit and its three first templates are taken from the readings of the references
   the maintainer chose, each of which he has accepted beside its pictures, each template states the attitude of the
   tribe it serves, and all pass the check (FR-036, FR-037, FR-039).
+- **SC-011**: For every preset reference read from its game's data, 100% of its objects are in its `objects.json` with
+  both categories and a position, its skeleton picture and its overlay on the game's image are in
+  `template-references/`, the maintainer saw each step's picture before the next step was built, and none of the
+  packages or of what was read or drawn from them is in the repository (FR-041 to FR-044).
 - **SC-012**: In the Empire's kit and the river-bend town's template, and in the tribal culture's kit and first
   templates, 100% of the parts name their source, every part Imperium-old's design defines is taken from it, and no
   part filled from a reading contradicts the design or the maintainer's recorded direction (FR-047).
@@ -829,7 +895,11 @@ and confirm that no shared file was changed.
   [Roadmap: R13; Testing].
 - The forms hold the parts the design and the maintainer's direction name, and take further parts when either names
   them [Design; Direction].
+- Reading a preset reference from its game's data runs on the maintainer's computer, where the packages are. No
+  source asks for a tool in the repository that reads another game's data, so this feature adds none; the check takes
+  the pictures such a reading gives as reference pictures, as it takes any other (FR-028, FR-043) [constitution,
+  Principle V].
 - None of the tribal culture's chosen references is a preset city, so its readings are drawn from the Steam
-  screenshots (FR-037); a preset city serves as a reference once the maintainer chooses it among candidates, as FR-037
-  sets for the tribal references [Direction].
+  screenshots (FR-037); a preset city read from the game's data serves as a reference once the maintainer chooses it
+  among candidates, as FR-037 sets for the tribal references [Direction].
 - How the forms are written, and the pictures' look and file format, are chosen in `/speckit-plan`.
