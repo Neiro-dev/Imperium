@@ -122,7 +122,8 @@ Odyssey added; each loads with no errors from Imperium and shows no missing requ
 ### Edge Cases
 
 - Imperium is placed above an official expansion in the load order: the game shows that it must be loaded after that
-  expansion and offers auto-sort, as it does for any mod out of order [Data: Menus_Main.xml lines 139 and 143].
+  expansion, either by refusing the move or by a load-order warning with auto-sort, as it does for any mod out of
+  order [Data: Menus_Main.xml lines 95, 139 and 143].
 - The game version is not 1.7: the mod list shows that Imperium was not made for that version, as it does for other
   mods [Data: Menus_Main.xml line 147, `ModNotMadeForThisVersion`; ModUpdating: line 253].
 - Two copies of Imperium are installed (one local, one from the Workshop): only one of them can be active, as for any
