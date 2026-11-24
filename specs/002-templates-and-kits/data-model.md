@@ -110,10 +110,10 @@ come (FR-020). The picture files are listed in [contracts/check-command.md](cont
 | unknown definition | a name found neither in `Data/` nor in the `Defs/` of the mods given | FR-013 |
 | wrong kind | a name where its kind cannot go: not a terrain in `terrain`, not natural in a terrain shape, not a wall in a `wallDef`, an unknown part or relation kind, a relation missing the field its kind needs | FR-014; R-4, R-5 |
 | other expansion | a definition of an expansion that the mod holding the file does not require, without that expansion's `MayRequire` | FR-015 |
-| outside the map | a cell past `minMapSize`, past 350×350 or past a city's `size`; a thing whose cells reach past the map | FR-016, FR-018 |
+| outside the map | a cell past `minMapSize`, past 350×350 or past a city's `size`; a cell of a group or spec card past its `size`; a thing whose cells reach past the map | FR-007, FR-016, FR-018 |
 | no terrain | a cell inside the map with no terrain | FR-016 |
 | unknown name | a relation naming a part or feature neither skeleton nor the terrain shape holds; a duplicate name | FR-017 |
-| no kit | a template whose `kit` does not exist | FR-017 |
+| no kit | a template whose `kit` does not exist; a laid-out city whose `kit` is not its template's | FR-017 |
 | affordance | a thing on a cell whose terrain lacks the affordance it needs, or its material's when its definition uses the material's | FR-018 |
 | size | a thing's `rect` that does not match its definition's `size` | FR-018; R-7 |
 | material | a material the definition does not take, or none where it takes one | FR-018 |

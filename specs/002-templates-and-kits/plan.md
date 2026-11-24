@@ -141,16 +141,21 @@ About/About.xml                    # adds Mantle to modDependencies and loadAfte
 Defs/
 ├── KitDefs/
 │   └── Kits_Empire.xml            # the Empire kit (R-8)
+├── RulePackDefs/
+│   └── RulePacks_Namers_Empire.xml  # the Empire kit's word list (R-3)
 └── TemplateDefs/
     └── Templates_Empire.xml       # the river-bend town's template (R-13)
+Languages/
+└── English/
+    └── Strings/                   # the words of the Empire's word list (R-3)
 ```
 
-**Structure Decision**: each repository root stays its mod's folder (R1 research R-1). Mantle's code, its check and
-the tribal culture's kit, templates and readings go with Mantle's own mod, since every culture shares the forms and the
-check and the alpha is Mantle alone (ROADMAP R14, Releases); its `Source/` and `Assemblies/` follow
-`ModUpdating.txt`, its definitions sit in `Defs/` with folders named as `Data/` names its own, and the check sits
-beside them as a Python package in Spec Kit's layout. Imperium holds only the Empire's kit and template. The game loads
-none of `pyproject.toml`, `src/`, `tests/` or `readings/`.
+**Structure Decision**: each repository root stays its mod's folder (R1 research R-1). Mantle's code, its check and the
+tribal culture's kit, templates and readings go with Mantle's own mod, since every culture shares the forms and the
+check and the alpha is Mantle alone (ROADMAP R14, Releases); its `Source/` and `Assemblies/` follow `ModUpdating.txt`,
+its definitions sit in `Defs/` with folders named as `Data/` names its own, and the check sits beside them as a Python
+package in Spec Kit's layout. Imperium holds only the Empire's kit, its word list and template; the tribal kit names the
+base game's own word list (spec FR-011). The game loads none of `pyproject.toml`, `src/`, `tests/` or `readings/`.
 
 ## Complexity Tracking
 
