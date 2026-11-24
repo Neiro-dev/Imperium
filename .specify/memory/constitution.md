@@ -38,10 +38,11 @@ be removed.
 Every conclusion, including a judgment, MUST name its source and MUST be reached from that
 source. When the source allows the agent to judge, the agent MUST judge without asking.
 
-### VII. The Maintainer's Words Are Not Recorded
+### VII. The Maintainer's Words Are Not a Rule
 
-The maintainer's own words MUST NOT be saved or quoted in any file, list, memory, or message to
-another session. Only a cleaned-up, unambiguous statement of their meaning MAY be written.
+The maintainer's words MUST NOT be recorded as a rule, or as a source for any topic other than
+game content. Only a cleaned-up, unambiguous statement of a game-content decision's meaning MAY
+be written.
 
 ## Source Register
 
@@ -58,19 +59,17 @@ Each topic and its one fixed source:
 
 ## Game Content Records
 
-The maintainer's recorded game-content decisions are the design on the default branch of
-`Neiro-dev/Imperium-old`.
+The maintainer's game-content decisions in force are the design documents on the default branch
+of `Neiro-dev/Imperium-old`.
 
-- That design supersedes `Neiro-dev/Imperium-Knowledge` and `Neiro-dev/RimWorld-Imperium` (the
-  old repositories). The old repositories MUST be used only to see how something was implemented
-  before.
-- Old-repository content on a topic that Imperium-old deleted is void.
-- Old-repository content on a topic that Imperium-old never addressed is a gap: it is neither
-  void nor decided, and the maintainer settles it (Principle IV).
+- Content that Imperium-old's design deleted, including old-repository content
+  (`Neiro-dev/Imperium-Knowledge`, `Neiro-dev/RimWorld-Imperium`) on a deleted topic, is void.
+- Content that Imperium-old's design never addressed is a gap: it is neither void nor decided,
+  and the maintainer settles it (Principle IV). Other repositories MAY be used only to see how
+  something was implemented before.
 - Lists derived from these repositories MUST NOT decide game content.
-- Imperium-old's unmerged design-draft pull requests are undecided. They MUST NOT be treated as
-  its design, and MUST be handled only when a feature needs them, through the development
-  process.
+- Imperium-old's unmerged design-draft pull requests are not decisions in force. They MUST be
+  handled only when a feature needs them, through the development process.
 
 ## Governance
 
