@@ -8,12 +8,14 @@
 
 ## Summary
 
-Imperium becomes a mod RimWorld 1.7 lists and loads: it requires Royalty and no other expansion, loads after Core
-and every official expansion, and is presented as community-created content (spec FR-001 to FR-010). The whole
-feature is one file, `About/About.xml` at the repository root, shaped like an official expansion's `About.xml`
-where a community mod can be, and like `ModUpdating.txt`'s form where it cannot ([research.md](research.md) R-1
-to R-8). No code, content or Harmony (R-9). It is validated in the game on the maintainer's computer
-([quickstart.md](quickstart.md)).
+Imperium becomes a mod RimWorld 1.7 lists and loads: it requires Royalty and no other expansion, loads after Core and
+every official expansion, and is presented as community-created content (spec FR-001 to FR-011). The feature is
+`About/About.xml` at the repository root and one sentence in `README.md`; the file is shaped like an official
+expansion's `About.xml` where a community mod can be, and like `ModUpdating.txt`'s form where it cannot
+([research.md](research.md) R-1 to R-8). It names no other package in its load order, so it can sit directly after the
+official expansions and ahead of every ordinary mod after them, and `README.md` tells players that place in the
+Harmony mod's form (R-6). No code, content or Harmony, and so no Harmony requirement (R-9). It is validated in the
+game on the maintainer's computer ([quickstart.md](quickstart.md)).
 
 ## Technical Context
 
@@ -23,8 +25,9 @@ to R-8). No code, content or Harmony (R-9). It is validated in the game on the m
 
 **Storage**: N/A
 
-**Testing**: in the game: `-quicktest` (`Readme.txt` lines 58-60), the log in `_Data/output_log.txt` (`Readme.txt`
-line 21), then RimBridgeServer 2.4.0 or later with GABS for what `Readme.txt` gives no form for (research R-10)
+**Testing**: first outside the game, against the official files in `Data/` (constitution 2.1.0); then in the game:
+`-quicktest` (`Readme.txt` lines 58-60) with `-savedatafolder=SaveData` (lines 27-38), then RimBridgeServer 2.4.0 or
+later with GABS for what `Readme.txt` gives no form for, comparing each launch's `Player.log` (research R-10)
 
 **Target Platform**: RimWorld 1.7 only (research R-5), tested on the maintainer's Windows install at
 `D:\Steam\steamapps\common\RimWorld`, the only install of the game the project has
@@ -36,7 +39,7 @@ line 21), then RimBridgeServer 2.4.0 or later with GABS for what `Readme.txt` gi
 **Constraints**: the package identifier's format (`ModUpdating.txt` lines 231-237); never presented as official
 (`EULA.txt` lines 57 and 78)
 
-**Scale/Scope**: one file
+**Scale/Scope**: one file and one sentence in `README.md`
 
 ## Constitution Check
 
@@ -46,13 +49,15 @@ line 21), then RimBridgeServer 2.4.0 or later with GABS for what `Readme.txt` gi
 |-----------|-------|--------|
 | I. One Source per Topic | Imperium's design from Imperium-old `main` (spec, Sources); the mod's form from `Data/`, `ModUpdating.txt`, Harmony; testing from `Readme.txt`, RimBridgeServer, GABS; workflow from Spec Kit; repository files from GitHub Docs | Pass |
 | II. Other Sources Only Cross-Check | No decision rests on a source outside its topic's register entry | Pass |
-| III. Sources in Order | Each field takes `Data/`'s form first; `name` and `modDependencies` come from `ModUpdating.txt` only because `Data/` gives no form (R-2); `loadAfter` is held back unless `forceLoadAfter` proves Ludeon-only (R-6); Harmony is not reached (R-9); testing uses RimBridgeServer only where `Readme.txt` gives no form (R-10) | Pass |
+| III. Sources in Order | Each field takes `Data/`'s form first; `name` and `modDependencies` come from `ModUpdating.txt` only because `Data/` gives no form (R-2); `loadAfter` is held back unless `forceLoadAfter` proves Ludeon-only (R-6); Harmony's `README.md` is reached only for telling players Imperium's place, which no `Data/` or `ModUpdating.txt` form can express (R-6), and Harmony is not a requirement (R-9); testing uses RimBridgeServer only where `Readme.txt` gives no form (R-10) | Pass |
 | IV. Asking the Maintainer | No question goes to the maintainer: nothing here is game content left unsettled | Pass |
 | V. When a Source Gives No Form | No icon, because no source gives a community mod one (R-8); no `LoadFolders.xml`, version folders, empty content folders or code, because nothing in R1 needs them (R-1, R-9) | Pass |
 | VI. Every Conclusion Names Its Source | Every decision in research.md and every row in data-model.md names its source | Pass |
 | Source Register, `EULA.txt` always followed | Community-created presentation, no `ExpansionDef`, disclaimer in `README.md` (R-8) | Pass |
+| Source Register, testing outside the game (2.1.0) | The checks in the cloud come before the checks in the game, hold `About/About.xml` against the official files in `Data/`, and do not replace the checks in the game (quickstart.md; R-10) | Pass |
 
-Post-design re-check (after Phase 1): unchanged, all pass.
+Post-design re-check (after Phase 1): unchanged, all pass. Re-checked against constitution 2.1.0 (2026-11-24): all
+pass, with the row for testing outside the game added.
 
 ## Project Structure
 
@@ -74,7 +79,7 @@ specs/001-mod-foundation/
 ```text
 About/
 └── About.xml            # new in R1
-README.md                # holds the EULA's disclaimer (already on main)
+README.md                # the EULA's disclaimer (already on main) and Imperium's place in the mod list
 LICENSE                  # names the maker (already on main)
 ```
 

@@ -17,6 +17,8 @@ on is in [contracts/about-xml.md](contracts/about-xml.md).
 
 Fields left out in R1: `description`, `url`, `steamAppId`, `forceLoadBefore`, `loadBefore`, `incompatibleWith`,
 the versioned fields (R-2, R-6, R-8), and `loadAfter` unless research R-6's fallback replaces `forceLoadAfter` with it.
+No load-order field names a package that is not Ludeon's (spec FR-011; R-6, Among ordinary mods), and
+`modDependencies` holds no Harmony entry (R-9).
 
 ## Royalty dependency (one entry of `modDependencies`)
 
@@ -35,4 +37,5 @@ The game shows Imperium in one of these states in the mod list (`Menus_Main.xml`
 - Placed before an official expansion: move refused (line 95) or load-order warning (lines 139 and 143).
 - Game version other than 1.7: not made for this version (line 147).
 - Another active mod with the same identifier: same-ID warning (line 144).
+- Directly after the last official expansion and ahead of an ordinary mod: no warning (spec FR-011).
 - Otherwise: no warning.
