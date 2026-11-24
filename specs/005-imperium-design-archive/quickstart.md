@@ -18,12 +18,13 @@ import re, sys, pathlib
 old, files = pathlib.Path(sys.argv[1]), sys.argv[2:]
 bad = 0
 for f in files:
-    for n, line in enumerate(open(f, encoding='utf-8'), 1):
-        for path, a, b in re.findall(r'`([^`]+?)` L(\d+)(?:-(\d+))?', line):
-            p = old / path
-            last = int(b or a)
-            if not p.is_file() or last > len(p.read_text(encoding='utf-8').split('\n')) or int(a) > last:
-                print(f'{f}:{n}: {path} L{a}-{b or a}'); bad += 1
+    text = open(f, encoding='utf-8').read()
+    # a pointer may wrap across a line break between its path and its lines
+    for path, a, b in re.findall(r'`([^`\n]+?)`\s+L(\d+)(?:\s*-\s*L?(\d+))?', text):
+        p = old / path
+        last = int(b or a)
+        if not p.is_file() or last > len(p.read_text(encoding='utf-8').split('\n')) or int(a) > last:
+            print(f'{f}: {path} L{a}-{b or a}'); bad += 1
 print('unresolved pointers:', bad)
 EOF
 ```

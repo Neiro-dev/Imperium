@@ -54,6 +54,10 @@ Roman, medieval, industrial and tribal settlements (lines 173 and 184). The main
   dates, the later passage is the design and the earlier is named as replaced; for looks the latest holds. A conflict
   stays only where the dates are equal or unknown (the maintainer's broad direction, 2026-11-24, constitution,
   Principle IV).
+- Q: Does a newer setting replace an older one point by point? → A: No; by whole lines. A newer setting deletes the old
+  line with everything on it, even where the old passages carry no mark of their own, so those are not conflicts. The
+  archive writes each subject's newest line and gives a replaced line one deleted note; a line counts as deleted only
+  where a trace shows it (the maintainer's direction, 2026-11-24, constitution, Principle IV).
 - Q: Is the hydraulics axis (水利, the imperial aqueducts) part of the design? → A: No; the maintainer deleted it
   (2026-11-24). The archive records it as deleted and writes none of it as design. Imperium-old's glossary dropping the
   fluid-powered equipment on 2026-11-21 (Imperium-old PR #269) cross-checks it.
@@ -197,8 +201,9 @@ holds it, with its class and, for a design source, the archive sections that use
 - **FR-011**: The archive MUST keep the sources' own names for things; where it translates a name, it MUST give the
   original beside it on first use. Where Imperium-old's glossary names the term in force for a thing, the archive MUST
   use it and give the other names the sources use beside it on first use (`docs/glossary.md`, lines 3-4).
-- **FR-012**: The archive MUST NOT describe the deleted hydraulics as design, and MUST mark what rests on it as
-  deleted (Clarifications).
+- **FR-012**: The archive MUST describe each subject's newest line only; an older line that a newer one deleted MUST
+  appear once as deleted, with pointers to it and to the trace of its deletion, and not as conflicts or open points.
+  The hydraulics axis is such a line (Clarifications).
 
 ### Key Entities
 

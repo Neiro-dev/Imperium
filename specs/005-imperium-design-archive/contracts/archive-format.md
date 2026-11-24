@@ -28,7 +28,8 @@ gives it.>
 > **Base game**: <the fact the design rests on>, to be checked against `Data/` (`<path>` L<a>-<b>).
 
 > [!NOTE]
-> **Deleted**: <what rested on the hydraulics the maintainer deleted> (`<path>` L<a>-<b>).
+> **Deleted**: <the old line, what it held> (`<path>` L<a>-<b>), deleted by <the newer line or mark, or the
+> maintainer's direction> (`<path>` L<a>-<b>).
 ```
 
 Rules:
