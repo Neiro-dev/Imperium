@@ -13,7 +13,15 @@
       <steamWorkshopUrl>steam://url/StoreAppPage/1149640</steamWorkshopUrl>
       <downloadUrl>https://rimworldgame.com/</downloadUrl>
     </li>
+    <li>
+      <packageId>Neiro.RimWorld.Mantle</packageId>
+      <displayName>Mantle</displayName>
+      <downloadUrl>https://github.com/Neiro-dev/Imperium</downloadUrl>
+    </li>
   </modDependencies>
+  <loadAfter>
+    <li>Neiro.RimWorld.Mantle</li>
+  </loadAfter>
   <forceLoadAfter>
     <li>Ludeon.RimWorld</li>
     <li>Ludeon.RimWorld.Royalty</li>
