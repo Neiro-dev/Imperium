@@ -43,7 +43,8 @@ source. When the source allows the agent to judge, the agent MUST judge without 
 ### VII. The Maintainer's Words Are Not a Rule
 
 The maintainer's words MUST NOT be recorded as a rule, or as a source for any topic other than
-game content, except as principles adopted into this constitution through Governance. Only a
+game content, except as principles adopted into this constitution through Governance, or as
+preferences on how Claude runs the project, which Claude's documentation says to follow. Only a
 cleaned-up, unambiguous statement of a game-content decision's meaning MAY be written.
 
 ## Source Register
