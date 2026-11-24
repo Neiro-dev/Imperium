@@ -171,7 +171,8 @@ files, to `Neiro-dev/Imperium-old` at 20a052b, to Spec Kit at v1.4.3 and to Harm
   Mantle's mod needs no expansion for them (FR-015).
 - **What R13 writes**: the forms of all five fields (FR-006); the tribal kit's and the Empire kit's skeletons, wall
   settings, groups and fill, each from its culture's readings, the tribal culture's three (R-13) and the river-bend
-  town's render (FR-031); and each culture's word list, from its culture's sources (FR-011).
+  town's render (FR-031); and each culture's word list (FR-011): the Empire's from its sources on Rome, and the tribal
+  culture's the base game's own `NamerSettlementTribal` (`Core/Defs/FactionDefs/Factions_Misc.xml` line 230).
 
 ## R-9: The check is a Python package in Spec Kit's form
 

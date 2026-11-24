@@ -451,9 +451,9 @@ and confirm that no shared file was changed.
   each thing that stands on the map with its definition, cell, rotation and, where its definition takes one, its
   material, and where each part of the template's skeleton lies, so that the check reads what generation writes
   [Roadmap: R2; Design: lines 173, 204; Data: `AncientPrefabs.xml` lines 12, 13 and 23].
-- **FR-009**: Templates and kits MUST be data that Imperium holds and Mantle's generation reads, and MUST NOT hold
-  generation itself. Picking a template, mirroring, turning and stretching it to fit the site, and filling its blocks
-  with the kit's buildings belong to R2, and generation does nothing else to a template [Roadmap: R13, R2;
+- **FR-009**: Templates and kits MUST be data that Mantle's mod or Imperium holds and Mantle's generation reads, and
+  MUST NOT hold generation itself. Picking a template, mirroring, turning and stretching it to fit the site, and filling
+  its blocks with the kit's buildings belong to R2, and generation does nothing else to a template [Roadmap: R13, R2;
   Design: lines 184, 209; Direction].
 - **FR-010**: A template MUST NOT hold another game's art, names, models or code. Its terrain shape and skeleton MAY
   follow its reading cell by cell, since a reading lies on the game's flat cells and is built from the culture's own
@@ -461,7 +461,9 @@ and confirm that no shared file was changed.
   EULA: line 76].
 - **FR-011**: The Empire's elements in a template or kit, such as the names in a word list and its public buildings,
   MUST come from Rome as reliable sources describe it, leaning toward New Rome, and not from popular images of Rome
-  or from a reference city [Design: setting.md lines 56, 59-60; Direction].
+  or from a reference city [Design: setting.md lines 56, 59-60; Direction]. The tribal culture's word list MUST be
+  the one the base game names its tribes' settlements with [Data: `Core/Defs/FactionDefs/Factions_Misc.xml` line
+  230].
 
 **The check**
 
@@ -491,8 +493,8 @@ and confirm that no shared file was changed.
   has one, its cell [Spec Kit].
 - **FR-020**: Every result MUST state that testing in the game is the final check and that it is still to come; a
   template, kit or laid-out city with no problem found MUST NOT be reported as final [Testing; Roadmap: R13].
-- **FR-021**: The check MUST read the game's files where they are installed, and MUST NOT copy them into Imperium or
-  its results, beyond the names and labels it reports [EULA: line 86].
+- **FR-021**: The check MUST read the game's files where they are installed, and MUST NOT copy them into Mantle's or
+  Imperium's repositories or its results, beyond the names and labels it reports [EULA: line 86].
 - **FR-022**: The same template, kit or laid-out city, checked against the same `Data/` with the same reference
   picture, MUST always give the same report and the same pictures [Testing].
 
@@ -512,7 +514,7 @@ and confirm that no shared file was changed.
   imperium.md line 110].
 - **FR-027**: Each problem that has a cell MUST be marked at that cell in the picture, with what it is [Spec Kit].
 - **FR-028**: The check MUST read a reference picture where the developer keeps it, and MUST NOT put it into
-  Imperium's repository or its released files [Direction; EULA: line 76].
+  Mantle's or Imperium's repository or their released files [Direction; EULA: line 76].
 
 **The comparison**
 
@@ -574,11 +576,13 @@ and confirm that no shared file was changed.
   [Direction]. There MUST be one for each attitude (FR-039), from the references the maintainer chose: Tir Uisce for the
   gentle tribe's open village, a Celtic oppidum for the fierce tribe's walled stronghold and a small Celtic hillfort for
   the savage tribe's fortress, whose pictures are kept in `template-references/` in the project's files; an agricultural
-  island MAY be consulted beside them as supplementary material only [Direction].
+  island MAY be consulted beside them as supplementary material only, and is the reference of no template
+  [Direction].
 - **FR-038**: Settlements MUST be built from three layers [Direction]: Mantle's, the same for every culture (FR-033);
   the culture's, one kit that all of the culture's factions share (FR-006); and the faction's, the templates of its
   culture that its settlements are laid out from, picked by attitude (FR-039) and terrain (FR-040). A culture MUST
-  pick only by the dimensions it needs, and its templates MUST leave the other one open [Direction].
+  pick only by the dimensions it needs [Direction]: the tribal culture's templates MUST leave their biomes open, and
+  the Empire's MUST leave both attitude fields out, which serves the Empire, since it holds neither (FR-040).
 - **FR-039**: A template MUST state the attitude of the factions it serves in the two fields with which a faction's
   definition states it, `naturalEnemy` and `permanentEnemy`, each false unless set [Data: `Factions_Misc.xml` lines
   202, 462, 485 and 529], and serves the factions whose definitions hold the same two values; it MUST NOT name a
@@ -589,10 +593,10 @@ and confirm that no shared file was changed.
   [Data: same file, lines 445, 480 and 504, confirmed by the maintainer].
 - **FR-040**: A template MUST state the biomes it suits, or none for any biome (FR-001). The Empire's templates MUST be
   picked by terrain alone, since the Empire's definition holds neither attitude field, only the factions it is not a
-  permanent enemy of [Data: `Royalty/Defs/FactionDefs/Faction_Empire.xml` lines 57-67]: the river-bend town's MUST
-  suit the temperate biomes [Data: `Core/Defs/BiomeDefs/Biomes_Temperate.xml` lines 5 and 210], and a Romanized
-  Egyptian city's, which is later work, the desert and arid ones [Data: `Biomes_WarmArid.xml` lines 5, 172 and 322;
-  Direction; Roadmap: R15].
+  permanent enemy of [Data: `Royalty/Defs/FactionDefs/Faction_Empire.xml` lines 57-67]: the river-bend town's MUST suit
+  the temperate biomes, temperate forest and temperate swamp [Data: `Core/Defs/BiomeDefs/Biomes_Temperate.xml` lines 5
+  and 210], and a Romanized Egyptian city's, which is later work, the desert and arid ones [Data: `Biomes_WarmArid.xml`
+  lines 5, 172 and 322; Direction; Roadmap: R15].
 
 ### Key Entities *(include if feature involves data)*
 
