@@ -4,7 +4,9 @@
   <!-- The Empire's kit: what every city of the Empire has. Each part names where it comes from, in this order
        (specs/002-templates-and-kits/spec.md, FR-047): "Design", a line of Imperium-old's docs at 20a052b, the glossary
        unless another file is named; "Spec", an entry of that spec recording the maintainer's direction; and only where
-       both are silent, "[Direction]", read off the river-bend town's render, for the maintainer to judge. -->
+       both are silent, "[Direction]", read off the river-bend town's render, for the maintainer to judge. Where the design
+       archive (docs/design-archive/, Imperium-old's design read subject by subject) names the section, it is cited by
+       that section, since it points to Imperium-old's lines as of b218bdc. -->
   <Mantle.KitDef>
     <defName>Empire</defName>
     <label>Empire</label>
@@ -103,670 +105,675 @@
          cells apart centre to centre for a gate of 3, 14 for the gate of 5; between the other neighbouring towers the
          centres stand 17 to 74 cells apart, 16 of the 23 between 20 and 40, the middle one 32 (the design's line 213
          has the distance set by how exposed the face is).
-         Materials: limestone for the walls: the render names limestone slabs for its streets and squares, and Data's own
-         prefabs set a wall to BlocksLimestone (Odyssey/Defs/PrefabDefs/AncientPrefabs.xml line 761,
-         AncientExteriorPrefabs.xml line 1211); the render names no wall material for its houses, so they take the
-         same. Doors: Steel; the render names no door material, and Data's own layouts give every doorStuffDef as Steel
-         (Odyssey/Defs/LayoutDefs/Layouts_Misc.xml lines 21 and 119, Layouts_AncientRuins.xml line 323,
-         Layouts_OrbitalPlatform.xml lines 10 and 306, Layouts_Mechhive.xml line 6), the option a source uses in its own
-         examples (Constitution, Principle V). -->
+         Materials: [Design], in the order of FR-047, from the design archive (docs/design-archive/, which points to
+         Imperium-old's lines): the wall, its towers and its gatehouses are of one stone, single-colour limestone
+         (cities-walls.md, "Stone"); every door is plain stone in its natural colour, none an automatic door
+         (cities-walls.md, "Floors and doors"; cities-inside.md, "Furnishings" and "Walls and doors by tier"); ordinary
+         residents' houses are sandstone in its natural colour, rich households' limestone, warehouses and workshops
+         limestone (cities-inside.md, "Walls and doors by tier"). So curtainWall1x3 and tower9x9 are BlocksLimestone, and
+         the households' groups, dwelling* and annex*, which are single households, since the design makes a rich
+         household by merging ordinary ones (cities-inside.md, "Rich households"), are BlocksSandstone with doors of
+         BlocksSandstone, a stone a Door takes (Data: Core/Defs/ThingDefs_Buildings/Buildings_Structure.xml, DoorBase
+         stuffCategories Stony; Core/Defs/ThingDefs_Misc/Various_Stone.xml, BlocksSandstone and BlocksLimestone). The
+         design's gold on the main gate's ornate leaves waits for the mod's own textures (cities-walls.md, "Gold and
+         ornament on gates"). The render names no wall or door material for its houses, so it is not used for them. -->
     <groups>
       <li>
         <name>dwelling5x9</name>
         <size>(5,9)</size>
         <things>
-          <Wall><position>(0,0,0)</position><rotation>North</rotation><stuff>BlocksLimestone</stuff></Wall>
-          <Wall><position>(1,0,0)</position><rotation>North</rotation><stuff>BlocksLimestone</stuff></Wall>
-          <Wall><position>(2,0,0)</position><rotation>North</rotation><stuff>BlocksLimestone</stuff></Wall>
-          <Wall><position>(3,0,0)</position><rotation>North</rotation><stuff>BlocksLimestone</stuff></Wall>
-          <Wall><position>(4,0,0)</position><rotation>North</rotation><stuff>BlocksLimestone</stuff></Wall>
-          <Door><position>(0,0,1)</position><rotation>East</rotation><stuff>Steel</stuff></Door>
-          <Wall><position>(4,0,1)</position><rotation>North</rotation><stuff>BlocksLimestone</stuff></Wall>
-          <Wall><position>(0,0,2)</position><rotation>North</rotation><stuff>BlocksLimestone</stuff></Wall>
-          <Wall><position>(4,0,2)</position><rotation>North</rotation><stuff>BlocksLimestone</stuff></Wall>
-          <Wall><position>(0,0,3)</position><rotation>North</rotation><stuff>BlocksLimestone</stuff></Wall>
-          <Wall><position>(4,0,3)</position><rotation>North</rotation><stuff>BlocksLimestone</stuff></Wall>
-          <Wall><position>(0,0,4)</position><rotation>North</rotation><stuff>BlocksLimestone</stuff></Wall>
-          <Wall><position>(4,0,4)</position><rotation>North</rotation><stuff>BlocksLimestone</stuff></Wall>
-          <Wall><position>(0,0,5)</position><rotation>North</rotation><stuff>BlocksLimestone</stuff></Wall>
-          <Wall><position>(4,0,5)</position><rotation>North</rotation><stuff>BlocksLimestone</stuff></Wall>
-          <Wall><position>(0,0,6)</position><rotation>North</rotation><stuff>BlocksLimestone</stuff></Wall>
-          <Wall><position>(4,0,6)</position><rotation>North</rotation><stuff>BlocksLimestone</stuff></Wall>
-          <Wall><position>(0,0,7)</position><rotation>North</rotation><stuff>BlocksLimestone</stuff></Wall>
-          <Wall><position>(4,0,7)</position><rotation>North</rotation><stuff>BlocksLimestone</stuff></Wall>
-          <Wall><position>(0,0,8)</position><rotation>North</rotation><stuff>BlocksLimestone</stuff></Wall>
-          <Wall><position>(1,0,8)</position><rotation>North</rotation><stuff>BlocksLimestone</stuff></Wall>
-          <Wall><position>(2,0,8)</position><rotation>North</rotation><stuff>BlocksLimestone</stuff></Wall>
-          <Wall><position>(3,0,8)</position><rotation>North</rotation><stuff>BlocksLimestone</stuff></Wall>
-          <Wall><position>(4,0,8)</position><rotation>North</rotation><stuff>BlocksLimestone</stuff></Wall>
+          <Wall><position>(0,0,0)</position><rotation>North</rotation><stuff>BlocksSandstone</stuff></Wall>
+          <Wall><position>(1,0,0)</position><rotation>North</rotation><stuff>BlocksSandstone</stuff></Wall>
+          <Wall><position>(2,0,0)</position><rotation>North</rotation><stuff>BlocksSandstone</stuff></Wall>
+          <Wall><position>(3,0,0)</position><rotation>North</rotation><stuff>BlocksSandstone</stuff></Wall>
+          <Wall><position>(4,0,0)</position><rotation>North</rotation><stuff>BlocksSandstone</stuff></Wall>
+          <Door><position>(0,0,1)</position><rotation>East</rotation><stuff>BlocksSandstone</stuff></Door>
+          <Wall><position>(4,0,1)</position><rotation>North</rotation><stuff>BlocksSandstone</stuff></Wall>
+          <Wall><position>(0,0,2)</position><rotation>North</rotation><stuff>BlocksSandstone</stuff></Wall>
+          <Wall><position>(4,0,2)</position><rotation>North</rotation><stuff>BlocksSandstone</stuff></Wall>
+          <Wall><position>(0,0,3)</position><rotation>North</rotation><stuff>BlocksSandstone</stuff></Wall>
+          <Wall><position>(4,0,3)</position><rotation>North</rotation><stuff>BlocksSandstone</stuff></Wall>
+          <Wall><position>(0,0,4)</position><rotation>North</rotation><stuff>BlocksSandstone</stuff></Wall>
+          <Wall><position>(4,0,4)</position><rotation>North</rotation><stuff>BlocksSandstone</stuff></Wall>
+          <Wall><position>(0,0,5)</position><rotation>North</rotation><stuff>BlocksSandstone</stuff></Wall>
+          <Wall><position>(4,0,5)</position><rotation>North</rotation><stuff>BlocksSandstone</stuff></Wall>
+          <Wall><position>(0,0,6)</position><rotation>North</rotation><stuff>BlocksSandstone</stuff></Wall>
+          <Wall><position>(4,0,6)</position><rotation>North</rotation><stuff>BlocksSandstone</stuff></Wall>
+          <Wall><position>(0,0,7)</position><rotation>North</rotation><stuff>BlocksSandstone</stuff></Wall>
+          <Wall><position>(4,0,7)</position><rotation>North</rotation><stuff>BlocksSandstone</stuff></Wall>
+          <Wall><position>(0,0,8)</position><rotation>North</rotation><stuff>BlocksSandstone</stuff></Wall>
+          <Wall><position>(1,0,8)</position><rotation>North</rotation><stuff>BlocksSandstone</stuff></Wall>
+          <Wall><position>(2,0,8)</position><rotation>North</rotation><stuff>BlocksSandstone</stuff></Wall>
+          <Wall><position>(3,0,8)</position><rotation>North</rotation><stuff>BlocksSandstone</stuff></Wall>
+          <Wall><position>(4,0,8)</position><rotation>North</rotation><stuff>BlocksSandstone</stuff></Wall>
         </things>
       </li>
       <li>
         <name>dwelling6x6</name>
         <size>(6,6)</size>
         <things>
-          <Wall><position>(0,0,0)</position><rotation>North</rotation><stuff>BlocksLimestone</stuff></Wall>
-          <Wall><position>(1,0,0)</position><rotation>North</rotation><stuff>BlocksLimestone</stuff></Wall>
-          <Wall><position>(2,0,0)</position><rotation>North</rotation><stuff>BlocksLimestone</stuff></Wall>
-          <Wall><position>(3,0,0)</position><rotation>North</rotation><stuff>BlocksLimestone</stuff></Wall>
-          <Wall><position>(4,0,0)</position><rotation>North</rotation><stuff>BlocksLimestone</stuff></Wall>
-          <Wall><position>(5,0,0)</position><rotation>North</rotation><stuff>BlocksLimestone</stuff></Wall>
-          <Wall><position>(0,0,1)</position><rotation>North</rotation><stuff>BlocksLimestone</stuff></Wall>
-          <Wall><position>(5,0,1)</position><rotation>North</rotation><stuff>BlocksLimestone</stuff></Wall>
-          <Wall><position>(0,0,2)</position><rotation>North</rotation><stuff>BlocksLimestone</stuff></Wall>
-          <Wall><position>(5,0,2)</position><rotation>North</rotation><stuff>BlocksLimestone</stuff></Wall>
-          <Door><position>(0,0,3)</position><rotation>East</rotation><stuff>Steel</stuff></Door>
-          <Wall><position>(5,0,3)</position><rotation>North</rotation><stuff>BlocksLimestone</stuff></Wall>
-          <Wall><position>(0,0,4)</position><rotation>North</rotation><stuff>BlocksLimestone</stuff></Wall>
-          <Wall><position>(5,0,4)</position><rotation>North</rotation><stuff>BlocksLimestone</stuff></Wall>
-          <Wall><position>(0,0,5)</position><rotation>North</rotation><stuff>BlocksLimestone</stuff></Wall>
-          <Wall><position>(1,0,5)</position><rotation>North</rotation><stuff>BlocksLimestone</stuff></Wall>
-          <Wall><position>(2,0,5)</position><rotation>North</rotation><stuff>BlocksLimestone</stuff></Wall>
-          <Wall><position>(3,0,5)</position><rotation>North</rotation><stuff>BlocksLimestone</stuff></Wall>
-          <Wall><position>(4,0,5)</position><rotation>North</rotation><stuff>BlocksLimestone</stuff></Wall>
-          <Wall><position>(5,0,5)</position><rotation>North</rotation><stuff>BlocksLimestone</stuff></Wall>
+          <Wall><position>(0,0,0)</position><rotation>North</rotation><stuff>BlocksSandstone</stuff></Wall>
+          <Wall><position>(1,0,0)</position><rotation>North</rotation><stuff>BlocksSandstone</stuff></Wall>
+          <Wall><position>(2,0,0)</position><rotation>North</rotation><stuff>BlocksSandstone</stuff></Wall>
+          <Wall><position>(3,0,0)</position><rotation>North</rotation><stuff>BlocksSandstone</stuff></Wall>
+          <Wall><position>(4,0,0)</position><rotation>North</rotation><stuff>BlocksSandstone</stuff></Wall>
+          <Wall><position>(5,0,0)</position><rotation>North</rotation><stuff>BlocksSandstone</stuff></Wall>
+          <Wall><position>(0,0,1)</position><rotation>North</rotation><stuff>BlocksSandstone</stuff></Wall>
+          <Wall><position>(5,0,1)</position><rotation>North</rotation><stuff>BlocksSandstone</stuff></Wall>
+          <Wall><position>(0,0,2)</position><rotation>North</rotation><stuff>BlocksSandstone</stuff></Wall>
+          <Wall><position>(5,0,2)</position><rotation>North</rotation><stuff>BlocksSandstone</stuff></Wall>
+          <Door><position>(0,0,3)</position><rotation>East</rotation><stuff>BlocksSandstone</stuff></Door>
+          <Wall><position>(5,0,3)</position><rotation>North</rotation><stuff>BlocksSandstone</stuff></Wall>
+          <Wall><position>(0,0,4)</position><rotation>North</rotation><stuff>BlocksSandstone</stuff></Wall>
+          <Wall><position>(5,0,4)</position><rotation>North</rotation><stuff>BlocksSandstone</stuff></Wall>
+          <Wall><position>(0,0,5)</position><rotation>North</rotation><stuff>BlocksSandstone</stuff></Wall>
+          <Wall><position>(1,0,5)</position><rotation>North</rotation><stuff>BlocksSandstone</stuff></Wall>
+          <Wall><position>(2,0,5)</position><rotation>North</rotation><stuff>BlocksSandstone</stuff></Wall>
+          <Wall><position>(3,0,5)</position><rotation>North</rotation><stuff>BlocksSandstone</stuff></Wall>
+          <Wall><position>(4,0,5)</position><rotation>North</rotation><stuff>BlocksSandstone</stuff></Wall>
+          <Wall><position>(5,0,5)</position><rotation>North</rotation><stuff>BlocksSandstone</stuff></Wall>
         </things>
       </li>
       <li>
         <name>dwelling6x7</name>
         <size>(6,7)</size>
         <things>
-          <Wall><position>(0,0,0)</position><rotation>North</rotation><stuff>BlocksLimestone</stuff></Wall>
-          <Wall><position>(1,0,0)</position><rotation>North</rotation><stuff>BlocksLimestone</stuff></Wall>
-          <Wall><position>(2,0,0)</position><rotation>North</rotation><stuff>BlocksLimestone</stuff></Wall>
-          <Wall><position>(3,0,0)</position><rotation>North</rotation><stuff>BlocksLimestone</stuff></Wall>
-          <Wall><position>(4,0,0)</position><rotation>North</rotation><stuff>BlocksLimestone</stuff></Wall>
-          <Wall><position>(5,0,0)</position><rotation>North</rotation><stuff>BlocksLimestone</stuff></Wall>
-          <Wall><position>(0,0,1)</position><rotation>North</rotation><stuff>BlocksLimestone</stuff></Wall>
-          <Wall><position>(5,0,1)</position><rotation>North</rotation><stuff>BlocksLimestone</stuff></Wall>
-          <Wall><position>(0,0,2)</position><rotation>North</rotation><stuff>BlocksLimestone</stuff></Wall>
-          <Wall><position>(5,0,2)</position><rotation>North</rotation><stuff>BlocksLimestone</stuff></Wall>
-          <Wall><position>(0,0,3)</position><rotation>North</rotation><stuff>BlocksLimestone</stuff></Wall>
-          <Wall><position>(5,0,3)</position><rotation>North</rotation><stuff>BlocksLimestone</stuff></Wall>
-          <Wall><position>(0,0,4)</position><rotation>North</rotation><stuff>BlocksLimestone</stuff></Wall>
-          <Wall><position>(5,0,4)</position><rotation>North</rotation><stuff>BlocksLimestone</stuff></Wall>
-          <Wall><position>(0,0,5)</position><rotation>North</rotation><stuff>BlocksLimestone</stuff></Wall>
-          <Wall><position>(5,0,5)</position><rotation>North</rotation><stuff>BlocksLimestone</stuff></Wall>
-          <Wall><position>(0,0,6)</position><rotation>North</rotation><stuff>BlocksLimestone</stuff></Wall>
-          <Door><position>(1,0,6)</position><rotation>North</rotation><stuff>Steel</stuff></Door>
-          <Wall><position>(2,0,6)</position><rotation>North</rotation><stuff>BlocksLimestone</stuff></Wall>
-          <Wall><position>(3,0,6)</position><rotation>North</rotation><stuff>BlocksLimestone</stuff></Wall>
-          <Wall><position>(4,0,6)</position><rotation>North</rotation><stuff>BlocksLimestone</stuff></Wall>
-          <Wall><position>(5,0,6)</position><rotation>North</rotation><stuff>BlocksLimestone</stuff></Wall>
+          <Wall><position>(0,0,0)</position><rotation>North</rotation><stuff>BlocksSandstone</stuff></Wall>
+          <Wall><position>(1,0,0)</position><rotation>North</rotation><stuff>BlocksSandstone</stuff></Wall>
+          <Wall><position>(2,0,0)</position><rotation>North</rotation><stuff>BlocksSandstone</stuff></Wall>
+          <Wall><position>(3,0,0)</position><rotation>North</rotation><stuff>BlocksSandstone</stuff></Wall>
+          <Wall><position>(4,0,0)</position><rotation>North</rotation><stuff>BlocksSandstone</stuff></Wall>
+          <Wall><position>(5,0,0)</position><rotation>North</rotation><stuff>BlocksSandstone</stuff></Wall>
+          <Wall><position>(0,0,1)</position><rotation>North</rotation><stuff>BlocksSandstone</stuff></Wall>
+          <Wall><position>(5,0,1)</position><rotation>North</rotation><stuff>BlocksSandstone</stuff></Wall>
+          <Wall><position>(0,0,2)</position><rotation>North</rotation><stuff>BlocksSandstone</stuff></Wall>
+          <Wall><position>(5,0,2)</position><rotation>North</rotation><stuff>BlocksSandstone</stuff></Wall>
+          <Wall><position>(0,0,3)</position><rotation>North</rotation><stuff>BlocksSandstone</stuff></Wall>
+          <Wall><position>(5,0,3)</position><rotation>North</rotation><stuff>BlocksSandstone</stuff></Wall>
+          <Wall><position>(0,0,4)</position><rotation>North</rotation><stuff>BlocksSandstone</stuff></Wall>
+          <Wall><position>(5,0,4)</position><rotation>North</rotation><stuff>BlocksSandstone</stuff></Wall>
+          <Wall><position>(0,0,5)</position><rotation>North</rotation><stuff>BlocksSandstone</stuff></Wall>
+          <Wall><position>(5,0,5)</position><rotation>North</rotation><stuff>BlocksSandstone</stuff></Wall>
+          <Wall><position>(0,0,6)</position><rotation>North</rotation><stuff>BlocksSandstone</stuff></Wall>
+          <Door><position>(1,0,6)</position><rotation>North</rotation><stuff>BlocksSandstone</stuff></Door>
+          <Wall><position>(2,0,6)</position><rotation>North</rotation><stuff>BlocksSandstone</stuff></Wall>
+          <Wall><position>(3,0,6)</position><rotation>North</rotation><stuff>BlocksSandstone</stuff></Wall>
+          <Wall><position>(4,0,6)</position><rotation>North</rotation><stuff>BlocksSandstone</stuff></Wall>
+          <Wall><position>(5,0,6)</position><rotation>North</rotation><stuff>BlocksSandstone</stuff></Wall>
         </things>
       </li>
       <li>
         <name>dwelling6x14</name>
         <size>(6,14)</size>
         <things>
-          <Wall><position>(0,0,0)</position><rotation>North</rotation><stuff>BlocksLimestone</stuff></Wall>
-          <Wall><position>(1,0,0)</position><rotation>North</rotation><stuff>BlocksLimestone</stuff></Wall>
-          <Door><position>(2,0,0)</position><rotation>North</rotation><stuff>Steel</stuff></Door>
-          <Wall><position>(3,0,0)</position><rotation>North</rotation><stuff>BlocksLimestone</stuff></Wall>
-          <Wall><position>(4,0,0)</position><rotation>North</rotation><stuff>BlocksLimestone</stuff></Wall>
-          <Wall><position>(5,0,0)</position><rotation>North</rotation><stuff>BlocksLimestone</stuff></Wall>
-          <Wall><position>(0,0,1)</position><rotation>North</rotation><stuff>BlocksLimestone</stuff></Wall>
-          <Wall><position>(5,0,1)</position><rotation>North</rotation><stuff>BlocksLimestone</stuff></Wall>
-          <Wall><position>(0,0,2)</position><rotation>North</rotation><stuff>BlocksLimestone</stuff></Wall>
-          <Wall><position>(5,0,2)</position><rotation>North</rotation><stuff>BlocksLimestone</stuff></Wall>
-          <Wall><position>(0,0,3)</position><rotation>North</rotation><stuff>BlocksLimestone</stuff></Wall>
-          <Wall><position>(5,0,3)</position><rotation>North</rotation><stuff>BlocksLimestone</stuff></Wall>
-          <Wall><position>(0,0,4)</position><rotation>North</rotation><stuff>BlocksLimestone</stuff></Wall>
-          <Wall><position>(5,0,4)</position><rotation>North</rotation><stuff>BlocksLimestone</stuff></Wall>
-          <Wall><position>(0,0,5)</position><rotation>North</rotation><stuff>BlocksLimestone</stuff></Wall>
-          <Wall><position>(5,0,5)</position><rotation>North</rotation><stuff>BlocksLimestone</stuff></Wall>
-          <Wall><position>(0,0,6)</position><rotation>North</rotation><stuff>BlocksLimestone</stuff></Wall>
-          <Wall><position>(5,0,6)</position><rotation>North</rotation><stuff>BlocksLimestone</stuff></Wall>
-          <Wall><position>(0,0,7)</position><rotation>North</rotation><stuff>BlocksLimestone</stuff></Wall>
-          <Wall><position>(5,0,7)</position><rotation>North</rotation><stuff>BlocksLimestone</stuff></Wall>
-          <Wall><position>(0,0,8)</position><rotation>North</rotation><stuff>BlocksLimestone</stuff></Wall>
-          <Wall><position>(5,0,8)</position><rotation>North</rotation><stuff>BlocksLimestone</stuff></Wall>
-          <Wall><position>(0,0,9)</position><rotation>North</rotation><stuff>BlocksLimestone</stuff></Wall>
-          <Wall><position>(5,0,9)</position><rotation>North</rotation><stuff>BlocksLimestone</stuff></Wall>
-          <Wall><position>(0,0,10)</position><rotation>North</rotation><stuff>BlocksLimestone</stuff></Wall>
-          <Wall><position>(5,0,10)</position><rotation>North</rotation><stuff>BlocksLimestone</stuff></Wall>
-          <Wall><position>(0,0,11)</position><rotation>North</rotation><stuff>BlocksLimestone</stuff></Wall>
-          <Wall><position>(5,0,11)</position><rotation>North</rotation><stuff>BlocksLimestone</stuff></Wall>
-          <Wall><position>(0,0,12)</position><rotation>North</rotation><stuff>BlocksLimestone</stuff></Wall>
-          <Wall><position>(5,0,12)</position><rotation>North</rotation><stuff>BlocksLimestone</stuff></Wall>
-          <Wall><position>(0,0,13)</position><rotation>North</rotation><stuff>BlocksLimestone</stuff></Wall>
-          <Wall><position>(1,0,13)</position><rotation>North</rotation><stuff>BlocksLimestone</stuff></Wall>
-          <Wall><position>(2,0,13)</position><rotation>North</rotation><stuff>BlocksLimestone</stuff></Wall>
-          <Wall><position>(3,0,13)</position><rotation>North</rotation><stuff>BlocksLimestone</stuff></Wall>
-          <Wall><position>(4,0,13)</position><rotation>North</rotation><stuff>BlocksLimestone</stuff></Wall>
-          <Wall><position>(5,0,13)</position><rotation>North</rotation><stuff>BlocksLimestone</stuff></Wall>
+          <Wall><position>(0,0,0)</position><rotation>North</rotation><stuff>BlocksSandstone</stuff></Wall>
+          <Wall><position>(1,0,0)</position><rotation>North</rotation><stuff>BlocksSandstone</stuff></Wall>
+          <Door><position>(2,0,0)</position><rotation>North</rotation><stuff>BlocksSandstone</stuff></Door>
+          <Wall><position>(3,0,0)</position><rotation>North</rotation><stuff>BlocksSandstone</stuff></Wall>
+          <Wall><position>(4,0,0)</position><rotation>North</rotation><stuff>BlocksSandstone</stuff></Wall>
+          <Wall><position>(5,0,0)</position><rotation>North</rotation><stuff>BlocksSandstone</stuff></Wall>
+          <Wall><position>(0,0,1)</position><rotation>North</rotation><stuff>BlocksSandstone</stuff></Wall>
+          <Wall><position>(5,0,1)</position><rotation>North</rotation><stuff>BlocksSandstone</stuff></Wall>
+          <Wall><position>(0,0,2)</position><rotation>North</rotation><stuff>BlocksSandstone</stuff></Wall>
+          <Wall><position>(5,0,2)</position><rotation>North</rotation><stuff>BlocksSandstone</stuff></Wall>
+          <Wall><position>(0,0,3)</position><rotation>North</rotation><stuff>BlocksSandstone</stuff></Wall>
+          <Wall><position>(5,0,3)</position><rotation>North</rotation><stuff>BlocksSandstone</stuff></Wall>
+          <Wall><position>(0,0,4)</position><rotation>North</rotation><stuff>BlocksSandstone</stuff></Wall>
+          <Wall><position>(5,0,4)</position><rotation>North</rotation><stuff>BlocksSandstone</stuff></Wall>
+          <Wall><position>(0,0,5)</position><rotation>North</rotation><stuff>BlocksSandstone</stuff></Wall>
+          <Wall><position>(5,0,5)</position><rotation>North</rotation><stuff>BlocksSandstone</stuff></Wall>
+          <Wall><position>(0,0,6)</position><rotation>North</rotation><stuff>BlocksSandstone</stuff></Wall>
+          <Wall><position>(5,0,6)</position><rotation>North</rotation><stuff>BlocksSandstone</stuff></Wall>
+          <Wall><position>(0,0,7)</position><rotation>North</rotation><stuff>BlocksSandstone</stuff></Wall>
+          <Wall><position>(5,0,7)</position><rotation>North</rotation><stuff>BlocksSandstone</stuff></Wall>
+          <Wall><position>(0,0,8)</position><rotation>North</rotation><stuff>BlocksSandstone</stuff></Wall>
+          <Wall><position>(5,0,8)</position><rotation>North</rotation><stuff>BlocksSandstone</stuff></Wall>
+          <Wall><position>(0,0,9)</position><rotation>North</rotation><stuff>BlocksSandstone</stuff></Wall>
+          <Wall><position>(5,0,9)</position><rotation>North</rotation><stuff>BlocksSandstone</stuff></Wall>
+          <Wall><position>(0,0,10)</position><rotation>North</rotation><stuff>BlocksSandstone</stuff></Wall>
+          <Wall><position>(5,0,10)</position><rotation>North</rotation><stuff>BlocksSandstone</stuff></Wall>
+          <Wall><position>(0,0,11)</position><rotation>North</rotation><stuff>BlocksSandstone</stuff></Wall>
+          <Wall><position>(5,0,11)</position><rotation>North</rotation><stuff>BlocksSandstone</stuff></Wall>
+          <Wall><position>(0,0,12)</position><rotation>North</rotation><stuff>BlocksSandstone</stuff></Wall>
+          <Wall><position>(5,0,12)</position><rotation>North</rotation><stuff>BlocksSandstone</stuff></Wall>
+          <Wall><position>(0,0,13)</position><rotation>North</rotation><stuff>BlocksSandstone</stuff></Wall>
+          <Wall><position>(1,0,13)</position><rotation>North</rotation><stuff>BlocksSandstone</stuff></Wall>
+          <Wall><position>(2,0,13)</position><rotation>North</rotation><stuff>BlocksSandstone</stuff></Wall>
+          <Wall><position>(3,0,13)</position><rotation>North</rotation><stuff>BlocksSandstone</stuff></Wall>
+          <Wall><position>(4,0,13)</position><rotation>North</rotation><stuff>BlocksSandstone</stuff></Wall>
+          <Wall><position>(5,0,13)</position><rotation>North</rotation><stuff>BlocksSandstone</stuff></Wall>
         </things>
       </li>
       <li>
         <name>dwelling7x7</name>
         <size>(7,7)</size>
         <things>
-          <Wall><position>(0,0,0)</position><rotation>North</rotation><stuff>BlocksLimestone</stuff></Wall>
-          <Wall><position>(1,0,0)</position><rotation>North</rotation><stuff>BlocksLimestone</stuff></Wall>
-          <Wall><position>(2,0,0)</position><rotation>North</rotation><stuff>BlocksLimestone</stuff></Wall>
-          <Wall><position>(3,0,0)</position><rotation>North</rotation><stuff>BlocksLimestone</stuff></Wall>
-          <Wall><position>(4,0,0)</position><rotation>North</rotation><stuff>BlocksLimestone</stuff></Wall>
-          <Wall><position>(5,0,0)</position><rotation>North</rotation><stuff>BlocksLimestone</stuff></Wall>
-          <Wall><position>(6,0,0)</position><rotation>North</rotation><stuff>BlocksLimestone</stuff></Wall>
-          <Wall><position>(0,0,1)</position><rotation>North</rotation><stuff>BlocksLimestone</stuff></Wall>
-          <Wall><position>(6,0,1)</position><rotation>North</rotation><stuff>BlocksLimestone</stuff></Wall>
-          <Wall><position>(0,0,2)</position><rotation>North</rotation><stuff>BlocksLimestone</stuff></Wall>
-          <Wall><position>(6,0,2)</position><rotation>North</rotation><stuff>BlocksLimestone</stuff></Wall>
-          <Wall><position>(0,0,3)</position><rotation>North</rotation><stuff>BlocksLimestone</stuff></Wall>
-          <Wall><position>(6,0,3)</position><rotation>North</rotation><stuff>BlocksLimestone</stuff></Wall>
-          <Wall><position>(0,0,4)</position><rotation>North</rotation><stuff>BlocksLimestone</stuff></Wall>
-          <Wall><position>(6,0,4)</position><rotation>North</rotation><stuff>BlocksLimestone</stuff></Wall>
-          <Door><position>(0,0,5)</position><rotation>East</rotation><stuff>Steel</stuff></Door>
-          <Wall><position>(6,0,5)</position><rotation>North</rotation><stuff>BlocksLimestone</stuff></Wall>
-          <Wall><position>(0,0,6)</position><rotation>North</rotation><stuff>BlocksLimestone</stuff></Wall>
-          <Wall><position>(1,0,6)</position><rotation>North</rotation><stuff>BlocksLimestone</stuff></Wall>
-          <Wall><position>(2,0,6)</position><rotation>North</rotation><stuff>BlocksLimestone</stuff></Wall>
-          <Wall><position>(3,0,6)</position><rotation>North</rotation><stuff>BlocksLimestone</stuff></Wall>
-          <Wall><position>(4,0,6)</position><rotation>North</rotation><stuff>BlocksLimestone</stuff></Wall>
-          <Wall><position>(5,0,6)</position><rotation>North</rotation><stuff>BlocksLimestone</stuff></Wall>
-          <Wall><position>(6,0,6)</position><rotation>North</rotation><stuff>BlocksLimestone</stuff></Wall>
+          <Wall><position>(0,0,0)</position><rotation>North</rotation><stuff>BlocksSandstone</stuff></Wall>
+          <Wall><position>(1,0,0)</position><rotation>North</rotation><stuff>BlocksSandstone</stuff></Wall>
+          <Wall><position>(2,0,0)</position><rotation>North</rotation><stuff>BlocksSandstone</stuff></Wall>
+          <Wall><position>(3,0,0)</position><rotation>North</rotation><stuff>BlocksSandstone</stuff></Wall>
+          <Wall><position>(4,0,0)</position><rotation>North</rotation><stuff>BlocksSandstone</stuff></Wall>
+          <Wall><position>(5,0,0)</position><rotation>North</rotation><stuff>BlocksSandstone</stuff></Wall>
+          <Wall><position>(6,0,0)</position><rotation>North</rotation><stuff>BlocksSandstone</stuff></Wall>
+          <Wall><position>(0,0,1)</position><rotation>North</rotation><stuff>BlocksSandstone</stuff></Wall>
+          <Wall><position>(6,0,1)</position><rotation>North</rotation><stuff>BlocksSandstone</stuff></Wall>
+          <Wall><position>(0,0,2)</position><rotation>North</rotation><stuff>BlocksSandstone</stuff></Wall>
+          <Wall><position>(6,0,2)</position><rotation>North</rotation><stuff>BlocksSandstone</stuff></Wall>
+          <Wall><position>(0,0,3)</position><rotation>North</rotation><stuff>BlocksSandstone</stuff></Wall>
+          <Wall><position>(6,0,3)</position><rotation>North</rotation><stuff>BlocksSandstone</stuff></Wall>
+          <Wall><position>(0,0,4)</position><rotation>North</rotation><stuff>BlocksSandstone</stuff></Wall>
+          <Wall><position>(6,0,4)</position><rotation>North</rotation><stuff>BlocksSandstone</stuff></Wall>
+          <Door><position>(0,0,5)</position><rotation>East</rotation><stuff>BlocksSandstone</stuff></Door>
+          <Wall><position>(6,0,5)</position><rotation>North</rotation><stuff>BlocksSandstone</stuff></Wall>
+          <Wall><position>(0,0,6)</position><rotation>North</rotation><stuff>BlocksSandstone</stuff></Wall>
+          <Wall><position>(1,0,6)</position><rotation>North</rotation><stuff>BlocksSandstone</stuff></Wall>
+          <Wall><position>(2,0,6)</position><rotation>North</rotation><stuff>BlocksSandstone</stuff></Wall>
+          <Wall><position>(3,0,6)</position><rotation>North</rotation><stuff>BlocksSandstone</stuff></Wall>
+          <Wall><position>(4,0,6)</position><rotation>North</rotation><stuff>BlocksSandstone</stuff></Wall>
+          <Wall><position>(5,0,6)</position><rotation>North</rotation><stuff>BlocksSandstone</stuff></Wall>
+          <Wall><position>(6,0,6)</position><rotation>North</rotation><stuff>BlocksSandstone</stuff></Wall>
         </things>
       </li>
       <li>
         <name>dwelling7x11</name>
         <size>(7,11)</size>
         <things>
-          <Wall><position>(0,0,0)</position><rotation>North</rotation><stuff>BlocksLimestone</stuff></Wall>
-          <Wall><position>(1,0,0)</position><rotation>North</rotation><stuff>BlocksLimestone</stuff></Wall>
-          <Wall><position>(2,0,0)</position><rotation>North</rotation><stuff>BlocksLimestone</stuff></Wall>
-          <Wall><position>(3,0,0)</position><rotation>North</rotation><stuff>BlocksLimestone</stuff></Wall>
-          <Wall><position>(4,0,0)</position><rotation>North</rotation><stuff>BlocksLimestone</stuff></Wall>
-          <Wall><position>(5,0,0)</position><rotation>North</rotation><stuff>BlocksLimestone</stuff></Wall>
-          <Wall><position>(6,0,0)</position><rotation>North</rotation><stuff>BlocksLimestone</stuff></Wall>
-          <Door><position>(0,0,1)</position><rotation>East</rotation><stuff>Steel</stuff></Door>
-          <Wall><position>(6,0,1)</position><rotation>North</rotation><stuff>BlocksLimestone</stuff></Wall>
-          <Wall><position>(0,0,2)</position><rotation>North</rotation><stuff>BlocksLimestone</stuff></Wall>
-          <Wall><position>(6,0,2)</position><rotation>North</rotation><stuff>BlocksLimestone</stuff></Wall>
-          <Wall><position>(0,0,3)</position><rotation>North</rotation><stuff>BlocksLimestone</stuff></Wall>
-          <Wall><position>(6,0,3)</position><rotation>North</rotation><stuff>BlocksLimestone</stuff></Wall>
-          <Wall><position>(0,0,4)</position><rotation>North</rotation><stuff>BlocksLimestone</stuff></Wall>
-          <Wall><position>(6,0,4)</position><rotation>North</rotation><stuff>BlocksLimestone</stuff></Wall>
-          <Wall><position>(0,0,5)</position><rotation>North</rotation><stuff>BlocksLimestone</stuff></Wall>
-          <Wall><position>(6,0,5)</position><rotation>North</rotation><stuff>BlocksLimestone</stuff></Wall>
-          <Wall><position>(0,0,6)</position><rotation>North</rotation><stuff>BlocksLimestone</stuff></Wall>
-          <Wall><position>(6,0,6)</position><rotation>North</rotation><stuff>BlocksLimestone</stuff></Wall>
-          <Wall><position>(0,0,7)</position><rotation>North</rotation><stuff>BlocksLimestone</stuff></Wall>
-          <Wall><position>(6,0,7)</position><rotation>North</rotation><stuff>BlocksLimestone</stuff></Wall>
-          <Wall><position>(0,0,8)</position><rotation>North</rotation><stuff>BlocksLimestone</stuff></Wall>
-          <Wall><position>(6,0,8)</position><rotation>North</rotation><stuff>BlocksLimestone</stuff></Wall>
-          <Wall><position>(0,0,9)</position><rotation>North</rotation><stuff>BlocksLimestone</stuff></Wall>
-          <Wall><position>(6,0,9)</position><rotation>North</rotation><stuff>BlocksLimestone</stuff></Wall>
-          <Wall><position>(0,0,10)</position><rotation>North</rotation><stuff>BlocksLimestone</stuff></Wall>
-          <Wall><position>(1,0,10)</position><rotation>North</rotation><stuff>BlocksLimestone</stuff></Wall>
-          <Wall><position>(2,0,10)</position><rotation>North</rotation><stuff>BlocksLimestone</stuff></Wall>
-          <Wall><position>(3,0,10)</position><rotation>North</rotation><stuff>BlocksLimestone</stuff></Wall>
-          <Wall><position>(4,0,10)</position><rotation>North</rotation><stuff>BlocksLimestone</stuff></Wall>
-          <Wall><position>(5,0,10)</position><rotation>North</rotation><stuff>BlocksLimestone</stuff></Wall>
-          <Wall><position>(6,0,10)</position><rotation>North</rotation><stuff>BlocksLimestone</stuff></Wall>
+          <Wall><position>(0,0,0)</position><rotation>North</rotation><stuff>BlocksSandstone</stuff></Wall>
+          <Wall><position>(1,0,0)</position><rotation>North</rotation><stuff>BlocksSandstone</stuff></Wall>
+          <Wall><position>(2,0,0)</position><rotation>North</rotation><stuff>BlocksSandstone</stuff></Wall>
+          <Wall><position>(3,0,0)</position><rotation>North</rotation><stuff>BlocksSandstone</stuff></Wall>
+          <Wall><position>(4,0,0)</position><rotation>North</rotation><stuff>BlocksSandstone</stuff></Wall>
+          <Wall><position>(5,0,0)</position><rotation>North</rotation><stuff>BlocksSandstone</stuff></Wall>
+          <Wall><position>(6,0,0)</position><rotation>North</rotation><stuff>BlocksSandstone</stuff></Wall>
+          <Door><position>(0,0,1)</position><rotation>East</rotation><stuff>BlocksSandstone</stuff></Door>
+          <Wall><position>(6,0,1)</position><rotation>North</rotation><stuff>BlocksSandstone</stuff></Wall>
+          <Wall><position>(0,0,2)</position><rotation>North</rotation><stuff>BlocksSandstone</stuff></Wall>
+          <Wall><position>(6,0,2)</position><rotation>North</rotation><stuff>BlocksSandstone</stuff></Wall>
+          <Wall><position>(0,0,3)</position><rotation>North</rotation><stuff>BlocksSandstone</stuff></Wall>
+          <Wall><position>(6,0,3)</position><rotation>North</rotation><stuff>BlocksSandstone</stuff></Wall>
+          <Wall><position>(0,0,4)</position><rotation>North</rotation><stuff>BlocksSandstone</stuff></Wall>
+          <Wall><position>(6,0,4)</position><rotation>North</rotation><stuff>BlocksSandstone</stuff></Wall>
+          <Wall><position>(0,0,5)</position><rotation>North</rotation><stuff>BlocksSandstone</stuff></Wall>
+          <Wall><position>(6,0,5)</position><rotation>North</rotation><stuff>BlocksSandstone</stuff></Wall>
+          <Wall><position>(0,0,6)</position><rotation>North</rotation><stuff>BlocksSandstone</stuff></Wall>
+          <Wall><position>(6,0,6)</position><rotation>North</rotation><stuff>BlocksSandstone</stuff></Wall>
+          <Wall><position>(0,0,7)</position><rotation>North</rotation><stuff>BlocksSandstone</stuff></Wall>
+          <Wall><position>(6,0,7)</position><rotation>North</rotation><stuff>BlocksSandstone</stuff></Wall>
+          <Wall><position>(0,0,8)</position><rotation>North</rotation><stuff>BlocksSandstone</stuff></Wall>
+          <Wall><position>(6,0,8)</position><rotation>North</rotation><stuff>BlocksSandstone</stuff></Wall>
+          <Wall><position>(0,0,9)</position><rotation>North</rotation><stuff>BlocksSandstone</stuff></Wall>
+          <Wall><position>(6,0,9)</position><rotation>North</rotation><stuff>BlocksSandstone</stuff></Wall>
+          <Wall><position>(0,0,10)</position><rotation>North</rotation><stuff>BlocksSandstone</stuff></Wall>
+          <Wall><position>(1,0,10)</position><rotation>North</rotation><stuff>BlocksSandstone</stuff></Wall>
+          <Wall><position>(2,0,10)</position><rotation>North</rotation><stuff>BlocksSandstone</stuff></Wall>
+          <Wall><position>(3,0,10)</position><rotation>North</rotation><stuff>BlocksSandstone</stuff></Wall>
+          <Wall><position>(4,0,10)</position><rotation>North</rotation><stuff>BlocksSandstone</stuff></Wall>
+          <Wall><position>(5,0,10)</position><rotation>North</rotation><stuff>BlocksSandstone</stuff></Wall>
+          <Wall><position>(6,0,10)</position><rotation>North</rotation><stuff>BlocksSandstone</stuff></Wall>
         </things>
       </li>
       <li>
         <name>dwelling8x10</name>
         <size>(8,10)</size>
         <things>
-          <Wall><position>(0,0,0)</position><rotation>North</rotation><stuff>BlocksLimestone</stuff></Wall>
-          <Wall><position>(1,0,0)</position><rotation>North</rotation><stuff>BlocksLimestone</stuff></Wall>
-          <Wall><position>(2,0,0)</position><rotation>North</rotation><stuff>BlocksLimestone</stuff></Wall>
-          <Wall><position>(3,0,0)</position><rotation>North</rotation><stuff>BlocksLimestone</stuff></Wall>
-          <Wall><position>(4,0,0)</position><rotation>North</rotation><stuff>BlocksLimestone</stuff></Wall>
-          <Wall><position>(5,0,0)</position><rotation>North</rotation><stuff>BlocksLimestone</stuff></Wall>
-          <Wall><position>(6,0,0)</position><rotation>North</rotation><stuff>BlocksLimestone</stuff></Wall>
-          <Wall><position>(7,0,0)</position><rotation>North</rotation><stuff>BlocksLimestone</stuff></Wall>
-          <Wall><position>(0,0,1)</position><rotation>North</rotation><stuff>BlocksLimestone</stuff></Wall>
-          <Wall><position>(7,0,1)</position><rotation>North</rotation><stuff>BlocksLimestone</stuff></Wall>
-          <Wall><position>(0,0,2)</position><rotation>North</rotation><stuff>BlocksLimestone</stuff></Wall>
-          <Wall><position>(7,0,2)</position><rotation>North</rotation><stuff>BlocksLimestone</stuff></Wall>
-          <Wall><position>(0,0,3)</position><rotation>North</rotation><stuff>BlocksLimestone</stuff></Wall>
-          <Wall><position>(7,0,3)</position><rotation>North</rotation><stuff>BlocksLimestone</stuff></Wall>
-          <Wall><position>(0,0,4)</position><rotation>North</rotation><stuff>BlocksLimestone</stuff></Wall>
-          <Wall><position>(7,0,4)</position><rotation>North</rotation><stuff>BlocksLimestone</stuff></Wall>
-          <Wall><position>(0,0,5)</position><rotation>North</rotation><stuff>BlocksLimestone</stuff></Wall>
-          <Door><position>(7,0,5)</position><rotation>East</rotation><stuff>Steel</stuff></Door>
-          <Wall><position>(0,0,6)</position><rotation>North</rotation><stuff>BlocksLimestone</stuff></Wall>
-          <Wall><position>(7,0,6)</position><rotation>North</rotation><stuff>BlocksLimestone</stuff></Wall>
-          <Wall><position>(0,0,7)</position><rotation>North</rotation><stuff>BlocksLimestone</stuff></Wall>
-          <Wall><position>(7,0,7)</position><rotation>North</rotation><stuff>BlocksLimestone</stuff></Wall>
-          <Wall><position>(0,0,8)</position><rotation>North</rotation><stuff>BlocksLimestone</stuff></Wall>
-          <Wall><position>(7,0,8)</position><rotation>North</rotation><stuff>BlocksLimestone</stuff></Wall>
-          <Wall><position>(0,0,9)</position><rotation>North</rotation><stuff>BlocksLimestone</stuff></Wall>
-          <Wall><position>(1,0,9)</position><rotation>North</rotation><stuff>BlocksLimestone</stuff></Wall>
-          <Wall><position>(2,0,9)</position><rotation>North</rotation><stuff>BlocksLimestone</stuff></Wall>
-          <Wall><position>(3,0,9)</position><rotation>North</rotation><stuff>BlocksLimestone</stuff></Wall>
-          <Wall><position>(4,0,9)</position><rotation>North</rotation><stuff>BlocksLimestone</stuff></Wall>
-          <Wall><position>(5,0,9)</position><rotation>North</rotation><stuff>BlocksLimestone</stuff></Wall>
-          <Wall><position>(6,0,9)</position><rotation>North</rotation><stuff>BlocksLimestone</stuff></Wall>
-          <Wall><position>(7,0,9)</position><rotation>North</rotation><stuff>BlocksLimestone</stuff></Wall>
+          <Wall><position>(0,0,0)</position><rotation>North</rotation><stuff>BlocksSandstone</stuff></Wall>
+          <Wall><position>(1,0,0)</position><rotation>North</rotation><stuff>BlocksSandstone</stuff></Wall>
+          <Wall><position>(2,0,0)</position><rotation>North</rotation><stuff>BlocksSandstone</stuff></Wall>
+          <Wall><position>(3,0,0)</position><rotation>North</rotation><stuff>BlocksSandstone</stuff></Wall>
+          <Wall><position>(4,0,0)</position><rotation>North</rotation><stuff>BlocksSandstone</stuff></Wall>
+          <Wall><position>(5,0,0)</position><rotation>North</rotation><stuff>BlocksSandstone</stuff></Wall>
+          <Wall><position>(6,0,0)</position><rotation>North</rotation><stuff>BlocksSandstone</stuff></Wall>
+          <Wall><position>(7,0,0)</position><rotation>North</rotation><stuff>BlocksSandstone</stuff></Wall>
+          <Wall><position>(0,0,1)</position><rotation>North</rotation><stuff>BlocksSandstone</stuff></Wall>
+          <Wall><position>(7,0,1)</position><rotation>North</rotation><stuff>BlocksSandstone</stuff></Wall>
+          <Wall><position>(0,0,2)</position><rotation>North</rotation><stuff>BlocksSandstone</stuff></Wall>
+          <Wall><position>(7,0,2)</position><rotation>North</rotation><stuff>BlocksSandstone</stuff></Wall>
+          <Wall><position>(0,0,3)</position><rotation>North</rotation><stuff>BlocksSandstone</stuff></Wall>
+          <Wall><position>(7,0,3)</position><rotation>North</rotation><stuff>BlocksSandstone</stuff></Wall>
+          <Wall><position>(0,0,4)</position><rotation>North</rotation><stuff>BlocksSandstone</stuff></Wall>
+          <Wall><position>(7,0,4)</position><rotation>North</rotation><stuff>BlocksSandstone</stuff></Wall>
+          <Wall><position>(0,0,5)</position><rotation>North</rotation><stuff>BlocksSandstone</stuff></Wall>
+          <Door><position>(7,0,5)</position><rotation>East</rotation><stuff>BlocksSandstone</stuff></Door>
+          <Wall><position>(0,0,6)</position><rotation>North</rotation><stuff>BlocksSandstone</stuff></Wall>
+          <Wall><position>(7,0,6)</position><rotation>North</rotation><stuff>BlocksSandstone</stuff></Wall>
+          <Wall><position>(0,0,7)</position><rotation>North</rotation><stuff>BlocksSandstone</stuff></Wall>
+          <Wall><position>(7,0,7)</position><rotation>North</rotation><stuff>BlocksSandstone</stuff></Wall>
+          <Wall><position>(0,0,8)</position><rotation>North</rotation><stuff>BlocksSandstone</stuff></Wall>
+          <Wall><position>(7,0,8)</position><rotation>North</rotation><stuff>BlocksSandstone</stuff></Wall>
+          <Wall><position>(0,0,9)</position><rotation>North</rotation><stuff>BlocksSandstone</stuff></Wall>
+          <Wall><position>(1,0,9)</position><rotation>North</rotation><stuff>BlocksSandstone</stuff></Wall>
+          <Wall><position>(2,0,9)</position><rotation>North</rotation><stuff>BlocksSandstone</stuff></Wall>
+          <Wall><position>(3,0,9)</position><rotation>North</rotation><stuff>BlocksSandstone</stuff></Wall>
+          <Wall><position>(4,0,9)</position><rotation>North</rotation><stuff>BlocksSandstone</stuff></Wall>
+          <Wall><position>(5,0,9)</position><rotation>North</rotation><stuff>BlocksSandstone</stuff></Wall>
+          <Wall><position>(6,0,9)</position><rotation>North</rotation><stuff>BlocksSandstone</stuff></Wall>
+          <Wall><position>(7,0,9)</position><rotation>North</rotation><stuff>BlocksSandstone</stuff></Wall>
         </things>
       </li>
       <li>
         <name>dwelling9x15</name>
         <size>(9,15)</size>
         <things>
-          <Wall><position>(0,0,0)</position><rotation>North</rotation><stuff>BlocksLimestone</stuff></Wall>
-          <Wall><position>(1,0,0)</position><rotation>North</rotation><stuff>BlocksLimestone</stuff></Wall>
-          <Wall><position>(2,0,0)</position><rotation>North</rotation><stuff>BlocksLimestone</stuff></Wall>
-          <Wall><position>(3,0,0)</position><rotation>North</rotation><stuff>BlocksLimestone</stuff></Wall>
-          <Wall><position>(4,0,0)</position><rotation>North</rotation><stuff>BlocksLimestone</stuff></Wall>
-          <Wall><position>(5,0,0)</position><rotation>North</rotation><stuff>BlocksLimestone</stuff></Wall>
-          <Wall><position>(6,0,0)</position><rotation>North</rotation><stuff>BlocksLimestone</stuff></Wall>
-          <Wall><position>(7,0,0)</position><rotation>North</rotation><stuff>BlocksLimestone</stuff></Wall>
-          <Wall><position>(8,0,0)</position><rotation>North</rotation><stuff>BlocksLimestone</stuff></Wall>
-          <Wall><position>(0,0,1)</position><rotation>North</rotation><stuff>BlocksLimestone</stuff></Wall>
-          <Wall><position>(8,0,1)</position><rotation>North</rotation><stuff>BlocksLimestone</stuff></Wall>
-          <Wall><position>(0,0,2)</position><rotation>North</rotation><stuff>BlocksLimestone</stuff></Wall>
-          <Wall><position>(8,0,2)</position><rotation>North</rotation><stuff>BlocksLimestone</stuff></Wall>
-          <Wall><position>(0,0,3)</position><rotation>North</rotation><stuff>BlocksLimestone</stuff></Wall>
-          <Wall><position>(8,0,3)</position><rotation>North</rotation><stuff>BlocksLimestone</stuff></Wall>
-          <Wall><position>(0,0,4)</position><rotation>North</rotation><stuff>BlocksLimestone</stuff></Wall>
-          <Wall><position>(8,0,4)</position><rotation>North</rotation><stuff>BlocksLimestone</stuff></Wall>
-          <Wall><position>(0,0,5)</position><rotation>North</rotation><stuff>BlocksLimestone</stuff></Wall>
-          <Wall><position>(8,0,5)</position><rotation>North</rotation><stuff>BlocksLimestone</stuff></Wall>
-          <Wall><position>(0,0,6)</position><rotation>North</rotation><stuff>BlocksLimestone</stuff></Wall>
-          <Wall><position>(8,0,6)</position><rotation>North</rotation><stuff>BlocksLimestone</stuff></Wall>
-          <Wall><position>(0,0,7)</position><rotation>North</rotation><stuff>BlocksLimestone</stuff></Wall>
-          <Wall><position>(8,0,7)</position><rotation>North</rotation><stuff>BlocksLimestone</stuff></Wall>
-          <Wall><position>(0,0,8)</position><rotation>North</rotation><stuff>BlocksLimestone</stuff></Wall>
-          <Wall><position>(8,0,8)</position><rotation>North</rotation><stuff>BlocksLimestone</stuff></Wall>
-          <Wall><position>(0,0,9)</position><rotation>North</rotation><stuff>BlocksLimestone</stuff></Wall>
-          <Wall><position>(8,0,9)</position><rotation>North</rotation><stuff>BlocksLimestone</stuff></Wall>
-          <Wall><position>(0,0,10)</position><rotation>North</rotation><stuff>BlocksLimestone</stuff></Wall>
-          <Wall><position>(8,0,10)</position><rotation>North</rotation><stuff>BlocksLimestone</stuff></Wall>
-          <Wall><position>(0,0,11)</position><rotation>North</rotation><stuff>BlocksLimestone</stuff></Wall>
-          <Wall><position>(8,0,11)</position><rotation>North</rotation><stuff>BlocksLimestone</stuff></Wall>
-          <Wall><position>(0,0,12)</position><rotation>North</rotation><stuff>BlocksLimestone</stuff></Wall>
-          <Wall><position>(8,0,12)</position><rotation>North</rotation><stuff>BlocksLimestone</stuff></Wall>
-          <Wall><position>(0,0,13)</position><rotation>North</rotation><stuff>BlocksLimestone</stuff></Wall>
-          <Door><position>(8,0,13)</position><rotation>East</rotation><stuff>Steel</stuff></Door>
-          <Wall><position>(0,0,14)</position><rotation>North</rotation><stuff>BlocksLimestone</stuff></Wall>
-          <Wall><position>(1,0,14)</position><rotation>North</rotation><stuff>BlocksLimestone</stuff></Wall>
-          <Wall><position>(2,0,14)</position><rotation>North</rotation><stuff>BlocksLimestone</stuff></Wall>
-          <Wall><position>(3,0,14)</position><rotation>North</rotation><stuff>BlocksLimestone</stuff></Wall>
-          <Wall><position>(4,0,14)</position><rotation>North</rotation><stuff>BlocksLimestone</stuff></Wall>
-          <Wall><position>(5,0,14)</position><rotation>North</rotation><stuff>BlocksLimestone</stuff></Wall>
-          <Wall><position>(6,0,14)</position><rotation>North</rotation><stuff>BlocksLimestone</stuff></Wall>
-          <Wall><position>(7,0,14)</position><rotation>North</rotation><stuff>BlocksLimestone</stuff></Wall>
-          <Wall><position>(8,0,14)</position><rotation>North</rotation><stuff>BlocksLimestone</stuff></Wall>
+          <Wall><position>(0,0,0)</position><rotation>North</rotation><stuff>BlocksSandstone</stuff></Wall>
+          <Wall><position>(1,0,0)</position><rotation>North</rotation><stuff>BlocksSandstone</stuff></Wall>
+          <Wall><position>(2,0,0)</position><rotation>North</rotation><stuff>BlocksSandstone</stuff></Wall>
+          <Wall><position>(3,0,0)</position><rotation>North</rotation><stuff>BlocksSandstone</stuff></Wall>
+          <Wall><position>(4,0,0)</position><rotation>North</rotation><stuff>BlocksSandstone</stuff></Wall>
+          <Wall><position>(5,0,0)</position><rotation>North</rotation><stuff>BlocksSandstone</stuff></Wall>
+          <Wall><position>(6,0,0)</position><rotation>North</rotation><stuff>BlocksSandstone</stuff></Wall>
+          <Wall><position>(7,0,0)</position><rotation>North</rotation><stuff>BlocksSandstone</stuff></Wall>
+          <Wall><position>(8,0,0)</position><rotation>North</rotation><stuff>BlocksSandstone</stuff></Wall>
+          <Wall><position>(0,0,1)</position><rotation>North</rotation><stuff>BlocksSandstone</stuff></Wall>
+          <Wall><position>(8,0,1)</position><rotation>North</rotation><stuff>BlocksSandstone</stuff></Wall>
+          <Wall><position>(0,0,2)</position><rotation>North</rotation><stuff>BlocksSandstone</stuff></Wall>
+          <Wall><position>(8,0,2)</position><rotation>North</rotation><stuff>BlocksSandstone</stuff></Wall>
+          <Wall><position>(0,0,3)</position><rotation>North</rotation><stuff>BlocksSandstone</stuff></Wall>
+          <Wall><position>(8,0,3)</position><rotation>North</rotation><stuff>BlocksSandstone</stuff></Wall>
+          <Wall><position>(0,0,4)</position><rotation>North</rotation><stuff>BlocksSandstone</stuff></Wall>
+          <Wall><position>(8,0,4)</position><rotation>North</rotation><stuff>BlocksSandstone</stuff></Wall>
+          <Wall><position>(0,0,5)</position><rotation>North</rotation><stuff>BlocksSandstone</stuff></Wall>
+          <Wall><position>(8,0,5)</position><rotation>North</rotation><stuff>BlocksSandstone</stuff></Wall>
+          <Wall><position>(0,0,6)</position><rotation>North</rotation><stuff>BlocksSandstone</stuff></Wall>
+          <Wall><position>(8,0,6)</position><rotation>North</rotation><stuff>BlocksSandstone</stuff></Wall>
+          <Wall><position>(0,0,7)</position><rotation>North</rotation><stuff>BlocksSandstone</stuff></Wall>
+          <Wall><position>(8,0,7)</position><rotation>North</rotation><stuff>BlocksSandstone</stuff></Wall>
+          <Wall><position>(0,0,8)</position><rotation>North</rotation><stuff>BlocksSandstone</stuff></Wall>
+          <Wall><position>(8,0,8)</position><rotation>North</rotation><stuff>BlocksSandstone</stuff></Wall>
+          <Wall><position>(0,0,9)</position><rotation>North</rotation><stuff>BlocksSandstone</stuff></Wall>
+          <Wall><position>(8,0,9)</position><rotation>North</rotation><stuff>BlocksSandstone</stuff></Wall>
+          <Wall><position>(0,0,10)</position><rotation>North</rotation><stuff>BlocksSandstone</stuff></Wall>
+          <Wall><position>(8,0,10)</position><rotation>North</rotation><stuff>BlocksSandstone</stuff></Wall>
+          <Wall><position>(0,0,11)</position><rotation>North</rotation><stuff>BlocksSandstone</stuff></Wall>
+          <Wall><position>(8,0,11)</position><rotation>North</rotation><stuff>BlocksSandstone</stuff></Wall>
+          <Wall><position>(0,0,12)</position><rotation>North</rotation><stuff>BlocksSandstone</stuff></Wall>
+          <Wall><position>(8,0,12)</position><rotation>North</rotation><stuff>BlocksSandstone</stuff></Wall>
+          <Wall><position>(0,0,13)</position><rotation>North</rotation><stuff>BlocksSandstone</stuff></Wall>
+          <Door><position>(8,0,13)</position><rotation>East</rotation><stuff>BlocksSandstone</stuff></Door>
+          <Wall><position>(0,0,14)</position><rotation>North</rotation><stuff>BlocksSandstone</stuff></Wall>
+          <Wall><position>(1,0,14)</position><rotation>North</rotation><stuff>BlocksSandstone</stuff></Wall>
+          <Wall><position>(2,0,14)</position><rotation>North</rotation><stuff>BlocksSandstone</stuff></Wall>
+          <Wall><position>(3,0,14)</position><rotation>North</rotation><stuff>BlocksSandstone</stuff></Wall>
+          <Wall><position>(4,0,14)</position><rotation>North</rotation><stuff>BlocksSandstone</stuff></Wall>
+          <Wall><position>(5,0,14)</position><rotation>North</rotation><stuff>BlocksSandstone</stuff></Wall>
+          <Wall><position>(6,0,14)</position><rotation>North</rotation><stuff>BlocksSandstone</stuff></Wall>
+          <Wall><position>(7,0,14)</position><rotation>North</rotation><stuff>BlocksSandstone</stuff></Wall>
+          <Wall><position>(8,0,14)</position><rotation>North</rotation><stuff>BlocksSandstone</stuff></Wall>
         </things>
       </li>
       <li>
         <name>dwelling10x8</name>
         <size>(10,8)</size>
         <things>
-          <Wall><position>(0,0,0)</position><rotation>North</rotation><stuff>BlocksLimestone</stuff></Wall>
-          <Wall><position>(1,0,0)</position><rotation>North</rotation><stuff>BlocksLimestone</stuff></Wall>
-          <Wall><position>(2,0,0)</position><rotation>North</rotation><stuff>BlocksLimestone</stuff></Wall>
-          <Wall><position>(3,0,0)</position><rotation>North</rotation><stuff>BlocksLimestone</stuff></Wall>
-          <Wall><position>(4,0,0)</position><rotation>North</rotation><stuff>BlocksLimestone</stuff></Wall>
-          <Wall><position>(5,0,0)</position><rotation>North</rotation><stuff>BlocksLimestone</stuff></Wall>
-          <Wall><position>(6,0,0)</position><rotation>North</rotation><stuff>BlocksLimestone</stuff></Wall>
-          <Wall><position>(7,0,0)</position><rotation>North</rotation><stuff>BlocksLimestone</stuff></Wall>
-          <Wall><position>(8,0,0)</position><rotation>North</rotation><stuff>BlocksLimestone</stuff></Wall>
-          <Wall><position>(9,0,0)</position><rotation>North</rotation><stuff>BlocksLimestone</stuff></Wall>
-          <Wall><position>(0,0,1)</position><rotation>North</rotation><stuff>BlocksLimestone</stuff></Wall>
-          <Wall><position>(9,0,1)</position><rotation>North</rotation><stuff>BlocksLimestone</stuff></Wall>
-          <Wall><position>(0,0,2)</position><rotation>North</rotation><stuff>BlocksLimestone</stuff></Wall>
-          <Wall><position>(9,0,2)</position><rotation>North</rotation><stuff>BlocksLimestone</stuff></Wall>
-          <Wall><position>(0,0,3)</position><rotation>North</rotation><stuff>BlocksLimestone</stuff></Wall>
-          <Wall><position>(9,0,3)</position><rotation>North</rotation><stuff>BlocksLimestone</stuff></Wall>
-          <Wall><position>(0,0,4)</position><rotation>North</rotation><stuff>BlocksLimestone</stuff></Wall>
-          <Wall><position>(9,0,4)</position><rotation>North</rotation><stuff>BlocksLimestone</stuff></Wall>
-          <Wall><position>(0,0,5)</position><rotation>North</rotation><stuff>BlocksLimestone</stuff></Wall>
-          <Wall><position>(9,0,5)</position><rotation>North</rotation><stuff>BlocksLimestone</stuff></Wall>
-          <Wall><position>(0,0,6)</position><rotation>North</rotation><stuff>BlocksLimestone</stuff></Wall>
-          <Door><position>(9,0,6)</position><rotation>East</rotation><stuff>Steel</stuff></Door>
-          <Wall><position>(0,0,7)</position><rotation>North</rotation><stuff>BlocksLimestone</stuff></Wall>
-          <Wall><position>(1,0,7)</position><rotation>North</rotation><stuff>BlocksLimestone</stuff></Wall>
-          <Wall><position>(2,0,7)</position><rotation>North</rotation><stuff>BlocksLimestone</stuff></Wall>
-          <Wall><position>(3,0,7)</position><rotation>North</rotation><stuff>BlocksLimestone</stuff></Wall>
-          <Wall><position>(4,0,7)</position><rotation>North</rotation><stuff>BlocksLimestone</stuff></Wall>
-          <Wall><position>(5,0,7)</position><rotation>North</rotation><stuff>BlocksLimestone</stuff></Wall>
-          <Wall><position>(6,0,7)</position><rotation>North</rotation><stuff>BlocksLimestone</stuff></Wall>
-          <Wall><position>(7,0,7)</position><rotation>North</rotation><stuff>BlocksLimestone</stuff></Wall>
-          <Wall><position>(8,0,7)</position><rotation>North</rotation><stuff>BlocksLimestone</stuff></Wall>
-          <Wall><position>(9,0,7)</position><rotation>North</rotation><stuff>BlocksLimestone</stuff></Wall>
+          <Wall><position>(0,0,0)</position><rotation>North</rotation><stuff>BlocksSandstone</stuff></Wall>
+          <Wall><position>(1,0,0)</position><rotation>North</rotation><stuff>BlocksSandstone</stuff></Wall>
+          <Wall><position>(2,0,0)</position><rotation>North</rotation><stuff>BlocksSandstone</stuff></Wall>
+          <Wall><position>(3,0,0)</position><rotation>North</rotation><stuff>BlocksSandstone</stuff></Wall>
+          <Wall><position>(4,0,0)</position><rotation>North</rotation><stuff>BlocksSandstone</stuff></Wall>
+          <Wall><position>(5,0,0)</position><rotation>North</rotation><stuff>BlocksSandstone</stuff></Wall>
+          <Wall><position>(6,0,0)</position><rotation>North</rotation><stuff>BlocksSandstone</stuff></Wall>
+          <Wall><position>(7,0,0)</position><rotation>North</rotation><stuff>BlocksSandstone</stuff></Wall>
+          <Wall><position>(8,0,0)</position><rotation>North</rotation><stuff>BlocksSandstone</stuff></Wall>
+          <Wall><position>(9,0,0)</position><rotation>North</rotation><stuff>BlocksSandstone</stuff></Wall>
+          <Wall><position>(0,0,1)</position><rotation>North</rotation><stuff>BlocksSandstone</stuff></Wall>
+          <Wall><position>(9,0,1)</position><rotation>North</rotation><stuff>BlocksSandstone</stuff></Wall>
+          <Wall><position>(0,0,2)</position><rotation>North</rotation><stuff>BlocksSandstone</stuff></Wall>
+          <Wall><position>(9,0,2)</position><rotation>North</rotation><stuff>BlocksSandstone</stuff></Wall>
+          <Wall><position>(0,0,3)</position><rotation>North</rotation><stuff>BlocksSandstone</stuff></Wall>
+          <Wall><position>(9,0,3)</position><rotation>North</rotation><stuff>BlocksSandstone</stuff></Wall>
+          <Wall><position>(0,0,4)</position><rotation>North</rotation><stuff>BlocksSandstone</stuff></Wall>
+          <Wall><position>(9,0,4)</position><rotation>North</rotation><stuff>BlocksSandstone</stuff></Wall>
+          <Wall><position>(0,0,5)</position><rotation>North</rotation><stuff>BlocksSandstone</stuff></Wall>
+          <Wall><position>(9,0,5)</position><rotation>North</rotation><stuff>BlocksSandstone</stuff></Wall>
+          <Wall><position>(0,0,6)</position><rotation>North</rotation><stuff>BlocksSandstone</stuff></Wall>
+          <Door><position>(9,0,6)</position><rotation>East</rotation><stuff>BlocksSandstone</stuff></Door>
+          <Wall><position>(0,0,7)</position><rotation>North</rotation><stuff>BlocksSandstone</stuff></Wall>
+          <Wall><position>(1,0,7)</position><rotation>North</rotation><stuff>BlocksSandstone</stuff></Wall>
+          <Wall><position>(2,0,7)</position><rotation>North</rotation><stuff>BlocksSandstone</stuff></Wall>
+          <Wall><position>(3,0,7)</position><rotation>North</rotation><stuff>BlocksSandstone</stuff></Wall>
+          <Wall><position>(4,0,7)</position><rotation>North</rotation><stuff>BlocksSandstone</stuff></Wall>
+          <Wall><position>(5,0,7)</position><rotation>North</rotation><stuff>BlocksSandstone</stuff></Wall>
+          <Wall><position>(6,0,7)</position><rotation>North</rotation><stuff>BlocksSandstone</stuff></Wall>
+          <Wall><position>(7,0,7)</position><rotation>North</rotation><stuff>BlocksSandstone</stuff></Wall>
+          <Wall><position>(8,0,7)</position><rotation>North</rotation><stuff>BlocksSandstone</stuff></Wall>
+          <Wall><position>(9,0,7)</position><rotation>North</rotation><stuff>BlocksSandstone</stuff></Wall>
         </things>
       </li>
       <li>
         <name>dwelling13x14</name>
         <size>(13,14)</size>
         <things>
-          <Wall><position>(0,0,0)</position><rotation>North</rotation><stuff>BlocksLimestone</stuff></Wall>
-          <Wall><position>(1,0,0)</position><rotation>North</rotation><stuff>BlocksLimestone</stuff></Wall>
-          <Wall><position>(2,0,0)</position><rotation>North</rotation><stuff>BlocksLimestone</stuff></Wall>
-          <Wall><position>(3,0,0)</position><rotation>North</rotation><stuff>BlocksLimestone</stuff></Wall>
-          <Wall><position>(4,0,0)</position><rotation>North</rotation><stuff>BlocksLimestone</stuff></Wall>
-          <Wall><position>(5,0,0)</position><rotation>North</rotation><stuff>BlocksLimestone</stuff></Wall>
-          <Wall><position>(6,0,0)</position><rotation>North</rotation><stuff>BlocksLimestone</stuff></Wall>
-          <Wall><position>(7,0,0)</position><rotation>North</rotation><stuff>BlocksLimestone</stuff></Wall>
-          <Wall><position>(8,0,0)</position><rotation>North</rotation><stuff>BlocksLimestone</stuff></Wall>
-          <Wall><position>(9,0,0)</position><rotation>North</rotation><stuff>BlocksLimestone</stuff></Wall>
-          <Wall><position>(10,0,0)</position><rotation>North</rotation><stuff>BlocksLimestone</stuff></Wall>
-          <Wall><position>(11,0,0)</position><rotation>North</rotation><stuff>BlocksLimestone</stuff></Wall>
-          <Wall><position>(12,0,0)</position><rotation>North</rotation><stuff>BlocksLimestone</stuff></Wall>
-          <Wall><position>(0,0,1)</position><rotation>North</rotation><stuff>BlocksLimestone</stuff></Wall>
-          <Wall><position>(12,0,1)</position><rotation>North</rotation><stuff>BlocksLimestone</stuff></Wall>
-          <Wall><position>(0,0,2)</position><rotation>North</rotation><stuff>BlocksLimestone</stuff></Wall>
-          <Wall><position>(12,0,2)</position><rotation>North</rotation><stuff>BlocksLimestone</stuff></Wall>
-          <Wall><position>(0,0,3)</position><rotation>North</rotation><stuff>BlocksLimestone</stuff></Wall>
-          <Wall><position>(12,0,3)</position><rotation>North</rotation><stuff>BlocksLimestone</stuff></Wall>
-          <Wall><position>(0,0,4)</position><rotation>North</rotation><stuff>BlocksLimestone</stuff></Wall>
-          <Wall><position>(12,0,4)</position><rotation>North</rotation><stuff>BlocksLimestone</stuff></Wall>
-          <Wall><position>(0,0,5)</position><rotation>North</rotation><stuff>BlocksLimestone</stuff></Wall>
-          <Wall><position>(12,0,5)</position><rotation>North</rotation><stuff>BlocksLimestone</stuff></Wall>
-          <Wall><position>(0,0,6)</position><rotation>North</rotation><stuff>BlocksLimestone</stuff></Wall>
-          <Wall><position>(12,0,6)</position><rotation>North</rotation><stuff>BlocksLimestone</stuff></Wall>
-          <Door><position>(0,0,7)</position><rotation>East</rotation><stuff>Steel</stuff></Door>
-          <Wall><position>(12,0,7)</position><rotation>North</rotation><stuff>BlocksLimestone</stuff></Wall>
-          <Wall><position>(0,0,8)</position><rotation>North</rotation><stuff>BlocksLimestone</stuff></Wall>
-          <Wall><position>(12,0,8)</position><rotation>North</rotation><stuff>BlocksLimestone</stuff></Wall>
-          <Wall><position>(0,0,9)</position><rotation>North</rotation><stuff>BlocksLimestone</stuff></Wall>
-          <Wall><position>(12,0,9)</position><rotation>North</rotation><stuff>BlocksLimestone</stuff></Wall>
-          <Wall><position>(0,0,10)</position><rotation>North</rotation><stuff>BlocksLimestone</stuff></Wall>
-          <Wall><position>(12,0,10)</position><rotation>North</rotation><stuff>BlocksLimestone</stuff></Wall>
-          <Wall><position>(0,0,11)</position><rotation>North</rotation><stuff>BlocksLimestone</stuff></Wall>
-          <Wall><position>(12,0,11)</position><rotation>North</rotation><stuff>BlocksLimestone</stuff></Wall>
-          <Wall><position>(0,0,12)</position><rotation>North</rotation><stuff>BlocksLimestone</stuff></Wall>
-          <Wall><position>(12,0,12)</position><rotation>North</rotation><stuff>BlocksLimestone</stuff></Wall>
-          <Wall><position>(0,0,13)</position><rotation>North</rotation><stuff>BlocksLimestone</stuff></Wall>
-          <Wall><position>(1,0,13)</position><rotation>North</rotation><stuff>BlocksLimestone</stuff></Wall>
-          <Wall><position>(2,0,13)</position><rotation>North</rotation><stuff>BlocksLimestone</stuff></Wall>
-          <Wall><position>(3,0,13)</position><rotation>North</rotation><stuff>BlocksLimestone</stuff></Wall>
-          <Wall><position>(4,0,13)</position><rotation>North</rotation><stuff>BlocksLimestone</stuff></Wall>
-          <Wall><position>(5,0,13)</position><rotation>North</rotation><stuff>BlocksLimestone</stuff></Wall>
-          <Wall><position>(6,0,13)</position><rotation>North</rotation><stuff>BlocksLimestone</stuff></Wall>
-          <Wall><position>(7,0,13)</position><rotation>North</rotation><stuff>BlocksLimestone</stuff></Wall>
-          <Wall><position>(8,0,13)</position><rotation>North</rotation><stuff>BlocksLimestone</stuff></Wall>
-          <Wall><position>(9,0,13)</position><rotation>North</rotation><stuff>BlocksLimestone</stuff></Wall>
-          <Wall><position>(10,0,13)</position><rotation>North</rotation><stuff>BlocksLimestone</stuff></Wall>
-          <Wall><position>(11,0,13)</position><rotation>North</rotation><stuff>BlocksLimestone</stuff></Wall>
-          <Wall><position>(12,0,13)</position><rotation>North</rotation><stuff>BlocksLimestone</stuff></Wall>
+          <Wall><position>(0,0,0)</position><rotation>North</rotation><stuff>BlocksSandstone</stuff></Wall>
+          <Wall><position>(1,0,0)</position><rotation>North</rotation><stuff>BlocksSandstone</stuff></Wall>
+          <Wall><position>(2,0,0)</position><rotation>North</rotation><stuff>BlocksSandstone</stuff></Wall>
+          <Wall><position>(3,0,0)</position><rotation>North</rotation><stuff>BlocksSandstone</stuff></Wall>
+          <Wall><position>(4,0,0)</position><rotation>North</rotation><stuff>BlocksSandstone</stuff></Wall>
+          <Wall><position>(5,0,0)</position><rotation>North</rotation><stuff>BlocksSandstone</stuff></Wall>
+          <Wall><position>(6,0,0)</position><rotation>North</rotation><stuff>BlocksSandstone</stuff></Wall>
+          <Wall><position>(7,0,0)</position><rotation>North</rotation><stuff>BlocksSandstone</stuff></Wall>
+          <Wall><position>(8,0,0)</position><rotation>North</rotation><stuff>BlocksSandstone</stuff></Wall>
+          <Wall><position>(9,0,0)</position><rotation>North</rotation><stuff>BlocksSandstone</stuff></Wall>
+          <Wall><position>(10,0,0)</position><rotation>North</rotation><stuff>BlocksSandstone</stuff></Wall>
+          <Wall><position>(11,0,0)</position><rotation>North</rotation><stuff>BlocksSandstone</stuff></Wall>
+          <Wall><position>(12,0,0)</position><rotation>North</rotation><stuff>BlocksSandstone</stuff></Wall>
+          <Wall><position>(0,0,1)</position><rotation>North</rotation><stuff>BlocksSandstone</stuff></Wall>
+          <Wall><position>(12,0,1)</position><rotation>North</rotation><stuff>BlocksSandstone</stuff></Wall>
+          <Wall><position>(0,0,2)</position><rotation>North</rotation><stuff>BlocksSandstone</stuff></Wall>
+          <Wall><position>(12,0,2)</position><rotation>North</rotation><stuff>BlocksSandstone</stuff></Wall>
+          <Wall><position>(0,0,3)</position><rotation>North</rotation><stuff>BlocksSandstone</stuff></Wall>
+          <Wall><position>(12,0,3)</position><rotation>North</rotation><stuff>BlocksSandstone</stuff></Wall>
+          <Wall><position>(0,0,4)</position><rotation>North</rotation><stuff>BlocksSandstone</stuff></Wall>
+          <Wall><position>(12,0,4)</position><rotation>North</rotation><stuff>BlocksSandstone</stuff></Wall>
+          <Wall><position>(0,0,5)</position><rotation>North</rotation><stuff>BlocksSandstone</stuff></Wall>
+          <Wall><position>(12,0,5)</position><rotation>North</rotation><stuff>BlocksSandstone</stuff></Wall>
+          <Wall><position>(0,0,6)</position><rotation>North</rotation><stuff>BlocksSandstone</stuff></Wall>
+          <Wall><position>(12,0,6)</position><rotation>North</rotation><stuff>BlocksSandstone</stuff></Wall>
+          <Door><position>(0,0,7)</position><rotation>East</rotation><stuff>BlocksSandstone</stuff></Door>
+          <Wall><position>(12,0,7)</position><rotation>North</rotation><stuff>BlocksSandstone</stuff></Wall>
+          <Wall><position>(0,0,8)</position><rotation>North</rotation><stuff>BlocksSandstone</stuff></Wall>
+          <Wall><position>(12,0,8)</position><rotation>North</rotation><stuff>BlocksSandstone</stuff></Wall>
+          <Wall><position>(0,0,9)</position><rotation>North</rotation><stuff>BlocksSandstone</stuff></Wall>
+          <Wall><position>(12,0,9)</position><rotation>North</rotation><stuff>BlocksSandstone</stuff></Wall>
+          <Wall><position>(0,0,10)</position><rotation>North</rotation><stuff>BlocksSandstone</stuff></Wall>
+          <Wall><position>(12,0,10)</position><rotation>North</rotation><stuff>BlocksSandstone</stuff></Wall>
+          <Wall><position>(0,0,11)</position><rotation>North</rotation><stuff>BlocksSandstone</stuff></Wall>
+          <Wall><position>(12,0,11)</position><rotation>North</rotation><stuff>BlocksSandstone</stuff></Wall>
+          <Wall><position>(0,0,12)</position><rotation>North</rotation><stuff>BlocksSandstone</stuff></Wall>
+          <Wall><position>(12,0,12)</position><rotation>North</rotation><stuff>BlocksSandstone</stuff></Wall>
+          <Wall><position>(0,0,13)</position><rotation>North</rotation><stuff>BlocksSandstone</stuff></Wall>
+          <Wall><position>(1,0,13)</position><rotation>North</rotation><stuff>BlocksSandstone</stuff></Wall>
+          <Wall><position>(2,0,13)</position><rotation>North</rotation><stuff>BlocksSandstone</stuff></Wall>
+          <Wall><position>(3,0,13)</position><rotation>North</rotation><stuff>BlocksSandstone</stuff></Wall>
+          <Wall><position>(4,0,13)</position><rotation>North</rotation><stuff>BlocksSandstone</stuff></Wall>
+          <Wall><position>(5,0,13)</position><rotation>North</rotation><stuff>BlocksSandstone</stuff></Wall>
+          <Wall><position>(6,0,13)</position><rotation>North</rotation><stuff>BlocksSandstone</stuff></Wall>
+          <Wall><position>(7,0,13)</position><rotation>North</rotation><stuff>BlocksSandstone</stuff></Wall>
+          <Wall><position>(8,0,13)</position><rotation>North</rotation><stuff>BlocksSandstone</stuff></Wall>
+          <Wall><position>(9,0,13)</position><rotation>North</rotation><stuff>BlocksSandstone</stuff></Wall>
+          <Wall><position>(10,0,13)</position><rotation>North</rotation><stuff>BlocksSandstone</stuff></Wall>
+          <Wall><position>(11,0,13)</position><rotation>North</rotation><stuff>BlocksSandstone</stuff></Wall>
+          <Wall><position>(12,0,13)</position><rotation>North</rotation><stuff>BlocksSandstone</stuff></Wall>
         </things>
       </li>
       <li>
         <name>dwelling14x11</name>
         <size>(14,11)</size>
         <things>
-          <Wall><position>(0,0,0)</position><rotation>North</rotation><stuff>BlocksLimestone</stuff></Wall>
-          <Wall><position>(1,0,0)</position><rotation>North</rotation><stuff>BlocksLimestone</stuff></Wall>
-          <Wall><position>(2,0,0)</position><rotation>North</rotation><stuff>BlocksLimestone</stuff></Wall>
-          <Wall><position>(3,0,0)</position><rotation>North</rotation><stuff>BlocksLimestone</stuff></Wall>
-          <Wall><position>(4,0,0)</position><rotation>North</rotation><stuff>BlocksLimestone</stuff></Wall>
-          <Wall><position>(5,0,0)</position><rotation>North</rotation><stuff>BlocksLimestone</stuff></Wall>
-          <Wall><position>(6,0,0)</position><rotation>North</rotation><stuff>BlocksLimestone</stuff></Wall>
-          <Wall><position>(7,0,0)</position><rotation>North</rotation><stuff>BlocksLimestone</stuff></Wall>
-          <Wall><position>(8,0,0)</position><rotation>North</rotation><stuff>BlocksLimestone</stuff></Wall>
-          <Wall><position>(9,0,0)</position><rotation>North</rotation><stuff>BlocksLimestone</stuff></Wall>
-          <Wall><position>(10,0,0)</position><rotation>North</rotation><stuff>BlocksLimestone</stuff></Wall>
-          <Wall><position>(11,0,0)</position><rotation>North</rotation><stuff>BlocksLimestone</stuff></Wall>
-          <Wall><position>(12,0,0)</position><rotation>North</rotation><stuff>BlocksLimestone</stuff></Wall>
-          <Wall><position>(13,0,0)</position><rotation>North</rotation><stuff>BlocksLimestone</stuff></Wall>
-          <Wall><position>(0,0,1)</position><rotation>North</rotation><stuff>BlocksLimestone</stuff></Wall>
-          <Wall><position>(13,0,1)</position><rotation>North</rotation><stuff>BlocksLimestone</stuff></Wall>
-          <Wall><position>(0,0,2)</position><rotation>North</rotation><stuff>BlocksLimestone</stuff></Wall>
-          <Wall><position>(13,0,2)</position><rotation>North</rotation><stuff>BlocksLimestone</stuff></Wall>
-          <Wall><position>(0,0,3)</position><rotation>North</rotation><stuff>BlocksLimestone</stuff></Wall>
-          <Wall><position>(13,0,3)</position><rotation>North</rotation><stuff>BlocksLimestone</stuff></Wall>
-          <Wall><position>(0,0,4)</position><rotation>North</rotation><stuff>BlocksLimestone</stuff></Wall>
-          <Wall><position>(13,0,4)</position><rotation>North</rotation><stuff>BlocksLimestone</stuff></Wall>
-          <Wall><position>(0,0,5)</position><rotation>North</rotation><stuff>BlocksLimestone</stuff></Wall>
-          <Wall><position>(13,0,5)</position><rotation>North</rotation><stuff>BlocksLimestone</stuff></Wall>
-          <Wall><position>(0,0,6)</position><rotation>North</rotation><stuff>BlocksLimestone</stuff></Wall>
-          <Wall><position>(13,0,6)</position><rotation>North</rotation><stuff>BlocksLimestone</stuff></Wall>
-          <Wall><position>(0,0,7)</position><rotation>North</rotation><stuff>BlocksLimestone</stuff></Wall>
-          <Wall><position>(13,0,7)</position><rotation>North</rotation><stuff>BlocksLimestone</stuff></Wall>
-          <Wall><position>(0,0,8)</position><rotation>North</rotation><stuff>BlocksLimestone</stuff></Wall>
-          <Wall><position>(13,0,8)</position><rotation>North</rotation><stuff>BlocksLimestone</stuff></Wall>
-          <Wall><position>(0,0,9)</position><rotation>North</rotation><stuff>BlocksLimestone</stuff></Wall>
-          <Wall><position>(13,0,9)</position><rotation>North</rotation><stuff>BlocksLimestone</stuff></Wall>
-          <Wall><position>(0,0,10)</position><rotation>North</rotation><stuff>BlocksLimestone</stuff></Wall>
-          <Wall><position>(1,0,10)</position><rotation>North</rotation><stuff>BlocksLimestone</stuff></Wall>
-          <Wall><position>(2,0,10)</position><rotation>North</rotation><stuff>BlocksLimestone</stuff></Wall>
-          <Wall><position>(3,0,10)</position><rotation>North</rotation><stuff>BlocksLimestone</stuff></Wall>
-          <Wall><position>(4,0,10)</position><rotation>North</rotation><stuff>BlocksLimestone</stuff></Wall>
-          <Wall><position>(5,0,10)</position><rotation>North</rotation><stuff>BlocksLimestone</stuff></Wall>
-          <Door><position>(6,0,10)</position><rotation>North</rotation><stuff>Steel</stuff></Door>
-          <Wall><position>(7,0,10)</position><rotation>North</rotation><stuff>BlocksLimestone</stuff></Wall>
-          <Wall><position>(8,0,10)</position><rotation>North</rotation><stuff>BlocksLimestone</stuff></Wall>
-          <Wall><position>(9,0,10)</position><rotation>North</rotation><stuff>BlocksLimestone</stuff></Wall>
-          <Wall><position>(10,0,10)</position><rotation>North</rotation><stuff>BlocksLimestone</stuff></Wall>
-          <Wall><position>(11,0,10)</position><rotation>North</rotation><stuff>BlocksLimestone</stuff></Wall>
-          <Wall><position>(12,0,10)</position><rotation>North</rotation><stuff>BlocksLimestone</stuff></Wall>
-          <Wall><position>(13,0,10)</position><rotation>North</rotation><stuff>BlocksLimestone</stuff></Wall>
+          <Wall><position>(0,0,0)</position><rotation>North</rotation><stuff>BlocksSandstone</stuff></Wall>
+          <Wall><position>(1,0,0)</position><rotation>North</rotation><stuff>BlocksSandstone</stuff></Wall>
+          <Wall><position>(2,0,0)</position><rotation>North</rotation><stuff>BlocksSandstone</stuff></Wall>
+          <Wall><position>(3,0,0)</position><rotation>North</rotation><stuff>BlocksSandstone</stuff></Wall>
+          <Wall><position>(4,0,0)</position><rotation>North</rotation><stuff>BlocksSandstone</stuff></Wall>
+          <Wall><position>(5,0,0)</position><rotation>North</rotation><stuff>BlocksSandstone</stuff></Wall>
+          <Wall><position>(6,0,0)</position><rotation>North</rotation><stuff>BlocksSandstone</stuff></Wall>
+          <Wall><position>(7,0,0)</position><rotation>North</rotation><stuff>BlocksSandstone</stuff></Wall>
+          <Wall><position>(8,0,0)</position><rotation>North</rotation><stuff>BlocksSandstone</stuff></Wall>
+          <Wall><position>(9,0,0)</position><rotation>North</rotation><stuff>BlocksSandstone</stuff></Wall>
+          <Wall><position>(10,0,0)</position><rotation>North</rotation><stuff>BlocksSandstone</stuff></Wall>
+          <Wall><position>(11,0,0)</position><rotation>North</rotation><stuff>BlocksSandstone</stuff></Wall>
+          <Wall><position>(12,0,0)</position><rotation>North</rotation><stuff>BlocksSandstone</stuff></Wall>
+          <Wall><position>(13,0,0)</position><rotation>North</rotation><stuff>BlocksSandstone</stuff></Wall>
+          <Wall><position>(0,0,1)</position><rotation>North</rotation><stuff>BlocksSandstone</stuff></Wall>
+          <Wall><position>(13,0,1)</position><rotation>North</rotation><stuff>BlocksSandstone</stuff></Wall>
+          <Wall><position>(0,0,2)</position><rotation>North</rotation><stuff>BlocksSandstone</stuff></Wall>
+          <Wall><position>(13,0,2)</position><rotation>North</rotation><stuff>BlocksSandstone</stuff></Wall>
+          <Wall><position>(0,0,3)</position><rotation>North</rotation><stuff>BlocksSandstone</stuff></Wall>
+          <Wall><position>(13,0,3)</position><rotation>North</rotation><stuff>BlocksSandstone</stuff></Wall>
+          <Wall><position>(0,0,4)</position><rotation>North</rotation><stuff>BlocksSandstone</stuff></Wall>
+          <Wall><position>(13,0,4)</position><rotation>North</rotation><stuff>BlocksSandstone</stuff></Wall>
+          <Wall><position>(0,0,5)</position><rotation>North</rotation><stuff>BlocksSandstone</stuff></Wall>
+          <Wall><position>(13,0,5)</position><rotation>North</rotation><stuff>BlocksSandstone</stuff></Wall>
+          <Wall><position>(0,0,6)</position><rotation>North</rotation><stuff>BlocksSandstone</stuff></Wall>
+          <Wall><position>(13,0,6)</position><rotation>North</rotation><stuff>BlocksSandstone</stuff></Wall>
+          <Wall><position>(0,0,7)</position><rotation>North</rotation><stuff>BlocksSandstone</stuff></Wall>
+          <Wall><position>(13,0,7)</position><rotation>North</rotation><stuff>BlocksSandstone</stuff></Wall>
+          <Wall><position>(0,0,8)</position><rotation>North</rotation><stuff>BlocksSandstone</stuff></Wall>
+          <Wall><position>(13,0,8)</position><rotation>North</rotation><stuff>BlocksSandstone</stuff></Wall>
+          <Wall><position>(0,0,9)</position><rotation>North</rotation><stuff>BlocksSandstone</stuff></Wall>
+          <Wall><position>(13,0,9)</position><rotation>North</rotation><stuff>BlocksSandstone</stuff></Wall>
+          <Wall><position>(0,0,10)</position><rotation>North</rotation><stuff>BlocksSandstone</stuff></Wall>
+          <Wall><position>(1,0,10)</position><rotation>North</rotation><stuff>BlocksSandstone</stuff></Wall>
+          <Wall><position>(2,0,10)</position><rotation>North</rotation><stuff>BlocksSandstone</stuff></Wall>
+          <Wall><position>(3,0,10)</position><rotation>North</rotation><stuff>BlocksSandstone</stuff></Wall>
+          <Wall><position>(4,0,10)</position><rotation>North</rotation><stuff>BlocksSandstone</stuff></Wall>
+          <Wall><position>(5,0,10)</position><rotation>North</rotation><stuff>BlocksSandstone</stuff></Wall>
+          <Door><position>(6,0,10)</position><rotation>North</rotation><stuff>BlocksSandstone</stuff></Door>
+          <Wall><position>(7,0,10)</position><rotation>North</rotation><stuff>BlocksSandstone</stuff></Wall>
+          <Wall><position>(8,0,10)</position><rotation>North</rotation><stuff>BlocksSandstone</stuff></Wall>
+          <Wall><position>(9,0,10)</position><rotation>North</rotation><stuff>BlocksSandstone</stuff></Wall>
+          <Wall><position>(10,0,10)</position><rotation>North</rotation><stuff>BlocksSandstone</stuff></Wall>
+          <Wall><position>(11,0,10)</position><rotation>North</rotation><stuff>BlocksSandstone</stuff></Wall>
+          <Wall><position>(12,0,10)</position><rotation>North</rotation><stuff>BlocksSandstone</stuff></Wall>
+          <Wall><position>(13,0,10)</position><rotation>North</rotation><stuff>BlocksSandstone</stuff></Wall>
         </things>
       </li>
       <li>
         <name>annex3x6</name>
         <size>(3,6)</size>
         <things>
-          <Wall><position>(0,0,0)</position><rotation>North</rotation><stuff>BlocksLimestone</stuff></Wall>
-          <Door><position>(1,0,0)</position><rotation>North</rotation><stuff>Steel</stuff></Door>
-          <Wall><position>(2,0,0)</position><rotation>North</rotation><stuff>BlocksLimestone</stuff></Wall>
-          <Wall><position>(0,0,1)</position><rotation>North</rotation><stuff>BlocksLimestone</stuff></Wall>
-          <Wall><position>(2,0,1)</position><rotation>North</rotation><stuff>BlocksLimestone</stuff></Wall>
-          <Wall><position>(0,0,2)</position><rotation>North</rotation><stuff>BlocksLimestone</stuff></Wall>
-          <Wall><position>(2,0,2)</position><rotation>North</rotation><stuff>BlocksLimestone</stuff></Wall>
-          <Wall><position>(0,0,3)</position><rotation>North</rotation><stuff>BlocksLimestone</stuff></Wall>
-          <Wall><position>(2,0,3)</position><rotation>North</rotation><stuff>BlocksLimestone</stuff></Wall>
-          <Wall><position>(0,0,4)</position><rotation>North</rotation><stuff>BlocksLimestone</stuff></Wall>
-          <Wall><position>(2,0,4)</position><rotation>North</rotation><stuff>BlocksLimestone</stuff></Wall>
-          <Wall><position>(0,0,5)</position><rotation>North</rotation><stuff>BlocksLimestone</stuff></Wall>
-          <Wall><position>(1,0,5)</position><rotation>North</rotation><stuff>BlocksLimestone</stuff></Wall>
-          <Wall><position>(2,0,5)</position><rotation>North</rotation><stuff>BlocksLimestone</stuff></Wall>
+          <Wall><position>(0,0,0)</position><rotation>North</rotation><stuff>BlocksSandstone</stuff></Wall>
+          <Door><position>(1,0,0)</position><rotation>North</rotation><stuff>BlocksSandstone</stuff></Door>
+          <Wall><position>(2,0,0)</position><rotation>North</rotation><stuff>BlocksSandstone</stuff></Wall>
+          <Wall><position>(0,0,1)</position><rotation>North</rotation><stuff>BlocksSandstone</stuff></Wall>
+          <Wall><position>(2,0,1)</position><rotation>North</rotation><stuff>BlocksSandstone</stuff></Wall>
+          <Wall><position>(0,0,2)</position><rotation>North</rotation><stuff>BlocksSandstone</stuff></Wall>
+          <Wall><position>(2,0,2)</position><rotation>North</rotation><stuff>BlocksSandstone</stuff></Wall>
+          <Wall><position>(0,0,3)</position><rotation>North</rotation><stuff>BlocksSandstone</stuff></Wall>
+          <Wall><position>(2,0,3)</position><rotation>North</rotation><stuff>BlocksSandstone</stuff></Wall>
+          <Wall><position>(0,0,4)</position><rotation>North</rotation><stuff>BlocksSandstone</stuff></Wall>
+          <Wall><position>(2,0,4)</position><rotation>North</rotation><stuff>BlocksSandstone</stuff></Wall>
+          <Wall><position>(0,0,5)</position><rotation>North</rotation><stuff>BlocksSandstone</stuff></Wall>
+          <Wall><position>(1,0,5)</position><rotation>North</rotation><stuff>BlocksSandstone</stuff></Wall>
+          <Wall><position>(2,0,5)</position><rotation>North</rotation><stuff>BlocksSandstone</stuff></Wall>
         </things>
       </li>
       <li>
         <name>annex4x21</name>
         <size>(4,21)</size>
         <things>
-          <Wall><position>(0,0,0)</position><rotation>North</rotation><stuff>BlocksLimestone</stuff></Wall>
-          <Wall><position>(1,0,0)</position><rotation>North</rotation><stuff>BlocksLimestone</stuff></Wall>
-          <Wall><position>(2,0,0)</position><rotation>North</rotation><stuff>BlocksLimestone</stuff></Wall>
-          <Wall><position>(3,0,0)</position><rotation>North</rotation><stuff>BlocksLimestone</stuff></Wall>
-          <Wall><position>(0,0,1)</position><rotation>North</rotation><stuff>BlocksLimestone</stuff></Wall>
-          <Wall><position>(3,0,1)</position><rotation>North</rotation><stuff>BlocksLimestone</stuff></Wall>
-          <Wall><position>(0,0,2)</position><rotation>North</rotation><stuff>BlocksLimestone</stuff></Wall>
-          <Wall><position>(3,0,2)</position><rotation>North</rotation><stuff>BlocksLimestone</stuff></Wall>
-          <Wall><position>(0,0,3)</position><rotation>North</rotation><stuff>BlocksLimestone</stuff></Wall>
-          <Wall><position>(3,0,3)</position><rotation>North</rotation><stuff>BlocksLimestone</stuff></Wall>
-          <Wall><position>(0,0,4)</position><rotation>North</rotation><stuff>BlocksLimestone</stuff></Wall>
-          <Wall><position>(3,0,4)</position><rotation>North</rotation><stuff>BlocksLimestone</stuff></Wall>
-          <Wall><position>(0,0,5)</position><rotation>North</rotation><stuff>BlocksLimestone</stuff></Wall>
-          <Wall><position>(3,0,5)</position><rotation>North</rotation><stuff>BlocksLimestone</stuff></Wall>
-          <Wall><position>(0,0,6)</position><rotation>North</rotation><stuff>BlocksLimestone</stuff></Wall>
-          <Wall><position>(3,0,6)</position><rotation>North</rotation><stuff>BlocksLimestone</stuff></Wall>
-          <Wall><position>(0,0,7)</position><rotation>North</rotation><stuff>BlocksLimestone</stuff></Wall>
-          <Wall><position>(3,0,7)</position><rotation>North</rotation><stuff>BlocksLimestone</stuff></Wall>
-          <Wall><position>(0,0,8)</position><rotation>North</rotation><stuff>BlocksLimestone</stuff></Wall>
-          <Wall><position>(3,0,8)</position><rotation>North</rotation><stuff>BlocksLimestone</stuff></Wall>
-          <Wall><position>(0,0,9)</position><rotation>North</rotation><stuff>BlocksLimestone</stuff></Wall>
-          <Wall><position>(3,0,9)</position><rotation>North</rotation><stuff>BlocksLimestone</stuff></Wall>
-          <Wall><position>(0,0,10)</position><rotation>North</rotation><stuff>BlocksLimestone</stuff></Wall>
-          <Wall><position>(3,0,10)</position><rotation>North</rotation><stuff>BlocksLimestone</stuff></Wall>
-          <Wall><position>(0,0,11)</position><rotation>North</rotation><stuff>BlocksLimestone</stuff></Wall>
-          <Wall><position>(3,0,11)</position><rotation>North</rotation><stuff>BlocksLimestone</stuff></Wall>
-          <Wall><position>(0,0,12)</position><rotation>North</rotation><stuff>BlocksLimestone</stuff></Wall>
-          <Wall><position>(3,0,12)</position><rotation>North</rotation><stuff>BlocksLimestone</stuff></Wall>
-          <Wall><position>(0,0,13)</position><rotation>North</rotation><stuff>BlocksLimestone</stuff></Wall>
-          <Wall><position>(3,0,13)</position><rotation>North</rotation><stuff>BlocksLimestone</stuff></Wall>
-          <Wall><position>(0,0,14)</position><rotation>North</rotation><stuff>BlocksLimestone</stuff></Wall>
-          <Wall><position>(3,0,14)</position><rotation>North</rotation><stuff>BlocksLimestone</stuff></Wall>
-          <Wall><position>(0,0,15)</position><rotation>North</rotation><stuff>BlocksLimestone</stuff></Wall>
-          <Wall><position>(3,0,15)</position><rotation>North</rotation><stuff>BlocksLimestone</stuff></Wall>
-          <Wall><position>(0,0,16)</position><rotation>North</rotation><stuff>BlocksLimestone</stuff></Wall>
-          <Wall><position>(3,0,16)</position><rotation>North</rotation><stuff>BlocksLimestone</stuff></Wall>
-          <Wall><position>(0,0,17)</position><rotation>North</rotation><stuff>BlocksLimestone</stuff></Wall>
-          <Wall><position>(3,0,17)</position><rotation>North</rotation><stuff>BlocksLimestone</stuff></Wall>
-          <Wall><position>(0,0,18)</position><rotation>North</rotation><stuff>BlocksLimestone</stuff></Wall>
-          <Wall><position>(3,0,18)</position><rotation>North</rotation><stuff>BlocksLimestone</stuff></Wall>
-          <Wall><position>(0,0,19)</position><rotation>North</rotation><stuff>BlocksLimestone</stuff></Wall>
-          <Wall><position>(3,0,19)</position><rotation>North</rotation><stuff>BlocksLimestone</stuff></Wall>
-          <Wall><position>(0,0,20)</position><rotation>North</rotation><stuff>BlocksLimestone</stuff></Wall>
-          <Door><position>(1,0,20)</position><rotation>North</rotation><stuff>Steel</stuff></Door>
-          <Wall><position>(2,0,20)</position><rotation>North</rotation><stuff>BlocksLimestone</stuff></Wall>
-          <Wall><position>(3,0,20)</position><rotation>North</rotation><stuff>BlocksLimestone</stuff></Wall>
+          <Wall><position>(0,0,0)</position><rotation>North</rotation><stuff>BlocksSandstone</stuff></Wall>
+          <Wall><position>(1,0,0)</position><rotation>North</rotation><stuff>BlocksSandstone</stuff></Wall>
+          <Wall><position>(2,0,0)</position><rotation>North</rotation><stuff>BlocksSandstone</stuff></Wall>
+          <Wall><position>(3,0,0)</position><rotation>North</rotation><stuff>BlocksSandstone</stuff></Wall>
+          <Wall><position>(0,0,1)</position><rotation>North</rotation><stuff>BlocksSandstone</stuff></Wall>
+          <Wall><position>(3,0,1)</position><rotation>North</rotation><stuff>BlocksSandstone</stuff></Wall>
+          <Wall><position>(0,0,2)</position><rotation>North</rotation><stuff>BlocksSandstone</stuff></Wall>
+          <Wall><position>(3,0,2)</position><rotation>North</rotation><stuff>BlocksSandstone</stuff></Wall>
+          <Wall><position>(0,0,3)</position><rotation>North</rotation><stuff>BlocksSandstone</stuff></Wall>
+          <Wall><position>(3,0,3)</position><rotation>North</rotation><stuff>BlocksSandstone</stuff></Wall>
+          <Wall><position>(0,0,4)</position><rotation>North</rotation><stuff>BlocksSandstone</stuff></Wall>
+          <Wall><position>(3,0,4)</position><rotation>North</rotation><stuff>BlocksSandstone</stuff></Wall>
+          <Wall><position>(0,0,5)</position><rotation>North</rotation><stuff>BlocksSandstone</stuff></Wall>
+          <Wall><position>(3,0,5)</position><rotation>North</rotation><stuff>BlocksSandstone</stuff></Wall>
+          <Wall><position>(0,0,6)</position><rotation>North</rotation><stuff>BlocksSandstone</stuff></Wall>
+          <Wall><position>(3,0,6)</position><rotation>North</rotation><stuff>BlocksSandstone</stuff></Wall>
+          <Wall><position>(0,0,7)</position><rotation>North</rotation><stuff>BlocksSandstone</stuff></Wall>
+          <Wall><position>(3,0,7)</position><rotation>North</rotation><stuff>BlocksSandstone</stuff></Wall>
+          <Wall><position>(0,0,8)</position><rotation>North</rotation><stuff>BlocksSandstone</stuff></Wall>
+          <Wall><position>(3,0,8)</position><rotation>North</rotation><stuff>BlocksSandstone</stuff></Wall>
+          <Wall><position>(0,0,9)</position><rotation>North</rotation><stuff>BlocksSandstone</stuff></Wall>
+          <Wall><position>(3,0,9)</position><rotation>North</rotation><stuff>BlocksSandstone</stuff></Wall>
+          <Wall><position>(0,0,10)</position><rotation>North</rotation><stuff>BlocksSandstone</stuff></Wall>
+          <Wall><position>(3,0,10)</position><rotation>North</rotation><stuff>BlocksSandstone</stuff></Wall>
+          <Wall><position>(0,0,11)</position><rotation>North</rotation><stuff>BlocksSandstone</stuff></Wall>
+          <Wall><position>(3,0,11)</position><rotation>North</rotation><stuff>BlocksSandstone</stuff></Wall>
+          <Wall><position>(0,0,12)</position><rotation>North</rotation><stuff>BlocksSandstone</stuff></Wall>
+          <Wall><position>(3,0,12)</position><rotation>North</rotation><stuff>BlocksSandstone</stuff></Wall>
+          <Wall><position>(0,0,13)</position><rotation>North</rotation><stuff>BlocksSandstone</stuff></Wall>
+          <Wall><position>(3,0,13)</position><rotation>North</rotation><stuff>BlocksSandstone</stuff></Wall>
+          <Wall><position>(0,0,14)</position><rotation>North</rotation><stuff>BlocksSandstone</stuff></Wall>
+          <Wall><position>(3,0,14)</position><rotation>North</rotation><stuff>BlocksSandstone</stuff></Wall>
+          <Wall><position>(0,0,15)</position><rotation>North</rotation><stuff>BlocksSandstone</stuff></Wall>
+          <Wall><position>(3,0,15)</position><rotation>North</rotation><stuff>BlocksSandstone</stuff></Wall>
+          <Wall><position>(0,0,16)</position><rotation>North</rotation><stuff>BlocksSandstone</stuff></Wall>
+          <Wall><position>(3,0,16)</position><rotation>North</rotation><stuff>BlocksSandstone</stuff></Wall>
+          <Wall><position>(0,0,17)</position><rotation>North</rotation><stuff>BlocksSandstone</stuff></Wall>
+          <Wall><position>(3,0,17)</position><rotation>North</rotation><stuff>BlocksSandstone</stuff></Wall>
+          <Wall><position>(0,0,18)</position><rotation>North</rotation><stuff>BlocksSandstone</stuff></Wall>
+          <Wall><position>(3,0,18)</position><rotation>North</rotation><stuff>BlocksSandstone</stuff></Wall>
+          <Wall><position>(0,0,19)</position><rotation>North</rotation><stuff>BlocksSandstone</stuff></Wall>
+          <Wall><position>(3,0,19)</position><rotation>North</rotation><stuff>BlocksSandstone</stuff></Wall>
+          <Wall><position>(0,0,20)</position><rotation>North</rotation><stuff>BlocksSandstone</stuff></Wall>
+          <Door><position>(1,0,20)</position><rotation>North</rotation><stuff>BlocksSandstone</stuff></Door>
+          <Wall><position>(2,0,20)</position><rotation>North</rotation><stuff>BlocksSandstone</stuff></Wall>
+          <Wall><position>(3,0,20)</position><rotation>North</rotation><stuff>BlocksSandstone</stuff></Wall>
         </things>
       </li>
       <li>
         <name>annex5x3</name>
         <size>(5,3)</size>
         <things>
-          <Wall><position>(0,0,0)</position><rotation>North</rotation><stuff>BlocksLimestone</stuff></Wall>
-          <Wall><position>(1,0,0)</position><rotation>North</rotation><stuff>BlocksLimestone</stuff></Wall>
-          <Door><position>(2,0,0)</position><rotation>North</rotation><stuff>Steel</stuff></Door>
-          <Wall><position>(3,0,0)</position><rotation>North</rotation><stuff>BlocksLimestone</stuff></Wall>
-          <Wall><position>(4,0,0)</position><rotation>North</rotation><stuff>BlocksLimestone</stuff></Wall>
-          <Wall><position>(0,0,1)</position><rotation>North</rotation><stuff>BlocksLimestone</stuff></Wall>
-          <Wall><position>(4,0,1)</position><rotation>North</rotation><stuff>BlocksLimestone</stuff></Wall>
-          <Wall><position>(0,0,2)</position><rotation>North</rotation><stuff>BlocksLimestone</stuff></Wall>
-          <Wall><position>(1,0,2)</position><rotation>North</rotation><stuff>BlocksLimestone</stuff></Wall>
-          <Wall><position>(2,0,2)</position><rotation>North</rotation><stuff>BlocksLimestone</stuff></Wall>
-          <Wall><position>(3,0,2)</position><rotation>North</rotation><stuff>BlocksLimestone</stuff></Wall>
-          <Wall><position>(4,0,2)</position><rotation>North</rotation><stuff>BlocksLimestone</stuff></Wall>
+          <Wall><position>(0,0,0)</position><rotation>North</rotation><stuff>BlocksSandstone</stuff></Wall>
+          <Wall><position>(1,0,0)</position><rotation>North</rotation><stuff>BlocksSandstone</stuff></Wall>
+          <Door><position>(2,0,0)</position><rotation>North</rotation><stuff>BlocksSandstone</stuff></Door>
+          <Wall><position>(3,0,0)</position><rotation>North</rotation><stuff>BlocksSandstone</stuff></Wall>
+          <Wall><position>(4,0,0)</position><rotation>North</rotation><stuff>BlocksSandstone</stuff></Wall>
+          <Wall><position>(0,0,1)</position><rotation>North</rotation><stuff>BlocksSandstone</stuff></Wall>
+          <Wall><position>(4,0,1)</position><rotation>North</rotation><stuff>BlocksSandstone</stuff></Wall>
+          <Wall><position>(0,0,2)</position><rotation>North</rotation><stuff>BlocksSandstone</stuff></Wall>
+          <Wall><position>(1,0,2)</position><rotation>North</rotation><stuff>BlocksSandstone</stuff></Wall>
+          <Wall><position>(2,0,2)</position><rotation>North</rotation><stuff>BlocksSandstone</stuff></Wall>
+          <Wall><position>(3,0,2)</position><rotation>North</rotation><stuff>BlocksSandstone</stuff></Wall>
+          <Wall><position>(4,0,2)</position><rotation>North</rotation><stuff>BlocksSandstone</stuff></Wall>
         </things>
       </li>
       <li>
         <name>annex5x7</name>
         <size>(5,7)</size>
         <things>
-          <Wall><position>(0,0,0)</position><rotation>North</rotation><stuff>BlocksLimestone</stuff></Wall>
-          <Wall><position>(1,0,0)</position><rotation>North</rotation><stuff>BlocksLimestone</stuff></Wall>
-          <Wall><position>(2,0,0)</position><rotation>North</rotation><stuff>BlocksLimestone</stuff></Wall>
-          <Wall><position>(3,0,0)</position><rotation>North</rotation><stuff>BlocksLimestone</stuff></Wall>
-          <Wall><position>(4,0,0)</position><rotation>North</rotation><stuff>BlocksLimestone</stuff></Wall>
-          <Wall><position>(0,0,1)</position><rotation>North</rotation><stuff>BlocksLimestone</stuff></Wall>
-          <Wall><position>(4,0,1)</position><rotation>North</rotation><stuff>BlocksLimestone</stuff></Wall>
-          <Wall><position>(0,0,2)</position><rotation>North</rotation><stuff>BlocksLimestone</stuff></Wall>
-          <Wall><position>(4,0,2)</position><rotation>North</rotation><stuff>BlocksLimestone</stuff></Wall>
-          <Door><position>(0,0,3)</position><rotation>East</rotation><stuff>Steel</stuff></Door>
-          <Wall><position>(4,0,3)</position><rotation>North</rotation><stuff>BlocksLimestone</stuff></Wall>
-          <Wall><position>(0,0,4)</position><rotation>North</rotation><stuff>BlocksLimestone</stuff></Wall>
-          <Wall><position>(4,0,4)</position><rotation>North</rotation><stuff>BlocksLimestone</stuff></Wall>
-          <Wall><position>(0,0,5)</position><rotation>North</rotation><stuff>BlocksLimestone</stuff></Wall>
-          <Wall><position>(4,0,5)</position><rotation>North</rotation><stuff>BlocksLimestone</stuff></Wall>
-          <Wall><position>(0,0,6)</position><rotation>North</rotation><stuff>BlocksLimestone</stuff></Wall>
-          <Wall><position>(1,0,6)</position><rotation>North</rotation><stuff>BlocksLimestone</stuff></Wall>
-          <Wall><position>(2,0,6)</position><rotation>North</rotation><stuff>BlocksLimestone</stuff></Wall>
-          <Wall><position>(3,0,6)</position><rotation>North</rotation><stuff>BlocksLimestone</stuff></Wall>
-          <Wall><position>(4,0,6)</position><rotation>North</rotation><stuff>BlocksLimestone</stuff></Wall>
+          <Wall><position>(0,0,0)</position><rotation>North</rotation><stuff>BlocksSandstone</stuff></Wall>
+          <Wall><position>(1,0,0)</position><rotation>North</rotation><stuff>BlocksSandstone</stuff></Wall>
+          <Wall><position>(2,0,0)</position><rotation>North</rotation><stuff>BlocksSandstone</stuff></Wall>
+          <Wall><position>(3,0,0)</position><rotation>North</rotation><stuff>BlocksSandstone</stuff></Wall>
+          <Wall><position>(4,0,0)</position><rotation>North</rotation><stuff>BlocksSandstone</stuff></Wall>
+          <Wall><position>(0,0,1)</position><rotation>North</rotation><stuff>BlocksSandstone</stuff></Wall>
+          <Wall><position>(4,0,1)</position><rotation>North</rotation><stuff>BlocksSandstone</stuff></Wall>
+          <Wall><position>(0,0,2)</position><rotation>North</rotation><stuff>BlocksSandstone</stuff></Wall>
+          <Wall><position>(4,0,2)</position><rotation>North</rotation><stuff>BlocksSandstone</stuff></Wall>
+          <Door><position>(0,0,3)</position><rotation>East</rotation><stuff>BlocksSandstone</stuff></Door>
+          <Wall><position>(4,0,3)</position><rotation>North</rotation><stuff>BlocksSandstone</stuff></Wall>
+          <Wall><position>(0,0,4)</position><rotation>North</rotation><stuff>BlocksSandstone</stuff></Wall>
+          <Wall><position>(4,0,4)</position><rotation>North</rotation><stuff>BlocksSandstone</stuff></Wall>
+          <Wall><position>(0,0,5)</position><rotation>North</rotation><stuff>BlocksSandstone</stuff></Wall>
+          <Wall><position>(4,0,5)</position><rotation>North</rotation><stuff>BlocksSandstone</stuff></Wall>
+          <Wall><position>(0,0,6)</position><rotation>North</rotation><stuff>BlocksSandstone</stuff></Wall>
+          <Wall><position>(1,0,6)</position><rotation>North</rotation><stuff>BlocksSandstone</stuff></Wall>
+          <Wall><position>(2,0,6)</position><rotation>North</rotation><stuff>BlocksSandstone</stuff></Wall>
+          <Wall><position>(3,0,6)</position><rotation>North</rotation><stuff>BlocksSandstone</stuff></Wall>
+          <Wall><position>(4,0,6)</position><rotation>North</rotation><stuff>BlocksSandstone</stuff></Wall>
         </things>
       </li>
       <li>
         <name>annex7x16</name>
         <size>(7,16)</size>
         <things>
-          <Wall><position>(0,0,0)</position><rotation>North</rotation><stuff>BlocksLimestone</stuff></Wall>
-          <Door><position>(1,0,0)</position><rotation>North</rotation><stuff>Steel</stuff></Door>
-          <Wall><position>(2,0,0)</position><rotation>North</rotation><stuff>BlocksLimestone</stuff></Wall>
-          <Wall><position>(3,0,0)</position><rotation>North</rotation><stuff>BlocksLimestone</stuff></Wall>
-          <Wall><position>(4,0,0)</position><rotation>North</rotation><stuff>BlocksLimestone</stuff></Wall>
-          <Wall><position>(5,0,0)</position><rotation>North</rotation><stuff>BlocksLimestone</stuff></Wall>
-          <Wall><position>(6,0,0)</position><rotation>North</rotation><stuff>BlocksLimestone</stuff></Wall>
-          <Wall><position>(0,0,1)</position><rotation>North</rotation><stuff>BlocksLimestone</stuff></Wall>
-          <Wall><position>(6,0,1)</position><rotation>North</rotation><stuff>BlocksLimestone</stuff></Wall>
-          <Wall><position>(0,0,2)</position><rotation>North</rotation><stuff>BlocksLimestone</stuff></Wall>
-          <Wall><position>(6,0,2)</position><rotation>North</rotation><stuff>BlocksLimestone</stuff></Wall>
-          <Wall><position>(0,0,3)</position><rotation>North</rotation><stuff>BlocksLimestone</stuff></Wall>
-          <Wall><position>(6,0,3)</position><rotation>North</rotation><stuff>BlocksLimestone</stuff></Wall>
-          <Wall><position>(0,0,4)</position><rotation>North</rotation><stuff>BlocksLimestone</stuff></Wall>
-          <Wall><position>(6,0,4)</position><rotation>North</rotation><stuff>BlocksLimestone</stuff></Wall>
-          <Wall><position>(0,0,5)</position><rotation>North</rotation><stuff>BlocksLimestone</stuff></Wall>
-          <Wall><position>(6,0,5)</position><rotation>North</rotation><stuff>BlocksLimestone</stuff></Wall>
-          <Wall><position>(0,0,6)</position><rotation>North</rotation><stuff>BlocksLimestone</stuff></Wall>
-          <Wall><position>(6,0,6)</position><rotation>North</rotation><stuff>BlocksLimestone</stuff></Wall>
-          <Wall><position>(0,0,7)</position><rotation>North</rotation><stuff>BlocksLimestone</stuff></Wall>
-          <Wall><position>(6,0,7)</position><rotation>North</rotation><stuff>BlocksLimestone</stuff></Wall>
-          <Wall><position>(0,0,8)</position><rotation>North</rotation><stuff>BlocksLimestone</stuff></Wall>
-          <Wall><position>(6,0,8)</position><rotation>North</rotation><stuff>BlocksLimestone</stuff></Wall>
-          <Wall><position>(0,0,9)</position><rotation>North</rotation><stuff>BlocksLimestone</stuff></Wall>
-          <Wall><position>(6,0,9)</position><rotation>North</rotation><stuff>BlocksLimestone</stuff></Wall>
-          <Wall><position>(0,0,10)</position><rotation>North</rotation><stuff>BlocksLimestone</stuff></Wall>
-          <Wall><position>(6,0,10)</position><rotation>North</rotation><stuff>BlocksLimestone</stuff></Wall>
-          <Wall><position>(0,0,11)</position><rotation>North</rotation><stuff>BlocksLimestone</stuff></Wall>
-          <Wall><position>(6,0,11)</position><rotation>North</rotation><stuff>BlocksLimestone</stuff></Wall>
-          <Wall><position>(0,0,12)</position><rotation>North</rotation><stuff>BlocksLimestone</stuff></Wall>
-          <Wall><position>(6,0,12)</position><rotation>North</rotation><stuff>BlocksLimestone</stuff></Wall>
-          <Wall><position>(0,0,13)</position><rotation>North</rotation><stuff>BlocksLimestone</stuff></Wall>
-          <Wall><position>(6,0,13)</position><rotation>North</rotation><stuff>BlocksLimestone</stuff></Wall>
-          <Wall><position>(0,0,14)</position><rotation>North</rotation><stuff>BlocksLimestone</stuff></Wall>
-          <Wall><position>(6,0,14)</position><rotation>North</rotation><stuff>BlocksLimestone</stuff></Wall>
-          <Wall><position>(0,0,15)</position><rotation>North</rotation><stuff>BlocksLimestone</stuff></Wall>
-          <Wall><position>(1,0,15)</position><rotation>North</rotation><stuff>BlocksLimestone</stuff></Wall>
-          <Wall><position>(2,0,15)</position><rotation>North</rotation><stuff>BlocksLimestone</stuff></Wall>
-          <Wall><position>(3,0,15)</position><rotation>North</rotation><stuff>BlocksLimestone</stuff></Wall>
-          <Wall><position>(4,0,15)</position><rotation>North</rotation><stuff>BlocksLimestone</stuff></Wall>
-          <Wall><position>(5,0,15)</position><rotation>North</rotation><stuff>BlocksLimestone</stuff></Wall>
-          <Wall><position>(6,0,15)</position><rotation>North</rotation><stuff>BlocksLimestone</stuff></Wall>
+          <Wall><position>(0,0,0)</position><rotation>North</rotation><stuff>BlocksSandstone</stuff></Wall>
+          <Door><position>(1,0,0)</position><rotation>North</rotation><stuff>BlocksSandstone</stuff></Door>
+          <Wall><position>(2,0,0)</position><rotation>North</rotation><stuff>BlocksSandstone</stuff></Wall>
+          <Wall><position>(3,0,0)</position><rotation>North</rotation><stuff>BlocksSandstone</stuff></Wall>
+          <Wall><position>(4,0,0)</position><rotation>North</rotation><stuff>BlocksSandstone</stuff></Wall>
+          <Wall><position>(5,0,0)</position><rotation>North</rotation><stuff>BlocksSandstone</stuff></Wall>
+          <Wall><position>(6,0,0)</position><rotation>North</rotation><stuff>BlocksSandstone</stuff></Wall>
+          <Wall><position>(0,0,1)</position><rotation>North</rotation><stuff>BlocksSandstone</stuff></Wall>
+          <Wall><position>(6,0,1)</position><rotation>North</rotation><stuff>BlocksSandstone</stuff></Wall>
+          <Wall><position>(0,0,2)</position><rotation>North</rotation><stuff>BlocksSandstone</stuff></Wall>
+          <Wall><position>(6,0,2)</position><rotation>North</rotation><stuff>BlocksSandstone</stuff></Wall>
+          <Wall><position>(0,0,3)</position><rotation>North</rotation><stuff>BlocksSandstone</stuff></Wall>
+          <Wall><position>(6,0,3)</position><rotation>North</rotation><stuff>BlocksSandstone</stuff></Wall>
+          <Wall><position>(0,0,4)</position><rotation>North</rotation><stuff>BlocksSandstone</stuff></Wall>
+          <Wall><position>(6,0,4)</position><rotation>North</rotation><stuff>BlocksSandstone</stuff></Wall>
+          <Wall><position>(0,0,5)</position><rotation>North</rotation><stuff>BlocksSandstone</stuff></Wall>
+          <Wall><position>(6,0,5)</position><rotation>North</rotation><stuff>BlocksSandstone</stuff></Wall>
+          <Wall><position>(0,0,6)</position><rotation>North</rotation><stuff>BlocksSandstone</stuff></Wall>
+          <Wall><position>(6,0,6)</position><rotation>North</rotation><stuff>BlocksSandstone</stuff></Wall>
+          <Wall><position>(0,0,7)</position><rotation>North</rotation><stuff>BlocksSandstone</stuff></Wall>
+          <Wall><position>(6,0,7)</position><rotation>North</rotation><stuff>BlocksSandstone</stuff></Wall>
+          <Wall><position>(0,0,8)</position><rotation>North</rotation><stuff>BlocksSandstone</stuff></Wall>
+          <Wall><position>(6,0,8)</position><rotation>North</rotation><stuff>BlocksSandstone</stuff></Wall>
+          <Wall><position>(0,0,9)</position><rotation>North</rotation><stuff>BlocksSandstone</stuff></Wall>
+          <Wall><position>(6,0,9)</position><rotation>North</rotation><stuff>BlocksSandstone</stuff></Wall>
+          <Wall><position>(0,0,10)</position><rotation>North</rotation><stuff>BlocksSandstone</stuff></Wall>
+          <Wall><position>(6,0,10)</position><rotation>North</rotation><stuff>BlocksSandstone</stuff></Wall>
+          <Wall><position>(0,0,11)</position><rotation>North</rotation><stuff>BlocksSandstone</stuff></Wall>
+          <Wall><position>(6,0,11)</position><rotation>North</rotation><stuff>BlocksSandstone</stuff></Wall>
+          <Wall><position>(0,0,12)</position><rotation>North</rotation><stuff>BlocksSandstone</stuff></Wall>
+          <Wall><position>(6,0,12)</position><rotation>North</rotation><stuff>BlocksSandstone</stuff></Wall>
+          <Wall><position>(0,0,13)</position><rotation>North</rotation><stuff>BlocksSandstone</stuff></Wall>
+          <Wall><position>(6,0,13)</position><rotation>North</rotation><stuff>BlocksSandstone</stuff></Wall>
+          <Wall><position>(0,0,14)</position><rotation>North</rotation><stuff>BlocksSandstone</stuff></Wall>
+          <Wall><position>(6,0,14)</position><rotation>North</rotation><stuff>BlocksSandstone</stuff></Wall>
+          <Wall><position>(0,0,15)</position><rotation>North</rotation><stuff>BlocksSandstone</stuff></Wall>
+          <Wall><position>(1,0,15)</position><rotation>North</rotation><stuff>BlocksSandstone</stuff></Wall>
+          <Wall><position>(2,0,15)</position><rotation>North</rotation><stuff>BlocksSandstone</stuff></Wall>
+          <Wall><position>(3,0,15)</position><rotation>North</rotation><stuff>BlocksSandstone</stuff></Wall>
+          <Wall><position>(4,0,15)</position><rotation>North</rotation><stuff>BlocksSandstone</stuff></Wall>
+          <Wall><position>(5,0,15)</position><rotation>North</rotation><stuff>BlocksSandstone</stuff></Wall>
+          <Wall><position>(6,0,15)</position><rotation>North</rotation><stuff>BlocksSandstone</stuff></Wall>
         </things>
       </li>
       <li>
         <name>annex9x5</name>
         <size>(9,5)</size>
         <things>
-          <Wall><position>(0,0,0)</position><rotation>North</rotation><stuff>BlocksLimestone</stuff></Wall>
-          <Wall><position>(1,0,0)</position><rotation>North</rotation><stuff>BlocksLimestone</stuff></Wall>
-          <Wall><position>(2,0,0)</position><rotation>North</rotation><stuff>BlocksLimestone</stuff></Wall>
-          <Wall><position>(3,0,0)</position><rotation>North</rotation><stuff>BlocksLimestone</stuff></Wall>
-          <Wall><position>(4,0,0)</position><rotation>North</rotation><stuff>BlocksLimestone</stuff></Wall>
-          <Wall><position>(5,0,0)</position><rotation>North</rotation><stuff>BlocksLimestone</stuff></Wall>
-          <Wall><position>(6,0,0)</position><rotation>North</rotation><stuff>BlocksLimestone</stuff></Wall>
-          <Wall><position>(7,0,0)</position><rotation>North</rotation><stuff>BlocksLimestone</stuff></Wall>
-          <Wall><position>(8,0,0)</position><rotation>North</rotation><stuff>BlocksLimestone</stuff></Wall>
-          <Wall><position>(0,0,1)</position><rotation>North</rotation><stuff>BlocksLimestone</stuff></Wall>
-          <Wall><position>(8,0,1)</position><rotation>North</rotation><stuff>BlocksLimestone</stuff></Wall>
-          <Door><position>(0,0,2)</position><rotation>East</rotation><stuff>Steel</stuff></Door>
-          <Wall><position>(8,0,2)</position><rotation>North</rotation><stuff>BlocksLimestone</stuff></Wall>
-          <Wall><position>(0,0,3)</position><rotation>North</rotation><stuff>BlocksLimestone</stuff></Wall>
-          <Wall><position>(8,0,3)</position><rotation>North</rotation><stuff>BlocksLimestone</stuff></Wall>
-          <Wall><position>(0,0,4)</position><rotation>North</rotation><stuff>BlocksLimestone</stuff></Wall>
-          <Wall><position>(1,0,4)</position><rotation>North</rotation><stuff>BlocksLimestone</stuff></Wall>
-          <Wall><position>(2,0,4)</position><rotation>North</rotation><stuff>BlocksLimestone</stuff></Wall>
-          <Wall><position>(3,0,4)</position><rotation>North</rotation><stuff>BlocksLimestone</stuff></Wall>
-          <Wall><position>(4,0,4)</position><rotation>North</rotation><stuff>BlocksLimestone</stuff></Wall>
-          <Wall><position>(5,0,4)</position><rotation>North</rotation><stuff>BlocksLimestone</stuff></Wall>
-          <Wall><position>(6,0,4)</position><rotation>North</rotation><stuff>BlocksLimestone</stuff></Wall>
-          <Wall><position>(7,0,4)</position><rotation>North</rotation><stuff>BlocksLimestone</stuff></Wall>
-          <Wall><position>(8,0,4)</position><rotation>North</rotation><stuff>BlocksLimestone</stuff></Wall>
+          <Wall><position>(0,0,0)</position><rotation>North</rotation><stuff>BlocksSandstone</stuff></Wall>
+          <Wall><position>(1,0,0)</position><rotation>North</rotation><stuff>BlocksSandstone</stuff></Wall>
+          <Wall><position>(2,0,0)</position><rotation>North</rotation><stuff>BlocksSandstone</stuff></Wall>
+          <Wall><position>(3,0,0)</position><rotation>North</rotation><stuff>BlocksSandstone</stuff></Wall>
+          <Wall><position>(4,0,0)</position><rotation>North</rotation><stuff>BlocksSandstone</stuff></Wall>
+          <Wall><position>(5,0,0)</position><rotation>North</rotation><stuff>BlocksSandstone</stuff></Wall>
+          <Wall><position>(6,0,0)</position><rotation>North</rotation><stuff>BlocksSandstone</stuff></Wall>
+          <Wall><position>(7,0,0)</position><rotation>North</rotation><stuff>BlocksSandstone</stuff></Wall>
+          <Wall><position>(8,0,0)</position><rotation>North</rotation><stuff>BlocksSandstone</stuff></Wall>
+          <Wall><position>(0,0,1)</position><rotation>North</rotation><stuff>BlocksSandstone</stuff></Wall>
+          <Wall><position>(8,0,1)</position><rotation>North</rotation><stuff>BlocksSandstone</stuff></Wall>
+          <Door><position>(0,0,2)</position><rotation>East</rotation><stuff>BlocksSandstone</stuff></Door>
+          <Wall><position>(8,0,2)</position><rotation>North</rotation><stuff>BlocksSandstone</stuff></Wall>
+          <Wall><position>(0,0,3)</position><rotation>North</rotation><stuff>BlocksSandstone</stuff></Wall>
+          <Wall><position>(8,0,3)</position><rotation>North</rotation><stuff>BlocksSandstone</stuff></Wall>
+          <Wall><position>(0,0,4)</position><rotation>North</rotation><stuff>BlocksSandstone</stuff></Wall>
+          <Wall><position>(1,0,4)</position><rotation>North</rotation><stuff>BlocksSandstone</stuff></Wall>
+          <Wall><position>(2,0,4)</position><rotation>North</rotation><stuff>BlocksSandstone</stuff></Wall>
+          <Wall><position>(3,0,4)</position><rotation>North</rotation><stuff>BlocksSandstone</stuff></Wall>
+          <Wall><position>(4,0,4)</position><rotation>North</rotation><stuff>BlocksSandstone</stuff></Wall>
+          <Wall><position>(5,0,4)</position><rotation>North</rotation><stuff>BlocksSandstone</stuff></Wall>
+          <Wall><position>(6,0,4)</position><rotation>North</rotation><stuff>BlocksSandstone</stuff></Wall>
+          <Wall><position>(7,0,4)</position><rotation>North</rotation><stuff>BlocksSandstone</stuff></Wall>
+          <Wall><position>(8,0,4)</position><rotation>North</rotation><stuff>BlocksSandstone</stuff></Wall>
         </things>
       </li>
       <li>
         <name>annex14x3</name>
         <size>(14,3)</size>
         <things>
-          <Wall><position>(0,0,0)</position><rotation>North</rotation><stuff>BlocksLimestone</stuff></Wall>
-          <Wall><position>(1,0,0)</position><rotation>North</rotation><stuff>BlocksLimestone</stuff></Wall>
-          <Wall><position>(2,0,0)</position><rotation>North</rotation><stuff>BlocksLimestone</stuff></Wall>
-          <Wall><position>(3,0,0)</position><rotation>North</rotation><stuff>BlocksLimestone</stuff></Wall>
-          <Wall><position>(4,0,0)</position><rotation>North</rotation><stuff>BlocksLimestone</stuff></Wall>
-          <Wall><position>(5,0,0)</position><rotation>North</rotation><stuff>BlocksLimestone</stuff></Wall>
-          <Wall><position>(6,0,0)</position><rotation>North</rotation><stuff>BlocksLimestone</stuff></Wall>
-          <Wall><position>(7,0,0)</position><rotation>North</rotation><stuff>BlocksLimestone</stuff></Wall>
-          <Wall><position>(8,0,0)</position><rotation>North</rotation><stuff>BlocksLimestone</stuff></Wall>
-          <Wall><position>(9,0,0)</position><rotation>North</rotation><stuff>BlocksLimestone</stuff></Wall>
-          <Wall><position>(10,0,0)</position><rotation>North</rotation><stuff>BlocksLimestone</stuff></Wall>
-          <Wall><position>(11,0,0)</position><rotation>North</rotation><stuff>BlocksLimestone</stuff></Wall>
-          <Wall><position>(12,0,0)</position><rotation>North</rotation><stuff>BlocksLimestone</stuff></Wall>
-          <Wall><position>(13,0,0)</position><rotation>North</rotation><stuff>BlocksLimestone</stuff></Wall>
-          <Wall><position>(0,0,1)</position><rotation>North</rotation><stuff>BlocksLimestone</stuff></Wall>
-          <Wall><position>(13,0,1)</position><rotation>North</rotation><stuff>BlocksLimestone</stuff></Wall>
-          <Wall><position>(0,0,2)</position><rotation>North</rotation><stuff>BlocksLimestone</stuff></Wall>
-          <Wall><position>(1,0,2)</position><rotation>North</rotation><stuff>BlocksLimestone</stuff></Wall>
-          <Wall><position>(2,0,2)</position><rotation>North</rotation><stuff>BlocksLimestone</stuff></Wall>
-          <Wall><position>(3,0,2)</position><rotation>North</rotation><stuff>BlocksLimestone</stuff></Wall>
-          <Wall><position>(4,0,2)</position><rotation>North</rotation><stuff>BlocksLimestone</stuff></Wall>
-          <Wall><position>(5,0,2)</position><rotation>North</rotation><stuff>BlocksLimestone</stuff></Wall>
-          <Door><position>(6,0,2)</position><rotation>North</rotation><stuff>Steel</stuff></Door>
-          <Wall><position>(7,0,2)</position><rotation>North</rotation><stuff>BlocksLimestone</stuff></Wall>
-          <Wall><position>(8,0,2)</position><rotation>North</rotation><stuff>BlocksLimestone</stuff></Wall>
-          <Wall><position>(9,0,2)</position><rotation>North</rotation><stuff>BlocksLimestone</stuff></Wall>
-          <Wall><position>(10,0,2)</position><rotation>North</rotation><stuff>BlocksLimestone</stuff></Wall>
-          <Wall><position>(11,0,2)</position><rotation>North</rotation><stuff>BlocksLimestone</stuff></Wall>
-          <Wall><position>(12,0,2)</position><rotation>North</rotation><stuff>BlocksLimestone</stuff></Wall>
-          <Wall><position>(13,0,2)</position><rotation>North</rotation><stuff>BlocksLimestone</stuff></Wall>
+          <Wall><position>(0,0,0)</position><rotation>North</rotation><stuff>BlocksSandstone</stuff></Wall>
+          <Wall><position>(1,0,0)</position><rotation>North</rotation><stuff>BlocksSandstone</stuff></Wall>
+          <Wall><position>(2,0,0)</position><rotation>North</rotation><stuff>BlocksSandstone</stuff></Wall>
+          <Wall><position>(3,0,0)</position><rotation>North</rotation><stuff>BlocksSandstone</stuff></Wall>
+          <Wall><position>(4,0,0)</position><rotation>North</rotation><stuff>BlocksSandstone</stuff></Wall>
+          <Wall><position>(5,0,0)</position><rotation>North</rotation><stuff>BlocksSandstone</stuff></Wall>
+          <Wall><position>(6,0,0)</position><rotation>North</rotation><stuff>BlocksSandstone</stuff></Wall>
+          <Wall><position>(7,0,0)</position><rotation>North</rotation><stuff>BlocksSandstone</stuff></Wall>
+          <Wall><position>(8,0,0)</position><rotation>North</rotation><stuff>BlocksSandstone</stuff></Wall>
+          <Wall><position>(9,0,0)</position><rotation>North</rotation><stuff>BlocksSandstone</stuff></Wall>
+          <Wall><position>(10,0,0)</position><rotation>North</rotation><stuff>BlocksSandstone</stuff></Wall>
+          <Wall><position>(11,0,0)</position><rotation>North</rotation><stuff>BlocksSandstone</stuff></Wall>
+          <Wall><position>(12,0,0)</position><rotation>North</rotation><stuff>BlocksSandstone</stuff></Wall>
+          <Wall><position>(13,0,0)</position><rotation>North</rotation><stuff>BlocksSandstone</stuff></Wall>
+          <Wall><position>(0,0,1)</position><rotation>North</rotation><stuff>BlocksSandstone</stuff></Wall>
+          <Wall><position>(13,0,1)</position><rotation>North</rotation><stuff>BlocksSandstone</stuff></Wall>
+          <Wall><position>(0,0,2)</position><rotation>North</rotation><stuff>BlocksSandstone</stuff></Wall>
+          <Wall><position>(1,0,2)</position><rotation>North</rotation><stuff>BlocksSandstone</stuff></Wall>
+          <Wall><position>(2,0,2)</position><rotation>North</rotation><stuff>BlocksSandstone</stuff></Wall>
+          <Wall><position>(3,0,2)</position><rotation>North</rotation><stuff>BlocksSandstone</stuff></Wall>
+          <Wall><position>(4,0,2)</position><rotation>North</rotation><stuff>BlocksSandstone</stuff></Wall>
+          <Wall><position>(5,0,2)</position><rotation>North</rotation><stuff>BlocksSandstone</stuff></Wall>
+          <Door><position>(6,0,2)</position><rotation>North</rotation><stuff>BlocksSandstone</stuff></Door>
+          <Wall><position>(7,0,2)</position><rotation>North</rotation><stuff>BlocksSandstone</stuff></Wall>
+          <Wall><position>(8,0,2)</position><rotation>North</rotation><stuff>BlocksSandstone</stuff></Wall>
+          <Wall><position>(9,0,2)</position><rotation>North</rotation><stuff>BlocksSandstone</stuff></Wall>
+          <Wall><position>(10,0,2)</position><rotation>North</rotation><stuff>BlocksSandstone</stuff></Wall>
+          <Wall><position>(11,0,2)</position><rotation>North</rotation><stuff>BlocksSandstone</stuff></Wall>
+          <Wall><position>(12,0,2)</position><rotation>North</rotation><stuff>BlocksSandstone</stuff></Wall>
+          <Wall><position>(13,0,2)</position><rotation>North</rotation><stuff>BlocksSandstone</stuff></Wall>
         </things>
       </li>
       <li>
@@ -808,12 +815,12 @@
         </things>
       </li>
     </groups>
-    <!-- [Direction]: what the render's blocks are built with (Spec: FR-036), as the groups above: the walls and doors as the
-         comment above the groups gives them. -->
+    <!-- Design: what a block's households are built with is what their groups above are: Door, of the sandstone the
+         comment above the groups gives for ordinary households' doors (cities-inside.md, "Walls and doors by tier"). -->
     <fill>
       <wallDef>Wall</wallDef>
       <doorDef>Door</doorDef>
-      <doorStuffDef>Steel</doorStuffDef>
+      <doorStuffDef>BlocksSandstone</doorStuffDef>
       <plots />
     </fill>
   </Mantle.KitDef>
