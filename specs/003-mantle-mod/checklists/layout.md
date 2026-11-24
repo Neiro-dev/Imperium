@@ -67,6 +67,18 @@ mean implementation work is complete.
 - [ ] CHK019 Is the claim that a second repository would be a second Spec Kit project with its own constitution
   sourced to Spec Kit? [Assumption, Plan R-1]
 
+## Code in the Mod Folders
+
+These items apply to every later pull request that adds or changes code in `Mantle/Source/` or `Imperium/Source/`
+(contracts/repository-layout.md), and are checked before it merges.
+
+- [ ] CHK020 Does each exception handler in the code follow a form that a source in the constitution's Source Register
+  gives for the released mod (`Data/`, then `ModUpdating.txt`, then Harmony) and name that source, with no handler
+  that swallows an exception and none added only so that nothing is reported? [Traceability, Constitution
+  Principles V, VI]
+- [ ] CHK021 When the code meets an error, is it reported in the game's log in the way the source it follows reports
+  its own, rather than hidden or reworded? [Consistency, Constitution Principles V, VI]
+
 ## Notes
 
 - Mark items `[x]` only after review confirms the requirement-quality criterion is satisfied
