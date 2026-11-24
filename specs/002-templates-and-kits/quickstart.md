@@ -5,8 +5,8 @@ Source Register). Sources for each step are in [research.md](research.md) R-10 t
 
 ## Prerequisites
 
-- Python 3.11 or later, and from the root of Mantle's repository `pip install -e ".[test]"`.
-- The folders of Mantle's mod and of Imperium, each passed to the check with `--mod`.
+- Python 3.11 or later, and from the repository root `pip install -e ".[test]"`.
+- The mod folders `Mantle/` and `Imperium/`, each passed to the check with `--mod`.
 - RimWorld 1.7.5014's `Data/` with `Version.txt` beside it: on the maintainer's computer
   `D:\Steam\steamapps\common\RimWorld\Data`; in a cloud thread, `rimworld-1.7.5014-data.zip` from the project's files,
   unpacked outside the repository.
@@ -47,10 +47,11 @@ Source Register). Sources for each step are in [research.md](research.md) R-10 t
 
 ## In the game
 
-On the maintainer's computer, through Remote Control, with Mantle's mod and `Mods\Imperium` pulled to the commits
-under test:
+On the maintainer's computer, through Remote Control, in the clone at `RimWorld\Imperium` checked out at the commit
+under test, which R14 moves out of `Mods` (R14 quickstart.md, Prerequisites):
 
-1. Build `Assemblies/Mantle.dll` from Mantle's `Source/Mantle/` against the installed game's assemblies (research R-2).
+1. Build `Mantle/Assemblies/Mantle.dll` from `Mantle/Source/Mantle/` against the installed game's assemblies (research
+   R-2), and copy `Mantle\` and `Imperium\` from the clone into `RimWorld\Mods`.
 2. Launch with `-quicktest` (`Readme.txt` lines 58-60) and `-savedatafolder=SaveData` (lines 27-38): with no mod as the
    baseline, with Mantle's mod alone and no expansion, and with Royalty, Mantle and Imperium.
 3. Copy `Player.log` after each launch and compare with the baseline: neither mod adds an error or warning line about

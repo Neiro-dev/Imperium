@@ -49,5 +49,5 @@ name the template's `reference` gives the city, in place of `template` and `kit`
 </LaidOutCity>
 ```
 
-It is kept in `readings/` of the repository of the mod that holds the template, as the template's source, and is not
-in the mod's released files; its reference pictures are kept outside the repository (FR-028).
+It is kept in `readings/` at the repository root, outside both mod folders, as the template's source, so it is in
+neither mod's released files (research R-7); its reference pictures are kept outside the repository (FR-028).

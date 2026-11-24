@@ -130,3 +130,6 @@ mean implementation work is complete.
 - The commit that adds this checklist also changes the spec for CHK006 (the tribal word list, FR-011), CHK008 (what
   each culture leaves open, FR-038), CHK010 (the temperate biomes named, FR-040), CHK016 (FR-009), CHK017 (FR-021,
   FR-028) and CHK032 (the agricultural island, FR-037); the reviewer judges whether each is now satisfied
+- R14 then kept Mantle in this repository, in `Mantle/` beside `Imperium/`, with the check and the readings at the root
+  (`specs/003-mantle-mod/contracts/repository-layout.md`). The commit that aligns R13 with it changes FR-021, FR-028,
+  FR-036 and the Assumptions, which bears on CHK017 and CHK036; the reviewer judges them against the new text
