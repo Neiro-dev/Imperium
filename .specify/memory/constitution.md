@@ -44,7 +44,7 @@ Three layers: Claude, GitHub and RimWorld. Each topic and its source:
 | Claude | How the AI works: sessions, threads, project settings, CLAUDE.md, skills, subagents | The Anthropic documentation for the product in use: code.claude.com (Claude Code and projects), platform.claude.com (the API), support.claude.com (claude.ai). anthropic.com/engineering only cross-checks |
 | GitHub | Development workflow | Spec Kit (`github/spec-kit`) |
 | GitHub | Repository files and settings, branches, pull requests, and commit messages | GitHub Docs; choosealicense.com for the license |
-| RimWorld | What to rebuild | The meaning of the design on the default branch of `Neiro-dev/Imperium-old`, not its code or implementation. Imperium-old is retired once the rebuild covers all of it |
+| RimWorld | Imperium's own design | While the rebuild runs: the meaning of the design on the default branch of `Neiro-dev/Imperium-old`, not its code or implementation. Imperium-old is retired once the rebuild covers all of it. Design beyond it: the maintainer's broad direction (Principle IV) |
 | RimWorld | Game content and the released mod | Base game and official expansions in `Data/` → `ModUpdating.txt` → Harmony (`pardeike/HarmonyRimWorld`). Game content is judged by what the official expansions contain. `EULA.txt` is always followed |
 | RimWorld | Testing in the game | In order: `Readme.txt` (the `-quicktest` launch option), then RimBridgeServer (`pardeike/RimBridgeServer`) with GABS (`pardeike/GABS`) |
 
