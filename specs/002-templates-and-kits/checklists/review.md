@@ -15,7 +15,7 @@ mean implementation work is complete.
 
 ## Source Traceability
 
-- [ ] CHK001 Does every functional requirement and success criterion name a source from the constitution's Source
+- [x] CHK001 Does every functional requirement and success criterion name a source from the constitution's Source
   Register, and is each conclusion reached from that source rather than only labelled with it? [Traceability,
   Spec §Sources, FR-001 to FR-040]
   - **Review**: Not satisfied:
@@ -33,7 +33,11 @@ mean implementation work is complete.
       lines hold only their defNames; their `settlementGenerationWeight` is at lines 9 and 224, and the Empire's at
       `Faction_Empire.xml` line 11, as lines 511 and 517 are cited for the pirates. Add them.
     - FR-019, FR-024 and FR-027: see CHK002.
-- [ ] CHK002 Is `[Spec Kit]` a source the Source Register allows for the report's and pictures' content (FR-019,
+  - **Re-review** (#31, f000454): Satisfied. FR-011 and Sources cite lines 57 and 60-61; SC-002, SC-004, SC-005 and
+    SC-007 name their FRs and SC-003 its source in the Input; FR-022 and FR-019 cite Spec Kit's `analyze.md` lines 263
+    and 181; FR-032 adds `Factions_Misc.xml` lines 9 and 224 and `Faction_Empire.xml` line 11. Each was checked against
+    the file it names.
+- [x] CHK002 Is `[Spec Kit]` a source the Source Register allows for the report's and pictures' content (FR-019,
   FR-023 to FR-027), given that its register row covers the development workflow? [Traceability, Spec §FR-019,
   FR-023]
   - **Review**: Partly. The check is a development tool, so its form falls under the Spec Kit row, as research R-9
@@ -46,13 +50,16 @@ mean implementation work is complete.
     - FR-024, a picture of each spec card: the Input names pictures of templates and laid-out cities only, and no other
       source asks for one. Either the request names it, or the picture goes and the spec cards' check stays (FR-007,
       FR-013, FR-014) (Principle V), with User Story 4 scenario 2, T033 and T034 following.
+  - **Re-review** (#31, f000454): Satisfied. FR-019 and FR-027 now reach their content from Spec Kit's report and from
+    FR-019 with FR-023, and FR-024 is withdrawn under Principle V, with User Story 4, Key Entities, research R-11, the
+    contract and T033 and T034 following. tasks.md Phase 6 still says spec cards are drawn: see Notes.
 - [x] CHK003 Is the source of the attitude-to-layout mapping written the same way in Purpose, Clarifications,
   Sources, FR-039, research R-14 and the roadmap's R13 row: the tribes' descriptions in `Data/`, confirmed by the
   maintainer? [Consistency, Spec §FR-039]
   - **Review**: Purpose, Clarifications, Sources ([Data] and [Direction]), FR-039 and research R-14 all give
     `Factions_Misc.xml` lines 445, 480 and 504, confirmed by the maintainer. The roadmap's R13 row gives the same lines
     for "one for each attitude" and states no mapping, so it has nothing to differ on.
-- [ ] CHK004 Is the Empire's terrain mapping, the river-bend town in temperate biomes and a Romanized Egyptian city in
+- [x] CHK004 Is the Empire's terrain mapping, the river-bend town in temperate biomes and a Romanized Egyptian city in
   desert and arid ones, traced to a stated source for each half, the biome lists to `Data/` and the choice of city to
   the maintainer's direction? [Traceability, Spec §FR-040]
   - **Review**: Not satisfied:
@@ -67,6 +74,25 @@ mean implementation work is complete.
       Cases example of the Empire in a boreal forest must agree. The design names looks, not a template's biomes, so if
       it is not taken to settle this, it is game content for the maintainer (Principle IV). Either way FR-040's "the
       temperate biomes" uses the glossary's word in a narrower sense and should say so.
+  - **Re-review** (#31, f000454): One point left. Both halves now carry [Direction] and the biome lists `Data/`, and
+    FR-040 follows the design's two looks (glossary lines 208 and 162) before the direction (Principle III), which also
+    places the cold biomes and the tropical edge case (`Biomes_Warm.xml` lines 5 and 203, hot and wet). But FR-040's
+    last sentence keeps every expansion biome out of both lists because `Data/` "places [them] in neither file", while
+    the design's looks go by region, not by file. Odyssey's `GlacialPlain` is "an open area scraped clean by the
+    movement of glaciers" (`Odyssey/Defs/BiomeDefs/GlacialPlain.xml` line 7), a cold region in `Data/`'s own words:
+    either add it to the river-bend town's list, marked with Odyssey's `MayRequire` (FR-015; `Odyssey/About/About.xml`
+    line 3), or name a source that keeps it out. Judge the other expansion biomes the same way, by what their
+    definitions say; where a definition names no region, as `Grasslands.xml` line 7 names none, no source places it, and
+    that is the reason it is in neither list (Principle V), not the file that holds it. Research R-14 and T038 follow.
+  - **Re-review** (#31, 8e26f32): Satisfied. FR-040 now places each biome outside the looks' Core files by what its
+    definition says: Odyssey's `GlacialPlain`, "scraped clean by the movement of glaciers" (`GlacialPlain.xml` line 7),
+    joins the river-bend town's list, marked with Odyssey's `MayRequire` in the form
+    `Core/Defs/Misc/FeatureDefs/Features.xml` line 268 uses, which itself lists it beside `Tundra`; grasslands,
+    glowforest, scarlands and lava field, whose descriptions name no region's climate, stay out because no source places
+    them (Principle V); ocean and lake (`Biomes_Water.xml` lines 7 and 22), space and orbit (`Space.xml` lines 7 and
+    45), and the underground and Anomaly's three, which never generate on the world (`Biomes_Misc.xml` line 7;
+    `LabyrinthMapGenerator.xml` line 32, `MetalHellMapGenerator.xml` line 31, `UndercaveMapGenerator.xml` line 105 by
+    its parent), each for its stated reason. Every line was checked; Purpose, Sources, research R-14 and T038 follow.
 - [x] CHK005 Is the statement that medieval mods set the attitude fields marked as an inference everywhere it appears,
   and nowhere stated as a fact? [Consistency, Spec §Edge Cases, Purpose]
   - **Review**: Purpose, Edge Cases and research R-14 call it an inference; no other place states it.
@@ -103,7 +129,7 @@ mean implementation work is complete.
   data-model's `allowedBiomes` row and the contract example? [Consistency, Spec §FR-040]
   - **Review**: FR-040 ("none for any biome"), data-model ("empty means any"), the contract ("leaves `allowedBiomes`
     out") and research R-14 ("empty for any") say the same: a template that names no biome suits any.
-- [ ] CHK012 Is it stated how picking by attitude and by terrain combine for a culture that may one day use both?
+- [x] CHK012 Is it stated how picking by attitude and by terrain combine for a culture that may one day use both?
   [Gap, Spec §FR-038]
   - **Review**: Not satisfied. FR-038 says templates are "picked by attitude (FR-039) and terrain (FR-040)", and its
     next sentence describes cultures that use one each, which leaves a culture that uses both open. Add to FR-038 that a
@@ -111,6 +137,8 @@ mean implementation work is complete.
     and its biomes, where it names any, include the settlement's (FR-040), from the direction's "picked by attitude and
     terrain" (Sources, [Direction]) and each field's own rule. Which of several such templates generation picks stays
     R2's (Assumptions).
+  - **Re-review** (#31, f000454): Satisfied. FR-038 now says a template serves a settlement only where both hold, from
+    FR-039 and FR-040, and leaves the choice among several to R2.
 - [x] CHK013 Is the boundary between this feature and R2 clear: that this feature gives templates the fields picking
   reads, and that which culture a faction takes and the picking itself are R2's? [Clarity, Spec §Assumptions,
   FR-009]
@@ -145,7 +173,7 @@ mean implementation work is complete.
   - **Review**: FR-031 and FR-036: the river-bend town's template is taken from its two pictures, with no reading file,
     fits 350×350, and names both pictures in `reference` (data-model `TemplateDef.reference`; T038); every other field
     is that of any template.
-- [ ] CHK019 Is the scale of a tribal settlement quantified, as a map size or an extent within the 350×350 city map?
+- [x] CHK019 Is the scale of a tribal settlement quantified, as a map size or an extent within the 350×350 city map?
   [Clarity, Spec §FR-003, FR-037]
   - **Review**: Not satisfied. FR-037's "at the scale of a tribal settlement" has no measure, and FR-003 binds every
     template to "a city's map, which is 350×350 cells" from a direction that names Imperium's city maps (Sources,
@@ -154,6 +182,10 @@ mean implementation work is complete.
     350×350. Whether a tribal settlement's map is itself a 350×350 city map is game content that neither `Data/`, which
     gives a site's map its own size (`WorldObjects.xml` line 205), nor the design settles, so it is the maintainer's
     broad direction (Principle IV).
+  - **Re-review** (#31, f000454): Satisfied. FR-037 gives a tribal template its reading's extent, stated as its
+    `minMapSize` and at most 350×350, and reaches "a tribal settlement's map is a city's map" from the design: city
+    building is Imperium's generation of settlements (glossary line 173), among them tribal ones, whose kit line 184
+    names, so the direction's 350×350 city map covers them. T044 follows.
 - [x] CHK020 Are the parts a tribal skeleton holds named, for the open village without a wall line and for the
   stronghold and fortress with one, as FR-005 names them for a city? [Completeness, Spec §FR-005]
   - **Review**: Naming the parts before the readings would have no source (Principle V): FR-036 takes each skeleton from
@@ -166,7 +198,7 @@ mean implementation work is complete.
 
 ## The Check Outside the Game
 
-- [ ] CHK022 Are the kinds of problem the check reports listed completely, and does any kind cover the new fields,
+- [x] CHK022 Are the kinds of problem the check reports listed completely, and does any kind cover the new fields,
   such as an attitude field that is not true or false? [Completeness, Spec §FR-013 to FR-018]
   - **Review**: Not satisfied. data-model's list, What the check reports, has no kind for:
     - a value not in its field's form: an attitude field that is not `true` or `false`; a rect, position, size or
@@ -178,7 +210,10 @@ mean implementation work is complete.
     - a `minMapSize` or a city's `size` that is not square, which data-model's rules ask for (FR-003;
       `Dialogs_Various.xml` line 153);
     - a required field left out, such as `minMapSize` (data-model, TemplateDef).
-- [ ] CHK023 Is FR-015 stated so that a reviewer can tell, for each holding mod, which expansions it requires and
+  - **Re-review** (#31, f000454): Satisfied. FR-014 and data-model add wrong kind for biomes, rivers and word lists,
+    wrong form, not square and missing field, and T017 implements them. T014 has no fixtures for them yet, which SC-001
+    needs: see Notes.
+- [x] CHK023 Is FR-015 stated so that a reviewer can tell, for each holding mod, which expansions it requires and
   which definitions must be marked, including expansion biomes named in `allowedBiomes`? [Clarity, Spec §FR-015]
   - **Review**: Not satisfied for laid-out cities and readings. For definitions FR-015 is clear: Mantle's mod requires
     no expansion and Imperium requires Royalty, every other expansion's definition needs `MayRequire`, a biome in
@@ -188,10 +223,13 @@ mean implementation work is complete.
     checked against. FR-015 and the contract must say it, for example a laid-out city by the mod that holds its
     `template`, and a reading by the mod whose template names its `reference` or by a kit the reading names; the tribal
     readings, written before their templates (T040 to T042 before T044), need an answer too.
+  - **Re-review** (#31, f000454): Satisfied. FR-015, data-model and contracts/check-command.md give a laid-out city to
+    the mod that holds its template, and a reading to the mod that holds the template naming it, or to none, requiring
+    no expansion, until one does; T018 follows. No fixture tests a reading yet: see Notes.
 - [x] CHK024 Can FR-022's "the same report and the same pictures" be measured, for example as byte-identical files?
   [Measurability, Spec §FR-022]
   - **Review**: contracts/check-command.md (Output) and quickstart.md step 2 make it byte for byte, and T049 tests it.
-- [ ] CHK025 Is SC-003's limit, "before the game reaches its main menu on the same computer", stated with the
+- [x] CHK025 Is SC-003's limit, "before the game reaches its main menu on the same computer", stated with the
   conditions it is measured under, such as which mods are loaded? [Measurability, Spec §SC-003]
   - **Review**: Not satisfied. SC-003 names no conditions, and the check also runs in cloud threads (Assumptions), where
     the game does not run, so it can be measured only on the maintainer's computer. State them: the check run there on
@@ -199,6 +237,9 @@ mean implementation work is complete.
     launched there without `-quicktest`, which starts straight into a map (`Readme.txt` lines 58-60), with Royalty,
     Mantle and Imperium active as in quickstart.md, In the game, step 2; timed from launch to the main menu. T050
     follows. SC-003 also needs a source: see CHK001.
+  - **Re-review** (#31, f000454): Satisfied. SC-003, quickstart.md step 9 and T050 say where and how it is measured: on
+    the maintainer's computer, the check with every expansion and both mods, and the game launched without `-quicktest`
+    with Royalty, Mantle and Imperium, timed to the main menu.
 - [x] CHK026 Are failure paths for the check's inputs covered: `Data/` missing or of another version, a reference
   picture missing or unreadable, an output folder inside a repository? [Coverage, Spec §Edge Cases, FR-028]
   - **Review**: Edge Cases cover `Data/` missing or of another version, and a reference picture missing or unreadable.
@@ -212,7 +253,7 @@ mean implementation work is complete.
   - **Review**: FR-031's first bullet is "in this feature"; its later bullets and FR-030 wait for generation (R2, R15).
     SC-008 splits the two, and data-model's States of a template places Written and Checked in this feature and Laid out
     on R2.
-- [ ] CHK028 Is it specified where and how the maintainer's acceptance of a side-by-side picture is recorded, so that
+- [x] CHK028 Is it specified where and how the maintainer's acceptance of a side-by-side picture is recorded, so that
   "counts as passing" can be traced? [Gap, Spec §FR-029, FR-030]
   - **Review**: Not satisfied. FR-029 and FR-030 say the maintainer accepts or rejects, but nothing says where that is
     recorded, and the picture itself stays out of the pull request (FR-028; research R-13). The record is part of the
@@ -220,7 +261,11 @@ mean implementation work is complete.
     checklist (`templates/commands/checklist.md` lines 32-36, v1.4.3). Add to FR-029 or FR-030, and to data-model's
     state 4, one such item per template, naming the template, the commit and where the picture is in the project's
     files, checked when the maintainer accepts it.
-- [ ] CHK029 Is "set beside its pictures until it matches them" (FR-036) given a judge and a stopping point, as FR-029
+  - **Re-review** (#31, f000454): Satisfied. FR-029 records the maintainer's judgment as an item of a reviewer-owned
+    checklist, one for each picture, naming the template or reading, the commit and where the picture is, checked when
+    he accepts it (Spec Kit `templates/commands/checklist.md` lines 32-36); data-model's state 4 and A reading's
+    acceptance follow, with `checklists/acceptance.md` as the file.
+- [x] CHK029 Is "set beside its pictures until it matches them" (FR-036) given a judge and a stopping point, as FR-029
   gives one for a laid-out city? [Measurability, Spec §FR-036]
   - **Review**: Not satisfied. FR-036 gives "until it matches them" no judge and no end. quickstart.md step 6 already
     expects, for each tribal reading, "a side-by-side picture the maintainer accepts", but the spec does not say so.
@@ -228,11 +273,15 @@ mean implementation work is complete.
     CHK028 sets, as the end; the only source for judging a match by eye is the maintainer's direction (Clarifications,
     first answer; FR-029). If that direction is not meant to cover readings, who judges a reading is game content for
     him (Principle IV).
+  - **Re-review** (#31, f000454): Satisfied. FR-036 names the maintainer as the judge, by eye beside the pictures, and
+    his acceptance, recorded as FR-029 sets, as the end [Direction]; data-model, SC-010, quickstart.md step 6 and T040
+    to T043 follow.
 - [x] CHK030 Is SC-010, which asks the tribal templates to pass the check, consistent with FR-030, which also asks for
   the maintainer's acceptance? [Consistency, Spec §SC-010, FR-030]
   - **Review**: SC-010 asks only that the tribal templates pass the check (data-model state 2, Checked); FR-030 governs
     when a template counts as passing (state 4, Accepted), which waits for R2's generation, as SC-008 shows for the
     river-bend town. Once CHK029 is fixed, SC-010 should also name the maintainer's acceptance of the three readings.
+  - **Re-review** (#31, f000454): SC-010 now names the maintainer's acceptance of the three readings.
 - [x] CHK031 Is the order among the three tribal templates stated, or stated to be free, as SC-008 states the river-bend
   town's place before them? [Gap, Spec §SC-008, FR-037]
   - **Review**: No source orders them, and tasks.md marks the three readings, T040 to T042, `[P]` (Parallel
@@ -240,7 +289,7 @@ mean implementation work is complete.
 
 ## Tribal References
 
-- [ ] CHK032 Is the role of the agricultural island as "supplementary material only" defined: what may be taken from
+- [x] CHK032 Is the role of the agricultural island as "supplementary material only" defined: what may be taken from
   it, and that it yields no template of its own? [Clarity, Spec §FR-037]
   - **Review**: Not satisfied. FR-037 now says the island is the reference of no template, but not what may be taken
     from it. FR-006 takes a kit's groups, fill and wall settings from its culture's reference city, and the island is
@@ -248,6 +297,9 @@ mean implementation work is complete.
     which it is: only looked at beside the three, or read so that its reading may feed the tribal kit's groups and fill
     without being a template's reference. The direction says only "supplementary material only" (Sources, [Direction])
     and the design is silent, so this is the maintainer's broad direction (Principle IV).
+  - **Re-review** (#31, f000454): Satisfied. FR-037 says the island is only looked at, to help read the three, with no
+    reading of it and nothing of it in a template or the kit [Direction], which is what FR-006 already gives, since the
+    island is no culture's reference city; research R-13 and T042 follow.
 - [x] CHK033 Are the reference criteria stated the same way in Purpose step 1, Clarifications, Sources, FR-037 and Key
   Entities, now that a reference may be a publicly shared player city from any source? [Consistency, Spec §FR-037,
   Purpose]
@@ -255,7 +307,7 @@ mean implementation work is complete.
     bullets), FR-037 and Key Entities all allow a player-built city shared publicly from any source, or one the game
     presets for a governor or an AI rival, and give the tribal criteria (Albion, Celtic only, a tribal settlement's
     scale, seen from above) alike.
-- [ ] CHK034 Is each chosen tribal reference identified in the spec unambiguously enough to find its picture, and are
+- [x] CHK034 Is each chosen tribal reference identified in the spec unambiguously enough to find its picture, and are
   the pictures' location and the rule that they stay out of every repository stated together? [Completeness, Spec
   §FR-037, FR-028]
   - **Review**: Not satisfied, in two places. The references can be found: Clarifications gives each Steam id, and
@@ -265,6 +317,8 @@ mean implementation work is complete.
       ids or the folder.
     - Key Entities, Reference city, says the developer keeps the pictures "outside Imperium's files", which since R14
       can read as outside `Imperium/` only; change it to outside the repository and both mods' released files (FR-028).
+  - **Re-review** (#31, f000454): Satisfied. FR-037 gives the Steam ids, `template-references/部落城-凯尔特/` and "never in
+    the repository (FR-028)", and Key Entities now says outside the repository and both mods' released files.
 - [x] CHK035 Is the edge case for missing reference pictures still accurate now that the tribal pictures are kept in
   `template-references/`, and does it say what waits on them? [Consistency, Spec §Edge Cases]
   - **Review**: The pictures are now in `template-references/部落城-凯尔特/` (checked), and the edge case still holds for a
@@ -279,7 +333,7 @@ mean implementation work is complete.
     nothing now; what is left of R14, the clone moved out of `Mods` (R14 T007), blocks the load in the game (tasks.md,
     Phase Dependencies; quickstart.md, In the game). R2 blocks the comparison of a generated city (FR-030, FR-031) and,
     with R15, the check in the game (Assumptions).
-- [ ] CHK037 Is the assumption that every faction's definition can hold the two attitude fields stated with its
+- [x] CHK037 Is the assumption that every faction's definition can hold the two attitude fields stated with its
   `Data/` source? [Assumption, Spec §FR-039]
   - **Review**: Not satisfied. Purpose and Edge Cases say every faction's definition can hold the two fields, with no
     source for "every": the lines cited (`Core/Defs/FactionDefs/Factions_Misc.xml` 202, 462, 485 and 529) are all Core's
@@ -287,6 +341,8 @@ mean implementation work is complete.
     `Core/Defs/FactionDefs/Factions_Hidden.xml` lines 77 and 122, `Ideology/Defs/FactionDefs/Factions_Misc.xml` lines 74
     and 98, `Anomaly/Defs/FactionDefs/Factions_Misc.xml` line 8 and `Odyssey/Defs/FactionDefs/Factions_Misc.xml` line
     198. Cite them where the sentence stands, add them to Sources, [Data], and state the assumption in Assumptions.
+  - **Re-review** (#31, f000454): Satisfied. Purpose, Sources ([Data], a faction's attitude) and Assumptions cite the
+    fields on Core's hidden factions and on factions of Ideology, Anomaly and Odyssey; each line was checked.
 
 ## Notes
 
@@ -328,3 +384,18 @@ mean implementation work is complete.
   T040), CHK032 (FR-037: the island is only looked at, and nothing is taken from it), CHK034 (FR-037, Key Entities)
   and CHK037 (Purpose, Sources and Assumptions); and the two findings (research R-11 and T025 follow FR-026; R-5 takes
   `Bridge` from line 197). The reviewer judges each against the new text
+- Re-reviewed on 2026-11-24 against #31 at f000454 by the same reviewer: 12 of the 13 items are now satisfied, so 36
+  of 37 are checked. CHK004 has one point left, about Odyssey's glacial plain and how expansion biomes are kept out.
+- What #31 leaves behind outside the items, to fix before implement:
+  - tasks.md Phase 6 is still headed "Check and see a kit's buildings", its Goal says each spec card is "checked and
+    drawn as its building", and its Independent Test compares "the report and the two pictures"; with FR-024 withdrawn
+    they must follow User Story 4. T032's two cards hold only an unknown name, while T033 now also tests a room or
+    thing past its plot (User Story 4, scenario 2); add that card to T032.
+  - T014 has no fixture for the kinds CHK022 added: a wrong kind in `allowedBiomes`, `allowedRivers` or `nameMaker`,
+    wrong form, not square and missing field; and no fixture tests a reading, by FR-015 held by no mod, that names an
+    unmarked expansion definition. SC-001 asks for one problem of each kind FR-013 to FR-018 name.
+- Re-reviewed again against #31 at 8e26f32: CHK004 is satisfied, so all 37 items are checked. Both leftovers above are
+  fixed: tasks.md Phase 6, its Goal and Independent Test, and User Story 4's Independent Test now only check spec cards,
+  with T032 holding three cards (unknown definition, past its plot, clean) and T033 testing all three; T014 and T015 now
+  hold a fixture for each kind CHK022 added and for a reading no template names with an unmarked Biotech definition
+  (FR-015).
