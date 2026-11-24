@@ -826,7 +826,8 @@ and confirm that no shared file was changed.
   in the picture a door, a figure or a tree is one RimWorld cell, which gives how many pixels one cell is; then how many
   RimWorld cells the reference game's own cell is; and only then are sizes compared and things laid out. The other
   game's cell MUST NOT be mapped one to one, and the size of one of Imperium's households MUST NOT size a reference's
-  houses [Design archive: `cities.md`, The size of a cell].
+  houses [Design archive: `cities.md`, The size of a cell]. The scale MUST name the things it was got from, each with
+  its region of the picture [constitution, Principle VI].
 - **FR-049**: A reference MUST be traced into cells only as far as blocks, house groups, yards and roads, not building
   by building, and a template candidate MUST come only from tracing an accepted reference [Design archive:
   `cities-forms.md` lines 123 and 475]. Each traced piece MUST name the region of the picture it was read from

@@ -13,7 +13,7 @@
 
 ## Requirement Completeness
 
-- [x] No [NEEDS CLARIFICATION] markers remain
+- [ ] No [NEEDS CLARIFICATION] markers remain (two remain, in FR-049 and FR-051, left open on purpose; see Notes)
 - [x] Requirements are testable and unambiguous
 - [x] Success criteria are measurable
 - [x] Success criteria are technology-agnostic (no implementation details)
@@ -58,3 +58,8 @@
   order in which kits and templates are derived (Imperium-old's design first, then his recorded direction where it is
   silent, a reading only where both are silent, never overriding either), and FR-006, FR-031, FR-036 and FR-037 follow
   it, with SC-012. No marker was added.
+- Updated 2026-11-24 for FR-048 to FR-052, which read a reference from its picture in the design archive's steps and keep
+  the effect of the old preview tool. Two markers remain on purpose: the classes a piece is traced in (FR-049) and what
+  counts as a piece not matching its picture in colour and shape (FR-051). No source gives either, so none is written
+  and no task builds them (constitution, Principle V). The item above is left unchecked until a source or the
+  maintainer's recorded direction gives them. The other items still pass.

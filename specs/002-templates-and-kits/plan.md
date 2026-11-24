@@ -28,7 +28,11 @@ template states the attitude of the factions it serves in `FactionDef`'s own `na
 the biomes it suits in `allowedBiomes`; the tribal culture picks by the first, the Empire by the second (R-14). A
 reference city that Anno 117 presets may also be read from the game's own data on the maintainer's computer and drawn
 from above, in steps the maintainer sees one by one, into the project's files and never into the repository; the check
-takes those drawings as reference pictures, as it takes a screenshot (R-15). The industrial (outlander) and pirate
+takes those drawings as reference pictures, as it takes a screenshot (R-15). A reference that exists only as a picture is
+read in the design's steps: the cell sized first by things the size of a person, the picture traced only to blocks,
+house groups, yards and roads, the reading's cells laid over the picture in the side-by-side picture, and each area shown to the maintainer
+after tracing and after laying out; the classes of a traced piece and the marks of a mismatch have no source and are
+left open (R-17). The industrial (outlander) and pirate
 cultures' kits and templates, which the alpha opens too, are R16's, in these forms; the later cultures' references are
 recorded for them (R-13, R-16). It is validated by tests outside the game, then by a load in the game
 ([quickstart.md](quickstart.md)).
@@ -85,7 +89,11 @@ templates, and the Empire kit with the river-bend town's template; test fixtures
 | Source Register, testing outside the game | The check and its tests run outside the game against `Data/` first, and the load in the game follows; placing templates in the game stays the final check (quickstart.md; R-12) | Pass |
 
 Post-design re-check (after Phase 1): unchanged. Re-checked after the update that added R-15 and R-16 and moved the
-industrial (outlander) and pirate cultures to R16 (2026-11-24): unchanged.
+industrial (outlander) and pirate cultures to R16 (2026-11-24): unchanged. Re-checked after the update that added R-17
+(2026-11-24): the steps come from the design archive and the maintainer's direction (I, VI); an existing tool was looked
+for first and none does the job (R-17, Alternatives considered); the two things no source gives, the classes of a
+traced piece and the marks of a mismatch, are left open and built by no task (V); no question is asked of the
+maintainer, since the references to read are his choice among candidates (IV): unchanged.
 
 ## Project Structure
 

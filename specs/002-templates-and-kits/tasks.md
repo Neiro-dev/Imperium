@@ -273,15 +273,18 @@ templates are R16's, not this feature's (spec FR-032)
 
 ### The tribal culture, after the river-bend town passes the check
 
-- [ ] T040 [P] Write the gentle tribe's reading in `readings/`, under the mod's own name for an open village,
-  from `template-references/部落城-凯尔特/温和部落-TirUisce-3639186959.jpg`, set beside it until the maintainer accepts it,
-  and add its item to `specs/002-templates-and-kits/checklists/acceptance.md` (data-model.md `LaidOutCity.reference`,
-  A reading's acceptance; spec FR-029, FR-036, FR-037)
+- [ ] T040 [P] Write the gentle tribe's reading in `readings/`, under the mod's own name for an open village, from the
+  reference the maintainer chooses for it, shown from above (spec FR-037, FR-052), in the steps of spec FR-048 to
+  FR-050, with T059 to T061 done, set beside it until the maintainer accepts it, and add its items to
+  `specs/002-templates-and-kits/checklists/acceptance.md`, one after each area is traced and one after it is laid out
+  (data-model.md `LaidOutCity.reference`, `scale`, `from`, A reading's acceptance; spec FR-029, FR-036, FR-050;
+  research R-17)
 - [ ] T041 [P] Write the fierce tribe's reading in `readings/`, under the mod's own name for a walled
-  stronghold, from `template-references/部落城-凯尔特/凶猛部落-Oppidum-3625652909.jpg`, the same way (spec FR-036, FR-037)
-- [ ] T042 [P] Write the savage tribe's reading in `readings/`, under the mod's own name for a fortress, from
-  `template-references/部落城-凯尔特/野蛮部落-小山堡-3621994739.jpg`, the same way; the agricultural island is only looked
-  at beside the three, and nothing is taken from it (spec FR-036, FR-037)
+  stronghold, from the reference the maintainer chooses for it, shown from above, the same way (spec FR-036, FR-037,
+  FR-052)
+- [ ] T042 [P] Write the savage tribe's reading in `readings/`, under the mod's own name for a fortress, from the
+  reference the maintainer chooses for it, shown from above, the same way; the agricultural island is only looked at
+  beside the three, and nothing is taken from it (spec FR-036, FR-037, FR-052)
 - [ ] T043 Write the tribal kit in `Mantle/Defs/KitDefs/Kits_Tribal.xml`, derived in the order of spec FR-047, with the
   three accepted readings filling what the design and the recorded direction leave open, each part naming its source
   (research R-13): data-model.md `KitDef.nameMaker` as the base game's `NamerSettlementTribal`, `KitDef.skeleton`,
@@ -314,6 +317,29 @@ so far is one (spec, Assumptions). On the maintainer's computer, outside every r
 - [ ] T058 Cross-check what T054 to T056 read against the old project's output and images and, where it is at hand,
   FileDBReader, taking nothing from them, and confirm that neither the packages nor anything read or drawn is in the
   repository (spec FR-041, FR-045; quickstart.md step 10; SC-011)
+
+### A reference that exists only as a picture, before its reading
+
+For T040 to T042, in the steps of spec FR-048 to FR-052 (research R-17). They come before those three tasks, and the
+tests come first and fail before the code, as in each story.
+
+- [ ] T059 Write a test reading, with a small reference picture the test makes itself and never a reference picture, and
+  readings each holding one problem, in `tests/fixtures/us2/`; then write `tests/test_picture_reading.py`: a known
+  `scale` puts a known cell at a known pixel of the reference picture in the side-by-side picture;
+  a `pixelsPerCell` that is not a positive number, a `measured` thing without a `rect`, and a `from` whose pixel rect
+  lies outside the picture are each reported, with the file, part and what is wrong; a reading without a `scale` is
+  drawn as before; and the same inputs give identical pictures (spec FR-019, FR-022, FR-028, FR-048, FR-049,
+  FR-051; contracts/laid-out-city.md, A reading)
+- [ ] T060 Implement reading `scale` and its `measured` things, and `from` of a part or feature, in
+  `src/mantle_check/forms.py`, and report each malformed one in `src/mantle_check/checks.py`, as T059 sets
+  (data-model.md `LaidOutCity`, Common forms; spec FR-019, FR-048, FR-049; research R-17)
+- [ ] T061 In `src/mantle_check/pictures.py`, lay the cells of a reading that holds a `scale` over its reference
+  picture in the side-by-side picture, at the pixels the `scale` gives, adding no picture or file name; report it in
+  `src/mantle_check/report.py`; and pass T059 (research R-11, R-17; spec FR-025, FR-051)
+
+Not tasks: the classes a piece is traced in, and the marks of a piece that does not match its picture in colour and
+shape. No source gives either (spec FR-049, FR-051, marked NEEDS CLARIFICATION; constitution, Principle V). They are
+built only after a source or the maintainer's recorded direction gives them, through the spec, plan and tasks again.
 
 **Checkpoint**: Both cultures' kits and first templates pass the check outside the game
 
@@ -376,7 +402,8 @@ checked, and no shared file changes (spec, User Story 5)
   User Stories 3 and 4 use the grid drawing of User Story 2 (T025)
 - **The first kits and templates (Phase 7)**: depends on User Stories 1 to 3; the river-bend town (T035 to T039)
   comes before the tribal culture (T040 to T045) (spec FR-031, SC-008); T054 to T058 depend on nothing in the
-  repository, and come before the reading of the preset reference they draw (spec FR-043)
+  repository, and come before the reading of the preset reference they draw (spec FR-043); T059 to T061 come before
+  T040 to T042 (spec FR-048 to FR-051; research R-17)
 - **User Story 5 (Phase 8)**: depends on the Empire kit and the river-bend town's template (T037, T038)
 - **Polish (Phase 9)**: depends on all before it; T051 and T052 need the maintainer's computer, with the clone moved
   out of `Mods` as R14's T007 sets up

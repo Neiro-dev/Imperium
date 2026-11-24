@@ -49,5 +49,27 @@ name the template's `reference` gives the city, in place of `template` and `kit`
 </LaidOutCity>
 ```
 
+A reading from a reference that exists only as a picture also holds `scale`, the pixels one cell is and the things the
+size of a person it was got from, and each part or feature it traces holds `from`, the region of the picture it was read
+from, as pixel rects (the form of data-model.md, Common forms; spec FR-048, FR-049; research R-17):
+
+```xml
+<LaidOutCity>
+  <reference>ExampleHillfort</reference>
+  <size>(350,350)</size>
+  <scale>
+    <pixelsPerCell>9.5</pixelsPerCell>
+    <measured><li><name>door</name><rect>(412,288,421,297)</rect></li></measured>
+  </scale>
+  ...
+  <parts>
+    <li><name>innerYard</name><rects><li>(120,100,160,140)</li></rects><from><li>(380,260,760,640)</li></from></li>
+  </parts>
+</LaidOutCity>
+```
+
+The classes a piece is traced in are not given, so the form has no field for them (spec FR-049, marked NEEDS
+CLARIFICATION).
+
 It is kept in `readings/` at the repository root, outside both mod folders, as the template's source, so it is in
 neither mod's released files (research R-7); its reference pictures are kept outside the repository (FR-028).

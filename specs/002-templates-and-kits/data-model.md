@@ -10,6 +10,8 @@ design and the maintainer's direction name, and take further parts when either n
 Common forms, all from `Data/` (R-3):
 
 - **rect**: `(minX,minZ,maxX,maxZ)`, inclusive, in cells.
+- **pixel rect** (only in a reading from a picture): the same form, `(minX,minY,maxX,maxY)`, inclusive, in the
+  reference picture's pixels counted from its upper-left pixel as Pillow counts them (R-9; R-17).
 - **layer**: a list whose elements are each named by a definition and hold that definition's `rects`; an element
   written later covers the cells of one written earlier, so an author can lay a whole site and then the river on it
   [Direction: lowering the barrier for other authors].
@@ -91,7 +93,9 @@ thing form below. Every cell of its terrain, rooms and things lies inside its pl
 | `size` | `(x, z)` | square | FR-003, FR-008 |
 | `terrain`, `roofs` | layers | every cell has a terrain; nothing outside the map | FR-008, FR-016 |
 | `things` | list of Thing | below | FR-008, FR-018 |
-| `parts`, `features` | lists, each a `name` and `rects`, a river feature also `flowsFrom` | every part of both skeletons that is not optional, and every feature a relation names, has cells; a reading holds the parts and features it reads | FR-008, FR-029; R-7 |
+| `parts`, `features` | lists, each a `name` and `rects`, a river feature also `flowsFrom`; in a reading each may also hold `from` | every part of both skeletons that is not optional, and every feature a relation names, has cells; a reading holds the parts and features it reads | FR-008, FR-029; R-7 |
+| `scale` | `pixelsPerCell`, a number, and `measured`, a list of the things the size of a person it was got from, each a `name` and a pixel `rect` | in a reading from a picture only: one cell is sized first, by things the size of a person | FR-048; R-17 |
+| `from` (of a part or feature) | pixel `rect`s in the reference picture | in a reading from a picture only: the region of the picture the piece was read from; the classes a piece is traced in are not given (spec FR-049) | FR-049; R-17 |
 
 **Thing**: an element named by its `ThingDef`, holding `position`, `rotation`, `stuff` where the definition takes one,
 and `rect` where the definition's `size` is larger than one cell.

@@ -343,9 +343,10 @@ files, to `Neiro-dev/Imperium-old` at 20a052b, to Spec Kit at v1.4.3 and to Harm
   nothing it reads may enter the repository (constitution, Principle V; spec FR-041). The old project's index, cfg and
   cut files as input. Rejected by the direction (FR-041). FileDBReader as the reader. Rejected: by the direction it
   only cross-checks (FR-045).
-- **In this feature**: none of the tribal references the maintainer chose is a preset city (spec FR-037), so R13's
-  readings are drawn from their screenshots; the steps above run for a preset city once the maintainer chooses it as
-  a reference (spec, Assumptions).
+- **In this feature**: none of the tribal references the maintainer chose first is a preset city (spec FR-037); they
+  are screenshots, read by R-17's steps only where a screenshot is shown from above (FR-052). The steps above run for a
+  preset city once the maintainer chooses it as a reference (spec, Assumptions); the presets of Albion that have not
+  been read are being read, to give him top-down candidates to choose among (2026-11-24).
 
 ## R-16: The later cultures' references
 
@@ -363,3 +364,43 @@ files, to `Neiro-dev/Imperium-old` at 20a052b, to Spec Kit at v1.4.3 and to Harm
   (`Odyssey/Defs/WorldObjectDefs/WorldObjects.xml` lines 44 and 50), and the Salvagers are hidden
   (`Odyssey/Defs/FactionDefs/Factions_Misc.xml` line 172), so whether they get settlements is checked in the game (spec
   FR-032, Edge Cases).
+
+## R-17: Reading a reference from its picture
+
+- **Decision**: a reference that exists only as a picture is read in the steps of spec FR-048 to FR-052:
+  1. the cell is sized first: things the size of a person in the picture (a door, a figure or a tree is one cell) are
+     measured to give how many pixels one cell is, and from it how many RimWorld cells the other game's cell is; the
+     reading records the pixels per cell and the things measured, each with its region of the picture (FR-048);
+  2. the picture is traced into cells only as far as blocks, house groups, yards and roads, and each traced piece
+     records the region of the picture it was read from (FR-049);
+  3. the check lays the reading's cells over its reference picture at the same scale, in the side-by-side picture it
+     already draws of a reading beside its reference pictures (R-11; FR-025, FR-051);
+  4. one area is read at a time, and the maintainer sees its picture after it is traced and again after it is laid out,
+     before the next area is begun, each recorded as an item of `checklists/acceptance.md` (FR-050; FR-029).
+  A picture these steps give no form for, such as one not shown from above, is not read (FR-052). Two things are open
+  and have no form here: the classes a piece is traced in, and what counts as a piece not matching the picture in
+  colour and shape; so no task builds the classes or the marks of mismatching pieces (spec FR-049, FR-051, marked
+  NEEDS CLARIFICATION; constitution, Principle V).
+- **Form**: a reading is a laid-out city (R-7), so the record sits in it: the root holds `scale`, the pixels per cell
+  and a list of the things measured, each a `name` and its `rect` in the picture's pixels; each part and feature may
+  hold `from`, its region of the picture as `rect`s in pixels (data-model.md, `LaidOutCity`). The pictures stay what
+  R-11 draws, one PNG and one side-by-side PNG; where a reading holds a `scale`, the reference picture in the
+  side-by-side PNG carries the reading's cells laid over it where the `scale` places them, so that no picture or file
+  name is added (FR-025, FR-051).
+- **Rationale**: spec FR-048 to FR-052, which take the steps from the design archive (`cities.md`, The size of a cell;
+  `cities-forms.md` lines 123, 199 and 475) and keep the effect of the old project's preview tool as the maintainer
+  directed (spec, Clarifications). R-7 already gives a reading its form and R-11 the check its pictures, so only the
+  record of the scale and of where a piece was read from is new, and each is asked for by an FR (constitution,
+  Principles V and VI).
+- **Alternatives considered**: an existing tool. Spec Kit v1.4.3's community catalogs (203 extensions, 43 presets,
+  4 workflows, 5 bundles) hold none that reads or draws a settlement from a picture. On GitHub, searched on 2026-11-24
+  by repository search with RimWorld layout, preview and editor terms, the nearest are Structure-Editor (a hand editor
+  of structures that exports `PrefabDef` XML; MIT; created 2026-11-07), rimworld-planner (a browser planner for a
+  player's base that exports Blueprints XML; created 2026-10-19) and MapPreview (a mod that previews the world map in
+  the game): none sets a laid-out city or a reading beside a reference picture, and none reads one from a picture.
+  Only their descriptions and READMEs were read, not their code. Rejected: each does another job, and the check (R-9)
+  already draws pictures beside reference pictures. The old project's tool. Rejected as a source: its code, settings
+  and numbers are not taken (spec, Sources); only its effect is kept (FR-051). A method of its own for straightening
+  an oblique picture. Rejected: no source gives one (FR-052), and the design archive names none.
+- **Open**: which reference each tribe is read from (spec FR-037), since the screenshots chosen first are read only
+  where shown from above (FR-052); T040 to T042 wait for it.
