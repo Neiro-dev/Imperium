@@ -70,16 +70,17 @@ the tiers large, medium and small (`Imperium-Knowledge/09_地图生成与CBF技�
 (哨所), was added (`Imperium-Knowledge/designs/city-plans/kit/版型格式-方案.md` L169, R-1111-1933).
 
 > [!NOTE]
-> **Unverified**: The template format (`imperium-template-1`) is marked a draft awaiting the dispatcher's word, and
-> only some of its points were answered by the dispatcher (`Imperium-Knowledge/designs/city-plans/kit/版型格式-方案.md` L1-2, L161-170). Its fuller account of a template is:
+> **Unverified**: The template format (`imperium-template-1`) is marked a draft awaiting the dispatcher's word, and the
+> dispatcher has given eight replies to it (`Imperium-Knowledge/designs/city-plans/kit/版型格式-方案.md` L1-2, L161-170). Its
+> fuller account of a template is:
 > - a template holds the terrain big shape, the skeleton, fixed items, and which parts vary, with a header used for
 >   picking it: number, conditions, source, status (`Imperium-Knowledge/designs/city-plans/kit/版型格式-方案.md` L8);
-> - its skeleton holds a core (the first square or a ferry crossing), bridges, an optional palace quarter (a small
->   city has none) with a palace gate and a waterside end, gates (at least one land gate), skeleton-level streets (at
->   least one main street; secondary streets and lanes belong to the variable parts), squares and the wall
+> - its skeleton holds a core (the first square or a ferry crossing), bridges, an optional palace quarter (a small city
+>   has none) with a palace gate and a waterside end, gates (at least one land gate), skeleton-level streets (at least
+>   one main street; secondary streets and lanes belong to the variable parts), squares and the wall
 >   (`Imperium-Knowledge/designs/city-plans/kit/版型格式-方案.md` L43-49);
-> - fixed items are large items (大件), cards and groups; a variable part is an area with a range, the rule it is laid
->   by, a trial value for that rule, and the items inside it that stay fixed
+> - fixed items are large items (大件), cards and groups; a variable part is an area with a range, the rule it is laid by,
+>   a trial value for that rule, and the items inside it that stay fixed
 >   (`Imperium-Knowledge/designs/city-plans/kit/版型格式-方案.md` L50-51);
 > - a template carries a faction, Roman by default, with medieval, tribal, modern and others named as later factions
 >   (`Imperium-Knowledge/designs/city-plans/kit/版型格式-方案.md` L26);
@@ -87,15 +88,14 @@ the tiers large, medium and small (`Imperium-Knowledge/09_地图生成与CBF技�
 >   (`Imperium-Knowledge/designs/city-plans/kit/版型格式-方案.md` L31);
 > - mirroring is an east-west flip, allowed by default, and turns are 0, 90, 180 and 270 degrees clockwise by default
 >   (`Imperium-Knowledge/designs/city-plans/kit/版型格式-方案.md` L52-53);
-> - stretching is set for each direction N, E, S and W as a range of multipliers (1.0, no stretch, by default) and
->   moves only the half on the side of the anchor, which is the core point; bridge width, street width, gates, towers
->   and fixed items do not stretch, a rule the dispatcher accepted
->   (`Imperium-Knowledge/designs/city-plans/kit/版型格式-方案.md` L16, L54, L167);
-> - a template can name direction conditions to keep after stretching or turning, such as the side the river enters
->   from staying the tile's river side (`Imperium-Knowledge/designs/city-plans/kit/版型格式-方案.md` L55);
-> - in the merger of the older formats the template is the finished product, the tracing is the hand-made working
->   base, and the replica city is for measuring real cities
->   (`Imperium-Knowledge/designs/city-plans/kit/版型格式-方案.md` L126).
+> - stretching is set for each direction N, E, S and W as a range of multipliers (1.0, no stretch, by default) and moves
+>   only the half on the side of the anchor, which is the core point; bridge width, street width, gates, towers and
+>   fixed items do not stretch, a rule the dispatcher accepted (`Imperium-Knowledge/designs/city-plans/kit/版型格式-方案.md`
+>   L16, L54, L167);
+> - a template can name direction conditions to keep after stretching or turning, such as the side the river enters from
+>   staying the tile's river side (`Imperium-Knowledge/designs/city-plans/kit/版型格式-方案.md` L55);
+> - in the merger of the older formats the template is the finished product, the tracing is the hand-made working base,
+>   and the replica city is for measuring real cities (`Imperium-Knowledge/designs/city-plans/kit/版型格式-方案.md` L126).
 
 ### How a template is used
 
@@ -110,13 +110,13 @@ template's skeleton, and in template No. 1 the palace quarter's outline follows 
 When a template is larger than the map, it is scaled as a whole by one ratio, set only by one household being about
 15×15 cells; street widths follow the scale but stay at least 3 for a lane, 5 for a secondary street and 5 for the main
 trunk, and gates, towers and bridges keep their widths, so that the city's texture and its relation to the big shape
-stay as they were (`Imperium-Knowledge/现行/城/地形与选址.md` L83). The scaled households become plots that are later
-filled with Imperium's cards at their own size (`Imperium-Knowledge/现行/城/地形与选址.md` L84); houses are not shrunk,
-and a city that still does not fit the large-city map places fewer areas and takes its wall in
-(`Imperium-Knowledge/现行/城/地形与选址.md` L88). The ratio is not set from the map edge, and the earlier factor of
-0.822 for template No. 1 is void (`Imperium-Knowledge/09_地图生成与CBF技术.md` L963) (replaces
-`Imperium-Knowledge/09_地图生成与CBF技术.md` L876 in part). If scaling would require changing the skeleton, a template
-of the next lower tier is used instead (`Imperium-Knowledge/现行/城/地形与选址.md` L85).
+stay as they were (`Imperium-Knowledge/现行/城/地形与选址.md` L83). The scaled households become plots that are later filled
+with Imperium's cards at their own size (`Imperium-Knowledge/现行/城/地形与选址.md` L84); houses are not shrunk; when, after the
+screenshot calibration, a city does not fit the 350 map, it places fewer areas and takes its wall in in proportion
+(`Imperium-Knowledge/现行/城/地形与选址.md` L88). The ratio is not set from the map edge, and the earlier factor of 0.822 for
+template No. 1 is void (`Imperium-Knowledge/09_地图生成与CBF技术.md` L963) (replaces `Imperium-Knowledge/09_地图生成与CBF技术.md` L876
+in part). If scaling would require changing the skeleton, a template of the next lower tier is used instead
+(`Imperium-Knowledge/现行/城/地形与选址.md` L85).
 
 ### Where templates come from
 
@@ -156,14 +156,14 @@ template as finished (`Imperium-Knowledge/designs/做法史/地形与选址.md` 
 
 ### Template No. 1
 
-Template No. 1 is the Anno 117 river-bay settlement (《Anno117-河湾聚落》), the era river-bay city (纪元河湾城),
-transplanted by the colony world's logic into a cell-level sample; later cities are compared side by side with it and
-proportioned by it, and the points where it disagrees with the Roman rules are listed for the user to decide by picture
-(`Imperium-Knowledge/现行/城/罗马城-做法与顺序.md` L144). The whole city, with its river bay, island and banks, lands in
-the game directly as a city, without the city ring and the generator re-laying it; the whole city is traced first and
-handed to code afterwards, and the whole block of the governor's villa on the north bank is replaced by the palace
-quarter (`Imperium-Knowledge/现行/城/罗马城-做法与顺序.md` L144). Its 1:1 wall outer frame is 396×351 and its sample
-frame 398×359 (`Imperium-Knowledge/现行/城/地形与选址.md` L86).
+Template No. 1 is the Anno 117 river-bay settlement (《Anno117-河湾聚落》), the era river-bay city (纪元河湾城), transplanted by
+the colony world's logic into a cell-level sample; later cities are compared side by side with it and proportioned by
+it, and the points where it disagrees with the Roman rules are listed for the user to decide by picture
+(`Imperium-Knowledge/现行/城/罗马城-做法与顺序.md` L144). The whole city, with its river bay, island and banks, lands in the game
+directly as a city, without the city-area outline (城区圈) and the generator re-laying it; the whole city is traced first
+and handed to code afterwards, and the whole block of the governor's villa on the north bank is replaced by the palace
+quarter (`Imperium-Knowledge/现行/城/罗马城-做法与顺序.md` L144). Its 1:1 wall outer frame is 396×351 and its sample frame 398×359
+(`Imperium-Knowledge/现行/城/地形与选址.md` L86).
 
 Its large items are replaced by Imperium's groups by position, and the assembly hall, main-street colonnade, quay
 group and bridgehead group that the original image lacks are added slowly, without moving the river bend, bridge or
@@ -197,16 +197,18 @@ drawn as card samples with era-style small yards and annexes (`Imperium-Knowledg
 > R-1112-1959; `Imperium-Knowledge/designs/tools/方向表.md` L58).
 
 Template No. 1 is done one area at a time, each shown to the user once after tracing and once after layout, the first
-being the area around the east square (`Imperium-Knowledge/现行/城/罗马城-做法与顺序.md` L173). Two ratios are kept
-apart: when reading originals and measuring era buildings, one era cell is provisionally 3.7 tracing cells; when
-placing Imperium's own houses, one household (one plot) is about 15×15 cells and one era cell about 5 cells; houses are
-not shrunk (`Imperium-Knowledge/现行/城/罗马城-做法与顺序.md` L173; `Imperium-Knowledge/designs/研究/城/布置思路.md` L28;
-`Imperium-Knowledge/09_地图生成与CBF技术.md` L960) (replaces `Imperium-Knowledge/09_地图生成与CBF技术.md` L930, L936
-in part). Template No. 1 is a large-city template, laid into the large-city map as a whole
-(`Imperium-Knowledge/现行/城/地形与选址.md` L86; `Imperium-Knowledge/designs/city-plans/kit/版型格式-方案.md` L72).
-Its palace quarter takes the whole block around the north-bank governor's villa that the existing roads enclose, and
-is recorded in the template (`Imperium-Knowledge/现行/城/罗马城-做法与顺序.md` L176-177) (replaces
-`Imperium-Knowledge/designs/city-plans/kit/版型格式-方案.md` L168 and `Imperium-Knowledge/designs/回报/进度-版型工具.md` L88 in part). Its status is kept (留), and only it stays among the templates
+being the area around the east square (`Imperium-Knowledge/现行/城/罗马城-做法与顺序.md` L173). Two ratios are kept apart: when
+reading originals and measuring era buildings, one era cell is provisionally 3.7 tracing cells; when placing Imperium's
+own houses, one household (one plot) is about 15×15 cells and one era cell about 5 cells; houses are not shrunk
+(`Imperium-Knowledge/现行/城/罗马城-做法与顺序.md` L173; `Imperium-Knowledge/designs/研究/城/布置思路.md` L28;
+`Imperium-Knowledge/09_地图生成与CBF技术.md` L960) (replaces `Imperium-Knowledge/09_地图生成与CBF技术.md` L930, L936 in part).
+Template No. 1 is a large-city template, laid into the large-city map as a whole (`Imperium-Knowledge/现行/城/地形与选址.md`
+L86; `Imperium-Knowledge/designs/city-plans/kit/版型格式-方案.md` L72). Its palace quarter takes the whole block around the
+north-bank governor's villa that the existing roads enclose (with the land of the zoning's rich household 7), the part
+beyond 6% of the land inside the wall being kept as the present woodland, and is recorded in the template
+(`Imperium-Knowledge/现行/城/罗马城-做法与顺序.md` L176-177) (replaces `Imperium-Knowledge/designs/city-plans/kit/版型格式-方案.md` L168
+and `Imperium-Knowledge/designs/回报/进度-版型工具.md` L88 in part). Its status is written as kept (留), to be frozen only once
+the north-bank small palace quarter and the scaling rule are fixed; template 2 stays out of main
 (`Imperium-Knowledge/designs/city-plans/kit/版型格式-方案.md` L168; `Imperium-Knowledge/designs/回报/进度-版型工具.md` L8-9).
 
 > [!NOTE]
@@ -223,13 +225,14 @@ is recorded in the template (`Imperium-Knowledge/现行/城/罗马城-做法与�
 
 ## Kits (套件) and city files
 
-A kit is a culture's fixed set of generation data, such as its word list, skeleton, groups, fill and wall settings,
-with one kit each for Roman, medieval, industrial and tribal settlements (`docs/glossary.md` L184). City data is of two
+A kit is a culture's fixed set of generation data, such as its word list, skeleton, groups, fill and wall settings, with
+one kit each for Roman, medieval, industrial and tribal settlements (`docs/glossary.md` L184). City data is of two
 kinds: the kit, set by design and without coordinates (word list, skeleton, groups, housing base, fill, period table,
-wall parameters), and the city file, the result of one map, in which hand layout and code output share one form and
-each item records where it lies, which hard conditions it passed and by which condition it was chosen
-(`Imperium-Knowledge/现行/城/罗马城-做法与顺序.md` L59; `Imperium-Knowledge/designs/city-plans/kit/城建数据格式-草案.md` L2-11). In ICF a faction kit refers to the L1 definitions (spec cards, object roles, material tiers, the parameter table and
-the others) and adds the strategy for each stage (`Imperium-Knowledge/designs/ICF/ICF设计.md` L96).
+wall parameters), and the city file, the result of one map, in which hand layout and code output share one form and each
+item records where it lies, which hard conditions it passed and by which condition it was chosen
+(`Imperium-Knowledge/现行/城/罗马城-做法与顺序.md` L59; `Imperium-Knowledge/designs/city-plans/kit/城建数据格式-草案.md` L2-11). In ICF a
+faction kit (阵营套件) refers to the items listed above it in the table and adds the strategy class names for each stage
+(`Imperium-Knowledge/designs/ICF/ICF设计.md` L96).
 
 Hand-laid drafts are written in the city-file form from the first day, each item saying whether it is a skeleton node
 or a group, where it lands and by which pairing, as the engine's standard answer
@@ -242,10 +245,11 @@ item or outside (`Imperium-Knowledge/designs/city-plans/kit/城建数据格式-�
 The kit's word list holds the five kinds of face, with what each meets and never meets, and the face rules; the five
 kinds of port, the goods port being at least 3 cells wide; the street kinds; and the terrain features (river, bank,
 inner bend of a river, rock, rock head, marsh, soft ground, coast, approach, old road)
-(`Imperium-Knowledge/designs/city-plans/kit/城建数据格式-草案.md` L26-36). A condition is either hard, so that a place
-that fails it is not a candidate, or a pick condition, compared in order among the places that passed the hard ones,
-with no combined score; each placed item records the hard conditions it passed, the pick condition that chose it and
-how many places qualified (`Imperium-Knowledge/designs/city-plans/kit/城建数据格式-草案.md` L32-33, L99).
+(`Imperium-Knowledge/designs/city-plans/kit/城建数据格式-草案.md` L26-36). A condition is marked hard, so that a place that
+fails it is not a candidate, or pick, compared in order among the places that passed the hard ones, with no combined
+score, or null; which conditions are hard and which are pick is not ruled, so for now all are written null to be set at
+step ③; each placed item records the hard conditions it passed, the pick condition that chose it and how many places
+qualified (`Imperium-Knowledge/designs/city-plans/kit/城建数据格式-草案.md` L32-33, L99).
 
 The Empire's Roman settlements have one Roman kit, and the camp tiers City, Castellum, Fortlet and Burgus are tiers of
 that kit (`Imperium-Knowledge/designs/instructions/生成具象规格-现行版.md` L119;
@@ -383,38 +387,34 @@ in `cities-inside.md`.
 
 > [!NOTE]
 > **Deleted**: The fifth port, the water inlet and outlet joining an open channel, connected items to the city's water
-> network and belonged to the hydraulics the maintainer deleted (`Imperium-Knowledge/现行/城/罗马城-城内.md` L160;
+> network and belonged to the hydraulics axis the maintainer deleted on 2026-11-24 (`Imperium-Knowledge/现行/城/罗马城-城内.md` L160;
 > `Imperium-Knowledge/15_水利主轴.md` L4, L21-32).
 
-> [!NOTE]
-> **Unverified**: The city check does not yet check faces and ports or each item's hard conditions; they are to be
-> added at step ③ (`Imperium-Knowledge/designs/tools/city/说明/check.md` L10). The rule that a piece's face lies next
-> to a street (I7) is to be folded into the street-network check (S5) later
-> (`Imperium-Knowledge/designs/tools/city/说明/check.md` L103).
+> [!
 
 ## The city grammar (聚落平面语法)
 
 > [!NOTE]
 > **Deleted**: The hand-designed city plan line. The Roman city plan was hand-designed data read and fitted onto the
-> terrain, which the settlement plan grammar v4 defined field by field as ICF's L1 plan definition: a skeleton with
-> card slots and fixed cards for each Roman row (without high ground A31, A29, A26 and A7; with high ground A31 and
-> A12; A28 at the crossing of the core street and the axis), block slots, assembly marks, the approach side and the
-> Roman row (`Imperium-Knowledge/designs/ICF/聚落平面语法-v4.md` L8, L12, L17, L276-286;
-> `Imperium-Knowledge/designs/ICF/ICF设计.md` L94; `Imperium-Knowledge/09_地图生成与CBF技术.md` L594-595). With it went
-> the axis-and-grid plan, in which Rome first draws the axis and the grid follows it out to the area of the site sheet
-> (`Imperium-Knowledge/09_地图生成与CBF技术.md` L573); the later variants of plan v2
-> (`Imperium-Knowledge/designs/ICF/聚落平面语法-v4.md` L408); the 10-29 survey's five repairs to grammar v3, which the
+> terrain, which the settlement plan grammar v4 defined field by field as ICF's L1 plan definition: a skeleton with card
+> slots and fixed cards for each Roman row (without high ground A31, A29, A26 and A7; with high ground A31 and A12; A28
+> at the crossing of the core street and the axis), block slots, assembly marks, the approach side and the Roman row
+> (`Imperium-Knowledge/designs/ICF/聚落平面语法-v4.md` L8, L12, L17, L276-286; `Imperium-Knowledge/designs/ICF/ICF设计.md` L94;
+> `Imperium-Knowledge/09_地图生成与CBF技术.md` L594-595). The axis-and-grid plan, in which Rome first draws the axis and the
+> grid follows it out to the area of the site sheet, was already changed in v5.1: the city plan is hand-designed data
+> and the grid is no longer laid along the axis (`Imperium-Knowledge/09_地图生成与CBF技术.md` L573); the later variants of plan
+> v2 (`Imperium-Knowledge/designs/ICF/聚落平面语法-v4.md` L408); the 10-29 survey's five repairs to grammar v3, which the
 > ledger took into the grammar (`Imperium-Knowledge/designs/罗马理想城调研-2026-10-29.md` L104-110;
-> `Imperium-Knowledge/09_地图生成与CBF技术.md` L606-613); the parameter keys for the core's elevation and the
-> three-sided barrier test (`Imperium-Knowledge/designs/ICF/聚落平面语法-v4.md` L322-323); and the grammar's shape text,
-> to be rewritten after a hand-laid confluence-mouth city (`Imperium-Knowledge/designs/ICF/聚落平面语法-v4.md` L4). The
-> rulings of 10-30 deleted it: the skeleton is laid by hand and records relations, the plan is no longer hand-designed
-> data read onto the terrain, and the grammar's Roman City shapes give way to the current city cards
-> (`Imperium-Knowledge/09_地图生成与CBF技术.md` L697, R-1030-1406; `Imperium-Knowledge/designs/ICF/ICF设计.md` L6,
-> R-1030-1802; `Imperium-Knowledge/designs/ICF/聚落平面语法-v4.md` L4, L6). What R-1030-1802 put in its place, a main ring
-> set by the main core and a plan generated by weights from the sources, was deleted in turn: a city's area is not grown
-> by tuning weights, and a city goes only through a template (`Imperium-Knowledge/现行/城/罗马城-做法与顺序.md` L52,
-> R-1110-1057; `Imperium-Knowledge/09_地图生成与CBF技术.md` L905, R-1112-0820).
+> `Imperium-Knowledge/09_地图生成与CBF技术.md` L606-613); the parameter keys for the core's elevation and the three-sided
+> barrier test (`Imperium-Knowledge/designs/ICF/聚落平面语法-v4.md` L322-323); and the grammar's shape text, to be rewritten
+> after a hand-laid confluence-mouth city (`Imperium-Knowledge/designs/ICF/聚落平面语法-v4.md` L4). The rulings of 10-30
+> deleted it: the skeleton is laid by hand and records relations, the plan is no longer hand-designed data read onto the
+> terrain, and the grammar's Roman City shapes give way to the current city cards (`Imperium-Knowledge/09_地图生成与CBF技术.md`
+> L697, R-1030-1406; `Imperium-Knowledge/designs/ICF/ICF设计.md` L6, R-1030-1802;
+> `Imperium-Knowledge/designs/ICF/聚落平面语法-v4.md` L4, L6). What R-1030-1802 put in its place, a main ring set by the main
+> core and a plan generated by weights from the sources, was deleted in turn: a city's area is not grown by tuning
+> weights, and a city goes only through a template (`Imperium-Knowledge/现行/城/罗马城-做法与顺序.md` L52, R-1110-1057;
+> `Imperium-Knowledge/09_地图生成与CBF技术.md` L905, R-1112-0820).
 
 The grammar builds a settlement from nine primitives (core and open space, street network and axis, lifeline, boundary
 and control, density gradient, block slots and block library, outer-wall layering, cards and card slots, assembly),
@@ -440,7 +440,7 @@ skeleton: modern factions electricity, the medieval faction its lord, tribes fir
 > **Deleted**: The Roman lifeline is water, which is also the Roman city's power grid: its source is an aqueduct or a
 > well at the water tower A31, its trunk the channel along the colonnaded main street, the places where it shows are
 > the monument fountain, the square pools and the public baths, and its exit chain runs water-out gate, moat, sluice,
-> main canal, branch canal and field; this belonged to the hydraulics the maintainer deleted (`docs/glossary.md` L187;
+> main canal, branch canal and field; this belonged to the hydraulics axis the maintainer deleted on 2026-11-24 (`docs/glossary.md` L187;
 > `Imperium-Knowledge/designs/ICF/聚落平面语法-v4.md` L104, L108, L110; `Imperium-Knowledge/15_水利主轴.md` L4,
 > L21-32).
 
@@ -484,22 +484,25 @@ reference, combination and look are learned, while function comes from Imperium'
 cards missing for an area are made for it (`Imperium-Knowledge/现行/城/罗马城-做法与顺序.md` L162;
 `Imperium-Knowledge/09_地图生成与CBF技术.md` L937).
 
-An area is 2800 to 9200 cells, weighted by the attraction field, so that areas near the core and the main street are
-small and outlying ones large (`Imperium-Knowledge/现行/城/罗马城-城内.md` L23; `Imperium-Knowledge/09_地图生成与CBF技术.md` L863) (replaces `Imperium-Knowledge/09_地图生成与CBF技术.md` L861). A building with its annex and small yard counts as one item (`Imperium-Knowledge/designs/研究/城/布置思路.md` L13).
-Several roof blocks that adjoin tightly with slightly offset coordinates are one household and one building, whose
-outline they make together, and tracing, samples and card filling follow the household's outline, not squares
-(`Imperium-Knowledge/现行/城/罗马城-做法与顺序.md` L153; `Imperium-Knowledge/09_地图生成与CBF技术.md` L953).
+An area is 2800 to 9200 cells, floating with the attraction field's weight, so that areas near the core and the main
+street are small and outlying ones large; the strength of the weighting is a trial value to be set after the user has
+seen the images (`Imperium-Knowledge/现行/城/罗马城-城内.md` L23; `Imperium-Knowledge/09_地图生成与CBF技术.md` L863) (replaces
+`Imperium-Knowledge/09_地图生成与CBF技术.md` L861). A building with its annex and small yard counts as one item
+(`Imperium-Knowledge/designs/研究/城/布置思路.md` L13). Several roof blocks that adjoin tightly with slightly offset
+coordinates are one household and one building, whose outline they make together, and tracing, samples and card filling
+follow the household's outline, not squares (`Imperium-Knowledge/现行/城/罗马城-做法与顺序.md` L153;
+`Imperium-Knowledge/09_地图生成与CBF技术.md` L953).
 
-An area is laid by its spectrum in three steps: households come out of the spectrum, then each is given its tier, then
-households are merged; if the look is wrong, the order changes to merging first and then applying the spectrum, the
-user judging by picture (`Imperium-Knowledge/现行/城/罗马城-做法与顺序.md` L174). The tiers and uses come from the
-attraction field (`Imperium-Knowledge/现行/城/罗马城-做法与顺序.md` L148), and rich households are merged by block
-(`Imperium-Knowledge/现行/城/罗马城-做法与顺序.md` L175). The east square's spectrum is taken as a general spectrum for
-small-square housing areas, which any housing area around a small square can use; the first square, the largest and
-most formal in the city, gets another reference and is recorded as its own type; and which building forms a square's
-front is decided when the area is laid (`Imperium-Knowledge/现行/城/罗马城-做法与顺序.md` L174;
-`Imperium-Knowledge/09_地图生成与CBF技术.md` L932-933). The earlier reading of the east square and its fronting long
-house as the first-square group is void (`Imperium-Knowledge/09_地图生成与CBF技术.md` L932-933).
+An area is laid by its spectrum by first trying three steps: households come out of the spectrum, then each is given its
+tier, then households are merged; if the look is wrong, the order changes to merging first and then applying the
+spectrum, the user judging by picture (`Imperium-Knowledge/现行/城/罗马城-做法与顺序.md` L174). The tiers and uses come from the
+attraction field (`Imperium-Knowledge/现行/城/罗马城-做法与顺序.md` L148), and in template 1's zoning rich households are merged by
+block (`Imperium-Knowledge/现行/城/罗马城-做法与顺序.md` L175). The east square's spectrum is taken as a general spectrum for
+small-square housing areas, which any housing area around a small square can use; the first square, the largest and most
+formal in the city, gets another reference and is recorded as its own type; and which building forms a square's front is
+decided when the area is laid (`Imperium-Knowledge/现行/城/罗马城-做法与顺序.md` L174; `Imperium-Knowledge/09_地图生成与CBF技术.md`
+L932-933). The earlier reading of the east square and its fronting long house as the first-square group is void
+(`Imperium-Knowledge/09_地图生成与CBF技术.md` L932-933).
 
 Variety goes through a fragment library (片段库): house groups are cut into fragments, which can be mirrored, turned,
 stretched along the street and given card variants, while the area spectrum only picks cards and checks counts and
@@ -558,17 +561,14 @@ odd outline and its door on the street face, carries seven tags, passes the auto
 can be mirrored and rotated (`Imperium-Knowledge/14_来源同步与权威.md` L55). The seven tags are use, tier, size class,
 city-zone layer, facade, rotation and mirroring, and terrain (`Imperium-Knowledge/designs/ICF/聚落平面语法-v4.md` L276).
 
-In ICF a spec card has four layers, structure, floor, roof and objects, whose object symbols point only to object
-roles, and it carries the seven tags, its tier, era, growth parts and terrain tag
-(`Imperium-Knowledge/designs/ICF/ICF设计.md` L89). The material tiers are common, rich, workshop, military, imperial and
-city defence, and they map to wall, floor, paint and mask colour (`Imperium-Knowledge/designs/ICF/ICF设计.md` L92); materials
-belong to the card and the kit (`Imperium-Knowledge/designs/ICF/聚落平面语法-v4.md` L286), and the materials themselves are
-in `cities-inside.md`. Each room of a card is given a use and a user (谁用), and a shop has a
-door to the street (`Imperium-Knowledge/designs/tools/city/说明/cards.md` L16;
-`Imperium-Knowledge/designs/tools/city/代码地图.md` L1422). The room uses are bedroom, hall
-(reception), dining room, kitchen, servants, shop front, storage, workshop, warehouse, worship hall, apse, entrance
-hall, gateway, colonnade (portico), bath, cistern, courtyard, colonnaded courtyard, garden and other
-(`Imperium-Knowledge/designs/roman-cards/zones_v3.md` L81).
+In ICF a spec card has four layers, structure, floor, roof and objects, whose object symbols point only to object roles,
+and it carries the seven tags, its tier, era, growth parts and terrain tag (`Imperium-Knowledge/designs/ICF/ICF设计.md`
+L89). The material tiers are common, rich, workshop, military, imperial and city defence, and they map to wall, floor,
+paint and mask colour (`Imperium-Knowledge/designs/ICF/ICF设计.md` L92); materials belong to the card and the kit
+(`Imperium-Knowledge/designs/ICF/聚落平面语法-v4.md` L286), and the materials themselves are in `cities-inside.md`. The room
+uses are bedroom, hall (reception), dining room, kitchen, servants, shop front, storage, workshop, warehouse, worship
+hall, apse, entrance hall, gateway, colonnade (portico), bath, cistern, courtyard, colonnaded courtyard, garden and
+other (`Imperium-Knowledge/designs/roman-cards/zones_v3.md` L81).
 
 A building is built from one spec card at the card's scale, not assembled from several small independent houses, and
 single cards are not laid out as an even-spaced array (`Imperium-Knowledge/designs/instructions/生成具象规格-现行版.md` L140-143). The lower limits of the main outlines are A3 mansion 17×14, A4 cathedral 17 wide by 22 long, A7 council hall
@@ -577,25 +577,26 @@ those of the card table (`Imperium-Knowledge/designs/instructions/生成具象�
 
 ### How Roman cards are drawn
 
-Roman cards were redrawn as a high-technology Rome (`Imperium-Knowledge/09_地图生成与CBF技术.md` L450-451). Function is
-the skeleton of a card; courtyard, colonnade, portico and rows of columns give the Roman flavour; the outline comes from
-rooms of unequal size, annexes, L shapes, projecting porches and side rooms; an apse is only for ceremonial rooms;
-ornate walls, quoins and large ornate doors are only for core buildings; corners are not cut at 45°; eastern Rome is
-Rome, in two periods; and the history need not be fully reproduced, function coming first
-(`Imperium-Knowledge/09_地图生成与CBF技术.md` L451). Ordinary buildings get their Roman feel from ring colonnades, a
-symmetric front door on the central axis, a shallow pool in the yard and statues
-(`Imperium-Knowledge/09_地图生成与CBF技术.md` L452). The street colonnade belongs to the city, not to a card
-(`Imperium-Knowledge/09_地图生成与CBF技术.md` L477). Houses are made as a core plus growth parts (生长件), which give
+The new Roman cards A23 to A26 of 10-28 07:15 were voided and redone as a high-technology Rome (new A23 big workshop,
+A24 camp infirmary, A25 camp mess) (`Imperium-Knowledge/09_地图生成与CBF技术.md` L450-451). Function is the skeleton of a card;
+courtyard, colonnade, portico and rows of columns give the Roman flavour; the outline comes from rooms of unequal size,
+annexes, L shapes, projecting porches and side rooms; an apse is only for ceremonial rooms; ornate walls, quoins and
+large ornate doors are only for core buildings; corners are not cut at 45°; eastern Rome is Rome, in two periods; and
+the history need not be fully reproduced, function coming first (`Imperium-Knowledge/09_地图生成与CBF技术.md` L451). Ordinary
+buildings get their Roman feel from ring colonnades, a symmetric front door on the central axis, a shallow pool in the
+yard and statues (`Imperium-Knowledge/09_地图生成与CBF技术.md` L452). Card A1 loses its own colonnade, the colonnade belonging
+to the city (`Imperium-Knowledge/09_地图生成与CBF技术.md` L477). Houses are made as a core plus growth parts (生长件), which give
 their variants (`Imperium-Knowledge/09_地图生成与CBF技术.md` L510; `Imperium-Knowledge/designs/roman-cards/罗马规格卡总表.md` L8).
 
 A card's body width and depth are always odd and at most 25×20; the door is a single door on the central axis, and
-shopfronts and storage doors use a double door across the whole face, not aligned with a column
-(`Imperium-Knowledge/designs/roman-cards/罗马规格卡总表.md` L95). The apse of public and rich-household cards is 9 to 11
-wide outside; cards at most 17 wide take an outer width of 9 as the lower limit; A20's outer width of 5 is an exception
-as an insert in A11's courtyard, and A8's small chapel apse of outer width 5 is a block attached at the side
-(`Imperium-Knowledge/designs/roman-cards/罗马规格卡总表.md` L96). Columns stand 3 apart, with a central bay of 4 in
-front of a door; they sit on the structure layer, end columns do not touch side walls except as antae, and columns do
-not take the left and right edge cells (`Imperium-Knowledge/designs/roman-cards/罗马规格卡总表.md` L97).
+shopfronts and storage doors use a double door across the whole face, not aligned with a column (A14's north store takes
+a single door to clear the corner column); three exceptions follow 09§8
+(`Imperium-Knowledge/designs/roman-cards/罗马规格卡总表.md` L95). The apse of public and rich-household cards is 9 to 11 wide
+outside; cards at most 17 wide take an outer width of 9 as the lower limit; A20's outer width of 5 is an exception as an
+insert in A11's courtyard, and A8's small chapel apse of outer width 5 is a block attached at the side
+(`Imperium-Knowledge/designs/roman-cards/罗马规格卡总表.md` L96). Columns stand 3 apart, with a central bay of 4 in front of a
+door; they sit on the structure layer, end columns do not touch side walls except as antae, and columns do not take the
+left and right edge cells (`Imperium-Knowledge/designs/roman-cards/罗马规格卡总表.md` L97).
 
 ### The Roman card set
 
@@ -610,25 +611,24 @@ variant (`Imperium-Knowledge/现行/城/罗马城-城内.md` L152; `Imperium-Kno
 
 > [!NOTE]
 > **Deleted**: The v2 card line: the v2 card table and data with 34 cards, among them A1c, the graveyard church A6 and
-> the almshouse A16, the separate A1b, and the first A23 to A26 of 10-28 07:15 (a bakery with mill, a big workshop, a
-> camp infirmary and a camp kitchen with mess) (`Imperium-Knowledge/09_地图生成与CBF技术.md` L449, L510). The 10-28
-> redraw as high-technology Rome voided those first A23 to A26, and the v3.1 table replaced the v2 table, deleting A1c
-> (overlapping A27b), A6 and A16 (overlapping A24), merging A1b into A1 and folding the three shopfronts into A27b
+> the almshouse A16, and the first A23 to A26 of 10-28 07:15 (a bakery with mill, a big workshop, a camp infirmary and a
+> camp kitchen with mess) (`Imperium-Knowledge/09_地图生成与CBF技术.md` L449, L510). The 10-28 redraw as high-technology Rome
+> voided those first A23 to A26, and the v3.1 table replaced the v2 table, deleting A1c (overlapping A27b), A6, and A16
+> (overlapping A24), merging A1b into A1 and folding the three shopfronts into A27b
 > (`Imperium-Knowledge/09_地图生成与CBF技术.md` L450-451, L574; `Imperium-Knowledge/designs/roman-cards/罗马规格卡总表.md` L2, L67).
 
-Card numbers keep their old numbers, new cards are numbered from A32 in tier order, and the temporary numbers of the
-new candidates map to their card numbers: N1 to A3, N5 to A2, N6 to A2b, N7 to A1, N10 to A32, N11 to A33, N2 to A34,
-N16 to A35, N14 to A36, N17 to A37, N3 to A38, N4 to A39, N15 to A40, N12 to A41, N13 to A42, N8 to A43 and N9 to A44
-(`Imperium-Knowledge/designs/roman-cards/罗马规格卡总表.md` L8, L105-123;
-`Imperium-Knowledge/designs/整理/整理方案-2026-11-02.md` L152). The table gives for each card its name, tier, body size
-(not counting the one cell in front of the door), how it is used in the J and B types of city, a lineage over the two
-peak periods (peak two first), its growth parts or variants, its source and its batch status
-(`Imperium-Knowledge/designs/roman-cards/罗马规格卡总表.md` L8-10). The lineage names one real-history example from each
-peak period, or says that no ancestor of the same function exists, as an anchor for the card; the cathedral A4, for
-example, names a Justinian-era church with a forecourt and the Basilica Ulpia (112), matching in function and place
-(`Imperium-Knowledge/designs/roman-cards/罗马规格卡总表.md` L12). Lineage notes such as "survey A5, B1" are the type
-numbers of the housing survey, not card numbers (`Imperium-Knowledge/designs/roman-cards/罗马规格卡总表.md` L8). Cards
-marked † are generated only when Ideology is loaded (`Imperium-Knowledge/designs/roman-cards/罗马规格卡总表.md` L8).
+Card numbers keep their old numbers, new cards are numbered from A32 in tier order, and the temporary numbers of the new
+candidates map to their card numbers: N1 to A3, N5 to A2, N6 to A2b, N7 to A1, N10 to A32, N11 to A33, N2 to A34, N16 to
+A35, N14 to A36, N17 to A37, N3 to A38, N4 to A39, N15 to A40, N12 to A41, N13 to A42, N8 to A43 and N9 to A44
+(`Imperium-Knowledge/designs/roman-cards/罗马规格卡总表.md` L8, L105-123; `Imperium-Knowledge/designs/整理/整理方案-2026-11-02.md`
+L152). The table gives for each card its name, tier, body size (not counting the one cell in front of the door), how it
+is used in the J and B types of city, a lineage over the two peak periods (peak two first), its growth parts or
+variants, its source and its batch status (`Imperium-Knowledge/designs/roman-cards/罗马规格卡总表.md` L8-10). The lineage names
+one real example for each of the two peak periods, peak two first; the cathedral A4, for example, names a Justinian-era
+church with a forecourt and the Basilica Ulpia (112), matching in function and place
+(`Imperium-Knowledge/designs/roman-cards/罗马规格卡总表.md` L12). Lineage notes such as "survey A5, B1" are the type numbers of
+the housing survey, not card numbers (`Imperium-Knowledge/designs/roman-cards/罗马规格卡总表.md` L8). Cards marked † are
+generated only when Ideology is loaded (`Imperium-Knowledge/designs/roman-cards/罗马规格卡总表.md` L8).
 
 The cards remade in v3 are the public bath A26 (25×19, cold, warm and hot pools on one axis with the door, the hot pool in a
 semicircular apse, a colonnaded exercise yard), the citadel governor's residence A12 (19×17, door, four-column atrium,
@@ -643,28 +643,29 @@ changed slightly, five kept as they were, and the v3.1 review added further corr
 
 The row cottages A27 are units of 7×9 in three kinds, dwelling, shopfront and workshop, sharing walls with their
 neighbours and able to stand as 9×7; they fill the street frontage and the shops on main streets and square edges that
-the big cards cannot (`Imperium-Knowledge/09_地图生成与CBF技术.md` L469). The camp mess A25 is a long hall with two long
-tables and stools, an apse with the officers' seat at the east end, a kitchen wing set off to the north and a
-four-column porch on the south door (`Imperium-Knowledge/09_地图生成与CBF技术.md` L480), now 19×15
-(`Imperium-Knowledge/designs/roman-cards/罗马规格卡总表.md` L62). The four-sided gate A28 has four ornate octagonal
-piers at the crossing with a roofed crossing, in three sizes by street width
-(`Imperium-Knowledge/09_地图生成与CBF技术.md` L480-481). The monument fountain A29 is a gold-trimmed niche with four
-statues and a pool, and the monument column A30 stands for a later imperial column piece
-(`Imperium-Knowledge/09_地图生成与CBF技术.md` L480). The medium workshop (A44) and the port warehouse with a quay face
-(A43) were added (`Imperium-Knowledge/09_地图生成与CBF技术.md` L510, L574).
+the big cards cannot (`Imperium-Knowledge/09_地图生成与CBF技术.md` L469). The camp mess A25 is a long hall with two long tables
+and stools, an apse with the officers' seat at the east end, a kitchen wing set off to the north and a four-column porch
+on the south door (`Imperium-Knowledge/09_地图生成与CBF技术.md` L480), now 19×15
+(`Imperium-Knowledge/designs/roman-cards/罗马规格卡总表.md` L62). The four-sided gate A28 has four ornate octagonal piers at
+the crossing with a roofed crossing, in three sizes by street width (`Imperium-Knowledge/09_地图生成与CBF技术.md` L480-481).
+The monument fountain A29 is a gold-trimmed niche with four statues and a pool, and the monument column A30 is
+represented by a grand statue, to be replaced later by an imperial monument-column piece
+(`Imperium-Knowledge/09_地图生成与CBF技术.md` L480). The medium workshop and the port warehouse with a quay face were added as
+new cards (`Imperium-Knowledge/09_地图生成与CBF技术.md` L510, L574).
 
 > [!NOTE]
 > **Deleted**: These card passages rest on the city's water network and its powered equipment, which belonged to the
-> hydraulics the maintainer deleted (`Imperium-Knowledge/15_水利主轴.md` L4, L21-32):
+> hydraulics axis the maintainer deleted on 2026-11-24 (`Imperium-Knowledge/15_水利主轴.md` L4, L21-32):
 > - A29's pool is fed from its back wall and its outflow joins the main-street channel
 >   (`Imperium-Knowledge/09_地图生成与CBF技术.md` L480);
-> - A31, the water palace (水宫), formerly the water-distribution tower (分水塔), 13×13, has a central chamfered pool
->   joined to the outlets on its faces by culverts, one inlet and three outlets, and the city's only hydraulic
->   generator (`Imperium-Knowledge/09_地图生成与CBF技术.md` L480; `Imperium-Knowledge/designs/roman-cards/罗马规格卡总表.md` L26, L98);
+> - A31, the water palace (水宫), formerly the water-distribution tower (分水塔), 13×13, has a central chamfered pool joined
+>   to the outlets on its faces by culverts, one inlet and three outlets, and the city's only hydraulic generator
+>   (`Imperium-Knowledge/09_地图生成与CBF技术.md` L480; `Imperium-Knowledge/designs/roman-cards/罗马规格卡总表.md` L26, L98);
 > - the big workshop A23 and the row workshop unit A27c carry a street-side water inlet and outlet and a placeholder for
 >   a hydraulic power unit (`Imperium-Knowledge/designs/instructions/生成具象规格-现行版.md` L450;
 >   `Imperium-Knowledge/09_地图生成与CBF技术.md` L477);
-> - the rainwater pools A32 and A33 store water, first also meant as a water source for the water tower
+> - the rainwater pool, a new card added on 10-28, was first meant as the water source for the water tower when the
+>   hot-dry type J has no river, matching B's aqueduct, and was later ruled to serve only as storage
 >   (`Imperium-Knowledge/09_地图生成与CBF技术.md` L510);
 > - a pool and its water outlet are joined by a culvert, with no water line drawn across the ground
 >   (`Imperium-Knowledge/09_地图生成与CBF技术.md` L481; `Imperium-Knowledge/designs/roman-cards/罗马规格卡总表.md` L98).
@@ -680,17 +681,18 @@ A49, and the plot cards A51a to A51e and A52a to A52e (`Imperium-Knowledge/desig
 > - 120 rooms of the cards are still pending review, among them those of the square-hall variants
 >   (`Imperium-Knowledge/designs/roman-cards/zones_v3.md` L30-41, L79).
 > - The table names three exceptions to the footprint and door rules "per 09§8" without listing them
->   (`Imperium-Knowledge/designs/roman-cards/罗马规格卡总表.md` L95); the ledger has three exceptions of 10-28 on yard
->   columns and the symmetry axis, and the table does not say whether these are the ones meant
+>   (`Imperium-Knowledge/designs/roman-cards/罗马规格卡总表.md` L95); the ledger has three exceptions of 10-28 on yard columns
+>   and the symmetry axis, and the table does not say whether these are the ones meant
 >   (`Imperium-Knowledge/09_地图生成与CBF技术.md` L549-552).
-> - The archive office (档案署) and the inn (客栈) have no card of their own
->   (`Imperium-Knowledge/designs/整理/删除核对-2026-11-03.md` L20).
+> - The archive office (档案署) and the inn (客栈) were noted as having no card of their own (专卡), and this was entered as
+>   item 35 of the list awaiting the user's ruling (`Imperium-Knowledge/designs/整理/删除核对-2026-11-03.md` L20).
 > - The housing survey suggests how many cards each house type suits, such as three slices of the atrium house and two
->   each of most others (`Imperium-Knowledge/designs/roman-cards/罗马住宅调查-2026-10-28.md` L114-129), and a later
->   report proposes, without a ruling, which cards serve living cities and which ruins
->   (`Imperium-Knowledge/designs/city-plans/罗马大城住宅类型-查证-2026-11-03.md` L158-186). The house width and depth
->   grades for the near, middle and far rings in the task book are not ruled
->   (`Imperium-Knowledge/designs/整理/回报/城卡.md` L28).
+>   each of most others (`Imperium-Knowledge/designs/roman-cards/罗马住宅调查-2026-10-28.md` L114-129), and a later report
+>   proposes which cards suit living cities and which ruins, and for A38 and A39 follows the user's addition that, Ostia
+>   being in Italy itself, their form belongs to ruins
+>   (`Imperium-Knowledge/designs/city-plans/罗马大城住宅类型-查证-2026-11-03.md` L158-186). The values of household width and
+>   depth for the near, middle and far grades in the task book are not ruled (`Imperium-Knowledge/designs/整理/回报/城卡.md`
+>   L28).
 
 ### Cards in the city
 
@@ -729,63 +731,52 @@ as one building; and the outside of the city is not counted (`Imperium-Knowledge
 
 A card can be stretched by inserting seams, while the spec card itself is not changed: floor or wall is inserted only
 into seams where both sides are of the same kind (the floor of one room, or a wall running across) and that do not cut
-furniture or doors; by default a card widens by at most 4 and deepens by at most 2, some cards are held to 2, and a
-card with an axis of symmetry inserts in pairs (`Imperium-Knowledge/现行/城/罗马城-城内.md` L150). Furniture, doors and
-columns stay where they were; a seam does not run where one side is a vertical wall and the other floor, and does not
-cut a door, a multi-cell object, a pool or two columns; A2, A9a, A9b, A41 and A45 widen by at most 2; and a card with a
-central yard stretches symmetrically about the yard's midline (`Imperium-Knowledge/designs/tools/city/说明/cards.md` L28). The method is adopted and the numbers are trial values (`Imperium-Knowledge/designs/tools/city/说明/cards.md` L28; `Imperium-Knowledge/designs/city-plans/kit/城建数据格式-草案.md` L101). Streets, plots and groups without cards do
-not stretch, and widening the bakery A45 (13×11) by 2 and deepening it by 1 makes it 15×12
-(`Imperium-Knowledge/designs/city-plans/kit/城建数据格式-草案.md` L101-109). Of the sixteen houses and shopfronts
-scanned, A2b, A2c, A27b, A27c, A49, A3 and A34 do not widen, and A27c does not deepen either
-(`Imperium-Knowledge/designs/tools/city/说明/cards.md` L64).
+furniture or doors; by default a card widens by at most 4 and deepens by at most 2, some cards are held to 2, and a card
+with an axis of symmetry inserts in pairs (`Imperium-Knowledge/现行/城/罗马城-城内.md` L150). Furniture, doors and columns stay
+where they were; a seam does not run where one side is a vertical wall and the other floor, and does not cut a door, a
+multi-cell object, a pool or two columns; A2, A9a, A9b, A41 and A45 widen by at most 2; and a card with a central yard
+stretches symmetrically about the yard's midline (`Imperium-Knowledge/designs/tools/city/说明/cards.md` L28). The method
+is adopted and the numbers are trial values (`Imperium-Knowledge/designs/tools/city/说明/cards.md` L28;
+`Imperium-Knowledge/designs/city-plans/kit/城建数据格式-草案.md` L101). Streets, plots and groups without cards do not stretch,
+and widening the bakery A45 (13×11) by 2 and deepening it by 1 makes it 15×12
+(`Imperium-Knowledge/designs/city-plans/kit/城建数据格式-草案.md` L101-109).
 
 > [!WARNING]
 > **Conflict**: The tier of the row workshop unit A27c. Neither side dates its tier: the stretch scan's only ruling id
 > dates the stretch method, not the grouping.
-> - The stretch scan lists A27c among the common-tier houses and shopfronts
->   (`Imperium-Knowledge/designs/tools/city/说明/cards.md` L28).
-> - The card table puts it in storage and workshops (`Imperium-Knowledge/designs/roman-cards/罗马规格卡总表.md` L56);
->   the water-coverage rule, which belonged to the deleted hydraulics, also calls it workshop tier and not a household
+> - The card table puts it in storage and workshops (`Imperium-Knowledge/designs/roman-cards/罗马规格卡总表.md` L56); the
+>   water-coverage rule, which belonged to the deleted hydraulics, also calls it workshop tier and not a household
 >   (`Imperium-Knowledge/designs/tools/city/说明/draft.md` L48).
 
 ### Slant cards (斜卡)
 
 A slant card is the 45° version of an upright card, made only for the house types that fall on 45° plots: small
 dwellings, street-front shopfronts and small workshops; large items are placed horizontally or vertically and the land
-is cut to fit them (`Imperium-Knowledge/现行/城/罗马城-城内.md` L132). A slant card is generated from the upright card's
-source as a variant beside stretching: the frame turns 45°, the walls step in eight directions, the furniture stands
-horizontal or vertical, the triangle left by a wall serves as a storage or yard corner, sizes are measured on the
-slanted land, and small dwellings get one narrower size; the card library itself is not changed
-(`Imperium-Knowledge/现行/城/罗马城-城内.md` L133; `Imperium-Knowledge/designs/回报/进度-斜卡工具.md` L116-117). It is made
-by re-laying the rooms, not by turning the grid: each wall line maps to a diagonal line whose cells are wall and touch
-corner to corner; doors open on the diagonal line with a wall cell added on each side, double doors become single, and
-two doors on one diagonal line are at least 4 spans apart; furniture goes back room by room, and pieces that do not fit
-are listed, neither squeezed in nor deleted (`Imperium-Knowledge/designs/tools/city/说明/cards.md` L34).
+is cut to fit them (`Imperium-Knowledge/现行/城/罗马城-城内.md` L132). A slant card is generated from the upright card's source
+as a variant beside stretching: the frame turns 45°, the walls step in eight directions, the furniture stands horizontal
+or vertical, the triangle left by a wall serves as a storage or yard corner, sizes are measured on the slanted land, and
+small dwellings get one narrower size (`Imperium-Knowledge/现行/城/罗马城-城内.md` L133;
+`Imperium-Knowledge/designs/回报/进度-斜卡工具.md` L116-117).
 
-Slant cards come in grades: 斜, door facing south-east (north-west when turned 180°); 斜二, its mirror, door facing
-south-west; and, for cards given a narrow grade, 斜窄 and 斜窄二 with a stated frontage and depth in slant cells
-(`Imperium-Knowledge/designs/tools/city/说明/cards.md` L36). The slant cards cover seven target cards, the second round
-having added A2c, A2, A9a and A44, and each room keeps at least 0.6 of its upright area, a trial value
-(`Imperium-Knowledge/designs/tools/city/说明/cards.md` L42, L49). A slant card can be stretched within the same limits
-as its upright card, and the stretched version is the same card (`Imperium-Knowledge/designs/tools/city/说明/cards.md` L44, L50).
+The slant cards cover seven target cards, the second round having added A2c, A2, A9a and A44, and each room keeps at
+least 0.6 of its upright area (`Imperium-Knowledge/designs/tools/city/说明/cards.md` L42, L49). A slant card can be
+stretched within the same limits as its upright card, and the stretched version is the same card
+(`Imperium-Knowledge/designs/tools/city/说明/cards.md` L44, L50).
 
 > [!NOTE]
 > **Base game**: Wall cells that touch only corner to corner still enclose a room, but a pawn cannot pass through a
 > diagonal seam, to be checked against `Data/` (`Imperium-Knowledge/designs/tools/city/说明/cards.md` L34).
 
 > [!NOTE]
-> **Unverified**: In the slant-card rounds the 15% cap could not be met (one card at 44% on the island and 32% in the
-> north-west city), and the reports leave to the user whether to make slant cards for the shopfront and rich tiers or
-> add cards first, or to loosen the cap; whether long slant houses may join into a neighbouring block's free ground;
-> whether back houses and lanes join the long houses; whether blocks without cards keep the reference's 1:1 houses;
-> whether empty blocks, which become courts of about 200 cells, get cards of their own; and whether the comparison
-> table gets presets beyond the 15% cap and the share of the three tiers
-> (`Imperium-Knowledge/designs/回报/进度-斜卡三轮.md` L106-111; `Imperium-Knowledge/designs/回报/进度-斜卡四轮.md` L110-114).
+> **Unverified**: In the slant-card rounds the 15% cap could not be met (A27b at 44% on the island and A27a at 32% in
+> the north part of the west city), and the reports leave to the user whether to repair the slant-card generator and
+> make slant cards for the shopfront and rich tiers first or add cards first, or to loosen the cap; whether long slant
+> houses may join into a neighbouring block's free ground; whether back houses and lanes join the long houses; whether
+> blocks without cards keep the reference's 1:1 houses; whether empty blocks, which become courts of about 200 cells,
+> get cards of their own; and whether the comparison table gets presets beyond the 15% cap and the share of the three
+> tiers (`Imperium-Knowledge/designs/回报/进度-斜卡三轮.md` L106-111; `Imperium-Knowledge/designs/回报/进度-斜卡四轮.md` L110-114).
 
 ## Card families
-
-Several cards form families that share a form and grow into one another
-(`Imperium-Knowledge/designs/roman-cards/罗马规格卡总表.md` L8):
 
 - The row cottages A27a (dwelling), A27b (shopfront, with three shopfront forms) and A27c (workshop) are laid mixed in
   rows (`Imperium-Knowledge/designs/roman-cards/罗马规格卡总表.md` L47-48, L56). On an oblique street, neighbouring row
@@ -806,16 +797,16 @@ Several cards form families that share a form and grow into one another
 - The rich-household houses have rear-hall and square-hall versions (`Imperium-Knowledge/designs/roman-cards/罗马规格卡总表.md` L29-40, L130).
 
 The plot card family (地块卡族) is ten candidate cards, the free citizens' A51a to A51e and the commoners' A52a to A52e,
-each 15×15 for one household's plot, kept out of the table's count; the commoners' inner yards are no smaller than 4×4,
-and the things in a plot are interchangeable (livestock pen, shed with shelves, garden, colonnade, workshop shed,
-barrel, well) (`Imperium-Knowledge/09_地图生成与CBF技术.md` L964). The 15×15 is the household's plot, not a square
-house: the house follows the household's outline, made of several roof blocks of differing shape and position (a long
-strip, an L, a U, two blocks with a passage between them, or a few scattered), and occupies only those roof blocks;
-the yard walls enclose only the house; elsewhere in the plot are yard, garden, shed, pen, barrel and lamp; the plot
-edge is not walled all round, only where the enlarged picture shows a wall, fence or flower bed; and the cards have
-distinct outer shapes and a use for every room (`Imperium-Knowledge/09_地图生成与CBF技术.md` L968;
-`Imperium-Knowledge/现行/城/罗马城-做法与顺序.md` L168) (replaces `Imperium-Knowledge/09_地图生成与CBF技术.md` L964 in
-part). Vine trellises and shrines in the plots are not made for now (`Imperium-Knowledge/现行/城/罗马城-做法与顺序.md` L168).
+each 15×15 for one household's plot, kept out of the table's count; the things in a plot are interchangeable (livestock
+pen, shed with shelves, garden, colonnade, workshop shed, barrel, well) (`Imperium-Knowledge/09_地图生成与CBF技术.md` L964).
+The 15×15 is the household's plot, not a square house: the house follows the household's outline, made of several roof
+blocks of differing shape and position (a long strip, an L, a U, two blocks with a passage between them, or a few
+scattered), and occupies only those roof blocks; the house's walls enclose only the house; elsewhere in the plot are
+yard, garden, shed, pen, barrel and lamp; the plot edge is not walled all round, only where the enlarged picture shows a
+wall, fence or flower bed; and the cards have distinct outer shapes and a use for every room
+(`Imperium-Knowledge/09_地图生成与CBF技术.md` L968; `Imperium-Knowledge/现行/城/罗马城-做法与顺序.md` L168) (replaces
+`Imperium-Knowledge/09_地图生成与CBF技术.md` L964 in part). Vine trellises and shrines in the plots are not made for now
+(`Imperium-Knowledge/现行/城/罗马城-做法与顺序.md` L168).
 
 The plot cards follow the bright daytime pictures, not the dark ones, and railings, fences, low walls and walls are told
 apart: something see-through with posts is a railing or fence, something solid and low is a low wall, and only a house's
@@ -851,8 +842,8 @@ can stand in is checked first, and if it can, nothing is borrowed or made; piece
 terraces first, then what cards need to enter a city, then what the medieval, tribal and modern kits need when each is
 made (`Imperium-Knowledge/designs/ICF/构件需求表-v1.md` L4).
 
-The table's pieces each have their Roman, medieval, modern and tribal material, and those that stand are
-(`Imperium-Knowledge/designs/ICF/构件需求表-v1.md` L6-27):
+The table's pieces are given by their Roman, medieval, modern and tribal material where each is used, and those that
+stand are (`Imperium-Knowledge/designs/ICF/构件需求表-v1.md` L6-27):
 
 - the terrace edge, ramp and stairs, borrowed;
 - a retaining wall, not made for now;
@@ -868,10 +859,10 @@ The table's pieces each have their Roman, medieval, modern and tribal material, 
   sandbags, barricade and checkpoint, and a flag or flagpole of Imperium's own art.
 
 > [!NOTE]
-> **Deleted**: The table's water pieces, wanted in the first round with walls and terraces, served the city's water
-> network: the surface water channel for the street, workshop and field channels (its water the base game's moving
-> shallow water, its edge borrowed as curb pieces, also used for the pool group), the small bridge over a channel, and
-> the Roman aqueduct arch; they belonged to the hydraulics the maintainer deleted
+> **Deleted**: The table's water pieces, wanted in round 3 with walls and terraces (the aqueduct arch after round 3),
+> served the city's water network: the surface water channel for the street, workshop and field channels (its water the
+> base game's moving shallow water, its edge borrowed as curb pieces, also used for the pool group), the small bridge
+> over a channel, and the Roman aqueduct arch; they belonged to the hydraulics axis the maintainer deleted on 2026-11-24
 > (`Imperium-Knowledge/designs/ICF/构件需求表-v1.md` L4, L8-10, L19; `Imperium-Knowledge/15_水利主轴.md` L4, L34-36).
 
 An object role (物件角色) names a thing, such as a floor lamp or a stone shelf, and has a candidate chain:
@@ -880,6 +871,7 @@ with a material rule (`Imperium-Knowledge/designs/ICF/ICF设计.md` L91). The re
 ReBuild, so every role falls to a base-game piece or a placeholder (`Imperium-Knowledge/designs/ICF/ICF设计.md` L99).
 
 > [!NOTE]
-> **Base game**: The part table rests on what the base game has: shallow water, the fence (since 1.3), doors, large and small statues and Ideology's totems and flags, stone tiles and flagstones,
-> the campfire, sandbags and barricades, and walls only as room walls; to be checked against `Data/`
+> **Base game**: The part table rests on what the base game has: shallow water, the fence (since 1.3), doors, large and
+> small statues and Ideology's totems, the campfire, sandbags and barricades; stone tiles and flagstones and Ideology's
+> flags stand only by half, and walls exist only as room walls; to be checked against `Data/`
 > (`Imperium-Knowledge/designs/ICF/构件需求表-v1.md` L6-27).

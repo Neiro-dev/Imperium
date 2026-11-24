@@ -4,7 +4,7 @@ This section covers the land outside a Roman city's walls: what a middle or smal
 leaves out, the cemeteries and roads outside the gates, and how those roads are drawn. It also covers the water in and
 around a city: how a river is brought to the city and reshaped, how the city sits across it, its bridges, quays and
 harbour, and the seaside city. It gives only the newest line on each subject; each older line that a newer setting
-replaced is one Deleted note, and the city's own water system, which belonged to the hydraulics the maintainer deleted,
+replaced is one Deleted note, and the city's own water system, which belonged to the hydraulics axis the maintainer deleted on 2026-11-24,
 is one such note. It meets `cities.md` on the phases in which a city is laid out, `cities-siting.md` on terrain, hills,
 mountains and coasts, `cities-walls.md` on the moat, the cleared strip, the gates, the water gates, the wall along water
 and the small forts on rock beside the wall, `cities-inside.md` on the palace quarter, the streets, the cemeteries
@@ -15,11 +15,12 @@ system beyond one city.
 
 ### Middle and small cities
 
-Outside the walls of a middle or small city the land follows the von Thünen rings (杜能圈): garden plots (园圃) lie
-nearest the gate, larger fields lie farther out, and beyond the fields the original terrain is kept (`Imperium-Knowledge/现行/城/罗马城-墙外.md` L12; `Imperium-Knowledge/09_地图生成与CBF技术.md` L790).
-The Empire keeps no animals, so the outermost ring holds no pasture and no gate is opened toward one, and no woodland is
-grown for firewood, since the industrial Empire has no firewood; the countryside is meant to read as an industrial
-Empire's, without herds or woods (`Imperium-Knowledge/09_地图生成与CBF技术.md` L790; `Imperium-Knowledge/现行/城/罗马城-墙外.md` L12; `Imperium-Knowledge/designs/做法史/罗马城·墙外.md` L49).
+Outside the city walls the land follows the von Thünen rings (杜能圈): garden plots (园圃) lie nearest the gate, larger
+fields lie farther out, and beyond the fields the original terrain is kept (`Imperium-Knowledge/现行/城/罗马城-墙外.md` L12;
+`Imperium-Knowledge/09_地图生成与CBF技术.md` L790). The Empire keeps no animals, so the outermost ring holds no pasture and no
+gate is opened toward one, and no woodland is grown for firewood, since the industrial Empire has no firewood; the
+countryside is meant to read as an industrial Empire's, without herds or woods (`Imperium-Knowledge/09_地图生成与CBF技术.md`
+L790; `Imperium-Knowledge/现行/城/罗马城-墙外.md` L12; `Imperium-Knowledge/designs/做法史/罗马城·墙外.md` L49).
 
 Estates (庄园) stand along the main road, each with several square fields (方田), and the fields are not drawn as one
 block outside the city (`Imperium-Knowledge/现行/城/罗马城-墙外.md` L20; `Imperium-Knowledge/designs/city-plans/罗马城排法-算法.md` L81; `Imperium-Knowledge/09_地图生成与CBF技术.md` L705). The square fields follow the direction of the city's street net:
@@ -68,9 +69,10 @@ land kept outside the wall for defence, the cleared strip and the ground left fo
 > (`Imperium-Knowledge/09_地图生成与CBF技术.md` L961; `Imperium-Knowledge/09_地图生成与CBF技术.md` L972; `Imperium-Knowledge/designs/做法史/罗马城·墙外.md` L56).
 
 > [!NOTE]
-> **Unverified**: how many cells are kept outside the wall on each side is not decided; reproducing the Anno 117 city
-> comes first (`Imperium-Knowledge/09_地图生成与CBF技术.md` L971). How wide the open land a big city keeps for defence is waits for the user (`Imperium-Knowledge/09_地图生成与CBF技术.md` L961), and
-> the width of the cleared strip is tracked as live-list #73 (`Imperium-Knowledge/现行/城/罗马城-墙外.md` L15).
+> **Unverified**: how many cells are kept outside the wall on each stretch (段) is not decided for now; reproducing the
+> Anno city (纪元城) comes first (`Imperium-Knowledge/09_地图生成与CBF技术.md` L971). How wide the open land a big city keeps for
+> defence is waits for the user (`Imperium-Knowledge/09_地图生成与CBF技术.md` L961), and the width of the cleared strip is
+> tracked as live-list #73 (`Imperium-Knowledge/现行/城/罗马城-墙外.md` L15).
 
 ### What does not stand outside
 
@@ -124,13 +126,17 @@ stretch of the arriving road outside the gate runs along the wall, and the road 
 ### How roads are drawn
 
 Roads are redrawn only on the city and settlement maps this mod generates; the player's home and other maps keep the
-base game's roads (`Imperium-Knowledge/09_地图生成与CBF技术.md` L731; `Imperium-Knowledge/现行/城/罗马城-墙外.md` L43). A redrawn road has a smooth line falling on the grid in clean steps, and a
-layered section of surface, kerb and shoulder (`Imperium-Knowledge/现行/城/罗马城-墙外.md` L43; `Imperium-Knowledge/09_地图生成与CBF技术.md` L731). Forks, bridgeheads and gate fronts widen into small
-paved patches (`Imperium-Knowledge/现行/城/罗马城-墙外.md` L43; `Imperium-Knowledge/09_地图生成与CBF技术.md` L731). Road surfaces are only stone slab and marble, with no dirt or gravel, one system
-inside and outside the walls (`Imperium-Knowledge/09_地图生成与CBF技术.md` L855; `Imperium-Knowledge/09_地图生成与CBF技术.md` L856). Outside the walls the main road is wide, of hard stone slab with a
-kerb, and marble is laid only on its last stretch before the city and on the widened patches before gates, at
-bridgeheads and at forks; small roads and field paths are slab (`Imperium-Knowledge/09_地图生成与CBF技术.md` L856; `Imperium-Knowledge/现行/城/罗马城-墙外.md` L43). Materials are put together from
-base-game floors, with at most one added kind (`Imperium-Knowledge/09_地图生成与CBF技术.md` L731; `Imperium-Knowledge/designs/回报/审查-城卡同类冲突-2026-11-10.md` L47).
+base game's roads (`Imperium-Knowledge/09_地图生成与CBF技术.md` L731; `Imperium-Knowledge/现行/城/罗马城-墙外.md` L43). A redrawn road
+has a smooth line falling on the grid in clean steps, and a layered section of surface, kerb and shoulder
+(`Imperium-Knowledge/现行/城/罗马城-墙外.md` L43; `Imperium-Knowledge/09_地图生成与CBF技术.md` L731). Forks, bridgeheads and gate
+fronts widen into small paved patches (`Imperium-Knowledge/现行/城/罗马城-墙外.md` L43; `Imperium-Knowledge/09_地图生成与CBF技术.md`
+L731). Road surfaces are only stone slab and marble, with no dirt or gravel, one system inside and outside the walls
+(`Imperium-Knowledge/09_地图生成与CBF技术.md` L855; `Imperium-Knowledge/09_地图生成与CBF技术.md` L856). Outside the walls the main
+road is wide, of hard stone slab with a kerb, and marble is laid only on its last stretch before the city and on the
+widened patches before gates, at bridgeheads and at forks; small roads and field paths are slab
+(`Imperium-Knowledge/09_地图生成与CBF技术.md` L856; `Imperium-Knowledge/现行/城/罗马城-墙外.md` L43). Materials are put together from
+base-game floors as far as possible, with at most one added kind, a Roman stone paving that players can also lay
+(`Imperium-Knowledge/09_地图生成与CBF技术.md` L731; `Imperium-Knowledge/designs/回报/审查-城卡同类冲突-2026-11-10.md` L47).
 
 The form of a road, its line, section, grade and widened nodes, is shared by all factions, while its surface and roadside
 furniture follow the faction's technology: tribal trodden dirt paths, medieval dirt and gravel roads with stone bridges,
@@ -146,8 +152,7 @@ and electric lamps, and an Old Rome ruin road is broken old paving, grown with g
 
 > [!NOTE]
 > **Unverified**: which base-game floors go where, and where the area thresholds lie, are to be tried on a test map and
-> decided after the user has seen it (`Imperium-Knowledge/09_地图生成与CBF技术.md` L856). There is no rank vocabulary for approach roads, so the checker only
-> notes roads of different rank (`Imperium-Knowledge/designs/tools/city/说明/check.md` L80).
+> decided after the user has seen it (`Imperium-Knowledge/09_地图生成与CBF技术.md` L856).
 
 ### Roadside
 
@@ -160,10 +165,12 @@ Along a Roman road stand graves, milestones (里程碑), rows of cypress and, ne
 ### The river comes to the city
 
 On a plain map with a river, the river is by default reshaped to Rome's need so that the city straddles it and the river
-runs through the city; a plain with no river at all is to be discussed separately (`Imperium-Knowledge/现行/城/罗马城-河与水.md` L12; `Imperium-Knowledge/09_地图生成与CBF技术.md` L728). The river comes
-to the city, not the city to the river: on the city's map, terrain generation lets the river cross the map naturally
-through the middle, with the city in the middle (`Imperium-Knowledge/现行/城/罗马城-河与水.md` L13; `Imperium-Knowledge/09_地图生成与CBF技术.md` L728). Hills, mountains and coasts follow their own
-defaults, given in `cities-siting.md` (`Imperium-Knowledge/现行/城/罗马城-河与水.md` L12; `Imperium-Knowledge/09_地图生成与CBF技术.md` L728).
+runs through the city; a plain with no river at all is to be discussed separately (`Imperium-Knowledge/现行/城/罗马城-河与水.md`
+L12; `Imperium-Knowledge/09_地图生成与CBF技术.md` L728). The river comes to the city, not the city to the river: on the city's
+map, terrain generation by default lets the river cross the map naturally through the middle, with the city in the
+middle (`Imperium-Knowledge/现行/城/罗马城-河与水.md` L13; `Imperium-Knowledge/09_地图生成与CBF技术.md` L728). Hills, mountains and
+coasts follow their own defaults, given in `cities-siting.md` (`Imperium-Knowledge/现行/城/罗马城-河与水.md` L12;
+`Imperium-Knowledge/09_地图生成与CBF技术.md` L728).
 
 The river on the world map is the river that enters the map, and its width is the base game's width for that
 world-map river grade (`Imperium-Knowledge/现行/城/罗马城-河与水.md` L17; `Imperium-Knowledge/09_地图生成与CBF技术.md` L730). The base-game course keeps the map edges where it enters and leaves, and
@@ -202,12 +209,7 @@ fort (桥头堡) stands on the far bank, because people can wade a river and a f
 (`Imperium-Knowledge/现行/城/罗马城-河与水.md` L39; `Imperium-Knowledge/09_地图生成与CBF技术.md` L791; `Imperium-Knowledge/designs/整理/原意走样排查-2026-11-06.md` L16). The wall encloses a city, not an empty far bank (`Imperium-Knowledge/现行/城/罗马城-河与水.md` L39; `Imperium-Knowledge/09_地图生成与CBF技术.md` L786; `Imperium-Knowledge/designs/整理/批量整理-2026-11-06.md` L28). The far bank is a
 variant taken at generation, because a RimWorld city is fixed once it is generated and does not grow (`Imperium-Knowledge/09_地图生成与CBF技术.md` L786).
 
-The city checker reads the banks this way: the core bank is the one holding the first plaza (第一广场), and the far bank
-is a district when it holds pieces of the city, a bridgehead group not counting (`Imperium-Knowledge/designs/tools/city/说明/check.md` L104). For a district the curtain
-wall does not lie on the river, and a far bank with no wall on it is an error; without a district, wall, towers,
-bridgehead forts or other composite pieces on the far bank are errors, a bridge more than half over the river excepted
-(`Imperium-Knowledge/designs/tools/city/说明/check.md` L104; `Imperium-Knowledge/现行/城/罗马城-河与水.md` L39). How the wall meets the river and where its towers stand when it spans both banks is in
-`cities-walls.md`.
+How the wall meets the river and where its towers stand when it spans both banks is in `cities-walls.md`.
 
 > [!NOTE]
 > **Base game**: in RimWorld people can wade across a river and only deep water stops them, to be checked against
@@ -303,17 +305,30 @@ is industrial (`Imperium-Knowledge/09_地图生成与CBF技术.md` L668). The bu
 > [!NOTE]
 > **Deleted**: the city's water system, deleted with the hydraulics by the maintainer's direction of 2026-11-24. It was
 > the lifeline (命脉线) as a water line from source to outlet that was also the city's power grid, with the hydro unit in
-> the water-dividing tower, later named the water palace (水宫), as the only generator, channels carrying power, pools
-> as batteries and a blackout when the source is cut (`docs/glossary.md` L187; `Imperium-Knowledge/09_地图生成与CBF技术.md` L579; `Imperium-Knowledge/09_地图生成与CBF技术.md` L511-518; `Imperium-Knowledge/09_地图生成与CBF技术.md` L632; `Imperium-Knowledge/09_地图生成与CBF技术.md` L912;
-> `Imperium-Knowledge/designs/roman-cards/罗马规格卡总表.md` L98; `Imperium-Knowledge/designs/instructions/生成第2轮重做-第一段批准与第二段补充.md` L396); the water palace taking water in at the wall by an intake gate (进水门) or a drilled well, with
-> the sea not counting as a source and the palace quarter set upstream for the water (`Imperium-Knowledge/09_地图生成与CBF技术.md` L726; `Imperium-Knowledge/designs/city-plans/罗马城排法-算法.md` L63; `Imperium-Knowledge/09_地图生成与CBF技术.md` L663;
-> `Imperium-Knowledge/09_地图生成与CBF技术.md` L701; `Imperium-Knowledge/09_地图生成与CBF技术.md` L710); the arched aqueduct (拱水道) through the city as a landmark (`Imperium-Knowledge/现行/城/罗马城-河与水.md` L88; `Imperium-Knowledge/09_地图生成与CBF技术.md` L804); open
-> channels (明渠) along the streets, hidden pipes (暗管) into houses and estates, the order in which water was shared
-> out, and the single outlet water gate (出水门) with its deep channel to the river (`Imperium-Knowledge/09_地图生成与CBF技术.md` L726; `Imperium-Knowledge/现行/城/罗马城-墙外.md` L22; `Imperium-Knowledge/09_地图生成与CBF技术.md` L673;
-> `Imperium-Knowledge/designs/city-plans/罗马城排法-算法.md` L64-65; `Imperium-Knowledge/designs/instructions/生成具象规格-现行版.md` L290; `Imperium-Knowledge/09_地图生成与CBF技术.md` L720; `Imperium-Knowledge/designs/city-plans/城市建筑学对照-罗马城理念-2026-10-30.md` L28); households' connection to water and street springs (水泉, card A48)
-> (`Imperium-Knowledge/designs/city-plans/理念与机制对照-草案.md` L14; `Imperium-Knowledge/designs/city-plans/kit/城建数据格式-草案.md` L100; `Imperium-Knowledge/designs/city-plans/kit/城建数据格式-草案.md` L120; `Imperium-Knowledge/designs/city-plans/kit/城建数据格式-草案.md` L153; `Imperium-Knowledge/现行/城/罗马城-河与水.md` L93-94); open cisterns, a pond taken in as a pool and the rain pools
-> A32 and A33 (`Imperium-Knowledge/09_地图生成与CBF技术.md` L699; `Imperium-Knowledge/09_地图生成与CBF技术.md` L515; `Imperium-Knowledge/designs/roman-cards/罗马规格卡总表.md` L27-28); and its open points, among them a coastal city's water line, the side
-> a drilled-well city's water comes from and paving across a channel (`Imperium-Knowledge/09_地图生成与CBF技术.md` L663; `Imperium-Knowledge/现行/城/罗马城-河与水.md` L116; `Imperium-Knowledge/designs/instructions/生成具象规格-现行版.md` L318; `Imperium-Knowledge/09_地图生成与CBF技术.md` L657; `Imperium-Knowledge/designs/roman-cards/罗马规格卡总表.md` L145).
+> the water-dividing tower, later named the water palace (水宫), as the only generator, channels carrying power, pools as
+> batteries and a blackout when the source is cut (`docs/glossary.md` L187; `Imperium-Knowledge/09_地图生成与CBF技术.md` L579;
+> `Imperium-Knowledge/09_地图生成与CBF技术.md` L511-518; `Imperium-Knowledge/09_地图生成与CBF技术.md` L632;
+> `Imperium-Knowledge/09_地图生成与CBF技术.md` L912; `Imperium-Knowledge/designs/roman-cards/罗马规格卡总表.md` L98;
+> `Imperium-Knowledge/designs/instructions/生成第2轮重做-第一段批准与第二段补充.md` L396); the water palace taking water in at the wall
+> by an intake gate (进水门) or a drilled well, with the sea not counting as a source and the palace quarter set upstream
+> for the water (`Imperium-Knowledge/09_地图生成与CBF技术.md` L726; `Imperium-Knowledge/designs/city-plans/罗马城排法-算法.md` L63;
+> `Imperium-Knowledge/09_地图生成与CBF技术.md` L663; `Imperium-Knowledge/09_地图生成与CBF技术.md` L701;
+> `Imperium-Knowledge/09_地图生成与CBF技术.md` L710); the arched aqueduct (拱水道) through the city as a landmark
+> (`Imperium-Knowledge/现行/城/罗马城-河与水.md` L88; `Imperium-Knowledge/09_地图生成与CBF技术.md` L804); open channels (明渠) along the
+> streets, hidden pipes (暗管) into houses and estates, and the single outlet water gate (出水门) with its deep channel to
+> the river (`Imperium-Knowledge/09_地图生成与CBF技术.md` L726; `Imperium-Knowledge/现行/城/罗马城-墙外.md` L22;
+> `Imperium-Knowledge/09_地图生成与CBF技术.md` L673; `Imperium-Knowledge/designs/city-plans/罗马城排法-算法.md` L64-65;
+> `Imperium-Knowledge/designs/instructions/生成具象规格-现行版.md` L290; `Imperium-Knowledge/09_地图生成与CBF技术.md` L720); households'
+> connection to water and street springs (水泉, card A48) (`Imperium-Knowledge/designs/city-plans/理念与机制对照-草案.md` L14;
+> `Imperium-Knowledge/designs/city-plans/kit/城建数据格式-草案.md` L100;
+> `Imperium-Knowledge/designs/city-plans/kit/城建数据格式-草案.md` L120;
+> `Imperium-Knowledge/designs/city-plans/kit/城建数据格式-草案.md` L153; `Imperium-Knowledge/现行/城/罗马城-河与水.md` L93-94); open
+> cisterns, a pond taken in as a pool and the rain pools A32 and A33 (`Imperium-Knowledge/09_地图生成与CBF技术.md` L699;
+> `Imperium-Knowledge/09_地图生成与CBF技术.md` L515; `Imperium-Knowledge/designs/roman-cards/罗马规格卡总表.md` L27-28); and its open
+> points, among them a coastal city's water line, the side a drilled-well city's water comes from and paving across a
+> channel (`Imperium-Knowledge/09_地图生成与CBF技术.md` L663; `Imperium-Knowledge/现行/城/罗马城-河与水.md` L116;
+> `Imperium-Knowledge/designs/instructions/生成具象规格-现行版.md` L318; `Imperium-Knowledge/09_地图生成与CBF技术.md` L657;
+> `Imperium-Knowledge/designs/roman-cards/罗马规格卡总表.md` L145).
 
 The water gates where a river enters and leaves the city are part of its layout, given above under the river and in
 `cities-walls.md`.

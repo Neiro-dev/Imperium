@@ -37,17 +37,17 @@ L118). A medieval settlement grows into a city and deletes only small pieces of 
 
 Geological Landforms (GL) is the terrain base (`Imperium-Knowledge/现行/城/地形与选址.md` L61;
 `Imperium-Knowledge/designs/做法史/借用与第三方.md` L29). A map has at most one main landform plus a river layer
-(`Imperium-Knowledge/现行/城/地形与选址.md` L66). GL's marks forbidding settlements are not copied: a fit table of
-landform against site requirements (需求单) judges by the Roman and medieval ideas, and flat, riverless, inland tiles use
-a self-written plain landform (gentle hills, meadow, forest edge) that stays flat and gets no ridges
-(`Imperium-Knowledge/现行/城/地形与选址.md` L67). When a GL landform is chosen, Odyssey's landmarks and modifiers each
-take up a category (`Imperium-Knowledge/09_地图生成与CBF技术.md` L478). All 17 biomes of the base game and Odyssey are
-supported: the base game's 12 fall into five groups with sea ice as a separate fallback, and Odyssey's five
-(grassland, glacier plain, scorched ground, glowing forest, lava field) attach to the nearest group as variants, lava
-only on the outskirts; glowing forest, scorched ground and lava field are only guaranteed usable and free of errors
-(`Imperium-Knowledge/09_地图生成与CBF技术.md` L434; `Imperium-Knowledge/现行/城/地形与选址.md` L73). Pirate camps do
-not use Odyssey's interface, since Odyssey's scavengers and outposts exist only at the orbital layer
-(`Imperium-Knowledge/09_地图生成与CBF技术.md` L667).
+(`Imperium-Knowledge/现行/城/地形与选址.md` L66). GL's marks forbidding settlements are not copied: a fit table of landform
+against site requirements (需求单) judges by the Roman and medieval ideas, and flat, riverless, inland tiles use a
+self-written plain landform (gentle hills, meadow, forest edge) that stays flat and gets no ridges
+(`Imperium-Knowledge/现行/城/地形与选址.md` L67). Odyssey's landmarks and modifiers each take up a category, as accepted with
+the rest of the draft in the user's first-stage approval of the second-round redo (`Imperium-Knowledge/09_地图生成与CBF技术.md`
+L478). All 17 biomes of the base game and Odyssey are supported: the base game's 12 fall into five groups with sea ice
+as a separate fallback, and Odyssey's five (grassland, glacier plain, scorched ground, glowing forest, lava field)
+attach to the nearest group as variants, lava only on the outskirts; glowing forest, scorched ground and lava field are
+only guaranteed usable and free of errors (`Imperium-Knowledge/09_地图生成与CBF技术.md` L434;
+`Imperium-Knowledge/现行/城/地形与选址.md` L73). Pirate camps do not use Odyssey's interface, since Odyssey's scavengers and
+outposts exist only at the orbital layer (`Imperium-Knowledge/09_地图生成与CBF技术.md` L667).
 
 > [!NOTE]
 > **Deleted**: the mod's own landform library with its per-kind terrain templates and 30 terrain sketches, including
@@ -85,12 +85,10 @@ the type branching with an island with the variant river bend (河湾), not a ty
 written so (`Imperium-Knowledge/designs/city-plans/kit/版型格式-方案.md` L163).
 
 > [!NOTE]
-> **Deleted**: the draft's river-bend site type (河湾), and template number 1 written as river through the city with
-> the variant river bend with island (`Imperium-Knowledge/09_地图生成与CBF技术.md` L797;
-> `Imperium-Knowledge/designs/city-plans/kit/版型格式-方案.md` L73). The river-bend type became river through the city,
-> the river bend having sat in an odd place, and the island case became the variant river bend of branching with an
-> island (`Imperium-Knowledge/09_地图生成与CBF技术.md` L806;
-> `Imperium-Knowledge/designs/回报/审查-城建版本盘点-2026-11-10.md` L23;
+> **Deleted**: the draft's river-bend site type (河湾) (`Imperium-Knowledge/09_地图生成与CBF技术.md` L797;
+> `Imperium-Knowledge/designs/city-plans/kit/版型格式-方案.md` L73). The river-bend type became river through the city, the
+> river bend having sat in an odd place, and the island case became the variant river bend of branching with an island
+> (`Imperium-Knowledge/09_地图生成与CBF技术.md` L806; `Imperium-Knowledge/designs/回报/审查-城建版本盘点-2026-11-10.md` L23;
 > `Imperium-Knowledge/designs/city-plans/kit/版型格式-方案.md` L163).
 
 > [!NOTE]
@@ -211,25 +209,20 @@ circle the generator grows (`Imperium-Knowledge/09_地图生成与CBF技术.md` 
 
 A river that already crosses the circle is not moved (`Imperium-Knowledge/现行/城/地形与选址.md` L38;
 `Imperium-Knowledge/designs/tools/city/说明/gen.md` L68). If the tile has a river that is not near the city, the first
-square (第一广场) is placed on the approach at the point nearest the river and the city grows across it; only if the
-river still does not cross the circle is one stretch of the original river moved into the circle by a displacement
-field (位移场), at the place needing the least movement and only inside the default transition band, and if it cannot
-be moved in, the site is reported and the band is not widened (`Imperium-Knowledge/现行/城/地形与选址.md` L38;
-`Imperium-Knowledge/09_地图生成与CBF技术.md` L821, L841). The transition band is 0.5 times the circle's equivalent
-radius (`Imperium-Knowledge/designs/tools/city/说明/gen.md` L67; `Imperium-Knowledge/09_地图生成与CBF技术.md` L841).
-Inside the circle the river passes 0.3 to 0.6 of the radius from the core, to one side, with only a gentle bend and not
-wrapping round the city (`Imperium-Knowledge/09_地图生成与CBF技术.md` L806); a moved river passes the core side at a
-distance of at least the quay belt plus the shortest bridgehead street plus one cell plus half the river's width plus a
-margin, enters and leaves the circle once each and keeps a minimum turning radius
-(`Imperium-Knowledge/designs/tools/city/说明/gen.md` L69). The displacement field pushes the original stretch over,
-keeping its width, bank roughness and shallows, rather than drawing a new river
-(`Imperium-Knowledge/09_地图生成与CBF技术.md` L806). Small patches of rock, soft ground and marsh touching the circle or
-an approach road are cleared to flat ground (`Imperium-Knowledge/designs/tools/city/说明/gen.md` L71). The river then
-reads as a city built at a ford, not a river dragged beside a road (`Imperium-Knowledge/现行/城/地形与选址.md` L38;
-`Imperium-Knowledge/09_地图生成与CBF技术.md` L821). The quay walls, docks, bridge and long straight wall-face banks of
-the river inside the city are made when the city is laid out, while outside the river bends as before, so the river
-reads half natural and half changed by the city (`Imperium-Knowledge/09_地图生成与CBF技术.md` L806); these works belong
-to `cities-outside.md`.
+square (第一广场) is placed on the approach at the point nearest the river and the city grows across it; only if the river
+still does not cross the circle is one stretch of the original river moved into the circle by a displacement field
+(位移场), at the place needing the least movement and only inside the default transition band, and if it cannot be moved
+in, the site is reported and the band is not widened (`Imperium-Knowledge/现行/城/地形与选址.md` L38;
+`Imperium-Knowledge/09_地图生成与CBF技术.md` L821, L841). The transition band is 0.5 times the circle's equivalent radius
+(`Imperium-Knowledge/designs/tools/city/说明/gen.md` L67; `Imperium-Knowledge/09_地图生成与CBF技术.md` L841). Inside the circle
+the river passes 0.3 to 0.6 of the radius from the core, to one side, with only a gentle bend and not wrapping round the
+city (`Imperium-Knowledge/09_地图生成与CBF技术.md` L806). The displacement field pushes the original stretch over, keeping its
+width, bank roughness and shallows, rather than drawing a new river (`Imperium-Knowledge/09_地图生成与CBF技术.md` L806). The
+river then reads as a city built at a ford, not a river dragged beside a road (`Imperium-Knowledge/现行/城/地形与选址.md` L38;
+`Imperium-Knowledge/09_地图生成与CBF技术.md` L821). The quay walls, docks, bridge and long straight wall-face banks of the
+river inside the city are made when the city is laid out, while outside the river bends as before, so the river reads
+half natural and half changed by the city (`Imperium-Knowledge/09_地图生成与CBF技术.md` L806); these works belong to
+`cities-outside.md`.
 
 The circle's area target is 1.5 times the district area (trial value); each map takes the largest multiple that fits,
 and neither the distance to the map edge nor the minimum distance of the core from water is relaxed for it; on the
@@ -270,12 +263,14 @@ delimit the site, and the city is not pressed into a narrow wedge marked out by 
 (`Imperium-Knowledge/现行/城/地形与选址.md` L94; `Imperium-Knowledge/designs/整理/城建错题转拦截-2026-11-05.md` L23).
 
 > [!NOTE]
-> **Unverified**: the outline reports left to the design side whether the windmill-like octagon with four notches
-> that an empty plain gives is to be made regular, whether the T1 snapshot is replaced by one exported under the new
-> deep-water rule, and whether the T4 confluence is read at the flood-meeting point or at the actual fork
-> (`Imperium-Knowledge/designs/回报/Code-第二段轮廓-二轮.md` L25; `Imperium-Knowledge/designs/回报/Code-测试地形快照.md`
-> L19, L22). Their question of the circle multiple is settled by taking the largest multiple that fits each map
-> (`Imperium-Knowledge/designs/回报/Code-第二段轮廓-五轮.md` L20; `Imperium-Knowledge/09_地图生成与CBF技术.md` L838).
+> **Unverified**: the outline reports left to the design side whether the windmill-like octagon with four notches that
+> an empty plain gives is to be made regular and whether the T1 snapshot is replaced by one exported under the new
+> deep-water rule; for T4 they report that the flood method puts the confluence on the longer branch while the actual
+> fork lies about 4 cells from the edge of the central square, so reading it at the fork or nearer the middle needs a
+> changed map or condition (`Imperium-Knowledge/designs/回报/Code-第二段轮廓-二轮.md` L25;
+> `Imperium-Knowledge/designs/回报/Code-测试地形快照.md` L19, L22). Their question of the circle multiple is settled by taking
+> the largest multiple that fits each map (`Imperium-Knowledge/designs/回报/Code-第二段轮廓-五轮.md` L20;
+> `Imperium-Knowledge/09_地图生成与CBF技术.md` L838).
 
 > [!NOTE]
 > **Unverified**: how candidate sites are compared is not written; the version inventory recommends a line-by-line
@@ -284,40 +279,40 @@ delimit the site, and the city is not pressed into a narrow wedge marked out by 
 
 ## Where the city stands on a river
 
-On a plains map with a river, the river comes to the city rather than the city going to the river: terrain generation
-lets the river pass naturally through the middle of the map, the city stands in the middle, and the city spans the
-river with the river running through it, since a city going to the river would squeeze into a corner of the map
+On a plains map with a river, the river comes to the city rather than the city going to the river, by default: terrain
+generation lets the river pass naturally through the middle of the map, the city stands in the middle, and the city
+spans the river with the river running through it, since a city going to the river would squeeze into a corner of the
+map; this is for plains only, and whether 'plains' includes small hills is undecided
 (`Imperium-Knowledge/现行/城/罗马城-河与水.md` L12-13; `Imperium-Knowledge/09_地图生成与CBF技术.md` L728;
-`Imperium-Knowledge/现行/城/地形与选址.md` L50). The river winds at random from where it enters the map, with no bend
-angle prescribed and no hard right-angle bend (`Imperium-Knowledge/现行/城/罗马城-河与水.md` L19;
-`Imperium-Knowledge/09_地图生成与CBF技术.md` L734). The core, the palace quarter and the public core stand on one bank,
-on the inside of the bend where there is one; how large each bank is and whether the far bank becomes a district are
-read from the terrain and the approach roads of the map, with no preset large and small bank, the same for large,
-medium and small cities (`Imperium-Knowledge/现行/城/罗马城-河与水.md` L23; `Imperium-Knowledge/09_地图生成与CBF技术.md`
-L808). The banks, quays, bridges and water gates of such a city belong to `cities-outside.md` and `cities-walls.md`.
+`Imperium-Knowledge/现行/城/地形与选址.md` L50). The river winds at random from where it enters the map, with no bend angle
+prescribed and no hard right-angle bend (`Imperium-Knowledge/现行/城/罗马城-河与水.md` L19; `Imperium-Knowledge/09_地图生成与CBF技术.md`
+L734). The core, the palace quarter and the public core stand on one bank, on the inside of the bend where there is one;
+how large each bank is and whether the far bank becomes a district are read from the terrain and the approach roads of
+the map, with no preset large and small bank, the same for large, medium and small cities
+(`Imperium-Knowledge/现行/城/罗马城-河与水.md` L23; `Imperium-Knowledge/09_地图生成与CBF技术.md` L808). The banks, quays, bridges and
+water gates of such a city belong to `cities-outside.md` and `cities-walls.md`.
 
 > [!NOTE]
 > **Deleted**: the earlier river lines: a city built on one bank of a large river, with a harbour band, a bridgehead
-> fort across and small forts watching the bridge, laid for the first hand-placed city after a literature study found
+> fort across and small forts watching the bridge, laid for the hand-placed city RC1 after a literature study found
 > large rivers mostly outside a city or along its edge (`Imperium-Knowledge/09_地图生成与CBF技术.md` L426, L682;
-> `Imperium-Knowledge/裁定归档/2026-10.md` L139); the first cross-river rule, with the river through the middle as the
-> long axis, the main bank holding most of the city and the far bank a second district
-> (`Imperium-Knowledge/09_地图生成与CBF技术.md` L727, L806); and the river winding about 90° round the city
-> (`Imperium-Knowledge/09_地图生成与CBF技术.md` L733). The river winding at random, with the banks read from terrain
-> and approach roads, replaced them (`Imperium-Knowledge/09_地图生成与CBF技术.md` L734, L808;
-> `Imperium-Knowledge/现行/城/罗马城-河与水.md` L19, L23).
+> `Imperium-Knowledge/裁定归档/2026-10.md` L139); the first cross-river rule, with the river through the middle as the long
+> axis, the main bank holding most of the city and the far bank a second district (`Imperium-Knowledge/09_地图生成与CBF技术.md`
+> L727, L806); and the river winding about 90° round the city (`Imperium-Knowledge/09_地图生成与CBF技术.md` L733). The river
+> winding at random, with the banks read from terrain and approach roads, replaced them
+> (`Imperium-Knowledge/09_地图生成与CBF技术.md` L734, L808; `Imperium-Knowledge/现行/城/罗马城-河与水.md` L19, L23).
 
 The reading of five test terrains looked only at where the roads come from and where they cross the river, whether the
-river can be waded, and whether rock is thick enough (`Imperium-Knowledge/designs/研究/城/五张测试地形读法-2026-11-05.md`
-L10-14). Its common points are these: the city centre sits where a road crosses the river, at the bridgehead on all
-three maps with a bridge; the far bank counts as a district only if a road comes from that bank and the bridge crosses,
-so wedge land with water on two sides but no road is not enclosed; when both banks are districts the river is the long
-axis inside the city and only two water gates, in and out, need defence, and on a confluence map the city's upstream
-edge is drawn below the confluence so that only one river crosses it; and rock heads become wall by their distance from
-the centre and their thickness (`Imperium-Knowledge/designs/研究/城/五张测试地形读法-2026-11-05.md` L26-31), their other
-use in that reading, as a base, being deleted as noted under the district's edges. The per-map reading is drawn in
-`Imperium-Knowledge/designs/研究/城/图/五张测试地形读法-2026-11-05.png`, where red dots mark road entries, yellow frames
-bridges, orange pentagons the read city centres and light purple the land the river cuts off without a road
+river can be waded, and whether rock is thick enough (`Imperium-Knowledge/designs/研究/城/五张测试地形读法-2026-11-05.md` L10-14).
+Its common points are these: the city centre sits where a road crosses the river, at the bridgehead on all three maps
+with a bridge; the far bank counts as a district only if a road comes from that bank and the bridge crosses, so wedge
+land with water on two sides but no road is not enclosed; when both banks are districts the river is the long axis
+inside the city and only two water gates, in and out, need defence, and on a confluence map the city's upstream edge is
+drawn below the confluence so that only one river crosses it; and rock heads serve as a base or as wall, by their
+distance from the centre and their thickness (`Imperium-Knowledge/designs/研究/城/五张测试地形读法-2026-11-05.md` L26-31), their
+other use in that reading, as a base, being deleted as noted under the district's edges. The per-map reading is drawn in
+`Imperium-Knowledge/designs/研究/城/图/五张测试地形读法-2026-11-05.png`, where red dots mark road entries, yellow frames bridges,
+orange pentagons the read city centres and light purple the land the river cuts off without a road
 (`Imperium-Knowledge/designs/研究/城/五张测试地形读法-2026-11-05.md` L6, L18-24).
 
 > [!NOTE]
@@ -355,21 +350,21 @@ each, stating district size, preferred landform, hard requirements and site rule
 (`Imperium-Knowledge/现行/城/地形与选址.md` L79).
 
 > [!NOTE]
-> **Deleted**: the district area fixed by the site requirements, with the city's scale always following them, and for
-> a large city 0.33 of buildable land capped at 40% of the map, with a 30-cell band of gardens and cemeteries kept to
-> the map edge (`Imperium-Knowledge/designs/做法史/地形与选址.md` L22, L27, L53-54, L84, L86;
-> `Imperium-Knowledge/09_地图生成与CBF技术.md` L820). The area computed from the map, and the large city's wall circle
-> taking half to two thirds of the map with its wall at least 10 cells from the edge, replaced it
+> **Deleted**: the district area fixed by the site requirements, with the city's scale always following them, and for a
+> large city 0.33 of buildable land capped at 40% of the map, with a band of gardens and cemeteries, a trial value of 30
+> cells, kept to the map edge (`Imperium-Knowledge/designs/做法史/地形与选址.md` L22, L27, L53-54, L84, L86;
+> `Imperium-Knowledge/09_地图生成与CBF技术.md` L820). The area computed from the map, and the large city's wall circle taking
+> half to two thirds of the map with its wall at least 10 cells from the edge, replaced it
 > (`Imperium-Knowledge/现行/城/地形与选址.md` L81-82; `Imperium-Knowledge/09_地图生成与CBF技术.md` L870).
 
 The district's outline grows on the original terrain: the site is chosen on natural terrain first, the district grows
 outward from the core and stops at hill feet and shorelines, which become its edge, and rock serves as wall unbuilt
-while the water side is built along the bank (`Imperium-Knowledge/09_地图生成与CBF技术.md` L808). The second-stage
-outline method (edges split into hill, water and opening, thin strips removed, mountains pulled only at problem
-segments) is joined back to the Roman line, with R1, on a 300 map with a large-hills plot, and S49, on a 250 map with
-flat ground and a lone mountain, as its samples (`Imperium-Knowledge/09_地图生成与CBF技术.md` L807-808;
-`Imperium-Knowledge/designs/回报/审查-城建版本盘点-2026-11-10.md` L119); the shape of the Roman circle itself is in
-`cities.md` (`Imperium-Knowledge/现行/城/罗马城-做法与顺序.md` L129).
+while the water side is built along the bank (`Imperium-Knowledge/09_地图生成与CBF技术.md` L808). The second-stage outline
+method (edges split into hill, water and opening, thin strips removed, mountains pulled only at problem segments) is
+joined back to the Roman line; R1 (a 300 map with a large-hills plot) and S49 (a 250 map with flat ground and a lone
+mountain) are the two second-stage intermediate district maps taken as reference images, how to read them still awaiting
+the user (`Imperium-Knowledge/09_地图生成与CBF技术.md` L807-808; `Imperium-Knowledge/designs/回报/审查-城建版本盘点-2026-11-10.md` L119);
+the shape of the Roman circle itself is in `cities.md` (`Imperium-Knowledge/现行/城/罗马城-做法与顺序.md` L129).
 
 The district edge is of three kinds: mountain (rock at least 5 cells thick at its thinnest, counted outward from the
 edge line), water (deep water that cannot be waded) and opening (开口, everything else); an edge within 12 cells of a
@@ -460,8 +455,8 @@ L38).
 > `Imperium-Knowledge/现行/城/地形与选址.md` L115; `Imperium-Knowledge/designs/instructions/生成具象规格-现行版.md` L4).
 
 > [!NOTE]
-> **Deleted**: the water palace (水宫), that is the water tower (分水塔), which the same rule keeps off ridges and the
-> highest place, belonged to the hydraulics the maintainer deleted (`Imperium-Knowledge/现行/城/罗马城-做法与顺序.md` L48;
+> **Deleted**: the water palace (水宫), which the same rule keeps off ridges and the highest place, belonged to the
+> hydraulics axis the maintainer deleted on 2026-11-24 (`Imperium-Knowledge/现行/城/罗马城-做法与顺序.md` L48;
 > `Imperium-Knowledge/designs/整理/城建错题转拦截-2026-11-05.md` L26).
 
 > [!NOTE]
@@ -536,24 +531,25 @@ water is the fallback (`Imperium-Knowledge/designs/instructions/生成第2轮重
 
 > [!NOTE]
 > **Deleted**: the other reasons that preference gives, high ground for the landmark terrace and water tower and water
-> for the water source, belonged to the hydraulics the maintainer deleted
+> for the water source, belonged to the hydraulics axis the maintainer deleted on 2026-11-24
 > (`Imperium-Knowledge/designs/instructions/生成第2轮重做-第一段批准与第二段补充.md` L657).
 
 Biomes that by nature lack rock and water, such as desert and ice sheet, are set apart
-(`Imperium-Knowledge/现行/城/地形与选址.md` L107; `Imperium-Knowledge/09_地图生成与CBF技术.md` L825). A desert follows
-the banding of Anno 117's Aegyptus (Dawn of the Delta): from the water outward come the river, the farmland belt, and
-the city on dry ground, so the city does not hug the river bank, and trade roads give the wall nodes
-(`Imperium-Knowledge/现行/城/地形与选址.md` L108; `Imperium-Knowledge/09_地图生成与CBF技术.md` L827). Only the banding is
-borrowed, not the flooding, and the desert city reads as living by water
-(`Imperium-Knowledge/09_地图生成与CBF技术.md` L827). An ice sheet produces only medium and small settlements
-(`Imperium-Knowledge/现行/城/地形与选址.md` L108; `Imperium-Knowledge/09_地图生成与CBF技术.md` L826), and in extreme
-cold (tundra, ice sheet, sea ice) no City is sited, though a castellum, fortlet or burgus may be
+(`Imperium-Knowledge/现行/城/地形与选址.md` L107; `Imperium-Knowledge/09_地图生成与CBF技术.md` L825). A desert follows the banding of
+Anno 117's Aegyptus (Dawn of the Delta): from the water outward come the river or water line, the farmland belt, and the
+city on dry ground, so the city does not hug the river bank; the wall nodes are the waterwheels, cisterns and canal
+heads on the water line and the trade roads, the fields following the cisterns, and where there is no river the water
+line is brought in from the map edge or from deep wells (`Imperium-Knowledge/现行/城/地形与选址.md` L108;
+`Imperium-Knowledge/09_地图生成与CBF技术.md` L827). Only the banding is borrowed, not the flooding, and the desert city reads
+as living by water (`Imperium-Knowledge/09_地图生成与CBF技术.md` L827). An ice sheet produces only medium and small settlements
+(`Imperium-Knowledge/现行/城/地形与选址.md` L108; `Imperium-Knowledge/09_地图生成与CBF技术.md` L826), and in extreme cold (tundra, ice
+sheet, sea ice) no City is sited, though a castellum, fortlet or burgus may be
 (`Imperium-Knowledge/designs/instructions/生成第2轮重做-第一段批准与第二段补充.md` L658).
 
 > [!NOTE]
 > **Deleted**: the desert's water line, brought in from the map edge or from deep wells where there is no river, with
 > waterwheels, cisterns and canal heads on it as wall nodes and fields following the cisterns, and the earlier imperial
-> water line of aqueducts and water tower that it replaced, belonged to the hydraulics the maintainer deleted
+> water line of aqueducts and water tower that it replaced, belonged to the hydraulics axis the maintainer deleted on 2026-11-24
 > (`Imperium-Knowledge/现行/城/地形与选址.md` L108; `Imperium-Knowledge/09_地图生成与CBF技术.md` L826-827).
 
 > [!NOTE]
@@ -642,15 +638,15 @@ that wall segment is moved or one patch at the city edge is left out, without sh
 
 ## Failure and retry
 
-A city's size is computed per map from its site requirements and area, and the skeleton's indispensable pieces scale
-with the district area between their limits; only when they do not fit at the lower limit is the city started again
-(`Imperium-Knowledge/现行/城/地形与选址.md` L102). When part of a Roman city cannot be made, a combination piece that
-does not fit is first tried at other candidate positions on the same terrain, blocks, colonnades, skeleton or wall that
-cannot be made are first redone alone, and only when the local repair fails does generation go back to the terrain
-(`Imperium-Knowledge/现行/城/地形与选址.md` L103). Retries are capped at three, and the fourth uses a conservative
-terrain (保守地形) that keeps the tile's regularities, a gentle river and large rock away from the district, keeps
-scattered rock and small puddles by biome as wall nodes, and always fits the skeleton
-(`Imperium-Knowledge/现行/城/地形与选址.md` L106; `Imperium-Knowledge/09_地图生成与CBF技术.md` L825).
+A city's size is computed per map from its requirement sheet and area ("需求单与面积"), and the skeleton's indispensable
+pieces (palace district, first square, cathedral and so on) scale with the district area between their upper and lower
+limits; only when they do not fit at the lower limit is the city started again (`Imperium-Knowledge/现行/城/地形与选址.md`
+L102). When part of a Roman city cannot be made, a combination piece that does not fit is first tried at other candidate
+positions on the same terrain, blocks, colonnades, skeleton or wall that cannot be made are first redone alone, and only
+when the local repair fails does generation go back to the terrain (`Imperium-Knowledge/现行/城/地形与选址.md` L103). Retries
+are capped at three, and the fourth uses a conservative terrain (保守地形) that keeps the tile's regularities, a gentle
+river and large rock away from the district, keeps scattered rock and small puddles by biome as wall nodes, and always
+fits the skeleton (`Imperium-Knowledge/现行/城/地形与选址.md` L106; `Imperium-Knowledge/09_地图生成与CBF技术.md` L825).
 
 > [!NOTE]
 > **Deleted**: the earlier fallbacks: changing to a candidate landform, then seeking a site on vanilla terrain, then
@@ -665,20 +661,21 @@ scattered rock and small puddles by biome as wall nodes, and always fits the ske
 > [!NOTE]
 > **Unverified**: the community-terrain report, a reference report not ruled, was made on the direction to follow the
 > community's idea of first making land suited to a city and then building on it
-> (`Imperium-Knowledge/designs/研究/城/社区造地形-城址-2026-11-11.md` L2, L5). It finds four kinds of community terrain
-> creation, landform by tile feature as in GL, player tweaks as in Map Designer, land reserved for buildings by clearing
-> a rectangle as in RimCities and KCSG, and picking without making as with GL's nearby search and vanilla landmarks; it
+> (`Imperium-Knowledge/designs/研究/城/社区造地形-城址-2026-11-11.md` L2, L5). It finds four kinds of community terrain creation,
+> landform by tile feature as in GL, player tweaks as in Map Designer, land reserved for buildings by clearing a
+> rectangle as in RimCities and KCSG, and picking without making as with GL's nearby search and vanilla landmarks; it
 > takes the first as the one wanted, in line with the site landform rule, reads the second as in line with re-laying
 > within the tile's rules, and calls the third the look to avoid
-> (`Imperium-Knowledge/designs/研究/城/社区造地形-城址-2026-11-11.md` L9, L23-30). It names landforms suited to city
-> sites in a no-high-ground row (confluence, river split by an island, ordinary river, cove, coast corner, peninsula or
-> land bridge, lake, and the three self-written plains) and in a high-ground row read as rock (cliff, cliff corner,
-> cliff and coast, valley, lone mountain), and landforms unfit for a large city because they are enclosed or too narrow
-> at the exit, have too little land, are cut up as a delta is, or are not load-bearing or too fragmentary
-> (`Imperium-Knowledge/designs/研究/城/社区造地形-城址-2026-11-11.md` L36-61). It finds that a city-site landform can be
-> added in GL's XML form, the landform picking the core by itself and handing it to the city through a named output,
-> with the world-tile requirement nodes holding the line of not going beyond the tile
-> (`Imperium-Knowledge/designs/研究/城/社区造地形-城址-2026-11-11.md` L65-67).
+> (`Imperium-Knowledge/designs/研究/城/社区造地形-城址-2026-11-11.md` L9, L23-30). It names landforms suited to city sites in a
+> no-high-ground row (confluence, river split by an island, ordinary river, cove, coast corner, peninsula or land
+> bridge, lake, and the three self-written plains) and in a high-ground row read as rock (cliff, cliff corner, cliff and
+> coast, valley, lone mountain), and landforms unfit for a large city because they are enclosed or too narrow at the
+> exit, have too little land, are cut up as a delta is, or are not load-bearing or too fragmentary (the last group not
+> yet checked map by map) (`Imperium-Knowledge/designs/研究/城/社区造地形-城址-2026-11-11.md` L36-61). It finds that a city-site
+> landform can be added in GL's XML form, as the three plains are, with the world-tile requirement nodes holding the
+> line of not going beyond the tile; GL's grid has no core input, so the landform would pick the core by itself and hand
+> it to the city through a named output, which needs a reader for that output written in code; the other way, the city
+> fixing the core first, is not taken (`Imperium-Knowledge/designs/研究/城/社区造地形-城址-2026-11-11.md` L65-67).
 
 > [!NOTE]
 > **Unverified**: the same report proposes three plains tiers with trial sizes not yet shown in an image: re-paving
@@ -700,7 +697,5 @@ scattered rock and small puddles by biome as wall nodes, and always fits the ske
 > [!NOTE]
 > **Unverified**: open in the community-terrain report: whether a city-site landform is mounted as a tile mutator and
 > which name the player sees on the world map; whether a flat tile may carry one rock head of 300 cells; the full list
-> of landmarks a flat vanilla tile can carry; the reading of hilliness as the vanilla enumeration 1 to 5 with 6 as GL's
-> cave tier; and its reading of the vanilla tile text (biome, hilliness, world roads, swampiness, rainfall, rock type and
-> landmarks such as pond and wetland) as all a plains city can draw on
-> (`Imperium-Knowledge/designs/研究/城/社区造地形-城址-2026-11-11.md` L34, L68, L70-82, L119-123).
+> of landmarks a flat vanilla tile can carry; and the reading of hilliness as the vanilla enumeration 1 to 5 with 6 as
+> GL's cave tier (`Imperium-Knowledge/designs/研究/城/社区造地形-城址-2026-11-11.md` L34, L68, L70-82, L119-123).

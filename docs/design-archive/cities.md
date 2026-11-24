@@ -16,12 +16,10 @@ cards and the city grammar are in [cities-forms.md](cities-forms.md). The settle
 
 Generation concentrates first on Rome: the City and the three military camps, Castellum, Fortlet and Burgus. The
 medieval, modern and tribal settlements are each designed and implemented on their own and do not join Rome's rounds
-(`Imperium-Knowledge/现行/城/罗马城-做法与顺序.md` L34, R-1029-1307; `Imperium-Knowledge/09_地图生成与CBF技术.md` L577).
-Beyond the City and the camps, Rome is also to have a market town, outposts, estates, relay stations and mines, which are
-made later (`Imperium-Knowledge/现行/城/罗马城-做法与顺序.md` L35, R-1029-1400a); the skeleton is the base of a
-civilisation, and Rome needs more uses of it (`Imperium-Knowledge/designs/做法史/罗马城·做法与顺序.md` L98). The tiers
-are City, Castellum, Fortlet and Burgus, in the sizes S, M and L (`Imperium-Knowledge/designs/tools/审查清单-条文.md`
-L21).
+(`Imperium-Knowledge/现行/城/罗马城-做法与顺序.md` L34, R-1029-1307; `Imperium-Knowledge/09_地图生成与CBF技术.md` L577). Beyond the City
+and the camps, Rome is also to have a market town, outposts, estates, relay stations and mines, which are made later
+(`Imperium-Knowledge/现行/城/罗马城-做法与顺序.md` L35, R-1029-1400a); the skeleton is the base of a civilisation, and Rome needs
+more uses of it (`Imperium-Knowledge/designs/做法史/罗马城·做法与顺序.md` L98).
 
 Each faction has one theme, its types divided by region and not by period: Rome's two types are those of hot dry regions
 and of temperate and colder regions, and the other factions are to follow the same pattern
@@ -87,7 +85,7 @@ these eight are laid by the existing rules of where they stand and what they adj
 system is made up for them (`Imperium-Knowledge/现行/城/罗马城-做法与顺序.md` L179).
 
 > [!NOTE]
-> **Deleted**: the hydraulics the maintainer deleted took with it what city building rested on it: the library's line of
+> **Deleted**: the hydraulics axis the maintainer deleted on 2026-11-24 took with it what city building rested on it: the library's line of
 > city systems for water and power (`Imperium-Knowledge/designs/回报/进度-配套表.md` L18); the lifeline (命脉线), which
 > for a Roman city is its water and also its power grid, among the skeleton's pieces of period 1 and laid as a trunk with
 > them (`docs/glossary.md` L187; `Imperium-Knowledge/现行/城/罗马城-做法与顺序.md` L100;
@@ -122,8 +120,10 @@ and each grade's test terrain follows that grade's map, the existing 325 snapsho
 (`Imperium-Knowledge/现行/城/罗马城-做法与顺序.md` L136; `Imperium-Knowledge/09_地图生成与CBF技术.md` L873).
 
 > [!NOTE]
-> **Base game**: the base game's map sizes come in tiers from 200×200 to 400×400, which the four grades are set to
-> match, to be checked against `Data/` (`Imperium-Knowledge/09_地图生成与CBF技术.md` L871, L873).
+> **Base game**: the base game's map sizes, as the RimWorld wiki lists them, come in tiers from 200×200 to 400×400, and
+> the four grades are set to match its four tiers 200, 250, 300 and 350, 400 not being used; Code first checks that the
+> base game's interface for generating a settlement map can set the map's size (`Imperium-Knowledge/09_地图生成与CBF技术.md`
+> L871, L873).
 
 ### The area of a city
 
@@ -158,38 +158,37 @@ household of 143 cells and came out 597×574 cells, every house far too large
 city into its map follows on the same scale chain (`Imperium-Knowledge/现行/城/地形与选址.md` L90;
 `Imperium-Knowledge/09_地图生成与CBF技术.md` L914).
 
-For Imperium's own layout one household (户), a house with its plot, is about 15×15 cells, the size of one Anno 117
-house plot of 3×3 Anno cells, so that one Anno cell comes to about 5 cells (`Imperium-Knowledge/09_地图生成与CBF技术.md`
-L960; `Imperium-Knowledge/现行/城/地形与选址.md` L88) (replaces `Imperium-Knowledge/09_地图生成与CBF技术.md` L930;
+For Imperium's own layout one household (户), a house with its plot, is about 15×15 cells, the size of one Anno 117 house
+plot of 3×3 Anno cells, so that one Anno cell comes to about 5 cells (`Imperium-Knowledge/09_地图生成与CBF技术.md` L960;
+`Imperium-Knowledge/现行/城/地形与选址.md` L88) (replaces `Imperium-Knowledge/09_地图生成与CBF技术.md` L930;
 `Imperium-Knowledge/designs/tools/city/说明/sample.md` L326; `Imperium-Knowledge/designs/tools/city/代码地图.md` L730;
-`Imperium-Knowledge/designs/整理/整理记录-2026-11-02.md` L579; `Imperium-Knowledge/designs/研究/城/布置思路.md` L56).
-The reasons given are that road widths of 3, 5 and 7 then match the reference's proportions, that a wall circle of about
-two thirds of the 350 map holds the whole city without cutting districts, that commoners' inner yards are decent, and
-that existing cards can serve as wings (`Imperium-Knowledge/09_地图生成与CBF技术.md` L960). Reading the reference and
-laying out Imperium's own houses use two separate ratios on purpose (`Imperium-Knowledge/现行/城/罗马城-做法与顺序.md`
-L173; `Imperium-Knowledge/designs/研究/城/布置思路.md` L28; `Imperium-Knowledge/designs/研究/城/片区谱-广场住片.md`
-L24). Rich households and large public pieces keep their card sizes; where they do not fit, blocks are merged so that one
-piece takes a whole block, only lanes being removed and main and secondary streets left alone; houses are not shrunk, and
-a city that does not fit its map places fewer districts (`Imperium-Knowledge/现行/城/地形与选址.md` L88).
+`Imperium-Knowledge/designs/整理/整理记录-2026-11-02.md` L579; `Imperium-Knowledge/designs/研究/城/布置思路.md` L56). The reasons
+given are that road widths of 3, 5 and 7 then match the reference's proportions, that a wall circle of about two thirds
+of the 350 map holds the whole city without cutting districts, that commoners' inner yards are decent, and that existing
+cards can serve as wings (`Imperium-Knowledge/09_地图生成与CBF技术.md` L960). Reading the reference and laying out Imperium's
+own houses use two separate ratios on purpose (`Imperium-Knowledge/现行/城/罗马城-做法与顺序.md` L173;
+`Imperium-Knowledge/designs/研究/城/布置思路.md` L28; `Imperium-Knowledge/designs/研究/城/片区谱-广场住片.md` L24). Rich households and
+large public pieces keep their card sizes; where they do not fit, blocks are merged so that one piece takes a whole
+block, only lanes being removed and main and secondary streets left alone; after the screenshot calibration, if the city
+does not fit 350, fewer districts are placed and houses are not shrunk, the city wall being drawn in by ratio
+(`Imperium-Knowledge/现行/城/地形与选址.md` L88).
 
-When the reference is read, one Anno cell is taken for now as 3.7 trace cells, measured, to be checked against the
-user's in-game screenshots (`Imperium-Knowledge/现行/城/罗马城-做法与顺序.md` L173;
-`Imperium-Knowledge/09_地图生成与CBF技术.md` L930; `Imperium-Knowledge/designs/整理/整理记录-2026-11-02.md` L610)
-(replaces `Imperium-Knowledge/designs/tools/city/说明/sample.md` L281;
-`Imperium-Knowledge/designs/研究/城/纪元资料/总督别墅与模块.md` L31;
+When the reference is read, one Anno cell is taken for now as 3.7 trace cells, provisionally (暂) and measured from the
+original, to be checked against the user's in-game screenshots (`Imperium-Knowledge/现行/城/罗马城-做法与顺序.md` L173;
+`Imperium-Knowledge/09_地图生成与CBF技术.md` L930; `Imperium-Knowledge/designs/整理/整理记录-2026-11-02.md` L610) (replaces
+`Imperium-Knowledge/designs/tools/city/说明/sample.md` L281; `Imperium-Knowledge/designs/研究/城/纪元资料/总督别墅与模块.md` L31;
 `Imperium-Knowledge/designs/整理/整理记录-2026-11-02.md` L546;
 `Imperium-Knowledge/designs/研究/城/纪元117-设计理念-地图与城建-2026-11-11.md` L46-47;
-`Imperium-Knowledge/designs/研究/城/纪元资料/河湾聚落尺度查证.md` L14-18, L30;
-`Imperium-Knowledge/designs/研究/城/纪元117-图例-2026-11-12.md` L145, which read about 3.3, 3 to 4, 1.9 to 2.8 and
-2.6). Beside it the card records the person scale measured on the five in-game screenshots
-`Imperium-Knowledge/designs/city-plans/Anno117-截图-平民-搬迁-一.png`,
+`Imperium-Knowledge/designs/研究/城/纪元资料/河湾聚落尺度查证.md` L14-18, L30; `Imperium-Knowledge/designs/研究/城/纪元117-图例-2026-11-12.md`
+L145, which read about 3.3, 3 to 4, 1.9 to 2.8 and 2.6). Beside it the card records the person scale measured on the
+five in-game screenshots `Imperium-Knowledge/designs/city-plans/Anno117-截图-平民-搬迁-一.png`,
 `Imperium-Knowledge/designs/city-plans/Anno117-截图-自由民-搬迁-二.png`,
 `Imperium-Knowledge/designs/city-plans/Anno117-截图-平民-斜看-三.png`,
 `Imperium-Knowledge/designs/city-plans/Anno117-截图-平民-九宫格-四.png` and
-`Imperium-Knowledge/designs/city-plans/Anno117-截图-自由民-九宫格-五.png`, on which one Anno cell is about 8.9
-person-sized cells, 5.6 to 9.7 (`Imperium-Knowledge/现行/城/罗马城-做法与顺序.md` L173;
-`Imperium-Knowledge/09_地图生成与CBF技术.md` L959); the scale page notes that the reference image draws its people
-small, a house being six to eight people wide (`Imperium-Knowledge/designs/研究/城/纪元资料/河湾聚落尺度查证.md` L50).
+`Imperium-Knowledge/designs/city-plans/Anno117-截图-自由民-九宫格-五.png`, on which one Anno cell is about 8.9 person-sized
+cells, 5.6 to 9.7 (`Imperium-Knowledge/现行/城/罗马城-做法与顺序.md` L173; `Imperium-Knowledge/09_地图生成与CBF技术.md` L959); the scale
+page notes that the reference image draws its people small, a house being six to eight people wide
+(`Imperium-Knowledge/designs/研究/城/纪元资料/河湾聚落尺度查证.md` L50).
 
 ### Templates larger than the map
 
@@ -225,14 +224,14 @@ reporting them (`Imperium-Knowledge/现行/城/地形与选址.md` L89).
 
 ### Scale in the studies of real cities
 
-The studies of real cities take one cell as about one metre
+The survey of Roman houses takes one cell as about one metre
 (`Imperium-Knowledge/designs/roman-cards/罗马住宅调查-2026-10-28.md` L4), about 1.3 m
 (`Imperium-Knowledge/designs/city-plans/街坊外廓-两盛期查证-2026-10-30.md` L4), or 1 to 1.5 m
 (`Imperium-Knowledge/designs/instructions/罗马城墙史实核查-2026-10-29.md` L6;
-`Imperium-Knowledge/designs/city-plans/现实街坊研究-方法草案-2026-10-30.md` L32, L59). A study window of a real
-district is about 100×100 m, about 70 to 90 cells square (`Imperium-Knowledge/designs/city-plans/现实街坊研究-方法草案-2026-10-30.md`
-L32). These figures serve to read real cities; angles and sizes are set by the game's effect, as the next section says
-(`Imperium-Knowledge/14_来源同步与权威.md` L168).
+`Imperium-Knowledge/designs/city-plans/现实街坊研究-方法草案-2026-10-30.md` L32, L59). The draft method for studying real
+districts takes a study window of about 100×100 m, about 70 to 90 cells square
+(`Imperium-Knowledge/designs/city-plans/现实街坊研究-方法草案-2026-10-30.md` L32). These figures serve to read real cities; angles
+and sizes are set by the game's effect, as the next section says (`Imperium-Knowledge/14_来源同步与权威.md` L168).
 
 ## References
 
@@ -266,16 +265,15 @@ limestone, sandstone and marble masonry, do not follow Italy (`Imperium-Knowledg
 `Imperium-Knowledge/09_地图生成与CBF技术.md` L691-692).
 
 Having existed is not the same as representing. Only what the large cities outside Italy share enters a rule; the plans
-of small towns, camps and veteran colonies, such as the square city of Timgad or the near-round polygon of Nicaea, only
-existed and are no rule; lineage is sought among great cities, not by count; and the aim is what can represent Roman
-civilisation (`Imperium-Knowledge/现行/流程/设计会话工作规矩.md` L111; `Imperium-Knowledge/14_来源同步与权威.md` L56). A
-feature seen in Italy or in textbooks, such as the black basalt streets of Rome and Pompeii or the square military camp,
-is not taken as an imperial rule; the first question is whether it is local to Italy or belongs to the whole Empire
-(`Imperium-Knowledge/14_来源同步与权威.md` L56). A reference is first judged by what share of the Roman city it covers:
-camps, camp cities and palace cities are single cases, a small share of Roman cities, and are neither taken as the body
-of a city nor used to push its shape (`Imperium-Knowledge/designs/回报/改法-入口瘦身-2026-11-10.md` L154, L167;
-`Imperium-Knowledge/designs/回报/规则表-2026-11-11.md` L39; `Imperium-Knowledge/designs/tools/默认用规则.md` L33, L91,
-L167).
+of small towns, camps and veteran colonies, such as the square city of Timgad, only existed and are no rule; lineage is
+sought among great cities, not by count; and the aim is what can represent Roman civilisation
+(`Imperium-Knowledge/现行/流程/设计会话工作规矩.md` L111; `Imperium-Knowledge/14_来源同步与权威.md` L56). A feature seen in Italy or in
+textbooks, such as the black basalt streets of Rome and Pompeii or the square military camp, is not taken as an imperial
+rule; the first question is whether it is local to Italy or belongs to the whole Empire
+(`Imperium-Knowledge/14_来源同步与权威.md` L56). A reference is first judged by what share of the Roman city it covers: camps,
+camp cities and palace cities are single cases, a small share of Roman cities, and are neither taken as the body of a
+city nor used to push its shape (`Imperium-Knowledge/designs/回报/改法-入口瘦身-2026-11-10.md` L154, L167;
+`Imperium-Knowledge/designs/回报/规则表-2026-11-11.md` L39; `Imperium-Knowledge/designs/tools/默认用规则.md` L33, L91, L167).
 
 Design speaks of Rome by meaning: the standard is whether it reads as New Rome with the Roman civilisation it inherited,
 not whether history is right, and history is not verified for design; a historical statement needs a source only where
@@ -284,14 +282,13 @@ it is used as a basis or stated as fact (`Imperium-Knowledge/designs/研究/城/
 
 ### How a reference is used
 
-Before the shape of the Roman city (its outline, walls and districts) is discussed, a reference passes three steps:
+Before the shape of the Roman city (its shape, walls, blocks and outline) is discussed, a reference passes three steps:
 history lends only the concept, why it was built that way; the game lends the effect, the pictures of Anno 117 and Nova
 Roma; and the result is landed in RimWorld's 2D top-down view, where nothing shows height or facade
-(`Imperium-Knowledge/14_来源同步与权威.md` L273; `Imperium-Knowledge/designs/回报/改法-入口瘦身-2026-11-10.md` L156). In
-that view walls run in eight directions (`Imperium-Knowledge/14_来源同步与权威.md` L273), and houses in the city take one
-of three orientations, horizontal, vertical or 45°, following the street in front of them
-(`Imperium-Knowledge/09_地图生成与CBF技术.md` L845) (replaces `Imperium-Knowledge/14_来源同步与权威.md` L273, which
-allowed houses only horizontal and vertical).
+(`Imperium-Knowledge/14_来源同步与权威.md` L273; `Imperium-Knowledge/designs/回报/改法-入口瘦身-2026-11-10.md` L156). In that view
+walls run in eight directions (`Imperium-Knowledge/14_来源同步与权威.md` L273), and houses in the city take one of three
+orientations, horizontal, vertical or 45°, following the street in front of them (`Imperium-Knowledge/09_地图生成与CBF技术.md`
+L845) (replaces `Imperium-Knowledge/14_来源同步与权威.md` L273, which allowed houses only horizontal and vertical).
 
 Imperium learns the meaning of a reference, not its shape: the outlines of reference images, historic cities and
 geometric figures are not carried onto a city, the outline is set by the city itself, and the Roman feel does not come
@@ -351,10 +348,10 @@ second reference city is another Anno 117 showcase city on different terrain, mo
 
 Approved reference images and the original images given in conversation are kept under `designs/city-plans/`, and each
 round's images are set beside them at the same scale; where a whole city does not match them, several historical city
-templates are made, as with the Constantinople base map, to find the reason
-(`Imperium-Knowledge/现行/城/罗马城-做法与顺序.md` L200, L203). Approved images are not deleted, whatever replaced method
-they belong to (`Imperium-Knowledge/designs/整理/整理方案-2026-11-02.md` L349). The approved images, left where they are,
-are (`Imperium-Knowledge/现行/城/罗马城-做法与顺序.md` L184-197):
+templates are made, as with the Constantinople base map, to find the reason (`Imperium-Knowledge/现行/城/罗马城-做法与顺序.md`
+L200, L203). Approved images are not deleted, whatever replaced method they belong to
+(`Imperium-Knowledge/designs/整理/整理方案-2026-11-02.md` L349). The approved reference images are
+(`Imperium-Knowledge/现行/城/罗马城-做法与顺序.md` L184-197):
 
 - `Imperium-Knowledge/designs/city-plans/图三-配合地形的城区.png` (image three), one of three sketches found more useful
   than building by weights, read for terrain change, a river through the city and the old road
@@ -408,37 +405,36 @@ of the river view, and ships, of which only the harbour basin and quay are made
 The four settlement design atlases of 2026-10-27, Roman, medieval, modern and tribal, each in small, medium and large
 with facilities, twenty images in all, are sketches rather than game screenshots; their numbers follow the batch
 instructions, and deliveries were set beside the drawings of the same name (`Imperium-Knowledge/09_地图生成与CBF技术.md`
-L321-323; `Imperium-Knowledge/11_开发进度与未决事项.md` L34). They are kept in `Imperium-Knowledge/designs/聚落设计图/`,
-indexed by `Imperium-Knowledge/designs/聚落设计图/README.md`; their Roman sheets, a Justinian and a Basil set, belong to
-the two-set line deleted below (`Imperium-Knowledge/09_地图生成与CBF技术.md` L321).
+L321-323; `Imperium-Knowledge/11_开发进度与未决事项.md` L34). They are kept in `Imperium-Knowledge/designs/聚落设计图/`, indexed by
+`Imperium-Knowledge/designs/聚落设计图/README.md`; their Roman sheets, a Justinian and a Basil set, belong to the two-set
+line deleted below (`Imperium-Knowledge/09_地图生成与CBF技术.md` L323).
 
 ### Community references
 
-Community references are used only for what will be seen in the game, and none of the community's methods is adopted:
-hand-made templates assembled at random by tag and count are not Imperium's way, circles are not drawn on purpose,
-Imperium's taste rests on what could be achieved in reality, every place needs a real reason, and plain permutation is
-of no use; what can be used are facts about rendering limits
+The community reference on Roman cities and settlement generation is used only for what will be seen in the game, and
+none of the community's methods is adopted: hand-made templates assembled at random by tag and count are not Imperium's
+way, circles are not drawn on purpose, Imperium's taste rests on what could be achieved in reality, every place needs a
+real reason, and plain permutation is of no use; what can be used are facts about rendering limits
 (`Imperium-Knowledge/designs/city-plans/社区参照-罗马城与聚落生成-2026-10-30.md` L6).
 
 > [!NOTE]
-> **Unverified**: these reports are not ruled. The report on why city-builder walls are expressive says that city-builder
-> games support "the city grows first, the wall wraps it after", taking only ideas, not sizes or geometry
-> (`Imperium-Knowledge/designs/city-plans/社区参照-城建游戏城墙表现力-2026-11-03.md` L2, L6). The reports on Anno 117
-> read it as follows: the generator behaves like a reasonable player, starting from port, bridgehead and approach road,
-> growing along the road, filling what the terrain encloses and stopping at constraints, so that a plain with few
-> constraints has no reason for an organic outline; limited buildable space is the source of the puzzle; island size and
-> house size are decided together, as a city's households and their size are to be fixed with its site; the grid is kept
-> and only 45° is added, houses following roads; services follow the road, so roads come first; Anno builds the city first
-> and the wall after; and a hand touch layer cannot be kept for every generated map and is to be replaced by placement
-> rules (`Imperium-Knowledge/designs/研究/城/纪元117-设计理念-地图与城建-2026-11-11.md` L8-21, L29, L34, L77). The
-> report on the Anno city's whole form proposes picture checks: the city fills the ground enclosed by water, rock and soft
-> ground; housing ground and wall colour are pressed to one or two kinds with large pieces standing out; and each large
-> piece takes a whole block ringed by garden, trees or plaza at the edge, corner or end of an axis
-> (`Imperium-Knowledge/designs/研究/城/纪元117-罗马城整体造型-2026-11-10.md` L146-150), with readings A1 to A8 for
-> RimWorld (`Imperium-Knowledge/designs/研究/城/纪元117-罗马城整体造型-2026-11-10.md` L88-102); the recommendations
-> and two alternatives wait for the user
-> (`Imperium-Knowledge/designs/回报/调研-纪元117罗马城整体造型.md` L20-24). Which of the officially chosen Anno player
-> cities the user picks, and what is learned from them, is open
+> **Unverified**: these reports are not ruled. The reference report on the wall expressiveness of city-builder games,
+> not ruled (未裁), is meant to find outside grounds for the rule 'the city grows first, the wall wraps it after', taking
+> only design ideas, not sizes or geometry (`Imperium-Knowledge/designs/city-plans/社区参照-城建游戏城墙表现力-2026-11-03.md` L2,
+> L6). The reports on Anno 117 read it as follows: the generator behaves like a reasonable player, starting from port,
+> bridgehead and approach road, growing along the road, filling what the terrain encloses and stopping at constraints,
+> so that a plain with few constraints has no reason for an organic outline; limited buildable space is the source of
+> the puzzle; island size and house size are decided together, as a city's households and their size are to be fixed
+> with its site; the grid is kept and only 45° is added, houses following roads; services follow the road, so roads come
+> first; Anno builds the city first and the wall after; and a hand touch layer cannot be kept for every generated map
+> and is to be replaced by placement rules (`Imperium-Knowledge/designs/研究/城/纪元117-设计理念-地图与城建-2026-11-11.md` L8-21, L29,
+> L34, L77). The report on the Anno city's whole form proposes picture checks: the city fills the ground enclosed by
+> water, rock and soft ground; housing ground and wall colour are pressed to one or two kinds with large pieces standing
+> out; and each large piece takes a whole block ringed by garden, trees or plaza at the edge, corner or end of an axis
+> (`Imperium-Knowledge/designs/研究/城/纪元117-罗马城整体造型-2026-11-10.md` L146-150), with readings A1 to A8 for RimWorld
+> (`Imperium-Knowledge/designs/研究/城/纪元117-罗马城整体造型-2026-11-10.md` L88-102); the report recommends A1 to A3 as picture
+> checks and gives two alternatives (`Imperium-Knowledge/designs/回报/调研-纪元117罗马城整体造型.md` L20-24). Which of the officially
+> chosen Anno player cities the user picks, and what is learned from them, is open
 > (`Imperium-Knowledge/designs/研究/城/纪元117-聚光城单-2026-11-12.md` L5, L36-40).
 
 ### Historical replication and city measuring
@@ -476,29 +472,28 @@ with terrain enter rules (`Imperium-Knowledge/现行/城/罗马城-做法与顺�
 The measured set is the Constantinople replica of about 1025, the hand-laid wall sketch v3 and the skeleton v12乙 of the
 confluence-estuary map (汇流河口图) (`Imperium-Knowledge/designs/city-plans/量城/README.md` L9-17), with the Anno 117
 settlement measured on its own card. The Constantinople replica has a wall of 917 cells in 45 segments, 31.7% of it on
-land, no rock as wall, six land gates, 75 towers and the Augustaion as its first square
-(`Imperium-Knowledge/designs/city-plans/量城/君士坦丁堡-量数卡.md` L8-14, L66); its tower spacing is the drawing rule of
-its base-map script, not history, and it has no sea gates or approach roads
-(`Imperium-Knowledge/designs/city-plans/量城/README.md` L42-46). The skeleton v12乙 has a wall of 508.2 cells in 14
+land, no rock as wall and 75 towers, 74 of them counted (`Imperium-Knowledge/designs/city-plans/量城/君士坦丁堡-量数卡.md` L8-14,
+L66); its tower spacing is the drawing rule of its base-map script, not history, and it has no sea gates or approach
+roads (`Imperium-Knowledge/designs/city-plans/量城/README.md` L42-46). The skeleton v12乙 has a wall of 508.2 cells in 14
 segments, 62.2% on land, every corner at 45°, 24 towers and five gates
 (`Imperium-Knowledge/designs/city-plans/量城/骨架-v12乙-量数卡.md` L8-14, L35, L53). The Anno settlement has a closed wall of
 1730.9 cells in 75 segments, 87.9% on land and without towers, six gates, a ratio of 1.114 along the water, its first
 core at the east square of the main bridge where the ferry crossed, and a typical household, the craftsman house with
-L-shaped yard (A2), of 143 cells (11×13) (`Imperium-Knowledge/designs/city-plans/量城/Anno117-河湾聚落-量数卡.md`
-L4-14, L55, L68-72, L85-98, L147-149). Where the three measured cities fall in one band the result is only a common-point candidate;
+L-shaped yard (A2), of 143 cells (11×13) (`Imperium-Knowledge/designs/city-plans/量城/Anno117-河湾聚落-量数卡.md` L4-14, L55,
+L68-72, L85-98, L147-149). Where the three measured cities fall in one band the result is only a common-point candidate;
 whether it is a Roman rule is for the literature and the user to judge
 (`Imperium-Knowledge/designs/city-plans/量城/对照-君士坦丁堡-草图v3-骨架v12乙.md` L4, L40-72).
 
-The study of ten real city sites across the two flourishing periods, from public web literature without elevation maps
-(`Imperium-Knowledge/designs/city-plans/真城址研读-文献-2026-10-30.md` L4-5), found that large rivers lie outside a city
-or at its edge and what is enclosed is mostly small streams, that no river was turned into a water line, supply always
-coming from aqueducts, springs, wells or cisterns, and that outlines are mostly irregular, from coast or peninsula, hills
-and citadels, enclosed suburbs or buildings, and late shrinking, while the street grids inside are often regular
-(`Imperium-Knowledge/designs/city-plans/真城址研读-文献-2026-10-30.md` L110-113). A survey of how emperors founded and
-rebuilt cities draws twelve ideas as concepts, among them an axis that comes before everything with palace, plazas and
-gates hung on it, a palace group at one corner or side beside water, a grid following the long side of the main terrain,
-older roads crossing the grid diagonally, and a wall built last that encloses more than the built area
-(`Imperium-Knowledge/designs/罗马理想城调研-2026-10-29.md` L61-74).
+The study of real city sites across the two flourishing periods, from public web literature without elevation maps
+(`Imperium-Knowledge/designs/city-plans/真城址研读-文献-2026-10-30.md` L4-5), found that large rivers are usually outside a
+city or at its edge and what is enclosed is mostly small streams, found no case of a river turned into a water line,
+supply coming from aqueducts, springs, wells or cisterns in all ten old-period cities, and that outlines are mostly
+irregular, from coast or peninsula, hills and citadels, enclosed suburbs or buildings, and late shrinking, while the
+street grids inside are often regular (`Imperium-Knowledge/designs/city-plans/真城址研读-文献-2026-10-30.md` L110-113). A
+survey of how emperors founded and rebuilt cities draws twelve ideas as concepts, among them an axis that comes before
+everything with palace, plazas and gates hung on it, a palace group at one corner or side beside water, a grid following
+the long side of the main terrain, older roads crossing the grid diagonally, and a wall built last that encloses more
+than the built area (`Imperium-Knowledge/designs/罗马理想城调研-2026-10-29.md` L61-74).
 
 ## The eras of the Roman city
 
@@ -528,35 +523,37 @@ continuity: old walls and gates are maintained heritage, and decay is given only
 
 ### The two flourishing periods
 
-The design draws on the two flourishing periods of Rome as concepts: the old period of the 1st to 2nd century and the
-new of the 10th to 11th (`Imperium-Knowledge/designs/city-plans/真城址研读-文献-2026-10-30.md` L4-5;
-`Imperium-Knowledge/designs/罗马理想城调研-2026-10-29.md` L4); the survey of Roman houses takes the first as the 1st
-century BC to the 2nd century and the second as the 6th century and the 10th to 12th
-(`Imperium-Knowledge/designs/roman-cards/罗马住宅调查-2026-10-28.md` L2-10, L52-53). In the old period emperors built new
-colonnaded avenues and plazas, city public buildings and aqueduct-fed monumental fountains, with wall circles very large
-or absent; in the new they laid no new street grids, funded palace, monastery and charity groups inside existing cities,
-and made recovered cities seats of military districts with weight on citadel and walls
+In the city research the old flourishing period is the 1st to 2nd century and the new the 10th to 11th
+(`Imperium-Knowledge/designs/city-plans/真城址研读-文献-2026-10-30.md` L4-5; `Imperium-Knowledge/designs/罗马理想城调研-2026-10-29.md`
+L4); the survey of Roman houses takes the first as the 1st century BC to the 2nd century and the second as the 6th
+century and the 10th to 12th (`Imperium-Knowledge/designs/roman-cards/罗马住宅调查-2026-10-28.md` L2-10, L52-53). In the old
+period emperors built new colonnaded avenues and plazas, city public buildings and aqueduct-fed monumental fountains,
+with wall circles very large or absent; in the new they laid no new street grids, funded palace, monastery and charity
+groups inside existing cities, and made recovered cities seats of military districts with weight on citadel and walls
 (`Imperium-Knowledge/designs/罗马理想城调研-2026-10-29.md` L4, L76-77).
 
 > [!NOTE]
-> **Unverified**: the study of what the two periods share is a first round and is not ruled. It lists eight shared
-> traces: a main street with colonnades and shops inside them; shops below and living above, with shops, workshops and
-> houses mixed in one street; houses turned inward on a yard with few openings to the street; public water points and
-> private water, with cisterns and wells taking over when aqueducts fail; one ceremonial avenue stringing gates, squares
-> and palace; palace and circus as a group; gardens and land inside the wall, with large open cisterns; and colonnaded
-> streets and squares taken over bit by bit by shops, tolerated while they do not block the way
-> (`Imperium-Knowledge/designs/city-plans/罗马痕迹-两盛期共同规律查证-2026-10-30.md` L4-19); the method draft before it
-> had found in both periods a house round a courtyard, with well and hearth in the new period and a peristyle garden in
-> the old, and street-front rooms as shops and workshops mixed along the street
-> (`Imperium-Knowledge/designs/city-plans/现实街坊研究-方法草案-2026-10-30.md` L28). It lists differences:
-> graves outside the city on the great roads in the old period and beside churches and monasteries in the new; one
-> central square against several church-centred blocks; paved secondary streets against unpaved ones squeezed between
-> houses; a large wall circle against a small walled city of citadel and lower town; many public baths against few held
-> by monasteries; markets in squares against large gatherings outside the wall
-> (`Imperium-Knowledge/designs/city-plans/罗马痕迹-两盛期共同规律查证-2026-10-30.md` L21-30). Its next round was to
-> redraw real windows, write the shared traces as cause, result and what shows on the plan, and turn the differences into
-> two skins (`Imperium-Knowledge/designs/city-plans/罗马痕迹-两盛期共同规律查证-2026-10-30.md` L59-62). Whether "shops
-> below, home above" holds for the great cities of both periods is still to be checked
+> **Unverified**: the study of what the two periods share is a first round and is not ruled. Its first round lists eight
+> shared traces, in two of which evidence is incomplete: the old-period source for the ceremonial avenue is not yet
+> found, and whether shops below and homes above are shared by great cities of both periods is still to be checked; the
+> eight are: a main street with colonnades and shops inside them; shops below and living above, with shops, workshops
+> and houses mixed in one street; houses turned inward on a yard with few openings to the street; public water points
+> and private water, with cisterns and wells taking over when aqueducts fail; one ceremonial avenue stringing gates,
+> squares and palace; palace and circus as a group; gardens and land inside the wall, with large open cisterns; and
+> colonnaded streets and squares taken over bit by bit by shops, tolerated while they do not block the way
+> (`Imperium-Knowledge/designs/city-plans/罗马痕迹-两盛期共同规律查证-2026-10-30.md` L4-19); the method draft before it had found
+> clues in both periods, to count only once measured on excavation plans: a house round a courtyard, with well and
+> hearth in the new period and a peristyle garden in the old, and street-front rooms as shops and workshops mixed along
+> the street (`Imperium-Knowledge/designs/city-plans/现实街坊研究-方法草案-2026-10-30.md` L28). It lists differences: graves
+> outside the city on the great roads in the old period and beside churches and monasteries in the new; one central
+> square against several church-centred blocks; paved secondary streets against unpaved ones squeezed between houses; a
+> large wall circle against a small walled city of citadel and lower town; many public baths against few held by
+> monasteries; markets in squares against large gatherings outside the wall
+> (`Imperium-Knowledge/designs/city-plans/罗马痕迹-两盛期共同规律查证-2026-10-30.md` L21-30). Its next round was to redraw real
+> windows, write the shared traces as cause, result and what shows on the plan, and turn differences A to E into the
+> difference between the old and new peak's two skins
+> (`Imperium-Knowledge/designs/city-plans/罗马痕迹-两盛期共同规律查证-2026-10-30.md` L59-62). Whether "shops below, home above" holds
+> for the great cities of both periods is still to be checked
 > (`Imperium-Knowledge/designs/city-plans/罗马痕迹-两盛期共同规律查证-2026-10-30.md` L13).
 
 ### Form and skin
@@ -606,35 +603,37 @@ pulling a result toward Roman style when it is too far off (`Imperium-Knowledge/
 > [!NOTE]
 > **Unverified**: the report on Roman building law and trade practice is a list of candidates for the user to choose
 > from, not a ruling, and takes only the idea behind each article without turning its measures into cells
-> (`Imperium-Knowledge/designs/city-plans/罗马建筑法与行规-理念.md` L4). It gathers its ideas under dwellings, workshops
-> and trades, streets and colonnades, sight and light, and walls and gates (`Imperium-Knowledge/目录/城-住宅与建筑法.md`
-> L30-61). Its five ideas that most make a city read as Roman are: public places not taken privately, with the main-street
-> colonnade unbroken from gate to gate; houses with a gap and no shared wall, which conflicts with the joined side faces
-> of neighbouring households in the cards and was to be ruled first; one trade gathered in an appointed place, prestigious trades near the palace and great avenue; good
-> sightlines to water, landmarks and open squares; and noisy workshops drawn back behind garden or stack yard
-> (`Imperium-Knowledge/designs/city-plans/罗马建筑法与行规-理念.md` L182-188), with the sightline candidate written out in
-> full (`Imperium-Knowledge/designs/city-plans/罗马建筑法与行规-理念.md` L134-171). Floors, height limits, balconies,
-> outside stairs and kinds of window cannot be shown from above and are dropped, their ideas merged into the items on
-> house gaps, doors and yards (`Imperium-Knowledge/designs/city-plans/罗马建筑法与行规-理念.md` L180); the draft that
-> pairs ideas with mechanisms drops the same, with smoke, smell, noise and two walls side by side shown as no shared wall
-> (`Imperium-Knowledge/designs/city-plans/理念与机制对照-草案.md` L80-86), and only parts of that draft are adopted
-> (`Imperium-Knowledge/designs/city-plans/理念与机制对照-草案.md` L4).
+> (`Imperium-Knowledge/designs/city-plans/罗马建筑法与行规-理念.md` L4). It gathers its ideas under dwellings, workshops and
+> trades, streets and colonnades, sight and light, and walls and gates (`Imperium-Knowledge/目录/城-住宅与建筑法.md` L30-61). Its
+> five ideas that most make a city read as Roman are: public places not taken privately, with the main-street colonnade
+> unbroken from gate to gate; houses with a gap and no shared wall, which conflicts with the joined side faces of
+> R-1103-0013 and needs ruling first; one trade gathered in an appointed place, prestigious trades near the palace and
+> great avenue; good sightlines protected, with water, landmarks and squares kept open in front; and noisy workshops
+> drawn back, a garden or stack yard between them and the houses (`Imperium-Knowledge/designs/city-plans/罗马建筑法与行规-理念.md`
+> L182-188), with the sightline candidate (视-1) set out under its origin, period and scope, what it governs, idea,
+> layout and fit with present rules (`Imperium-Knowledge/designs/city-plans/罗马建筑法与行规-理念.md` L134-171). Floors, height
+> limits, balconies, outside stairs and kinds of window cannot be shown from above and are dropped, their ideas merged
+> into the items on house gaps, doors and yards (`Imperium-Knowledge/designs/city-plans/罗马建筑法与行规-理念.md` L180); the draft
+> that pairs ideas with mechanisms also drops them, along with smoke, smell, noise and vibration themselves, and two
+> walls built side by side as a way to show no shared wall (`Imperium-Knowledge/designs/city-plans/理念与机制对照-草案.md`
+> L80-86), and only parts of that draft are adopted (R-1103-1220); the rest is still not ruled, the cards under 现行/城/
+> governing (`Imperium-Knowledge/designs/city-plans/理念与机制对照-草案.md` L4).
 
 ### Effect, readability and lasting order
 
 Each shape rule carries one sentence on its effect, and a rule whose effect cannot be written is not admitted; each
-ruling names its origin, effect, resolving a conflict, filling a gap or a copied number, and the last three are listed
-for review (`Imperium-Knowledge/现行/城/罗马城-做法与顺序.md` L73; `Imperium-Knowledge/09_地图生成与CBF技术.md` L772).
-Feedback leads first to its cause, and is not stacked into new rules for an algorithm to fit
-(`Imperium-Knowledge/现行/城/罗马城-做法与顺序.md` L74). A city's shape is not set by ratio, since the Romans did not
-build by ratio (`Imperium-Knowledge/designs/回报/审查-城卡同类冲突-2026-11-10.md` L30;
-`Imperium-Knowledge/现行/城/罗马城-做法与顺序.md` L126). District rules are written as cause, result and what can be
-seen on the plan, without ratios, the ratios growing out of the causes
-(`Imperium-Knowledge/designs/city-plans/现实街坊研究-方法草案-2026-10-30.md` L40-41). A district is read not for what a
-Roman city looks like but for why each thing in it is where it is: who lives there, what they live on, where the door
-faces, where the water comes from, whose the garden is and whom the street is opened for; the answer is to hold in both
-flourishing periods, and what holds in only one is recorded as a difference between them
-(`Imperium-Knowledge/designs/city-plans/现实街坊研究-方法草案-2026-10-30.md` L6, L10, L39).
+ruling names its origin as one of effect, resolving a conflict, filling a gap or a copied number, the last three being
+listed for review; this runs from R-1103-1338 on, and old cards are not gone back over
+(`Imperium-Knowledge/现行/城/罗马城-做法与顺序.md` L73; `Imperium-Knowledge/09_地图生成与CBF技术.md` L772). Feedback leads first to its
+cause, and is not stacked into new rules for an algorithm to fit (`Imperium-Knowledge/现行/城/罗马城-做法与顺序.md` L74). A city's
+shape is not set by ratio, since the Romans did not build by ratio
+(`Imperium-Knowledge/designs/回报/审查-城卡同类冲突-2026-11-10.md` L30; `Imperium-Knowledge/现行/城/罗马城-做法与顺序.md` L126). The draft
+method proposes that district rules be written as cause, result and what can be seen on the plan, without ratios, the
+ratios growing out of the causes (`Imperium-Knowledge/designs/city-plans/现实街坊研究-方法草案-2026-10-30.md` L40-41). The draft
+method has a district read not for what a Roman city looks like but for why each thing in it is where it is: who lives
+there, what they live on, where the door faces, where the water comes from, whose the garden is and whom the street is
+opened for; the answer is to hold in both flourishing periods, and what holds in only one is recorded as a difference
+between them (`Imperium-Knowledge/designs/city-plans/现实街坊研究-方法草案-2026-10-30.md` L6, L10, L39).
 
 The city ideas are all gone over with urban architecture, which here concerns only the abstract placing of buildings
 (`Imperium-Knowledge/designs/city-plans/城市建筑学对照-罗马城理念-2026-10-30.md` L4, L51). A city is readable: roads
@@ -659,29 +658,25 @@ source; then the Roman feel; then measured numbers (`Imperium-Knowledge/现行/�
 The base of the city is written as checks that must pass before delivery: blocks all of one size or aspect ratio, one
 equidistant grid over the whole map, blocks beside slanted streets, banks or rock without a slanted edge, and a walled
 buildable area larger than the grown city by a set proportion are errors, and each round runs at least two maps
-(`Imperium-Knowledge/现行/城/罗马城-做法与顺序.md` L68; `Imperium-Knowledge/09_地图生成与CBF技术.md` L792). What is
-expected is blocks of unequal size, block edges that can be oblique, and land inside the wall about equal to the city
-that grew (`Imperium-Knowledge/designs/整理/复盘-城建-近百版的基础错-2026-11-05.md` L18). A city is checked for a street
-network connected over the whole city (S5), a river crossing the wall (W17), the core's placement (I10), the skeleton's
-required pieces (I11) and a centred core (I12); the shortest bridgehead street of 5 and the centring ratio of 0.6 are
-trial values, and the list of required pieces is in `designs/tools/city/城检-参数表.json`
-(`Imperium-Knowledge/14_来源同步与权威.md` L271). The orderly look, the share of straight main and secondary streets,
-whether long straight streets of 40 cells or more end on something that closes the view, the spread of tower spacing,
-the outline, the composition of housing and the wall's distance from the built area, is reported only, without targets
-(`Imperium-Knowledge/designs/tools/city/说明/check.md` L10, L89-96). Generated blocks are set beside a real window at the
-same scale and judged by the picture, checks only stopping obvious errors
-(`Imperium-Knowledge/designs/city-plans/现实街坊研究-方法草案-2026-10-30.md` L46); a review first asks by eye whether it
-looks like a capital, whether it has order and whether its outline has reasons, and only then reads the measures
+(`Imperium-Knowledge/现行/城/罗马城-做法与顺序.md` L68; `Imperium-Knowledge/09_地图生成与CBF技术.md` L792). What is expected is blocks of
+unequal size, block edges that can be oblique, and land inside the wall about equal to the city that grew
+(`Imperium-Knowledge/designs/整理/复盘-城建-近百版的基础错-2026-11-05.md` L18). A city is checked for a street network connected over
+the whole city (S5), a river crossing the wall (W17), the core's placement (I10), the skeleton's required pieces (I11)
+and a centred core (I12); the shortest bridgehead street of 5 and the centring ratio of 0.6 are trial values, and the
+list of required pieces is in `designs/tools/city/城检-参数表.json` (`Imperium-Knowledge/14_来源同步与权威.md` L271). The draft
+method has generated blocks set beside a real window at the same scale and judged by the user from the picture, the
+checks only stopping obvious errors and not serving as a pass standard
+(`Imperium-Knowledge/designs/city-plans/现实街坊研究-方法草案-2026-10-30.md` L46); a review first asks by eye whether it looks
+like a capital, whether it has order and whether its outline has reasons, and only then reads the measures
 (`Imperium-Knowledge/现行/城/城建-生成流程.md` L32).
 
 > [!NOTE]
 > **Unverified**: the thresholds of the city check and of the texture and order figures are trial values
-> (`Imperium-Knowledge/14_来源同步与权威.md` L271; `Imperium-Knowledge/designs/tools/city/说明/check.md` L10, L89-96).
-> The city-check row that the ring generator printed for each case was dropped with it; whether the city check itself
-> stays is not restated (`Imperium-Knowledge/09_地图生成与CBF技术.md` L905).
-> Base checks on the palace quarter's place relative to the main gate, the first plaza's offset from the centroid, a main
-> street hugging the river wall, one long river wall in a single direction, and ponds and rock patches enclosed by the
-> wall are not yet written, their thresholds undecided
+> (`Imperium-Knowledge/14_来源同步与权威.md` L271; `Imperium-Knowledge/designs/tools/city/说明/check.md` L10, L89-96). The
+> city-check row that the ring generator printed for each case (R-1110-2328) was dropped with it
+> (`Imperium-Knowledge/09_地图生成与CBF技术.md` L905). Base checks on the palace quarter's place relative to the main gate, the
+> first plaza's offset from the centroid, a main street hugging the river wall, one long river wall in a single
+> direction, and ponds and rock patches enclosed by the wall are not yet written, their thresholds undecided
 > (`Imperium-Knowledge/designs/整理/城建错题转拦截-2026-11-05.md` L4, L17, L22, L33-34).
 
 ## How a city is made
@@ -690,12 +685,11 @@ looks like a capital, whether it has order and whether its outline has reasons, 
 
 The city's interior is laid first and the wall is pulled last (先内后墙), and every review judges the whole city
 (`Imperium-Knowledge/现行/城/罗马城-做法与顺序.md` L80; `Imperium-Knowledge/designs/city-plans/罗马城排法-算法.md` L4;
-`Imperium-Knowledge/designs/整理/城建错题转拦截-2026-11-05.md` L10, L12) (replaces
-`Imperium-Knowledge/designs/整理/城建错题转拦截-2026-11-05.md` L55, the order of wall first, then pieces and streets,
-then households). A city is not made wall first, drawing the outer frame or wall and then filling it; the houses come
-first and the wall is pulled to the outermost blocks (`Imperium-Knowledge/designs/tools/红线表.md` L20;
-`Imperium-Knowledge/designs/tools/审查清单-图面.md` L42). Each period lays its interior first, fills the seams once and
-pulls its wall last (`Imperium-Knowledge/现行/城/罗马城-做法与顺序.md` L98).
+`Imperium-Knowledge/designs/整理/城建错题转拦截-2026-11-05.md` L10, L12) A city is not made wall first, drawing the outer frame
+or wall and then filling it (a recorded red line); the wall's distance to the outermost row of blocks is the same on
+every side, differing only by the ring road's width, with no empty frame left inside the wall
+(`Imperium-Knowledge/designs/tools/红线表.md` L20; `Imperium-Knowledge/designs/tools/审查清单-图面.md` L42). Each period lays its
+interior first, fills the seams once and pulls its wall last (`Imperium-Knowledge/现行/城/罗马城-做法与顺序.md` L98).
 
 ### Skeleton, composite pieces and housing base
 
@@ -716,15 +710,16 @@ table v3.1 (`Imperium-Knowledge/现行/城/罗马城-城内.md` L4, L12). What t
 [cities-forms.md](cities-forms.md), and how housing is laid in [cities-inside.md](cities-inside.md).
 
 > [!NOTE]
-> **Deleted**: the hand-drawn plan line, in which the Roman City's interior was hand-designed plan data
-> that generation stretched to the terrain, cropped at mountain or water and wrapped with the wall last, with a skeleton
-> of fixed slots, neighbourhood slots filled from a block library and share limits per card, together with the Roman City
-> writing of that time in the ICF design, the settlement grammar and the generation spec, such as two main axes of equal
-> rank and the siting of water tower, palace quarter and citadel on the highest ground
-> (`Imperium-Knowledge/designs/instructions/生成具象规格-现行版.md` L173-182; `Imperium-Knowledge/designs/ICF/ICF设计.md`
-> L4; `Imperium-Knowledge/designs/instructions/生成具象规格-现行版.md` L4). The void notes of those files replaced it: the plan is
+> **Deleted**: the hand-drawn plan line, in which the Roman City's interior was hand-designed plan data that generation
+> stretched to the terrain, cropped at mountain or water and wrapped with the wall last, with a skeleton of fixed slots,
+> neighbourhood slots filled from a block library and share limits per card, together with the Roman City writing of
+> that time in the ICF design, the settlement grammar and the generation spec, such as two main axes of equal rank and
+> the siting of water tower, palace quarter and citadel on the highest ground
+> (`Imperium-Knowledge/designs/instructions/生成具象规格-现行版.md` L173-182; `Imperium-Knowledge/designs/ICF/ICF设计.md` L4;
+> `Imperium-Knowledge/designs/instructions/生成具象规格-现行版.md` L4). The void notes of those files replaced it: the plan is
 > generated from the main core with the wall last, there is no block library, and ordinary housing is laid household by
-> household along the street, the rules in force being the cards under `现行/城/`
+> household along the street with one card per household, the specific wording awaiting a rewrite once the city's three
+> steps are approved, the rules in force being the cards under `现行/城/`
 > (`Imperium-Knowledge/designs/instructions/生成具象规格-现行版.md` L6; `Imperium-Knowledge/designs/ICF/ICF设计.md` L6;
 > `Imperium-Knowledge/designs/ICF/聚落平面语法-v4.md` L4-6).
 
@@ -750,28 +745,29 @@ laying a city is only this one (`Imperium-Knowledge/现行/城/罗马城-做法�
 ### Tracing a reference and replacing its pieces
 
 Once templates exist, the game picks a template by world tile, mirrors, turns and stretches it, lays its large terrain
-form and city skeleton, and lays the variable parts by rule; template candidates come only from tracing an approved
-reference or from the design session's hand drawing, not from the dependency order or the old layout generator
-(`Imperium-Knowledge/现行/城/城建-生成流程.md` L10; `Imperium-Knowledge/designs/回报/规矩落地与流程工具/判断类裁定盘点.md`
-L61). An approved reference is traced 1:1 into cells, by household, a few very tightly packed roofs being recorded as one
-household and one building, and then each piece is replaced by Imperium's own; the traced examples are distilled into a
-generation order for cities without a reference (`Imperium-Knowledge/现行/城/城建-生成流程.md` L11;
-`Imperium-Knowledge/designs/tools/方向表.md` L10; `Imperium-Knowledge/designs/回报/进度-读地块入口.md` L14). The
-self-check adds whether the city looks grown: the share of shared walls or aligned houses, on how many sides a yard is
-enclosed, into how many pieces green space breaks, into how many segments a road is cut, and how many kinds of element
-there are, with the traced Anno version as the standard (`Imperium-Knowledge/现行/城/城建-生成流程.md` L11;
-`Imperium-Knowledge/09_地图生成与CBF技术.md` L899). Effect: it looks grown, neither empty nor cluttered
-(`Imperium-Knowledge/现行/城/城建-生成流程.md` L11). The grass standard is a reference, not a threshold; beyond its range
-one sentence says why (`Imperium-Knowledge/现行/城/罗马城-做法与顺序.md` L171;
+form and city skeleton, and lays the variable parts by rule; template candidates come from copying a reference image or
+from hand drawing, the dependency order does not produce candidates, and the old layout generator is not used for them
+(the hook to block it is still to be built) (`Imperium-Knowledge/现行/城/城建-生成流程.md` L10;
+`Imperium-Knowledge/designs/回报/规矩落地与流程工具/判断类裁定盘点.md` L61). An approved reference is traced 1:1 into cells, by household,
+a few very tightly packed roofs being recorded as one household and one building, and then each piece is replaced by
+Imperium's own; the traced examples are distilled into a generation order for cities without a reference
+(`Imperium-Knowledge/现行/城/城建-生成流程.md` L11; `Imperium-Knowledge/designs/tools/方向表.md` L10;
+`Imperium-Knowledge/designs/回报/进度-读地块入口.md` L14). The self-check adds whether the city looks grown: the share of shared
+walls or aligned houses, on how many sides a yard is enclosed, into how many pieces green space breaks, into how many
+segments a road is cut, and how many kinds of element there are, with the traced Anno version as the standard
+(`Imperium-Knowledge/现行/城/城建-生成流程.md` L11; `Imperium-Knowledge/09_地图生成与CBF技术.md` L899). Effect: it looks grown, neither
+empty nor cluttered (`Imperium-Knowledge/现行/城/城建-生成流程.md` L11). The grass standard is a reference, not a threshold;
+beyond its range one sentence says why (`Imperium-Knowledge/现行/城/罗马城-做法与顺序.md` L171;
 `Imperium-Knowledge/designs/回报/进度-拷打入账.md` L23).
 
 > [!NOTE]
-> **Unverified**: the standard values of visible green inside the wall are proposals inferred from the reference, "由用户定":
-> dense core about 10 to 18%, edge housing 13 to 33%, island 7 to 19%, palace and gardens about 17 to 20%; the same page
-> also gives corrected values of about 18 to 20% for the palace and 8 to 20% for the island, and the sample's green
-> exceeded the reference in all nine boxes (`Imperium-Knowledge/designs/研究/城/纪元资料/河湾聚落尺度查证.md` L81-86,
-> L106, L111). Whether the palace standard is quoted with the water misreading removed or measured again is for the user
-> to choose (`Imperium-Knowledge/designs/回报/草地量具独立核.md` L15).
+> **Unverified**: the standard values of visible green inside the wall are proposals inferred from the reference,
+> "由用户定": dense core about 10 to 18%, edge housing 13 to 33%, island 7 to 19%, palace and gardens about 17 to 20%; the
+> same page also gives corrected values of about 18 to 20% for the palace and 8 to 20% for the island, and none of the
+> nine sample boxes falls within the reference limits, eight being above and one (south-east inside the gate, 12%) below
+> (`Imperium-Knowledge/designs/研究/城/纪元资料/河湾聚落尺度查证.md` L81-86, L106, L111). Whether the palace standard is quoted with
+> the water misreading removed or measured again is for the user to choose (`Imperium-Knowledge/designs/回报/草地量具独立核.md`
+> L15).
 
 The unit of learning is the district: what a district holds, the coordinates of its pieces and their relations, not what
 one house should have; each piece can state its reason for being in the district, and scattered pieces without a reason
@@ -811,17 +807,18 @@ to the user, then laid out and shown again before the next, the first being the 
 
 A whole city is first laid by hand on one real terrain snapshot and turned into rules only after the user has seen and
 accepted it, and the generator's output on the same snapshot is compared with it cell by cell to measure reproduction
-(`Imperium-Knowledge/现行/城/罗马城-做法与顺序.md` L53; `Imperium-Knowledge/09_地图生成与CBF技术.md` L676). The approved
-sketches are first dissected, what, where and why, then a city is laid by hand on real terrain for the user to approve,
-then rules are drawn back out of it, the algorithm first having to reproduce the hand-laid map
+(`Imperium-Knowledge/现行/城/罗马城-做法与顺序.md` L53; `Imperium-Knowledge/09_地图生成与CBF技术.md` L676). The approved sketches are
+first dissected, what, where and why, then a city is laid by hand on real terrain for the user to approve, then rules
+are drawn back out of it, the algorithm first having to reproduce the hand-laid map
 (`Imperium-Knowledge/09_地图生成与CBF技术.md` L693-696). The aim is a reproducible template that learns the Roman way of
 building a city as a whole and builds by it; a result unlike what was imagined does not pass
-(`Imperium-Knowledge/现行/城/罗马城-做法与顺序.md` L54). A city is not measured in area and single-colour rectangles; it
-has content (`Imperium-Knowledge/designs/tools/红线表.md` L22; `Imperium-Knowledge/designs/整理/城建错题转拦截-2026-11-05.md`
-L16, L57). The base for changes is the user-approved templates and traced lines
-(`Imperium-Knowledge/现行/城/城建-生成流程.md` L21; `Imperium-Knowledge/designs/city-plans/城建基准.md` L4). For now only
-plain cities, a river through them included, are handled, and sites where rock or mountain presses on the city and wide
-river mouths come later (`Imperium-Knowledge/现行/城/城建-生成流程.md` L46).
+(`Imperium-Knowledge/现行/城/罗马城-做法与顺序.md` L54). A city is not to take area and single-colour rectangles as its unit, since
+it then has no content; this is recorded at level 记下 in the red-line table, and the correction table proposes keeping
+only this half of the original line (`Imperium-Knowledge/designs/tools/红线表.md` L22;
+`Imperium-Knowledge/designs/整理/城建错题转拦截-2026-11-05.md` L16, L57). The base for changes is the user-approved templates and
+traced lines (`Imperium-Knowledge/现行/城/城建-生成流程.md` L21; `Imperium-Knowledge/designs/city-plans/城建基准.md` L4). For now
+only plain cities, a river through them included, are handled, and sites where rock or mountain presses on the city and
+wide river mouths come later (`Imperium-Knowledge/现行/城/城建-生成流程.md` L46).
 
 > [!NOTE]
 > **Unverified**: the card still states the comparison with a generator's output, while the ring generator was dropped
@@ -829,36 +826,33 @@ river mouths come later (`Imperium-Knowledge/现行/城/城建-生成流程.md` 
 > (`Imperium-Knowledge/现行/城/罗马城-做法与顺序.md` L53; `Imperium-Knowledge/09_地图生成与CBF技术.md` L693-696, L905).
 
 > [!NOTE]
-> **Deleted**: the build-by-weights line (按权建城), the RC1 city laid by an algorithm that read the
-> terrain, placed citadel, city centre and main streets by weight, grew the city by weight into a band along the avenue,
-> straightened dike and river by weight and pulled the wall last, its units area and single-colour rectangles and its
-> blocks drawn as equal squares (`Imperium-Knowledge/09_地图生成与CBF技术.md` L689-696;
-> `Imperium-Knowledge/designs/整理/城建错题转拦截-2026-11-05.md` L61). It was stopped because the weights were guessed
-> numbers, three earlier sketches being found more useful, and the weights came back only to decide what goes inside the
-> circle (`Imperium-Knowledge/09_地图生成与CBF技术.md` L696, L700, L711;
-> `Imperium-Knowledge/designs/回报/审查-城建版本盘点-2026-11-10.md` L19;
-> `Imperium-Knowledge/designs/整理/原意走样排查-2026-11-06.md` L14; `Imperium-Knowledge/designs/整理/整理方案-2026-11-02.md`
-> L463; `Imperium-Knowledge/designs/回报/审查-原意走样二.md` L66; `Imperium-Knowledge/现行/索引.md` L451).
+> **Deleted**: the build-by-weights line (按权建城), the RC1 city laid by an algorithm that read the terrain, placed
+> citadel, city centre and main streets by weight, grew the city by weight into a band along the avenue, straightened
+> dike and river by weight and pulled the wall last, its units area and single-colour rectangles and its blocks drawn as
+> equal squares (`Imperium-Knowledge/09_地图生成与CBF技术.md` L689-696; `Imperium-Knowledge/designs/整理/城建错题转拦截-2026-11-05.md`
+> L61). It was stopped because the weights were guessed numbers, and the weights came back only to decide what goes
+> inside the circle; the user's finding that three earlier sketches were more useful was later superseded by R-1112-0804
+> (`Imperium-Knowledge/09_地图生成与CBF技术.md` L696, L700, L711; `Imperium-Knowledge/designs/回报/审查-城建版本盘点-2026-11-10.md` L19;
+> `Imperium-Knowledge/designs/整理/原意走样排查-2026-11-06.md` L14; `Imperium-Knowledge/designs/整理/整理方案-2026-11-02.md` L463;
+> `Imperium-Knowledge/designs/回报/审查-原意走样二.md` L66; `Imperium-Knowledge/现行/索引.md` L451).
 
 > [!NOTE]
 > **Deleted**: the ring line, in which the `city ring` generator grew a circle and laid the city inside it: with it went
 > the city-building baseline (城建基准) and its outline faults, the three outline versions and the outline trials (the
 > outline retreating along roads and water, the cut-corner rectangle), the v3A whole-city line and the ring grown by
 > patches, the road-network-first switch, the city-check row it printed for each case, its order of first plaza,
-> patches, trunk, palace quarter, large pieces, secondary streets and blocks, wall, the eight steps of laying out a city,
-> the research recommendation to grow its outline as a union of pieces under a larger circle, and the questions its
-> trials left open (`Imperium-Knowledge/designs/city-plans/城建基准.md` L4-30;
-> `Imperium-Knowledge/designs/研究/城/成熟城建生成-外形与城墙-2026-11-11.md` L8-16, L112-137;
-> `Imperium-Knowledge/designs/回报/调研-成熟城建生成.md` L21-25;
-> `Imperium-Knowledge/designs/派活/放弃分支.md` L34, L39-40; `Imperium-Knowledge/designs/回报/试做-切角长方形.md` L4;
-> `Imperium-Knowledge/designs/回报/试做-路网先成.md` L13-15; `Imperium-Knowledge/designs/回报/试做-圈内排城.md` L19-23;
-> `Imperium-Knowledge/designs/回报/Code-第二段轮廓-导出.md` L20; `Imperium-Knowledge/designs/回报/Code-第二段轮廓复用.md`
-> L31; `Imperium-Knowledge/designs/回报/基准改外缘.md` L10;
-> `Imperium-Knowledge/designs/做法史/城建·生成流程.md` L12, L26; `Imperium-Knowledge/designs/tools/方向表.md` L53). A
-> ruling dropped the generator, its outlines and the outline versions and sends the city only by templates, and a later
-> one deleted the eight steps (`Imperium-Knowledge/09_地图生成与CBF技术.md` L905;
-> `Imperium-Knowledge/designs/整理/整理记录-2026-11-02.md` L381-470, L517; `Imperium-Knowledge/现行/城/城建-生成流程.md`
-> L13, L21; `Imperium-Knowledge/现行/城/罗马城-做法与顺序.md` L94).
+> patches, trunk, palace quarter, large pieces, secondary streets and blocks, wall, the eight steps of laying out a
+> city, the research recommendation, a proposal whose circle multiple was left for the user to set, to grow its outline
+> as a union of pieces under a larger circle, and the questions its trials left open
+> (`Imperium-Knowledge/designs/city-plans/城建基准.md` L4-30; `Imperium-Knowledge/designs/研究/城/成熟城建生成-外形与城墙-2026-11-11.md`
+> L8-16, L112-137; `Imperium-Knowledge/designs/回报/调研-成熟城建生成.md` L21-25; `Imperium-Knowledge/designs/派活/放弃分支.md` L34,
+> L39-40; `Imperium-Knowledge/designs/回报/试做-切角长方形.md` L4; `Imperium-Knowledge/designs/回报/试做-路网先成.md` L13-15;
+> `Imperium-Knowledge/designs/回报/试做-圈内排城.md` L19-23; `Imperium-Knowledge/designs/回报/Code-第二段轮廓-导出.md` L20;
+> `Imperium-Knowledge/designs/回报/Code-第二段轮廓复用.md` L31; `Imperium-Knowledge/designs/回报/基准改外缘.md` L10;
+> `Imperium-Knowledge/designs/做法史/城建·生成流程.md` L12, L26; `Imperium-Knowledge/designs/tools/方向表.md` L53). A ruling dropped
+> the generator, its outlines and the outline versions and sends the city only by templates, and a later one deleted the
+> eight steps (`Imperium-Knowledge/09_地图生成与CBF技术.md` L905; `Imperium-Knowledge/designs/整理/整理记录-2026-11-02.md` L381-470,
+> L517; `Imperium-Knowledge/现行/城/城建-生成流程.md` L13, L21; `Imperium-Knowledge/现行/城/罗马城-做法与顺序.md` L94).
 
 ### From framework to ICF
 
@@ -869,15 +863,14 @@ the end sufficing, the East plaza from tracing to the 350 map, all other distric
 reference cities are done, the second with no new tools; and the same kind of district spectrum laid on two different
 pieces of land looks different and still reads as a Roman city (`Imperium-Knowledge/现行/城/城建-生成流程.md` L36;
 `Imperium-Knowledge/designs/做法史/城建·生成流程.md` L28, L31; `Imperium-Knowledge/designs/回报/进度-拷打入账.md` L27;
-`Imperium-Knowledge/designs/回报/进度-拷打入账二.md` L24, L47). The formats of template and spectrum are extensible, a
-new kind of terrain not changing them, and variety comes from several reference cities, from ranges and relations
-recorded in the spectrum and from terrain (`Imperium-Knowledge/现行/城/城建-生成流程.md` L37-38;
-`Imperium-Knowledge/designs/研究/城/布置思路.md` L30; `Imperium-Knowledge/designs/做法史/城建·生成流程.md` L29).
-Diversity matters more than speed (`Imperium-Knowledge/designs/研究/城/布置思路.md` L30). What the framework hands to ICF
-is the layout table, cards, positions, uses and tiers, while room contents, people, goods and guards belong to ICF
-(`Imperium-Knowledge/现行/城/城建-生成流程.md` L40). ICF is the general framework that generates fitting land for imperial
-content from the plot onward and works with the whole city system; once it is done the names CBF and GL no longer appear
-(`Imperium-Knowledge/designs/回报/规矩落地与流程工具/判断类裁定盘点.md` L56).
+`Imperium-Knowledge/designs/回报/进度-拷打入账二.md` L24, L47). The formats of template and spectrum are extensible, a new kind
+of terrain not changing them, and variety comes from several reference cities, from ranges and relations recorded in the
+spectrum and from terrain (`Imperium-Knowledge/现行/城/城建-生成流程.md` L37-38; `Imperium-Knowledge/designs/研究/城/布置思路.md` L30;
+`Imperium-Knowledge/designs/做法史/城建·生成流程.md` L29). Diversity matters more than speed
+(`Imperium-Knowledge/designs/研究/城/布置思路.md` L30). What the framework hands to ICF is the layout table, cards, positions,
+uses and tiers, while room contents, people, goods and guards belong to ICF (`Imperium-Knowledge/现行/城/城建-生成流程.md` L40).
+ICF is the general framework (通用框架); once it is done the names CBF and GL no longer appear, `ledger sync` only counting
+them (`Imperium-Knowledge/designs/回报/规矩落地与流程工具/判断类裁定盘点.md` L56).
 
 ## How a city grows
 
@@ -897,11 +890,11 @@ with the core set where water and roads meet (`Imperium-Knowledge/designs/city-p
 L8, L22).
 
 The main core fixes the main circle, and the circle of a secondary core (辅核心) lies inside the main circle; the main
-circle fixes only area and core and does not generate the wall's shape (`Imperium-Knowledge/现行/城/罗马城-做法与顺序.md`
-L86). A city of small area needs no secondary core (`Imperium-Knowledge/09_地图生成与CBF技术.md` L711), and whether a
-city has one is in [cities-inside.md](cities-inside.md). Rome fixes its core from the start and only expands outward
-when area runs short, while the medieval city grows from village to town to city and later clears its core and rebuilds
-it regularly (`Imperium-Knowledge/09_地图生成与CBF技术.md` L700).
+circle fixes only area and core and does not generate the wall's shape (`Imperium-Knowledge/现行/城/罗马城-做法与顺序.md` L86). A
+city of small area needs no secondary core (`Imperium-Knowledge/09_地图生成与CBF技术.md` L711), and whether a city has one is
+in [cities-inside.md](cities-inside.md). Rome fixes its core from the start and only expands outward when area runs
+short, while the medieval city grows from village to town to city and later clears its core and rebuilds it into a
+regular form (`Imperium-Knowledge/09_地图生成与CBF技术.md` L700).
 
 ### The outline
 
@@ -909,39 +902,37 @@ The outline is grown. The attraction field and weights decide only what is place
 outline; the outer edge decides only which places are to be enclosed and roughly where the guide line runs. Extension
 blocks stretch along the roads, the outer ends of rows and columns differ in length, the edge is not flush, and blocks
 are not lined up side by side in vertical rows. Effect: the city reads as grown from the core, and the wall as several
-continuous lines of defence (`Imperium-Knowledge/现行/城/罗马城-做法与顺序.md` L85; `Imperium-Knowledge/09_地图生成与CBF技术.md`
-L796; `Imperium-Knowledge/designs/整理/原意走样排查-2026-11-06.md` L14, L28;
-`Imperium-Knowledge/designs/整理/城建错题转拦截-2026-11-05.md` L28) (replaces `Imperium-Knowledge/09_地图生成与CBF技术.md`
-L772, the city growing block by block to an edge of grid steps). Fixing the outer shape first and letting the city fill
-it is a rejected way of working (`Imperium-Knowledge/designs/tools/默认用规则.md` L170;
+continuous lines of defence (`Imperium-Knowledge/现行/城/罗马城-做法与顺序.md` L85; `Imperium-Knowledge/09_地图生成与CBF技术.md` L796;
+`Imperium-Knowledge/designs/整理/原意走样排查-2026-11-06.md` L14, L28; `Imperium-Knowledge/designs/整理/城建错题转拦截-2026-11-05.md`
+L28) (replaces `Imperium-Knowledge/09_地图生成与CBF技术.md` L772, the city growing block by block to an edge of grid steps).
+The city's outline is grown by the city, the field and weights deciding only what goes inside the circle, and is not
+fixed first for the city to fill (`Imperium-Knowledge/designs/tools/默认用规则.md` L170;
 `Imperium-Knowledge/designs/做法史/罗马城·做法与顺序.md` L154).
 
-With equal cost on all four sides the edge lies about equally far from the core and the city comes out roughly round; this
-is a result of how it grows, not a goal. Departure from it has only two kinds of cause: force majeure, water, cliff, rock
-or soft ground in the way, and actively borrowing an advantage, following a road, lying beside water, or taking rock and
-water that defend themselves (`Imperium-Knowledge/现行/城/罗马城-做法与顺序.md` L118;
+With equal cost on all four sides the edge lies about equally far from the core and the city comes out roughly round;
+this is a result of how it grows, not a goal. Departure from it has only two kinds of cause: force majeure, water,
+cliff, rock or soft ground in the way, and actively borrowing an advantage, following a road, lying beside water, or
+taking rock and water that defend themselves (`Imperium-Knowledge/现行/城/罗马城-做法与顺序.md` L118;
 `Imperium-Knowledge/09_地图生成与CBF技术.md` L801) (replaces `Imperium-Knowledge/09_地图生成与CBF技术.md` L702;
-`Imperium-Knowledge/designs/做法史/罗马城·墙.md` L9; `Imperium-Knowledge/14_来源同步与权威.md` L56, the ideal city close
-to a circle and roundness as no goal). The shape is not fixed by proportion and comes from growing out of the city's
-centre; without high ground, a city beside water has its long axis and its main street along the water, and no ratio of
-length to width is set, since 1.5:1 came from Damascus alone (`Imperium-Knowledge/现行/城/罗马城-做法与顺序.md` L126-127;
-`Imperium-Knowledge/09_地图生成与CBF技术.md` L801) (replaces `Imperium-Knowledge/designs/做法史/罗马城·墙.md` L9, the
-shape stretched to about 1.5:1). With high ground, the first plaza of a city backed by a mountain lies on the open ground
-in front of the rock, the city grows from the plaza and stops at the rock's edge, and the rock is only the edge of the
-city area; the samples are S49, R1 and image three, the approved images listed under References
-(`Imperium-Knowledge/现行/城/罗马城-做法与顺序.md` L128; `Imperium-Knowledge/09_地图生成与CBF技术.md` L809). The first
-plaza is about equally far from the city area's edge in four directions, checked by I12
-(`Imperium-Knowledge/现行/城/罗马城-做法与顺序.md` L128).
+`Imperium-Knowledge/designs/做法史/罗马城·墙.md` L9; `Imperium-Knowledge/14_来源同步与权威.md` L56, the ideal city close to a circle
+and roundness as no goal). The shape is not fixed by proportion and comes from growing out of the city's centre; without
+high ground, a city beside water has its long axis and its main street along the water, and no ratio of length to width
+is set, since 1.5:1 came from Damascus alone (`Imperium-Knowledge/现行/城/罗马城-做法与顺序.md` L126-127;
+`Imperium-Knowledge/09_地图生成与CBF技术.md` L801) (replaces `Imperium-Knowledge/designs/做法史/罗马城·墙.md` L9, the shape stretched
+to about 1.5:1). With high ground, the first plaza of a city backed by a mountain lies on the open ground in front of
+the rock, the city grows from the plaza and stops at the rock's edge, and the rock is only the edge of the city area;
+the samples are S49, R1 and image three (`Imperium-Knowledge/现行/城/罗马城-做法与顺序.md` L128;
+`Imperium-Knowledge/09_地图生成与CBF技术.md` L809). The first plaza is about equally far from the city area's edge in four
+directions, checked by I12 (`Imperium-Knowledge/现行/城/罗马城-做法与顺序.md` L128).
 
 The city's outline grows on the terrain made for the site when the map is generated: it grows outward from the core,
-stops at mountain foot or shore and takes them as edges, and the wall follows the city; it does not grow by tuning
-weights (`Imperium-Knowledge/现行/城/罗马城-做法与顺序.md` L52). Rome's circle folds regularly, with edges only
-horizontal, vertical and 45°, straight runs, and folds where terrain and direction change, so that it does not grow into
-a round on flat land; the sample is the right-hand image of
-`Imperium-Knowledge/designs/回报/Code-第二段轮廓-校准与核心/校准-R1-第四轮.png`, and the circle keeps the city from
-leaving it throughout the ICF framework (`Imperium-Knowledge/现行/城/罗马城-做法与顺序.md` L129). Variants come from each
-map's roads, rivers and rock making the city grow differently, and the circle is not changed to force a shape
-(`Imperium-Knowledge/现行/城/城建-生成流程.md` L45). How the circle and the site are found is in
+stops at mountain foot or shore and takes them as edges, and the wall follows the wall card (罗马城-墙); it does not grow by
+tuning weights (`Imperium-Knowledge/现行/城/罗马城-做法与顺序.md` L52). Rome's circle folds regularly, with edges only horizontal,
+vertical and 45°, straight runs, and folds where terrain and direction change, so that it does not grow into a round on
+flat land; the sample is the right-hand image of `Imperium-Knowledge/designs/回报/Code-第二段轮廓-校准与核心/校准-R1-第四轮.png`, and the
+circle keeps the city from leaving it throughout the ICF framework (`Imperium-Knowledge/现行/城/罗马城-做法与顺序.md` L129).
+Variants come from each map's roads, rivers and rock making the city grow differently, and the circle is not changed to
+force a shape (`Imperium-Knowledge/现行/城/城建-生成流程.md` L45). How the circle and the site are found is in
 [cities-siting.md](cities-siting.md), and how the wall is laid round the city in [cities-walls.md](cities-walls.md).
 
 > [!NOTE]
@@ -954,21 +945,18 @@ map's roads, rivers and rock making the city grow differently, and the circle is
 The period table has four periods (`Imperium-Knowledge/现行/城/罗马城-做法与顺序.md` L99-103;
 `Imperium-Knowledge/09_地图生成与CBF技术.md` L752):
 
-1. Founding (一期·立城): the whole skeleton (palace quarter, first plaza, main street, second plaza, main bridge, gate
-   positions), the densest grid ring around the core, quay walls and quays on the river reach inside the
-   city, a cemetery along the road outside the gate, and the first wall pulled at the end
-   (`Imperium-Knowledge/现行/城/罗马城-做法与顺序.md` L100; `Imperium-Knowledge/09_地图生成与CBF技术.md` L801).
-2. Expansion (二期·扩城): the grid grows outward, aligned slightly offset from period 1; the bath group, quays and arrival
-   place, sanctuary, the district on the far bank and secondary bridges; the outer wall pulled at the end
-   (`Imperium-Knowledge/现行/城/罗马城-做法与顺序.md` L101).
-3. Filling (三期·填充): lanes through blocks, shops on secondary streets encroaching on the street, one small plaza with
-   fountain and market for each housing district, the workshop group, and gardens near the core filled by new
-   households (`Imperium-Knowledge/现行/城/罗马城-做法与顺序.md` L102).
-4. Outside the city (四期·城外): gate gardens and orchards, estates along the great road, fields, which a large city does
-   not place, no added cemetery outside the gates for a large city, and road beautification
-   (`Imperium-Knowledge/现行/城/罗马城-做法与顺序.md` L103); a large city keeps outside its wall only the roads from its
-   gates, and what lies outside each city is in [cities-outside.md](cities-outside.md)
-   (`Imperium-Knowledge/现行/城/罗马城-墙外.md` L13-14).
+1. Founding (一期·立城): the whole skeleton (palace quarter, first plaza, main street, second plaza, lifeline (命脉线), main
+bridge, gate positions), the densest grid ring around the core, quay walls and quays on the river reach inside the city,
+a cemetery along the road outside the gate, and the first wall pulled at the end (`Imperium-Knowledge/现行/城/罗马城-做法与顺序.md`
+L100; `Imperium-Knowledge/09_地图生成与CBF技术.md` L801). 2. Expansion (二期·扩城): the grid grows outward, aligned slightly offset
+from period 1; the bath group, quays and arrival place, sanctuary, the district on the far bank and secondary bridges;
+the outer wall pulled at the end (`Imperium-Knowledge/现行/城/罗马城-做法与顺序.md` L101). 3. Filling (三期·填充): lanes through
+blocks, shops on secondary streets encroaching on the street, one small plaza with fountain and market for each housing
+district, the workshop group, and gardens near the core filled by new households (`Imperium-Knowledge/现行/城/罗马城-做法与顺序.md`
+L102). 4. Outside the city (四期·城外): gate garden plots, estates along the great road, fields (which a large city does not
+place), no added cemetery outside the gates for a large city, and road beautification
+(`Imperium-Knowledge/现行/城/罗马城-做法与顺序.md` L103); a large city keeps outside its wall only the roads from its gates, and
+what lies outside each city is in [cities-outside.md](cities-outside.md) (`Imperium-Knowledge/现行/城/罗马城-墙外.md` L13-14).
 
 These replace the earlier period 3 with a barracks group, a monastery on the garden belt and a district church for each
 housing district, and the earlier period 4 with pasture and woodland
@@ -987,16 +975,14 @@ in [cities-inside.md](cities-inside.md) (`Imperium-Knowledge/现行/城/罗马�
 ### Enlargement and its traces
 
 From period 2 the wall line of period 1 becomes the old-town boundary ring (旧城界环): the old gate positions become round
-plazas, the old wall belt becomes the large-piece belt (大件带), holding garden plots with the base game's crops, of which
-there may be many, and depots, and the ring street may be broken (`Imperium-Knowledge/现行/城/罗马城-城内.md` L200;
-`Imperium-Knowledge/designs/city-plans/城市建筑学对照-罗马城理念-2026-10-30.md` L23, L51) (replaces
-`Imperium-Knowledge/designs/city-plans/城市建筑学对照-罗马城理念-2026-10-30.md` L52, the old wall line as a ring street
-with the gate arch kept). The large-piece belt exists only from period 2; against the present wall only
-the ring road (环城路) is left, with no garden between wall and blocks, and the city inside the first wall is full
-(`Imperium-Knowledge/designs/回报/审查-城卡同类冲突-2026-11-10.md` L28, L32, L41, L43;
-`Imperium-Knowledge/09_地图生成与CBF技术.md` L789). Around a wall, inside and outside, the things that need much land
-gather first, and the next enlargement takes them in (`Imperium-Knowledge/designs/city-plans/城市建筑学对照-罗马城理念-2026-10-30.md`
-L13).
+plazas, the old wall belt becomes the large-piece belt (大件带), holding garden plots with the base game's crops, open
+reservoirs and depots, the garden plots and open reservoirs being allowed to be many, and the ring street may be broken
+(`Imperium-Knowledge/现行/城/罗马城-城内.md` L200; `Imperium-Knowledge/designs/city-plans/城市建筑学对照-罗马城理念-2026-10-30.md` L23, L51)
+The large-piece belt exists only from period 2; against the present wall only the ring road (环城路) is left, with no
+garden between wall and blocks, and the city inside the first wall is full
+(`Imperium-Knowledge/designs/回报/审查-城卡同类冲突-2026-11-10.md` L28, L32, L41, L43; `Imperium-Knowledge/09_地图生成与CBF技术.md`
+L789). Around a wall, inside and outside, the things that need much land gather first, and the next enlargement takes
+them in (`Imperium-Knowledge/designs/city-plans/城市建筑学对照-罗马城理念-2026-10-30.md` L13).
 
 Period 2 also leaves these traces: several stretches of old wall are kept as maintained monuments and district
 boundaries, with streets passing through newly opened arches; an old gate made a round plaza keeps its gate tower; the
