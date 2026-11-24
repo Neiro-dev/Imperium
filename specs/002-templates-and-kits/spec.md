@@ -50,20 +50,24 @@ the check, generation and the pieces each faction skins (FR-033). The second is 
 its factions share. The third is the faction's: which of its culture's templates its settlements are laid out from,
 picked on two dimensions, of which each culture uses only those it needs (FR-038 to FR-040):
 
-- **Attitude**, by the two fields with which a faction's definition says how it stands toward others, `naturalEnemy`
-  and `permanentEnemy` [Data: `Core/Defs/FactionDefs/Factions_Misc.xml` lines 202, 462, 485 and 529], read from the
+- **Attitude**, by the two fields with which a faction's definition says how it stands toward others, `naturalEnemy` and
+  `permanentEnemy` [Data: `Core/Defs/FactionDefs/Factions_Misc.xml` lines 202, 462, 485 and 529], read from the
   definition rather than bound to a faction's name. The tribal culture picks by it, as its factions' descriptions set:
   the gentle tribe, with neither field, is open to trade and alliances and gets an open village; the fierce tribe, a
   natural enemy, values warlike dominance and gets a walled stronghold; the savage tribe, a permanent enemy, is driven
-  by a blood-and-honor culture that cannot be allied with and gets a fortress [Data: same file, lines 445, 480 and
-  504, confirmed by the maintainer]. Since every faction's definition can hold the two fields, a faction another mod
-  adds picks the same way; that the medieval factions of other mods set them as the base game's factions do is an
-  inference, not yet checked.
+  by a blood-and-honor culture that cannot be allied with and gets a fortress [Data: same file, lines 445, 480 and 504,
+  confirmed by the maintainer]. Since every faction's definition can hold the two fields, as `Data/` sets them on
+  factions of every kind [Data: `Core/Defs/FactionDefs/Factions_Hidden.xml` lines 77 and 122;
+  `Ideology/Defs/FactionDefs/Factions_Misc.xml` lines 74 and 98; `Anomaly/Defs/FactionDefs/Factions_Misc.xml` line 8;
+  `Odyssey/Defs/FactionDefs/Factions_Misc.xml` line 198], a faction another mod adds picks the same way; that the
+  medieval factions of other mods set them as the base game's factions do is an inference, not yet checked.
 - **Terrain**, by the biomes a template suits (FR-001). The Empire picks by it alone, since its definition holds
   neither attitude field, only the factions it is not a permanent enemy of [Data:
-  `Royalty/Defs/FactionDefs/Faction_Empire.xml` lines 57-67]: in the temperate biomes the river-bend town [Data:
-  `Core/Defs/BiomeDefs/Biomes_Temperate.xml` lines 5 and 210], and in the desert and arid biomes a Romanized Egyptian
-  city, which is later work [Data: `Core/Defs/BiomeDefs/Biomes_WarmArid.xml` lines 5, 172 and 322; Direction;
+  `Royalty/Defs/FactionDefs/Faction_Empire.xml` lines 57-67], by the design's two looks of imperial cities, temperate
+  for temperate and cold regions and arid for hot, dry ones [Design: lines 208 and 162]: in the temperate and cold
+  biomes the river-bend town [Direction; Data: `Core/Defs/BiomeDefs/Biomes_Temperate.xml` lines 5 and 210;
+  `Core/Defs/BiomeDefs/Biomes_Cold.xml` lines 5, 198, 371, 586 and 710], and in the desert and arid biomes a Romanized
+  Egyptian city, which is later work [Direction; Data: `Core/Defs/BiomeDefs/Biomes_WarmArid.xml` lines 5, 172 and 322;
   Roadmap: R15].
 
 Mantle is a framework that other authors build on too [Design: line 221], so adding a culture asks only for its
@@ -112,7 +116,8 @@ Anno 117's Albion built only in the Celtic way, neither Romanized nor mixed, at 
 shown from above, either player-built and publicly shared or preset by the game for a governor or an AI rival. The
 maintainer chose among the candidates three cities that a player shared on Steam: Tir Uisce for the gentle tribe's
 open village, a Celtic oppidum for the fierce tribe's walled stronghold and a small Celtic hillfort for the savage
-tribe's fortress, with an agricultural island beside them as supplementary material only (FR-037) [Direction].
+tribe's fortress, with an agricultural island looked at beside them as supplementary material only, from which
+nothing is taken (FR-037) [Direction].
 
 The comparison is why the check outside the game exists [Direction]. Generation that is not held to a fixed skeleton,
 and a developer, a person or an AI, working toward a target, take shortcuts toward abstract geometric layouts, such as
@@ -164,6 +169,8 @@ template (FR-030), and the check in the game, the final one, still follows [Test
   fortress for the savage tribe (`Data/`, `Factions_Misc.xml` lines 445, 480 and 504, confirmed by the maintainer).
   The Empire, which holds neither field (`Faction_Empire.xml` lines 57-67), picks by terrain: the river-bend town in
   temperate biomes, and a Romanized Egyptian city in desert and arid ones later (the maintainer's broad direction).
+  These are the design's two looks of imperial cities, temperate for temperate and cold regions and arid for hot, dry
+  ones (Imperium-old `docs/glossary.md` lines 208 and 162), so the river-bend town suits the cold biomes too (FR-040).
 
 ## Sources
 
@@ -174,30 +181,34 @@ Each requirement below names its source in brackets. The sources are those the c
   mod's files in its folder, `Mantle/` or `Imperium/`, and the files that serve both at the repository root, and
   `contracts/about-xml.md`, which gives Mantle's package identifier.
 - **[Design]**: Imperium's own design, Imperium-old `main` (20a052b), `docs/glossary.md`, section City building and
-  generation: block library (line 167), city building (line 173), kit (line 184), piece (line 194), skeleton
-  (line 204), spec card (line 206), template (line 209) and Mantle (line 221); `docs/imperium.md`, section Expansions
-  (lines 108-110); and `docs/setting.md`, section Rome (lines 56 and 59-60).
+  generation: block library (line 167), city building (line 173), kit (line 184), piece (line 194), skeleton (line 204),
+  spec card (line 206), template (line 209), Mantle (line 221), and the looks of imperial cities, arid (line 162) and
+  temperate (line 208); `docs/imperium.md`, section Expansions (lines 108-110); and `docs/setting.md`, section Rome
+  (lines 57 and 60-61).
 - **[Testing]**: the constitution's Source Register, row Testing outside the game: the base game and official
   expansions in `Data/`; testing outside the game comes before testing in the game and does not replace it, and
   testing in the game is the final check.
-- **[Data]**: the base game and official expansions in `Data/` of RimWorld 1.7.5014: terrain
-  (`Core/Defs/TerrainDefs/`), and the affordances a terrain gives (`Terrain_Natural.xml` lines 5-7, 51-55 and
-  126-131); natural rock (`Core/Defs/ThingDefs_Buildings/Buildings_Natural.xml` line 47); roofs
-  (`Core/Defs/Misc/RoofDefs/Roofs.xml` lines 5, 14 and 24); the affordance a thing needs
-  (`Core/Defs/ThingDefs_Buildings/Buildings_Base.xml` line 11), or its material needs when the thing says so
-  (`Buildings_Structure.xml` lines 277-278; `Core/Defs/ThingDefs_Misc/Various_Stone.xml` line 88); the materials a
-  thing takes (`Buildings_Structure.xml` lines 286-290); a faction base's generation
+- **[Data]**: the base game and official expansions in `Data/` of RimWorld 1.7.5014: terrain (`Core/Defs/TerrainDefs/`),
+  and the affordances a terrain gives (`Terrain_Natural.xml` lines 5-7, 51-55 and 126-131); natural rock
+  (`Core/Defs/ThingDefs_Buildings/Buildings_Natural.xml` line 47); roofs (`Core/Defs/Misc/RoofDefs/Roofs.xml` lines 5,
+  14 and 24); the affordance a thing needs (`Core/Defs/ThingDefs_Buildings/Buildings_Base.xml` line 11), or its material
+  needs when the thing says so (`Buildings_Structure.xml` lines 277-278; `Core/Defs/ThingDefs_Misc/Various_Stone.xml`
+  line 88); the materials a thing takes (`Buildings_Structure.xml` lines 286-290); a faction base's generation
   (`Core/Defs/MapGeneration/BaseFactionMapGenerator.xml` lines 14-21); the smallest map a site needs
   (`Ideology/Defs/Sites/AncientComplex.xml` line 15); square maps (`Core/Languages/English/Keyed/Dialogs_Various.xml`
-  line 153); a site's map taking its own size (`Core/Defs/WorldObjectDefs/WorldObjects.xml` line 205); a thing placed
-  by its position as `(x, 0, z)`, its rotation and its material (`Odyssey/Defs/PrefabDefs/AncientPrefabs.xml` lines
-  12, 13 and 23); the factions that have settlements (`Royalty/Defs/FactionDefs/Faction_Empire.xml` line 5;
-  `Core/Defs/FactionDefs/Factions_Misc.xml` lines 185, 443, 511 and 517; `Odyssey/Defs/FactionDefs/Factions_Misc.xml`
-  lines 5, 17, 40-42, 168, 188 and 202-204); a faction's attitude (`Core/Defs/FactionDefs/Factions_Misc.xml` lines
-  202, 462, 485 and 529) and the descriptions of the gentle, fierce and savage tribes (same file, lines 445, 480 and
-  504); the factions the Empire is not a permanent enemy of (`Royalty/Defs/FactionDefs/Faction_Empire.xml` lines
-  57-67); the temperate biomes (`Core/Defs/BiomeDefs/Biomes_Temperate.xml` lines 5 and 210) and the desert and arid
-  ones (`Biomes_WarmArid.xml` lines 5, 172 and 322); and each expansion's `About/About.xml`.
+  line 153); a site's map taking its own size (`Core/Defs/WorldObjectDefs/WorldObjects.xml` line 205); a thing placed by
+  its position as `(x, 0, z)`, its rotation and its material (`Odyssey/Defs/PrefabDefs/AncientPrefabs.xml` lines 12, 13
+  and 23); the factions that have settlements (`Royalty/Defs/FactionDefs/Faction_Empire.xml` lines 5 and 11;
+  `Core/Defs/FactionDefs/Factions_Misc.xml` lines 9, 185, 224, 443, 511 and 517;
+  `Odyssey/Defs/FactionDefs/Factions_Misc.xml` lines 5, 17, 40-42, 168, 188 and 202-204); a faction's attitude
+  (`Core/Defs/FactionDefs/Factions_Misc.xml` lines 202, 462, 485 and 529), set on factions of every kind
+  (`Core/Defs/FactionDefs/Factions_Hidden.xml` lines 77 and 122; `Ideology/Defs/FactionDefs/Factions_Misc.xml` lines 74
+  and 98; `Anomaly/Defs/FactionDefs/Factions_Misc.xml` line 8; `Odyssey/Defs/FactionDefs/Factions_Misc.xml` line 198),
+  and the descriptions of the gentle, fierce and savage tribes (`Core/Defs/FactionDefs/Factions_Misc.xml` lines 445, 480
+  and 504); the factions the Empire is not a permanent enemy of (`Royalty/Defs/FactionDefs/Faction_Empire.xml` lines
+  57-67); the temperate biomes (`Core/Defs/BiomeDefs/Biomes_Temperate.xml` lines 5 and 210), the cold ones
+  (`Biomes_Cold.xml` lines 5, 198, 371, 586 and 710), the desert and arid ones (`Biomes_WarmArid.xml` lines 5, 172 and
+  322) and the tropical ones (`Biomes_Warm.xml` lines 5 and 203); and each expansion's `About/About.xml`.
 - **[EULA]**: `EULA.txt`, which is always followed (constitution, Source Register).
 - **[Direction]**: the maintainer's broad direction on where template layouts come from and how they are accepted,
   which Imperium-old's design leaves open (constitution, Source Register, row Imperium's own design; Principle IV):
@@ -248,7 +259,10 @@ Each requirement below names its source in brackets. The sources are those the c
     method that cannot express the town is fixed first. Once the calibration passes, the town's template ships as a
     regular template, as it stands, with no credit line.
 - **[Spec Kit]**: the feature description given to `/speckit-specify` (Input, above), the development workflow's
-  source for what a feature is for.
+  source for what a feature is for; and Spec Kit v1.4.3's own forms where the Input gives none: a report's findings
+  each with its location (`templates/commands/analyze.md` line 181), a rerun without changes giving the same results
+  (line 263), and a reviewer's judgment recorded as a checked item of a reviewer-owned checklist
+  (`templates/commands/checklist.md` lines 32-36).
 
 Imperium-old's earlier layout tool and the reverted spec of the earlier R13 are not sources, and nothing is taken from
 them.
@@ -346,24 +360,23 @@ cell, part and relation in the picture with the template.
 
 ---
 
-### User Story 4 - Check and see a kit's buildings (Priority: P4)
+### User Story 4 - Check a kit's buildings (Priority: P4)
 
 Where a kit has a block library, the ready-made blocks built from spec cards, the developer checks each spec card,
-the design card that fixes one building's plot, rooms and contents, and gets it as a picture of the building on the
-game's cells.
+the design card that fixes one building's plot, rooms and contents.
 
 **Why this priority**: A block library belongs to a kit, though the Empire's cities do not use one [Design: lines 167,
 206], so it comes after the checks every kit needs.
 
 **Independent Test**: Write a test kit with a block library of two spec cards, one with a known problem; check it and
-compare the report and the two pictures with the cards.
+compare the report with the cards.
 
 **Acceptance Scenarios**:
 
 1. **Given** a spec card whose contents name a definition `Data/` does not hold, **When** the check runs, **Then** it
    reports that name and the cell where it is.
-2. **Given** a checked spec card, **When** the developer opens its picture, **Then** its plot, rooms and contents are
-   shown on the grid, with a legend.
+2. **Given** a spec card with a room or thing past its plot, **When** the check runs, **Then** it reports the cell
+   (FR-007).
 
 ---
 
@@ -405,9 +418,9 @@ and confirm that no shared file was changed.
 - The pictures of the tribal culture's references are not yet in `template-references/`: its readings, kit and
   templates wait for them; the forms, the check, the Empire's kit and the river-bend town's template do not
   [Direction].
-- A faction holds an attitude that no template of its culture serves, or settles in a biome that none suits, such as
-  the Empire in a boreal forest before its other templates come: this feature gives it no template, and what
-  generation does then is R2's [Roadmap: R2, R15].
+- A faction holds an attitude that no template of its culture serves, or settles in a biome that none suits, such as the
+  Empire in a tropical rainforest, which is hot and wet and so neither of the design's looks (FR-040), before its other
+  templates come: this feature gives it no template, and what generation does then is R2's [Roadmap: R2, R15].
 - A faction another mod adds, such as a medieval mod's, holds the two attitude fields as every faction's definition
   can, and picks its culture's templates by them; that those mods set the fields as the base game's factions do is an
   inference, to be checked when the medieval culture's kit comes [Direction].
@@ -464,7 +477,7 @@ and confirm that no shared file was changed.
   EULA: line 76].
 - **FR-011**: The Empire's elements in a template or kit, such as the names in a word list and its public buildings,
   MUST come from Rome as reliable sources describe it, leaning toward New Rome, and not from popular images of Rome
-  or from a reference city [Design: setting.md lines 56, 59-60; Direction]. The tribal culture's word list MUST be
+  or from a reference city [Design: setting.md lines 57, 60-61; Direction]. The tribal culture's word list MUST be
   the one the base game names its tribes' settlements with [Data: `Core/Defs/FactionDefs/Factions_Misc.xml` line
   230].
 
@@ -475,13 +488,21 @@ and confirm that no shared file was changed.
 - **FR-013**: The check MUST report each name of a definition that it finds neither in `Data/` nor among the
   definitions of Mantle's and Imperium's mods [Testing; Data; Roadmap: R14].
 - **FR-014**: The check MUST report each name that stands where its kind of definition cannot go, such as a
-  definition that is not a terrain in a terrain shape, one that is not a wall in wall settings, or any thing a city is
-  built of placed on a template's cells (FR-002) [Data; Design: line 209].
+  definition that is not a terrain in a terrain shape, one that is not a wall in wall settings, one that is not a
+  biome, river or word list where a template's biomes, rivers or a kit's word list stand, or any thing a city is built
+  of placed on a template's cells (FR-002) [Data; Design: line 209]. It MUST also report each value not in its field's
+  form, such as an attitude field that is neither true nor false, a cell range, position, size or rotation not in the
+  form `Data/` writes it in, and a map size that is not square, and each required field left out, such as a template's
+  kit or smallest map (FR-001, FR-003) [Data: `AncientPrefabs.xml` lines 12 and 13; `Dialogs_Various.xml` line
+  153].
 - **FR-015**: The check MUST accept definitions of the base game and of each expansion that the mod holding the
   template, kit or laid-out city requires, none for Mantle's own mod and Royalty for Imperium, and MUST report a
   definition of any other expansion unless it is marked as that expansion's content, since a mod's requirements are
   the mods it needs to function and other expansions add content [Roadmap: R14, Releases; Design: imperium.md lines
-  108-110; Data: each expansion's `About/About.xml`].
+  108-110; Data: each expansion's `About/About.xml`]. A laid-out city, which comes from a template (FR-008), is held by
+  the mod that holds its template, and a reading, its template's source (FR-036), by the mod that holds the template
+  whose reference it reads; a reading that no template names yet is held by no mod, so it requires no expansion, and
+  every expansion's definition in it MUST be marked.
 - **FR-016**: The check MUST report each cell of a terrain shape that lies outside the smallest map its template
   states or outside a city's 350×350 map, each cell of a laid-out city that lies outside its map, and each cell of
   either that has no terrain [Data; Direction].
@@ -493,21 +514,23 @@ and confirm that no shared file was changed.
   cells, by its definition's size, reach past the map; and each material its definition does not take
   [Data: `Buildings_Structure.xml` lines 286-290].
 - **FR-019**: Each problem MUST be reported with its template, kit or laid-out city, the part it is in and, where it
-  has one, its cell [Spec Kit].
+  has one, its cell, as Spec Kit's own report gives each finding with its location [Spec Kit:
+  `templates/commands/analyze.md` line 181].
 - **FR-020**: Every result MUST state that testing in the game is the final check and that it is still to come; a
   template, kit or laid-out city with no problem found MUST NOT be reported as final [Testing; Roadmap: R13].
 - **FR-021**: The check MUST read the game's files where they are installed, and MUST NOT copy them into the repository
   or its results, beyond the names and labels it reports [EULA: line 86].
 - **FR-022**: The same template, kit or laid-out city, checked against the same `Data/` with the same reference
-  picture, MUST always give the same report and the same pictures [Testing].
+  picture, MUST always give the same report and the same pictures, as a rerun of Spec Kit's own report without changes
+  does [Spec Kit: `templates/commands/analyze.md` line 263].
 
 **The pictures**
 
 - **FR-023**: The check MUST draw each template as a picture of its site: every cell of the terrain shape in its place
   on a grid, the coordinates along the edges as the game gives positions, `x` and `z`
   [Data: `AncientPrefabs.xml` line 12], and the skeleton's parts and relations shown and named on it [Spec Kit].
-- **FR-024**: The check MUST draw each spec card as a picture of its building: its plot, rooms and contents on the
-  same kind of grid [Design: line 206; Spec Kit].
+- **FR-024**: Withdrawn: neither the Input nor another source asks for a picture of a spec card, so none is drawn;
+  spec cards are checked (FR-007, FR-013, FR-014) (constitution, Principle V).
 - **FR-025**: The check MUST draw each laid-out city on the same kind of grid, with each thing where it stands and each
   part of the template's skeleton named where it lies, and MUST set the whole drawing beside the whole of each
   reference picture given, so that all are seen at once; a template's picture MUST be set beside its reference
@@ -515,7 +538,8 @@ and confirm that no shared file was changed.
 - **FR-026**: Each picture MUST hold a legend that names each terrain, rock, roof and thing it shows under the label
   its definition gives, and names the expansion of each definition that is not the base game's [Data; Design:
   imperium.md line 110].
-- **FR-027**: Each problem that has a cell MUST be marked at that cell in the picture, with what it is [Spec Kit].
+- **FR-027**: Each problem that has a cell MUST be marked at that cell in the picture, with what it is, so that
+  FR-019's location is shown on FR-023's grid [FR-019; FR-023].
 - **FR-028**: The check MUST read a reference picture where the developer keeps it, and MUST NOT put it into
   the repository or either mod's released files [Direction; EULA: line 76].
 
@@ -524,7 +548,10 @@ and confirm that no shared file was changed.
 - **FR-029**: The check MUST measure whether each relation of the template's skeleton holds in the laid-out city, and
   MUST report each one that does not, with the parts it relates and where they lie [Design: line 204; Direction]. A
   laid-out city in which every relation holds MUST then be judged by the maintainer, who looks at the side-by-side
-  picture and accepts or rejects it; the check MUST NOT report a match by itself [Direction].
+  picture and accepts or rejects it; the check MUST NOT report a match by itself [Direction]. His judgment MUST be
+  recorded as an item of a reviewer-owned checklist in the feature where he judges it, one item for each picture,
+  naming the template or reading, the commit it was drawn from and where the picture is in the project's files, and
+  checked only when he accepts it [Spec Kit: `templates/commands/checklist.md` lines 32-36].
 - **FR-030**: A template MUST count as passing only once the check has drawn a city laid out from it, every relation
   of its skeleton holds there, and the maintainer has accepted the comparison with its reference as FR-029 sets,
   whoever wrote the template; the check in the game still follows [Direction; Testing].
@@ -547,14 +574,14 @@ and confirm that no shared file was changed.
   - Once the calibration passes, the town's template MUST ship with Imperium as a regular template, as it stands, with
     no step that changes its content [Direction; Roadmap: R15].
 - **FR-032**: Kits and templates MUST come, in time, for the culture of every faction that has settlements: the Empire
-  [Data: `Royalty/Defs/FactionDefs/Faction_Empire.xml` line 5], tribal and industrial (outlander) [Data:
-  `Core/Defs/FactionDefs/Factions_Misc.xml` lines 185 and 443], pirate [Data: same file, lines 511 and 517], medieval,
-  for the medieval factions other mods add [Direction], and Odyssey's Traders Guild and Salvagers, whose settlements lie
-  on the Orbit layer [Data: `Odyssey/Defs/FactionDefs/Factions_Misc.xml` lines 5, 17, 40-42, 168, 188 and 202-204]
-  [Design: line 184; Direction]. This feature MUST hold the tribal culture's kit and its first templates, one for each
-  attitude (FR-039), which Mantle's alpha opens as a mod of its own [Roadmap: R13, R14, Releases; Direction], and the
-  Empire's kit with the river-bend town's template, which come with Imperium [Roadmap: R15]; the other cultures' kits
-  and templates are later work [Direction; Roadmap: R13].
+  [Data: `Royalty/Defs/FactionDefs/Faction_Empire.xml` lines 5 and 11], tribal and industrial (outlander) [Data:
+  `Core/Defs/FactionDefs/Factions_Misc.xml` lines 9, 185, 224 and 443], pirate [Data: same file, lines 511 and 517],
+  medieval, for the medieval factions other mods add [Direction], and Odyssey's Traders Guild and Salvagers, whose
+  settlements lie on the Orbit layer [Data: `Odyssey/Defs/FactionDefs/Factions_Misc.xml` lines 5, 17, 40-42, 168, 188
+  and 202-204] [Design: line 184; Direction]. This feature MUST hold the tribal culture's kit and its first templates,
+  one for each attitude (FR-039), which Mantle's alpha opens as a mod of its own [Roadmap: R13, R14, Releases;
+  Direction], and the Empire's kit with the river-bend town's template, which come with Imperium [Roadmap: R15]; the
+  other cultures' kits and templates are later work [Direction; Roadmap: R13].
 - **FR-033**: Adding a culture MUST need only its skeletons, in its templates, and its kit [Direction]. Everything else
   MUST be shared and the same for every culture: the forms of templates and kits, the check outside the game and its
   pictures, generation's picking, mirroring, turning, stretching and filling [Roadmap: R2], and the pieces, which every
@@ -564,26 +591,33 @@ and confirm that no shared file was changed.
 - **FR-035**: The river-bend town MUST serve as the complete worked example, from its reference pictures through its
   skeleton and the Empire kit to the city generation lays out from them [Direction; FR-031].
 - **FR-036**: A culture's templates and kit MUST be taken from its reference city's reading: the reference is read onto
-  the game's cells, and the reading is set beside its pictures until it matches them, as the river-bend town's render
-  was; then the template's terrain shape and skeleton, and what the kit's groups, fill and wall settings hold, are taken
-  apart from the reading [Direction]. A new reading MUST be written in the laid-out city's form (FR-008), naming the
-  reference city it reads in place of a template and kit, so that the check checks it and draws it beside the
-  reference pictures as it does a laid-out city (FR-025) [Direction; Spec Kit]; the river-bend town's reading is its
-  render, which already exists (FR-031). A reading written in that form MUST be kept in the repository, outside both
-  mod folders and so outside their released files, as the template's source; its reference pictures MUST NOT be
-  (FR-028) [Direction; R14; EULA: line 76].
+  the game's cells, and the reading is set beside its pictures until the maintainer, judging it by eye beside them,
+  accepts it, recorded as FR-029 sets, as the river-bend town's render was judged; then the template's terrain shape and
+  skeleton, and what the kit's groups, fill and wall settings hold, are taken apart from the reading [Direction]. A new
+  reading MUST be written in the laid-out city's form (FR-008), naming the reference city it reads in place of a
+  template and kit, so that the check checks it and draws it beside the reference pictures as it does a laid-out city
+  (FR-025) [Direction; Spec Kit]; the river-bend town's reading is its render, which already exists (FR-031). A reading
+  written in that form MUST be kept in the repository, outside both mod folders and so outside their released files, as
+  the template's source; its reference pictures MUST NOT be (FR-028) [Direction; R14; EULA: line 76].
 - **FR-037**: The tribal culture's first templates and its kit MUST be taken from cities of Anno 117's Albion built
   only in the Celtic way, neither Romanized nor mixed, at the scale of a tribal settlement, and shown from above so
   that their layout can be read: player-built cities shared publicly from any source, or cities the game presets for
   a governor or an AI rival, which the maintainer chooses among candidates before their readings are written
   [Direction]. There MUST be one for each attitude (FR-039), from the references the maintainer chose: Tir Uisce for the
   gentle tribe's open village, a Celtic oppidum for the fierce tribe's walled stronghold and a small Celtic hillfort for
-  the savage tribe's fortress, whose pictures are kept in `template-references/` in the project's files; an agricultural
-  island MAY be consulted beside them as supplementary material only, and is the reference of no template
-  [Direction].
+  the savage tribe's fortress, Steam screenshots 3639186959, 3625652909 and 3621994739, whose pictures are kept in
+  `template-references/部落城-凯尔特/` in the project's files and never in the repository (FR-028). An agricultural
+  island, 3639163413, MAY be looked at beside them as supplementary material only, to help read them: no reading is
+  written of it, and it is the source of no template and of nothing in the kit [Direction]. A tribal template's extent
+  MUST be its reading's, laid on the game's cells with things of the sizes their definitions give (FR-036) [Data], and
+  is stated as its smallest map, no larger than a city's 350×350 map (FR-003); a tribal settlement's map is a city's
+  map, since the design's city building is the generation of every settlement [Design: line 173; Direction].
 - **FR-038**: Settlements MUST be built from three layers [Direction]: Mantle's, the same for every culture (FR-033);
   the culture's, one kit that all of the culture's factions share (FR-006); and the faction's, the templates of its
-  culture that its settlements are laid out from, picked by attitude (FR-039) and terrain (FR-040). A culture MUST
+  culture that its settlements are laid out from, picked by attitude (FR-039) and terrain (FR-040). A template MUST
+  serve a faction's settlement only where both hold: its two attitude fields match the faction's, and its biomes,
+  where it names any, include the settlement's [Direction; FR-039; FR-040]; which of several such templates
+  generation takes is R2's [Roadmap: R2]. A culture MUST
   pick only by the dimensions it needs [Direction]: the tribal culture's templates MUST leave their biomes open, and
   the Empire's MUST leave both attitude fields out, which serves the Empire, since it holds neither (FR-040).
 - **FR-039**: A template MUST state the attitude of the factions it serves in the two fields with which a faction's
@@ -596,10 +630,16 @@ and confirm that no shared file was changed.
   [Data: same file, lines 445, 480 and 504, confirmed by the maintainer].
 - **FR-040**: A template MUST state the biomes it suits, or none for any biome (FR-001). The Empire's templates MUST be
   picked by terrain alone, since the Empire's definition holds neither attitude field, only the factions it is not a
-  permanent enemy of [Data: `Royalty/Defs/FactionDefs/Faction_Empire.xml` lines 57-67]: the river-bend town's MUST suit
-  the temperate biomes, temperate forest and temperate swamp [Data: `Core/Defs/BiomeDefs/Biomes_Temperate.xml` lines 5
-  and 210], and a Romanized Egyptian city's, which is later work, the desert and arid ones [Data: `Biomes_WarmArid.xml`
-  lines 5, 172 and 322; Direction; Roadmap: R15].
+  permanent enemy of [Data: `Royalty/Defs/FactionDefs/Faction_Empire.xml` lines 57-67]. They MUST follow the design's
+  two looks of imperial cities: temperate, the look in temperate and cold regions, and arid, the look in hot, dry ones
+  [Design: lines 208 and 162], which the direction's temperate and desert and arid biomes name. The river-bend town's
+  MUST suit the temperate look's biomes: temperate forest and temperate swamp [Data:
+  `Core/Defs/BiomeDefs/Biomes_Temperate.xml` lines 5 and 210] and boreal forest, tundra, cold bog, ice sheet and sea ice
+  [Data: `Core/Defs/BiomeDefs/Biomes_Cold.xml` lines 5, 198, 371, 586 and 710] [Direction]. A Romanized Egyptian city's,
+  which is later work, MUST suit the arid look's: arid shrubland, desert and extreme desert [Data: `Biomes_WarmArid.xml`
+  lines 5, 172 and 322; Direction; Roadmap: R15]. "Temperate" here is the design's look, which is wider than the biomes
+  `Data/` calls temperate; the tropical biomes, hot and wet, belong to neither look [Data: `Biomes_Warm.xml` lines 5 and
+  203], and expansion biomes, which `Data/` places in neither file, are in neither list.
 
 ### Key Entities *(include if feature involves data)*
 
@@ -622,14 +662,15 @@ and confirm that no shared file was changed.
 - **Laid-out city**: the city generation lays out on a map from a template and a kit: each cell's terrain, rock and
   roof, each thing that stands there, and where each part of the skeleton lies.
 - **Reference city**: the city a template is drawn from, player-built and publicly shared or preset by the game,
-  and its **reference pictures**, such as a screenshot of it, which the developer keeps outside Imperium's files.
+  and its **reference pictures**, such as a screenshot of it, which the developer keeps outside the repository and
+  both mods' released files (FR-028).
 - **Reading**: a reference city drawn on the game's cells and set beside its pictures until it matches them, in the
   laid-out city's form, from which a culture's templates and kit are taken; for the river-bend town, its render. It is
   kept in the repository as its template's source; its reference pictures are not.
 - **Report**: what one run of the check found, each problem with its place, and the statement that the check in the
   game is still to come.
-- **Picture**: the drawing of one template, laid-out city or spec card, with grid, coordinates, legend and marked
-  problems, and for a template or laid-out city, the reference picture beside it.
+- **Picture**: the drawing of one template or laid-out city, with grid, coordinates, legend and marked problems, and
+  the reference picture beside it.
 
 ## Success Criteria *(mandatory)*
 
@@ -638,16 +679,19 @@ and confirm that no shared file was changed.
 - **SC-001**: For a set of test templates, kits and laid-out cities holding one problem of each kind that FR-013 to
   FR-018 and FR-029 name, the check reports 100% of the problems, and reports none for those that hold no problem.
 - **SC-002**: For every reported problem that has a cell, a developer finds that cell in the picture from the report
-  alone, without reading the template or laid-out city.
-- **SC-003**: Checking and drawing one template, or one laid-out city beside its reference, finishes before the game,
-  started on the same computer, reaches its main menu.
-- **SC-004**: 100% of reports state that testing in the game is the final check and is still to come.
+  alone, without reading the template or laid-out city (FR-019, FR-027).
+- **SC-003**: Checking and drawing one template, or one laid-out city beside its reference, finishes before the game
+  reaches its main menu, both on the maintainer's computer: the check run on that one file against `Data/` with every
+  expansion and with `--mod` for Mantle and Imperium, and the game launched without `-quicktest`, which starts straight
+  into a map (`Readme.txt` lines 58-60), with Royalty, Mantle and Imperium active, timed from launch to the main menu.
+  It measures the Input's "so that the developer can see it without starting the game" [Spec Kit].
+- **SC-004**: 100% of reports state that testing in the game is the final check and is still to come (FR-020).
 - **SC-005**: For every laid-out city given with a reference picture, the developer sees the whole city and the whole
-  reference at once, side by side, and can name in both where each part of the skeleton lies.
+  reference at once, side by side, and can name in both where each part of the skeleton lies (FR-025).
 - **SC-006**: No template counts as passing without a laid-out city from it in which every skeleton relation holds
   and whose comparison with its reference the maintainer has accepted (FR-030).
 - **SC-007**: The river-bend town's template passes the check, and in its picture beside each reference picture,
-  every part of its skeleton is found in the same relations to the river and to the other parts.
+  every part of its skeleton is found in the same relations to the river and to the other parts (FR-031).
 - **SC-008**: Before the tribal culture's kit and templates are written, the river-bend town's template and the
   Empire's kit pass the check and the template is drawn beside the screenshot and the render; before the town ships,
   a town that generation lays out from them keeps 100% of its skeleton relations and the maintainer has accepted it
@@ -655,8 +699,8 @@ and confirm that no shared file was changed.
 - **SC-009**: A test culture copied from the Empire kit and the river-bend town's template is checked and drawn with no
   change to any shared form, check, picture or piece (FR-033, FR-034).
 - **SC-010**: The tribal culture's kit and its three first templates are taken from the readings of the references
-  the maintainer chose, each template states the attitude of the tribe it serves, and all pass the check (FR-036,
-  FR-037, FR-039).
+  the maintainer chose, each of which he has accepted beside its pictures, each template states the attitude of the
+  tribe it serves, and all pass the check (FR-036, FR-037, FR-039).
 
 ## Assumptions
 
@@ -669,6 +713,8 @@ and confirm that no shared file was changed.
 - Mantle's own mod holds what every culture shares and the tribal culture's kit and templates; Imperium holds the
   Empire's kit and templates [Roadmap: R14, R15, Releases]. Both mod folders lie side by side in this repository, with
   the check and the readings at its root, and Mantle's package identifier is `Neiro.RimWorld.Mantle` [R14].
+- Every faction's definition can hold `naturalEnemy` and `permanentEnemy`, since `Data/` sets them on factions of
+  every kind, in Core and in the expansions (Sources, [Data], a faction's attitude).
 - Which culture a faction's settlements take, and the picking itself, are generation's; this feature gives templates
   the attitude and biomes that picking reads [Roadmap: R2].
 - Until R2 generates cities, the laid-out cities the check is tested with are written by hand from test templates and

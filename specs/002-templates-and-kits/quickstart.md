@@ -33,7 +33,8 @@ Source Register). Sources for each step are in [research.md](research.md) R-10 t
    of the skeleton is named in the picture and can be found in each reference. Give the picture to the maintainer in
    the project's files, not in the pull request, since it holds the screenshot.
 6. **The tribal culture** (SC-010, FR-036, FR-037, FR-039): run the check on each of the three tribal readings in
-   `readings/` with its reference pictures; expect no problem and a side-by-side picture the maintainer accepts. Then
+   `readings/` with its reference pictures; expect no problem and a side-by-side picture the maintainer accepts,
+   recorded as a checked item of `checklists/acceptance.md` (FR-029). Then
    run it on Mantle's tribal templates and kit; expect no problem, no definition of any expansion that is not marked
    (FR-015), and each template stating its tribe's attitude: neither field for the open village, `naturalEnemy` for
    the walled stronghold, `permanentEnemy` for the fortress, as `Factions_Misc.xml` lines 445, 480 and 504 set.
@@ -42,8 +43,9 @@ Source Register). Sources for each step are in [research.md](research.md) R-10 t
 8. **A copied culture** (SC-009): copy the kit and the river-bend template under a test culture's name in a scratch
    folder, change its wall settings and one relation, and check them; the report and pictures follow the changes, and
    `git status` shows no shared file changed.
-9. **Speed** (SC-003): checking and drawing the river-bend town finishes before the game, started on the same
-   computer, reaches its main menu.
+9. **Speed** (SC-003): on the maintainer's computer, checking and drawing the river-bend town against `Data/` with
+   every expansion and `--mod` for `Mantle/` and `Imperium/` finishes before the game, launched there without
+   `-quicktest` with Royalty, Mantle and Imperium, reaches its main menu.
 
 ## In the game
 

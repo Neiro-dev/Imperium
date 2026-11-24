@@ -80,7 +80,7 @@ true for a slot that a city may leave out (default false).
 corner, as `PrefabDef` places them (R-8). Every cell lies inside its `size`.
 
 **SpecCard**: `name`; `size`, its plot; `terrain`, a layer; `rooms`, each a `name` and `rects`; `things`, each in the
-thing form below. Every cell of its terrain, rooms and things lies inside its plot (FR-007, FR-024).
+thing form below. Every cell of its terrain, rooms and things lies inside its plot (FR-007).
 
 ## LaidOutCity (a file, root `LaidOutCity`)
 
@@ -96,6 +96,13 @@ thing form below. Every cell of its terrain, rooms and things lies inside its pl
 **Thing**: an element named by its `ThingDef`, holding `position`, `rotation`, `stuff` where the definition takes one,
 and `rect` where the definition's `size` is larger than one cell.
 
+A laid-out city is held, for FR-015, by the mod that holds its `template`; a reading by the mod that holds the template
+whose `reference` names it, or by no mod, requiring no expansion, while no template names it (FR-015).
+
+**A reading's acceptance**: a reading counts once the check reports no problem in it and the maintainer has accepted
+it beside its reference pictures (FR-036), recorded as an item of `checklists/acceptance.md` that names the reading,
+the commit and where the picture is in the project's files, checked when he accepts it (FR-029).
+
 ## Report and pictures
 
 A **problem** has a number, the file, the template, kit, city or spec card, the part or field, the cell where it has
@@ -108,8 +115,11 @@ come (FR-020). The picture files are listed in [contracts/check-command.md](cont
 | Problem | When | Source |
 |---------|------|--------|
 | unknown definition | a name found neither in `Data/` nor in the `Defs/` of the mods given | FR-013 |
-| wrong kind | a name where its kind cannot go: not a terrain in `terrain`, not natural in a terrain shape, not a wall in a `wallDef`, an unknown part or relation kind, a relation missing the field its kind needs | FR-014; R-4, R-5 |
-| other expansion | a definition of an expansion that the mod holding the file does not require, without that expansion's `MayRequire` | FR-015 |
+| wrong kind | a name where its kind cannot go: not a terrain in `terrain`, not natural in a terrain shape, not a wall in a `wallDef`, not a `BiomeDef` in `allowedBiomes`, not a `RiverDef` in `allowedRivers`, not a `RulePackDef` in `nameMaker`, an unknown part or relation kind, a relation missing the field its kind needs | FR-014; R-4, R-5 |
+| wrong form | a value not in its field's form: an attitude field that is not `true` or `false`; a rect, position, size or `minMapSize` not in its form; a rotation or `flowsFrom` that is not `North`, `East`, `South` or `West` | FR-014; R-3 |
+| not square | a `minMapSize` or a city's `size` whose `x` and `z` differ | FR-003, FR-014 |
+| missing field | a required field left out: a template's `kit` or `minMapSize`; a laid-out city's `template`, `kit` or `size`; a reading's `reference` or `size` | FR-001, FR-003, FR-008, FR-014 |
+| other expansion | a definition of an expansion that the mod holding the file, as FR-015 sets for laid-out cities and readings, does not require, without that expansion's `MayRequire` | FR-015 |
 | outside the map | a cell past `minMapSize`, past 350×350 or past a city's `size`; a cell of a group or spec card past its `size`; a thing whose cells reach past the map | FR-007, FR-016, FR-018 |
 | no terrain | a cell inside the map with no terrain | FR-016 |
 | unknown name | a relation naming a part or feature neither skeleton nor the terrain shape holds; a duplicate name | FR-017 |
@@ -128,5 +138,7 @@ The check stops, and reports nothing as passing, when `Data/` is missing or not 
 1. **Written**: in its mod's `Defs/TemplateDefs/`, taken from its culture's reading (FR-036).
 2. **Checked**: the check reports no problem in it or its kit.
 3. **Laid out**: a city generation laid out from it is checked, every relation holds (R2).
-4. **Accepted**: the maintainer has accepted the side-by-side picture (FR-029, FR-030). Only now does it count.
+4. **Accepted**: the maintainer has accepted the side-by-side picture, recorded as a checked item of a reviewer-owned
+   checklist naming the template, the commit and where the picture is in the project's files (FR-029, FR-030). Only
+   now does it count.
 5. **Confirmed in the game**: the final check, once R2 places it, or R15 for the Empire's (spec, Assumptions).

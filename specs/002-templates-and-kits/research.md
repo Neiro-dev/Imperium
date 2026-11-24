@@ -103,7 +103,7 @@ files, to `Neiro-dev/Imperium-old` at 20a052b, to Spec Kit at v1.4.3 and to Harm
   - A **part** has a `name`, a `kind` and, for a slot, `optional`. The kinds are those the design and the maintainer
     name as fixed parts of a layout: `Core` [line 174], `SecondaryCore` [200], `PalaceQuarter` [193], `Gate` [204],
     `RiverGate` [197], `MainStreet` [188], `SecondaryAxis` [199], `District` [178], `Acropolis` [161], `Landmark`
-    [185], `Bridge` [169], and `WallLine`, `Plaza` and `PublicBuilding` [Direction].
+    [185], `Bridge` [197, the bridge of a bridge gate], and `WallLine`, `Plaza` and `PublicBuilding` [Direction].
   - A **feature** of the terrain shape has a `name` and `rects`, and a river feature names the map edge it flows from,
     `flowsFrom`, by `Rot4` name.
   - A **relation** has its kind and the parts or features it relates. The kinds are the relations the design's
@@ -220,14 +220,14 @@ files, to `Neiro-dev/Imperium-old` at 20a052b, to Spec Kit at v1.4.3 and to Harm
 
 ## R-11: The pictures
 
-- **Decision**: one PNG per template, laid-out city and spec card, and one side-by-side PNG per template or laid-out
+- **Decision**: one PNG per template and laid-out city, and one side-by-side PNG per template or laid-out
   city with each reference picture given. Each cell is drawn as a square; a thin grid line runs between cells and a
   stronger one every 10 cells, numbered along all four edges as `x` and `z`, with `z` growing toward north at the top.
   Terrain, roofs and things are filled with the `color` their definition gives, or with a colour drawn from their
   definition's name where it gives none. Parts and features are outlined and named where they lie; a template, whose
   parts have no cells, shows its parts and relations as a named diagram beside its terrain shape, with each feature
   named on the grid. Each problem with a cell is marked there with its number in the report. A legend lists every
-  definition shown by its `label`, with its expansion where it is not the base game or Royalty. The side-by-side
+  definition shown by its `label`, with its expansion where it is not the base game's (FR-026). The side-by-side
   picture sets the whole drawing and each whole reference picture at the same height. Pictures are written to a folder
   the developer names, and the check refuses a folder inside the repository.
 - **Rationale**: PNG is the image form `ModUpdating.txt` gives mods (lines 84-90); FR-023 to FR-028; positions are
@@ -260,9 +260,10 @@ files, to `Neiro-dev/Imperium-old` at 20a052b, to Spec Kit at v1.4.3 and to Harm
   screenshot (FR-028). Once it passes the check, the tribal culture's three readings are written from the references the
   maintainer chose, whose pictures are in `template-references/部落城-凯尔特/`, in `readings/`: the gentle tribe's open
   village from Tir Uisce, the fierce tribe's walled stronghold from a Celtic oppidum and the savage tribe's fortress
-  from a small Celtic hillfort, with the agricultural island consulted as supplementary material only. A template is
-  taken from each, stating its tribe's attitude (R-14), and the one tribal kit from all three. Each template ships as it
-  stands once it passes (FR-010, FR-031).
+  from a small Celtic hillfort, with the agricultural island only looked at beside them, as supplementary material, and
+  nothing taken from it. Each reading counts once the maintainer accepts it beside its pictures, recorded in
+  `checklists/acceptance.md` (spec FR-029, FR-036). A template is taken from each, stating its tribe's attitude (R-14),
+  and the one tribal kit from all three. Each template ships as it stands once it passes (FR-010, FR-031).
 - **Rationale**: FR-031, FR-036, FR-037, FR-039, Clarifications; [Direction].
 
 ## R-14: Picking a template by attitude and terrain
@@ -272,10 +273,12 @@ files, to `Neiro-dev/Imperium-old` at 20a052b, to Spec Kit at v1.4.3 and to Harm
   (`Core/Defs/FactionDefs/Factions_Misc.xml` lines 202, 462, 485 and 529), and serves the factions whose definitions
   hold the same two values. It names no faction. The biomes it suits are its `allowedBiomes` (R-3), empty for any. The
   tribal culture's three templates leave `allowedBiomes` empty and set the attitude: neither field for the gentle
-  tribe's open village, `naturalEnemy` for the fierce tribe's walled stronghold, `permanentEnemy` for the savage
-  tribe's fortress. The Empire's templates leave both fields out and set `allowedBiomes`: the river-bend town's
-  `TemperateForest` and `TemperateSwamp` (`Core/Defs/BiomeDefs/Biomes_Temperate.xml` lines 5 and 210). Which culture
-  a faction takes, and picking among the templates that serve it, are generation's (ROADMAP R2).
+  tribe's open village, `naturalEnemy` for the fierce tribe's walled stronghold, `permanentEnemy` for the savage tribe's
+  fortress. The Empire's templates leave both fields out and set `allowedBiomes` by the design's two looks of imperial
+  cities, temperate for temperate and cold regions and arid for hot, dry ones (Imperium-old glossary lines 208 and 162):
+  the river-bend town's `TemperateForest` and `TemperateSwamp` (`Core/Defs/BiomeDefs/Biomes_Temperate.xml` lines 5 and
+  210) and `BorealForest`, `Tundra`, `ColdBog`, `IceSheet` and `SeaIce` (`Biomes_Cold.xml` lines 5, 198, 371, 586 and
+  710). Which culture a faction takes, and picking among the templates that serve it, are generation's (ROADMAP R2).
 - **Rationale**: Principle III: `Data/` already writes a faction's attitude in these two fields, so a template that
   states the attitude it serves writes it the same way. The tribes' descriptions set which layout each attitude gets:
   the gentle tribe is open to trade and alliances, the fierce tribe values warlike dominance, the savage tribe has a

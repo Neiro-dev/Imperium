@@ -316,3 +316,15 @@ mean implementation work is complete.
     `TerrainDef Bridge`, a wooden floor laid over water, not a part of a city's layout. Cite what the kind comes from:
     the river gate, "such as a bridge gate" (line 197), or the river-bend town's reading (research R-13, "the main
     streets with their bridges").
+- The commit that answers this review changes, without touching any box: CHK001 (setting.md lines 57 and 60-61;
+  SC-002, SC-004, SC-005 and SC-007 name their FRs; SC-003 its source; FR-022 and FR-019 cite Spec Kit's analyze.md
+  lines 263 and 181; FR-032 the settlement weights), CHK002 (FR-027 cites FR-019 and FR-023; FR-024 withdrawn, with
+  User Story 4, research R-11, the contract, T033 and T034), CHK004 (FR-040 and Purpose follow the glossary's looks,
+  lines 208 and 162, so the river-bend town also suits the five cold biomes; the edge case now names a tropical
+  rainforest), CHK012 (FR-038), CHK019 (FR-037: a tribal template's extent is its reading's, and a tribal settlement's
+  map is a city's map by glossary line 173), CHK022 (FR-014 and data-model: wrong form, not square, missing field, and
+  the new wrong kinds), CHK023 (FR-015, data-model and the contract: which mod holds a laid-out city or reading),
+  CHK025 (SC-003, quickstart step 9, T050), CHK028 (FR-029, data-model state 4), CHK029 (FR-036, SC-010, data-model,
+  T040), CHK032 (FR-037: the island is only looked at, and nothing is taken from it), CHK034 (FR-037, Key Entities)
+  and CHK037 (Purpose, Sources and Assumptions); and the two findings (research R-11 and T025 follow FR-026; R-5 takes
+  `Bridge` from line 197). The reviewer judges each against the new text
