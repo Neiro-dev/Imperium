@@ -35,15 +35,15 @@ kits and templates, which are game content rather than a story, have a phase of 
 
 **Purpose**: The check's package at the repository root and Mantle's C# project in `Mantle/Source/`
 
-- [ ] T001 Create `pyproject.toml` declaring the package `mantle-check` in `src/mantle_check/` with the command
+- [X] T001 Create `pyproject.toml` declaring the package `mantle-check` in `src/mantle_check/` with the command
   `mantle-check`, Python 3.11 or later, Typer and Pillow, Hatchling, and a `test` extra with pytest (research R-9;
   contracts/check-command.md, Install and run)
-- [ ] T002 [P] Add Spec Kit's Python lines and Harmony's `[Bb]in/` and `[Oo]bj/` lines to `.gitignore`
+- [X] T002 [P] Add Spec Kit's Python lines and Harmony's `[Bb]in/` and `[Oo]bj/` lines to `.gitignore`
   (research R-9, Ignored files)
-- [ ] T003 [P] Create `Mantle/Source/Directory.Build.props` with `RimWorldAssemblyDir`, and
+- [X] T003 [P] Create `Mantle/Source/Directory.Build.props` with `RimWorldAssemblyDir`, and
   `Mantle/Source/Mantle/Mantle.csproj` targeting `net10.0`, referencing the game's assemblies through that property
   without copying them, and writing `Assemblies/Mantle.dll` (research R-2)
-- [ ] T004 [P] Create `src/mantle_check/__init__.py` and `tests/conftest.py`, which takes `Data/` from
+- [X] T004 [P] Create `src/mantle_check/__init__.py` and `tests/conftest.py`, which takes `Data/` from
   `RIMWORLD_DATA_DIR`, fails with a message naming the variable when it is unset, and gives tests a helper that writes a
   small reference picture into a temporary folder (research R-12)
 
@@ -55,34 +55,34 @@ kits and templates, which are game content rather than a story, have a phase of 
 
 **⚠️ CRITICAL**: No user story work can begin until this phase is complete
 
-- [ ] T005 Implement reading `Data/` in `src/mantle_check/gamedata.py`: `Version.txt` must name 1.7; every XML
+- [X] T005 Implement reading `Data/` in `src/mantle_check/gamedata.py`: `Version.txt` must name 1.7; every XML
   file under each expansion's and each `--mod`'s `Defs/`; each `About/About.xml`'s `packageId` and `modDependencies`;
   inheritance by `Name`, `Abstract`, `ParentName` and `Inherit="False"`; each definition's origin; and the fields
   research R-10 lists under What it reads from each definition
-- [ ] T006 [P] Implement the common forms in `src/mantle_check/forms.py`: rect, layer, position, size,
+- [X] T006 [P] Implement the common forms in `src/mantle_check/forms.py`: rect, layer, position, size,
   minMapSize, rotation and `MayRequire` (data-model.md, Common forms)
-- [ ] T007 Implement reading templates in `src/mantle_check/forms.py`: data-model.md `TemplateDef.defName`,
+- [X] T007 Implement reading templates in `src/mantle_check/forms.py`: data-model.md `TemplateDef.defName`,
   `TemplateDef.kit`, `TemplateDef.reference`, `TemplateDef.allowedBiomes`, `TemplateDef.allowedRivers`,
   `TemplateDef.naturalEnemy`, `TemplateDef.permanentEnemy`, `TemplateDef.minMapSize`, `TemplateDef.terrainShape` and
   `TemplateDef.skeleton`; `TerrainShape.terrain`, `TerrainShape.rocks`, `TerrainShape.roofs`, `TerrainShape.features`
   and `Feature.flowsFrom`; `Skeleton.parts`, `Skeleton.relations`, `Part.kind`, `Part.optional` and
   `Relation.relation` with the field each kind needs (contracts/template-and-kit-defs.md, A template)
-- [ ] T008 Implement reading kits in `src/mantle_check/forms.py`: data-model.md `KitDef.defName`,
+- [X] T008 Implement reading kits in `src/mantle_check/forms.py`: data-model.md `KitDef.defName`,
   `KitDef.nameMaker`, `KitDef.skeleton`, `KitDef.wallSettings`, `KitDef.groups`, `KitDef.fill` and
   `KitDef.blockLibrary`, with `Group.size` and `SpecCard.size` (contracts/template-and-kit-defs.md, A kit)
-- [ ] T009 Implement reading laid-out cities and readings in `src/mantle_check/forms.py`: data-model.md
+- [X] T009 Implement reading laid-out cities and readings in `src/mantle_check/forms.py`: data-model.md
   `LaidOutCity.template`, `LaidOutCity.kit`, `LaidOutCity.reference`, `LaidOutCity.size`, `LaidOutCity.terrain`,
   `LaidOutCity.roofs`, `LaidOutCity.things`, `LaidOutCity.parts`, `LaidOutCity.features`, `Thing.rect` and
   `Thing.stuff` (contracts/laid-out-city.md)
-- [ ] T010 Implement the report in `src/mantle_check/report.py`: problems numbered and sorted, each with its
+- [X] T010 Implement the report in `src/mantle_check/report.py`: problems numbered and sorted, each with its
   file, template, kit, city or spec card, part or field, cell and what is wrong; written to standard output and
   `report.txt`; ending with the statement that testing in the game is the final check and is still to come; no time,
   path or random value in it (data-model.md, Report and pictures; spec FR-019, FR-020, FR-022)
-- [ ] T011 Implement the command in `src/mantle_check/cli.py` with `--data`, `--out`, `--mod`, `--reference`
+- [X] T011 Implement the command in `src/mantle_check/cli.py` with `--data`, `--out`, `--mod`, `--reference`
   and files; refuse an output folder inside a repository, a `--mod` folder without `About/About.xml`, `Data/` missing
   or not 1.7, and a file that is not XML, each with exit status 2; exit 0 with no problem and 1 with problems
   (contracts/check-command.md)
-- [ ] T012 [P] Write Mantle's definition classes in `Mantle/Source/Mantle/TemplateDef.cs` (data-model.md `TemplateDef`,
+- [X] T012 [P] Write Mantle's definition classes in `Mantle/Source/Mantle/TemplateDef.cs` (data-model.md `TemplateDef`,
   with `naturalEnemy` and `permanentEnemy` as `bool`, false by default), `Mantle/Source/Mantle/KitDef.cs`
   (data-model.md `KitDef`), `Mantle/Source/Mantle/Skeleton.cs` (Skeleton, Part, Relation and their kinds) and
   `Mantle/Source/Mantle/Cells.cs` (rects, layers, features, Group, SpecCard) (research R-1, R-5)

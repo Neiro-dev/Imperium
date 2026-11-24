@@ -1,0 +1,7 @@
+<Project>
+
+	<PropertyGroup>
+		<RimWorldAssemblyDir Condition="'$(RimWorldAssemblyDir)' == ''">$(RIMWORLD_ASSEMBLY_DIR)</RimWorldAssemblyDir>
+	</PropertyGroup>
+
+</Project>
