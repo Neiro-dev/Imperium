@@ -2,38 +2,62 @@
 
 ## Core Principles
 
-### I. One Source per Topic
+### I. Sources by Topic, Then by Layer
 
-Every answer MUST come from the source the Source Register gives for its topic. Nothing outside
-the Source Register is a source.
+Every answer MUST come from the Source Register, first by topic, then by layer:
+
+- When a topic fits the question, the answer MUST come from the source the register gives for
+  that topic.
+- When no topic fits, the agent MUST decide which of the three layers (Claude, GitHub or
+  RimWorld) the question belongs to, and the answer MUST come from that layer's sources. A layer's
+  sources are only those the register already lists in that layer's rows, used in the order the
+  register lists them: row by row, and within a row in that row's own order. Each source keeps the
+  limits its row sets: a source that only cross-checks stays a cross-check, `EULA.txt` is always
+  followed, and a source given for one matter, such as choosealicense.com for the license, answers
+  only that matter. The maintainer's broad direction is not one of a layer's sources; only
+  Principle IV says when he is asked.
+- A question that fits no topic but fits a layer MUST NOT be treated as having no source, and MUST
+  NOT be left unanswered or left as it is for want of a topic.
+
+Nothing outside the Source Register is a source, and belonging to a layer does not make one.
 
 ### II. Other Sources Only Cross-Check
 
-Sources other than the topic's own source MUST be used only to cross-check.
+Sources other than the question's own sources (Principle I: its topic's source or, when no topic
+fits, its layer's sources) MUST be used only to cross-check.
 
 ### III. Sources in Order
 
-Where a topic lists several sources in order, the next one MUST be used only when the previous
-one gives no form.
+Where a topic lists several sources in order, and where a question is answered from its layer's
+sources (Principle I), the next source MUST be used only when the previous one gives no form.
 
 ### IV. Asking the Maintainer
 
 The agent MUST NOT ask the maintainer about anything other than game content. For game content,
-the maintainer is asked only when no source in its chain has the answer, and judges only its broad
-direction.
+the maintainer is asked only when no source in its chain, or for a question that fits no topic no
+source of its layer (Principle I), has the answer, and judges only its broad direction.
 
 ### V. When a Source Gives No Form
 
 When the topic's source names a default, the agent MUST use it. When the source offers options
 without a default, the agent MUST use the option the source uses in its own repository or
-examples. When the source gives neither, the agent MUST NOT act on the question, except for game
-content, where Principle IV applies. Rules, files, and practices that no source supports MUST be
-removed.
+examples. For a question that fits no topic, the same holds for each of its layer's sources in
+order (Principle I). When the sources give neither, the agent MUST NOT act on the question, except
+for game content, where Principle IV applies. For a question that fits no topic, this applies only
+once every source of its layer gives neither, or when no layer fits the question either. Rules,
+files, and practices that no source supports MUST be removed.
 
 ### VI. Every Conclusion Names Its Source
 
 Every conclusion, including a judgment, MUST name its source and MUST be reached from that
-source.
+source. It MUST also show the path that reached the source, in this order, and stop at the step
+where a source gave the answer:
+
+1. The topic: which topic fits, or that none does.
+2. The layer, when no topic fits: which layer, and which of its sources were tried, in order.
+3. Principle V or, for game content, Principle IV, when no source gives a form.
+
+The path MUST NOT skip a step.
 
 ## Source Register
 
@@ -61,4 +85,4 @@ Versioning follows semantic versioning:
 
 Compliance is reviewed at each plan's Constitution Check and at pull request review.
 
-**Version**: 2.1.0 | **Ratified**: 2026-11-23 | **Last Amended**: 2026-11-24
+**Version**: 2.2.0 | **Ratified**: 2026-11-23 | **Last Amended**: 2026-11-24
