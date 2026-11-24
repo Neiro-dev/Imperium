@@ -9,7 +9,10 @@ are in [research.md](research.md) R-10.
 - `Mods\Imperium` is the repository's clone, pulled to the commit under test.
 - RimBridgeServer 2.4.0 or later in `Mods`, and GABS configured for this install (RimBridgeServer `README.md`,
   Installation).
-- The log is `output_log.txt` in the install's `_Data` folder (`Readme.txt` line 21).
+- Every launch adds `-savedatafolder=SaveData` (`Readme.txt` lines 27-38), so the checks' mod lists and saves stay
+  in `SaveData` in the install's folder and the maintainer's own are not touched.
+- The log is read with `rimbridge/list_logs`, because 1.7.5014 does not write the `output_log.txt` of `Readme.txt`
+  line 21 (research R-10).
 
 ## Checks in the cloud
 

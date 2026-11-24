@@ -99,13 +99,18 @@ project files.
 ## R-10: Testing
 
 - **Decision**: in the game on the maintainer's computer (`D:\Steam\steamapps\common\RimWorld`, with `Mods\Imperium`
-  as a clone of the repository). New games start with `-quicktest` (`Readme.txt` lines 58-60). The log is
-  `output_log.txt` in the install's `_Data` folder (`Readme.txt` line 21). What `Readme.txt` gives no form for
+  as a clone of the repository). New games start with `-quicktest` (`Readme.txt` lines 58-60). Every launch adds
+  `-savedatafolder=SaveData`, the example of `Readme.txt` lines 27-38, so the checks' mod lists and saves stay in
+  `SaveData` in the install's folder and the maintainer's own are not touched. What `Readme.txt` gives no form for
   (turning expansions on and off, reading the mod list's warnings, reordering mods, saving and loading) uses
   RimBridgeServer with GABS: `rimworld/set_mod_enabled`, `rimworld/reorder_mod`,
   `rimworld/get_mod_configuration_status`, `rimworld/list_mods`, `rimworld/load_game_ready` and
   `rimbridge/list_logs` (RimBridgeServer `README.md`, sections Installation and Tool Surface). RimBridgeServer 2.4.0
   and later support 1.7 (same `README.md`, section RimWorld 1.7 build and frozen 1.6 payload).
+- **The log**: `Readme.txt` line 21 places `output_log.txt` in the install's `_Data` folder, but 1.7.5014 on the
+  maintainer's install writes no such file; it keeps `Player.log` in the `Logs` folder of the save data folder
+  (inventory of the install, 2026-11-24). Since `Readme.txt`'s form does not hold, the log is read with
+  `rimbridge/list_logs`, the next testing source (constitution, Principle III).
 - **Rationale**: the constitution's testing order (Source Register, Testing in the game).
 - **Note**: RimBridgeServer is a mod and writes its own log lines, so each baseline launch also runs it, and a
   launch passes when it adds no error or warning line to that baseline (spec, Clarifications).
