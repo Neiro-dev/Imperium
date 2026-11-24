@@ -120,10 +120,12 @@ project files.
   `rimworld/get_mod_configuration_status`, `rimworld/list_mods`, `rimworld/load_game_ready` and
   `rimbridge/list_logs` (RimBridgeServer `README.md`, sections Installation and Tool Surface). RimBridgeServer 2.4.0
   and later support 1.7 (same `README.md`, section RimWorld 1.7 build and frozen 1.6 payload).
-- **The log**: `Readme.txt` line 21 places `output_log.txt` in the install's `_Data` folder, but 1.7.5014 on the
-  maintainer's install writes no such file; it keeps `Player.log` in the `Logs` folder of the save data folder
-  (inventory of the install, 2026-11-24). Since `Readme.txt`'s form does not hold, the log is read with
-  `rimbridge/list_logs`, the next testing source (constitution, Principle III).
+- **The log**: `Readme.txt` line 21 places `output_log.txt` in the install's `_Data` folder, but 1.7.5014 writes no
+  such file. It keeps `Player.log` in the `Logs` folder of the default save data folder, which `-savedatafolder` does
+  not move (RimBridgeServer `skills/rimworld-17/references/launch-arguments.md`; inventory of the install,
+  2026-11-24). `rimbridge/list_logs` holds only the lines written after the bridge starts, and the game reports a mod
+  that loaded no content before that (checks in the game, 2026-11-24), so each launch's `Player.log` is copied when
+  the game stops and the copies are compared.
 - **Rationale**: the constitution's testing order (Source Register, Testing in the game).
 - **Note**: RimBridgeServer is a mod and writes its own log lines, so each baseline launch also runs it, and a
   launch passes when it adds no error or warning line to that baseline (spec, Clarifications), other than the game's
@@ -131,3 +133,6 @@ project files.
 - **Where checks run**: the game does not run in the cloud container, so the in-game checks wait for the
   maintainer's computer. The cloud can check that the XML is well-formed and that the identifier meets the game's
   format.
+- **Testing outside the game** (constitution 2.1.0, Source Register: `Data/`): the checks in the cloud come first and
+  hold `About/About.xml` against the official `About.xml` files in `Data/` and the field rules in data-model.md. They
+  do not replace the checks in the game, which are the final check.

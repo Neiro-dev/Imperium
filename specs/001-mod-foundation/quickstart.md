@@ -11,10 +11,14 @@ are in [research.md](research.md) R-10.
   Installation).
 - Every launch adds `-savedatafolder=SaveData` (`Readme.txt` lines 27-38), so the checks' mod lists and saves stay
   in `SaveData` in the install's folder and the maintainer's own are not touched.
-- The log is read with `rimbridge/list_logs`, because 1.7.5014 does not write the `output_log.txt` of `Readme.txt`
-  line 21 (research R-10).
+- The log is `Player.log` in the `Logs` folder of the default save data folder, which `-savedatafolder` does not
+  move. Copy it after each launch and compare the copies; `rimbridge/list_logs` misses the lines written before the
+  bridge starts (research R-10).
 
 ## Checks in the cloud
+
+These are the testing outside the game that comes first (constitution, Source Register); the checks in the game are
+the final check.
 
 1. `About/About.xml` is well-formed XML with the declaration the official files use.
 2. The package identifier meets the format in [data-model.md](data-model.md).

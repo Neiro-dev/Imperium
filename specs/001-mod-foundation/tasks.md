@@ -63,10 +63,10 @@ errors or warnings from it (spec US1, FR-001, FR-004, FR-005).
 ### Implementation for User Story 1
 
 - [X] T003 [US1] Add data-model.md `Mod metadata.forceLoadAfter` to `About/About.xml` (research.md R-6)
-- [ ] T004 [US1] On the maintainer's computer, check that the game honors `forceLoadAfter` from Imperium
+- [X] T004 [US1] On the maintainer's computer, check that the game honors `forceLoadAfter` from Imperium
   (quickstart.md, Checks in the game, 5); if it does not, replace it in `About/About.xml` with `loadAfter` holding the
   same identifiers, as research.md R-6 gives, and repeat
-- [ ] T005 [US1] On the maintainer's computer, run quickstart.md, Checks in the game, 1 to 3, against their
+- [X] T005 [US1] On the maintainer's computer, run quickstart.md, Checks in the game, 1 to 3, against their
   baselines, with `About/About.xml` as left by T004
 
 **Checkpoint**: At this point, User Story 1 should be fully functional and testable independently
@@ -85,7 +85,7 @@ errors or warnings from it (spec US1, FR-001, FR-004, FR-005).
   data-model.md `Royalty dependency.packageId`, `Royalty dependency.displayName`,
   `Royalty dependency.steamWorkshopUrl` and `Royalty dependency.downloadUrl` (research.md R-7)
 - [X] T007 [US2] Repeat T002 for the changed `About/About.xml`
-- [ ] T008 [US2] On the maintainer's computer, run quickstart.md, Checks in the game, 4
+- [X] T008 [US2] On the maintainer's computer, run quickstart.md, Checks in the game, 4
 
 **Checkpoint**: At this point, User Stories 1 AND 2 should both work independently
 
@@ -105,7 +105,7 @@ FR-003, FR-004, FR-006, FR-011).
   is its only requirement (data-model.md, Mod metadata, fields left out; spec FR-003), and that the mod's folder
   holds none of the content folders `Defs`, `Patches`, `Languages`, `Textures`, `Sounds`, `Assemblies`
   (`ModUpdating.txt` lines 96-139), so that R1 adds no content (spec FR-007)
-- [ ] T010 [US3] On the maintainer's computer, run quickstart.md, Checks in the game, 6 (all 16 combinations) and 7
+- [X] T010 [US3] On the maintainer's computer, run quickstart.md, Checks in the game, 6 (all 16 combinations) and 7
 - [X] T011 [US3] Add to `README.md` the sentence research.md R-6 (Among ordinary mods) gives for Imperium's place in
   the mod list, in the form of the Harmony mod's `README.md` (spec FR-011)
 - [X] T012 [US3] Check in the cloud that no load-order field in `About/About.xml` names a package that is not Ludeon's
@@ -121,11 +121,11 @@ FR-003, FR-004, FR-006, FR-011).
 
 **Purpose**: Improvements that affect multiple user stories
 
-- [ ] T014 On the maintainer's computer, run quickstart.md, Checks in the game, 8 (a save made with a different set
+- [X] T014 On the maintainer's computer, run quickstart.md, Checks in the game, 8 (a save made with a different set
   of mods)
 - [X] T015 [P] Check in the cloud that nothing in `About/About.xml` names Ludeon as maker or adds an `ExpansionDef`,
   and that `README.md` holds the EULA's disclaimer (spec FR-008, FR-009; research.md R-8)
-- [ ] T016 On the maintainer's computer, run quickstart.md, Checks in the game, 9
+- [X] T016 On the maintainer's computer, run quickstart.md, Checks in the game, 9
 - [ ] T017 Set R1's status to `done` in `ROADMAP.md` once T001 to T016 pass (Spec Kit `docs/how-to/spec-of-specs.md`
   v1.4.3, section Specifying each sub-feature, step 4)
 

@@ -25,9 +25,9 @@ game on the maintainer's computer ([quickstart.md](quickstart.md)).
 
 **Storage**: N/A
 
-**Testing**: in the game: `-quicktest` (`Readme.txt` lines 58-60) with `-savedatafolder=SaveData` (lines 27-38),
-then RimBridgeServer 2.4.0 or later with GABS for what `Readme.txt` gives no form for, the log included (research
-R-10)
+**Testing**: first outside the game, against the official files in `Data/` (constitution 2.1.0); then in the game:
+`-quicktest` (`Readme.txt` lines 58-60) with `-savedatafolder=SaveData` (lines 27-38), then RimBridgeServer 2.4.0 or
+later with GABS for what `Readme.txt` gives no form for, comparing each launch's `Player.log` (research R-10)
 
 **Target Platform**: RimWorld 1.7 only (research R-5), tested on the maintainer's Windows install at
 `D:\Steam\steamapps\common\RimWorld`, the only install of the game the project has
@@ -54,8 +54,10 @@ R-10)
 | V. When a Source Gives No Form | No icon, because no source gives a community mod one (R-8); no `LoadFolders.xml`, version folders, empty content folders or code, because nothing in R1 needs them (R-1, R-9) | Pass |
 | VI. Every Conclusion Names Its Source | Every decision in research.md and every row in data-model.md names its source | Pass |
 | Source Register, `EULA.txt` always followed | Community-created presentation, no `ExpansionDef`, disclaimer in `README.md` (R-8) | Pass |
+| Source Register, testing outside the game (2.1.0) | The checks in the cloud come before the checks in the game, hold `About/About.xml` against the official files in `Data/`, and do not replace the checks in the game (quickstart.md; R-10) | Pass |
 
-Post-design re-check (after Phase 1): unchanged, all pass.
+Post-design re-check (after Phase 1): unchanged, all pass. Re-checked against constitution 2.1.0 (2026-11-24): all
+pass, with the row for testing outside the game added.
 
 ## Project Structure
 
