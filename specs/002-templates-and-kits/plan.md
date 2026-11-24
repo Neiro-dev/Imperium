@@ -21,7 +21,9 @@ reads `Data/` 1.7.5014 and each mod's `About/About.xml` and `Defs/`, reports eve
 expansion content by what the holding mod requires, measures each skeleton relation in a laid-out city, and draws PNG
 pictures with a grid, coordinates and a legend beside the reference pictures, outside the repository (R-6, R-9 to R-11).
 The river-bend town's template and the Empire kit are taken first, then the tribal culture's three, one for each
-attitude, from the references the maintainer chose, and each ships as it stands once it passes (R-13). A template states
+attitude, from the references the maintainer chose, and each ships as it stands once it passes (R-13). Every kit and
+template is derived in a fixed order: Imperium-old's design first, then the maintainer's recorded direction, and a
+reading only where both are silent, which never overrides either, each part naming its source (spec FR-047; R-13). A template states
 the attitude of the factions it serves in `FactionDef`'s own `naturalEnemy` and `permanentEnemy`, and the biomes it
 suits in `allowedBiomes`; the tribal culture picks by the first, the Empire by the second (R-14). A reference city
 that Anno 117 presets may also be read from the game's own data on the maintainer's computer and drawn from above, in
@@ -72,7 +74,7 @@ templates, and the Empire kit with the river-bend town's template; test fixtures
 
 | Principle | Check | Result |
 |-----------|-------|--------|
-| I. One Source per Topic | Design from Imperium-old `main` and the maintainer's direction (spec, Sources); which mod holds what from the roadmap's R13, R14, R15 and Releases, and where each file goes from R14's layout; the released mod's forms from `Data/`, `ModUpdating.txt`, Harmony; testing outside the game from `Data/`; testing in the game from `Readme.txt`; the check's form and its ignored files from Spec Kit, the build's from Harmony | Pass |
+| I. One Source per Topic | Design from Imperium-old `main` and the maintainer's direction (spec, Sources), kits and templates derived in that order with a reading only where both are silent (spec FR-047; R-13); which mod holds what from the roadmap's R13, R14, R15 and Releases, and where each file goes from R14's layout; the released mod's forms from `Data/`, `ModUpdating.txt`, Harmony; testing outside the game from `Data/`; testing in the game from `Readme.txt`; the check's form and its ignored files from Spec Kit, the build's from Harmony | Pass |
 | II. Other Sources Only Cross-Check | No decision rests on a source outside its topic's register entry; the reference pictures are the maintainer's direction's material, not a source of form; the old project's output and images, and FileDBReader, only cross-check a reading of a game's data (R-15) | Pass |
 | III. Sources in Order | Every field takes `Data/`'s form first (R-3); `Defs/`, `Source/` and `Assemblies/` come from `ModUpdating.txt` because `Data/` holds no mod layout (R-1); the build comes from Harmony because neither earlier source gives one (R-2) | Pass |
 | IV. Asking the Maintainer | No question is asked: what a kit's groups and fill hold comes from its culture's reading, by his direction (R-8); his choice of the tribal references among candidates, one for each attitude, gates only the tribal readings, kit and templates (R-13); which layout each attitude gets comes from the tribes' descriptions in `Data/`, which the maintainer confirmed (R-14); how a preset reference is read from its game's data, and the later cultures' references, are his direction, which Imperium-old's design leaves open (R-15, R-16) | Pass |

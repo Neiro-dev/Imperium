@@ -242,8 +242,10 @@ hold, one with a room or thing past its plot and one with neither, is checked, a
 
 **Purpose**: The game content this feature holds, taken from readings and checked with the stories above (spec FR-031,
 FR-032, FR-036, FR-037, FR-039, FR-040; research R-13, R-14), and the drawing of any preset reference read from its
-game's data (spec FR-041 to FR-045; research R-15). The industrial (outlander) and pirate cultures' kits and templates
-are R16's, not this feature's (spec FR-032)
+game's data (spec FR-041 to FR-045; research R-15). Every kit and template here is derived in the order of spec
+FR-047, Imperium-old's design first, then the maintainer's recorded direction, and a reading only where both are
+silent, each part naming its source (research R-13). The industrial (outlander) and pirate cultures' kits and
+templates are R16's, not this feature's (spec FR-032)
 
 ### The Empire and the river-bend town, which calibrate the method first
 
@@ -280,12 +282,13 @@ are R16's, not this feature's (spec FR-032)
 - [ ] T042 [P] Write the savage tribe's reading in `readings/`, under the mod's own name for a fortress, from
   `template-references/部落城-凯尔特/野蛮部落-小山堡-3621994739.jpg`, the same way; the agricultural island is only looked
   at beside the three, and nothing is taken from it (spec FR-036, FR-037)
-- [ ] T043 Write the tribal kit in `Mantle/Defs/KitDefs/Kits_Tribal.xml`, taken from the three accepted readings:
-  data-model.md `KitDef.nameMaker` as the base game's `NamerSettlementTribal`, `KitDef.skeleton`,
+- [ ] T043 Write the tribal kit in `Mantle/Defs/KitDefs/Kits_Tribal.xml`, derived in the order of spec FR-047, with
+  the three accepted readings filling what the design and the recorded direction leave open, each part naming its
+  source (research R-13): data-model.md `KitDef.nameMaker` as the base game's `NamerSettlementTribal`, `KitDef.skeleton`,
   `KitDef.wallSettings`, `KitDef.groups` and `KitDef.fill`, with base-game definitions only, or expansion content
   marked (spec FR-006, FR-011, FR-015)
 - [ ] T044 Write the three tribal templates in `Mantle/Defs/TemplateDefs/Templates_Tribal.xml`, one from each reading,
-  each with its reading's extent as data-model.md `TemplateDef.minMapSize` (spec FR-037), `TemplateDef.allowedBiomes`
+  derived in the order of spec FR-047 as T043 is, each with its reading's extent as data-model.md `TemplateDef.minMapSize` (spec FR-037), `TemplateDef.allowedBiomes`
   left empty and its tribe's attitude in
   `TemplateDef.naturalEnemy` and `TemplateDef.permanentEnemy`: neither for the open village, `naturalEnemy` for the
   walled stronghold, `permanentEnemy` for the fortress (spec FR-038, FR-039; research R-14)

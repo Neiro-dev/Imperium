@@ -54,3 +54,7 @@
   stays with `/speckit-plan`. The later cultures' references are recorded in FR-046. The spec was reconciled with the
   roadmap's R16, which holds the industrial (outlander) and pirate cultures' kits and templates that the alpha opens
   too, while R13 keeps the tribal culture's (Input, Purpose, FR-032). No marker was added.
+- Updated again 2026-11-24 and validated, every item still passing: FR-047 records the maintainer's direction on the
+  order in which kits and templates are derived (Imperium-old's design first, then his recorded direction where it is
+  silent, a reading only where both are silent, never overriding either), and FR-006, FR-031, FR-036 and FR-037 follow
+  it, with SC-012. No marker was added.

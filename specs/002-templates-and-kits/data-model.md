@@ -72,8 +72,8 @@ true for a slot that a city may leave out (default false).
 | `nameMaker` | a `RulePackDef` | the word list | FR-006, FR-011; R-3 |
 | `skeleton` | Skeleton | what every city of the culture has; parts only | FR-006; R-5 |
 | `wallSettings` | `wallDef`, a `ThingDef` | a wall (`building/isWall`) | FR-006, FR-014; R-3 |
-| `groups` | list of Group | the sets of things placed together that the culture's reading shows (R-8) | FR-006, FR-036 |
-| `fill` | `wallDef`, `doorDef`, `doorStuffDef`, `plots` (list of Group) | what the reading's blocks are built with (R-8); `wallDef` a wall, `doorStuffDef` a material `doorDef` takes | FR-006, FR-014, FR-018, FR-036 |
+| `groups` | list of Group | derived in FR-047's order; where the design and the recorded direction are silent, the sets of things placed together that the culture's reading shows (R-8) | FR-006, FR-036, FR-047 |
+| `fill` | `wallDef`, `doorDef`, `doorStuffDef`, `plots` (list of Group) | derived in FR-047's order; where the design and the recorded direction are silent, what the reading's blocks are built with (R-8); `wallDef` a wall, `doorStuffDef` a material `doorDef` takes | FR-006, FR-014, FR-018, FR-036, FR-047 |
 | `blockLibrary` | list of SpecCard | optional; the Empire has none | FR-006; glossary line 167 |
 
 **Group**: `name`; `size`; `terrain`, a layer; `things`, each in the thing form below, placed from the group's own
@@ -151,7 +151,8 @@ The check stops, and reports nothing as passing, when `Data/` is missing or not 
 
 ## States of a template
 
-1. **Written**: in its mod's `Defs/TemplateDefs/`, taken from its culture's reading (FR-036).
+1. **Written**: in its mod's `Defs/TemplateDefs/`, derived in FR-047's order, its culture's reading filling what the
+   design and the recorded direction leave open, each part naming its source (FR-036, FR-047).
 2. **Checked**: the check reports no problem in it or its kit.
 3. **Laid out**: a city generation laid out from it is checked, every relation holds (R2).
 4. **Accepted**: the maintainer has accepted the side-by-side picture, recorded as a checked item of a reviewer-owned

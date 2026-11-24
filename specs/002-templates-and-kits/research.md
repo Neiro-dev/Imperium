@@ -163,21 +163,23 @@ files, to `Neiro-dev/Imperium-old` at 20a052b, to Spec Kit at v1.4.3 and to Harm
 
 ## R-8: A kit's groups and fill
 
-- **Decision**: what a kit's groups and fill hold is taken apart from its culture's reading, as its skeleton is (spec,
-  Clarifications; FR-006, FR-036), and written in `Data/`'s forms for what they are: `groups` is a list of named sets
-  of things placed together, each in `PrefabDef`'s form (`size`, `things` with `position`, `rotation` and `stuff`,
-  `terrain`; `AncientPrefabs.xml` lines 8-13), so a set read off a reading's things is written with no conversion;
-  `fill`, what a block's plots are built with, holds `StructureLayoutDef`'s `wallDef`, `doorDef` and `doorStuffDef`
-  (`Layouts_Misc.xml` lines 19-22) and a list of plot sets in the same `PrefabDef` form.
+- **Decision**: what a kit's groups and fill hold is derived in the order of spec FR-047, Imperium-old's design first,
+  then the maintainer's recorded direction, and so taken apart from its culture's reading, as its skeleton is, wherever
+  both leave it open (spec, Clarifications; FR-006, FR-036), and written in `Data/`'s forms for what they are: `groups`
+  is a list of named sets of things placed together, each in `PrefabDef`'s form (`size`, `things` with `position`,
+  `rotation` and `stuff`, `terrain`; `AncientPrefabs.xml` lines 8-13), so a set read off a reading's things is written
+  with no conversion; `fill`, what a block's plots are built with, holds `StructureLayoutDef`'s `wallDef`, `doorDef` and
+  `doorStuffDef` (`Layouts_Misc.xml` lines 19-22) and a list of plot sets in the same `PrefabDef` form.
 - **Rationale**: the design names a kit's groups and fill [Design: line 184], a building or group [185] and a block
   divided into plots for its households [166], without saying what they hold; the maintainer's direction is that they
   come from the reference city, as the skeleton does, and are never asked. The base game ships `PrefabDef` and
   `StructureLayoutDef` in its own assembly and uses them in Core (`Core/Defs/PrefabDefs/CommonRoomPrefabs.xml`), so
   Mantle's mod needs no expansion for them (FR-015).
 - **What R13 writes**: the forms of all five fields (FR-006); the tribal kit's and the Empire kit's skeletons, wall
-  settings, groups and fill, each from its culture's readings, the tribal culture's three (R-13) and the river-bend
-  town's render (FR-031); and each culture's word list (FR-011): the Empire's from its sources on Rome, and the tribal
-  culture's the base game's own `NamerSettlementTribal` (`Core/Defs/FactionDefs/Factions_Misc.xml` line 230).
+  settings, groups and fill, each derived in FR-047's order, its culture's readings filling what the design and the
+  recorded direction leave open: the tribal culture's three (R-13) and the river-bend town's render (FR-031); and each
+  culture's word list (FR-011): the Empire's from its sources on Rome, and the tribal culture's the base game's own
+  `NamerSettlementTribal` (`Core/Defs/FactionDefs/Factions_Misc.xml` line 230).
 
 ## R-9: The check is a Python package in Spec Kit's form
 
@@ -251,7 +253,16 @@ files, to `Neiro-dev/Imperium-old` at 20a052b, to Spec Kit at v1.4.3 and to Harm
 
 ## R-13: The first templates
 
-- **Decision**: in implement, the river-bend town first: its template and the Empire kit are taken from the screenshot
+- **Derivation order** (spec FR-047): every kit and template below is derived from Imperium-old's design meaning
+  first, reusing everything it defines, such as the parts its glossary names and the palace quarter lying upstream and
+  far from the main gate (glossary lines 184, 193, 204 and 209); then, where it is silent, from the maintainer's
+  direction as the merged specs and roadmap record it; and only where both are silent from the reading, which never
+  overrides either. Each part names its source in an XML comment beside it, as `Data/` comments its own definitions
+  (`Odyssey/Defs/LayoutDefs/Layouts_OrbitalPlatform.xml` lines 171, 182 and 189): the design's line, the spec or
+  roadmap entry that records the direction, or `[Direction]` with the reading for a part filled from it (constitution,
+  Principle VI).
+- **Decision**: in implement, the river-bend town first: where the order leaves them to a reading, its template and
+  the Empire kit are taken from the screenshot
   (`template-references/河湾城-原图与描线/原图-1596x1017.png`) and the newest render, its reading
   (`template-references/河湾城-最新版-1112/1比1整城样张.png`). Its terrain shape is drawn inside 350×350 cells, and its skeleton
   holds the river bend, the wall line, the districts on each bank and inside the bend, the main streets with their
@@ -345,6 +356,7 @@ files, to `Neiro-dev/Imperium-old` at 20a052b, to Spec Kit at v1.4.3 and to Harm
 - **Rationale**: the maintainer's direction (spec, Clarifications); Odyssey lays out an orbital settlement as one
   enclosed platform whose rooms open off corridors of a few fixed shapes
   (`Odyssey/Defs/LayoutDefs/Layouts_OrbitalPlatform.xml` lines 5, 7, 23 and 158-194;
-  `Odyssey/Defs/MapGeneration/SpaceMapGenerator.xml` lines 82-87), on a map of 200×200 cells (`Odyssey/Defs/WorldObjectDefs/WorldObjects.xml` lines 44 and 50), and the
-  Salvagers are hidden (`Odyssey/Defs/FactionDefs/Factions_Misc.xml` line 172), so whether they get settlements is
-  checked in the game (spec FR-032, Edge Cases).
+  `Odyssey/Defs/MapGeneration/SpaceMapGenerator.xml` lines 82-87), on a map of 200×200 cells
+  (`Odyssey/Defs/WorldObjectDefs/WorldObjects.xml` lines 44 and 50), and the Salvagers are hidden
+  (`Odyssey/Defs/FactionDefs/Factions_Misc.xml` line 172), so whether they get settlements is checked in the game (spec
+  FR-032, Edge Cases).

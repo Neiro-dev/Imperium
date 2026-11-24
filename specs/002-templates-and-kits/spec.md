@@ -90,6 +90,13 @@ What is fixed and what is left to generation [Design: lines 184, 209; Direction]
 
 Generation never designs a city: it fills a fixed skeleton.
 
+A culture's kit and templates are derived in a fixed order (FR-047) [Direction; constitution, Source Register, row
+Imperium's own design]. First comes Imperium-old's design, and everything it defines for them is reused [Design]. Where
+it is silent, the maintainer's broad direction comes next, as this repository's merged specs and roadmap record it
+[Direction; Roadmap]. Only where both are silent is the gap filled from the reference city's reading, and what is
+taken from it is marked [Direction], for the maintainer to judge its broad direction. A reading never overrides the
+design or his recorded direction.
+
 Templates are drawn from reference cities in four steps [Direction]:
 
 1. A reference city is chosen: a player-built city of Anno 117 that is publicly shared, whether Ubisoft features it
@@ -98,7 +105,8 @@ Templates are drawn from reference cities in four steps [Direction]:
    from above, and those drawings are then among its pictures (FR-041 to FR-045).
 2. It is read onto the game's cells, and the reading is set beside its pictures until it matches them, as the
    river-bend town's render was. Its layout relationships are then taken apart from the reading as a template, and what
-   fills them as its culture's kit, in this feature's form. Since the reading lies on the game's flat cells and is
+   fills them as its culture's kit, in this feature's form, wherever the design and the maintainer's recorded direction
+   leave them open (FR-047). Since the reading lies on the game's flat cells and is
    built from the culture's own kit, it carries only the reference's skeleton, the general way the city is laid out,
    and the template taken from it ships as it is once it passes (FR-010, FR-036).
 3. Generation lays out a city from the template and a kit [Roadmap: R2].
@@ -211,6 +219,11 @@ template (FR-030), and the check in the game, the final one, still follows [Test
   real footprints from `.ifo` files. The old project's output and images, and FileDBReader, only cross-check (the
   maintainer's broad direction, constitution, Principle IV; Imperium-old's design says nothing on reading a game's data,
   checked at 20a052b; constitution, Principle II).
+- Q: In what order are a culture's kit and templates derived? → A: First Imperium-old's default-branch design
+  meaning, reusing everything it defines; then, where it is silent, the maintainer's broad direction as the merged
+  specs and roadmap record it; and only where both are silent, the reference city's reading, marked [Direction] for
+  his judgment of its broad direction. A reading never overrides the design or his recorded direction (the
+  maintainer's broad direction; constitution, Source Register, row Imperium's own design).
 - Q: Does this feature hold the kits and templates of every culture the alpha opens? → A: No. The alpha opens every
   culture of the base game whose factions have settlements, but this feature holds the tribal culture's; the industrial
   (outlander) and pirate cultures' kits and templates are R16's, written in this feature's forms and checked by its
@@ -302,9 +315,13 @@ Each requirement below names its source in brackets. The sources are those the c
   - Further references by culture: Anno 1800 for the outlanders, Bright Sands for the civil and Wormways for the
     rough, and for the pirates, Harlow's and La Fortune's islands; Odyssey's own orbital platform form, a spine of
     corridors with rooms, for the Traders Guild, and for the Salvagers if they really get settlements.
-  - A culture's kit and templates are taken from its reference city: the reference is read onto the game's cells and
-    the reading set beside its pictures until it matches, as the river-bend town's render was, and then its skeleton
-    and its kit, groups and fill among them, are taken apart from that reading.
+  - A culture's kit and templates are derived in this order: Imperium-old's design meaning first, reusing everything
+    it defines; then, where it is silent, the maintainer's direction as the merged specs and roadmap record it; and
+    only where both are silent, the reference city's reading, marked [Direction] for his broad-direction judgment. A
+    reading never overrides the design or his recorded direction.
+  - Within that order, a culture's kit and templates are taken from its reference city: the reference is read onto
+    the game's cells and the reading set beside its pictures until it matches, as the river-bend town's render was,
+    and then its skeleton and its kit, groups and fill among them, are taken apart from that reading.
   - The tribal culture's references are cities of Anno 117's Albion, built only in the Celtic way, neither Romanized
     nor mixed, at the scale of a tribal settlement, and shown from above so that their layout can be read:
     player-built cities shared publicly from any source, or cities the game presets for a governor or an AI rival.
@@ -543,8 +560,9 @@ and confirm that no shared file was changed.
   [Design: line 204].
 - **FR-006**: A kit MUST hold its culture and its fixed generation data: its word list, skeleton, groups, fill and wall
   settings [Design: line 184], and, where it uses one, a block library of ready-made blocks built from spec cards
-  [Design: line 167]. What its groups, fill and wall settings hold MUST be taken from its culture's reference city, as
-  its skeleton is (FR-036) [Direction].
+  [Design: line 167]. What its groups, fill and wall settings hold MUST be taken in the order of FR-047, and so from
+  its culture's reference city, as its skeleton is (FR-036), wherever the design and the maintainer's recorded
+  direction leave them open [Direction].
 - **FR-007**: A spec card MUST fix one building: its plot, its rooms and their contents [Design: line 206].
 - **FR-008**: A laid-out city, the city that generation lays out on a map from a template and a kit, MUST be written in
   one form that holds the template and kit it comes from, its map size, each cell's terrain, natural rock and roof,
@@ -641,13 +659,13 @@ and confirm that no shared file was changed.
   whoever wrote the template; the check in the game still follows [Direction; Testing].
 - **FR-031**: The first template MUST be the river-bend town's, with the Empire's kit, and they MUST calibrate the
   method first [Direction; Roadmap: R13]:
-  - In this feature, before the tribal culture's kit and templates are written, its template and the Empire's kit
-    MUST be taken from its reference pictures: the screenshot of the player-built city, which is the source, and the
-    newest render on the game's cells, the town's reading, with its heights, hidden areas and exact sizes guessed, both
-    in `template-references/` in the project's files (FR-036). The template MUST fit a city's 350×350 map, whatever
-    size the render was drawn at, keeping the same skeleton relations (Clarifications). The check MUST pass the
-    template and kit and draw the template beside both pictures; if the forms cannot express the town, they MUST be
-    fixed first [Direction; FR-003; FR-025].
+  - In this feature, before the tribal culture's kit and templates are written, its template and the Empire's kit MUST
+    be derived in the order of FR-047, and where that order leaves them to a reading, taken from its reference pictures:
+    the screenshot of the player-built city, which is the source, and the newest render on the game's cells, the town's
+    reading, with its heights, hidden areas and exact sizes guessed, both in `template-references/` in the project's
+    files (FR-036). The template MUST fit a city's 350×350 map, whatever size the render was drawn at, keeping the same
+    skeleton relations (Clarifications). The check MUST pass the template and kit and draw the template beside both
+    pictures; if the forms cannot express the town, they MUST be fixed first [Direction; FR-003; FR-025].
   - Once generation lays the town out from them [Roadmap: R2, R15], the town MUST keep every relation of its skeleton,
     as FR-029 measures: the river bend, the wall line, which districts adjoin, how the main streets connect, and where
     the plazas and public buildings lie. The town MUST come from generation, not be written by hand, since only
@@ -678,28 +696,30 @@ and confirm that no shared file was changed.
   check MUST treat the copy as it treats the original [Direction].
 - **FR-035**: The river-bend town MUST serve as the complete worked example, from its reference pictures through its
   skeleton and the Empire kit to the city generation lays out from them [Direction; FR-031].
-- **FR-036**: A culture's templates and kit MUST be taken from its reference city's reading: the reference is read onto
-  the game's cells, and the reading is set beside its pictures until the maintainer, judging it by eye beside them,
-  accepts it, recorded as FR-029 sets, as the river-bend town's render was judged; then the template's terrain shape and
-  skeleton, and what the kit's groups, fill and wall settings hold, are taken apart from the reading [Direction]. A new
-  reading MUST be written in the laid-out city's form (FR-008), naming the reference city it reads in place of a
-  template and kit, so that the check checks it and draws it beside the reference pictures as it does a laid-out city
-  (FR-025) [Direction; Spec Kit]; the river-bend town's reading is its render, which already exists (FR-031). A reading
-  written in that form MUST be kept in the repository, outside both mod folders and so outside their released files, as
-  the template's source; its reference pictures MUST NOT be (FR-028) [Direction; R14; EULA: line 76].
-- **FR-037**: The tribal culture's first templates and its kit MUST be taken from cities of Anno 117's Albion built
-  only in the Celtic way, neither Romanized nor mixed, at the scale of a tribal settlement, and shown from above so
-  that their layout can be read: player-built cities shared publicly from any source, or cities the game presets for
-  a governor or an AI rival, which the maintainer chooses among candidates before their readings are written
-  [Direction]. There MUST be one for each attitude (FR-039), from the references the maintainer chose: Tir Uisce for the
-  gentle tribe's open village, a Celtic oppidum for the fierce tribe's walled stronghold and a small Celtic hillfort for
-  the savage tribe's fortress, Steam screenshots 3639186959, 3625652909 and 3621994739, whose pictures are kept in
-  `template-references/部落城-凯尔特/` in the project's files and never in the repository (FR-028). An agricultural
-  island, 3639163413, MAY be looked at beside them as supplementary material only, to help read them: no reading is
-  written of it, and it is the source of no template and of nothing in the kit [Direction]. A tribal template's extent
-  MUST be its reading's, laid on the game's cells with things of the sizes their definitions give (FR-036) [Data], and
-  is stated as its smallest map, no larger than a city's 350×350 map (FR-003); a tribal settlement's map is a city's
-  map, since the design's city building is the generation of every settlement [Design: line 173; Direction].
+- **FR-036**: Wherever the design and the maintainer's recorded direction leave them open (FR-047), a culture's
+  templates and kit MUST be taken from its reference city's reading: the reference is read onto the game's cells, and
+  the reading is set beside its pictures until the maintainer, judging it by eye beside them, accepts it, recorded as
+  FR-029 sets, as the river-bend town's render was judged; then the template's terrain shape and skeleton, and what the
+  kit's groups, fill and wall settings hold, are taken apart from the reading [Direction]. A new reading MUST be written
+  in the laid-out city's form (FR-008), naming the reference city it reads in place of a template and kit, so that the
+  check checks it and draws it beside the reference pictures as it does a laid-out city (FR-025) [Direction; Spec Kit];
+  the river-bend town's reading is its render, which already exists (FR-031). A reading written in that form MUST be
+  kept in the repository, outside both mod folders and so outside their released files, as the template's source; its
+  reference pictures MUST NOT be (FR-028) [Direction; R14; EULA: line 76].
+- **FR-037**: Where FR-047 leaves them to a reading, the tribal culture's first templates and its kit MUST be taken from
+  cities of Anno 117's Albion built only in the Celtic way, neither Romanized nor mixed, at the scale of a tribal
+  settlement, and shown from above so that their layout can be read: player-built cities shared publicly from any
+  source, or cities the game presets for a governor or an AI rival, which the maintainer chooses among candidates before
+  their readings are written [Direction]. There MUST be one for each attitude (FR-039), from the references the
+  maintainer chose: Tir Uisce for the gentle tribe's open village, a Celtic oppidum for the fierce tribe's walled
+  stronghold and a small Celtic hillfort for the savage tribe's fortress, Steam screenshots 3639186959, 3625652909 and
+  3621994739, whose pictures are kept in `template-references/部落城-凯尔特/` in the project's files and never in the
+  repository (FR-028). An agricultural island, 3639163413, MAY be looked at beside them as supplementary material only,
+  to help read them: no reading is written of it, and it is the source of no template and of nothing in the kit
+  [Direction]. A tribal template's extent MUST be its reading's, laid on the game's cells with things of the sizes their
+  definitions give (FR-036) [Data], and is stated as its smallest map, no larger than a city's 350×350 map (FR-003); a
+  tribal settlement's map is a city's map, since the design's city building is the generation of every settlement
+  [Design: line 173; Direction].
 - **FR-038**: Settlements MUST be built from three layers [Direction]: Mantle's, the same for every culture (FR-033);
   the culture's, one kit that all of the culture's factions share (FR-006); and the faction's, the templates of its
   culture that its settlements are laid out from, picked by attitude (FR-039) and terrain (FR-040). A template MUST
@@ -737,6 +757,20 @@ and confirm that no shared file was changed.
   hell and undercave, which never generate on the world [Data: `Core/Defs/BiomeDefs/Biomes_Misc.xml` line 7;
   `Anomaly/Defs/MapGeneration/LabyrinthMapGenerator.xml` line 32, `MetalHellMapGenerator.xml` line 31 and
   `UndercaveMapGenerator.xml` line 105].
+
+**The order of derivation**
+
+- **FR-047**: A culture's kit and templates MUST be derived in this order [Direction; constitution, Source Register,
+  row Imperium's own design]:
+  1. Imperium-old's default-branch design meaning, reusing everything it defines for them, such as the parts and
+     relations of a skeleton and what a kit holds [Design: lines 184, 193, 204, 209];
+  2. where that design is silent, the maintainer's broad direction, as this repository's merged specs and roadmap
+     record it [Direction; Roadmap];
+  3. only where both are silent, the reference city's reading (FR-036), with what is taken from it marked [Direction]
+     for the maintainer's judgment of its broad direction.
+  What a reading gives MUST NOT override 1 or 2 [Direction]. Each part of a kit or template MUST name the source it was
+  derived from, and each part filled from a reading MUST be marked [Direction] [constitution, Principle VI;
+  Direction].
 
 **Reading a reference from its game's data**
 
@@ -834,6 +868,9 @@ and confirm that no shared file was changed.
   both categories and a position, its skeleton picture and its overlay on the game's image are in
   `template-references/`, the maintainer saw each step's picture before the next step was built, and none of the
   packages or of what was read or drawn from them is in the repository (FR-041 to FR-044).
+- **SC-012**: In the Empire's kit and the river-bend town's template, and in the tribal culture's kit and first
+  templates, 100% of the parts name their source, every part Imperium-old's design defines is taken from it, and no
+  part filled from a reading contradicts the design or the maintainer's recorded direction (FR-047).
 
 ## Assumptions
 
