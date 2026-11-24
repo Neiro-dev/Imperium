@@ -13,6 +13,8 @@ project files.
   `Languages`, `Patches`).
 - **Alternatives considered**: a `1.7/` load folder or `LoadFolders.xml` (`ModUpdating.txt` lines 154-170,
   206-211). Rejected: no official expansion uses either, and Imperium supports 1.7 only (spec FR-001).
+- **Superseded in R14**: with Mantle as a second mod in this repository, Imperium's mod folder is `Imperium/` and the
+  root holds both mod folders side by side (`specs/003-mantle-mod/research.md` R-1).
 
 ## R-2: Metadata fields and their form
 
@@ -127,6 +129,8 @@ project files.
   that loaded no content before that (checks in the game, 2026-11-24), so each launch's `Player.log` is copied when
   the game stops and the copies are compared.
 - **Rationale**: the constitution's testing order (Source Register, Testing in the game).
+- **Superseded in R14**: the clone moves out of `Mods` to `RimWorld\Imperium`, and each mod folder is copied into
+  `Mods` for the checks (`specs/003-mantle-mod/research.md` R-9).
 - **Note**: RimBridgeServer is a mod and writes its own log lines, so each baseline launch also runs it, and a
   launch passes when it adds no error or warning line to that baseline (spec, Clarifications), other than the game's
   report that Imperium loaded no content, which R1 expects because it adds none (spec FR-005, FR-007).

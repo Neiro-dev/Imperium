@@ -33,12 +33,12 @@ maintainer's computer (quickstart.md, Prerequisites), which is the final check.
 
 **Purpose**: The repository's new layout, which every story uses
 
-- [ ] T001 Move `About/` to `Imperium/About/` and `README.md` to `Imperium/README.md` with `git mv`, both unchanged
+- [X] T001 Move `About/` to `Imperium/About/` and `README.md` to `Imperium/README.md` with `git mv`, both unchanged
   (data-model.md `Repository layout.Imperium/About/About.xml`, `Repository layout.Imperium/README.md`; research.md
   R-1)
-- [ ] T002 [P] Copy `LICENSE` to `Imperium/LICENSE` and `Mantle/LICENSE` (data-model.md
+- [X] T002 [P] Copy `LICENSE` to `Imperium/LICENSE` and `Mantle/LICENSE` (data-model.md
   `Repository layout.Imperium/LICENSE`, `Repository layout.Mantle/LICENSE`; research.md R-3)
-- [ ] T003 Write the repository's `README.md`: what the repository holds, the two mod folders and that each goes into
+- [X] T003 Write the repository's `README.md`: what the repository holds, the two mod folders and that each goes into
   the game's `Mods` folder by its own folder, and the EULA's disclaimer (data-model.md `Repository layout.README.md`;
   research.md R-3)
 
@@ -50,12 +50,12 @@ maintainer's computer (quickstart.md, Prerequisites), which is the final check.
 
 **⚠️ CRITICAL**: No user story work can begin until this phase is complete
 
-- [ ] T004 Create `Mantle/About/About.xml` (data-model.md `Repository layout.Mantle/About/About.xml`) with the byte
+- [X] T004 Create `Mantle/About/About.xml` (data-model.md `Repository layout.Mantle/About/About.xml`) with the byte
   order mark and declaration of the official files and one `ModMetaData` element holding data-model.md `Mantle's metadata.name`, `Mantle's metadata.packageId`,
   `Mantle's metadata.author` and `Mantle's metadata.supportedVersions`, in that order (research.md R-4, R-5)
-- [ ] T005 [P] Write `Mantle/README.md` with the EULA's disclaimer (data-model.md `Repository layout.Mantle/README.md`;
+- [X] T005 [P] Write `Mantle/README.md` with the EULA's disclaimer (data-model.md `Repository layout.Mantle/README.md`;
   research.md R-8)
-- [ ] T006 Run quickstart.md, Checks outside the game, 1, 3 and 5, for T001 to T005
+- [X] T006 Run quickstart.md, Checks outside the game, 1, 3 and 5, for T001 to T005
 - [ ] T007 On the maintainer's computer, set up the test install as quickstart.md, Prerequisites, gives: move the
   clone from `RimWorld\Mods\Imperium` to `RimWorld\Imperium` and check out the commit under test, change the import
   in `RimWorld\CLAUDE.md` to `@Imperium/.specify/memory/constitution.md`, and copy the clone's `Imperium\` and
@@ -74,7 +74,7 @@ with no missing requirement and no errors or warnings from it (spec US1, FR-001 
 
 ### Implementation for User Story 1
 
-- [ ] T008 [US1] Check that `Mantle/About/About.xml` holds no field data-model.md lists as left out in R14, so that it
+- [X] T008 [US1] Check that `Mantle/About/About.xml` holds no field data-model.md lists as left out in R14, so that it
   requires nothing (data-model.md, Mantle's metadata, fields left out; spec FR-003), and that `Mantle/` holds no
   content folder (`ModUpdating.txt` lines 96-151; spec FR-007)
 - [ ] T009 [US1] On the maintainer's computer, run quickstart.md, Checks in the game, 2 and 3, against their baselines
@@ -92,8 +92,8 @@ them, ahead of the mods that depend on it and every ordinary mod (spec US2, FR-0
 
 ### Implementation for User Story 2
 
-- [ ] T010 [US2] Add data-model.md `Mantle's metadata.forceLoadAfter` to `Mantle/About/About.xml` (research.md R-7)
-- [ ] T011 [US2] Add to `Mantle/README.md`, above the disclaimer, the sentence research.md R-7 gives for Mantle's place
+- [X] T010 [US2] Add data-model.md `Mantle's metadata.forceLoadAfter` to `Mantle/About/About.xml` (research.md R-7)
+- [X] T011 [US2] Add to `Mantle/README.md`, above the disclaimer, the sentence research.md R-7 gives for Mantle's place
   in the mod list (spec FR-011)
 - [ ] T012 [US2] Run quickstart.md, Checks outside the game, 2 and 4, and copy the changed `Mantle\` to
   `RimWorld\Mods\Mantle` again
@@ -123,7 +123,7 @@ them, ahead of the mods that depend on it and every ordinary mod (spec US2, FR-0
 
 - [ ] T015 On the maintainer's computer, run quickstart.md, Checks in the game, 6 (a save made with a different set of
   mods) and 7 (community content)
-- [ ] T016 [P] Note in `specs/001-mod-foundation/research.md`, R-1 and R-10, that R14 moves Imperium's mod folder to
+- [X] T016 [P] Note in `specs/001-mod-foundation/research.md`, R-1 and R-10, that R14 moves Imperium's mod folder to
   `Imperium/` and the clone out of `Mods` (research.md R-1, Effect on R1)
 - [ ] T017 Set R14's status to `done` in `ROADMAP.md` once T001 to T016 pass (Spec Kit `docs/how-to/spec-of-specs.md`
   v1.4.3, section Specifying each sub-feature, step 4)
