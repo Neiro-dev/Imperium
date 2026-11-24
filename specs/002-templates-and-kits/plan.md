@@ -23,14 +23,14 @@ pictures with a grid, coordinates and a legend beside the reference pictures, ou
 The river-bend town's template and the Empire kit are taken first, then the tribal culture's three, one for each
 attitude, from the references the maintainer chose, and each ships as it stands once it passes (R-13). Every kit and
 template is derived in a fixed order: Imperium-old's design first, then the maintainer's recorded direction, and a
-reading only where both are silent, which never overrides either, each part naming its source (spec FR-047; R-13). A template states
-the attitude of the factions it serves in `FactionDef`'s own `naturalEnemy` and `permanentEnemy`, and the biomes it
-suits in `allowedBiomes`; the tribal culture picks by the first, the Empire by the second (R-14). A reference city
-that Anno 117 presets may also be read from the game's own data on the maintainer's computer and drawn from above, in
-steps the maintainer sees one by one, into the project's files and never into the repository; the check takes those
-drawings as reference pictures, as it takes a screenshot (R-15). The industrial (outlander) and pirate cultures' kits
-and templates, which the alpha opens too, are R16's, in these forms; the later cultures' references are recorded for
-them (R-13, R-16). It is validated by tests outside the game, then by a load in the game
+reading only where both are silent, which never overrides either, each part naming its source (spec FR-047; R-13). A
+template states the attitude of the factions it serves in `FactionDef`'s own `naturalEnemy` and `permanentEnemy`, and
+the biomes it suits in `allowedBiomes`; the tribal culture picks by the first, the Empire by the second (R-14). A
+reference city that Anno 117 presets may also be read from the game's own data on the maintainer's computer and drawn
+from above, in steps the maintainer sees one by one, into the project's files and never into the repository; the check
+takes those drawings as reference pictures, as it takes a screenshot (R-15). The industrial (outlander) and pirate
+cultures' kits and templates, which the alpha opens too, are R16's, in these forms; the later cultures' references are
+recorded for them (R-13, R-16). It is validated by tests outside the game, then by a load in the game
 ([quickstart.md](quickstart.md)).
 
 ## Technical Context
@@ -61,9 +61,10 @@ check wherever Python and `Data/` are, on the maintainer's computer and in cloud
 the game reaches its main menu on the same computer (SC-003)
 
 **Constraints**: reference pictures and the game's files stay out of the repository and the released files (FR-021,
-FR-028; `EULA.txt` lines 76, 86), and so do another game's packages and what is read or drawn from them (FR-041); the same inputs give the same files (FR-022); city maps are 350×350 (FR-003);
-Mantle's kits use base-game definitions, and expansion content only when marked (FR-015); the mod folders
-`Mantle/` and `Imperium/` and Mantle's `packageId` come from R14 (R-1)
+FR-028; `EULA.txt` lines 76, 86), and so do another game's packages and what is read or drawn from them (FR-041); the
+same inputs give the same files (FR-022); city maps are 350×350 (FR-003); Mantle's kits use base-game definitions, and
+expansion content only when marked (FR-015); the mod folders `Mantle/` and `Imperium/` and Mantle's `packageId` come
+from R14 (R-1)
 
 **Scale/Scope**: two definition types, one laid-out city form, one command; the tribal culture's kit and three first
 templates, and the Empire kit with the river-bend town's template; test fixtures for every kind of problem

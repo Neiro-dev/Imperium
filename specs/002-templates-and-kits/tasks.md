@@ -282,14 +282,14 @@ templates are R16's, not this feature's (spec FR-032)
 - [ ] T042 [P] Write the savage tribe's reading in `readings/`, under the mod's own name for a fortress, from
   `template-references/部落城-凯尔特/野蛮部落-小山堡-3621994739.jpg`, the same way; the agricultural island is only looked
   at beside the three, and nothing is taken from it (spec FR-036, FR-037)
-- [ ] T043 Write the tribal kit in `Mantle/Defs/KitDefs/Kits_Tribal.xml`, derived in the order of spec FR-047, with
-  the three accepted readings filling what the design and the recorded direction leave open, each part naming its
-  source (research R-13): data-model.md `KitDef.nameMaker` as the base game's `NamerSettlementTribal`, `KitDef.skeleton`,
-  `KitDef.wallSettings`, `KitDef.groups` and `KitDef.fill`, with base-game definitions only, or expansion content
-  marked (spec FR-006, FR-011, FR-015)
+- [ ] T043 Write the tribal kit in `Mantle/Defs/KitDefs/Kits_Tribal.xml`, derived in the order of spec FR-047, with the
+  three accepted readings filling what the design and the recorded direction leave open, each part naming its source
+  (research R-13): data-model.md `KitDef.nameMaker` as the base game's `NamerSettlementTribal`, `KitDef.skeleton`,
+  `KitDef.wallSettings`, `KitDef.groups` and `KitDef.fill`, with base-game definitions only, or expansion content marked
+  (spec FR-006, FR-011, FR-015)
 - [ ] T044 Write the three tribal templates in `Mantle/Defs/TemplateDefs/Templates_Tribal.xml`, one from each reading,
-  derived in the order of spec FR-047 as T043 is, each with its reading's extent as data-model.md `TemplateDef.minMapSize` (spec FR-037), `TemplateDef.allowedBiomes`
-  left empty and its tribe's attitude in
+  derived in the order of spec FR-047 as T043 is, each with its reading's extent as data-model.md
+  `TemplateDef.minMapSize` (spec FR-037), `TemplateDef.allowedBiomes` left empty and its tribe's attitude in
   `TemplateDef.naturalEnemy` and `TemplateDef.permanentEnemy`: neither for the open village, `naturalEnemy` for the
   walled stronghold, `permanentEnemy` for the fortress (spec FR-038, FR-039; research R-14)
 - [ ] T045 Check the three readings with their pictures, then T043 and T044, until no problem is reported, and put the
