@@ -325,7 +325,7 @@ checked, and no shared file changes (spec, User Story 5)
 
 **Purpose**: What spans the stories, and the load in the game
 
-- [ ] T049 [P] Write `tests/test_same_files.py`: two runs on the same inputs give byte-identical reports and
+- [X] T049 [P] Write `tests/test_same_files.py`: two runs on the same inputs give byte-identical reports and
   pictures (spec FR-022; quickstart.md step 2)
 - [ ] T050 [P] On the maintainer's computer, time checking and drawing the river-bend town against the game,
   launched without `-quicktest` with Royalty, Mantle and Imperium, reaching its main menu (spec SC-003; quickstart.md
