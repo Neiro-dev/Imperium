@@ -61,10 +61,10 @@ on the maintainer's computer, which is the final check.
 ## Phase 4: Polish
 
 - [X] T006 Run quickstart.md check 4 (SC-004)
-- [ ] T007 Final check: quickstart.md check 5, in a thread on the maintainer's computer, after the maintainer's steps
-  in quickstart.md
+- [ ] T007 Final check: quickstart.md check 5, in a thread on the maintainer's computer, after the steps on the
+  maintainer's computer in quickstart.md
 
 ## Dependencies
 
 - T001 before T002 and T004; T002 before T003; T004 before T005; T003 and T005 before T006; the merge and the
-  maintainer's steps before T007.
+  steps on the maintainer's computer before T007.

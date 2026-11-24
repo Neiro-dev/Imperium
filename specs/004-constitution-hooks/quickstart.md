@@ -23,24 +23,25 @@ Results on 2026-11-24, Claude Code 2.1.331: check 1 denied, the reason naming Pr
 sent back twice and then ended once the answer no longer acted on the question without its source; check 3 recorded
 the message and passed both checks; check 4 found no shared sentence. Each check took 7 to 12 seconds.
 
-## Maintainer's steps
+## Steps on the maintainer's computer
 
-These are done on the maintainer's computer and in the project's settings, where only he can act.
+The repository's clone is `D:\Steam\steamapps\common\RimWorld\Imperium` (checked 2026-11-24 with folder access:
+a git clone of `origin` on `main`).
 
-1. After this feature merges, update the clone at `D:\Steam\steamapps\common\RimWorld\Mods\Imperium` from `main`
-   with his own git (`git pull`).
-2. Have Claude Code v2.1.280 or later (claude-projects.md line 256). In the Claude desktop app, **Settings > Code** (or
-   **Settings > Claude Code**), turn on **Use this computer from your phone and claude.ai** and add that clone's folder
-   to the list under it (claude-projects.md line 258). The folder must be the repository root, since the settings file
-   is read from the session's primary working directory (settings.md line 94).
-3. Open Claude Code once in that folder and accept the workspace trust dialog, since an interactive session holds back
-   hooks until the folder is trusted (hooks.md, Workspace trust).
-4. Keep **Require trusted devices** off, or a project cannot run a thread on his computer (claude-projects.md line
-   265). Optionally turn on **Keep this computer awake for Remote Control** (line 278).
-5. In **Project settings > Memory > Project instructions**, say that work on the repository runs as a thread on his
-   computer in that folder, with **Worktree** on so threads do not overwrite each other (claude-projects.md line 269).
-   The docs give no setting that does this by default (research R-2), and the current instructions send repository
-   work to cloud threads.
+1. After this feature merges, a project thread on his computer runs `git pull` in the clone. Such a thread "works with
+   the files, tools, MCP servers, and Claude Code settings on that machine" (claude-projects.md line 250; Remote
+   Control "executes on your machine", remote-control.md line 317), so it uses his git and credentials. Folder access
+   alone cannot: its shell reached no GitHub host (HTTP 403 from its proxy on 2026-11-24).
+2. Threads that should be checked run on his computer with the clone as their folder, since the settings file is read
+   from the session's primary working directory (settings.md line 94), with **Worktree** on so threads do not
+   overwrite each other (claude-projects.md line 269). The first such thread needs the folder allowed on its card
+   (claude-projects.md lines 256-269).
+3. The project's instructions say where repository work runs. The docs give no setting that runs threads on his
+   computer by default (research R-2), and the instructions now send repository work to cloud threads, so they change
+   to send it to a thread on his computer in the clone. Only he, or Claude at his request, changes them
+   (claude-projects.md, Give a project standing context).
+4. If `/hooks` in that thread lists no hooks, he opens Claude Code once in the clone and accepts the workspace trust
+   dialog, since an interactive session holds back hooks until the folder is trusted (hooks.md, Workspace trust).
 
 ## Final check, on the maintainer's computer
 
