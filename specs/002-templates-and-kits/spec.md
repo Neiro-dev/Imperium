@@ -233,6 +233,16 @@ template (FR-030), and the check in the game, the final one, still follows [Test
   Anne Harlow's and Jean La Fortune's; Odyssey's Traders Guild from Odyssey's own form of an orbital settlement, rooms
   off a spine of corridors; and the Salvagers the same way only if they really get settlements (the maintainer's broad
   direction).
+- Q: How is a reference city that exists only as a picture read onto the game's cells? → A: As the design traces a
+  reference: the cell is sized first, by things the size of a person; the picture is traced into cells only as far as
+  blocks, house groups, yards and roads; the tracing is set over the picture at the same scale and each traced piece is
+  compared with the picture, the check marking each piece that does not match for the maintainer and never deciding
+  anything itself; and each area is shown to the maintainer once after it is traced and once after it is laid out. The
+  effect of the old project's preview tool is kept; its code, settings and numbers are not taken. A picture these steps
+  cannot read, such as one not shown from above, is not read by a method of its own, and which picture to use instead is
+  the maintainer's broad direction (the maintainer's broad direction, 2026-11-24; design archive `cities.md`, The size
+  of a cell, and `cities-forms.md` lines 123, 199 and 475; constitution, Principles IV and V). A first reading of the
+  open village, made with a camera guessed from a screenshot, was removed because no source supports that method.
 
 ## Sources
 
@@ -247,6 +257,11 @@ Each requirement below names its source in brackets. The sources are those the c
   spec card (line 206), template (line 209), Mantle (line 221), and the looks of imperial cities, arid (line 162) and
   temperate (line 208); `docs/imperium.md`, section Expansions (lines 108-110); and `docs/setting.md`, section Rome
   (lines 57 and 60-61).
+- **[Design archive]**: `docs/design-archive/` in this repository, its record of Imperium-old's design meaning as of
+  Imperium-old b218bdc (`specs/005-imperium-design-archive/`): `cities.md`, sections The size of a cell and the Anno
+  sample, which the settlement grafted onto RimWorld's logic is kept as "for side-by-side comparison"; and
+  `cities-forms.md`, lines 123 (a template candidate comes only from tracing an accepted reference), 199 (each area shown
+  once after tracing and once after layout) and 475 (traced only as far as blocks, house groups, yards and roads).
 - **[Testing]**: the constitution's Source Register, row Testing outside the game: the base game and official
   expansions in `Data/`; testing outside the game comes before testing in the game and does not replace it, and
   testing in the game is the final check.
@@ -357,9 +372,11 @@ Each requirement below names its source in brackets. The sources are those the c
   (line 263), and a reviewer's judgment recorded as a checked item of a reviewer-owned checklist
   (`templates/commands/checklist.md` lines 32-36).
 
-Imperium-old's earlier layout tool and the reverted spec of the earlier R13 are not sources, and nothing is taken from
-them. The old project's output and old images, and FileDBReader, only cross-check what a reading of a game's data
-gives (constitution, Principle II) [Direction].
+Imperium-old's earlier layout tool and the reverted spec of the earlier R13 are not sources: their code, settings and
+numbers are not taken. What the design says of reading a picture is taken from the design archive (FR-048 to FR-050),
+and the effect of the old preview tool is kept as the maintainer directed (FR-051) [Direction]. The old project's output
+and old images, and FileDBReader, only cross-check what a reading of a game's data gives (constitution, Principle II)
+[Direction].
 
 ## User Scenarios & Testing *(mandatory)*
 
@@ -802,6 +819,29 @@ and confirm that no shared file was changed.
   of corridors on one enclosed platform, for the Traders Guild, and for the Salvagers if they really get settlements
   (FR-032) [Direction; Data: `Odyssey/Defs/LayoutDefs/Layouts_OrbitalPlatform.xml` lines 5, 7, 23 and 158-194;
   `Odyssey/Defs/MapGeneration/SpaceMapGenerator.xml` lines 82-87].
+
+**Reading a reference from its picture**
+
+- **FR-048**: A reference city that exists only as a picture MUST be read onto the game's cells by first sizing a cell:
+  in the picture a door, a figure or a tree is one RimWorld cell, which gives how many pixels one cell is; then how many
+  RimWorld cells the reference game's own cell is; and only then are sizes compared and things laid out. The other
+  game's cell MUST NOT be mapped one to one, and the size of one of Imperium's households MUST NOT size a reference's
+  houses [Design archive: `cities.md`, The size of a cell].
+- **FR-049**: A reference MUST be traced into cells only as far as blocks, house groups, yards and roads, not building
+  by building, and a template candidate MUST come only from tracing an accepted reference [Design archive:
+  `cities-forms.md` lines 123 and 475]. Each traced piece MUST name the region of the picture it was read from
+  [constitution, Principle VI].
+- **FR-050**: A reading MUST be made one area at a time, and the maintainer MUST see each area's picture once after it
+  is traced and once after it is laid out, before the next area is begun [Design archive: `cities-forms.md` line 199;
+  FR-044].
+- **FR-051**: The check MUST draw a tracing over its reference picture at the same scale, compare each traced piece with
+  the colour and shape of the picture where it lies, and mark each piece that does not match as a candidate for the
+  maintainer's attention, with what differs. It MUST NOT decide that a piece is wrong or that the reading matches
+  (FR-029) [Direction: the effect of the old project's preview tool is kept, 2026-11-24; Design archive: `cities.md`,
+  the Anno sample "kept for side-by-side comparison"].
+- **FR-052**: Where FR-048 to FR-051 give no form for a picture, such as one not shown from above (FR-037), it MUST NOT
+  be read by a method of its own; which picture to use instead is the maintainer's broad direction [constitution,
+  Principles IV and V; FR-037].
 
 ### Key Entities *(include if feature involves data)*
 
