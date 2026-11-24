@@ -19,14 +19,17 @@ one gives no form.
 ### IV. Asking the Maintainer
 
 The agent MUST NOT ask the maintainer about anything other than game content. For game content,
-the maintainer judges only its broad direction.
+the maintainer is asked only when the whole RimWorld chain in the Source Register has nothing.
+When the maintainer states how something works, the agent MUST cite the official source it comes
+from, not the maintainer.
 
 ### V. When a Source Gives No Form
 
 When the topic's source names a default, the agent MUST use it. When the source offers options
 without a default, the agent MUST use the option the source uses in its own repository or
-examples. When the source gives neither, the agent MUST NOT act on the question, and rules,
-files, and practices that no source supports MUST be removed.
+examples. When the source gives neither, the agent MUST NOT act on the question, except for game
+content, where Principle IV applies. Rules, files, and practices that no source supports MUST be
+removed.
 
 ### VI. Every Conclusion Names Its Source
 
@@ -42,8 +45,7 @@ Three layers: Claude, GitHub and RimWorld. Each topic and its source:
 | Claude | How the AI works: sessions, threads, project settings, CLAUDE.md, skills, subagents | The Anthropic documentation for the product in use: code.claude.com (Claude Code and projects), platform.claude.com (the API), support.claude.com (claude.ai). anthropic.com/engineering only cross-checks |
 | GitHub | Development workflow | Spec Kit (`github/spec-kit`) |
 | GitHub | Repository files and settings, branches, pull requests, and commit messages | GitHub Docs; choosealicense.com for the license |
-| RimWorld | Game content | TODO(GAME_CONTENT): pending the maintainer's correction |
-| RimWorld | The released mod | In order: the base game and official expansions in `Data/`, then `ModUpdating.txt`, then Harmony (`pardeike/HarmonyRimWorld`). `EULA.txt` always applies |
+| RimWorld | Game content and the released mod | What to build: the maintainer's design, on the default branch of `Neiro-dev/Imperium-old`. What it is like, in order: the base game and official expansions in `Data/`, then `ModUpdating.txt`, then Harmony (`pardeike/HarmonyRimWorld`); game content is judged by what the official expansions contain. `EULA.txt` always applies |
 | RimWorld | Testing in the game | In order: `Readme.txt` (the `-quicktest` launch option), then RimBridgeServer (`pardeike/RimBridgeServer`) with GABS (`pardeike/GABS`) |
 
 ## Governance
