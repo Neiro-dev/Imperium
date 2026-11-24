@@ -398,9 +398,9 @@ checked, and no shared file changes (spec, User Story 5)
 - [ ] T050 [P] On the maintainer's computer, time checking and drawing the river-bend town against the game,
   launched without `-quicktest` with Royalty, Mantle and Imperium, reaching its main menu (spec SC-003; quickstart.md
   step 9)
-- [ ] T051 Build `Mantle/Assemblies/Mantle.dll` from `Mantle/Source/Mantle/` in the maintainer's clone through
+- [X] T051 Build `Mantle/Assemblies/Mantle.dll` from `Mantle/Source/Mantle/` in the maintainer's clone through
   Remote Control, stopping and saying so if the .NET 10 SDK is missing, and commit it (research R-2)
-- [ ] T052 Copy `Mantle/` and `Imperium/` from the clone into the game's `Mods` (R14 quickstart.md, Prerequisites), and
+- [X] T052 Copy `Mantle/` and `Imperium/` from the clone into the game's `Mods` (R14 quickstart.md, Prerequisites), and
   launch the game with `-quicktest` and `-savedatafolder=SaveData` with no mod, with Mantle alone, and with Royalty,
   Mantle and Imperium, and compare each `Player.log` with the first: neither mod adds an error or warning
   about its definitions or assembly (quickstart.md, In the game; research R-12)
