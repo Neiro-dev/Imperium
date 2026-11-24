@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+  <Mantle.KitDef>
+    <defName>TestPalaceKit</defName>
+    <label>test palace kit</label>
+    <nameMaker>NamerSettlementOutlander</nameMaker>
+    <skeleton>
+      <parts>
+        <li><name>core</name><kind>Core</kind></li>
+      </parts>
+    </skeleton>
+    <wallSettings>
+      <wallDef>Wall</wallDef>
+    </wallSettings>
+  </Mantle.KitDef>
+
+  <Mantle.TemplateDef>
+    <defName>TestPalaceTown</defName>
+    <label>test palace town</label>
+    <kit>TestPalaceKit</kit>
+    <reference>
+      <name>TestPalaceTown</name>
+      <pictures>
+        <li>screenshot</li>
+        <li>render</li>
+      </pictures>
+    </reference>
+    <minMapSize>(30, 1, 30)</minMapSize>
+    <terrainShape>
+      <terrain>
+        <Soil><rects><li>(0,0,29,29)</li></rects></Soil>
+        <WaterMovingShallow><rects><li>(12,0,15,29)</li></rects></WaterMovingShallow>
+        <Gravel><rects><li>(20,20,25,25)</li></rects></Gravel>
+        <Quicksilver><rects><li>(3,3,4,4)</li></rects></Quicksilver>
+      </terrain>
+      <features>
+        <li><name>river</name><rects><li>(12,0,15,29)</li></rects><flowsFrom>North</flowsFrom></li>
+      </features>
+    </terrainShape>
+    <skeleton>
+      <parts>
+        <li><name>palace</name><kind>PalaceQuarter</kind></li>
+        <li><name>westBank</name><kind>District</kind></li>
+      </parts>
+      <relations>
+        <li><relation>Upstream</relation><a>palace</a><b>core</b><feature>river</feature></li>
+        <li><relation>SameSide</relation><a>palace</a><b>westBank</b><feature>river</feature></li>
+      </relations>
+    </skeleton>
+  </Mantle.TemplateDef>
+</Defs>

@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LaidOutCity>
+  <template>TestRiverTown</template>
+  <kit>TestTown</kit>
+  <size>(40,40)</size>
+  <terrain>
+    <Soil><rects><li>(0,0,39,39)</li></rects></Soil>
+    <WaterMovingShallow><rects><li>(18,0,21,39)</li></rects></WaterMovingShallow>
+  </terrain>
+  <roofs />
+  <things>
+    <Wall><position>(3,0,5)</position><rotation>North</rotation><stuff>WoodLog</stuff></Wall>
+    <Door><position>(3,0,6)</position><rotation>East</rotation><stuff>WoodLog</stuff></Door>
+    <Bed><position>(10,0,20)</position><rotation>North</rotation><stuff>WoodLog</stuff><rect>(10,20,10,21)</rect></Bed>
+  </things>
+  <parts>
+    <li><name>westBank</name><rects><li>(0,0,17,39)</li></rects></li>
+    <li><name>eastBank</name><rects><li>(22,0,39,39)</li></rects></li>
+    <li><name>core</name><rects><li>(5,10,12,17)</li></rects></li>
+    <li><name>square</name><rects><li>(13,12,15,14)</li></rects></li>
+    <li><name>gate</name><rects><li>(0,12,1,14)</li></rects></li>
+    <li><name>walls</name><rects><li>(2,8,2,20)</li></rects></li>
+    <li><name>palace</name><rects><li>(6,30,12,36)</li></rects></li>
+    <li><name>bridge</name><rects><li>(17,20,22,22)</li></rects></li>
+  </parts>
+  <features>
+    <li><name>river</name><rects><li>(18,0,21,39)</li></rects><flowsFrom>North</flowsFrom></li>
+  </features>
+</LaidOutCity>

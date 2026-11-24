@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+  <Mantle.KitDef>
+    <defName>TestTown</defName>
+    <label>test town</label>
+    <nameMaker>NamerSettlementOutlander</nameMaker>
+    <skeleton>
+      <parts>
+        <li><name>core</name><kind>Core</kind></li>
+        <li><name>square</name><kind>Plaza</kind></li>
+        <li><name>gate</name><kind>Gate</kind></li>
+        <li><name>walls</name><kind>WallLine</kind><optional>true</optional></li>
+      </parts>
+      <relations>
+        <li><relation>Inside</relation><a>square</a><b>core</b></li>
+        <li><relation>Adjoins</relation><a>gate</a><b>walls</b></li>
+      </relations>
+    </skeleton>
+    <wallSettings>
+      <wallDef>Wall</wallDef>
+    </wallSettings>
+  </Mantle.KitDef>
+</Defs>

@@ -152,33 +152,33 @@ breaks a relation and one with neither, each given with a test reference picture
 
 ### Tests for User Story 2
 
-- [ ] T021 [P] [US2] Write a test template and kit and laid-out cities from them in `tests/fixtures/us2/`: a
+- [X] T021 [P] [US2] Write a test template and kit and laid-out cities from them in `tests/fixtures/us2/`: a
   granite block wall on marshy soil; a thing whose `rect` does not match its definition's size; a material the
   definition does not take; a part that is not optional left without cells; each relation kind broken once; an
   optional part left out; and one city with no problem (data-model.md, What the check reports)
-- [ ] T022 [US2] Write `tests/test_laid_out_city.py`: each fixture of T021 gives exactly its problem; each
+- [X] T022 [US2] Write `tests/test_laid_out_city.py`: each fixture of T021 gives exactly its problem; each
   relation is `holds`, `broken` or `not measured` as its fixture sets; a city given with a reference picture gives
   `<out>/<city file name>.png` and `<out>/<city file name>.side-by-side.png`; a missing or unreadable picture gives a
   no comparison problem without stopping the run (spec, User Story 2, scenarios 1-4; Edge Cases)
 
 ### Implementation for User Story 2
 
-- [ ] T023 [US2] Implement the checks of a laid-out city in `src/mantle_check/checks.py`: cells outside its
+- [X] T023 [US2] Implement the checks of a laid-out city in `src/mantle_check/checks.py`: cells outside its
   map and cells without terrain (data-model.md `LaidOutCity.size`, `LaidOutCity.terrain`), a template or kit that
   does not exist or a kit that is not the template's (`LaidOutCity.template`, `LaidOutCity.kit`), affordance, with the
   material's affordance where the definition says so, size against `Thing.rect`, material against `Thing.stuff`, and
   missing part (`LaidOutCity.things`, `LaidOutCity.parts`; spec FR-016, FR-017, FR-018, FR-029)
-- [ ] T024 [US2] Implement measuring relations in `src/mantle_check/relations.py`: `Inside`, `Adjoins`,
+- [X] T024 [US2] Implement measuring relations in `src/mantle_check/relations.py`: `Inside`, `Adjoins`,
   `Across`, `SameSide`, `Upstream` and `Farther` as research R-6 reads them on cells, and not measured where an
   optional part is left out (data-model.md, Skeleton; spec FR-029)
-- [ ] T025 [US2] Implement the grid drawing in `src/mantle_check/pictures.py`: square cells, a thin line between
+- [X] T025 [US2] Implement the grid drawing in `src/mantle_check/pictures.py`: square cells, a thin line between
   cells and a stronger one every 10 numbered on all four edges as `x` and `z` with north at the top, fills from each
   definition's `color` or a colour drawn from its name, a legend by `label` naming each expansion other than the base
   game, and each problem marked at its cell with its number (research R-11; spec FR-023, FR-026, FR-027)
-- [ ] T026 [US2] Draw laid-out cities in `src/mantle_check/pictures.py` with each thing in place and each part
+- [X] T026 [US2] Draw laid-out cities in `src/mantle_check/pictures.py` with each thing in place and each part
   and feature outlined and named, and the side-by-side picture with each whole reference picture, read as JPEG, PNG or
   WebP, at the same height (research R-11; spec FR-025, FR-028)
-- [ ] T027 [US2] Report each relation's result and the reference pictures set beside each city in
+- [X] T027 [US2] Report each relation's result and the reference pictures set beside each city in
   `src/mantle_check/report.py`, run all of it from `src/mantle_check/cli.py` for laid-out city files,
   and pass T022 (contracts/check-command.md, Output)
 
@@ -195,19 +195,19 @@ and relation in its picture is compared with the template (spec, User Story 3)
 
 ### Tests for User Story 3
 
-- [ ] T028 [P] [US3] Write a test template in `tests/fixtures/us3/` with a known terrain shape, a river feature,
+- [X] T028 [P] [US3] Write a test template in `tests/fixtures/us3/` with a known terrain shape, a river feature,
   a skeleton that relates a palace quarter to the river, and one problem at one cell
-- [ ] T029 [US3] Write `tests/test_template_picture.py`: each cell's colour in `<out>/<defName>.png` is its
+- [X] T029 [US3] Write `tests/test_template_picture.py`: each cell's colour in `<out>/<defName>.png` is its
   terrain's, the coordinates run along the edges, the problem's cell is marked with its number, the parts and the
   relation are named, and a template given reference pictures gets a side-by-side picture (spec, User Story 3,
   scenarios 1-3)
 
 ### Implementation for User Story 3
 
-- [ ] T030 [US3] Draw templates in `src/mantle_check/pictures.py`: the terrain shape on the grid of T025 with
+- [X] T030 [US3] Draw templates in `src/mantle_check/pictures.py`: the terrain shape on the grid of T025 with
   each feature named, and the skeleton's parts and relations as a named diagram beside it, since a template's parts
   have no cells (research R-11; spec FR-023)
-- [ ] T031 [US3] Set a template's picture beside its reference pictures, named by `TemplateDef.reference` in
+- [X] T031 [US3] Set a template's picture beside its reference pictures, named by `TemplateDef.reference` in
   data-model.md, in `src/mantle_check/pictures.py`, and pass T029 (spec FR-025)
 
 **Checkpoint**: User Stories 1 to 3 work on their own
@@ -224,14 +224,14 @@ hold, one with a room or thing past its plot and one with neither, is checked, a
 
 ### Tests for User Story 4
 
-- [ ] T032 [P] [US4] Write a test kit with a block library of three spec cards in `tests/fixtures/us4/`: one naming a
+- [X] T032 [P] [US4] Write a test kit with a block library of three spec cards in `tests/fixtures/us4/`: one naming a
   definition `Data/` does not hold, one with a room or thing past its plot, and one with neither
-- [ ] T033 [US4] Write `tests/test_spec_cards.py`: the unknown name is reported with its cell, the room or thing past
+- [X] T033 [US4] Write `tests/test_spec_cards.py`: the unknown name is reported with its cell, the room or thing past
   its plot is reported with its cell, and the third card gives none (spec, User Story 4, scenarios 1-2)
 
 ### Implementation for User Story 4
 
-- [ ] T034 [US4] Check spec cards in `src/mantle_check/checks.py`, with every cell inside its plot
+- [X] T034 [US4] Check spec cards in `src/mantle_check/checks.py`, with every cell inside its plot
   (data-model.md `KitDef.blockLibrary` and SpecCard; spec FR-007); pass T033
 
 **Checkpoint**: User Stories 1 to 4 work on their own

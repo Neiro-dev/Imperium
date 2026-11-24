@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+  <Mantle.TemplateDef>
+    <defName>TestRiverTown</defName>
+    <label>test river town</label>
+    <kit>TestTown</kit>
+    <reference>
+      <name>TestRiverTown</name>
+      <pictures>
+        <li>plan</li>
+      </pictures>
+    </reference>
+    <minMapSize>(40, 1, 40)</minMapSize>
+    <terrainShape>
+      <terrain>
+        <Soil><rects><li>(0,0,39,39)</li></rects></Soil>
+        <WaterMovingShallow><rects><li>(18,0,21,39)</li></rects></WaterMovingShallow>
+      </terrain>
+      <features>
+        <li><name>river</name><rects><li>(18,0,21,39)</li></rects><flowsFrom>North</flowsFrom></li>
+      </features>
+    </terrainShape>
+    <skeleton>
+      <parts>
+        <li><name>westBank</name><kind>District</kind></li>
+        <li><name>eastBank</name><kind>District</kind></li>
+        <li><name>bridge</name><kind>Bridge</kind></li>
+        <li><name>palace</name><kind>PalaceQuarter</kind></li>
+      </parts>
+      <relations>
+        <li><relation>Across</relation><a>westBank</a><b>eastBank</b><feature>river</feature></li>
+        <li><relation>SameSide</relation><a>core</a><b>westBank</b><feature>river</feature></li>
+        <li><relation>Upstream</relation><a>palace</a><b>core</b><feature>river</feature></li>
+        <li><relation>Farther</relation><a>palace</a><b>gate</b><than>core</than></li>
+        <li><relation>Adjoins</relation><a>bridge</a><b>westBank</b></li>
+      </relations>
+    </skeleton>
+  </Mantle.TemplateDef>
+</Defs>

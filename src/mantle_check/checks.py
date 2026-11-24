@@ -287,6 +287,7 @@ class Checker:
             definition = self.lookup(thing.ref, "ThingDef", "a thing", cell)
             if definition is not None:
                 self.material(thing, definition, cell)
+                self.thing_size(thing, definition)
             if bounds is None:
                 continue
             if thing.position is not None:
@@ -294,6 +295,22 @@ class Checker:
                 self.outside([(x, z, x, z)], bounds, thing.where, past)
             if thing.rect is not None:
                 self.outside([thing.rect], bounds, thing.where, past)
+
+    def thing_size(self, thing: Thing, definition: Definition) -> None:
+        """A thing's rect matches its definition's size, turned by its rotation (data-model.md, Thing; R-7)."""
+        wide, deep = parse_size(text(self.game.resolved(definition), "size"))
+        if thing.rotation in ("East", "West"):
+            wide, deep = deep, wide
+        if thing.rect is not None:
+            x1, z1, x2, z2 = thing.rect
+            if (x2 - x1 + 1, z2 - z1 + 1) != (wide, deep):
+                self.problem(
+                    "size", thing.where, f"rect covers {x2 - x1 + 1}×{z2 - z1 + 1} cells, {definition.name} turned "
+                    f"{thing.rotation} covers {wide}×{deep}", thing.rect
+                )
+        elif (wide, deep) != (1, 1):
+            cell = (*thing.position, *thing.position) if thing.position is not None else None
+            self.problem("size", thing.where, f"{definition.name} covers {wide}×{deep} cells and no rect is given", cell)
 
     def group(self, group: Group) -> None:
         for entry in group.terrain:
@@ -371,19 +388,8 @@ class Checker:
             cells = [thing.position]
         if definition is None:
             return
+        self.thing_size(thing, definition)
         resolved = self.game.resolved(definition)
-        wide, deep = parse_size(text(resolved, "size"))
-        if thing.rotation in ("East", "West"):
-            wide, deep = deep, wide
-        if thing.rect is not None:
-            x1, z1, x2, z2 = thing.rect
-            if (x2 - x1 + 1, z2 - z1 + 1) != (wide, deep):
-                self.problem(
-                    "size", thing.where, f"rect covers {x2 - x1 + 1}×{z2 - z1 + 1} cells, {definition.name} turned "
-                    f"{thing.rotation} covers {wide}×{deep}", thing.rect
-                )
-        elif (wide, deep) != (1, 1):
-            self.problem("size", thing.where, f"{definition.name} covers {wide}×{deep} cells and no rect is given")
         need = text(resolved, "terrainAffordanceNeeded")
         if is_true(text(resolved, "useStuffTerrainAffordance")) and stuff is not None:
             need = text(self.game.resolved(stuff), "terrainAffordanceNeeded") or need

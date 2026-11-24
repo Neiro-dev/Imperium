@@ -47,6 +47,12 @@ class Legend:
 class Painter:
     def __init__(self, game: GameData):
         self.game = game
+        # Every caption drawn, so that what a picture names can be read back without reading its pixels.
+        self.written: list[str] = []
+
+    def write(self, draw: ImageDraw.ImageDraw, place, caption: str, fill, size: int) -> None:
+        self.written.append(caption)
+        draw.text(place, caption, fill=fill, font=font(size))
 
     def colour_of(self, definition: Definition | None, name: str) -> tuple[int, int, int]:
         if definition is not None:
@@ -76,7 +82,7 @@ class Painter:
         w, h = bounds
         cell = max(4, min(24, 2100 // max(w, h)))
         image = Image.new("RGB", (w * cell + 2 * MARGIN, h * cell + 2 * MARGIN + 24), BACKGROUND)
-        ImageDraw.Draw(image).text((MARGIN, 6), title, fill=INK, font=font(14))
+        self.write(ImageDraw.Draw(image), (MARGIN, 6), title, INK, 14)
         return image, cell
 
     def origin(self) -> tuple[int, int]:
@@ -126,30 +132,29 @@ class Painter:
             draw.line([(ox, y), (ox + w * cell, y)], fill=colour)
         image.paste(Image.alpha_composite(image.convert("RGBA"), overlay).convert("RGB"))
         draw = ImageDraw.Draw(image)
-        small = font(10)
         for x in range(0, w, 10):
             px = ox + x * cell
-            draw.text((px, oy - 14), str(x), fill=INK, font=small)
-            draw.text((px, oy + h * cell + 3), str(x), fill=INK, font=small)
+            self.write(draw, (px, oy - 14), str(x), INK, 10)
+            self.write(draw, (px, oy + h * cell + 3), str(x), INK, 10)
         for z in range(0, h, 10):
             py = oy + (h - 1 - z) * cell
-            draw.text((ox - 30, py), str(z), fill=INK, font=small)
-            draw.text((ox + w * cell + 4, py), str(z), fill=INK, font=small)
-        draw.text((ox + w * cell // 2 - 60, oy - 28), "x grows east, z grows north (top)", fill=INK, font=small)
+            self.write(draw, (ox - 30, py), str(z), INK, 10)
+            self.write(draw, (ox + w * cell + 4, py), str(z), INK, 10)
+        self.write(draw, (ox + w * cell // 2 - 60, oy - 28), "x grows east, z grows north (top)", INK, 10)
 
     def things(self, image, cell, bounds, things: list[Thing], legend: Legend) -> None:
         w, h = bounds
         draw = ImageDraw.Draw(image)
         for thing in things:
+            # A thing is filled with its own colour, and its material's colour shows in its middle.
             definition = self.definition(thing.ref.name, "ThingDef")
             stuff = self.definition(thing.stuff.name, "ThingDef") if thing.stuff is not None else None
-            colour = self.colour_of(stuff, thing.stuff.name) if thing.stuff is not None else self.colour_of(
-                definition, thing.ref.name
-            )
-            legend.add("thing", thing.ref.name, self.colour_of(definition, thing.ref.name),
-                       self.describe(definition, thing.ref.name))
-            if stuff is not None:
-                legend.add("material", thing.stuff.name, colour, self.describe(stuff, thing.stuff.name))
+            colour = self.colour_of(definition, thing.ref.name)
+            legend.add("thing", thing.ref.name, colour, self.describe(definition, thing.ref.name))
+            material = None
+            if thing.stuff is not None:
+                material = self.colour_of(stuff, thing.stuff.name)
+                legend.add("material", thing.stuff.name, material, self.describe(stuff, thing.stuff.name))
             if thing.rect is not None:
                 rect = thing.rect
             elif thing.position is not None:
@@ -163,11 +168,13 @@ class Painter:
             left, top, right, bottom = self.rect_box(cell, h, rect)
             inset = 1 if cell >= 6 else 0
             draw.rectangle([left + inset, top + inset, right - inset, bottom - inset], fill=colour, outline=INK)
+            core = cell // 4
+            if material is not None and cell >= 8:
+                draw.rectangle([left + core, top + core, right - core, bottom - core], fill=material)
 
     def areas(self, image, cell, bounds, areas, colour) -> None:
         w, h = bounds
         draw = ImageDraw.Draw(image)
-        label_font = font(12)
         for area in sorted(areas, key=lambda a: a.name):
             for x1, z1, x2, z2 in area.rects:
                 rect = (max(0, x1), max(0, z1), min(w - 1, x2), min(h - 1, z2))
@@ -177,12 +184,11 @@ class Painter:
             if area.rects:
                 x1, z1, x2, z2 = area.rects[0]
                 left, top, _, _ = self.rect_box(cell, h, (max(0, x1), max(0, z1), min(w - 1, x2), min(h - 1, z2)))
-                draw.text((left + 3, top + 2), area.name, fill=colour, font=label_font)
+                self.write(draw, (left + 3, top + 2), area.name, colour, 12)
 
     def problems(self, image, cell, bounds, numbered: list[tuple[int, Problem]]) -> None:
         w, h = bounds
         draw = ImageDraw.Draw(image)
-        label_font = font(12)
         for number, problem in numbered:
             if problem.cell is None:
                 continue
@@ -192,24 +198,23 @@ class Painter:
                 rect = (min(max(0, x1), w - 1), min(max(0, z1), h - 1)) * 2
             box = self.rect_box(cell, h, rect)
             draw.rectangle(box, outline=PROBLEM, width=2)
-            draw.text((box[0] + 2, box[1] - 14), f"{number}", fill=PROBLEM, font=label_font)
+            self.write(draw, (box[0] + 2, box[1] - 14), f"{number}", PROBLEM, 12)
 
     def legend(self, image: Image.Image, legend: Legend, extra: list[str]) -> Image.Image:
         rows = sorted(legend.entries.items(), key=lambda item: (item[0][0], item[1][1], item[0][1]))
-        label_font = font(12)
         height = 24 + 18 * (len(rows) + len(extra)) + 10
         out = Image.new("RGB", (max(image.width, 520), image.height + height), BACKGROUND)
         out.paste(image, (0, 0))
         draw = ImageDraw.Draw(out)
         y = image.height + 6
-        draw.text((MARGIN, y), "Legend", fill=INK, font=font(13))
+        self.write(draw, (MARGIN, y), "Legend", INK, 13)
         y += 20
         for (group, _), (colour, label) in rows:
             draw.rectangle([MARGIN, y + 2, MARGIN + 12, y + 14], fill=colour, outline=INK)
-            draw.text((MARGIN + 20, y), f"{group}: {label}", fill=INK, font=label_font)
+            self.write(draw, (MARGIN + 20, y), f"{group}: {label}", INK, 12)
             y += 18
         for line in extra:
-            draw.text((MARGIN, y), line, fill=INK, font=label_font)
+            self.write(draw, (MARGIN, y), line, INK, 12)
             y += 18
         return out
 
@@ -261,7 +266,7 @@ class Painter:
         size = max(520, min(height, 900))
         image = Image.new("RGB", (size, max(height, size)), BACKGROUND)
         draw = ImageDraw.Draw(image)
-        draw.text((16, 6), "Skeleton: parts, features and relations", fill=INK, font=font(14))
+        self.write(draw, (16, 6), "Skeleton: parts, features and relations", INK, 14)
         if not nodes:
             return image
         cx, cy, radius = size // 2, size // 2 + 10, size // 2 - 110
@@ -281,7 +286,7 @@ class Painter:
                 label += f" by {relation.feature}"
             if relation.than:
                 label += f" than {relation.than}"
-            draw.text(((x1 + x2) // 2 + 3, (y1 + y2) // 2 - 6), label, fill=(90, 90, 90), font=small)
+            self.write(draw, ((x1 + x2) // 2 + 3, (y1 + y2) // 2 - 6), label, (90, 90, 90), 11)
         for name in nodes:
             x, y = places[name]
             caption = f"{name} ({parts[name]})" if name in parts else f"{name} (feature)"
@@ -289,7 +294,7 @@ class Painter:
             box = draw.textbbox((0, 0), caption, font=small)
             width = box[2] - box[0]
             draw.rectangle([x - width // 2 - 4, y - 9, x + width // 2 + 4, y + 9], fill=BACKGROUND, outline=colour)
-            draw.text((x - width // 2, y - 7), caption, fill=colour, font=small)
+            self.write(draw, (x - width // 2, y - 7), caption, colour, 11)
         return image
 
 
