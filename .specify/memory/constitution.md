@@ -22,7 +22,8 @@ rows, the next one MUST be used only when the previous one gives no form.
 ### IV. Asking the Maintainer
 
 The agent MUST NOT ask the maintainer about anything other than game content. For game content,
-the maintainer is asked only when no other source Principle I gives has the answer.
+the maintainer is asked only when no other source Principle I gives has the answer, and judges
+only its broad direction.
 
 ### V. When a Source Gives No Form
 
@@ -63,4 +64,4 @@ Versioning follows semantic versioning:
 
 Compliance is reviewed at each plan's Constitution Check and at pull request review.
 
-**Version**: 3.0.0 | **Ratified**: 2026-11-23 | **Last Amended**: 2026-11-24
+**Version**: 2.3.0 | **Ratified**: 2026-11-23 | **Last Amended**: 2026-11-24
