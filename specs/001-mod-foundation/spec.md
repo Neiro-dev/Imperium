@@ -22,13 +22,17 @@ Each requirement below names its source in brackets. The sources are those the c
   `Data/Core/Languages/English/Keyed/Menus_Main.xml`.
 - **[ModUpdating]**: `ModUpdating.txt` of the same release, sections MOD FILE STRUCTURE and MOD METADATA. Used only
   where [Data] gives no form.
+- **[EULA]**: `EULA.txt` of RimWorld (last updated April 7, 2022), which is always followed (constitution, Source
+  Register).
 
 Imperium is a remake of Royalty and requires only Royalty [Design: glossary line 35], and in later entries it
 replaces the base game's Empire [Design: setting.md line 83]. Game content is judged by what the official
 expansions contain (constitution, Source Register), so each requirement below is measured against what the official
 expansions do, Royalty first, and not against what an ordinary mod may do. Imperium cannot itself be an official
 expansion: its package identifier may not contain "Ludeon" [ModUpdating: line 237]. Where the official expansions'
-form is open only to Ludeon's own packages, the next source applies (constitution, Principle III).
+form is open only to Ludeon's own packages, the next source applies (constitution, Principle III). Being measured
+against the official expansions does not make Imperium look official: it is presented as community-created content
+[EULA: line 78].
 
 ## User Scenarios & Testing *(mandatory)*
 
@@ -120,6 +124,10 @@ Odyssey added; each loads with no errors from Imperium and shows no missing requ
   [Design: lines 108 and 110].
 - **FR-007**: The mod MUST add no game content in this feature; content belongs to later roadmap entries
   [Roadmap: R1, "Deferred: all content"].
+- **FR-008**: Wherever the game shows Imperium, it MUST be presented as community-created content, and never as
+  official or made by Ludeon [EULA: lines 57 and 78].
+- **FR-009**: The disclaimer the EULA gives MUST be displayed on or reasonably in connection with Imperium
+  [EULA: lines 32-34].
 
 ### Key Entities
 
@@ -141,17 +149,20 @@ Odyssey added; each loads with no errors from Imperium and shows no missing requ
 - **SC-003**: Across Royalty alone and every combination of the four other official expansions added to it (16
   combinations), every one loads with zero errors from Imperium, with Imperium after every active official expansion
   and no load-order warning for it.
+- **SC-004**: Nothing the game shows for Imperium states or implies that it is official or made by Ludeon, and the
+  EULA's disclaimer is displayed with it.
 
 ## Assumptions
 
 - The mod's name in the mod list is Imperium, the name the design uses throughout [Design: `docs/imperium.md` title].
 - Each official expansion presents itself with a label, a description of what it contains, an icon and preview
   images [Data: ExpansionDefs.xml lines 13-39 for Royalty, and the same parts for each other expansion]. Imperium's
-  description and images take that form. Because each official description lists only what that expansion contains,
-  and this feature adds no content, they are written with the content they describe in later entries
-  [Roadmap: R1, "Deferred: all content"]. How Imperium shows them, given that the base game defines its own
+  description and images take that form, within FR-008. Because each official description lists only what that
+  expansion contains, and this feature adds no content, they are written with the content they describe in later
+  entries [Roadmap: R1, "Deferred: all content"]. How Imperium shows them, given that the base game defines its own
   expansions, belongs to `/speckit-plan`.
 - Whether Harmony is needed is an implementation question for `/speckit-plan`; this feature adds no code that needs
   it unless the plan finds otherwise.
-- Testing in the game follows the constitution's testing sources (`Readme.txt` `-quicktest`, then RimBridgeServer with
-  GABS); the setup belongs to the plan.
+- Testing in the game follows the constitution's testing sources: first `Readme.txt` line 58 (the `-quicktest`
+  launch option starts the game into a tiny, fast-loading map), then RimBridgeServer with GABS; the setup belongs
+  to the plan.

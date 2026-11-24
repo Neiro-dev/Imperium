@@ -51,6 +51,9 @@
     takes the official expansions' form (`ExpansionDefs.xml`: label, description, icon, preview images), filled with
     the content it describes in later entries.
   - FR-001, the key entities and the edge cases now compare Imperium with the official expansions.
+- Third review, against `EULA.txt` (always followed, constitution, Source Register): FR-008 and SC-004 keep Imperium
+  presented as community-created content, never as official or made by Ludeon (EULA lines 57 and 78), and FR-009
+  displays the EULA's disclaimer with it (lines 32-34). The testing assumption now cites `Readme.txt` line 58.
 - Bracketed source names in the spec name where each requirement comes from; they do not prescribe a technology.
 - No game content in this feature is left to the maintainer: the design settles the requirements, and the mod's
   form is left to `/speckit-plan` from the constitution's sources.
