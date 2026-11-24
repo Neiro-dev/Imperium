@@ -530,7 +530,8 @@ and confirm that no shared file was changed.
   building element the base game lacks [Design: line 194]: the check looks for it among the definitions of the mods it
   is given, and reports it when it is not there.
 - A terrain shape reaches past the map size the template states or past a city's 350×350 map, a laid-out city reaches
-  past its map, or either leaves a cell with no terrain: the check reports each such cell.
+  past its map, or either leaves a cell with no terrain: the check reports each such cell, except that a terrain shape holding no
+  terrain at all (FR-004) has none to report (FR-016).
 - A skeleton relation names a part the skeleton does not hold, or a terrain the terrain shape does not hold: the check
   reports the relation.
 - A definition from an expansion that the mod holding the template, kit or laid-out city does not require, marked as
@@ -636,8 +637,8 @@ and confirm that no shared file was changed.
   every expansion's definition in it MUST be marked.
 - **FR-016**: The check MUST report each cell of a terrain shape that lies outside the smallest map its template
   states or outside a city's 350×350 map, each cell of a laid-out city that lies outside its map, and each cell of
-  either that has no terrain, a terrain shape that holds no terrain at all, as FR-004 allows, having none to report
-  [Data; Direction].
+  either that has no terrain [Data; Direction]. A terrain shape that holds no terrain at all, as FR-004 allows, has no
+  cell to report for having none.
 - **FR-017**: The check MUST report each skeleton relation that names a part the skeleton does not hold, or a terrain
   the terrain shape does not hold [Design: line 204], and each template whose culture has no kit [Direction].
 - **FR-018**: The check MUST report each thing in a laid-out city that stands on a terrain lacking the affordance the
@@ -744,15 +745,12 @@ and confirm that no shared file was changed.
   cities of Anno 117's Albion built only in the Celtic way, neither Romanized nor mixed, at the scale of a tribal
   settlement, and shown from above so that their layout can be read: player-built cities shared publicly from any
   source, or cities the game presets for a governor or an AI rival, which the maintainer chooses among candidates before
-  their readings are written [Direction]. There MUST be one for each attitude (FR-039), from the references the
-  maintainer chose: Tir Uisce for the gentle tribe's open village, a Celtic oppidum for the fierce tribe's walled
-  stronghold and a small Celtic hillfort for the savage tribe's fortress, Steam screenshots 3639186959, 3625652909 and
-  3621994739, whose pictures are kept in `template-references/部落城-凯尔特/` in the project's files and never in the
-  repository (FR-028). These pictures are oblique, not shown from above, so they are not read (FR-052); the references
-  shown from above that replace them, chosen by the maintainer among the candidates found, are open [Direction,
-  2026-11-24]. An agricultural island, 3639163413, MAY be looked at beside them as supplementary material only,
-  to help read them: no reading is written of it, and it is the source of no template and of nothing in the kit
-  [Direction]. A tribal template's extent MUST be its reading's, the settlement's and not the island's ground, laid on the game's
+  their readings are written [Direction]. There MUST be one for each attitude (FR-039). The references the maintainer first chose, Steam
+  screenshots 3639186959, 3625652909 and 3621994739, whose pictures are kept in `template-references/部落城-凯尔特/` in
+  the project's files and never in the repository (FR-028), are oblique, not shown from above, so none of them is read
+  (FR-052); the references shown from above that replace them, chosen by the maintainer among the candidates found,
+  are open [Direction, 2026-11-24]. An agricultural island, 3639163413, is the source of no template and of nothing
+  in the kit [Direction]. A tribal template's extent MUST be its reading's, the settlement's and not the island's ground, laid on the game's
   cells with things of the sizes their definitions give (FR-036) [Data], and is stated as its smallest map, no larger than a city's 350×350 map (FR-003); a
   tribal settlement's map is a city's map, since the design's city building is the generation of every settlement
   [Design: line 173; Direction].
@@ -872,8 +870,8 @@ and confirm that no shared file was changed.
   meaning and is not taken.
 - **FR-050**: A reading from a picture MUST be made one area at a time, and the maintainer MUST see each area's picture
   once after it is traced and once after it is laid out, before the next area is begun [Design archive:
-  `cities-forms.md` line 199; Direction: the last entry of Clarifications, which makes it the rule for every reading
-  from a picture; FR-044]. The first picture is the tracing laid over the reference picture (FR-051); the second is the
+  `cities-forms.md` line 199; Direction: the clarification on how a reference city that exists only as a picture is read onto the
+  game's cells, which makes it the rule for every reading from a picture; FR-044]. The first picture is the tracing laid over the reference picture (FR-051); the second is the
   area laid out, drawn beside the reference picture (FR-025); the maintainer's acceptance of each is an item of
   `checklists/acceptance.md` (FR-029). An area is a district of the reference city's own zoning, which the design says
   the list of districts follows (`cities.md` lines 63-66); the sizes of 2800 to 9200 cells and the weighting that the
@@ -923,7 +921,7 @@ and confirm that no shared file was changed.
 - **Reference city**: the city a template is drawn from, player-built and publicly shared or preset by the game,
   and its **reference pictures**, such as a screenshot of it, which the developer keeps outside the repository and
   both mods' released files (FR-028).
-- **Reading**: a reference city drawn on the game's cells and set beside its pictures until it matches them, in the
+- **Reading**: a reference city read onto the game's cells and set beside its pictures until it matches them, in the
   laid-out city's form, from which a culture's templates and kit are taken; for the river-bend town, its render. It is
   kept in the repository as its template's source; its reference pictures are not. A reading is the whole and its file;
   a reading from a picture is made by tracing the picture into cells (FR-049) and then laying out what is traced

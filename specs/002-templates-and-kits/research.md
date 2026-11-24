@@ -271,11 +271,10 @@ files, to `Neiro-dev/Imperium-old` at 20a052b, to Spec Kit at v1.4.3 and to Harm
   holds the river bend, the wall line, the districts on each bank and inside the bend, the main street with its
   bridges and gates, the plazas, and the public buildings, by the relations of R-5. The check's picture of it beside
   both references is given to the maintainer in the project's files, not in the pull request, since it holds the
-  screenshot (FR-028). Once it passes the check, the tribal culture's three readings are written from the references the
-  maintainer chose, whose pictures are in `template-references/部落城-凯尔特/`, in `readings/`: the gentle tribe's open
-  village from Tir Uisce, the fierce tribe's walled stronghold from a Celtic oppidum and the savage tribe's fortress
-  from a small Celtic hillfort, with the agricultural island only looked at beside them, as supplementary material, and
-  nothing taken from it. Each reading counts once the maintainer accepts it beside its pictures, recorded in
+  screenshot (FR-028). Once it passes the check, the tribal culture's three readings are written in `readings/`, one for each
+  attitude, from the references the maintainer chooses among candidates shown from above (spec FR-037, FR-052); the
+  three Steam screenshots chosen first are oblique and are not read, and nothing is taken from the agricultural island.
+  Each reading counts once the maintainer accepts it beside its pictures, recorded in
   `checklists/acceptance.md` (spec FR-029, FR-036). A template is taken from each, stating its tribe's attitude (R-14),
   and the one tribal kit from all three. Each template ships as it stands once it passes (FR-010, FR-031). The
   industrial (outlander) and pirate cultures' kits and templates, which the alpha opens too, are R16's, written in

@@ -320,7 +320,7 @@ so far is one (spec, Assumptions). On the maintainer's computer, outside every r
 
 ### A template that leaves the land to generation, before the tribal templates
 
-For T044, since the tribal references are preset islands read for their skeleton only (spec FR-036; research R-18).
+For T044, since a tribal reference that is a preset island is read for its skeleton only (spec FR-036; research R-18).
 
 - [ ] T062 Write, in `tests/fixtures/us1/` and `tests/test_templates_and_kits.py`, a template whose `terrain` holds no
   cell and one whose `terrain` holds some cells but not all, and report "no terrain" only for the second; then change

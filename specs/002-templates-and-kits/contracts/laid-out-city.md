@@ -37,7 +37,7 @@ Field rules are in [../data-model.md](../data-model.md).
 
 ## A reading
 
-A reading is a reference city drawn on the game's cells in the same form, set beside its reference pictures until it
+A reading is a reference city read onto the game's cells in the same form, set beside its reference pictures until it
 matches them; the culture's template and kit are taken from it (spec FR-036; research R-7). It holds `reference`, the
 name the template's `reference` gives the city, in place of `template` and `kit`, and the parts and features it reads:
 

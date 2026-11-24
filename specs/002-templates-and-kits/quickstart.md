@@ -12,8 +12,8 @@ Source Register). Sources for each step are in [research.md](research.md) R-10 t
   unpacked outside the repository.
 - `RIMWORLD_DATA_DIR` set to that `Data/` folder for the tests.
 - For the river-bend town: its two reference pictures in `template-references/` in the project's files; for the
-  tribal culture, the reference pictures of the three cities the maintainer chose, in
-  `template-references/部落城-凯尔特/`.
+  tribal culture, the reference pictures of the three cities the maintainer chooses among candidates shown from
+  above (spec FR-037), in `template-references/` in the project's files.
 - For a reference city that Anno 117 presets, if it is read from the game's own data: its skeleton picture and its
   overlay on the game's `mapimage.png`, in `template-references/` in the project's files (research R-15).
 - An output folder outside the repository.
