@@ -39,6 +39,17 @@
         <!-- Design: lines 165 (a basilica beside the forum) and 174 (public buildings gather in the civic core): a slot,
              since the design does not say every city has one. -->
         <li><name>basilica</name><kind>PublicBuilding</kind><optional>true</optional></li>
+        <!-- Design: lines 174 (public buildings gather in the civic core) and 199 (a sanctuary). Which public buildings
+             a city of the Empire has: Spec FR-011 and setting.md line 60 (Rome as reliable sources describe it, leaning
+             toward New Rome), and not the reference city. A published account of a planned Late Antique city of the
+             eastern empire lists a large basilica, churches, baths, cisterns and granaries among "all the amenities
+             expected from a Roman and Christian city" (Epoch Magazine, "How Cities Disappeared in Late Antiquity: The
+             Life and Death of Justiniana Prima"). The account describes one city, so these are slots, not parts every
+             city has. The design's word sanctuary stands for the churches. -->
+        <li><name>sanctuary</name><kind>PublicBuilding</kind><optional>true</optional></li>
+        <li><name>baths</name><kind>PublicBuilding</kind><optional>true</optional></li>
+        <li><name>granary</name><kind>PublicBuilding</kind><optional>true</optional></li>
+        <li><name>cistern</name><kind>PublicBuilding</kind><optional>true</optional></li>
       </parts>
       <relations>
         <!-- Design: line 174. -->
@@ -64,6 +75,11 @@
         <!-- Design: lines 165 and 174. -->
         <li><relation>Adjoins</relation><a>basilica</a><b>firstSquare</b></li>
         <li><relation>Inside</relation><a>basilica</a><b>core</b></li>
+        <!-- Design: line 174. -->
+        <li><relation>Inside</relation><a>sanctuary</a><b>core</b></li>
+        <li><relation>Inside</relation><a>baths</a><b>core</b></li>
+        <li><relation>Inside</relation><a>granary</a><b>core</b></li>
+        <li><relation>Inside</relation><a>cistern</a><b>core</b></li>
       </relations>
     </skeleton>
     <!-- Design: lines 177 (a curtain wall) and 211 (the Theodosian Walls); Spec: FR-014 (a wall of Data/). -->
@@ -71,11 +87,14 @@
       <wallDef>Wall</wallDef>
     </wallSettings>
     <!-- [Direction]: the dwellings and annexes, their sizes, walls and doors, read off the river-bend town's render
-         (Spec: FR-036), since the design is silent on the Empire's dwellings. The render shows no material. The walls'
-         limestone blocks follow the Theodosian Walls, the design's reference for city walls (glossary line 211), which
+         (Spec: FR-036), since the design is silent on the Empire's dwellings. The render shows no material.
+         Walls: limestone blocks, as the Theodosian Walls, the design's reference for city walls (glossary line 211),
          are built of bricks and limestone blocks (World History Encyclopedia, "Theodosian Walls"); the base game has
-         no brick, so the blocks stand for both. The dwellings take the same stuff, which no source gives them, and the
-         doors take wood, which no source gives them either: both [Direction], for the maintainer to judge. -->
+         no brick, so the blocks stand for both. Doors: wood, which Britannica ("door") calls the most common door of
+         antiquity and describes in the Roman panelled form, and which ancient-history-sites.com ("Wood in Roman
+         architecture") names as cypress or cedar for doors; the base game has neither, so WoodLog stands for them.
+         The dwellings take the walls' stuff, since no reliable source found names their wall material for Late Antique
+         towns of the east: [Direction], for the maintainer to judge. -->
     <groups>
       <li>
         <name>dwelling5x9</name>
