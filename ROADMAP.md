@@ -24,7 +24,7 @@ development workflow, not of the design, and adds no game content.
 |----|-------------|--------|----------------|-----------|--------|----------|
 | R1 | Mod foundation | Imperium loads as a mod that requires Royalty and no other expansion, and is complete with Royalty alone (`docs/imperium.md` lines 108-109) | In: a loadable mod and its requirements. Deferred: all content | — | in-progress | specs/001-mod-foundation/ |
 | R13 | Layout preview | A settlement's layout on the game's cells is drawn as a gridded map with coordinates and a legend, outside the game, so that a layout can be checked and changed without starting the game (glossary "city building", "template") | In: drawing a layout description that holds only what the game can place. Deferred: generating layouts (R2), placing them in the game (R4) | — | planned | — |
-| R2 | Mantle | Mantle generates the world the parts take place in, and runs whether Empire content is on or off (`docs/imperium.md` lines 91-92; glossary "Mantle", "city building") | In: the generation layer and its on/off independence. Open: what it generates beyond R4 (the section Mantle of draft #132) | R1, R13 | planned | — |
+| R2 | Mantle | Mantle generates the world the parts take place in, and runs whether Empire content is on or off (`docs/imperium.md` lines 91-92; glossary "Mantle", "city building") | In: the generation layer, its on/off independence, and the settlements it generates with no Empire content, which the alpha opens (glossary "city building", "kit"). Open: what else it generates (the section Mantle of draft #132) | R1, R13 | planned | — |
 | R3 | The Empire faction | The present Empire replaces the base game's Empire, leans toward New Rome, carries no guns (`docs/setting.md` sections Rome, Weapons, Politics) | In: the faction and its rules. Open: mechanoids, appearance, honor guard (drafts #63, #133) | R1 | planned | — |
 | R4 | Starting ruins | A non-expiring quest leads to ruins near the colony that Mantle generates as a decayed town, different each game, which hold the core and disappear once it is taken (`docs/core.md` lines 59-63) | In: quest, site, town generation. Deferred: the core's uses | R2 | planned | — |
 | R5 | The core | The core cannot be destroyed, drops or returns with its building, and can be sold (`docs/core.md` lines 73-80) | In: keeping and selling. Deferred: insignia (R6), analysis device (R7), ultraheavy mechanoid (R9) | R4 | planned | — |
@@ -37,6 +37,21 @@ development workflow, not of the design, and adds no game content.
 | R12 | The end | One of two ends decides the Empire's rule on this planet (`docs/imperium.md` lines 83-88, 93) | Open: how either end is reached (Imperium-old issue #164) | R6, R8 | planned | — |
 
 R1 and R13 have no dependencies, so they can be built in either order or in parallel (spec-of-specs, The roadmap
-pass, step 4). City building, Mantle's generation of settlements, starts in R2 and is first used by R4. Until R4 places
-a town on a map, the tests in the game (`Readme.txt` line 58, then RimBridgeServer with GABS) have no generated
-settlement to look at, so R2 is demonstrable on its own only outside the game, through R13.
+pass, step 4). City building, Mantle's generation of settlements, starts in R2; R4 is its first use by the Empire
+content. A layout exists before the game places it on a map, as a designed template or as generated output (glossary
+"template", "city building"), while the tests in the game (`Readme.txt` line 58, then RimBridgeServer with GABS) look
+only at what is on a map. So a layout can be checked on its own, before it is placed, only outside the game, through
+R13.
+
+## Releases
+
+The first release is an alpha of Imperium that opens part of its content: Mantle (R2), on the mod foundation (R1).
+R13 is a development tool and goes into no release. Which content a release opens is game content that no design document
+settles, so it follows the maintainer's broad direction (constitution, Principle IV). It changes no dependency: R2
+depends on no slice of the Empire content, so it can be built before them (spec-of-specs, The roadmap pass, step 4),
+and Mantle must already run with the Empire content off (`docs/imperium.md` lines 91-92), which is how the alpha has
+it.
+
+The alpha is the same mod as every later release, so it requires Royalty (`docs/imperium.md` line 108), and its
+description says that it holds only part of Imperium (`EULA.txt` line 79). Later releases add the slices of the Empire
+content.
