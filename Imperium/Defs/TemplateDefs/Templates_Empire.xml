@@ -1357,7 +1357,10 @@
         <li><relation>Adjoins</relation><a>northEastGate</a><b>walls</b></li>
         <li><relation>Adjoins</relation><a>northWestGate</a><b>walls</b></li>
         <li><relation>Adjoins</relation><a>southGate</a><b>walls</b></li>
-        <!-- [Direction]: the bank each gate lies on; the main gate on the core's, at the main street's other end. -->
+        <!-- [Direction]: the bank each gate lies on; the main gate on the core's, at the main street's other end.
+             Which of the street's two end gates is the main gate the design leaves open: the palace lies nearly as
+             far from the west gate as from the south-east one (line 193 fits both), so the south-east gate, on the
+             core's bank, stands. -->
         <li><relation>SameSide</relation><a>westGate</a><b>westDistrict</b><feature>river</feature></li>
         <li><relation>SameSide</relation><a>northWestGate</a><b>westDistrict</b><feature>river</feature></li>
         <li><relation>SameSide</relation><a>northGate</a><b>eastDistrict</b><feature>river</feature></li>
@@ -1370,6 +1373,14 @@
         <li><relation>Adjoins</relation><a>lowerWaterGate</a><b>walls</b></li>
         <li><relation>Adjoins</relation><a>lowerWaterGate</a><b>river</b></li>
         <li><relation>Upstream</relation><a>upperWaterGate</a><b>lowerWaterGate</b><feature>river</feature></li>
+        <!-- Design: line 187 (a line from its source through the places where it shows and out again; for Roman cities
+             water) and line 215 (a water gate lets the river into or out of the city). That the upper water gate is the
+             source, the lower one the way out, and the west and island squares places where it shows: [Direction], as the
+             river-bend render holds the river's two crossings of the walls and a fountain in each square. -->
+        <li><relation>Adjoins</relation><a>lifeline</a><b>upperWaterGate</b></li>
+        <li><relation>Adjoins</relation><a>lifeline</a><b>lowerWaterGate</b></li>
+        <li><relation>Adjoins</relation><a>lifeline</a><b>westSquare</b></li>
+        <li><relation>Adjoins</relation><a>lifeline</a><b>islandSquare</b></li>
         <!-- [Direction]: the squares' districts. -->
         <li><relation>Inside</relation><a>westSquare</a><b>westDistrict</b></li>
         <li><relation>Inside</relation><a>islandSquare</a><b>islandDistrict</b></li>

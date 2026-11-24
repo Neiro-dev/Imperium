@@ -83,7 +83,7 @@ town is the complete worked example, from reference to skeleton to generated cit
 What is fixed and what is left to generation [Design: lines 184, 209; Direction]:
 
 - **Fixed**, defined by people and abstracted from the reference city: the template, meaning its terrain shape with
-  its river, and its skeleton with the wall line, the districts and their relations, the main streets, the plazas and
+  its river, and its skeleton with the wall line, the districts and their relations, the main street, the plazas and
   the places of the public buildings; and the kits.
 - **Left to generation**, and only within those bounds: picking a template, mirroring, turning and stretching it to
   fit the site, and filling its blocks with the kit's buildings.
@@ -336,7 +336,7 @@ Each requirement below names its source in brackets. The sources are those the c
   - Lowering the barrier for other authors is necessary: a new culture needs only its skeletons and kit, everything
     else is shared and identical across cultures, an author can copy an existing culture as a starting point, and the
     river-bend town is the complete worked example.
-  - The template's skeleton holds the wall line, districts, main streets, plazas and public buildings read from the
+  - The template's skeleton holds the wall line, districts, main street, plazas and public buildings read from the
     reference, beside the parts the design names; generation only picks, mirrors, turns and stretches a template and
     fills it from a kit.
   - The city laid out from a template is compared with its reference, and a template counts only once that comparison
@@ -667,7 +667,7 @@ and confirm that no shared file was changed.
     skeleton relations (Clarifications). The check MUST pass the template and kit and draw the template beside both
     pictures; if the forms cannot express the town, they MUST be fixed first [Direction; FR-003; FR-025].
   - Once generation lays the town out from them [Roadmap: R2, R15], the town MUST keep every relation of its skeleton,
-    as FR-029 measures: the river bend, the wall line, which districts adjoin, how the main streets connect, and where
+    as FR-029 measures: the river bend, the wall line, which districts adjoin, how the main street connects, and where
     the plazas and public buildings lie. The town MUST come from generation, not be written by hand, since only
     generation tests the method [Direction].
   - The maintainer MUST then judge the laid-out town by eye beside the screenshot and the render. A cell-exact match
@@ -737,8 +737,10 @@ and confirm that no shared file was changed.
   fortress for the savage tribe, a permanent enemy driven by a blood-and-honor culture that cannot be allied with
   [Data: same file, lines 445, 480 and 504, confirmed by the maintainer].
 - **FR-040**: A template MUST state the biomes it suits, or none for any biome (FR-001). The Empire's templates MUST be
-  picked by terrain alone, since the Empire's definition holds neither attitude field, only the factions it is not a
-  permanent enemy of [Data: `Royalty/Defs/FactionDefs/Faction_Empire.xml` lines 57-67]. They MUST follow the design's
+  picked by terrain alone [Direction: the maintainer confirmed that the Empire picks by biome and the tribes by
+  attitude], as the base game's Empire definition, which Imperium's Empire replaces [Design: setting.md line 83], holds
+  neither attitude field, only the factions it is not a permanent enemy of [Data:
+  `Royalty/Defs/FactionDefs/Faction_Empire.xml` lines 57-67]. They MUST follow the design's
   two looks of imperial cities: temperate, the look in temperate and cold regions, and arid, the look in hot, dry ones
   [Design: lines 208 and 162], which the direction's temperate and desert and arid biomes name. The river-bend town's
   MUST suit the temperate look's biomes: temperate forest and temperate swamp [Data:

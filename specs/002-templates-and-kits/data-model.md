@@ -50,8 +50,8 @@ Common forms, all from `Data/` (R-3):
 | `relations` | list of Relation | each names parts, or features of the template's terrain shape; a kit's relations name parts only | FR-005, FR-017; R-5 |
 
 **Part**: `name`; `kind`, one of `Core`, `SecondaryCore`, `PalaceQuarter`, `Gate`, `RiverGate`, `WaterGate`,
-`MainStreet`, `SecondaryAxis`, `District`, `Acropolis`, `Landmark`, `Bridge`, `WallLine`, `Plaza`,
-`PublicBuilding`; `optional`, true for a slot that a city may leave out (default false).
+`TowerChain`, `Lifeline`, `MainStreet`, `SecondaryAxis`, `District`, `Acropolis`, `Landmark`, `Bridge`, `WallLine`,
+`Plaza`, `PublicBuilding`; `optional`, true for a slot that a city may leave out (default false).
 
 **Relation**: `relation`, one of the kinds below; `a` and `b`, each a part or feature; and the field the kind needs.
 

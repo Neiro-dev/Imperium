@@ -102,15 +102,16 @@ files, to `Neiro-dev/Imperium-old` at 20a052b, to Spec Kit at v1.4.3 and to Harm
   `features`. Both a template and a kit hold a skeleton of this form:
   - A **part** has a `name`, a `kind` and, for a slot, `optional`. The kinds are those the design and the maintainer
     name as fixed parts of a layout: `Core` [line 174], `SecondaryCore` [200], `PalaceQuarter` [193], `Gate` [204],
-    `RiverGate` [197], `WaterGate` [215], `MainStreet` [188], `SecondaryAxis` [199], `District` [178], `Acropolis`
-    [161], `Landmark` [185], `Bridge` [197, the bridge of a bridge gate], and `WallLine`, `Plaza` and
-    `PublicBuilding` [Direction].
+    `RiverGate` [197], `WaterGate` [215], `TowerChain` [212], `Lifeline` [187], `MainStreet` [188], `SecondaryAxis`
+    [199], `District` [178], `Acropolis` [161], `Landmark` [185], `Bridge` [197, the bridge of a bridge gate], and
+    `WallLine`, `Plaza` and `PublicBuilding` [Direction].
   - A **feature** of the terrain shape has a `name` and `rects`, and a river feature names the map edge it flows from,
     `flowsFrom`, by `Rot4` name.
   - A **relation** has its kind and the parts or features it relates. The kinds are the relations the design's
     definitions use: `Inside` (a district within the walls [178]; a secondary core inside a gate [200]; a civic core
     around its first square [174]), `Adjoins` (beside [165]; runs from the gates through the squares [188]; ends at
-    [199]; by the river [197]; a gate in a city wall at the water [215]; which districts adjoin [Direction]),
+    [199]; by the river [197]; a gate in a city wall at the water [215]; the towers along one face of the walls [212];
+    the lifeline and the places where it shows [187]; which districts adjoin [Direction]),
     `Upstream` (upstream on the river [193]; into or out of the city [215]), `Farther` (far from the main gate
     [193]), and `Across` and `SameSide` (the river bend and which side of it each part lies on [Direction; 204,
     relations to the terrain]).
@@ -267,7 +268,7 @@ files, to `Neiro-dev/Imperium-old` at 20a052b, to Spec Kit at v1.4.3 and to Harm
   the Empire kit are taken from the screenshot
   (`template-references/河湾城-原图与描线/原图-1596x1017.png`) and the newest render, its reading
   (`template-references/河湾城-最新版-1112/1比1整城样张.png`). Its terrain shape is drawn inside 350×350 cells, and its skeleton
-  holds the river bend, the wall line, the districts on each bank and inside the bend, the main streets with their
+  holds the river bend, the wall line, the districts on each bank and inside the bend, the main street with its
   bridges and gates, the plazas, and the public buildings, by the relations of R-5. The check's picture of it beside
   both references is given to the maintainer in the project's files, not in the pull request, since it holds the
   screenshot (FR-028). Once it passes the check, the tribal culture's three readings are written from the references the

@@ -23,8 +23,15 @@
         <li><name>mainGate</name><kind>Gate</kind></li>
         <!-- Design: lines 185 (the city's landmark) and 193 (the quarter around the governor's residence). -->
         <li><name>palaceQuarter</name><kind>PalaceQuarter</kind></li>
-        <!-- Design: line 178 (the walls protect the district), so every city of the Empire has them. -->
-        <li><name>walls</name><kind>WallLine</kind></li>
+        <!-- Design: lines 178 (the walls protect the district) and 183 (a gatehouse holds a gate of a walled city, so a
+             city may have no walls); Spec: line 34 (walls a city may have or lack): a slot. -->
+        <li><name>walls</name><kind>WallLine</kind><optional>true</optional></li>
+        <!-- Design: lines 211-213 (a line of towers along one face of the walls, joined by straight curtain walls): a
+             slot, since only a walled city has one. Their spacing is set by how exposed the face is: left to generation. -->
+        <li><name>towerChain</name><kind>TowerChain</kind><optional>true</optional></li>
+        <!-- Design: line 187 (every settlement has a line from a source through a main line to the places where it shows
+             and out again; for Roman cities it is water, which is also their power grid). -->
+        <li><name>lifeline</name><kind>Lifeline</kind></li>
         <!-- Design: line 200 (a secondary core, which small cities do not have): a slot. -->
         <li><name>secondaryCore</name><kind>SecondaryCore</kind><optional>true</optional></li>
         <!-- Design: line 161 (an acropolis, which a city may have where its terrain can be defended): a slot. -->
@@ -39,11 +46,17 @@
         <!-- Design: line 188. -->
         <li><relation>Adjoins</relation><a>mainStreet</a><b>mainGate</b></li>
         <li><relation>Adjoins</relation><a>mainStreet</a><b>firstSquare</b></li>
-        <!-- Design: line 193 (in a corner far from the main gate): farther from it than the core is, and at the walls. -->
+        <!-- Design: line 193 (in a corner far from the main gate): farther from it than the core is; and at the walls, as
+             a corner of a walled city lies at them [Direction]. -->
         <li><relation>Farther</relation><a>palaceQuarter</a><b>mainGate</b><than>core</than></li>
         <li><relation>Adjoins</relation><a>palaceQuarter</a><b>walls</b></li>
         <!-- Design: line 183 (a gatehouse holds a gate of a walled city). -->
         <li><relation>Adjoins</relation><a>mainGate</a><b>walls</b></li>
+        <!-- Design: line 212 (the line of towers along one face of a city's walls). -->
+        <li><relation>Adjoins</relation><a>towerChain</a><b>walls</b></li>
+        <!-- Design: line 187 (the places where the line shows). That the Empire's first square is one of them: [Direction],
+             as the squares of the river-bend render hold its fountains. -->
+        <li><relation>Adjoins</relation><a>lifeline</a><b>firstSquare</b></li>
         <!-- Design: line 178 (the district grows outward from its core, within the walls). -->
         <li><relation>Inside</relation><a>core</a><b>walls</b></li>
         <!-- Design: lines 178 and 200 (a smaller center of the city, which lies within its walls). -->
@@ -53,14 +66,16 @@
         <li><relation>Inside</relation><a>basilica</a><b>core</b></li>
       </relations>
     </skeleton>
-    <!-- Design: lines 177 (curtain walls) and 178; Spec: FR-014 (a wall of Data/). -->
+    <!-- Design: lines 177 (a curtain wall) and 211 (the Theodosian Walls); Spec: FR-014 (a wall of Data/). -->
     <wallSettings>
       <wallDef>Wall</wallDef>
     </wallSettings>
     <!-- [Direction]: the dwellings and annexes, their sizes, walls and doors, read off the river-bend town's render
-         (Spec: FR-036), since the design is silent on the Empire's dwellings. Their materials, limestone blocks and
-         wooden doors, are the render's too: the design leaves the Empire's look to the artist (setting.md lines
-         88-89). -->
+         (Spec: FR-036), since the design is silent on the Empire's dwellings. The render shows no material. The walls'
+         limestone blocks follow the Theodosian Walls, the design's reference for city walls (glossary line 211), which
+         are built of bricks and limestone blocks (World History Encyclopedia, "Theodosian Walls"); the base game has
+         no brick, so the blocks stand for both. The dwellings take the same stuff, which no source gives them, and the
+         doors take wood, which no source gives them either: both [Direction], for the maintainer to judge. -->
     <groups>
       <li>
         <name>dwelling5x9</name>

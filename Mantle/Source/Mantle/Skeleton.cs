@@ -11,6 +11,8 @@ public enum PartKind
     Gate,
     RiverGate,
     WaterGate,
+    TowerChain,
+    Lifeline,
     MainStreet,
     SecondaryAxis,
     District,

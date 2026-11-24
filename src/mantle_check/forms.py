@@ -17,6 +17,8 @@ PART_KINDS = (
     "Gate",
     "RiverGate",
     "WaterGate",
+    "TowerChain",
+    "Lifeline",
     "MainStreet",
     "SecondaryAxis",
     "District",
