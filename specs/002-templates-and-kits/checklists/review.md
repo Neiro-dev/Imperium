@@ -59,7 +59,7 @@ mean implementation work is complete.
   - **Review**: Purpose, Clarifications, Sources ([Data] and [Direction]), FR-039 and research R-14 all give
     `Factions_Misc.xml` lines 445, 480 and 504, confirmed by the maintainer. The roadmap's R13 row gives the same lines
     for "one for each attitude" and states no mapping, so it has nothing to differ on.
-- [ ] CHK004 Is the Empire's terrain mapping, the river-bend town in temperate biomes and a Romanized Egyptian city in
+- [x] CHK004 Is the Empire's terrain mapping, the river-bend town in temperate biomes and a Romanized Egyptian city in
   desert and arid ones, traced to a stated source for each half, the biome lists to `Data/` and the choice of city to
   the maintainer's direction? [Traceability, Spec §FR-040]
   - **Review**: Not satisfied:
@@ -84,6 +84,15 @@ mean implementation work is complete.
     line 3), or name a source that keeps it out. Judge the other expansion biomes the same way, by what their
     definitions say; where a definition names no region, as `Grasslands.xml` line 7 names none, no source places it, and
     that is the reason it is in neither list (Principle V), not the file that holds it. Research R-14 and T038 follow.
+  - **Re-review** (#31, 8e26f32): Satisfied. FR-040 now places each biome outside the looks' Core files by what its
+    definition says: Odyssey's `GlacialPlain`, "scraped clean by the movement of glaciers" (`GlacialPlain.xml` line 7),
+    joins the river-bend town's list, marked with Odyssey's `MayRequire` in the form
+    `Core/Defs/Misc/FeatureDefs/Features.xml` line 268 uses, which itself lists it beside `Tundra`; grasslands,
+    glowforest, scarlands and lava field, whose descriptions name no region's climate, stay out because no source places
+    them (Principle V); ocean and lake (`Biomes_Water.xml` lines 7 and 22), space and orbit (`Space.xml` lines 7 and
+    45), and the underground and Anomaly's three, which never generate on the world (`Biomes_Misc.xml` line 7;
+    `LabyrinthMapGenerator.xml` line 32, `MetalHellMapGenerator.xml` line 31, `UndercaveMapGenerator.xml` line 105 by
+    its parent), each for its stated reason. Every line was checked; Purpose, Sources, research R-14 and T038 follow.
 - [x] CHK005 Is the statement that medieval mods set the attitude fields marked as an inference everywhere it appears,
   and nowhere stated as a fact? [Consistency, Spec §Edge Cases, Purpose]
   - **Review**: Purpose, Edge Cases and research R-14 call it an inference; no other place states it.
@@ -385,3 +394,8 @@ mean implementation work is complete.
   - T014 has no fixture for the kinds CHK022 added: a wrong kind in `allowedBiomes`, `allowedRivers` or `nameMaker`,
     wrong form, not square and missing field; and no fixture tests a reading, by FR-015 held by no mod, that names an
     unmarked expansion definition. SC-001 asks for one problem of each kind FR-013 to FR-018 name.
+- Re-reviewed again against #31 at 8e26f32: CHK004 is satisfied, so all 37 items are checked. Both leftovers above are
+  fixed: tasks.md Phase 6, its Goal and Independent Test, and User Story 4's Independent Test now only check spec cards,
+  with T032 holding three cards (unknown definition, past its plot, clean) and T033 testing all three; T014 and T015 now
+  hold a fixture for each kind CHK022 added and for a reading no template names with an unmarked Biotech definition
+  (FR-015).
