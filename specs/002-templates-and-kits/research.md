@@ -102,16 +102,18 @@ files, to `Neiro-dev/Imperium-old` at 20a052b, to Spec Kit at v1.4.3 and to Harm
   `features`. Both a template and a kit hold a skeleton of this form:
   - A **part** has a `name`, a `kind` and, for a slot, `optional`. The kinds are those the design and the maintainer
     name as fixed parts of a layout: `Core` [line 174], `SecondaryCore` [200], `PalaceQuarter` [193], `Gate` [204],
-    `RiverGate` [197], `MainStreet` [188], `SecondaryAxis` [199], `District` [178], `Acropolis` [161], `Landmark`
-    [185], `Bridge` [197, the bridge of a bridge gate], and `WallLine`, `Plaza` and `PublicBuilding` [Direction].
+    `RiverGate` [197], `WaterGate` [215], `MainStreet` [188], `SecondaryAxis` [199], `District` [178], `Acropolis`
+    [161], `Landmark` [185], `Bridge` [197, the bridge of a bridge gate], and `WallLine`, `Plaza` and
+    `PublicBuilding` [Direction].
   - A **feature** of the terrain shape has a `name` and `rects`, and a river feature names the map edge it flows from,
     `flowsFrom`, by `Rot4` name.
   - A **relation** has its kind and the parts or features it relates. The kinds are the relations the design's
     definitions use: `Inside` (a district within the walls [178]; a secondary core inside a gate [200]; a civic core
     around its first square [174]), `Adjoins` (beside [165]; runs from the gates through the squares [188]; ends at
-    [199]; by the river [197]; which districts adjoin [Direction]), `Upstream` (upstream on the river [193]),
-    `Farther` (far from the main gate [193]), and `Across` and `SameSide` (the river bend and which side of it each
-    part lies on [Direction; 204, relations to the terrain]).
+    [199]; by the river [197]; a gate in a city wall at the water [215]; which districts adjoin [Direction]),
+    `Upstream` (upstream on the river [193]; into or out of the city [215]), `Farther` (far from the main gate
+    [193]), and `Across` and `SameSide` (the river bend and which side of it each part lies on [Direction; 204,
+    relations to the terrain]).
   - A **kit's skeleton** holds what every city of its culture has, such as where the palace quarter lies [193], and
     names parts only; a **template's skeleton** holds what its site has, and may name its features. A template is
     read with its kit's skeleton: a part of the same name is the same part, and both skeletons' relations hold.

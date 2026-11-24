@@ -10,6 +10,7 @@ public enum PartKind
     PalaceQuarter,
     Gate,
     RiverGate,
+    WaterGate,
     MainStreet,
     SecondaryAxis,
     District,

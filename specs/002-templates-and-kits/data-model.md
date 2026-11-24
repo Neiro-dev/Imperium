@@ -49,9 +49,9 @@ Common forms, all from `Data/` (R-3):
 | `parts` | list of Part | names unique across the template's and its kit's skeletons, except that a template may name a kit's part again with the same kind | R-5 |
 | `relations` | list of Relation | each names parts, or features of the template's terrain shape; a kit's relations name parts only | FR-005, FR-017; R-5 |
 
-**Part**: `name`; `kind`, one of `Core`, `SecondaryCore`, `PalaceQuarter`, `Gate`, `RiverGate`, `MainStreet`,
-`SecondaryAxis`, `District`, `Acropolis`, `Landmark`, `Bridge`, `WallLine`, `Plaza`, `PublicBuilding`; `optional`,
-true for a slot that a city may leave out (default false).
+**Part**: `name`; `kind`, one of `Core`, `SecondaryCore`, `PalaceQuarter`, `Gate`, `RiverGate`, `WaterGate`,
+`MainStreet`, `SecondaryAxis`, `District`, `Acropolis`, `Landmark`, `Bridge`, `WallLine`, `Plaza`,
+`PublicBuilding`; `optional`, true for a slot that a city may leave out (default false).
 
 **Relation**: `relation`, one of the kinds below; `a` and `b`, each a part or feature; and the field the kind needs.
 
