@@ -41,6 +41,32 @@ A layout exists before the game places it on a map, as a designed template or as
 the way to check a layout on its own before it is placed [Roadmap; Spec Kit]. It decides no game content: it draws
 whatever a layout description holds. What a layout holds is decided by the slices that make layouts (R2, R4).
 
+## Clarifications
+
+### Session 2026-11-24
+
+Each answer comes from the source named with it; none is game content left to the maintainer (constitution,
+Principle IV).
+
+- Q: Which copy of the game's definitions does the preview read? → A: The `Data/` folder of a RimWorld 1.7 copy the
+  user has, with every official expansion found in it, and the version that copy's `Version.txt` gives [Data]: on the
+  maintainer's computer the install at `D:\Steam\steamapps\common\RimWorld`, the only install of the game the project
+  has (`specs/001-mod-foundation/plan.md`, Target Platform); in a cloud thread, the copy of 1.7.5014's `Data/` kept
+  among the project's files. The preview carries no copy of it [EULA: line 86].
+- Q: Which way does the picture face? → A: The way the game shows the map, so that the picture of a rectangle of cells
+  matches RimBridgeServer's screenshot of the same cells (`rimworld/screenshot_cell_rect`) laid beside it
+  [RimBridgeServer].
+- Q: In which language does the legend name each kind? → A: In English, under the label each definition gives:
+  English is the game's own language, and its other languages are fan-made translations [Readme: line 68].
+- Q: Which two things count as unable to share one cell? → A: Two buildings that both take the cell as its main
+  building, which the game calls the edifice. A building is one unless its definition says it is not (`isEdifice`
+  false, for example `PowerConduit` in `Data/Core/Defs/ThingDefs_Buildings/Buildings_Power.xml`) [Data]. The game's
+  full placement check runs only in the game, through RimBridgeServer's dry-run placement
+  (`rimworld/apply_architect_designator`), once R4 places a layout [RimBridgeServer; Roadmap].
+- Q: Where does the preview run? → A: Where sessions work on Imperium: in cloud threads, which hold the repository,
+  and in threads on the maintainer's computer, which work in `D:\Steam\steamapps\common\RimWorld` (project
+  instructions), where the game is installed.
+
 ## User Scenarios & Testing *(mandatory)*
 
 ### User Story 1 - See a layout as a map (Priority: P1)
@@ -100,8 +126,8 @@ marked at its cell on the map and listed with its reason.
 pictures honest about that, once User Stories 1 and 2 work.
 
 **Independent Test**: draw a description that holds a kind the game does not define, a thing whose footprint runs past
-the map's edge, and a wall on deep water; each is marked and listed with its cell and reason, and the picture says the
-layout cannot be placed as it stands.
+the map's edge, a wall on deep water and two walls in one cell; each is marked and listed with its cell and reason, and
+the picture says the layout cannot be placed as it stands.
 
 **Acceptance Scenarios**:
 
@@ -111,8 +137,8 @@ layout cannot be placed as it stands.
    listed as a problem [Data: the thing's size].
 3. **Given** a thing on terrain whose affordances do not allow it, **When** it is drawn, **Then** it is listed as a
    problem [Data: the terrain's affordances and the affordance the thing needs].
-4. **Given** two things in one cell that the game cannot place together, **When** it is drawn, **Then** they are listed
-   as a problem.
+4. **Given** two buildings in one cell that are both the cell's edifice, **When** it is drawn, **Then** they are listed
+   as a problem [Data: `isEdifice`].
 5. **Given** a description with at least one problem, **When** it is drawn, **Then** the picture states that the layout
    cannot be placed in the game as it stands, and a description with none does not.
 
@@ -149,10 +175,11 @@ layout cannot be placed as it stands.
   `Data/` of the supported game version, and in Imperium's own definitions once it has any [Data; Roadmap].
 - **FR-005**: The picture MUST separate every two neighboring cells by a grid line and carry the coordinates along its
   edges, so that the coordinates of any cell can be read from it; the coordinates MUST be the game's `x` and `z` cell
-  coordinates [Roadmap; RimBridgeServer: tool-reference.md line 313].
+  coordinates, and the picture MUST face the way the game shows the map [Roadmap; RimBridgeServer: tool-reference.md
+  line 313, `rimworld/screenshot_cell_rect`].
 - **FR-006**: Each kind of terrain, roof and thing in a picture MUST be drawn so that it can be told apart from every
-  other kind in the same picture, and listed in a legend under the label its definition gives; the legend MUST list
-  exactly the kinds the layout uses [Roadmap; Data].
+  other kind in the same picture, and listed in a legend under the English label its definition gives; the legend MUST
+  list exactly the kinds the layout uses [Roadmap; Data; Readme: line 68].
 - **FR-007**: For a kind from an official expansion other than Royalty, the legend MUST name that expansion [Design:
   `docs/imperium.md` lines 108-110].
 - **FR-008**: Each named area MUST be outlined and labeled with its name exactly as the description writes it
@@ -164,8 +191,9 @@ layout cannot be placed as it stands.
   [Roadmap: a layout can be changed and checked again].
 - **FR-012**: Drawing MUST NOT need the game to run, and MUST NOT change any file of the game's install or of
   Imperium's released mod [Roadmap: without starting the game; Releases: R13 goes into no release].
-- **FR-013**: The preview MUST read the game's definitions from a copy of the game the user has, and MUST NOT carry
-  copies of the game's files in the repository [EULA: line 86].
+- **FR-013**: The preview MUST read the game's definitions from the `Data/` folder of a RimWorld 1.7 copy the user
+  has, with every official expansion found in it, and MUST NOT carry copies of the game's files in the repository
+  [Data; EULA: line 86].
 - **FR-014**: Each problem of User Story 3 MUST be listed with its cell and reason and marked at its cell on the
   picture, and a picture with any problem MUST state that the layout cannot be placed in the game as it stands
   [Roadmap: only what the game can place].
@@ -199,6 +227,7 @@ layout cannot be placed as it stands.
 
 ## Assumptions
 
+- The preview runs in cloud threads and in threads on the maintainer's computer (Clarifications).
 - The maintainer and the developers look at the picture as an image file, which a session attaches to its thread or
   pull request; this needs no game and no special viewer.
 - Until R2 generates layouts, descriptions are written by hand; R2 writes the same kind of description, and R4 places
