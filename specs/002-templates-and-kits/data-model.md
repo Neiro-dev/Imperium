@@ -1,0 +1,124 @@
+# Data Model: Templates and kits
+
+Templates and kits are definitions the game loads (research R-1); a laid-out city is a file generation writes and the
+check reads (R-7); the report and pictures are the check's output (R-11). Their XML forms are in
+[contracts/](contracts/), and the sources of each form in [research.md](research.md). The forms hold the parts the
+design and the maintainer's direction name, and take further parts when either names them (spec, Assumptions).
+
+Common forms, all from `Data/` (R-3):
+
+- **rect**: `(minX,minZ,maxX,maxZ)`, inclusive, in cells.
+- **layer**: a list whose elements are each named by a definition and hold that definition's `rects`; an element
+  written later covers the cells of one written earlier, so an author can lay a whole site and then the river on it
+  [Direction: lowering the barrier for other authors].
+- **position**: `(x, 0, z)`. **size**: `(x, z)`. **minMapSize**: `(x, 1, z)`. **rotation**: `North`, `East`, `South`
+  or `West`.
+- **MayRequire**: on the element that names a definition from another expansion, that expansion's package identifier.
+
+## TemplateDef (`Mantle.TemplateDef`, in `Defs/TemplateDefs/`)
+
+| Field | Form | Rule | Source |
+|-------|------|------|--------|
+| `defName`, `label` | text | as every definition | `Data/` |
+| `kit` | a `KitDef` | required; the culture whose kit fills it; the check reports a template whose kit does not exist | FR-001, FR-002, FR-017 |
+| `reference` | `name` and `pictures` | Imperium's own name for the reference city and a label for each of its reference pictures, such as `screenshot` and `render`; no name of another game | FR-001, FR-010, FR-028 |
+| `allowedBiomes`, `allowedRivers` | lists of `BiomeDef`, `RiverDef` | the world tiles it suits; empty means any | FR-001; R-3 |
+| `minMapSize` | `(x, 1, z)` | required; square; no larger than `(350, 1, 350)` | FR-003 |
+| `terrainShape` | TerrainShape | every cell inside `minMapSize` has a terrain; nothing outside it | FR-004, FR-016 |
+| `skeleton` | Skeleton | read together with its kit's skeleton | FR-005; R-5 |
+
+## TerrainShape
+
+| Field | Form | Rule | Source |
+|-------|------|------|--------|
+| `terrain` | layer of `TerrainDef` | natural terrain only | FR-004; R-4 |
+| `rocks` | layer of `ThingDef` | natural rock only | FR-004; R-4 |
+| `roofs` | layer of `RoofDef` | natural roofs only | FR-004; R-4 |
+| `features` | list of Feature | names unique within the template | FR-005, FR-017; R-5 |
+
+**Feature**: `name`; `rects`; `flowsFrom`, a rotation naming the map edge a river enters by, for a river only.
+
+## Skeleton (in a TemplateDef and in a KitDef)
+
+| Field | Form | Rule | Source |
+|-------|------|------|--------|
+| `parts` | list of Part | names unique across the template's and its kit's skeletons, except that a template may name a kit's part again with the same kind | R-5 |
+| `relations` | list of Relation | each names parts, or features of the template's terrain shape; a kit's relations name parts only | FR-005, FR-017; R-5 |
+
+**Part**: `name`; `kind`, one of `Core`, `SecondaryCore`, `PalaceQuarter`, `Gate`, `RiverGate`, `MainStreet`,
+`SecondaryAxis`, `District`, `Acropolis`, `Landmark`, `Bridge`, `WallLine`, `Plaza`, `PublicBuilding`; `optional`,
+true for a slot that a city may leave out (default false).
+
+**Relation**: `relation`, one of the kinds below; `a` and `b`, each a part or feature; and the field the kind needs.
+
+| `relation` | Needs | Holds when (R-6) | Source |
+|------------|-------|------------------|--------|
+| `Inside` | `a`, `b` | every cell of `a` is a cell of `b` or enclosed by it | glossary lines 174, 178, 200 |
+| `Adjoins` | `a`, `b` | a cell of `a` is a cell of `b` or shares an edge with one | lines 165, 188, 197, 199; [Direction] |
+| `Across` | `a`, `b`, `feature` | no path of neighbouring cells outside `feature` joins `a` and `b` | line 204; [Direction] |
+| `SameSide` | `a`, `b`, `feature` | such a path exists | line 204; [Direction] |
+| `Upstream` | `a`, `b`, `feature` (a river) | the river cell nearest `a` lies fewer steps from where the river enters than the one nearest `b` | line 193 |
+| `Farther` | `a`, `b`, `than` | the distance from `a` to `b` is greater than from `than` to `b` | line 193 |
+
+## KitDef (`Mantle.KitDef`, in `Defs/KitDefs/`)
+
+| Field | Form | Rule | Source |
+|-------|------|------|--------|
+| `defName`, `label` | text | the `defName` names the culture, such as `Empire` | FR-006; [Direction] |
+| `nameMaker` | a `RulePackDef` | the word list | FR-006, FR-011; R-3 |
+| `skeleton` | Skeleton | what every city of the culture has; parts only | FR-006; R-5 |
+| `wallSettings` | `wallDef`, a `ThingDef` | a wall (`building/isWall`) | FR-006, FR-014; R-3 |
+| `groups` | list of `PrefabDef` | pending the maintainer (R-8) | FR-006 |
+| `fill` | `wallDef`, `doorDef`, `doorStuffDef`, `roomDefs` (list of `LayoutRoomDef`) | pending the maintainer (R-8); `wallDef` a wall, `doorStuffDef` a material `doorDef` takes | FR-006, FR-014, FR-018 |
+| `blockLibrary` | list of SpecCard | optional; the Empire has none | FR-006; glossary line 167 |
+
+**SpecCard**: `name`; `size`, its plot; `terrain`, a layer; `rooms`, each a `name` and `rects`; `things`, each in the
+thing form below. Every cell of its terrain, rooms and things lies inside its plot (FR-007, FR-024).
+
+## LaidOutCity (a file, root `LaidOutCity`)
+
+| Field | Form | Rule | Source |
+|-------|------|------|--------|
+| `template`, `kit` | defNames | both exist, and the kit is the template's | FR-008, FR-017 |
+| `size` | `(x, z)` | square | FR-003, FR-008 |
+| `terrain`, `roofs` | layers | every cell has a terrain; nothing outside the map | FR-008, FR-016 |
+| `things` | list of Thing | below | FR-008, FR-018 |
+| `parts`, `features` | lists, each a `name` and `rects`, a river feature also `flowsFrom` | every part of both skeletons that is not optional, and every feature a relation names, has cells | FR-008, FR-029; R-7 |
+
+**Thing**: an element named by its `ThingDef`, holding `position`, `rotation`, `stuff` where the definition takes one,
+and `rect` where the definition's `size` is larger than one cell.
+
+## Report and pictures
+
+A **problem** has a number, the file, the template, kit, city or spec card, the part or field, the cell where it has
+one, and what is wrong. A **relation result** is `holds`, `broken` (with the cells of its parts) or `not measured`
+(an optional part left out). The report ends by saying that testing in the game is the final check and is still to
+come (FR-020). The picture files are listed in [contracts/check-command.md](contracts/check-command.md).
+
+## What the check reports
+
+| Problem | When | Source |
+|---------|------|--------|
+| unknown definition | a name found neither in `Data/` nor in Imperium's `Defs/` | FR-013 |
+| wrong kind | a name where its kind cannot go: not a terrain in `terrain`, not natural in a terrain shape, not a wall in a `wallDef`, an unknown part or relation kind, a relation missing the field its kind needs | FR-014; R-4, R-5 |
+| other expansion | a definition of an expansion other than the base game and Royalty without that expansion's `MayRequire` | FR-015 |
+| outside the map | a cell past `minMapSize`, past 350×350 or past a city's `size`; a thing whose cells reach past the map | FR-016, FR-018 |
+| no terrain | a cell inside the map with no terrain | FR-016 |
+| unknown name | a relation naming a part or feature neither skeleton nor the terrain shape holds; a duplicate name | FR-017 |
+| no kit | a template whose `kit` does not exist | FR-017 |
+| affordance | a thing on a cell whose terrain lacks the affordance it needs, or its material's when its definition uses the material's | FR-018 |
+| size | a thing's `rect` that does not match its definition's `size` | FR-018; R-7 |
+| material | a material the definition does not take, or none where it takes one | FR-018 |
+| missing part | a part that is not optional and has no cells in a laid-out city | FR-029 |
+| broken relation | a relation that does not hold in a laid-out city | FR-029 |
+| no comparison | a template or laid-out city with a reference picture label given no picture, or one that cannot be read; it does not stop the run | spec, Edge Cases |
+
+The check stops, and reports nothing as passing, when `Data/` is missing or not of version 1.7 (spec, Edge Cases).
+
+## States of a template
+
+1. **Written**: in `Defs/TemplateDefs/`.
+2. **Checked**: the check reports no problem in it or its kit.
+3. **Laid out**: a city generation laid out from it is checked, every relation holds (R2).
+4. **Accepted**: the maintainer has accepted the side-by-side picture (FR-029, FR-030). Only now does it count.
+5. **Confirmed in the game**: the final check, once R2 places it (spec, Assumptions).

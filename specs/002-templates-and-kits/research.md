@@ -1,0 +1,229 @@
+# Research: Templates and kits
+
+Each decision names its source, from the constitution's Source Register, in the order the register gives: `Data/` of
+RimWorld 1.7.5014, then `ModUpdating.txt`, then Harmony (`pardeike/HarmonyRimWorld`), for the released mod; `EULA.txt`
+always; `Data/` for testing outside the game; `Readme.txt`, then RimBridgeServer with GABS, for testing in the game;
+Spec Kit for the development workflow; GitHub Docs for repository files; Imperium-old `main` (20a052b), then the
+maintainer's broad direction, for Imperium's own design. Line numbers refer to those files as copied into the project
+files, to `Neiro-dev/Imperium-old` at 20a052b, to Spec Kit at v1.4.3 and to HarmonyRimWorld at `master`. `[Design]`,
+`[Direction]` and the FR numbers point to [spec.md](spec.md).
+
+## R-1: Templates and kits are Defs of Mantle's own types
+
+- **Decision**: a template is a `Mantle.TemplateDef` and a kit a `Mantle.KitDef`, written as XML in `Defs/TemplateDefs/`
+  and `Defs/KitDefs/`. Their C# classes are Mantle's, in `Source/Mantle/`, compiled into `Assemblies/Mantle.dll`. The
+  Empire kit (`Defs/KitDefs/Kits_Empire.xml`) and the river-bend town's template
+  (`Defs/TemplateDefs/Templates_Empire.xml`) are Imperium's content in those types.
+- **Rationale**: templates and kits are data that Imperium holds and Mantle's generation reads (FR-009), and a mod's
+  new XML definitions go in `Defs/`, laid out as the base game lays out its own (`ModUpdating.txt` lines 98-106). A
+  definition the game loads has a class, as `ThingDef`, `PawnKindDef` and `JobDef` do (line 98), and a mod's classes
+  are a C# project in `Source/` compiled into `Assemblies/` (lines 139-151, 173-182). The types are Mantle's because
+  Mantle is the framework layer of Imperium's code [Design: line 221] and the forms are shared by every culture
+  (FR-033); the content is Imperium's. The files are named by type and then by what they hold, as `Data/` names its
+  own (`Core/Defs/RiverDefs/RiverDefs.xml`, `Odyssey/Defs/LayoutDefs/Layouts_Misc.xml`).
+- **Alternatives considered**: `PrefabDef`, which holds a size, terrain and things (`Data/`: its fields across Core,
+  Biotech and Odyssey are `size`, `things`, `terrain`, `edgeOnly`, `rotations`, `prefabs`). Rejected: it holds no roof
+  and no skeleton (FR-004, FR-005). Data kept outside `Defs/` until R2. Rejected: neither `Data/` nor `ModUpdating.txt`
+  gives a form for data a mod holds but the game does not load as definitions.
+
+## R-2: Building Mantle's assembly
+
+- **Decision**: `Source/Mantle/Mantle.csproj` targets `net10.0` and references the game's own assemblies where the game
+  is installed, through a `RimWorldAssemblyDir` property that a `Directory.Build.props` at the repository root sets. It
+  is built on the maintainer's computer through Remote Control, and the built `Assemblies/Mantle.dll` is committed. No
+  Harmony and no other package.
+- **Rationale**: `Data/` and `ModUpdating.txt` give no form for building a mod's code, so it comes from Harmony
+  (Principle III). RimWorld 1.7 runs on .NET 10 (`README.md` line 6), Harmony's 1.7 build selects the `net10.0` asset
+  (`BUILDING.md` line 12; `Source/packages.lock.json`) and compiles against the installed game's assemblies, found
+  through `RIMWORLD_ASSEMBLY_DIR` (`BUILDING.md` lines 18-19) and `RimWorldAssemblyDir` in `Directory.Build.props`
+  (line 17). Harmony commits its built assemblies, and its release packages that committed payload rather than
+  rebuilding against the game's files (`BUILDING.md` lines 14 and 38-39); the maintainer's `Mods\Imperium` is a clone,
+  so the game loads `Mantle.dll` after a pull. The game's assemblies exist only in the maintainer's install, and are
+  neither copied into the repository nor into the cloud (`EULA.txt` line 86). Def classes patch nothing, so Harmony is
+  still not a requirement (R1 research R-9). `Assemblies/` sits at the root, since Imperium supports 1.7 only and has no
+  load folders (R1 research R-1, R-5).
+- **Alternatives considered**: a `1.7/Assemblies/` folder, as Harmony has. Rejected: Harmony supports several game
+  versions; Imperium supports one, and `ModUpdating.txt` lines 173-180 put `Assemblies/` at the root.
+- **Open for implement**: whether the maintainer's computer has the .NET 10 SDK, and where the 1.7 install keeps its
+  assemblies. If the SDK is missing, the implement step says so and stops there.
+
+## R-3: Field forms taken from `Data/`
+
+- **Decision**: wherever a template, kit or laid-out city holds something `Data/` already writes, it is written in
+  `Data/`'s form:
+  - a layer of cells (terrain, roofs, terrain features, the places of parts) as `PrefabDef`'s terrain form: the
+    definition, then `rects` of `(minX,minZ,maxX,maxZ)` (`Odyssey/Defs/PrefabDefs/SitePrefabs.xml` lines 64-74);
+  - a thing as `PrefabDef`'s thing form: the definition, its `position` as `(x, 0, z)`, its `stuff`
+    (`AncientPrefabs.xml` lines 10-13), and its rotation by `Rot4` name (`North`, line 8);
+  - a map size as `(x, z)` (`AncientPrefabs.xml` line 9), and the smallest map a site needs as `minMapSize`
+    `(x, 1, z)` (`Ideology/Defs/Sites/AncientComplex.xml` line 15);
+  - another expansion's content marked with `MayRequire="<packageId>"` on the element that names it
+    (`Odyssey/Defs/PrefabDefs/CommonRoomPrefabs.xml` line 225; `Core/Defs/CultureDefs/Cultures.xml` line 43), each
+    package identifier from that expansion's `About/About.xml`;
+  - the world tiles a template suits as `allowedBiomes` (`Core/Defs/Storyteller/Incidents_Map_Misc.xml` line 56) and,
+    in the same form, `allowedRivers`, from the river definitions (`Core/Defs/RiverDefs/RiverDefs.xml` lines 4, 33,
+    52, 71);
+  - a kit's word list as a `RulePackDef`, as a faction names its settlements
+    (`Royalty/Defs/FactionDefs/Faction_Empire.xml` line 21), with the words in `Languages/English/Strings/`
+    (`ModUpdating.txt` lines 129-135);
+  - a kit's wall settings with `StructureLayoutDef`'s `wallDef` (`Odyssey/Defs/LayoutDefs/Layouts_Misc.xml` line 22).
+- **Rationale**: Principle III; the released mod follows `Data/` first, and a laid-out city, written by R2's
+  generation, is checked against the same definitions.
+- **Alternatives considered**: a grid of characters or an image for a terrain shape. Rejected: `Data/` gives a form.
+
+## R-4: What a template's cells may hold
+
+- **Decision**: a terrain shape holds only terrain whose definition is `natural`
+  (`Core/Defs/TerrainDefs/Terrain_Natural.xml` line 11; `Terrain_Water.xml` line 7), things whose definition is natural
+  rock (`isNaturalRock`, `Core/Defs/ThingDefs_Buildings/Buildings_Natural.xml` line 47), and roofs whose definition is
+  natural (`isNatural`, `Core/Defs/Misc/RoofDefs/Roofs.xml` lines 17 and 27). Anything else on a template's cells is a
+  thing a city is built of, and the check reports it (FR-002, FR-014).
+- **Rationale**: a template is a terrain shape and a skeleton, never a drawn map [Design: lines 204, 209]; `Data/`
+  marks what is natural.
+
+## R-5: The skeleton's form
+
+- **Decision**: a skeleton is a list of `parts` and a list of `relations`, and a terrain shape names its terrain
+  `features`. Both a template and a kit hold a skeleton of this form:
+  - A **part** has a `name`, a `kind` and, for a slot, `optional`. The kinds are those the design and the maintainer
+    name as fixed parts of a layout: `Core` [line 174], `SecondaryCore` [200], `PalaceQuarter` [193], `Gate` [204],
+    `RiverGate` [197], `MainStreet` [188], `SecondaryAxis` [199], `District` [178], `Acropolis` [161], `Landmark`
+    [185], `Bridge` [169], and `WallLine`, `Plaza` and `PublicBuilding` [Direction].
+  - A **feature** of the terrain shape has a `name` and `rects`, and a river feature names the map edge it flows from,
+    `flowsFrom`, by `Rot4` name.
+  - A **relation** has its kind and the parts or features it relates. The kinds are the relations the design's
+    definitions use: `Inside` (a district within the walls [178]; a secondary core inside a gate [200]; a civic core
+    around its first square [174]), `Adjoins` (beside [165]; runs from the gates through the squares [188]; ends at
+    [199]; by the river [197]; which districts adjoin [Direction]), `Upstream` (upstream on the river [193]),
+    `Farther` (far from the main gate [193]), and `Across` and `SameSide` (the river bend and which side of it each
+    part lies on [Direction; 204, relations to the terrain]).
+  - A **kit's skeleton** holds what every city of its culture has, such as where the palace quarter lies [193], and
+    names parts only; a **template's skeleton** holds what its site has, and may name its features. A template is
+    read with its kit's skeleton: a part of the same name is the same part, and both skeletons' relations hold.
+  - A part marked `optional` is a slot within the culture [Design: line 200; Direction]; there is no field that would
+    carry a skeleton to another culture (FR-002).
+- **Rationale**: a skeleton records the fixed parts as relations to each other and to the terrain, not coordinates
+  [Design: line 204]; a kit holds a skeleton [184] and so does a template [209]; the parts and relations named are those
+  the design's own definitions use, and the river-bend calibration is the test of whether they are enough (FR-031).
+  Further kinds are added when the design or the maintainer names them (spec, Assumptions).
+- **Alternatives considered**: free-text kinds. Rejected: the check could not tell a misspelt kind from a new one
+  (FR-014).
+
+## R-6: How the check measures a relation
+
+- **Decision**: on the laid-out city, each part and feature is the set of cells its `rects` cover, and each relation is
+  read plainly on those cells, with neighbours sharing an edge and distance between cell centres:
+  - `Inside(a, b)`: every cell of `a` is a cell of `b` or is enclosed by `b`, meaning no path of neighbouring cells
+    leads from it to the map's edge without crossing `b`.
+  - `Adjoins(a, b)`: a cell of `a` is a cell of `b` or a neighbour of one.
+  - `Across(a, b, feature)`: no path of neighbouring cells outside the feature leads from `a` to `b`; `SameSide` is
+    the opposite.
+  - `Upstream(a, b, feature)`: along the river feature, counted in steps from its cells on the edge it flows from, the
+    river cell nearest `a` comes before the river cell nearest `b`.
+  - `Farther(a, b, than)`: `a` is farther from `b` than `than` is, each distance being the shortest between their cells.
+  A relation whose optional part the city leaves out is reported as not measured rather than broken.
+- **Rationale**: FR-029 asks the check to measure each relation and report each one that does not hold; the readings add
+  no threshold that no source gives. Once every relation holds, the maintainer judges by eye (FR-029, Clarifications).
+
+## R-7: The laid-out city's form
+
+- **Decision**: one XML file per city, root element `LaidOutCity`, holding: the `template` and `kit` it comes from;
+  its map `size`; `terrain` and `roofs` as layers of cells; `things`, each with its definition, `position`,
+  `rotation`, `stuff` where its definition takes one, and `rect`, the cells it covers, where it covers more than one;
+  and `parts` and `features`, where each part and terrain feature of the template lies after generation picked,
+  mirrored, turned and stretched it, with each river's `flowsFrom`. The game does not load it and the mod does not
+  ship it.
+- **Rationale**: FR-008 lists what it holds, in the forms of R-3; generation writes it in R2 and the check reads it now.
+  The covered cells are written by generation, which has them from the game, so the check does not have to rebuild the
+  game's rule for where a large thing's cells lie; it checks that they match the definition's `size`, crosswise when
+  the thing is turned east or west.
+- **Alternatives considered**: a saved game. Rejected: it is not in `Data/` and holds far more than the check reads.
+
+## R-8: A kit's groups and fill
+
+- **Decision (pending the maintainer's answer)**: the design names a kit's groups and fill [Design: line 184] without
+  saying what they hold, which is game content, so the maintainer was asked (Principle IV). Until he answers, the plan
+  takes the recommended reading: `groups` lists `PrefabDef`s, each a set of buildings placed together, such as a forum
+  with its basilica [185, "a building or group"; 165]; `fill` holds what the blocks' plots are built with, in
+  `StructureLayoutDef`'s fields `wallDef`, `doorDef` and `doorStuffDef` (`Layouts_Misc.xml` lines 19-22) and a list of
+  `LayoutRoomDef`s (`Data/`: their fields `prefabs`, `floorTypes`, `parts`). This plan is not merged before the answer.
+- **Rationale**: generation fills a template's blocks from its kit [Direction; FR-009] and a block is divided into
+  plots for its households [Design: line 166].
+- **What R13 writes**: the forms of all five fields (FR-006). The Empire kit holds its skeleton and wall settings;
+  its word list, groups and fill are written when R2's generation lays out the river-bend town with them, since the
+  town takes Imperium's own buildings, materials and names once its calibration passes (FR-031).
+
+## R-9: The check is a Python package in Spec Kit's form
+
+- **Decision**: `pyproject.toml` at the repository root declares the package `mantle-check` (`src/mantle_check/`) with
+  a `mantle-check` command, Python 3.11 or later, Typer for the command line and Pillow for pictures, built with
+  Hatchling; tests in `tests/` run with pytest.
+- **Rationale**: the check is a development tool, so its form comes from the development workflow's source, Spec Kit,
+  which offers no tool form of its own; Principle V then takes the option Spec Kit uses in its own repository: a Python
+  package declared in `pyproject.toml`, with `requires-python = ">=3.11"`, Typer for its command line, a
+  `[project.scripts]` entry, Hatchling, and pytest over `tests/` (`pyproject.toml` lines 1-26, 39-55; `.gitignore`
+  lines 1-27). Pillow is needed to read the reference pictures, which are JPEG, PNG and WebP files
+  (`template-references/`), and to write PNG (R-11). XML is read with Python's own library. The package is Mantle's,
+  since every culture shares the check (FR-033).
+- **Ignored files**: `.gitignore` adds Spec Kit's Python lines (`.gitignore` lines 1-27) and Harmony's lines for the
+  C# build's output, `[Bb]in/` and `[Oo]bj/` (Harmony `.gitignore` lines 13-23), since `Data/` and `ModUpdating.txt`
+  give no form for ignored files.
+- **Alternatives considered**: a C# tool beside Mantle. Rejected: it would need the game's assemblies, which exist only
+  on the maintainer's computer (R-2), and the check must also run in cloud threads (spec, Assumptions).
+
+## R-10: Reading `Data/`
+
+- **Decision**: the check takes the path of `Data/` (on the maintainer's computer,
+  `D:\Steam\steamapps\common\RimWorld\Data`; in a cloud thread, the project's copy unpacked). It reads `Version.txt`
+  beside it and stops unless the version is 1.7. It reads every XML file under each expansion's `Defs/` and Imperium's
+  own `Defs/`, and resolves inheritance: an abstract parent (`Name`, `Abstract`) gives its fields to each child that
+  names it (`ParentName`), a child's field replaces the parent's, and a child's list adds to the parent's unless it is
+  marked `Inherit="False"` (`Core/Defs/ThingDefs_Buildings/Buildings_Base.xml` line 4 and `Buildings_Structure.xml`
+  lines 218 and 277-278, where `Wall` replaces `BuildingBase`'s affordance; `Apparel_Headgear.xml` line 552). Each
+  definition's expansion is the folder it is read from, with that folder's `About/About.xml` package identifier.
+- **Rationale**: testing outside the game reads `Data/` [Testing]; R1 supports 1.7 only (R1 research R-5); the files
+  are read where they are and nothing of them is copied (FR-021; `EULA.txt` line 86).
+- **What it reads from each definition**: `label`; a terrain's `natural` and `affordances`; a thing's `size`,
+  `terrainAffordanceNeeded`, `useStuffTerrainAffordance`, `stuffCategories`, `building/isWall`,
+  `building/isNaturalRock`; a material's `stuffProps/categories` and its own `terrainAffordanceNeeded`
+  (`Various_Stone.xml` line 88); a roof's `isNatural`; and the `color` a definition gives, for the pictures.
+
+## R-11: The pictures
+
+- **Decision**: one PNG per template, laid-out city and spec card, and one side-by-side PNG per template or laid-out
+  city with each reference picture given. Each cell is drawn as a square; a thin grid line runs between cells and a
+  stronger one every 10 cells, numbered along all four edges as `x` and `z`, with `z` growing toward north at the top.
+  Terrain, roofs and things are filled with the `color` their definition gives, or with a colour drawn from their
+  definition's name where it gives none. Parts and features are outlined and named where they lie; a template, whose
+  parts have no cells, shows its parts and relations as a named diagram beside its terrain shape, with each feature
+  named on the grid. Each problem with a cell is marked there with its number in the report. A legend lists every
+  definition shown by its `label`, with its expansion where it is not the base game or Royalty. The side-by-side
+  picture sets the whole drawing and each whole reference picture at the same height. Pictures are written to a folder
+  the developer names, and the check refuses a folder inside the repository.
+- **Rationale**: PNG is the image form `ModUpdating.txt` gives mods (lines 84-90); FR-023 to FR-028; positions are
+  `x` and `z` (`AncientPrefabs.xml` line 10) and `North` is a rotation `Data/` names (line 8). The side-by-side pictures
+  hold reference pictures, which stay out of the repository (FR-028; `EULA.txt` line 76).
+- **Determinism**: no time, path or random value goes into a report or picture, and every list is sorted, so the same
+  inputs give the same files (FR-022).
+
+## R-12: Tests
+
+- **Decision**: outside the game first: pytest runs the check over test templates, kits and laid-out cities written by
+  hand in `tests/fixtures/`, each holding one known kind of problem or none, against `Data/` 1.7.5014, whose path the
+  tests take from `RIMWORLD_DATA_DIR`. A test makes its own small reference picture, so none is committed. In the game:
+  `Mantle.dll` is built and the game is launched with `-quicktest` (`Readme.txt` lines 58-60) and
+  `-savedatafolder=SaveData` (lines 27-38), and `Player.log` shows that Imperium's definitions load with no error.
+  Placing templates on a map, the final check, comes with R2 (spec, Assumptions).
+- **Rationale**: testing outside the game comes first and testing in the game is the final check [Testing]; the
+  variable is named as Harmony names its own (`RIMWORLD_ASSEMBLY_DIR`, `BUILDING.md` line 18); test templates and kits
+  are not game content (spec, Assumptions).
+
+## R-13: The river-bend town's template
+
+- **Decision**: written in implement from the screenshot (`template-references/河湾城-原图与描线/原图-1596x1017.png`)
+  and the newest render (`template-references/河湾城-最新版-1112/1比1整城样张.png`). Its terrain shape is drawn inside
+  350×350 cells from the pictures, and its skeleton holds the river bend, the wall line, the districts on each bank and
+  inside the bend, the main streets with their bridges and gates, the plazas, and the public buildings, by the relations
+  of R-5. The check's picture of it beside both references is given to the maintainer in the project's files, not in
+  the pull request, since it holds the screenshot (FR-028).
+- **Rationale**: FR-031, Clarifications; [Direction].
