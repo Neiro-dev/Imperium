@@ -24,10 +24,20 @@ can be compared.
 Mantle is the framework layer that Imperium's content builds on [Design: line 221], so a template is not a drawn map
 of one city. It is a terrain shape and a skeleton, the fixed parts of a city's layout recorded as relations rather
 than coordinates, which generation picks by world tile and size, may mirror, turn and stretch, and fills from a kit,
-one culture's fixed set of generation data [Design: lines 184, 204, 209]. Each kit holds a skeleton and wall settings
-of its own [Design: line 184], while a template is picked by world tile and size [Design: line 209]. Whether one
-template serves the kits of several cultures, or each culture has its own templates, the design does not settle
-(FR-002).
+one culture's fixed set of generation data [Design: lines 184, 204, 209].
+
+Each culture has its own skeletons and templates, as each kit holds a skeleton of its own [Design: line 184;
+Direction]. Within a culture, a skeleton may have slots that vary, such as walls a city may have or lack, or a
+secondary core that small cities do not have [Design: line 200; Direction]. Slots that would carry one template
+across cultures are not used, since they would erase each culture's character [Direction]. The kit that Imperium-old's
+design calls the Roman kit (glossary line 184) is the Empire kit, and is named so in Imperium's files too, since no
+other faction uses its style [Direction].
+
+The cultures are those of every faction that has settlements, on the surface and in orbit (FR-032): the Empire,
+tribal, industrial (outlander), pirate and medieval, the last for the medieval factions that other mods add, and
+Odyssey's Traders Guild and Salvagers, whose settlements lie on the Orbit layer [Direction; Design: line 184; Data].
+This feature holds the Empire kit and the river-bend town's template; the other cultures' kits and templates are later
+work [Direction].
 
 What is fixed and what is left to generation [Design: lines 184, 209; Direction]:
 
@@ -75,6 +85,10 @@ template (FR-030), and the check in the game, the final one, still follows [Test
   the template's skeleton holds in the laid-out city and reports each one that does not; once every relation holds,
   the maintainer looks at the side-by-side picture and decides whether it passes (the maintainer's broad direction,
   constitution, Principle IV).
+- Q: Does one template serve several cultures' kits, through slots that each kit fills, replaces or leaves empty? →
+  A: No. Each culture has its own skeletons and templates. Slots give variation within a culture only, such as
+  optional walls, or no secondary core in small cities (Imperium-old glossary line 200); slots across cultures would
+  erase each culture's character (the maintainer's broad direction, constitution, Principle IV).
 - Q: How does the river-bend town fit a city's 350×350 map, whatever size its render was drawn at? → A: Its template is
   written with its terrain shape inside 350×350 cells and the same skeleton relations, and the render's cell sizes are
   not carried over. A skeleton is relations, not coordinates (Imperium-old glossary line 204); the render's sizes are
@@ -104,8 +118,10 @@ Each requirement below names its source in brackets. The sources are those the c
   (`Core/Defs/MapGeneration/BaseFactionMapGenerator.xml` lines 14-21); the smallest map a site needs
   (`Ideology/Defs/Sites/AncientComplex.xml` line 15); square maps (`Core/Languages/English/Keyed/Dialogs_Various.xml`
   line 153); a site's map taking its own size (`Core/Defs/WorldObjectDefs/WorldObjects.xml` line 205); a thing placed
-  by its position as `(x, 0, z)`, its rotation and its material
-  (`Odyssey/Defs/PrefabDefs/AncientPrefabs.xml` lines 12, 13 and 23); and each expansion's `About/About.xml`.
+  by its position as `(x, 0, z)`, its rotation and its material (`Odyssey/Defs/PrefabDefs/AncientPrefabs.xml` lines
+  12, 13 and 23); the factions that have settlements (`Royalty/Defs/FactionDefs/Faction_Empire.xml` line 5;
+  `Core/Defs/FactionDefs/Factions_Misc.xml` lines 185, 443, 511 and 517; `Odyssey/Defs/FactionDefs/Factions_Misc.xml`
+  lines 5, 17, 40-42, 168, 188 and 202-204); and each expansion's `About/About.xml`.
 - **[EULA]**: `EULA.txt`, which is always followed (constitution, Source Register).
 - **[Direction]**: the maintainer's broad direction on where template layouts come from and how they are accepted,
   which Imperium-old's design leaves open (constitution, Source Register, row Imperium's own design; Principle IV):
@@ -115,6 +131,11 @@ Each requirement below names its source in brackets. The sources are those the c
     Anno's art, names, models or code is used, and no reference picture is traced cell by cell, apart from the
     river-bend town below.
   - Imperium's city maps are 350×350 cells.
+  - Each culture has its own skeletons and templates; slots vary only within a culture. The old design's Roman kit is
+    the Empire kit, also in Imperium's files.
+  - Every faction that has settlements gets its own, on the surface and in orbit: the Empire, tribal, industrial
+    (outlander), pirate, medieval (for medieval mods), and Odyssey's Traders Guild and Salvagers. Only the Empire kit
+    and the river-bend town belong to this feature; the rest is later work.
   - The template's skeleton holds the wall line, districts, main streets, plazas and public buildings read from the
     reference, beside the parts the design names; generation only picks, mirrors, turns and stretches a template and
     fills it from a kit.
@@ -232,7 +253,7 @@ Where a kit has a block library, the ready-made blocks built from spec cards, th
 the design card that fixes one building's plot, rooms and contents, and gets it as a picture of the building on the
 game's cells.
 
-**Why this priority**: A block library belongs to a kit, though the Roman city does not use one [Design: lines 167,
+**Why this priority**: A block library belongs to a kit, though the Empire's cities do not use one [Design: lines 167,
 206], so it comes after the checks every kit needs.
 
 **Independent Test**: Write a test kit with a block library of two spec cards, one with a known problem; check it and
@@ -273,12 +294,13 @@ compare the report and the two pictures with the cards.
 **The forms**
 
 - **FR-001**: A template MUST hold its terrain shape and its skeleton together, what generation picks it by, the world
-  tile and size it suits [Design: line 209], and the reference city it is drawn from [Direction].
+  tile and size it suits [Design: line 209], its culture, and the reference city it is drawn from [Direction].
 - **FR-002**: A template MUST NOT be a drawn map of a city: it MUST NOT place on its cells the things a city is built
   of, such as buildings, walls and paving, which a kit gives when generation lays out a city [Design: lines 184, 204,
-  209, 221]. [NEEDS CLARIFICATION: Are a skeleton's parts culture-neutral places that each kit fills, replaces or
-  leaves empty, such as a boundary that becomes walls, a palisade or nothing, so that one template serves every
-  culture's kit; or does each culture have its own skeletons and templates?]
+  209, 221]. A template MUST belong to one culture, whose kit fills it, and each culture MUST have its own skeletons and
+  templates [Design: line 184; Direction]. A skeleton MAY hold slots that vary within its culture, such as walls a city
+  may have or lack, or a secondary core that small cities do not have [Design: line 200; Direction], and MUST NOT hold
+  slots meant to carry it to another culture [Direction].
 - **FR-003**: A template MUST state the smallest map it needs, as an official site states the smallest map it needs
   [Data: `AncientComplex.xml` line 15], and MUST fit a city's map, which is 350×350 cells [Direction]; maps are square
   [Data: `Dialogs_Various.xml` line 153], and a site's map takes its own size [Data: `WorldObjects.xml` line 205].
@@ -327,7 +349,7 @@ compare the report and the two pictures with the cards.
   states or outside a city's 350×350 map, each cell of a laid-out city that lies outside its map, and each cell of
   either that has no terrain [Data; Direction].
 - **FR-017**: The check MUST report each skeleton relation that names a part the skeleton does not hold, or a terrain
-  the terrain shape does not hold [Design: line 204].
+  the terrain shape does not hold [Design: line 204], and each template whose culture has no kit [Direction].
 - **FR-018**: The check MUST report each thing in a laid-out city that stands on a terrain lacking the affordance the
   thing needs, which is its material's when its definition says so [Data: `Buildings_Base.xml` line 11;
   `Buildings_Structure.xml` lines 277-278; `Various_Stone.xml` line 88; `Terrain_Natural.xml`]; each thing whose
@@ -385,11 +407,18 @@ compare the report and the two pictures with the cards.
   - If the method cannot express the town, the method MUST be fixed before anything else [Direction].
   - Once the calibration passes, the town MUST be laid out with Imperium's own buildings, materials and names, and its
     template MUST then ship as a regular template [Direction; FR-011].
+- **FR-032**: Kits and templates MUST come, in time, for the culture of every faction that has settlements: the Empire
+  [Data: `Royalty/Defs/FactionDefs/Faction_Empire.xml` line 5], tribal and industrial (outlander) [Data:
+  `Core/Defs/FactionDefs/Factions_Misc.xml` lines 185 and 443], pirate [Data: same file, lines 511 and 517], medieval,
+  for the medieval factions other mods add [Direction], and Odyssey's Traders Guild and Salvagers, whose settlements lie
+  on the Orbit layer [Data: `Odyssey/Defs/FactionDefs/Factions_Misc.xml` lines 5, 17, 40-42, 168, 188 and 202-204]
+  [Design: line 184; Direction]. This feature MUST hold the Empire kit and the river-bend town's template; the other
+  cultures' kits and templates are later work [Direction; Roadmap: R13].
 
 ### Key Entities *(include if feature involves data)*
 
 - **Template**: the designed layout of a whole city site: its terrain shape, its skeleton, what it is picked by, the
-  smallest map it needs and the reference city it is drawn from. It places no thing a city is built of.
+  smallest map it needs, its culture and the reference city it is drawn from. It places no thing a city is built of.
 - **Terrain shape**: the site's cells, each with its terrain, any natural rock and its roof, as the game defines them.
 - **Skeleton**: the fixed parts of a city's layout and their relations to each other and to the terrain. A kit holds
   one too [Design: line 184].
@@ -439,7 +468,7 @@ compare the report and the two pictures with the cards.
 - Until R2 generates cities, the laid-out cities the check is tested with are written by hand from test templates and
   kits. Test templates, kits and laid-out cities written for this feature are not game content. The river-bend town's
   template is the first template of game content, and it ships once its calibration passes (FR-031), in a release
-  that R2 sets [Roadmap: R2].
+  that R2 sets [Roadmap: R2]. The Empire kit is the first kit of game content (FR-032).
 - The check in the game, the final one, comes when R2 places templates on a map [Roadmap: R13; Testing].
 - The forms hold the parts the design and the maintainer's direction name, and take further parts when either names
   them [Design; Direction].

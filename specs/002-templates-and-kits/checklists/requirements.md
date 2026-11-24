@@ -13,7 +13,7 @@
 
 ## Requirement Completeness
 
-- [ ] No [NEEDS CLARIFICATION] markers remain
+- [x] No [NEEDS CLARIFICATION] markers remain
 - [x] Requirements are testable and unambiguous
 - [x] Success criteria are measurable
 - [x] Success criteria are technology-agnostic (no implementation details)
@@ -36,10 +36,8 @@
   `/speckit-plan`.
 - Where template layouts come from, what is fixed and what is left to generation beyond the parts the design names,
   and how a template is accepted follow the maintainer's broad direction ([Direction]; Purpose; FR-005, FR-010,
-  FR-029 to FR-031), since the design leaves them open; which templates and kits the alpha holds is deferred to R2
+  FR-029 to FR-032), since the design leaves them open; which templates and kits the alpha holds is deferred to R2
   (constitution, Principle IV).
-- One marker remains, in FR-002: whether one template serves several cultures' kits. The design gives each kit its own
-  skeleton and wall settings (glossary line 184) but does not say whether a template belongs to one culture (line 209).
-  It concerns what generated settlements look like, which is game content, so it goes to the maintainer for broad
-  direction (constitution, Principle IV). FR-029's question, how a laid-out city is judged to match its reference, was
-  answered in `/speckit-clarify` (spec, Clarifications).
+- No marker remains. `/speckit-clarify` settled three questions (spec, Clarifications): how a laid-out city is judged
+  to match its reference and whether one template serves several cultures, both answered by the maintainer as game
+  content (constitution, Principle IV), and how the river-bend town fits a 350×350 map, settled from the sources.
