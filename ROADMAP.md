@@ -42,8 +42,10 @@ generation of settlements, starts in R2; R4 and R15 are its first uses by the Em
 ## Releases
 
 The first release is an alpha of Mantle alone: Mantle (R2) with its templates and kits (R13), first the tribal
-culture's, as a mod of its own (R14). Which content a release opens, and that Mantle comes as a mod of its own, are
-settled by no design document, so they follow the maintainer's broad direction (constitution, Principle IV).
+culture's, as a mod of its own (R14). Which content a release opens, and that the tribal culture comes first, are
+settled by no design document, so they follow the maintainer's broad direction (constitution, Principle IV). A framework
+comes as a mod of its own that other mods depend on, as Harmony does (`pardeike/HarmonyRimWorld` README lines 3-4 and
+10-11).
 
 The alpha requires no expansion. The requirement of Royalty binds Imperium (`docs/imperium.md` line 108), and a mod is
 the one its `packageId` names, whose requirements are the mods it needs to function (`ModUpdating.txt` lines 230 and
@@ -58,8 +60,7 @@ description says that it is Mantle alone, a part of Imperium, and that its world
 line 79).
 
 Imperium requires Royalty and no other expansion (R1), and requires Mantle from the first slice whose content uses it,
-as the mods built on Harmony depend on Harmony, of which one copy is enabled (Harmony mod README lines 3-4 and 10-11;
-constitution, Principle V). With Royalty alone, Imperium, Mantle included, is complete (`docs/imperium.md` line 109).
-Imperium brings the new Empire (R3) with its kit and templates (R15): the river-bend town calibrates the method outside
-the game first (R13), and is checked in the game once R15 places it. Later releases add the slices of the Empire
-content.
+as the mods built on Harmony depend on Harmony, of which one copy is enabled (the same README lines; constitution,
+Principle V). With Royalty alone, Imperium, Mantle included, is complete (`docs/imperium.md` line 109). Imperium brings
+the new Empire (R3) with its kit and templates (R15): the river-bend town calibrates the method outside the game first
+(R13), and is checked in the game once R15 places it. Later releases add the slices of the Empire content.
