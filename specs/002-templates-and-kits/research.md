@@ -277,8 +277,12 @@ files, to `Neiro-dev/Imperium-old` at 20a052b, to Spec Kit at v1.4.3 and to Harm
   fortress. The Empire's templates leave both fields out and set `allowedBiomes` by the design's two looks of imperial
   cities, temperate for temperate and cold regions and arid for hot, dry ones (Imperium-old glossary lines 208 and 162):
   the river-bend town's `TemperateForest` and `TemperateSwamp` (`Core/Defs/BiomeDefs/Biomes_Temperate.xml` lines 5 and
-  210) and `BorealForest`, `Tundra`, `ColdBog`, `IceSheet` and `SeaIce` (`Biomes_Cold.xml` lines 5, 198, 371, 586 and
-  710). Which culture a faction takes, and picking among the templates that serve it, are generation's (ROADMAP R2).
+  210), `BorealForest`, `Tundra`, `ColdBog`, `IceSheet` and `SeaIce` (`Biomes_Cold.xml` lines 5, 198, 371, 586 and 710),
+  and Odyssey's `GlacialPlain`, scraped clean by glaciers (`Odyssey/Defs/BiomeDefs/GlacialPlain.xml` line 7), written
+  `<li MayRequire="Ludeon.RimWorld.Odyssey">GlacialPlain</li>` as `Core/Defs/Misc/FeatureDefs/Features.xml` line 268
+  writes it, since Imperium does not require Odyssey (spec FR-015). The other biomes are in neither list, each for the
+  reason spec FR-040 gives. Which culture a faction takes, and picking among the templates that serve it, are
+  generation's (ROADMAP R2).
 - **Rationale**: Principle III: `Data/` already writes a faction's attitude in these two fields, so a template that
   states the attitude it serves writes it the same way. The tribes' descriptions set which layout each attitude gets:
   the gentle tribe is open to trade and alliances, the fierce tribe values warlike dominance, the savage tribe has a

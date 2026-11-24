@@ -102,15 +102,20 @@ checked, and each report lists exactly the problems its file holds (spec, User S
 
 - [ ] T013 [P] [US1] Write two test mods in `tests/fixtures/mods/`: one whose `About/About.xml` requires no
   expansion, as Mantle's does, and one that requires Royalty, as Imperium does (spec FR-015)
-- [ ] T014 [P] [US1] Write test templates and kits in `tests/fixtures/us1/`, each holding one problem of
-  data-model.md, What the check reports: unknown definition; wrong kind (a terrain that is not natural, a `wallDef`
-  that is not a wall, an unknown part or relation kind, a relation missing its field); other expansion (a Biotech
-  definition unmarked, and a Royalty definition unmarked in a kit of each test mod); outside the map; no terrain;
-  unknown name; duplicate name; no kit; a building on a template's cell; and one template and kit with none
-- [ ] T015 [US1] Write `tests/test_templates_and_kits.py`: each fixture of T014 gives exactly its problem with
-  its cell, the Royalty definition is reported only in the kit of the mod that does not require Royalty, the clean
-  pair gives none and exit status 0, and every report ends with the statement of FR-020 (spec, User Story 1,
-  scenarios 1-6; SC-001, SC-004)
+- [ ] T014 [P] [US1] Write test templates, kits and readings in `tests/fixtures/us1/`, each holding one problem of
+  data-model.md, What the check reports: unknown definition; wrong kind (a terrain that is not natural, a `wallDef` that
+  is not a wall, a name that is not a `BiomeDef` in `allowedBiomes`, one that is not a `RiverDef` in `allowedRivers`,
+  one that is not a `RulePackDef` in `nameMaker`, an unknown part or relation kind, a relation missing its field); wrong
+  form (an attitude field that is neither `true` nor `false`, a `minMapSize` not in its form, a rotation that is not one
+  of the four directions); not square (a `minMapSize` whose `x` and `z` differ); missing field (a template without
+  `kit`, a template without `minMapSize`, a reading without `reference`); other expansion (a Biotech definition
+  unmarked, a Royalty definition unmarked in a kit of each test mod, and a Biotech definition unmarked in a reading that
+  no template names); outside the map; no terrain; unknown name; duplicate name; no kit; a building on a template's
+  cell; and one template and kit with none
+- [ ] T015 [US1] Write `tests/test_templates_and_kits.py`: each fixture of T014 gives exactly its problem, with its cell
+  where it has one, the Royalty definition is reported only in the kit of the mod that does not require Royalty, the
+  Biotech definition in the reading that no template names is reported (spec FR-015), the clean pair gives none and exit
+  status 0, and every report ends with the statement of FR-020 (spec, User Story 1, scenarios 1-6; SC-001, SC-004)
 - [ ] T016 [P] [US1] Write `tests/test_command.py`: `Data/` missing, `Version.txt` of another version, a `--mod`
   folder without `About/About.xml`, an output folder inside the repository and a file that is not XML each give exit
   status 2 and report nothing as passing (contracts/check-command.md, Exit status; spec, Edge Cases)
@@ -209,19 +214,20 @@ and relation in its picture is compared with the template (spec, User Story 3)
 
 ---
 
-## Phase 6: User Story 4 - Check and see a kit's buildings (Priority: P4)
+## Phase 6: User Story 4 - Check a kit's buildings (Priority: P4)
 
-**Goal**: Each spec card of a kit's block library is checked and drawn as its building
+**Goal**: Each spec card of a kit's block library is checked
 
-**Independent Test**: A test kit with a block library of two spec cards, one with a known problem, is checked, and the
-report and the two pictures are compared with the cards (spec, User Story 4)
+**Independent Test**: A test kit with a block library of three spec cards, one naming a definition `Data/` does not
+hold, one with a room or thing past its plot and one with neither, is checked, and the report is compared with the cards
+(spec, User Story 4)
 
 ### Tests for User Story 4
 
-- [ ] T032 [P] [US4] Write a test kit with a block library of two spec cards in `tests/fixtures/us4/`, one
-  naming a definition `Data/` does not hold
-- [ ] T033 [US4] Write `tests/test_spec_cards.py`: the unknown name is reported with its cell, and a room or thing
-  past its plot is reported with its cell (spec, User Story 4, scenarios 1-2)
+- [ ] T032 [P] [US4] Write a test kit with a block library of three spec cards in `tests/fixtures/us4/`: one naming a
+  definition `Data/` does not hold, one with a room or thing past its plot, and one with neither
+- [ ] T033 [US4] Write `tests/test_spec_cards.py`: the unknown name is reported with its cell, the room or thing past
+  its plot is reported with its cell, and the third card gives none (spec, User Story 4, scenarios 1-2)
 
 ### Implementation for User Story 4
 
@@ -253,10 +259,10 @@ FR-032, FR-036, FR-037, FR-039, FR-040; research R-13, R-14)
   (spec FR-006, FR-036; research R-8)
 - [ ] T038 Write the river-bend town's template in `Imperium/Defs/TemplateDefs/Templates_Empire.xml`: its terrain shape
   inside 350×350 cells, its skeleton as research R-13 lists it, data-model.md `TemplateDef.allowedBiomes` set to
-  `TemperateForest`, `TemperateSwamp`, `BorealForest`, `Tundra`, `ColdBog`, `IceSheet` and `SeaIce`,
-  `TemplateDef.allowedRivers`, `TemplateDef.naturalEnemy` and
-  `TemplateDef.permanentEnemy` left out, and `TemplateDef.reference` with the labels `screenshot` and `render`
-  (spec FR-031, FR-040)
+  `TemperateForest`, `TemperateSwamp`, `BorealForest`, `Tundra`, `ColdBog`, `IceSheet`, `SeaIce` and `GlacialPlain`, the
+  last marked `MayRequire="Ludeon.RimWorld.Odyssey"` (research R-14), `TemplateDef.allowedRivers`,
+  `TemplateDef.naturalEnemy` and `TemplateDef.permanentEnemy` left out, and `TemplateDef.reference` with the labels
+  `screenshot` and `render` (spec FR-015, FR-031, FR-040)
 - [ ] T039 Check T037 and T038 with `--mod` for `Mantle/` and `Imperium/` and `--reference` for both pictures until no
   problem is reported, and put the side-by-side picture in the project's files for the maintainer, not in the pull
   request (quickstart.md step 5; spec SC-007, SC-008)
