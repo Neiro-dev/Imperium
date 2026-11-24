@@ -49,12 +49,12 @@ Templates are drawn from reference cities in four steps [Direction]:
    beside pictures of the reference city; once every relation holds, the maintainer judges them side by side (FR-025,
    FR-029).
 
-The first case is the river-bend town, a player-built city of which the project holds a screenshot, the source, and
-two renders on the game's cells, an earlier reading of that single 2D screenshot whose heights, hidden areas and exact
-sizes were guessed [Direction]. It calibrates the method before anything else (FR-031). Its template is written from
+The first case is the river-bend town, a player-built city of which the project holds a screenshot, the source, and a
+render on the game's cells, an earlier reading of that single 2D screenshot whose heights, hidden areas and exact sizes
+were guessed [Direction]. It calibrates the method before anything else (FR-031). Its template is written from
 these pictures. R2's generation lays out the town from it with a kit [Roadmap: R2]. Every relation of its skeleton
-must hold in the laid-out town, and the maintainer then judges the town beside the screenshot and the renders. No
-cell-exact match to the renders is asked for, since they are guesses too. If the method cannot express the town, the
+must hold in the laid-out town, and the maintainer then judges the town beside the screenshot and the render. No
+cell-exact match to the render is asked for, since it is a guess too. If the method cannot express the town, the
 method is fixed first. Once the calibration passes, the town ships as a regular template, laid out with Imperium's
 own buildings, materials and names.
 
@@ -75,6 +75,12 @@ template (FR-030), and the check in the game, the final one, still follows [Test
   the template's skeleton holds in the laid-out city and reports each one that does not; once every relation holds,
   the maintainer looks at the side-by-side picture and decides whether it passes (the maintainer's broad direction,
   constitution, Principle IV).
+- Q: How does the river-bend town fit a city's 350×350 map, when its render is 398×359 cells? → A: Its template is
+  written with its terrain shape inside 350×350 cells and the same skeleton relations, and the render's cell sizes are
+  not carried over. A skeleton is relations, not coordinates (Imperium-old glossary line 204); the render's sizes are
+  guesses and no cell-exact match to it is required (the maintainer's broad direction, FR-031); and generation may
+  stretch a template to fit its site (glossary line 209). Whether the fitted town still reads as the river-bend town is
+  part of the maintainer's judgment in the calibration (FR-031).
 
 ## Sources
 
@@ -97,7 +103,8 @@ Each requirement below names its source in brackets. The sources are those the c
   thing takes (`Buildings_Structure.xml` lines 286-290); a faction base's generation
   (`Core/Defs/MapGeneration/BaseFactionMapGenerator.xml` lines 14-21); the smallest map a site needs
   (`Ideology/Defs/Sites/AncientComplex.xml` line 15); square maps (`Core/Languages/English/Keyed/Dialogs_Various.xml`
-  line 153); a thing placed by its position as `(x, 0, z)`, its rotation and its material
+  line 153); a site's map taking its own size (`Core/Defs/WorldObjectDefs/WorldObjects.xml` line 205); a thing placed
+  by its position as `(x, 0, z)`, its rotation and its material
   (`Odyssey/Defs/PrefabDefs/AncientPrefabs.xml` lines 12, 13 and 23); and each expansion's `About/About.xml`.
 - **[EULA]**: `EULA.txt`, which is always followed (constitution, Source Register).
 - **[Direction]**: the maintainer's broad direction on where template layouts come from and how they are accepted,
@@ -107,6 +114,7 @@ Each requirement below names its source in brackets. The sources are those the c
     public buildings, are expressed as Imperium's own templates in the design's form, and kits fill them. Nothing of
     Anno's art, names, models or code is used, and no reference picture is traced cell by cell, apart from the
     river-bend town below.
+  - Imperium's city maps are 350×350 cells.
   - The template's skeleton holds the wall line, districts, main streets, plazas and public buildings read from the
     reference, beside the parts the design names; generation only picks, mirrors, turns and stretches a template and
     fills it from a kit.
@@ -116,13 +124,13 @@ Each requirement below names its source in brackets. The sources are those the c
     side-by-side picture (Clarifications).
   - The river-bend town is the first case, and it calibrates the method before anything else. Its reference pictures
     are the screenshot of the player-built city, which is the source and which a separate thread may recover into
-    `template-references/` in the project's files, and two renders of it on the game's cells (`uploads/hearth/`), an
-    earlier reading of that single 2D screenshot whose heights, hidden areas and exact sizes were guessed. The
-    calibration checks that the method can express the town. Every relation of the skeleton must hold in the town that
-    generation lays out, and the maintainer then judges it by eye beside the screenshot and the renders, with no
-    cell-exact match to the renders. A method that cannot express the town is fixed first. Once the calibration
-    passes, the town's content is Imperium's own buildings, materials and names, and it ships as a regular template,
-    with no credit line.
+    `template-references/` in the project's files, and a render of it on the game's cells, 398×359 cells
+    (`uploads/hearth/`), an earlier reading of that single 2D screenshot whose heights, hidden areas and exact sizes
+    were guessed. The calibration checks that the method can express the town. Every relation of the skeleton must
+    hold in the town that generation lays out, and the maintainer then judges it by eye beside the screenshot and the
+    render, with no cell-exact match to the render. A method that cannot express the town is fixed first. Once the
+    calibration passes, the town's content is Imperium's own buildings, materials and names, and it ships as a regular
+    template, with no credit line.
 - **[Spec Kit]**: the feature description given to `/speckit-specify` (Input, above), the development workflow's
   source for what a feature is for.
 
@@ -213,7 +221,7 @@ cell, part and relation in the picture with the template.
    picture, **Then** both parts and the relation are shown and named.
 3. **Given** a template with a problem at one cell, **When** the developer opens its picture, **Then** that cell is
    marked and the mark names the problem.
-4. **Given** the river-bend town's template and its reference pictures, the screenshot and the two renders, **When**
+4. **Given** the river-bend town's template and its reference pictures, the screenshot and the render, **When**
    the developer opens its picture, **Then** the picture and each reference picture are side by side, and each part
    of the skeleton can be found in each.
 
@@ -245,15 +253,15 @@ compare the report and the two pictures with the cards.
 - A template, kit or laid-out city names one of Imperium's own definitions, such as a piece, a generic building
   element the base game lacks [Design: line 194]: the check looks for it among Imperium's own definitions, and reports
   it when it is not there.
-- A terrain shape reaches past the map size the template states, a laid-out city reaches past its map, or either
-  leaves a cell with no terrain: the check reports each such cell.
+- A terrain shape reaches past the map size the template states or past a city's 350×350 map, a laid-out city reaches
+  past its map, or either leaves a cell with no terrain: the check reports each such cell.
 - A skeleton relation names a part the skeleton does not hold, or a terrain the terrain shape does not hold: the check
   reports the relation.
 - A definition from an expansion other than Royalty, marked as that expansion's content: the check accepts it, and the
   picture's legend names the expansion [Design: imperium.md line 110].
 - A laid-out city is given without a reference picture, or with one the check cannot read: the check checks and draws
   the city, says that no comparison was made, and does not count its template as passing the comparison.
-- The river-bend town's screenshot is not yet in the project's files: the check draws the template beside the renders
+- The river-bend town's screenshot is not yet in the project's files: the check draws the template beside the render
   alone and says that the screenshot is missing, and the maintainer's judgment of the calibration waits for it
   [Direction].
 - `Data/` cannot be found or is of another game version: the check stops and says so, and reports nothing as
@@ -273,7 +281,8 @@ compare the report and the two pictures with the cards.
   leaves empty, such as a boundary that becomes walls, a palisade or nothing, so that one template serves every
   culture's kit; or does each culture have its own skeletons and templates?]
 - **FR-003**: A template MUST state the smallest map it needs, as an official site states the smallest map it needs
-  [Data: `AncientComplex.xml` line 15]; maps are square [Data: `Dialogs_Various.xml` line 153].
+  [Data: `AncientComplex.xml` line 15], and MUST fit a city's map, which is 350×350 cells [Direction]; maps are square
+  [Data: `Dialogs_Various.xml` line 153], and a site's map takes its own size [Data: `WorldObjects.xml` line 205].
 - **FR-004**: A terrain shape MUST hold, for each cell of the site, the terrain there, any natural rock, and the roof
   over it, each as a definition the game holds [Data: terrain, natural rock, roofs], so that it can be checked against
   `Data/` [Testing].
@@ -316,7 +325,8 @@ compare the report and the two pictures with the cards.
   Royalty alone and other expansions add content [Design: imperium.md lines 108-110; Data: each expansion's
   `About/About.xml`].
 - **FR-016**: The check MUST report each cell of a terrain shape that lies outside the smallest map its template
-  states, each cell of a laid-out city that lies outside its map, and each cell of either that has no terrain [Data].
+  states or outside a city's 350×350 map, each cell of a laid-out city that lies outside its map, and each cell of
+  either that has no terrain [Data; Direction].
 - **FR-017**: The check MUST report each skeleton relation that names a part the skeleton does not hold, or a terrain
   the terrain shape does not hold [Design: line 204].
 - **FR-018**: The check MUST report each thing in a laid-out city that stands on a terrain lacking the affordance the
@@ -363,15 +373,16 @@ compare the report and the two pictures with the cards.
 - **FR-031**: The first template MUST be the river-bend town's, and it MUST calibrate the method before any other
   template of game content is written [Direction]:
   - Its template MUST be written from its reference pictures: the screenshot of the player-built city, which is the
-    source, and the two renders on the game's cells in the project's files, an earlier reading of that screenshot
-    with its heights, hidden areas and exact sizes guessed. The check MUST pass the template and draw it beside them
-    [Direction; FR-025].
+    source, and the render on the game's cells in the project's files, an earlier reading of that screenshot with
+    its heights, hidden areas and exact sizes guessed. The template MUST fit a city's 350×350 map, although the render
+    is 398×359 cells, keeping the same skeleton relations (Clarifications). The check MUST pass the template and draw
+    it beside them [Direction; FR-003; FR-025].
   - The town that R2's generation lays out from it with a kit MUST keep every relation of its skeleton, as FR-029
     measures: the river bend, the wall line, which districts adjoin, how the main streets connect, and where the
     plazas and public buildings lie. The town MUST come from generation, not be written by hand, since only generation
     tests the method [Direction; Roadmap: R2].
-  - The maintainer MUST then judge the laid-out town by eye beside the screenshot and the renders. A cell-exact match
-    to the renders MUST NOT be required, since they are guesses too [Direction].
+  - The maintainer MUST then judge the laid-out town by eye beside the screenshot and the render. A cell-exact match
+    to the render MUST NOT be required, since it is a guess too [Direction].
   - If the method cannot express the town, the method MUST be fixed before anything else [Direction].
   - Once the calibration passes, the town MUST be laid out with Imperium's own buildings, materials and names, and its
     template MUST then ship as a regular template [Direction; FR-011].
@@ -390,7 +401,7 @@ compare the report and the two pictures with the cards.
 - **Laid-out city**: the city generation lays out on a map from a template and a kit: each cell's terrain, rock and
   roof, each thing that stands there, and where each part of the skeleton lies.
 - **Reference city**: the player-built city a template is drawn from, and its **reference pictures**, such as a
-  screenshot of it or, for the river-bend town, the renders of an earlier reading, which the developer keeps outside
+  screenshot of it or, for the river-bend town, the render of an earlier reading, which the developer keeps outside
   Imperium's files.
 - **Report**: what one run of the check found, each problem with its place, and the statement that the check in the
   game is still to come.
@@ -416,7 +427,7 @@ compare the report and the two pictures with the cards.
   every part of its skeleton is found in the same relations to the river and to the other parts.
 - **SC-008**: Before any other template of game content is written, a town that generation lays out from the
   river-bend town's template keeps 100% of its skeleton relations, and the maintainer has accepted it beside the
-  screenshot and the renders (FR-031).
+  screenshot and the render (FR-031).
 
 ## Assumptions
 
@@ -424,8 +435,8 @@ compare the report and the two pictures with the cards.
   definitions read are those of RimWorld 1.7.5014.
 - The check runs where `Data/` is available: on the maintainer's computer, in the game's install folder, and in cloud
   threads, from the project's copy of RimWorld 1.7.5014's `Data/`.
-- Which templates and kits the alpha holds, the map size each template needs, and generation are R2's
-  [Roadmap: R13, R2]. The form of a laid-out city is set here so that R2's generation writes it and the check reads it.
+- Which templates and kits the alpha holds, and generation, are R2's [Roadmap: R13, R2]. The form of a laid-out city
+  is set here so that R2's generation writes it and the check reads it.
 - Until R2 generates cities, the laid-out cities the check is tested with are written by hand from test templates and
   kits. Test templates, kits and laid-out cities written for this feature are not game content. The river-bend town's
   template is the first template of game content, and it ships once its calibration passes (FR-031), in a release
