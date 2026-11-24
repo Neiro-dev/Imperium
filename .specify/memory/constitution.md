@@ -29,23 +29,14 @@ only after the maintainer decides.
 
 ### V. The Project Logic Settles Everything Else
 
-The project logic is this constitution and the fixed sources in its Source Register. Every
-development question other than game content MUST be settled from the project logic, not by
-asking the maintainer. Rules, files, and practices that the project logic does not support MUST
-be removed. When the project logic does not settle such a question, the agent MUST NOT act
-on it.
+Questions other than game content MUST NOT be put to the maintainer. Rules, files, and practices
+that no fixed source supports MUST be removed. When no fixed source settles such a question, the
+agent MUST NOT act on it.
 
 ### VI. Every Conclusion Names Its Source
 
 Every conclusion, including a judgment, MUST name its source and MUST be reached from that
-source. When the source allows the agent to judge, the agent MUST judge without asking.
-
-### VII. The Maintainer's Words Are Not a Rule
-
-The maintainer's words MUST NOT be recorded as a rule, or as a source for any topic other than
-game content, except as principles adopted into this constitution through Governance, or as
-preferences on how Claude runs the project, which Claude's documentation says to follow. Only a
-cleaned-up, unambiguous statement of a game-content decision's meaning MAY be written.
+source.
 
 ## Source Register
 
@@ -53,27 +44,12 @@ Each topic and its one fixed source:
 
 | Topic | Fixed source |
 |-------|--------------|
-| Game content | The maintainer (recorded decisions: see Game Content Records) |
+| Game content | The maintainer; decisions in force are the design documents on the default branch of `Neiro-dev/Imperium-old` |
 | The released mod | The Principle III sequence: Core and the official DLCs, then `ModUpdating.txt`, then Harmony |
 | Development process | Spec Kit |
 | The agent and the files it reads | Claude's official documentation |
 | Repository | GitHub Docs |
 | Commit messages | Conventional Commits 1.0.0 |
-
-## Game Content Records
-
-The maintainer's game-content decisions in force are the design documents on the default branch
-of `Neiro-dev/Imperium-old`. Imperium-old's design supersedes the designs in
-`Neiro-dev/Imperium-Knowledge` and `Neiro-dev/RimWorld-Imperium`.
-
-- Content that Imperium-old's design deleted, including old-repository content
-  (`Neiro-dev/Imperium-Knowledge`, `Neiro-dev/RimWorld-Imperium`) on a deleted topic, is void.
-- Content that Imperium-old's design never addressed is a gap: it is neither void nor decided,
-  and the maintainer settles it (Principle IV). Other repositories MAY be used only to see how
-  something was implemented before.
-- Lists derived from these repositories MUST NOT decide game content.
-- Imperium-old's unmerged design-draft pull requests are not decisions in force. They MUST be
-  handled only when a feature needs them, through the development process.
 
 ## Governance
 
