@@ -2,42 +2,51 @@
 
 ## Core Principles
 
-### I. One Fixed Source per Topic
+### I. One Source per Topic
 
-Every answer MUST come from the fixed source for its topic in the Source Register. Each topic
-has one source.
+Every answer MUST come from the source the Source Register gives for its topic. Nothing outside
+the Source Register is a source.
 
 ### II. Other Sources Only Cross-Check
 
-Sources other than the topic's fixed source MUST be used only to cross-check.
+Sources other than the topic's own source MUST be used only to cross-check.
 
-### III. Released Mod Source Order
+### III. Sources in Order
 
-For the released mod, sources are used in this order:
+Where a topic lists several sources in order, the next one MUST be used only when the previous
+one gives no form.
 
-1. Core and the official DLCs.
-2. `ModUpdating.txt`.
-3. Harmony.
+### IV. Asking the Maintainer
 
-The next level MUST be used only when the previous one gives no form.
+The agent MUST NOT ask the maintainer about anything other than game content. For game content,
+the maintainer is asked only when no source in its chain has the answer, and judges only its broad
+direction.
 
-### IV. The Maintainer Settles Open Questions
+### V. When a Source Gives No Form
 
-When no source settles a question, the agent MUST ask the maintainer and MUST act only after
-the maintainer decides.
+When the topic's source names a default, the agent MUST use it. When the source offers options
+without a default, the agent MUST use the option the source uses in its own repository or
+examples. When the source gives neither, the agent MUST NOT act on the question, except for game
+content, where Principle IV applies. Rules, files, and practices that no source supports MUST be
+removed.
+
+### VI. Every Conclusion Names Its Source
+
+Every conclusion, including a judgment, MUST name its source and MUST be reached from that
+source.
 
 ## Source Register
 
-Each topic and its one fixed source:
+Three layers: Claude, GitHub and RimWorld. Each topic and its source:
 
-| Topic | Fixed source |
-|-------|--------------|
-| Game content | The maintainer |
-| The released mod | Core and the official DLCs, then `ModUpdating.txt`, then Harmony (Principle III) |
-| Development process | Spec Kit |
-| The agent and the files it reads | Claude's official documentation |
-| Repository | GitHub Docs |
-| Commit messages | Conventional Commits 1.0.0 |
+| Layer | Topic | Source |
+|-------|-------|--------|
+| Claude | How the AI works: sessions, threads, project settings, CLAUDE.md, skills, subagents | The Anthropic documentation for the product in use: code.claude.com (Claude Code and projects), platform.claude.com (the API), support.claude.com (claude.ai). anthropic.com/engineering only cross-checks |
+| GitHub | Development workflow | Spec Kit (`github/spec-kit`) |
+| GitHub | Repository files and settings, branches, pull requests, and commit messages | GitHub Docs; choosealicense.com for the license |
+| RimWorld | Imperium's own design | While the rebuild runs: the meaning of the design on the default branch of `Neiro-dev/Imperium-old`, not its code or implementation. Imperium-old is retired once the rebuild covers all of it. Design beyond it: the maintainer's broad direction (Principle IV) |
+| RimWorld | Game content and the released mod | Base game and official expansions in `Data/` → `ModUpdating.txt` → Harmony (`pardeike/HarmonyRimWorld`). Game content is judged by what the official expansions contain. `EULA.txt` is always followed |
+| RimWorld | Testing in the game | In order: `Readme.txt` (the `-quicktest` launch option), then RimBridgeServer (`pardeike/RimBridgeServer`) with GABS (`pardeike/GABS`) |
 
 ## Governance
 
@@ -51,4 +60,4 @@ Versioning follows semantic versioning:
 
 Compliance is reviewed at each plan's Constitution Check and at pull request review.
 
-**Version**: 1.0.0 | **Ratified**: 2026-11-23 | **Last Amended**: 2026-11-23
+**Version**: 2.0.0 | **Ratified**: 2026-11-23 | **Last Amended**: 2026-11-24
