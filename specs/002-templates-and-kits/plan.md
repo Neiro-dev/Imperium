@@ -15,7 +15,7 @@ alpha; Imperium holds the Empire's kit and the river-bend town's template, and r
 fields take `Data/`'s own forms wherever `Data/` writes the same thing (R-3): a template is a terrain shape of natural
 terrain, rock and roofs (R-4) and a skeleton of named parts and relations taken from the design's definitions (R-5); a
 kit holds its word list, skeleton, wall settings, groups and fill (R-8). A laid-out city is one XML file that R2's
-generation writes, and a reading, the reference city drawn on the game's cells that a culture's template and kit are
+generation writes, and a reading, the reference city read onto the game's cells that a culture's template and kit are
 taken from, is a file in the same form (R-7). The check is a Python package in Spec Kit's form, `mantle-check`, that
 reads `Data/` 1.7.5014 and each mod's `About/About.xml` and `Defs/`, reports every problem of the spec's kinds, accepts
 expansion content by what the holding mod requires, measures each skeleton relation in a laid-out city, and draws PNG

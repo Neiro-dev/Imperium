@@ -269,6 +269,37 @@ class Painter:
         self.problems(image, cell, bounds, numbered)
         return self.legend(image, legend, ["Parts are outlined in blue, terrain features in teal, problems in red."])
 
+    def over_picture(self, picture: Image.Image, city: City) -> Image.Image:
+        """The reference picture with the reading's cells laid over it at the reading's scale: one cell is the
+        scale's pixels per cell over its reference cell, cell (0, 0) at the picture's lower left corner and z growing
+        up the picture, as in the drawing. Nothing is marked as matching or not (spec FR-051; research R-17)."""
+        side = city.scale.pixels_per_rimworld_cell()
+        height = picture.height
+        base = picture.convert("RGBA")
+        overlay = Image.new("RGBA", base.size, (0, 0, 0, 0))
+        draw = ImageDraw.Draw(overlay)
+
+        def box(rect) -> tuple[int, int, int, int]:
+            x1, z1, x2, z2 = rect
+            return (round(x1 * side), round(height - (z2 + 1) * side), round((x2 + 1) * side) - 1,
+                    round(height - z1 * side) - 1)
+
+        for layers, short_type, blend in ((city.terrain, "TerrainDef", 0.35), (city.roofs, "RoofDef", 0.2)):
+            for entry in layers:
+                colour = self.colour_of(self.definition(entry.ref.name, short_type), entry.ref.name)
+                for rect in entry.rects:
+                    draw.rectangle(box(rect), fill=(*colour, round(255 * blend)))
+        for areas, colour in ((city.features, FEATURE), (city.parts, AREA)):
+            for area in sorted(areas, key=lambda a: a.name):
+                for rect in area.rects:
+                    draw.rectangle(box(rect), fill=(*colour, 110), outline=(*colour, 255))
+        for thing in city.things:
+            rect = thing.rect or ((*thing.position, *thing.position) if thing.position is not None else None)
+            if rect is not None:
+                colour = self.colour_of(self.definition(thing.ref.name, "ThingDef"), thing.ref.name)
+                draw.rectangle(box(rect), fill=(*colour, 220), outline=INK)
+        return Image.alpha_composite(base, overlay).convert("RGB")
+
     def diagram(self, skeleton: Skeleton, kit_skeleton: Skeleton | None, features: list[str], height: int) -> Image.Image:
         parts = {}
         for part in (kit_skeleton.parts if kit_skeleton is not None else []) + skeleton.parts:

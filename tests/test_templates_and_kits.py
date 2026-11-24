@@ -1,12 +1,14 @@
 """User Story 1: templates and kits checked against the game (spec, User Story 1, scenarios 1-6; SC-001, SC-004)."""
 
 import pytest
+from PIL import Image
 
 from mantle_check.report import FINAL_STATEMENT
 
 from conftest import FIXTURES, NEEDS_ROYALTY, NO_EXPANSION
 
 US1 = FIXTURES / "us1"
+DEFS_US2 = [FIXTURES / "us2" / name for name in ("TestTown.xml", "TestRiverTown.xml", "TestOtherKit.xml")]
 
 # Each fixture holds one problem: its kind, the cell reported where it has one, and a word of its message.
 ONE_PROBLEM = {
@@ -43,7 +45,7 @@ ONE_PROBLEM = {
     "building-in-things.xml": ("wrong kind", "(10, 10)", "a template holds no building"),
 }
 
-NO_PROBLEM = ["odyssey-marked.xml", "kit-biotech-marked.xml"]
+NO_PROBLEM = ["odyssey-marked.xml", "kit-biotech-marked.xml", "terrain-left-to-generation.xml"]
 
 
 @pytest.mark.parametrize("name", sorted(ONE_PROBLEM))
@@ -95,3 +97,23 @@ def test_the_clean_template_and_kit_give_no_problem(run_check, make_picture):
     assert result.report.rstrip("\n").endswith(FINAL_STATEMENT)
     assert (result.out / "TestHillfort.png").is_file()
     assert (result.out / "TestHillfort.side-by-side.png").is_file()
+
+
+def test_a_template_whose_terrain_holds_no_cell_leaves_the_land_to_generation(run_check):
+    result = run_check([US1 / "terrain-left-to-generation.xml"], mods=[NO_EXPANSION])
+    assert result.status == 0, result.report
+    assert "no terrain" not in result.kinds()
+    # Its picture shows its features without terrain: the river feature's teal outline is drawn on the bare grid.
+    picture = Image.open(result.out / "TestLeftToGeneration.png").convert("RGB")
+    assert (0, 130, 140) in {pixel for _, pixel in picture.getcolors(maxcolors=1_000_000)}
+
+
+def test_a_template_whose_terrain_holds_some_cells_but_not_all_is_still_reported(run_check):
+    result = run_check([US1 / "no-terrain.xml"], mods=[NO_EXPANSION])
+    assert result.kinds() == ["no terrain"], result.report
+
+
+def test_a_laid_out_city_with_no_terrain_at_all_is_reported_for_every_cell(run_check):
+    result = run_check([FIXTURES / "us2" / "cities" / "empty-terrain.xml", *DEFS_US2])
+    problems = [p for p in result.problems if p["kind"] == "no terrain"]
+    assert [p["cell"] for p in problems] == ["(0, 0)-(39, 39)"], result.report

@@ -38,6 +38,8 @@ RELATION_NEEDS = {
     "Farther": ("a", "b", "than"),
 }
 MAX_MAP = 350
+USES = ("Housing", "ShopFront", "Workshop", "Tavern", "Market", "Public", "AnnexOrAttic", "Unclear")
+WRONG_SCALE = "wrong scale, region or use"
 
 _INT = r"\s*(-?\d+)\s*"
 RECT = re.compile(rf"^\({_INT},{_INT},{_INT},{_INT}\)$")
@@ -66,6 +68,10 @@ class Area:
     name: str
     rects: list[Rect]
     flows_from: str | None = None
+    # In a reading from a picture only: the pixel rects of the picture the piece was read from (data-model.md).
+    from_rects: list[Rect] = field(default_factory=list)
+    use: str | None = None
+    basis: str | None = None
 
 
 @dataclass
@@ -173,6 +179,33 @@ class Kit:
 
 
 @dataclass
+class Measured:
+    name: str
+    rect: Rect | None
+
+
+@dataclass
+class Scale:
+    """How a reading from a picture sizes one cell (spec FR-048): pixels one cell of the reference game is, the
+    RimWorld cells it is, and the things it was measured from."""
+
+    pixels_per_cell: float | None
+    reference_cell: float | None
+    measured: list[Measured]
+
+    def usable(self) -> bool:
+        return (
+            self.pixels_per_cell is not None
+            and self.reference_cell is not None
+            and self.pixels_per_cell > 0
+            and self.reference_cell > 0
+        )
+
+    def pixels_per_rimworld_cell(self) -> float:
+        return self.pixels_per_cell / self.reference_cell
+
+
+@dataclass
 class City:
     file: str
     is_reading: bool
@@ -185,6 +218,7 @@ class City:
     things: list[Thing]
     parts: list[Area]
     features: list[Area]
+    scale: Scale | None = None
 
     @property
     def owner(self) -> str:
@@ -292,7 +326,7 @@ class Reader:
             entries.append(LayerEntry(ref, self.rects(element, f"{where} {element.tag}")))
         return entries
 
-    def areas(self, node: ET.Element | None, where: str, rivers: bool) -> list[Area]:
+    def areas(self, node: ET.Element | None, where: str, rivers: bool, reading: bool = False) -> list[Area]:
         if node is None:
             return []
         areas = []
@@ -307,8 +341,61 @@ class Reader:
                 if not rivers:
                     self.problem("wrong kind", label, "only a terrain feature names flowsFrom")
                 flows_from = self.rotation(flows, f"{label} flowsFrom")
-            areas.append(Area(name, self.rects(li, label), flows_from))
+            area = Area(name, self.rects(li, label), flows_from)
+            if reading:
+                self.region_and_use(li, label, area)
+            areas.append(area)
         return areas
+
+    def region_and_use(self, li: ET.Element, label: str, area: Area) -> None:
+        """Reads what a reading from a picture records of a piece: its `from` region, its `use` and its `basis`."""
+        for item in li.findall("from/li"):
+            rect = self.rect((item.text or "").strip(), f"{label} from")
+            if rect is not None:
+                area.from_rects.append(rect)
+        use = li.findtext("use")
+        basis = (li.findtext("basis") or "").strip()
+        if use is not None:
+            area.use = use.strip()
+            area.basis = basis or None
+            if area.use not in USES:
+                self.problem(WRONG_SCALE, f"{label} use", f"'{area.use}' is not one of the design's uses: {', '.join(USES)}")
+            elif not basis:
+                self.problem(WRONG_SCALE, f"{label} use", f"{area.use} is given with no basis, one sentence")
+
+    def number(self, node: ET.Element, tag: str, where: str) -> float | None:
+        text = node.findtext(tag)
+        try:
+            value = float((text or "").strip())
+        except ValueError:
+            value = None
+        if value is None or not value > 0 or value == float("inf"):
+            self.problem(WRONG_SCALE, where, f"'{(text or '').strip()}' is not a positive number")
+            return None
+        return value
+
+    def scale(self, node: ET.Element | None) -> Scale | None:
+        if node is None:
+            return None
+        scale = Scale(
+            self.number(node, "pixelsPerCell", "scale pixelsPerCell"),
+            self.number(node, "referenceCell", "scale referenceCell"),
+            [],
+        )
+        measured = node.findall("measured/li")
+        if not measured:
+            self.problem(WRONG_SCALE, "scale measured", "the scale holds no thing it was measured from, at least one")
+        for index, li in enumerate(measured, start=1):
+            name = (li.findtext("name") or "").strip()
+            label = f"scale measured {name}" if name else f"scale measured #{index}"
+            if not name:
+                self.problem(WRONG_SCALE, label, "a measured thing holds no name")
+            rect_text = li.findtext("rect")
+            rect = self.rect(rect_text.strip(), f"{label} rect") if rect_text is not None else None
+            if rect_text is None:
+                self.problem(WRONG_SCALE, label, "a measured thing holds no rect in the picture's pixels")
+            scale.measured.append(Measured(name, rect))
+        return scale
 
     def things(self, node: ET.Element | None, where: str, marked: frozenset[str]) -> list[Thing]:
         if node is None:
@@ -491,7 +578,8 @@ def read_city(root: ET.Element, file: str) -> tuple[City, list[Problem]]:
         terrain=reader.layer(root.find("terrain"), "terrain", marked),
         roofs=reader.layer(root.find("roofs"), "roofs", marked),
         things=reader.things(root.find("things"), "things", marked),
-        parts=reader.areas(root.find("parts"), "parts", False),
-        features=reader.areas(root.find("features"), "features", True),
+        parts=reader.areas(root.find("parts"), "parts", False, is_reading),
+        features=reader.areas(root.find("features"), "features", True, is_reading),
+        scale=reader.scale(root.find("scale")) if is_reading else None,
     )
     return city, reader.problems

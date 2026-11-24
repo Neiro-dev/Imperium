@@ -9,7 +9,7 @@ import typer
 from PIL import Image, UnidentifiedImageError
 
 from .checks import Checker, Known
-from .forms import Kit, read_city, read_kit, read_template
+from .forms import WRONG_SCALE, City, Kit, read_city, read_kit, read_template
 from .gamedata import NO_MOD, CannotRun, GameData, Source, parse_xml
 from .pictures import Painter, save, side_by_side
 from .report import Culture, Problem, Report
@@ -48,6 +48,27 @@ def parse_references(values: list[str]) -> dict[tuple[str, str], Path]:
         label, path = rest.split("=", 1)
         references[(name.strip(), label.strip())] = Path(path)
     return references
+
+
+NOT_MARKED = "mismatches are not marked and no picture is reported as a match"
+
+
+def regions_outside(city: City, file: str, owner: str, size: tuple[int, int]) -> list[Problem]:
+    """A measured thing or a `from` whose pixels lie outside the reference picture, where the picture is given
+    (data-model.md, What the check reports; spec FR-019, FR-048, FR-049)."""
+    width, height = size
+    problems = []
+    found = [(f"scale measured {m.name or '#' + str(i)}", m.rect) for i, m in enumerate(city.scale.measured, 1)] if city.scale else []
+    for area in city.parts + city.features:
+        found.extend((f"{'parts' if area in city.parts else 'features'} {area.name} from", rect) for rect in area.from_rects)
+    for where, rect in found:
+        if rect is not None and (rect[0] < 0 or rect[1] < 0 or rect[2] >= width or rect[3] >= height):
+            x1, z1, x2, z2 = rect
+            problems.append(
+                Problem(WRONG_SCALE, file, owner, where,
+                        f"({x1},{z1},{x2},{z2}) lies outside the picture, {width}×{height} pixels")
+            )
+    return problems
 
 
 def describe(culture: Culture, kit: Kit) -> None:
@@ -137,6 +158,10 @@ def run(files: list[Path], data: Path, out: Path, mods: list[Path], references: 
                 )
             elif template is not None:
                 reference_name, labels = template[0].reference_name, template[0].reference_pictures
+        scaled = kind == "city" and item.is_reading and item.scale is not None and item.scale.usable()
+        if scaled:
+            report.pictures.append(f"{owner}: its cells are laid over its first reference picture at its scale; {NOT_MARKED}")
+        first = True
         for picture_label in labels:
             path = pictures_given.get((reference_name or "", picture_label))
             if path is None:
@@ -150,6 +175,9 @@ def run(files: list[Path], data: Path, out: Path, mods: list[Path], references: 
                 with Image.open(path) as picture:
                     picture.load()
                     pictures.append(picture.convert("RGB"))
+                if first and kind == "city" and item.is_reading:
+                    report.problems.extend(regions_outside(item, file, owner, pictures[0].size))
+                first = False
                 report.pictures.append(f"{owner}: set beside {picture_label}")
             except (OSError, UnidentifiedImageError):
                 report.problems.append(
@@ -168,6 +196,8 @@ def run(files: list[Path], data: Path, out: Path, mods: list[Path], references: 
             image = painter.template(item, marked, kit[0].skeleton if kit else None)
         else:
             image = painter.city(item, marked)
+            if pictures and item.is_reading and item.scale is not None and item.scale.usable():
+                pictures = [painter.over_picture(pictures[0], item), *pictures[1:]]
         save(image, out / f"{stem}.png")
         if pictures:
             save(side_by_side(image, pictures), out / f"{stem}.side-by-side.png")

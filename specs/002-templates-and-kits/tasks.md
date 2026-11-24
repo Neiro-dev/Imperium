@@ -322,7 +322,7 @@ so far is one (spec, Assumptions). On the maintainer's computer, outside every r
 
 For T044, since a tribal reference that is a preset island is read for its skeleton only (spec FR-036; research R-18).
 
-- [ ] T062 Write, in `tests/fixtures/us1/` and `tests/test_templates_and_kits.py`, a template whose `terrain` holds no
+- [x] T062 Write, in `tests/fixtures/us1/` and `tests/test_templates_and_kits.py`, a template whose `terrain` holds no
   cell and one whose `terrain` holds some cells but not all, and report "no terrain" only for the second; then change
   the check in `src/mantle_check/checks.py` to that rule, keeping the report for every laid-out city; the picture of
   the first shows its features without terrain (data-model.md `TemplateDef.terrainShape`, What the check reports; spec
@@ -333,7 +333,7 @@ For T044, since a tribal reference that is a preset island is read for its skele
 For T040 to T042, in the steps of spec FR-048 to FR-052 (research R-17). They come before those three tasks, and the
 tests come first and fail before the code, as in each story.
 
-- [ ] T059 Write a test reading, with a small reference picture the test makes itself and never a reference picture, and
+- [x] T059 Write a test reading, with a small reference picture the test makes itself and never a reference picture, and
   readings each holding one problem, in `tests/fixtures/us2/`; then write `tests/test_picture_reading.py`: a known
   `scale` puts a known cell at a known pixel of the reference picture in the side-by-side picture; a `pixelsPerCell`
   or `referenceCell` that is not a positive number, a `scale` with no `measured` thing, a `measured` thing without a
@@ -341,11 +341,11 @@ tests come first and fail before the code, as in each story.
   the design's eight and a `use` without its `basis` are each reported, with the file, part and what is wrong; a
   reading without a `scale` is drawn as before and reported as before; and the same inputs give identical pictures
   and reports (spec FR-019, FR-022, FR-028, FR-048, FR-049, FR-051; SC-013; contracts/laid-out-city.md, A reading)
-- [ ] T060 Implement reading `scale`, with its `measured` things, `from` of a part or feature, and `use` and `basis` of
+- [x] T060 Implement reading `scale`, with its `measured` things, `from` of a part or feature, and `use` and `basis` of
   a part in `src/mantle_check/forms.py`, and report each malformed one in `src/mantle_check/checks.py` as the problem
   "wrong scale, region or use", as T059 sets (data-model.md `LaidOutCity`, Common forms, What the check reports; spec
   FR-019, FR-048, FR-049; research R-17)
-- [ ] T061 In `src/mantle_check/pictures.py`, lay the cells of a reading that holds a `scale` over its reference
+- [x] T061 In `src/mantle_check/pictures.py`, lay the cells of a reading that holds a `scale` over its reference
   picture in the side-by-side picture, at the pixels the `scale` gives, adding no picture or file name; in
   `src/mantle_check/report.py`, say for such a reading that mismatches are not marked and that no picture is reported
   as a match (contracts/check-command.md, Output); and pass T059 (research R-11, R-17; spec FR-020, FR-025, FR-029,

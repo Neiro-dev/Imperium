@@ -243,7 +243,8 @@ class Checker:
                 self.outside(entry.rects, bounds, entry.ref.where + " " + entry.ref.name, past)
         for feature in template.features:
             self.outside(feature.rects, bounds, f"feature {feature.name}", past)
-        if template.min_map_size is not None:
+        # A template whose terrain holds no cell leaves the land to generation and has none to report (FR-004, FR-016).
+        if template.min_map_size is not None and any(entry.rects for entry in template.terrain):
             self.no_terrain(template.terrain, (min(bounds[0], MAX_MAP), min(bounds[1], MAX_MAP)), "terrainShape terrain")
         features = {}
         for feature in template.features:
