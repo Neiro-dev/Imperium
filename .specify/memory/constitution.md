@@ -4,31 +4,33 @@
 
 ### I. One Source per Topic
 
-Every answer MUST come from the source the Source Register gives for its topic. Nothing outside
-the Source Register is a source.
+Every answer MUST come from the source the Source Register gives for its topic. When no topic
+fits, the answer MUST come from the sources the Source Register lists in the question's layer, in
+the order of their rows; the maintainer comes last, under Principle IV. Nothing outside the
+Source Register is a source.
 
 ### II. Other Sources Only Cross-Check
 
-Sources other than the topic's own source MUST be used only to cross-check.
+Sources other than those Principle I gives MUST be used only to cross-check.
 
 ### III. Sources in Order
 
-Where a topic lists several sources in order, the next one MUST be used only when the previous
-one gives no form.
+Where a topic, or a layer under Principle I, lists several sources in order, the next one MUST be
+used only when the previous one gives no form.
 
 ### IV. Asking the Maintainer
 
 The agent MUST NOT ask the maintainer about anything other than game content. For game content,
-the maintainer is asked only when no source in its chain has the answer, and judges only its broad
-direction.
+the maintainer is asked only when no other source Principle I gives has the answer, and judges
+only its broad direction.
 
 ### V. When a Source Gives No Form
 
-When the topic's source names a default, the agent MUST use it. When the source offers options
+When a source Principle I gives names a default, the agent MUST use it. When it offers options
 without a default, the agent MUST use the option the source uses in its own repository or
-examples. When the source gives neither, the agent MUST NOT act on the question, except for game
-content, where Principle IV applies. Rules, files, and practices that no source supports MUST be
-removed.
+examples. When the sources Principle I gives offer neither, or it gives none, the agent MUST NOT
+act on the question, except for game content, where Principle IV applies. Rules, files, and
+practices that no source supports MUST be removed.
 
 ### VI. Every Conclusion Names Its Source
 
@@ -61,4 +63,4 @@ Versioning follows semantic versioning:
 
 Compliance is reviewed at each plan's Constitution Check and at pull request review.
 
-**Version**: 2.1.0 | **Ratified**: 2026-11-23 | **Last Amended**: 2026-11-24
+**Version**: 2.2.0 | **Ratified**: 2026-11-23 | **Last Amended**: 2026-11-24
