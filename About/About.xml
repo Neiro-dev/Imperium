@@ -1,0 +1,25 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ModMetaData>
+  <name>Imperium</name>
+  <packageId>Neiro.RimWorld.Imperium</packageId>
+  <author>Neiro-dev</author>
+  <supportedVersions>
+    <li>1.7</li>
+  </supportedVersions>
+  <modDependencies>
+    <li>
+      <packageId>Ludeon.RimWorld.Royalty</packageId>
+      <displayName>Royalty</displayName>
+      <steamWorkshopUrl>steam://url/StoreAppPage/1149640</steamWorkshopUrl>
+      <downloadUrl>https://rimworldgame.com/</downloadUrl>
+    </li>
+  </modDependencies>
+  <forceLoadAfter>
+    <li>Ludeon.RimWorld</li>
+    <li>Ludeon.RimWorld.Royalty</li>
+    <li>Ludeon.RimWorld.Ideology</li>
+    <li>Ludeon.RimWorld.Biotech</li>
+    <li>Ludeon.RimWorld.Anomaly</li>
+    <li>Ludeon.RimWorld.Odyssey</li>
+  </forceLoadAfter>
+</ModMetaData>

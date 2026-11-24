@@ -67,6 +67,14 @@ project files.
 - **Effect on the spec's edge case**: with `forceLoadAfter` the game may refuse the move
   (`Menus_Main.xml` line 95, `ModReorderConflict_MustLoadAfter`); with `loadAfter` it warns and offers auto-sort
   (lines 139 and 143). Either shows that Imperium must load after the expansion; the spec's edge case names both.
+- **Among ordinary mods** (spec FR-011): no load-order field names a package that is not Ludeon's, so `loadBefore`
+  and `forceLoadBefore` stay out, `loadAfter` holds only the fallback above, and nothing is added for the Harmony
+  mod, which loads before Core by its own `loadBefore` (Harmony `About/About.xml`). Each load-order field names
+  single packages (`Data/*/About/About.xml`; `ModUpdating.txt` lines 300-314), so none can place Imperium ahead of
+  every ordinary mod, and neither `Data/` nor `ModUpdating.txt` gives a form for telling players a place. The next
+  source does: the Harmony mod's `README.md` tells players where to enable it ("Enable it above Core and mods that
+  depend on Harmony"). `README.md` therefore says: "Enable Imperium directly below the official expansions and
+  above the mods that come after them." The quickstart checks that the game accepts that place with no warning.
 
 ## R-7: Requirement on Royalty
 
@@ -95,20 +103,36 @@ project files.
 - **Rationale**: R1 adds no content (spec FR-007), and the official expansions' folders hold no assemblies
   (`Data/*/`). Harmony is the third source and is used only where `Data/` and `ModUpdating.txt` give no form
   (Principle III); R1 needs nothing from it.
+- **Harmony as a requirement**: none in R1. A requirement is a mod that must be active for Imperium to function
+  (`ModUpdating.txt` lines 266-267), and the Harmony mod is enabled above the mods that depend on it (Harmony
+  `README.md`); R1 has no code that could depend on it. The first entry whose code uses Harmony adds `brrainz.harmony`
+  to `modDependencies`, in the form of `ModUpdating.txt` lines 266-275, and no load-order entry, since the Harmony mod
+  loads before Core (Harmony `About/About.xml`, `loadBefore` `Ludeon.RimWorld`).
 
 ## R-10: Testing
 
 - **Decision**: in the game on the maintainer's computer (`D:\Steam\steamapps\common\RimWorld`, with `Mods\Imperium`
-  as a clone of the repository). New games start with `-quicktest` (`Readme.txt` lines 58-60). The log is
-  `output_log.txt` in the install's `_Data` folder (`Readme.txt` line 21). What `Readme.txt` gives no form for
+  as a clone of the repository). New games start with `-quicktest` (`Readme.txt` lines 58-60). Every launch adds
+  `-savedatafolder=SaveData`, the example of `Readme.txt` lines 27-38, so the checks' mod lists and saves stay in
+  `SaveData` in the install's folder and the maintainer's own are not touched. What `Readme.txt` gives no form for
   (turning expansions on and off, reading the mod list's warnings, reordering mods, saving and loading) uses
   RimBridgeServer with GABS: `rimworld/set_mod_enabled`, `rimworld/reorder_mod`,
   `rimworld/get_mod_configuration_status`, `rimworld/list_mods`, `rimworld/load_game_ready` and
   `rimbridge/list_logs` (RimBridgeServer `README.md`, sections Installation and Tool Surface). RimBridgeServer 2.4.0
   and later support 1.7 (same `README.md`, section RimWorld 1.7 build and frozen 1.6 payload).
+- **The log**: `Readme.txt` line 21 places `output_log.txt` in the install's `_Data` folder, but 1.7.5014 writes no
+  such file. It keeps `Player.log` in the `Logs` folder of the default save data folder, which `-savedatafolder` does
+  not move (RimBridgeServer `skills/rimworld-17/references/launch-arguments.md`; inventory of the install,
+  2026-11-24). `rimbridge/list_logs` holds only the lines written after the bridge starts, and the game reports a mod
+  that loaded no content before that (checks in the game, 2026-11-24), so each launch's `Player.log` is copied when
+  the game stops and the copies are compared.
 - **Rationale**: the constitution's testing order (Source Register, Testing in the game).
 - **Note**: RimBridgeServer is a mod and writes its own log lines, so each baseline launch also runs it, and a
-  launch passes when it adds no error or warning line to that baseline (spec, Clarifications).
+  launch passes when it adds no error or warning line to that baseline (spec, Clarifications), other than the game's
+  report that Imperium loaded no content, which R1 expects because it adds none (spec FR-005, FR-007).
 - **Where checks run**: the game does not run in the cloud container, so the in-game checks wait for the
   maintainer's computer. The cloud can check that the XML is well-formed and that the identifier meets the game's
   format.
+- **Testing outside the game** (constitution 2.1.0, Source Register: `Data/`): the checks in the cloud come first and
+  hold `About/About.xml` against the official `About.xml` files in `Data/` and the field rules in data-model.md. They
+  do not replace the checks in the game, which are the final check.
