@@ -32,6 +32,23 @@ mean implementation work is complete.
     - FR-050 cites `cities-forms.md` line 199, which says "Template No. 1 is done one area at a time". FR-050 makes it
       the rule for every reading; that extension is the maintainer's direction in the last entry of Clarifications,
       which FR-050's brackets do not name. Add [Direction] there.
+  - **Re-review (4bd5a94)**: Not satisfied, in FR-050 only; FR-048, FR-049, FR-051 and FR-052 now are.
+    - FR-051 (spec 884-892) names [Direction] alone for the drawing and the comparison and cites `cities.md` 335-337
+      for marking, never deciding, as asked; those lines say later layouts are compared with the Anno sample and that
+      where it differs the differences are listed for the user to judge by the picture (Imperium-old b218bdc
+      `现行/城/罗马城-做法与顺序.md`: 以后排城与它并排对照……与罗马规矩不一致处列清单，用户看图定). FR-052 (894-900) is reached from `cities.md` 319-321 (what
+      cannot be taken from the one oblique view, roofs and tree shadows, and what can, slanted blocks; same card,
+      带不走斜俯视的屋顶与树影，斜摆的街区能带走). FR-048's figure rule is reached from `cities.md` 183-191 (the person scale, person-sized
+      cells) with Principle V.
+    - FR-050 (873-883) names [Direction] but places it by position: "the last entry of Clarifications". Since 4bd5a94
+      the last entry (spec 249) is the preset-island one, which says nothing of areas; the entry that makes the
+      area-by-area rule the rule for every reading from a picture is the one before it (spec 239, "How is a reference
+      city that exists only as a picture read onto the game's cells?"). A citation that points at another entry does
+      not reach its source (Principle VI). Name the entry by its question, not by its place.
+    - Nit, not a ground: Sources, [Design archive] (spec 269-273) lists `cities.md` The size of a cell and the Anno
+      sample and `cities-forms.md` 123, 199 and 475; FR-050's `cities.md` 63-66, FR-049's `cities-forms.md` 480-482,
+      FR-052's `cities.md` 319-321 and the `cities-siting.md` passage of FR-004 and FR-036 are cited in their
+      requirements but not listed there.
 - [x] CHK002 Do the design archive's cited places (`cities.md`, The size of a cell; `cities-forms.md` lines 123, 199
   and 475) say what FR-048 to FR-050 attribute to them, at the commit the Sources entry names? [Traceability, Spec
   §Sources, Design archive]
@@ -70,7 +87,7 @@ mean implementation work is complete.
     give the record, `scale` with `pixelsPerCell` and `measured`. FR-048 first uses "the scale" without saying that it
     is the pixels one cell is, and SC-013 is the first to say that the reading holds it; whether the scale also holds
     the second result is CHK006.
-- [ ] CHK006 Is FR-048's second result, how many RimWorld cells the reference game's own cell is, given a form, or a
+- [x] CHK006 Is FR-048's second result, how many RimWorld cells the reference game's own cell is, given a form, or a
   place where it is recorded, or is it only a step with no outcome; and is it said whether the design's provisional
   3.7 trace cells for one Anno cell (`cities.md` line 176) applies and whether a trace cell is a RimWorld cell? [Gap,
   Spec §FR-048]
@@ -89,7 +106,18 @@ mean implementation work is complete.
     T059 to T061: where the result is recorded (a field of `scale`) and that each picture measures it by FR-048's
     steps with 3.7 only as the design's provisional value for the river-bend original; or, for what no source gives,
     a marker as FR-049 and FR-051 have.
-- [ ] CHK007 Is it defined how many things the sizing is measured from, and which of a door, a figure or a tree
+  - **Re-review (4bd5a94)**: Satisfied. FR-048 (844-856) now says the scale is two results, the pixels one cell is and
+    the RimWorld cells one cell of the reference game is, and `referenceCell` records the second: data-model 97,
+    `contracts/laid-out-city.md` (the `scale` example), R-17 Form, SC-013, and T059 and T060 (a `referenceCell` that
+    is not a positive number is reported).
+    - The design's 3.7 is stated as provisional, measured from the river-bend original and to be checked (`cities.md`
+      176). Whether a trace cell is a RimWorld cell is marked NEEDS CLARIFICATION, no value is taken, and each
+      picture's second result is measured by FR-048's steps: the course this item asked for. A search of
+      `docs/design-archive/` on main (124f5c8) finds "trace cell" only at `cities.md` 176 and `cities-forms.md` 201,
+      so the archive indeed never says it. T059 to T061 do not depend on the marker (tasks.md, "Not tasks").
+    - This is the third marker. Spec Kit v1.4.3 `templates/commands/specify.md` line 132 allows at most three, so a
+      further open point cannot be marked and has to be written from a source or left out.
+- [x] CHK007 Is it defined how many things the sizing is measured from, and which of a door, a figure or a tree
   prevails where they give different sizes? [Gap, Spec §FR-048]
   - **Review**: Not satisfied. FR-048 and the design say only that "a door, a figure or a tree is one RimWorld cell"
     (`cities.md` 151-152; b218bdc `14_…` L290), with no count and no order. The design's own measurement of one
@@ -99,13 +127,20 @@ mean implementation work is complete.
     gives no count and no default order. Its own example sizes by the figure (`cities.md` 183-189), which Principle V's
     rule for options without a default points to, but the spec has to say so itself, say how many, or mark that no
     source gives them.
+  - **Re-review (4bd5a94)**: Satisfied. FR-048 says the figure's size governs where a door, a figure and a tree give
+    different sizes, from the design's own sizing by person (`cities.md` 183-191) under Principle V, and that no
+    source says how many things to measure, so the scale names each one it used, at least one; data-model 97 requires
+    at least one `measured` thing and T059 reports a `scale` with none.
+    - Nit: the rule is for the case where all three differ. Two that differ in a picture with no figure are left to
+      the maintainer's eye on each area's picture (FR-050); the design's one example sizes by person, so no source
+      gives more.
 - [x] CHK008 Is it defined what the reading does where a picture shows no door, figure or tree to size a cell by?
   [Edge Case, Gap, Spec §FR-048, FR-052]
   - **Review**: Satisfied. FR-052 covers it: where FR-048 to FR-051 give no form for a picture, it MUST NOT be read by a
     method of its own, and which picture to use instead is the maintainer's broad direction. A picture with none of
     the three gives FR-048 nothing to size by, so FR-052 applies, and Principle V asks no more. Wording only: FR-052's
     one example is "not shown from above"; add "or showing none of a door, a figure or a tree".
-- [ ] CHK009 Is "an area" in FR-050 clear with its size of 2800 to 9200 cells floating with the weighting, a trial
+- [x] CHK009 Is "an area" in FR-050 clear with its size of 2800 to 9200 cells floating with the weighting, a trial
   value, and is it said who divides a picture into areas? [Clarity, Spec §FR-050]
   - **Review**: Not satisfied.
     - "The attraction field's weight" is not defined in the spec. The design's field is Imperium's own city's: its
@@ -120,7 +155,13 @@ mean implementation work is complete.
       governs.
     - The trial value is stated (`cities-forms.md` 487-489, "to be set after the user has seen the images"), but not
       by whom or when; he judges only broad direction (Principle IV).
-- [ ] CHK010 Are the two pictures FR-050 asks the maintainer to see, after tracing and after laying out, each said to
+  - **Re-review (4bd5a94)**: Satisfied. FR-050 now says an area is a district of the reference city's own zoning,
+    which the design says the list of districts follows (`cities.md` 63-66; b218bdc `现行/城/罗马城-做法与顺序.md`: 片区名单照纪元城分区定,
+    and 学纪元的单位是片区), and that the 2800 to 9200 cells and the attraction-field weighting are not taken for a reading,
+    since no source gives a weighting for a picture (Principle V).
+    - The first two bullets of the review are met; the third (the trial value) no longer arises. A search of spec,
+      plan, research, data-model, tasks and the contracts for "2800" finds only that sentence.
+- [x] CHK010 Are the two pictures FR-050 asks the maintainer to see, after tracing and after laying out, each said to
   show what, and is the place where his acceptance of each is recorded named? [Completeness, Spec §FR-050, FR-029]
   - **Review**: Not satisfied, in the first half. The place is named, but not in FR-050: FR-029 (a reviewer-owned
     checklist, one item for each picture, naming the reading, the commit and the picture's place), data-model's "A
@@ -129,10 +170,16 @@ mean implementation work is complete.
     traced and once after it is laid out"; FR-051 draws the tracing over the reference picture and FR-025 sets a
     laid-out city beside it, but nothing says that the first is the one picture and the second the other. Say it in
     FR-050, with `acceptance.md`.
+  - **Re-review (4bd5a94)**: Satisfied. FR-050 now says what each picture shows: the first is the tracing laid over
+    the reference picture (FR-051), the second the area laid out, drawn beside the reference picture (FR-025); and
+    that the maintainer's acceptance of each is an item of `checklists/acceptance.md` (FR-029). R-17 step 4 and T040
+    say the same.
+    - Both pictures come from the one side-by-side picture of `contracts/check-command.md`, Output, made from the
+      reading as it stands at each stage; FR-029's item names the commit, which tells the two stages apart.
 
 ## Requirement Clarity
 
-- [ ] CHK011 Are "blocks", "house groups", "yards" and "roads" each defined so that a piece can be told from the
+- [x] CHK011 Are "blocks", "house groups", "yards" and "roads" each defined so that a piece can be told from the
   others, or is it said where the design defines them? [Clarity, Spec §FR-049]
   - **Review**: Not satisfied. The four words are used and not defined, in FR-049 and in the design. The archive uses
     them (`cities-forms.md` 475, 491-494, where adjoining roof blocks are one household and one building;
@@ -142,18 +189,29 @@ mean implementation work is complete.
     `basis` (data-model 97-99) are the only per-piece fields, and a part's `kind` is a skeleton kind (data-model
     54-56), so a traced piece cannot say that it is a yard or a block. Principle V: say that the design gives no
     definition and the form records no piece kind, or give a source for them.
+  - **Re-review (4bd5a94)**: Satisfied. FR-049 now says the design defines none of the four as a piece and the form
+    records no kind of piece, so whether a traced piece is no finer than they are is judged by the maintainer's eye
+    (FR-029, FR-050) (Principle V): the course the review gave.
+    - Checked: in `docs/design-archive/` "house group" occurs in the sentence FR-049 cites (`cities-forms.md` 475), in
+      `cities-forms.md` 507 (house groups cut into fragments for variety) and, of a medieval house group, in
+      `cultures.md` 431 (main), and none defines it; "block" and "yard" are used of generated plots and cards, never
+      defined as a piece of a traced reference. Data-model 99 and R-17 Form say the same of the form.
 - [x] CHK012 Is "name the region of the picture it was read from" given a form that can be checked, such as what counts
   as naming a region? [Measurability, Spec §FR-049]
   - **Review**: Satisfied. Naming a region has a checkable form: one or more pixel rects `(minX,minY,maxX,maxY)`,
     inclusive, counted from the picture's upper-left pixel as Pillow counts (data-model 13-14 and 98; R-17), and T059
     reports a `from` whose rect lies outside the picture. That a traced piece names none at all is not reported
     anywhere: see CHK025.
-- [ ] CHK013 Is "at the same scale" defined: the scale of which picture, and in which unit? [Clarity, Spec §FR-051]
+- [x] CHK013 Is "at the same scale" defined: the scale of which picture, and in which unit? [Clarity, Spec §FR-051]
   - **Review**: Not satisfied. FR-051 does not say whose scale: the reading's, in pixels per cell (R-17 and T061 say
     so: "where the `scale` places them"), or the sameness of the side-by-side picture, which sets the drawing and each
     reference picture "at the same height" (R-11). One clause in FR-051 settles it: the reading's cells are drawn over
     the picture at the reading's `scale`, in pixels per cell (FR-048).
-- [ ] CHK014 Is the phrase "as far as blocks, house groups, yards and roads" clear about whether tracing to a finer
+  - **Re-review (4bd5a94)**: Satisfied. FR-051 (884) now draws the tracing "at the scale FR-048 gives, the pixels one
+    cell is", and `contracts/check-command.md`, Output, says the cells are laid over the reference picture at the
+    scale.
+    - Nit: R-17 step 3 still says "at the same scale"; FR-051 governs it.
+- [x] CHK014 Is the phrase "as far as blocks, house groups, yards and roads" clear about whether tracing to a finer
   piece is forbidden, or only not asked for? [Ambiguity, Spec §FR-049]
   - **Review**: Not satisfied. FR-049 says a reference "MUST be traced ... only as far as" them, which forbids; the
     design's words are a stop, "no longer identify building by building" so as not to spend the effort (b218bdc
@@ -162,6 +220,12 @@ mean implementation work is complete.
     blocks as one building, so a lone building is a group of one. Whether a piece finer than a house group may be
     traced where the picture shows it, and whether the check refuses it (it has no piece kind to refuse by, CHK011), is
     open. Say "need not" (the design) or "must not".
+  - **Re-review (4bd5a94)**: Satisfied. FR-049 now says a reference "need not be traced finer" and "the tracing stops
+    there", the design's own words (`cities-forms.md` 475; b218bdc `现行/城/罗马城-做法与顺序.md`: 只描到街区、房组、院、路，不逐栋认), so a finer
+    piece is not asked for and not forbidden.
+    - Nit: the clause after it, "whether a traced piece is no finer than they are is judged by the maintainer's eye",
+      answers CHK011 but reads as a limit that is enforced. None is: no check or task refuses a finer piece, and his
+      judgment of each area's picture (FR-050) decides.
 
 ## Requirement Consistency
 
@@ -178,6 +242,22 @@ mean implementation work is complete.
     "Read only where FR-052 allows" (FR-037; also R-17, research lines 347 and 409-410) is misleading too: FR-052 allows
     nothing, it forbids, so the three are not read at all until a reference shown from above replaces each. Make every
     place say one thing: the three were chosen first, are oblique, and are not read; the replacements are open.
+  - **Re-review (4bd5a94)**: Not satisfied. The fix reached Purpose (129-133), Clarifications (190-198), Sources
+    (350-355), Assumptions (1016-1019), FR-037 (751-753), R-15 (346-348) and R-17 (384, 414-416), which now all say
+    the three were chosen first, are oblique and are not read, and that the replacements are open. Three places still
+    say the opposite:
+    - research.md R-13, Decision (273-278): "the tribal culture's three readings are written from the references the
+      maintainer chose ... the gentle tribe's open village from Tir Uisce, the fierce tribe's walled stronghold from a
+      Celtic oppidum and the savage tribe's fortress from a small Celtic hillfort"; this is the plan's decision for
+      the first templates, and it has the three read.
+    - quickstart.md, Prerequisites (15): "for the tribal culture, the reference pictures of the three cities the
+      maintainer chose, in `template-references/部落城-凯尔特/`".
+    - FR-037 itself (747-752): "There MUST be one for each attitude (FR-039), from the references the maintainer
+      chose: Tir Uisce ..., Steam screenshots 3639186959, 3625652909 and 3621994739", and only the next sentence says
+      they are not read, so one requirement holds both. Say "first chose" there, as Purpose and Clarifications do, or
+      start the MUST at the references shown from above.
+    - Also read ambiguously without "first": plan.md Summary (24) and SC-010 (966-967), "the references the maintainer
+      chose"; they now mean the replacements, which can be said in one word each.
 - [x] CHK016 Does FR-049's "a template candidate MUST come only from tracing an accepted reference" agree with FR-047's
   order, in which a reading is used only where the design and the recorded direction are silent? [Conflict, Spec
   §FR-047, FR-049]
@@ -197,7 +277,16 @@ mean implementation work is complete.
     `contracts/laid-out-city.md` ("a reference city drawn on the game's cells"), the reading itself. One sentence in
     Key Entities settles it: reading (the whole and the file), tracing (the picture into cells, FR-049), laying out
     (the next stage in FR-050) and drawing (the check's and the top-down pictures).
-- [ ] CHK018 Are FR-050 (one area at a time, shown twice) and FR-044 (each step's picture seen before the next)
+  - **Re-review (4bd5a94)**: Not satisfied, narrowly. Key Entities, Reading (spec 926-931) now holds the sentence that
+    settles the words: a reading is the whole and its file; a reading from a picture is made by tracing the picture
+    into cells (FR-049) and then laying out what is traced (FR-050); a preset's objects are read from its data
+    (FR-041); drawing is what the check draws (FR-023, FR-025) and the top-down pictures of a preset (FR-043). FR-048
+    to FR-051 follow it.
+    - But the same entry opens "a reference city drawn on the game's cells and set beside its pictures", which uses
+      "drawn" for the reading itself, the sense its own last sentence takes from it, and `contracts/laid-out-city.md`
+      line 40 says "A reading is a reference city drawn on the game's cells in the same form". The first review named
+      both. Use "read onto the game's cells" in the two places, as FR-036 and FR-048 do.
+- [x] CHK018 Are FR-050 (one area at a time, shown twice) and FR-044 (each step's picture seen before the next)
   consistent about when the maintainer sees a picture, and about which of them applies to which kind of reference?
   [Consistency, Spec §FR-044, FR-050]
   - **Review**: Not satisfied. FR-044 sits under "Reading a reference from its game's data" and covers the top-down
@@ -208,6 +297,12 @@ mean implementation work is complete.
     FR-031 and FR-036 say already exists and which was not made by areas. Say that FR-044 governs the drawing of a
     preset, FR-050 the making of a reading, of every reference or of a picture only, and that the river-bend render is
     outside it.
+  - **Re-review (4bd5a94)**: Satisfied. FR-050 now opens "A reading from a picture" (873) and ends "FR-044 governs the
+    drawing of a preset from its data and FR-050 the making of a reading from a picture; the river-bend town's render,
+    which already exists (FR-031), is outside FR-050" (880-883): the course the review gave, with a picture only.
+    - The making of a preset's reading, once drawn, is then governed by FR-036 and FR-029 (acceptance beside its
+      pictures) without the area-by-area rule, which is consistent: FR-048 to FR-052 are for a reference that exists
+      only as a picture.
 - [x] CHK019 Does FR-051 agree with FR-029 and FR-025: the check marks candidates only, never reports a match, and the
   picture it draws is the side-by-side picture, with no other picture or file name added? [Consistency, Spec §FR-025,
   FR-029, FR-051; research.md R-17]
@@ -245,7 +340,7 @@ mean implementation work is complete.
     FR-050 and FR-052 are process and prohibition and need no task. Each marker sits in one sentence that can be left
     out. Wording only: FR-051's first sentence holds both the drawing and "compare ... and mark", the blocked half, so
     the spec does not say which half waits; tasks.md does.
-- [ ] CHK023 Is it said what the check does with a building or group that holds no use, and with a picture on which no
+- [x] CHK023 Is it said what the check does with a building or group that holds no use, and with a picture on which no
   mismatch can be marked, until the two markers are settled? [Edge Case, Gap, Spec §FR-049, FR-051]
   - **Review**: Not satisfied. Neither case is stated.
     - A building or group with no `use`: data-model (line 99) says it "holds both" and reports a `use` outside the list
@@ -256,7 +351,14 @@ mean implementation work is complete.
     - A picture with no mismatch marked: while marker 2 stands the check marks none, and a picture without marks can
       be read as no mismatch, though FR-051 forbids the check to say that a reading matches. Say that the report
       states that mismatches are not marked yet, as FR-020 has it state that the check in the game is still to come.
-- [ ] CHK024 Is it defined which pictures the steps give a form for, namely those shown from above, and how a picture
+  - **Re-review (4bd5a94)**: Satisfied. A building or group with no use: FR-049 carries the design's rule over, "an
+    item with no use is not laid out" (`cities-forms.md` 480-482), and data-model 156 says the check does not report
+    one, since the form records no kind of piece, so it is judged by eye (SC-013): what the check does and what the
+    eye does are each stated.
+    - A picture with no mismatch marked: FR-051 (890-892) says that until marker 2 is settled the check marks no piece
+      and the report says that mismatches are not marked and that a picture without marks is not a match (FR-020,
+      FR-029); `contracts/check-command.md` Output, T061 and SC-014 say the same.
+- [x] CHK024 Is it defined which pictures the steps give a form for, namely those shown from above, and how a picture
   is judged to be one, so that FR-052 can be applied? [Clarity, Spec §FR-052, FR-037]
   - **Review**: Not satisfied. "Shown from above" is neither defined nor tested: FR-037 says by assertion that the three
     pictures "are oblique", and FR-052's example leans on it. A test is needed because the design archive itself reads an
@@ -266,10 +368,19 @@ mean implementation work is complete.
     give is a method of straightening an oblique picture (R-17, Alternatives considered). State FR-052's reason as that,
     with the maintainer's direction that candidates be shown from above (Clarifications), and a test for which picture
     is one; without it FR-052 cannot be applied to a new candidate except by his eye.
+  - **Re-review (4bd5a94)**: Satisfied. FR-052 (894-900) gives the reason, that the design archive gives no method of
+    straightening an oblique picture and takes from its one oblique view only what that view can give (`cities.md`
+    319-321), with the maintainer's direction that references be shown from above; and says that whether a candidate
+    is shown from above is judged by the maintainer when he chooses among the candidates (FR-037) [Direction], and
+    that no source gives a test.
+    - No test is written, which is what Principle V gives where no source does; the item asked that the gap be said. A
+      search of the archive finds no method of straightening a picture ("straighten" occurs only of walls and rivers:
+      `cities-outside.md` 260-267, `cities-siting.md` 141, 151, 256), and the Imperium-old card of the oblique view
+      (b218bdc `现行/城/罗马城-做法与顺序.md`) gives none.
 
 ## Acceptance Criteria Quality
 
-- [ ] CHK025 Is each of FR-048 to FR-052 either objectively checkable without the maintainer's eye, as the recorded
+- [x] CHK025 Is each of FR-048 to FR-052 either objectively checkable without the maintainer's eye, as the recorded
   scale and the named regions are, or stated to be judged by his eye, as FR-029 sets? [Measurability, Spec §FR-029,
   FR-048 to FR-052]
   - **Review**: Not satisfied.
@@ -282,7 +393,14 @@ mean implementation work is complete.
       showing and SC-013's "saw each area's picture" are checkable from the items of `acceptance.md` (FR-029).
     Say for each which the check measures and which is judged by eye or by the record, as FR-029 does for relations
     and his judgment.
-- [ ] CHK026 Is SC-013 enough to measure FR-048 to FR-050, as SC-011 measures FR-041 to FR-044, and is any of FR-051
+  - **Re-review (4bd5a94)**: Satisfied. SC-013 (976-983) now says it is by inspection of the reading and the items of
+    `acceptance.md`; which of FR-048 to FR-052 the check reports (a malformed `scale`, `referenceCell`, `from`, `use`
+    or `basis`: data-model 141, "wrong scale, region or use") and which the maintainer judges by eye (the order of
+    FR-048's steps, the stopping of the tracing at FR-049's pieces). Data-model 156 says the check does not report a
+    missing `scale`, `from` or `use`, since it cannot tell a reading from a picture except by its `scale`.
+    - FR-050 is checked from the items of `acceptance.md` (FR-029), and FR-052 by inspection (no reading is written of
+      a picture the steps give no form for).
+- [x] CHK026 Is SC-013 enough to measure FR-048 to FR-050, as SC-011 measures FR-041 to FR-044, and is any of FR-051
   and FR-052 left without a measure? [Coverage, Spec §SC-013, FR-051, FR-052]
   - **Review**: Not satisfied. SC-013 measures the scale's things, the regions, the uses with their bases and his
     viewing (FR-048 in part, FR-049, FR-050). Left without a measure: FR-048's second result (CHK006) and "never one to
@@ -291,7 +409,13 @@ mean implementation work is complete.
     picture and the check's pictures staying outside it (FR-028). Add a criterion for FR-051's drawing and one for
     FR-052 (no reading is written of a picture the steps give no form for), and say that the 100% is by inspection
     (CHK025).
-- [ ] CHK027 Is the design's list of nine uses in FR-049 closed, and is it said that the check reports a use outside it
+  - **Re-review (4bd5a94)**: Satisfied. SC-013 now measures FR-048 (both results, each thing with its region), FR-049
+    (the regions, the uses with their bases), FR-050 (the viewing) and FR-052 (no reading of a picture the steps give
+    no form for).
+    - SC-014 (984-) measures FR-051: the reading's cells over the reference picture at its scale, no piece reported as
+      a match, the report saying mismatches are not marked, and, with FR-028, no reference picture or picture drawn
+      from it in the repository. T059's known cell at a known pixel and T061 make it testable.
+- [x] CHK027 Is the design's list of nine uses in FR-049 closed, and is it said that the check reports a use outside it
   and a use without its basis, while whether each building or group holds one is judged by the maintainer's eye?
   [Clarity, Spec §FR-049, SC-013; data-model.md]
   - **Review**: Not satisfied.
@@ -306,6 +430,14 @@ mean implementation work is complete.
     - How a use is decided: the design says "by the wiki and without measuring each building" (`cities-forms.md`
       476-478; `09_…` L934 and L937, which says to settle a use against the wiki), and FR-049 omits it. The wiki is not
       in the Source Register; settle its place under Principles I and II.
+  - **Re-review (4bd5a94)**: Satisfied. The list is eight classes, `AnnexOrAttic` being one, everywhere: FR-049
+    ("eight classes, annex or attic being one"), data-model 99, `contracts/laid-out-city.md`, R-17, T059 and the plan
+    summary; a search finds no "nine" left in spec, plan, research, data-model, tasks, quickstart or the contracts.
+    - SC-013 now says the check reports a malformed `use` or `basis` and that the maintainer judges by eye that each
+      building or group holds one (data-model 99 and 141 agree). FR-049 says the design settles a use against the
+      wiki, which the Source Register does not list, so the wiki is not a source of a use and each use names its
+      source in its basis (Principles I and VI).
+    - Outside the item: this checklist's own Notes (line 321) still say "nine uses", as of 12c1469.
 
 ## Notes
 
@@ -342,3 +474,37 @@ mean implementation work is complete.
   "What the check reports"; CHK027 eight classes (`AnnexOrAttic`) and the wiki's place. CHK004's and CHK019's notes:
   T061 and `contracts/check-command.md`, Output. New since the review: a preset island is read for its skeleton only
   (Clarifications; FR-004, FR-016, FR-036, FR-037; R-18; T062).
+- Re-reviewed at 4bd5a94 by an independent reviewer (2026-11-24): 24 of 27 satisfied (the 11 of the first review, and
+  CHK006, CHK007, CHK009, CHK010, CHK011, CHK013, CHK014, CHK018 and CHK023 to CHK027), 3 not (CHK001, CHK015,
+  CHK017), each with its reason and source under it as "Re-review". Each open item was checked against spec.md,
+  plan.md, research.md (R-13, R-15, R-17, R-18), data-model.md, tasks.md (T059 to T062), the contracts, the design
+  archive (`cities.md`, `cities-forms.md` and `cities-siting.md` are the same on main at 124f5c8) and, for the
+  citations the fix added, Imperium-old at b218bdc (`现行/城/罗马城-做法与顺序.md`, `现行/城/地形与选址.md`). The spec, plan and tasks
+  were not changed. Each of the three is a one-line fix, and re-ticking after it is the reviewer's.
+- The preset-island direction ([Direction, 2026-11-24]: only the skeleton is taken, the land is generated first from
+  the world tile and the city follows it, the parts tied to a coast are optional slots) is reflected consistently in
+  FR-004 (581-585), FR-016 (637-640), FR-036 (729-742), FR-037 (the extent is the settlement's and not the island's
+  ground), Key Entities (Terrain shape), data-model `terrainShape` (33) and "no terrain" (146), R-18 and T062: each
+  says a template from a preset island holds no terrain, rock or roof, that its features hold only what its skeleton
+  relations name, and that the check reports "no terrain" only where `terrain` holds a cell and in every laid-out
+  city. It agrees with `cities-siting.md`, Terrain before the city (b218bdc `现行/城/地形与选址.md`: 先地形后建筑;
+  都先生成自然地形，再生成城，最后查出的问题段由自然地形配合城; the world tile in the same card's 自然地形先定城址地貌), and `optional` is the existing slot
+  field (FR-002; data-model Part). Outside the 27 items, three places do not follow it yet, and a fourth point is
+  open:
+  - spec Edge Cases (532-533) still say "or either leaves a cell with no terrain: the check reports each such cell",
+    without FR-016's exemption, so a template with no terrain at all reads as one whose every cell is reported.
+  - tasks.md T062's lead-in (323) says "since the tribal references are preset islands read for their skeleton only"
+    as a fact; FR-037, Assumptions (1016-1019), R-15 and R-18 ("no reading of a preset island has been made") leave it
+    open whether the replacement references are preset islands or other pictures shown from above. Say "a template
+    taken from a preset island".
+  - FR-016's new clause runs on ("each cell of either that has no terrain, a terrain shape that holds no terrain at
+    all, as FR-004 allows, having none to report"), and FR-004 and the Clarification cite `cities-siting.md`, Terrain
+    before the city, for "from the world tile", which is in The landform of a city site (b218bdc `地形与选址.md`,
+    自然地形先定城址地貌，按世界地块挑一型) that R-18 cites.
+  - Open, and not an item of this checklist: a relation that names a feature (a river, a coast) needs the feature's
+    `rects` in the template (data-model Feature; FR-017), while the direction takes no ground, sea or shore. FR-004
+    and data-model keep "the features its skeleton relations name"; R-18 leaves "which coast-related parts a template
+    holds" open (R2); no requirement says what cells such a feature holds, which the design only says of the big
+    shape, never down to the cell (`cities-siting.md`, The landform of a city site). It needs a source or the
+    maintainer's recorded direction before the first preset-island template is written (T044); Spec Kit allows no
+    further marker (three stand).
