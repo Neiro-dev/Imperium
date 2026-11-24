@@ -18,105 +18,275 @@ mean implementation work is complete.
 - [ ] CHK001 Does every functional requirement and success criterion name a source from the constitution's Source
   Register, and is each conclusion reached from that source rather than only labelled with it? [Traceability,
   Spec §Sources, FR-001 to FR-040]
+  - **Review**: Not satisfied:
+    - FR-011 and Sources, [Design], cite `docs/setting.md` lines 56 and 59-60. At Imperium-old 20a052b line 56 is blank
+      and line 59 is "The Empire MUST NOT call itself Rome"; what FR-011 says is in line 57 (lean toward New Rome) and
+      lines 60-61 (reliable sources, not popular images). Change both to lines 57 and 60-61.
+    - SC-002, SC-003, SC-004, SC-005 and SC-007 name neither a source nor the requirement they measure. Name the FRs:
+      SC-002 (FR-019, FR-027), SC-004 (FR-020), SC-005 (FR-025), SC-007 (FR-031). SC-003 measures no FR, so name its
+      source, the Input's "so that the developer can see it without starting the game" [Spec Kit], or remove it
+      (Principle V).
+    - FR-022 cites [Testing], whose row names `Data/` and the order of testing, not that a run repeats. Spec Kit's own
+      report gives it: "Rerunning without changes should produce consistent IDs and counts"
+      (`templates/commands/analyze.md` line 263, v1.4.3). Cite that (Principle V).
+    - FR-032 cites `Factions_Misc.xml` lines 185 and 443 for the outlanders and tribes having settlements, but those
+      lines hold only their defNames; their `settlementGenerationWeight` is at lines 9 and 224, and the Empire's at
+      `Faction_Empire.xml` line 11, as lines 511 and 517 are cited for the pirates. Add them.
+    - FR-019, FR-024 and FR-027: see CHK002.
 - [ ] CHK002 Is `[Spec Kit]` a source the Source Register allows for the report's and pictures' content (FR-019,
   FR-023 to FR-027), given that its register row covers the development workflow? [Traceability, Spec §FR-019,
   FR-023]
-- [ ] CHK003 Is the source of the attitude-to-layout mapping written the same way in Purpose, Clarifications,
+  - **Review**: Partly. The check is a development tool, so its form falls under the Spec Kit row, as research R-9
+    already has it, and the Input, the feature description `/speckit-specify` takes, asks for a picture of a template's
+    site and for a laid-out city beside its reference, which covers FR-023 and FR-025. It does not cover:
+    - FR-019, each problem with its part and cell: not in the Input. Spec Kit's own report does it, each finding with
+      its Location(s) (`templates/commands/analyze.md` line 181, v1.4.3). Cite that (Principle V).
+    - FR-027, a problem marked at its cell: not in the Input; it is FR-019's location shown on FR-023's grid. Cite
+      FR-019 and FR-023 in place of [Spec Kit] alone.
+    - FR-024, a picture of each spec card: the Input names pictures of templates and laid-out cities only, and no other
+      source asks for one. Either the request names it, or the picture goes and the spec cards' check stays (FR-007,
+      FR-013, FR-014) (Principle V), with User Story 4 scenario 2, T033 and T034 following.
+- [x] CHK003 Is the source of the attitude-to-layout mapping written the same way in Purpose, Clarifications,
   Sources, FR-039, research R-14 and the roadmap's R13 row: the tribes' descriptions in `Data/`, confirmed by the
   maintainer? [Consistency, Spec §FR-039]
+  - **Review**: Purpose, Clarifications, Sources ([Data] and [Direction]), FR-039 and research R-14 all give
+    `Factions_Misc.xml` lines 445, 480 and 504, confirmed by the maintainer. The roadmap's R13 row gives the same lines
+    for "one for each attitude" and states no mapping, so it has nothing to differ on.
 - [ ] CHK004 Is the Empire's terrain mapping, the river-bend town in temperate biomes and a Romanized Egyptian city in
   desert and arid ones, traced to a stated source for each half, the biome lists to `Data/` and the choice of city to
   the maintainer's direction? [Traceability, Spec §FR-040]
-- [ ] CHK005 Is the statement that medieval mods set the attitude fields marked as an inference everywhere it appears,
+  - **Review**: Not satisfied:
+    - The choice of the river-bend town for the temperate biomes carries only [Data] in Purpose (Terrain) and FR-040,
+      and `Biomes_Temperate.xml` lines 5 and 210 hold biome names, which cannot choose a city. Add [Direction] there, as
+      the Egyptian half and the Clarifications have it.
+    - The design already groups imperial cities by region: Imperium-old glossary line 208, "temperate", the look of
+      imperial cities in temperate and cold regions, and line 162, "arid", the look of imperial cities in hot, dry
+      regions. Imperium's own design comes before the direction (Principle III), and the spec cites neither. FR-040 must
+      cite them and settle whether the river-bend town's biomes follow the design's temperate group, which adds the cold
+      biomes (`Core/Defs/BiomeDefs/Biomes_Cold.xml` lines 5, 198, 371, 586 and 710), or only its look does; the Edge
+      Cases example of the Empire in a boreal forest must agree. The design names looks, not a template's biomes, so if
+      it is not taken to settle this, it is game content for the maintainer (Principle IV). Either way FR-040's "the
+      temperate biomes" uses the glossary's word in a narrower sense and should say so.
+- [x] CHK005 Is the statement that medieval mods set the attitude fields marked as an inference everywhere it appears,
   and nowhere stated as a fact? [Consistency, Spec §Edge Cases, Purpose]
-- [ ] CHK006 Does the tribal culture's word list have a stated source, as FR-011 gives the Empire's? [Gap, Spec
+  - **Review**: Purpose, Edge Cases and research R-14 call it an inference; no other place states it.
+- [x] CHK006 Does the tribal culture's word list have a stated source, as FR-011 gives the Empire's? [Gap, Spec
   §FR-011; research R-8]
-- [ ] CHK007 Is every `Data/` line cited for the new rules (attitude fields, tribe descriptions, the Empire's
+  - **Review**: FR-011 and research R-8 give `NamerSettlementTribal`, the `settlementNameMaker` of `TribeBase`
+    (`Factions_Misc.xml` line 230).
+- [x] CHK007 Is every `Data/` line cited for the new rules (attitude fields, tribe descriptions, the Empire's
   exceptions, biome definitions) the line that holds what the requirement says? [Traceability, Spec §Sources]
+  - **Review**: Checked against `Data/` 1.7.5014: lines 202 (`OutlanderRoughBase`), 462 (`TribeRoughBase`), 485
+    (`TribeSavageBase`) and 529 (`Pirate`) hold the fields; 445, 480 and 504 are the descriptions of `TribeCivil`,
+    `TribeRough` and `TribeSavage`; `Faction_Empire.xml` lines 57-67 are its `permanentEnemyToEveryoneExcept`;
+    `Biomes_Temperate.xml` lines 5 and 210 and `Biomes_WarmArid.xml` lines 5, 172 and 322 are the five biomes' defNames.
 
 ## Skeleton Selection Rules
 
-- [ ] CHK008 Is "leave the other dimension open" (FR-038) well defined for attitude, given that a template that leaves
+- [x] CHK008 Is "leave the other dimension open" (FR-038) well defined for attitude, given that a template that leaves
   `naturalEnemy` and `permanentEnemy` out serves only factions holding neither field, which is not "open"?
   [Ambiguity, Conflict, Spec §FR-038, FR-039]
-- [ ] CHK009 Is it specified whether a template may set both attitude fields, and what that serves, since no base-game
+  - **Review**: FR-038 no longer calls leaving out the attitude fields "open": the Empire's templates leave both out,
+    which serves the Empire since it holds neither, and "open" is kept for biomes, where none named means any (FR-040;
+    data-model). Within a culture, which R2 assigns first (Assumptions), this is well defined.
+- [x] CHK009 Is it specified whether a template may set both attitude fields, and what that serves, since no base-game
   faction holds both? [Gap, Spec §FR-039]
-- [ ] CHK010 Is "the temperate biomes" defined as an exact list, and is it stated whether expansion biomes such as
+  - **Review**: FR-039's one rule, serving the factions whose definitions hold the same two values, decides it: a
+    template may set both and then serves factions that hold both. In `Data/` none does: `naturalEnemy` stands only at
+    `Core/Defs/FactionDefs/Factions_Misc.xml` lines 202 and 462, and neither faction sets `permanentEnemy`.
+- [x] CHK010 Is "the temperate biomes" defined as an exact list, and is it stated whether expansion biomes such as
   Odyssey's grasslands belong to it? [Clarity, Spec §FR-040]
-- [ ] CHK011 Is the meaning of an empty biome list ("none for any biome") stated consistently between FR-040,
+  - **Review**: FR-040 names the list, temperate forest and temperate swamp, the two biomes of `Biomes_Temperate.xml`
+    (lines 5 and 210). A closed list leaves out Odyssey's `Grasslands` (`Odyssey/Defs/BiomeDefs/Grasslands.xml` line 5),
+    which `Data/` does not call temperate. The word itself differs from the design's: see CHK004.
+- [x] CHK011 Is the meaning of an empty biome list ("none for any biome") stated consistently between FR-040,
   data-model's `allowedBiomes` row and the contract example? [Consistency, Spec §FR-040]
+  - **Review**: FR-040 ("none for any biome"), data-model ("empty means any"), the contract ("leaves `allowedBiomes`
+    out") and research R-14 ("empty for any") say the same: a template that names no biome suits any.
 - [ ] CHK012 Is it stated how picking by attitude and by terrain combine for a culture that may one day use both?
   [Gap, Spec §FR-038]
-- [ ] CHK013 Is the boundary between this feature and R2 clear: that this feature gives templates the fields picking
+  - **Review**: Not satisfied. FR-038 says templates are "picked by attitude (FR-039) and terrain (FR-040)", and its
+    next sentence describes cultures that use one each, which leaves a culture that uses both open. Add to FR-038 that a
+    template serves a faction's settlement only where both hold: its two attitude fields match the faction's (FR-039),
+    and its biomes, where it names any, include the settlement's (FR-040), from the direction's "picked by attitude and
+    terrain" (Sources, [Direction]) and each field's own rule. Which of several such templates generation picks stays
+    R2's (Assumptions).
+- [x] CHK013 Is the boundary between this feature and R2 clear: that this feature gives templates the fields picking
   reads, and that which culture a faction takes and the picking itself are R2's? [Clarity, Spec §Assumptions,
   FR-009]
-- [ ] CHK014 Are requirements defined for a culture whose factions hold an attitude no template of that culture serves,
+  - **Review**: Assumptions ("which culture a faction's settlements take, and the picking itself, are generation's"),
+    FR-009 and research R-14 agree, and the roadmap's R13 row defers picking to R2.
+- [x] CHK014 Are requirements defined for a culture whose factions hold an attitude no template of that culture serves,
   or for an Empire settlement in a biome no Empire template suits, beyond deferring them to R2 and R15? [Coverage,
   Spec §Edge Cases]
-- [ ] CHK015 Is the rule that a template names no faction (FR-039) consistent with every other field of the template
+  - **Review**: Deferring is right: what generation does then is R2's, and the Empire's other templates are R15's open
+    item (ROADMAP, R2 and R15). Within `Data/`, the three tribal templates serve every tribe, each descended from
+    `TribeBase`: `TribeCivil`, and Ideology's `NudistTribe`, which sets `permanentEnemy` false
+    (`Ideology/Defs/FactionDefs/Factions_Misc.xml` line 98), hold neither field; `TribeRough` holds `naturalEnemy`;
+    `TribeSavage` and Ideology's `TribeCannibal` (same file, line 74) hold `permanentEnemy`.
+- [x] CHK015 Is the rule that a template names no faction (FR-039) consistent with every other field of the template
   and kit forms, none of which names a faction? [Consistency, Spec §FR-039; data-model]
+  - **Review**: No field of data-model's TemplateDef or KitDef refers to a `FactionDef`: the kit's defName names the
+    culture (KitDef row) and `nameMaker` a `RulePackDef`.
 
 ## Forms and Holding Mods
 
-- [ ] CHK016 Is FR-009's "data that Imperium holds" consistent with Mantle's own mod holding the tribal kit and
+- [x] CHK016 Is FR-009's "data that Imperium holds" consistent with Mantle's own mod holding the tribal kit and
   templates (FR-032, Assumptions)? [Conflict, Spec §FR-009]
-- [ ] CHK017 Do FR-021 and FR-028, which keep the game's files and reference pictures out of "Imperium" and
+  - **Review**: FR-009 now reads "data that Mantle's mod or Imperium holds", as FR-032 and Assumptions place them.
+- [x] CHK017 Do FR-021 and FR-028, which keep the game's files and reference pictures out of "Imperium" and
   "Imperium's repository", also cover Mantle's repository, where the tribal readings are kept (FR-036)? [Gap, Spec
   §FR-021, FR-028, FR-036]
-- [ ] CHK018 Is it specified what a template holds when its reading is the river-bend town's render, a picture rather
+  - **Review**: With R14's one repository (`specs/003-mantle-mod/contracts/repository-layout.md`), FR-021 ("the
+    repository or its results") and FR-028 ("the repository or either mod's released files") cover where the readings
+    are kept (FR-036). Key Entities still says "outside Imperium's files": see CHK034.
+- [x] CHK018 Is it specified what a template holds when its reading is the river-bend town's render, a picture rather
   than a file in the laid-out city's form (FR-031, FR-036)? [Clarity, Spec §FR-036]
+  - **Review**: FR-031 and FR-036: the river-bend town's template is taken from its two pictures, with no reading file,
+    fits 350×350, and names both pictures in `reference` (data-model `TemplateDef.reference`; T038); every other field
+    is that of any template.
 - [ ] CHK019 Is the scale of a tribal settlement quantified, as a map size or an extent within the 350×350 city map?
   [Clarity, Spec §FR-003, FR-037]
-- [ ] CHK020 Are the parts a tribal skeleton holds named, for the open village without a wall line and for the
+  - **Review**: Not satisfied. FR-037's "at the scale of a tribal settlement" has no measure, and FR-003 binds every
+    template to "a city's map, which is 350×350 cells" from a direction that names Imperium's city maps (Sources,
+    [Direction]). State in FR-037, or FR-003, that a tribal template's extent is its reading's, laid on the game's cells
+    with things of the sizes their definitions give (FR-036; `Data/`), and is given as its `minMapSize`, at most
+    350×350. Whether a tribal settlement's map is itself a 350×350 city map is game content that neither `Data/`, which
+    gives a site's map its own size (`WorldObjects.xml` line 205), nor the design settles, so it is the maintainer's
+    broad direction (Principle IV).
+- [x] CHK020 Are the parts a tribal skeleton holds named, for the open village without a wall line and for the
   stronghold and fortress with one, as FR-005 names them for a city? [Completeness, Spec §FR-005]
-- [ ] CHK021 Is it stated that one tribal kit serves all three tribal templates, and how its wall settings serve the
+  - **Review**: Naming the parts before the readings would have no source (Principle V): FR-036 takes each skeleton from
+    its reading, research R-5 gives the kinds, and FR-039 sets the walled stronghold.
+- [x] CHK021 Is it stated that one tribal kit serves all three tribal templates, and how its wall settings serve the
   open village, which has no walls? [Clarity, Spec §FR-006, FR-038]
+  - **Review**: FR-038 ("one kit that all of the culture's factions share") and research R-13 ("the one tribal kit from
+    all three"). The open village leaves out the wall line as the slot FR-002 names, "walls a city may have or lack", so
+    the kit's wall settings apply only where a wall line is laid.
 
 ## The Check Outside the Game
 
 - [ ] CHK022 Are the kinds of problem the check reports listed completely, and does any kind cover the new fields,
   such as an attitude field that is not true or false? [Completeness, Spec §FR-013 to FR-018]
+  - **Review**: Not satisfied. data-model's list, What the check reports, has no kind for:
+    - a value not in its field's form: an attitude field that is not `true` or `false`; a rect, position, size or
+      `minMapSize` not in its form; a rotation or `flowsFrom` that is not `North`, `East`, `South` or `West`
+      (data-model, Common forms; FR-014);
+    - a name of the wrong definition type in `allowedBiomes` (not a `BiomeDef`), `allowedRivers` (not a `RiverDef`) or
+      `nameMaker` (not a `RulePackDef`), since "wrong kind" lists only terrain, natural things, walls, part kinds and
+      relation kinds (FR-014);
+    - a `minMapSize` or a city's `size` that is not square, which data-model's rules ask for (FR-003;
+      `Dialogs_Various.xml` line 153);
+    - a required field left out, such as `minMapSize` (data-model, TemplateDef).
 - [ ] CHK023 Is FR-015 stated so that a reviewer can tell, for each holding mod, which expansions it requires and
   which definitions must be marked, including expansion biomes named in `allowedBiomes`? [Clarity, Spec §FR-015]
-- [ ] CHK024 Can FR-022's "the same report and the same pictures" be measured, for example as byte-identical files?
+  - **Review**: Not satisfied for laid-out cities and readings. For definitions FR-015 is clear: Mantle's mod requires
+    no expansion and Imperium requires Royalty, every other expansion's definition needs `MayRequire`, a biome in
+    `allowedBiomes` included, and contracts/check-command.md says a definition file belongs to the mod whose folder
+    holds it. But FR-015 also judges "the mod holding the ... laid-out city", and laid-out cities and readings lie in
+    neither mod folder (FR-036; research R-7; contracts/laid-out-city.md), so nothing says whose requirements they are
+    checked against. FR-015 and the contract must say it, for example a laid-out city by the mod that holds its
+    `template`, and a reading by the mod whose template names its `reference` or by a kit the reading names; the tribal
+    readings, written before their templates (T040 to T042 before T044), need an answer too.
+- [x] CHK024 Can FR-022's "the same report and the same pictures" be measured, for example as byte-identical files?
   [Measurability, Spec §FR-022]
+  - **Review**: contracts/check-command.md (Output) and quickstart.md step 2 make it byte for byte, and T049 tests it.
 - [ ] CHK025 Is SC-003's limit, "before the game reaches its main menu on the same computer", stated with the
   conditions it is measured under, such as which mods are loaded? [Measurability, Spec §SC-003]
-- [ ] CHK026 Are failure paths for the check's inputs covered: `Data/` missing or of another version, a reference
+  - **Review**: Not satisfied. SC-003 names no conditions, and the check also runs in cloud threads (Assumptions), where
+    the game does not run, so it can be measured only on the maintainer's computer. State them: the check run there on
+    one template or laid-out city against `Data/` with every expansion, and `--mod` for Mantle and Imperium; the game
+    launched there without `-quicktest`, which starts straight into a map (`Readme.txt` lines 58-60), with Royalty,
+    Mantle and Imperium active as in quickstart.md, In the game, step 2; timed from launch to the main menu. T050
+    follows. SC-003 also needs a source: see CHK001.
+- [x] CHK026 Are failure paths for the check's inputs covered: `Data/` missing or of another version, a reference
   picture missing or unreadable, an output folder inside a repository? [Coverage, Spec §Edge Cases, FR-028]
+  - **Review**: Edge Cases cover `Data/` missing or of another version, and a reference picture missing or unreadable.
+    FR-028 is the rule an output folder inside the repository would break, and research R-11 and
+    contracts/check-command.md (Exit status) refuse it with status 2, as quickstart.md steps 3 and 4 test.
 
 ## Calibration and Acceptance
 
-- [ ] CHK027 Is it clear which parts of FR-030 and FR-031 a template can meet within R13, and which wait for R2's
+- [x] CHK027 Is it clear which parts of FR-030 and FR-031 a template can meet within R13, and which wait for R2's
   generation to lay out a city from it? [Dependency, Consistency, Spec §FR-030, FR-031, Assumptions]
+  - **Review**: FR-031's first bullet is "in this feature"; its later bullets and FR-030 wait for generation (R2, R15).
+    SC-008 splits the two, and data-model's States of a template places Written and Checked in this feature and Laid out
+    on R2.
 - [ ] CHK028 Is it specified where and how the maintainer's acceptance of a side-by-side picture is recorded, so that
   "counts as passing" can be traced? [Gap, Spec §FR-029, FR-030]
+  - **Review**: Not satisfied. FR-029 and FR-030 say the maintainer accepts or rejects, but nothing says where that is
+    recorded, and the picture itself stays out of the pull request (FR-028; research R-13). The record is part of the
+    development workflow, so Spec Kit gives its form: a reviewer's judgment is a checked item in a reviewer-owned
+    checklist (`templates/commands/checklist.md` lines 32-36, v1.4.3). Add to FR-029 or FR-030, and to data-model's
+    state 4, one such item per template, naming the template, the commit and where the picture is in the project's
+    files, checked when the maintainer accepts it.
 - [ ] CHK029 Is "set beside its pictures until it matches them" (FR-036) given a judge and a stopping point, as FR-029
   gives one for a laid-out city? [Measurability, Spec §FR-036]
-- [ ] CHK030 Is SC-010, which asks the tribal templates to pass the check, consistent with FR-030, which also asks for
+  - **Review**: Not satisfied. FR-036 gives "until it matches them" no judge and no end. quickstart.md step 6 already
+    expects, for each tribal reading, "a side-by-side picture the maintainer accepts", but the spec does not say so.
+    FR-036 must name the maintainer as the judge, by eye beside the reference pictures, and his acceptance, recorded as
+    CHK028 sets, as the end; the only source for judging a match by eye is the maintainer's direction (Clarifications,
+    first answer; FR-029). If that direction is not meant to cover readings, who judges a reading is game content for
+    him (Principle IV).
+- [x] CHK030 Is SC-010, which asks the tribal templates to pass the check, consistent with FR-030, which also asks for
   the maintainer's acceptance? [Consistency, Spec §SC-010, FR-030]
-- [ ] CHK031 Is the order among the three tribal templates stated, or stated to be free, as SC-008 states the river-bend
+  - **Review**: SC-010 asks only that the tribal templates pass the check (data-model state 2, Checked); FR-030 governs
+    when a template counts as passing (state 4, Accepted), which waits for R2's generation, as SC-008 shows for the
+    river-bend town. Once CHK029 is fixed, SC-010 should also name the maintainer's acceptance of the three readings.
+- [x] CHK031 Is the order among the three tribal templates stated, or stated to be free, as SC-008 states the river-bend
   town's place before them? [Gap, Spec §SC-008, FR-037]
+  - **Review**: No source orders them, and tasks.md marks the three readings, T040 to T042, `[P]` (Parallel
+    Opportunities), which states them free; the kit (T043) and the templates (T044) follow all three.
 
 ## Tribal References
 
 - [ ] CHK032 Is the role of the agricultural island as "supplementary material only" defined: what may be taken from
   it, and that it yields no template of its own? [Clarity, Spec §FR-037]
-- [ ] CHK033 Are the reference criteria stated the same way in Purpose step 1, Clarifications, Sources, FR-037 and Key
+  - **Review**: Not satisfied. FR-037 now says the island is the reference of no template, but not what may be taken
+    from it. FR-006 takes a kit's groups, fill and wall settings from its culture's reference city, and the island is
+    none, so as written nothing of it can enter the kit or a template, and "consulted" yields nothing. FR-037 must say
+    which it is: only looked at beside the three, or read so that its reading may feed the tribal kit's groups and fill
+    without being a template's reference. The direction says only "supplementary material only" (Sources, [Direction])
+    and the design is silent, so this is the maintainer's broad direction (Principle IV).
+- [x] CHK033 Are the reference criteria stated the same way in Purpose step 1, Clarifications, Sources, FR-037 and Key
   Entities, now that a reference may be a publicly shared player city from any source? [Consistency, Spec §FR-037,
   Purpose]
+  - **Review**: Purpose step 1 and its tribal paragraph, Clarifications, Sources ([Direction], first and tribal
+    bullets), FR-037 and Key Entities all allow a player-built city shared publicly from any source, or one the game
+    presets for a governor or an AI rival, and give the tribal criteria (Albion, Celtic only, a tribal settlement's
+    scale, seen from above) alike.
 - [ ] CHK034 Is each chosen tribal reference identified in the spec unambiguously enough to find its picture, and are
   the pictures' location and the rule that they stay out of every repository stated together? [Completeness, Spec
   §FR-037, FR-028]
-- [ ] CHK035 Is the edge case for missing reference pictures still accurate now that the tribal pictures are kept in
+  - **Review**: Not satisfied, in two places. The references can be found: Clarifications gives each Steam id, and
+    `template-references/部落城-凯尔特/` (research R-13) holds `温和部落-TirUisce-3639186959.jpg`, `凶猛部落-Oppidum-3625652909.jpg`,
+    `野蛮部落-小山堡-3621994739.jpg` and `补充-农业岛-3639163413.jpg` (checked in the project's files). But:
+    - FR-037 gives the pictures' place without the rule that keeps them out of the repository; add "(FR-028)", and the
+      ids or the folder.
+    - Key Entities, Reference city, says the developer keeps the pictures "outside Imperium's files", which since R14
+      can read as outside `Imperium/` only; change it to outside the repository and both mods' released files (FR-028).
+- [x] CHK035 Is the edge case for missing reference pictures still accurate now that the tribal pictures are kept in
   `template-references/`, and does it say what waits on them? [Consistency, Spec §Edge Cases]
+  - **Review**: The pictures are now in `template-references/部落城-凯尔特/` (checked), and the edge case still holds for a
+    copy of the project without them; it says that the tribal readings, kit and templates wait on them, and that the
+    forms, the check, the Empire's kit and the river-bend town's template do not.
 
 ## Dependencies and Assumptions
 
-- [ ] CHK036 Are the dependencies on R14 (the paths and `packageId` of Mantle's mod) and on R2 (generation) stated
+- [x] CHK036 Are the dependencies on R14 (the paths and `packageId` of Mantle's mod) and on R2 (generation) stated
   with what each blocks: implement, the comparison, or the check in the game? [Dependency, Spec §Assumptions]
+  - **Review**: R14's paths and `packageId` are merged (#27) and stated in Assumptions and research R-1, so they block
+    nothing now; what is left of R14, the clone moved out of `Mods` (R14 T007), blocks the load in the game (tasks.md,
+    Phase Dependencies; quickstart.md, In the game). R2 blocks the comparison of a generated city (FR-030, FR-031) and,
+    with R15, the check in the game (Assumptions).
 - [ ] CHK037 Is the assumption that every faction's definition can hold the two attitude fields stated with its
   `Data/` source? [Assumption, Spec §FR-039]
+  - **Review**: Not satisfied. Purpose and Edge Cases say every faction's definition can hold the two fields, with no
+    source for "every": the lines cited (`Core/Defs/FactionDefs/Factions_Misc.xml` 202, 462, 485 and 529) are all Core's
+    surface factions. `Data/` has the fields on `FactionDef`s of other kinds in Core and the expansions:
+    `Core/Defs/FactionDefs/Factions_Hidden.xml` lines 77 and 122, `Ideology/Defs/FactionDefs/Factions_Misc.xml` lines 74
+    and 98, `Anomaly/Defs/FactionDefs/Factions_Misc.xml` line 8 and `Odyssey/Defs/FactionDefs/Factions_Misc.xml` line
+    198. Cite them where the sentence stands, add them to Sources, [Data], and state the assumption in Assumptions.
 
 ## Notes
 
@@ -133,3 +303,16 @@ mean implementation work is complete.
 - R14 then kept Mantle in this repository, in `Mantle/` beside `Imperium/`, with the check and the readings at the root
   (`specs/003-mantle-mod/contracts/repository-layout.md`). The commit that aligns R13 with it changes FR-021, FR-028,
   FR-036 and the Assumptions, which bears on CHK017 and CHK036; the reviewer judges them against the new text
+- Reviewed on 2026-11-24 by a reviewer who wrote none of R13's documents, against the constitution's sources:
+  `Data/` of RimWorld 1.7.5014 from the project's files, Imperium-old `main` at 20a052b, Spec Kit v1.4.3 and R14's
+  `specs/003-mantle-mod/`. 24 of the 37 items are satisfied; the 13 left unchecked each say what must change and
+  where. CHK004, CHK019, CHK029 and CHK032 may each need the maintainer's broad direction on game content
+  (Principle IV); the rest can be fixed from the sources named.
+- Two findings outside the items:
+  - FR-026 names the expansion of each definition that is not the base game's, but research R-11 and T025 name it only
+    where it is not the base game or Royalty. Mantle's mod does not require Royalty (FR-015), so a marked Royalty
+    definition in a tribal picture must be named (Edge Cases); R-11 and T025 must follow FR-026.
+  - Research R-5 takes the part kind `Bridge` from Imperium-old glossary line 169, which defines Core's
+    `TerrainDef Bridge`, a wooden floor laid over water, not a part of a city's layout. Cite what the kind comes from:
+    the river gate, "such as a bridge gate" (line 197), or the river-bend town's reading (research R-13, "the main
+    streets with their bridges").
