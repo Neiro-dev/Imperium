@@ -18,8 +18,9 @@ mantle-check --data <Data folder> --out <output folder> --mod <mod folder>... [-
 - `--reference`: a reference picture, by the template's `reference` name and the picture's label, such as
   `RiverBendTown:screenshot=<path>`; repeatable. JPEG, PNG and WebP are read.
 - `<file>`: definition files from a mod's `Defs/`, laid-out city files and readings. Every given mod's `Defs/` is read
-  for names (FR-013), and a definition file belongs to the mod whose folder holds it; the files given are the ones
-  checked and drawn.
+  for names (FR-013), and a definition file belongs to the mod whose folder holds it; a laid-out city belongs to the
+  mod that holds its template, and a reading to the mod that holds the template whose reference names it, or to none,
+  requiring no expansion, while no template names it (FR-015). The files given are the ones checked and drawn.
 
 ## Output
 
@@ -28,8 +29,8 @@ mantle-check --data <Data folder> --out <output folder> --mod <mod folder>... [-
   relation with `holds`, `broken` or `not measured`; for each template and city, the reference pictures it was set
   beside or which were missing; and, last, that testing in the game is the final check and is still to come (FR-019,
   FR-020, FR-029).
-- `<out>/<defName>.png` for each template and spec card, and `<out>/<city file name>.png` for each laid-out city
-  (FR-023 to FR-027).
+- `<out>/<defName>.png` for each template, and `<out>/<city file name>.png` for each laid-out city and reading
+  (FR-023, FR-025 to FR-027).
 - `<out>/<defName or city file name>.side-by-side.png` when reference pictures are given (FR-025).
 - The same inputs give the same files, byte for byte (FR-022).
 

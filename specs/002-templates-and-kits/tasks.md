@@ -102,15 +102,20 @@ checked, and each report lists exactly the problems its file holds (spec, User S
 
 - [ ] T013 [P] [US1] Write two test mods in `tests/fixtures/mods/`: one whose `About/About.xml` requires no
   expansion, as Mantle's does, and one that requires Royalty, as Imperium does (spec FR-015)
-- [ ] T014 [P] [US1] Write test templates and kits in `tests/fixtures/us1/`, each holding one problem of
-  data-model.md, What the check reports: unknown definition; wrong kind (a terrain that is not natural, a `wallDef`
-  that is not a wall, an unknown part or relation kind, a relation missing its field); other expansion (a Biotech
-  definition unmarked, and a Royalty definition unmarked in a kit of each test mod); outside the map; no terrain;
-  unknown name; duplicate name; no kit; a building on a template's cell; and one template and kit with none
-- [ ] T015 [US1] Write `tests/test_templates_and_kits.py`: each fixture of T014 gives exactly its problem with
-  its cell, the Royalty definition is reported only in the kit of the mod that does not require Royalty, the clean
-  pair gives none and exit status 0, and every report ends with the statement of FR-020 (spec, User Story 1,
-  scenarios 1-6; SC-001, SC-004)
+- [ ] T014 [P] [US1] Write test templates, kits and readings in `tests/fixtures/us1/`, each holding one problem of
+  data-model.md, What the check reports: unknown definition; wrong kind (a terrain that is not natural, a `wallDef` that
+  is not a wall, a name that is not a `BiomeDef` in `allowedBiomes`, one that is not a `RiverDef` in `allowedRivers`,
+  one that is not a `RulePackDef` in `nameMaker`, an unknown part or relation kind, a relation missing its field); wrong
+  form (an attitude field that is neither `true` nor `false`, a `minMapSize` not in its form, a rotation that is not one
+  of the four directions); not square (a `minMapSize` whose `x` and `z` differ); missing field (a template without
+  `kit`, a template without `minMapSize`, a reading without `reference`); other expansion (a Biotech definition
+  unmarked, a Royalty definition unmarked in a kit of each test mod, and a Biotech definition unmarked in a reading that
+  no template names); outside the map; no terrain; unknown name; duplicate name; no kit; a building on a template's
+  cell; and one template and kit with none
+- [ ] T015 [US1] Write `tests/test_templates_and_kits.py`: each fixture of T014 gives exactly its problem, with its cell
+  where it has one, the Royalty definition is reported only in the kit of the mod that does not require Royalty, the
+  Biotech definition in the reading that no template names is reported (spec FR-015), the clean pair gives none and exit
+  status 0, and every report ends with the statement of FR-020 (spec, User Story 1, scenarios 1-6; SC-001, SC-004)
 - [ ] T016 [P] [US1] Write `tests/test_command.py`: `Data/` missing, `Version.txt` of another version, a `--mod`
   folder without `About/About.xml`, an output folder inside the repository and a file that is not XML each give exit
   status 2 and report nothing as passing (contracts/check-command.md, Exit status; spec, Edge Cases)
@@ -121,9 +126,12 @@ checked, and each report lists exactly the problems its file holds (spec, User S
   neither in `Data/` nor in the given mods' `Defs/`, and names where their kind cannot go: natural terrain, rock and
   roofs only in data-model.md `TerrainShape.terrain`, `TerrainShape.rocks` and `TerrainShape.roofs`, a wall in
   `KitDef.wallSettings` and in `KitDef.fill`'s `wallDef`, a material `doorDef` takes in `KitDef.fill`'s
-  `doorStuffDef`, and a known `Part.kind` and `Relation.relation` (spec FR-013, FR-014; research R-4)
+  `doorStuffDef`, a `BiomeDef` in `TemplateDef.allowedBiomes`, a `RiverDef` in `TemplateDef.allowedRivers`, a
+  `RulePackDef` in `KitDef.nameMaker`, and a known `Part.kind` and `Relation.relation`; and wrong form, not square and
+  missing field as data-model.md, What the check reports, lists them (spec FR-013, FR-014; research R-4)
 - [ ] T018 [US1] Implement other expansion in `src/mantle_check/checks.py`: a definition of an expansion that
-  the mod holding the file does not require, without that expansion's `MayRequire` (spec FR-015; research R-3)
+  the mod holding the file does not require, without that expansion's `MayRequire`, a laid-out city or reading held
+  as spec FR-015 sets (spec FR-015; research R-3)
 - [ ] T019 [US1] Implement outside the map, no terrain, unknown name and no kit for templates and kits in
   `src/mantle_check/checks.py`, against data-model.md `TemplateDef.kit`, `TemplateDef.minMapSize`,
   `TerrainShape.features`, `Skeleton.parts`, `Skeleton.relations` and `Group.size` (spec FR-016, FR-017)
@@ -166,7 +174,7 @@ breaks a relation and one with neither, each given with a test reference picture
 - [ ] T025 [US2] Implement the grid drawing in `src/mantle_check/pictures.py`: square cells, a thin line between
   cells and a stronger one every 10 numbered on all four edges as `x` and `z` with north at the top, fills from each
   definition's `color` or a colour drawn from its name, a legend by `label` naming each expansion other than the base
-  game and Royalty, and each problem marked at its cell with its number (research R-11; spec FR-023, FR-026, FR-027)
+  game, and each problem marked at its cell with its number (research R-11; spec FR-023, FR-026, FR-027)
 - [ ] T026 [US2] Draw laid-out cities in `src/mantle_check/pictures.py` with each thing in place and each part
   and feature outlined and named, and the side-by-side picture with each whole reference picture, read as JPEG, PNG or
   WebP, at the same height (research R-11; spec FR-025, FR-028)
@@ -206,25 +214,25 @@ and relation in its picture is compared with the template (spec, User Story 3)
 
 ---
 
-## Phase 6: User Story 4 - Check and see a kit's buildings (Priority: P4)
+## Phase 6: User Story 4 - Check a kit's buildings (Priority: P4)
 
-**Goal**: Each spec card of a kit's block library is checked and drawn as its building
+**Goal**: Each spec card of a kit's block library is checked
 
-**Independent Test**: A test kit with a block library of two spec cards, one with a known problem, is checked, and the
-report and the two pictures are compared with the cards (spec, User Story 4)
+**Independent Test**: A test kit with a block library of three spec cards, one naming a definition `Data/` does not
+hold, one with a room or thing past its plot and one with neither, is checked, and the report is compared with the cards
+(spec, User Story 4)
 
 ### Tests for User Story 4
 
-- [ ] T032 [P] [US4] Write a test kit with a block library of two spec cards in `tests/fixtures/us4/`, one
-  naming a definition `Data/` does not hold
-- [ ] T033 [US4] Write `tests/test_spec_cards.py`: the unknown name is reported with its cell, and each card
-  gives `<out>/<defName>.png` with its plot, rooms and contents and a legend (spec, User Story 4, scenarios 1-2)
+- [ ] T032 [P] [US4] Write a test kit with a block library of three spec cards in `tests/fixtures/us4/`: one naming a
+  definition `Data/` does not hold, one with a room or thing past its plot, and one with neither
+- [ ] T033 [US4] Write `tests/test_spec_cards.py`: the unknown name is reported with its cell, the room or thing past
+  its plot is reported with its cell, and the third card gives none (spec, User Story 4, scenarios 1-2)
 
 ### Implementation for User Story 4
 
 - [ ] T034 [US4] Check spec cards in `src/mantle_check/checks.py`, with every cell inside its plot
-  (data-model.md `KitDef.blockLibrary` and SpecCard; spec FR-007), and draw them in
-  `src/mantle_check/pictures.py` on the grid of T025 (spec FR-024); pass T033
+  (data-model.md `KitDef.blockLibrary` and SpecCard; spec FR-007); pass T033
 
 **Checkpoint**: User Stories 1 to 4 work on their own
 
@@ -251,9 +259,10 @@ FR-032, FR-036, FR-037, FR-039, FR-040; research R-13, R-14)
   (spec FR-006, FR-036; research R-8)
 - [ ] T038 Write the river-bend town's template in `Imperium/Defs/TemplateDefs/Templates_Empire.xml`: its terrain shape
   inside 350×350 cells, its skeleton as research R-13 lists it, data-model.md `TemplateDef.allowedBiomes` set to
-  `TemperateForest` and `TemperateSwamp`, `TemplateDef.allowedRivers`, `TemplateDef.naturalEnemy` and
-  `TemplateDef.permanentEnemy` left out, and `TemplateDef.reference` with the labels `screenshot` and `render`
-  (spec FR-031, FR-040)
+  `TemperateForest`, `TemperateSwamp`, `BorealForest`, `Tundra`, `ColdBog`, `IceSheet`, `SeaIce` and `GlacialPlain`, the
+  last marked `MayRequire="Ludeon.RimWorld.Odyssey"` (research R-14), `TemplateDef.allowedRivers`,
+  `TemplateDef.naturalEnemy` and `TemplateDef.permanentEnemy` left out, and `TemplateDef.reference` with the labels
+  `screenshot` and `render` (spec FR-015, FR-031, FR-040)
 - [ ] T039 Check T037 and T038 with `--mod` for `Mantle/` and `Imperium/` and `--reference` for both pictures until no
   problem is reported, and put the side-by-side picture in the project's files for the maintainer, not in the pull
   request (quickstart.md step 5; spec SC-007, SC-008)
@@ -261,19 +270,21 @@ FR-032, FR-036, FR-037, FR-039, FR-040; research R-13, R-14)
 ### The tribal culture, after the river-bend town passes the check
 
 - [ ] T040 [P] Write the gentle tribe's reading in `readings/`, under the mod's own name for an open village,
-  from `template-references/部落城-凯尔特/温和部落-TirUisce-3639186959.jpg`, set beside it until it matches (data-model.md
-  `LaidOutCity.reference`; spec FR-036, FR-037)
+  from `template-references/部落城-凯尔特/温和部落-TirUisce-3639186959.jpg`, set beside it until the maintainer accepts it,
+  and add its item to `specs/002-templates-and-kits/checklists/acceptance.md` (data-model.md `LaidOutCity.reference`,
+  A reading's acceptance; spec FR-029, FR-036, FR-037)
 - [ ] T041 [P] Write the fierce tribe's reading in `readings/`, under the mod's own name for a walled
   stronghold, from `template-references/部落城-凯尔特/凶猛部落-Oppidum-3625652909.jpg`, the same way (spec FR-036, FR-037)
 - [ ] T042 [P] Write the savage tribe's reading in `readings/`, under the mod's own name for a fortress, from
-  `template-references/部落城-凯尔特/野蛮部落-小山堡-3621994739.jpg`, the same way; the agricultural island is consulted
-  only as supplementary material (spec FR-036, FR-037)
-- [ ] T043 Write the tribal kit in `Mantle/Defs/KitDefs/Kits_Tribal.xml`, taken from the three readings:
+  `template-references/部落城-凯尔特/野蛮部落-小山堡-3621994739.jpg`, the same way; the agricultural island is only looked
+  at beside the three, and nothing is taken from it (spec FR-036, FR-037)
+- [ ] T043 Write the tribal kit in `Mantle/Defs/KitDefs/Kits_Tribal.xml`, taken from the three accepted readings:
   data-model.md `KitDef.nameMaker` as the base game's `NamerSettlementTribal`, `KitDef.skeleton`,
   `KitDef.wallSettings`, `KitDef.groups` and `KitDef.fill`, with base-game definitions only, or expansion content
   marked (spec FR-006, FR-011, FR-015)
 - [ ] T044 Write the three tribal templates in `Mantle/Defs/TemplateDefs/Templates_Tribal.xml`, one from each reading,
-  each with data-model.md `TemplateDef.allowedBiomes` left empty and its tribe's attitude in
+  each with its reading's extent as data-model.md `TemplateDef.minMapSize` (spec FR-037), `TemplateDef.allowedBiomes`
+  left empty and its tribe's attitude in
   `TemplateDef.naturalEnemy` and `TemplateDef.permanentEnemy`: neither for the open village, `naturalEnemy` for the
   walled stronghold, `permanentEnemy` for the fortress (spec FR-038, FR-039; research R-14)
 - [ ] T045 Check the three readings with their pictures, then T043 and T044, until no problem is reported, and put the
@@ -316,8 +327,9 @@ checked, and no shared file changes (spec, User Story 5)
 
 - [ ] T049 [P] Write `tests/test_same_files.py`: two runs on the same inputs give byte-identical reports and
   pictures (spec FR-022; quickstart.md step 2)
-- [ ] T050 [P] Time checking and drawing the river-bend town against the game reaching its main menu on the same
-  computer (spec SC-003; quickstart.md step 9)
+- [ ] T050 [P] On the maintainer's computer, time checking and drawing the river-bend town against the game,
+  launched without `-quicktest` with Royalty, Mantle and Imperium, reaching its main menu (spec SC-003; quickstart.md
+  step 9)
 - [ ] T051 Build `Mantle/Assemblies/Mantle.dll` from `Mantle/Source/Mantle/` in the maintainer's clone through
   Remote Control, stopping and saying so if the .NET 10 SDK is missing, and commit it (research R-2)
 - [ ] T052 Copy `Mantle/` and `Imperium/` from the clone into the game's `Mods` (R14 quickstart.md, Prerequisites), and
