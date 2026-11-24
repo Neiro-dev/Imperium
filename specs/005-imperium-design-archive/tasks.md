@@ -29,17 +29,17 @@ each section is written with its conflicts and unverified points in it (contract
 
 - [X] T001 Fill the reading log in `specs/005-imperium-design-archive/research.md` from the 32 notes files: files,
   contents, notes file and status of each chunk (research.md R-3)
-- [ ] T002 Create `docs/design-archive/` with `README.md` holding what the archive is, the pinned commit, how to open a
+- [X] T002 Create `docs/design-archive/` with `README.md` holding what the archive is, the pinned commit, how to open a
   pointer and the three markings (contracts/archive-format.md, README.md; research.md R-6, R-7)
 
 ---
 
 ## Phase 2: Foundational (blocks every section)
 
-- [ ] T003 Gather the statements of all 32 notes by subject into one extract per section, keeping each statement and
+- [X] T003 Gather the statements of all 32 notes by subject into one extract per section, keeping each statement and
   its pointers unchanged; split `cities` into the topics of the sections below by having each statement assigned to one
   topic (research.md R-5; data-model.md, Reading notes)
-- [ ] T004 Gather the conflicts and open points of all 32 notes into the same extracts, by subject (data-model.md,
+- [X] T004 Gather the conflicts and open points of all 32 notes into the same extracts, by subject (data-model.md,
   Reading notes)
 
 **Checkpoint**: one extract per section; every statement of the notes is in exactly one extract.
@@ -55,18 +55,18 @@ unsettled points as they are.
 
 ### City building first (R13 waits for it)
 
-- [ ] T005 [P] [US1] Write `docs/design-archive/cities.md`: what city building is, its scale and references, the
+- [X] T005 [P] [US1] Write `docs/design-archive/cities.md`: what city building is, its scale and references, the
   Roman city's eras and the order in which a city is made
-- [ ] T006 [P] [US1] Write `docs/design-archive/cities-siting.md`: terrain, landforms and where cities stand
-- [ ] T007 [P] [US1] Write `docs/design-archive/cities-walls.md`: walls, towers, gates, water gates and moats, and what
+- [X] T006 [P] [US1] Write `docs/design-archive/cities-siting.md`: terrain, landforms and where cities stand
+- [X] T007 [P] [US1] Write `docs/design-archive/cities-walls.md`: walls, towers, gates, water gates and moats, and what
   they are made of
-- [ ] T008 [P] [US1] Write `docs/design-archive/cities-inside.md`: the core, the palace district, streets, housing,
+- [X] T008 [P] [US1] Write `docs/design-archive/cities-inside.md`: the core, the palace district, streets, housing,
   groups, buildings and their materials
-- [ ] T009 [P] [US1] Write `docs/design-archive/cities-outside.md`: the land outside the walls, and rivers and water in
+- [X] T009 [P] [US1] Write `docs/design-archive/cities-outside.md`: the land outside the walls, and rivers and water in
   the city
-- [ ] T010 [P] [US1] Write `docs/design-archive/cities-forms.md`: templates, kits, skeletons, spec cards and the city
+- [X] T010 [P] [US1] Write `docs/design-archive/cities-forms.md`: templates, kits, skeletons, spec cards and the city
   grammar, as design and not as file formats
-- [ ] T011 [US2] Find the conflicts between the six city sections and record each in both places
+- [X] T011 [US2] Find the conflicts between the six city sections and record each in both places
   (contracts/archive-format.md)
 
 ### The rest of the design
