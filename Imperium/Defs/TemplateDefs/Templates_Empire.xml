@@ -1293,8 +1293,8 @@
       </features>
     </terrainShape>
     <skeleton>
-      <!-- Read with the Empire kit's skeleton: core, firstSquare, mainStreet, mainGate, palaceQuarter and walls are the
-           kit's. -->
+      <!-- Read with the Empire kit's skeleton: core, firstSquare, mainStreet, mainGate, palaceQuarter, walls and
+           towerChain are the kit's. -->
       <parts>
         <!-- Design: line 178 (the district). That the town has three, one on each bank and one on the island:
              [Direction]. -->
@@ -1321,6 +1321,19 @@
         <!-- Design: line 182 (each square a forum). That the town has these two besides its first square: [Direction]. -->
         <li><name>westSquare</name><kind>Plaza</kind></li>
         <li><name>islandSquare</name><kind>Plaza</kind></li>
+        <!-- [Direction]: the public buildings among the render's large pieces (Spec: spec.md lines 339 and 558, the public
+             buildings read from the reference city), each in the render's own cells before it is fitted to 350 by 350:
+             a market (15 by 18 cells) on the core's bank, an island market (27 by 20), a grammar school (48 by 33) on the
+             west bank, a garrison (9 by 17) on the core's bank, and a fire station (22 by 26) on the island. Their kinds
+             and names are the Empire's from Rome as reliable sources describe it (Spec: FR-011): the render's own names
+             stand for them. The render's sanctuary (46 by 36, west bank) is the kit's sanctuary slot, left out here since
+             the kit puts it in the core (the design's line 174) and the render sets it on the west bank; the render's
+             other two large pieces, a clay pit and a charcoal kiln, are production sites and no public building. -->
+        <li><name>market</name><kind>PublicBuilding</kind></li>
+        <li><name>islandMarket</name><kind>PublicBuilding</kind></li>
+        <li><name>grammarSchool</name><kind>PublicBuilding</kind></li>
+        <li><name>garrison</name><kind>PublicBuilding</kind></li>
+        <li><name>fireStation</name><kind>PublicBuilding</kind></li>
       </parts>
       <relations>
         <!-- [Direction]: the districts on either side of the river and on the island. -->
@@ -1357,10 +1370,9 @@
         <li><relation>Adjoins</relation><a>northEastGate</a><b>walls</b></li>
         <li><relation>Adjoins</relation><a>northWestGate</a><b>walls</b></li>
         <li><relation>Adjoins</relation><a>southGate</a><b>walls</b></li>
-        <!-- [Direction]: the bank each gate lies on; the main gate on the core's, at the main street's other end.
-             Which of the street's two end gates is the main gate the design leaves open: the palace lies nearly as
-             far from the west gate as from the south-east one (line 193 fits both), so the south-east gate, on the
-             core's bank, stands. -->
+        <!-- [Direction]: the bank each gate lies on. The main gate is the south-east one, on the core's bank, at the main
+             street's other end: the design (line 193) does not say which gate is the main one, and the render does, by
+             the width of the passage: 5 cells at the south-east gate, 3 at each of the other five. -->
         <li><relation>SameSide</relation><a>westGate</a><b>westDistrict</b><feature>river</feature></li>
         <li><relation>SameSide</relation><a>northWestGate</a><b>westDistrict</b><feature>river</feature></li>
         <li><relation>SameSide</relation><a>northGate</a><b>eastDistrict</b><feature>river</feature></li>
@@ -1389,6 +1401,20 @@
         <li><relation>Adjoins</relation><a>secondaryAxis</a><b>westIslandBridge</b></li>
         <li><relation>Adjoins</relation><a>secondaryAxis</a><b>islandSquare</b></li>
         <li><relation>Adjoins</relation><a>secondaryAxis</a><b>eastIslandBridge</b></li>
+        <!-- [Direction]: the bank each public building stands on (the banks of the render). -->
+        <li><relation>Inside</relation><a>market</a><b>eastDistrict</b></li>
+        <li><relation>Inside</relation><a>garrison</a><b>eastDistrict</b></li>
+        <li><relation>Inside</relation><a>grammarSchool</a><b>westDistrict</b></li>
+        <li><relation>Inside</relation><a>islandMarket</a><b>islandDistrict</b></li>
+        <li><relation>Inside</relation><a>fireStation</a><b>islandDistrict</b></li>
+        <!-- [Direction]: the town's walls carry a tower chain, with the two towers of a gate on either side of each of its
+             six gates (the render's gate groups, in the comment above the kit's groups). -->
+        <li><relation>Adjoins</relation><a>towerChain</a><b>mainGate</b></li>
+        <li><relation>Adjoins</relation><a>towerChain</a><b>westGate</b></li>
+        <li><relation>Adjoins</relation><a>towerChain</a><b>northGate</b></li>
+        <li><relation>Adjoins</relation><a>towerChain</a><b>northEastGate</b></li>
+        <li><relation>Adjoins</relation><a>towerChain</a><b>northWestGate</b></li>
+        <li><relation>Adjoins</relation><a>towerChain</a><b>southGate</b></li>
       </relations>
     </skeleton>
   </Mantle.TemplateDef>

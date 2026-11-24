@@ -27,7 +27,8 @@
              city may have no walls); Spec: line 34 (walls a city may have or lack): a slot. -->
         <li><name>walls</name><kind>WallLine</kind><optional>true</optional></li>
         <!-- Design: lines 211-213 (a line of towers along one face of the walls, joined by straight curtain walls): a
-             slot, since only a walled city has one. Their spacing is set by how exposed the face is: left to generation. -->
+             slot, since only a walled city has one. Their spacing is set by how exposed the face is (line 213); the tower
+             and the curtain wall are groups below, and the spacing the render shows is recorded in the comment above them. -->
         <li><name>towerChain</name><kind>TowerChain</kind><optional>true</optional></li>
         <!-- Design: line 187 (every settlement has a line from a source through a main line to the places where it shows
              and out again; for Roman cities it is water, which is also their power grid). -->
@@ -40,12 +41,13 @@
              since the design does not say every city has one. -->
         <li><name>basilica</name><kind>PublicBuilding</kind><optional>true</optional></li>
         <!-- Design: lines 174 (public buildings gather in the civic core) and 199 (a sanctuary). Which public buildings
-             a city of the Empire has: Spec FR-011 and setting.md line 60 (Rome as reliable sources describe it, leaning
-             toward New Rome), and not the reference city. A published account of a planned Late Antique city of the
-             eastern empire lists a large basilica, churches, baths, cisterns and granaries among "all the amenities
-             expected from a Roman and Christian city" (Epoch Magazine, "How Cities Disappeared in Late Antiquity: The
-             Life and Death of Justiniana Prima"). The account describes one city, so these are slots, not parts every
-             city has. The design's word sanctuary stands for the churches. -->
+             a city of the Empire has, by concept and name: Rome as reliable sources describe it, leaning toward New Rome
+             (Design: setting.md lines 57, 60-61); a published account of a planned Late Antique city of the eastern empire
+             lists a basilica, churches, baths, cisterns and granaries among "all the amenities expected from a Roman and
+             Christian city" (Epoch Magazine, "How Cities Disappeared in Late Antiquity: The Life and Death of Justiniana
+             Prima"). The account describes one city, so these are slots, not parts every city has; the design's word
+             sanctuary stands for the churches. History gives no size or place here: those are read off a reference
+             city's render, in its template (Spec: spec.md lines 339 and 558). -->
         <li><name>sanctuary</name><kind>PublicBuilding</kind><optional>true</optional></li>
         <li><name>baths</name><kind>PublicBuilding</kind><optional>true</optional></li>
         <li><name>granary</name><kind>PublicBuilding</kind><optional>true</optional></li>
@@ -82,19 +84,32 @@
         <li><relation>Inside</relation><a>cistern</a><b>core</b></li>
       </relations>
     </skeleton>
-    <!-- Design: lines 177 (a curtain wall) and 211 (the Theodosian Walls); Spec: FR-014 (a wall of Data/). -->
+    <!-- Design: line 177 (a curtain wall); Spec: FR-014 (a wall of Data/). What the walls are built with, and their thickness, towers
+         and gates: in the comment above the groups. -->
     <wallSettings>
       <wallDef>Wall</wallDef>
     </wallSettings>
-    <!-- [Direction]: the dwellings and annexes, their sizes, walls and doors, read off the river-bend town's render
-         (Spec: FR-036), since the design is silent on the Empire's dwellings. The render shows no material.
-         Walls: limestone blocks, as the Theodosian Walls, the design's reference for city walls (glossary line 211),
-         are built of bricks and limestone blocks (World History Encyclopedia, "Theodosian Walls"); the base game has
-         no brick, so the blocks stand for both. Doors: wood, which Britannica ("door") calls the most common door of
-         antiquity and describes in the Roman panelled form, and which ancient-history-sites.com ("Wood in Roman
-         architecture") names as cypress or cedar for doors; the base game has neither, so WoodLog stands for them.
-         The dwellings take the walls' stuff, since no reliable source found names their wall material for Late Antique
-         towns of the east: [Direction], for the maintainer to judge. -->
+    <!-- [Direction]: what the Empire's blocks, walls and towers are made of and how big they are, read in cells off the
+         river-bend town's render (Spec: FR-036, FR-047), since the design is silent on them. The render lies on the
+         game's cells, one to a cell (its grid: 4 pixels a cell, a light line every cell, a dark one every 10; cells x
+         0-397, y 0-358). History gave no measurement here: only the concept and the names.
+         Dwellings and annexes: a house walled by one cell of wall (the render's legend); the sizes of the render's houses.
+         Curtain wall (curtainWall1x3): three cells thick, an outer face, a wall-walk and an inner face of one cell each,
+         on every straight stretch of the render's wall; the group holds the two faces and leaves the walk open.
+         Tower (tower9x9): nine cells across, an octagon with its corners cut two cells, ringed by wall one cell thick;
+         all 34 towers of the render are this one.
+         Gates and spacing, which no field of the kit holds, so they are recorded here and not written as data: the passage
+         of a gate is 3 cells wide, and 5 for the one gate the render widens; the two towers that flank a gate stand 12
+         cells apart centre to centre for a gate of 3, 14 for the gate of 5; between the other neighbouring towers the
+         centres stand 17 to 74 cells apart, 16 of the 23 between 20 and 40, the middle one 32 (the design's line 213
+         has the distance set by how exposed the face is).
+         Materials: limestone for the walls: the render names limestone slabs for its streets and squares, and Data's own
+         prefabs set a wall to BlocksLimestone (Odyssey/Defs/PrefabDefs/AncientPrefabs.xml line 761,
+         AncientExteriorPrefabs.xml line 1211); the render names no wall material for its houses, so they take the
+         same. Doors: Steel; the render names no door material, and Data's own layouts give every doorStuffDef as Steel
+         (Odyssey/Defs/LayoutDefs/Layouts_Misc.xml lines 21 and 119, Layouts_AncientRuins.xml line 323,
+         Layouts_OrbitalPlatform.xml lines 10 and 306, Layouts_Mechhive.xml line 6), the option a source uses in its own
+         examples (Constitution, Principle V). -->
     <groups>
       <li>
         <name>dwelling5x9</name>
@@ -105,7 +120,7 @@
           <Wall><position>(2,0,0)</position><rotation>North</rotation><stuff>BlocksLimestone</stuff></Wall>
           <Wall><position>(3,0,0)</position><rotation>North</rotation><stuff>BlocksLimestone</stuff></Wall>
           <Wall><position>(4,0,0)</position><rotation>North</rotation><stuff>BlocksLimestone</stuff></Wall>
-          <Door><position>(0,0,1)</position><rotation>East</rotation><stuff>WoodLog</stuff></Door>
+          <Door><position>(0,0,1)</position><rotation>East</rotation><stuff>Steel</stuff></Door>
           <Wall><position>(4,0,1)</position><rotation>North</rotation><stuff>BlocksLimestone</stuff></Wall>
           <Wall><position>(0,0,2)</position><rotation>North</rotation><stuff>BlocksLimestone</stuff></Wall>
           <Wall><position>(4,0,2)</position><rotation>North</rotation><stuff>BlocksLimestone</stuff></Wall>
@@ -140,7 +155,7 @@
           <Wall><position>(5,0,1)</position><rotation>North</rotation><stuff>BlocksLimestone</stuff></Wall>
           <Wall><position>(0,0,2)</position><rotation>North</rotation><stuff>BlocksLimestone</stuff></Wall>
           <Wall><position>(5,0,2)</position><rotation>North</rotation><stuff>BlocksLimestone</stuff></Wall>
-          <Door><position>(0,0,3)</position><rotation>East</rotation><stuff>WoodLog</stuff></Door>
+          <Door><position>(0,0,3)</position><rotation>East</rotation><stuff>Steel</stuff></Door>
           <Wall><position>(5,0,3)</position><rotation>North</rotation><stuff>BlocksLimestone</stuff></Wall>
           <Wall><position>(0,0,4)</position><rotation>North</rotation><stuff>BlocksLimestone</stuff></Wall>
           <Wall><position>(5,0,4)</position><rotation>North</rotation><stuff>BlocksLimestone</stuff></Wall>
@@ -173,7 +188,7 @@
           <Wall><position>(0,0,5)</position><rotation>North</rotation><stuff>BlocksLimestone</stuff></Wall>
           <Wall><position>(5,0,5)</position><rotation>North</rotation><stuff>BlocksLimestone</stuff></Wall>
           <Wall><position>(0,0,6)</position><rotation>North</rotation><stuff>BlocksLimestone</stuff></Wall>
-          <Door><position>(1,0,6)</position><rotation>North</rotation><stuff>WoodLog</stuff></Door>
+          <Door><position>(1,0,6)</position><rotation>North</rotation><stuff>Steel</stuff></Door>
           <Wall><position>(2,0,6)</position><rotation>North</rotation><stuff>BlocksLimestone</stuff></Wall>
           <Wall><position>(3,0,6)</position><rotation>North</rotation><stuff>BlocksLimestone</stuff></Wall>
           <Wall><position>(4,0,6)</position><rotation>North</rotation><stuff>BlocksLimestone</stuff></Wall>
@@ -186,7 +201,7 @@
         <things>
           <Wall><position>(0,0,0)</position><rotation>North</rotation><stuff>BlocksLimestone</stuff></Wall>
           <Wall><position>(1,0,0)</position><rotation>North</rotation><stuff>BlocksLimestone</stuff></Wall>
-          <Door><position>(2,0,0)</position><rotation>North</rotation><stuff>WoodLog</stuff></Door>
+          <Door><position>(2,0,0)</position><rotation>North</rotation><stuff>Steel</stuff></Door>
           <Wall><position>(3,0,0)</position><rotation>North</rotation><stuff>BlocksLimestone</stuff></Wall>
           <Wall><position>(4,0,0)</position><rotation>North</rotation><stuff>BlocksLimestone</stuff></Wall>
           <Wall><position>(5,0,0)</position><rotation>North</rotation><stuff>BlocksLimestone</stuff></Wall>
@@ -241,7 +256,7 @@
           <Wall><position>(6,0,3)</position><rotation>North</rotation><stuff>BlocksLimestone</stuff></Wall>
           <Wall><position>(0,0,4)</position><rotation>North</rotation><stuff>BlocksLimestone</stuff></Wall>
           <Wall><position>(6,0,4)</position><rotation>North</rotation><stuff>BlocksLimestone</stuff></Wall>
-          <Door><position>(0,0,5)</position><rotation>East</rotation><stuff>WoodLog</stuff></Door>
+          <Door><position>(0,0,5)</position><rotation>East</rotation><stuff>Steel</stuff></Door>
           <Wall><position>(6,0,5)</position><rotation>North</rotation><stuff>BlocksLimestone</stuff></Wall>
           <Wall><position>(0,0,6)</position><rotation>North</rotation><stuff>BlocksLimestone</stuff></Wall>
           <Wall><position>(1,0,6)</position><rotation>North</rotation><stuff>BlocksLimestone</stuff></Wall>
@@ -263,7 +278,7 @@
           <Wall><position>(4,0,0)</position><rotation>North</rotation><stuff>BlocksLimestone</stuff></Wall>
           <Wall><position>(5,0,0)</position><rotation>North</rotation><stuff>BlocksLimestone</stuff></Wall>
           <Wall><position>(6,0,0)</position><rotation>North</rotation><stuff>BlocksLimestone</stuff></Wall>
-          <Door><position>(0,0,1)</position><rotation>East</rotation><stuff>WoodLog</stuff></Door>
+          <Door><position>(0,0,1)</position><rotation>East</rotation><stuff>Steel</stuff></Door>
           <Wall><position>(6,0,1)</position><rotation>North</rotation><stuff>BlocksLimestone</stuff></Wall>
           <Wall><position>(0,0,2)</position><rotation>North</rotation><stuff>BlocksLimestone</stuff></Wall>
           <Wall><position>(6,0,2)</position><rotation>North</rotation><stuff>BlocksLimestone</stuff></Wall>
@@ -311,7 +326,7 @@
           <Wall><position>(0,0,4)</position><rotation>North</rotation><stuff>BlocksLimestone</stuff></Wall>
           <Wall><position>(7,0,4)</position><rotation>North</rotation><stuff>BlocksLimestone</stuff></Wall>
           <Wall><position>(0,0,5)</position><rotation>North</rotation><stuff>BlocksLimestone</stuff></Wall>
-          <Door><position>(7,0,5)</position><rotation>East</rotation><stuff>WoodLog</stuff></Door>
+          <Door><position>(7,0,5)</position><rotation>East</rotation><stuff>Steel</stuff></Door>
           <Wall><position>(0,0,6)</position><rotation>North</rotation><stuff>BlocksLimestone</stuff></Wall>
           <Wall><position>(7,0,6)</position><rotation>North</rotation><stuff>BlocksLimestone</stuff></Wall>
           <Wall><position>(0,0,7)</position><rotation>North</rotation><stuff>BlocksLimestone</stuff></Wall>
@@ -366,7 +381,7 @@
           <Wall><position>(0,0,12)</position><rotation>North</rotation><stuff>BlocksLimestone</stuff></Wall>
           <Wall><position>(8,0,12)</position><rotation>North</rotation><stuff>BlocksLimestone</stuff></Wall>
           <Wall><position>(0,0,13)</position><rotation>North</rotation><stuff>BlocksLimestone</stuff></Wall>
-          <Door><position>(8,0,13)</position><rotation>East</rotation><stuff>WoodLog</stuff></Door>
+          <Door><position>(8,0,13)</position><rotation>East</rotation><stuff>Steel</stuff></Door>
           <Wall><position>(0,0,14)</position><rotation>North</rotation><stuff>BlocksLimestone</stuff></Wall>
           <Wall><position>(1,0,14)</position><rotation>North</rotation><stuff>BlocksLimestone</stuff></Wall>
           <Wall><position>(2,0,14)</position><rotation>North</rotation><stuff>BlocksLimestone</stuff></Wall>
@@ -403,7 +418,7 @@
           <Wall><position>(0,0,5)</position><rotation>North</rotation><stuff>BlocksLimestone</stuff></Wall>
           <Wall><position>(9,0,5)</position><rotation>North</rotation><stuff>BlocksLimestone</stuff></Wall>
           <Wall><position>(0,0,6)</position><rotation>North</rotation><stuff>BlocksLimestone</stuff></Wall>
-          <Door><position>(9,0,6)</position><rotation>East</rotation><stuff>WoodLog</stuff></Door>
+          <Door><position>(9,0,6)</position><rotation>East</rotation><stuff>Steel</stuff></Door>
           <Wall><position>(0,0,7)</position><rotation>North</rotation><stuff>BlocksLimestone</stuff></Wall>
           <Wall><position>(1,0,7)</position><rotation>North</rotation><stuff>BlocksLimestone</stuff></Wall>
           <Wall><position>(2,0,7)</position><rotation>North</rotation><stuff>BlocksLimestone</stuff></Wall>
@@ -445,7 +460,7 @@
           <Wall><position>(12,0,5)</position><rotation>North</rotation><stuff>BlocksLimestone</stuff></Wall>
           <Wall><position>(0,0,6)</position><rotation>North</rotation><stuff>BlocksLimestone</stuff></Wall>
           <Wall><position>(12,0,6)</position><rotation>North</rotation><stuff>BlocksLimestone</stuff></Wall>
-          <Door><position>(0,0,7)</position><rotation>East</rotation><stuff>WoodLog</stuff></Door>
+          <Door><position>(0,0,7)</position><rotation>East</rotation><stuff>Steel</stuff></Door>
           <Wall><position>(12,0,7)</position><rotation>North</rotation><stuff>BlocksLimestone</stuff></Wall>
           <Wall><position>(0,0,8)</position><rotation>North</rotation><stuff>BlocksLimestone</stuff></Wall>
           <Wall><position>(12,0,8)</position><rotation>North</rotation><stuff>BlocksLimestone</stuff></Wall>
@@ -514,7 +529,7 @@
           <Wall><position>(3,0,10)</position><rotation>North</rotation><stuff>BlocksLimestone</stuff></Wall>
           <Wall><position>(4,0,10)</position><rotation>North</rotation><stuff>BlocksLimestone</stuff></Wall>
           <Wall><position>(5,0,10)</position><rotation>North</rotation><stuff>BlocksLimestone</stuff></Wall>
-          <Door><position>(6,0,10)</position><rotation>North</rotation><stuff>WoodLog</stuff></Door>
+          <Door><position>(6,0,10)</position><rotation>North</rotation><stuff>Steel</stuff></Door>
           <Wall><position>(7,0,10)</position><rotation>North</rotation><stuff>BlocksLimestone</stuff></Wall>
           <Wall><position>(8,0,10)</position><rotation>North</rotation><stuff>BlocksLimestone</stuff></Wall>
           <Wall><position>(9,0,10)</position><rotation>North</rotation><stuff>BlocksLimestone</stuff></Wall>
@@ -529,7 +544,7 @@
         <size>(3,6)</size>
         <things>
           <Wall><position>(0,0,0)</position><rotation>North</rotation><stuff>BlocksLimestone</stuff></Wall>
-          <Door><position>(1,0,0)</position><rotation>North</rotation><stuff>WoodLog</stuff></Door>
+          <Door><position>(1,0,0)</position><rotation>North</rotation><stuff>Steel</stuff></Door>
           <Wall><position>(2,0,0)</position><rotation>North</rotation><stuff>BlocksLimestone</stuff></Wall>
           <Wall><position>(0,0,1)</position><rotation>North</rotation><stuff>BlocksLimestone</stuff></Wall>
           <Wall><position>(2,0,1)</position><rotation>North</rotation><stuff>BlocksLimestone</stuff></Wall>
@@ -591,7 +606,7 @@
           <Wall><position>(0,0,19)</position><rotation>North</rotation><stuff>BlocksLimestone</stuff></Wall>
           <Wall><position>(3,0,19)</position><rotation>North</rotation><stuff>BlocksLimestone</stuff></Wall>
           <Wall><position>(0,0,20)</position><rotation>North</rotation><stuff>BlocksLimestone</stuff></Wall>
-          <Door><position>(1,0,20)</position><rotation>North</rotation><stuff>WoodLog</stuff></Door>
+          <Door><position>(1,0,20)</position><rotation>North</rotation><stuff>Steel</stuff></Door>
           <Wall><position>(2,0,20)</position><rotation>North</rotation><stuff>BlocksLimestone</stuff></Wall>
           <Wall><position>(3,0,20)</position><rotation>North</rotation><stuff>BlocksLimestone</stuff></Wall>
         </things>
@@ -602,7 +617,7 @@
         <things>
           <Wall><position>(0,0,0)</position><rotation>North</rotation><stuff>BlocksLimestone</stuff></Wall>
           <Wall><position>(1,0,0)</position><rotation>North</rotation><stuff>BlocksLimestone</stuff></Wall>
-          <Door><position>(2,0,0)</position><rotation>North</rotation><stuff>WoodLog</stuff></Door>
+          <Door><position>(2,0,0)</position><rotation>North</rotation><stuff>Steel</stuff></Door>
           <Wall><position>(3,0,0)</position><rotation>North</rotation><stuff>BlocksLimestone</stuff></Wall>
           <Wall><position>(4,0,0)</position><rotation>North</rotation><stuff>BlocksLimestone</stuff></Wall>
           <Wall><position>(0,0,1)</position><rotation>North</rotation><stuff>BlocksLimestone</stuff></Wall>
@@ -627,7 +642,7 @@
           <Wall><position>(4,0,1)</position><rotation>North</rotation><stuff>BlocksLimestone</stuff></Wall>
           <Wall><position>(0,0,2)</position><rotation>North</rotation><stuff>BlocksLimestone</stuff></Wall>
           <Wall><position>(4,0,2)</position><rotation>North</rotation><stuff>BlocksLimestone</stuff></Wall>
-          <Door><position>(0,0,3)</position><rotation>East</rotation><stuff>WoodLog</stuff></Door>
+          <Door><position>(0,0,3)</position><rotation>East</rotation><stuff>Steel</stuff></Door>
           <Wall><position>(4,0,3)</position><rotation>North</rotation><stuff>BlocksLimestone</stuff></Wall>
           <Wall><position>(0,0,4)</position><rotation>North</rotation><stuff>BlocksLimestone</stuff></Wall>
           <Wall><position>(4,0,4)</position><rotation>North</rotation><stuff>BlocksLimestone</stuff></Wall>
@@ -645,7 +660,7 @@
         <size>(7,16)</size>
         <things>
           <Wall><position>(0,0,0)</position><rotation>North</rotation><stuff>BlocksLimestone</stuff></Wall>
-          <Door><position>(1,0,0)</position><rotation>North</rotation><stuff>WoodLog</stuff></Door>
+          <Door><position>(1,0,0)</position><rotation>North</rotation><stuff>Steel</stuff></Door>
           <Wall><position>(2,0,0)</position><rotation>North</rotation><stuff>BlocksLimestone</stuff></Wall>
           <Wall><position>(3,0,0)</position><rotation>North</rotation><stuff>BlocksLimestone</stuff></Wall>
           <Wall><position>(4,0,0)</position><rotation>North</rotation><stuff>BlocksLimestone</stuff></Wall>
@@ -703,7 +718,7 @@
           <Wall><position>(8,0,0)</position><rotation>North</rotation><stuff>BlocksLimestone</stuff></Wall>
           <Wall><position>(0,0,1)</position><rotation>North</rotation><stuff>BlocksLimestone</stuff></Wall>
           <Wall><position>(8,0,1)</position><rotation>North</rotation><stuff>BlocksLimestone</stuff></Wall>
-          <Door><position>(0,0,2)</position><rotation>East</rotation><stuff>WoodLog</stuff></Door>
+          <Door><position>(0,0,2)</position><rotation>East</rotation><stuff>Steel</stuff></Door>
           <Wall><position>(8,0,2)</position><rotation>North</rotation><stuff>BlocksLimestone</stuff></Wall>
           <Wall><position>(0,0,3)</position><rotation>North</rotation><stuff>BlocksLimestone</stuff></Wall>
           <Wall><position>(8,0,3)</position><rotation>North</rotation><stuff>BlocksLimestone</stuff></Wall>
@@ -744,7 +759,7 @@
           <Wall><position>(3,0,2)</position><rotation>North</rotation><stuff>BlocksLimestone</stuff></Wall>
           <Wall><position>(4,0,2)</position><rotation>North</rotation><stuff>BlocksLimestone</stuff></Wall>
           <Wall><position>(5,0,2)</position><rotation>North</rotation><stuff>BlocksLimestone</stuff></Wall>
-          <Door><position>(6,0,2)</position><rotation>North</rotation><stuff>WoodLog</stuff></Door>
+          <Door><position>(6,0,2)</position><rotation>North</rotation><stuff>Steel</stuff></Door>
           <Wall><position>(7,0,2)</position><rotation>North</rotation><stuff>BlocksLimestone</stuff></Wall>
           <Wall><position>(8,0,2)</position><rotation>North</rotation><stuff>BlocksLimestone</stuff></Wall>
           <Wall><position>(9,0,2)</position><rotation>North</rotation><stuff>BlocksLimestone</stuff></Wall>
@@ -754,12 +769,51 @@
           <Wall><position>(13,0,2)</position><rotation>North</rotation><stuff>BlocksLimestone</stuff></Wall>
         </things>
       </li>
+      <li>
+        <name>curtainWall1x3</name>
+        <size>(1,3)</size>
+        <things>
+          <Wall><position>(0,0,0)</position><rotation>North</rotation><stuff>BlocksLimestone</stuff></Wall>
+          <Wall><position>(0,0,2)</position><rotation>North</rotation><stuff>BlocksLimestone</stuff></Wall>
+        </things>
+      </li>
+      <li>
+        <name>tower9x9</name>
+        <size>(9,9)</size>
+        <things>
+          <Wall><position>(2,0,0)</position><rotation>North</rotation><stuff>BlocksLimestone</stuff></Wall>
+          <Wall><position>(3,0,0)</position><rotation>North</rotation><stuff>BlocksLimestone</stuff></Wall>
+          <Wall><position>(4,0,0)</position><rotation>North</rotation><stuff>BlocksLimestone</stuff></Wall>
+          <Wall><position>(5,0,0)</position><rotation>North</rotation><stuff>BlocksLimestone</stuff></Wall>
+          <Wall><position>(6,0,0)</position><rotation>North</rotation><stuff>BlocksLimestone</stuff></Wall>
+          <Wall><position>(1,0,1)</position><rotation>North</rotation><stuff>BlocksLimestone</stuff></Wall>
+          <Wall><position>(7,0,1)</position><rotation>North</rotation><stuff>BlocksLimestone</stuff></Wall>
+          <Wall><position>(0,0,2)</position><rotation>North</rotation><stuff>BlocksLimestone</stuff></Wall>
+          <Wall><position>(8,0,2)</position><rotation>North</rotation><stuff>BlocksLimestone</stuff></Wall>
+          <Wall><position>(0,0,3)</position><rotation>North</rotation><stuff>BlocksLimestone</stuff></Wall>
+          <Wall><position>(8,0,3)</position><rotation>North</rotation><stuff>BlocksLimestone</stuff></Wall>
+          <Wall><position>(0,0,4)</position><rotation>North</rotation><stuff>BlocksLimestone</stuff></Wall>
+          <Wall><position>(8,0,4)</position><rotation>North</rotation><stuff>BlocksLimestone</stuff></Wall>
+          <Wall><position>(0,0,5)</position><rotation>North</rotation><stuff>BlocksLimestone</stuff></Wall>
+          <Wall><position>(8,0,5)</position><rotation>North</rotation><stuff>BlocksLimestone</stuff></Wall>
+          <Wall><position>(0,0,6)</position><rotation>North</rotation><stuff>BlocksLimestone</stuff></Wall>
+          <Wall><position>(8,0,6)</position><rotation>North</rotation><stuff>BlocksLimestone</stuff></Wall>
+          <Wall><position>(1,0,7)</position><rotation>North</rotation><stuff>BlocksLimestone</stuff></Wall>
+          <Wall><position>(7,0,7)</position><rotation>North</rotation><stuff>BlocksLimestone</stuff></Wall>
+          <Wall><position>(2,0,8)</position><rotation>North</rotation><stuff>BlocksLimestone</stuff></Wall>
+          <Wall><position>(3,0,8)</position><rotation>North</rotation><stuff>BlocksLimestone</stuff></Wall>
+          <Wall><position>(4,0,8)</position><rotation>North</rotation><stuff>BlocksLimestone</stuff></Wall>
+          <Wall><position>(5,0,8)</position><rotation>North</rotation><stuff>BlocksLimestone</stuff></Wall>
+          <Wall><position>(6,0,8)</position><rotation>North</rotation><stuff>BlocksLimestone</stuff></Wall>
+        </things>
+      </li>
     </groups>
-    <!-- [Direction]: what the render's blocks are built with (Spec: FR-036), as the groups above. -->
+    <!-- [Direction]: what the render's blocks are built with (Spec: FR-036), as the groups above: the walls and doors as the
+         comment above the groups gives them. -->
     <fill>
       <wallDef>Wall</wallDef>
       <doorDef>Door</doorDef>
-      <doorStuffDef>WoodLog</doorStuffDef>
+      <doorStuffDef>Steel</doorStuffDef>
       <plots />
     </fill>
   </Mantle.KitDef>
