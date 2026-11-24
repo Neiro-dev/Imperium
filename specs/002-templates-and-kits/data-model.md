@@ -30,7 +30,7 @@ Common forms, all from `Data/` (R-3):
 | `allowedBiomes`, `allowedRivers` | lists of `BiomeDef`, `RiverDef` | the world tiles it suits; empty means any; the Empire's templates state the biomes, the tribal culture's leave them empty | FR-001, FR-040; R-3, R-14 |
 | `naturalEnemy`, `permanentEnemy` | `true` or `false`, `false` when left out | the attitude of the factions it serves: those whose `FactionDef` holds the same two values; no faction is named | FR-039; R-14 |
 | `minMapSize` | `(x, 1, z)` | required; square; no larger than `(350, 1, 350)` | FR-003 |
-| `terrainShape` | TerrainShape | every cell inside `minMapSize` has a terrain; nothing outside it | FR-004, FR-016 |
+| `terrainShape` | TerrainShape | where `terrain` holds any cell, every cell inside `minMapSize` has a terrain, and nothing lies outside it; a template taken from a preset island leaves `terrain`, `rocks` and `roofs` empty, since the land is generated first from the world tile and the city follows it, and its `features` hold only what its skeleton relations name | FR-004, FR-016, FR-036; R-18 |
 | `skeleton` | Skeleton | read together with its kit's skeleton | FR-005; R-5 |
 
 ## TerrainShape
@@ -94,9 +94,9 @@ thing form below. Every cell of its terrain, rooms and things lies inside its pl
 | `terrain`, `roofs` | layers | every cell has a terrain; nothing outside the map | FR-008, FR-016 |
 | `things` | list of Thing | below | FR-008, FR-018 |
 | `parts`, `features` | lists, each a `name` and `rects`, a river feature also `flowsFrom`; in a reading each may also hold `from` | every part of both skeletons that is not optional, and every feature a relation names, has cells; a reading holds the parts and features it reads | FR-008, FR-029; R-7 |
-| `scale` | `pixelsPerCell`, a number, and `measured`, a list of the things the size of a person it was got from, each a `name` and a pixel `rect` | in a reading from a picture only: one cell is sized first, by things the size of a person | FR-048; R-17 |
+| `scale` | `pixelsPerCell` and `referenceCell`, positive numbers: the pixels one cell is and the RimWorld cells one cell of the reference game is; and `measured`, a list of at least one thing it was got from, each a `name` and a pixel `rect` | in a reading from a picture only, which only a `scale` shows: one cell is sized first, by the figure where the sizes differ | FR-048; R-17 |
 | `from` (of a part or feature) | pixel `rect`s in the reference picture | in a reading from a picture only: the region of the picture the piece was read from | FR-049; R-17 |
-| `use`, `basis` (of a part) | `use` is one of `Housing`, `ShopFront`, `Workshop`, `Tavern`, `Market`, `Public`, `Annex`, `Attic` or `Unclear`; `basis` is one sentence | in a reading from a picture only: a building or group holds both; a `use` outside the list, or a `use` without its `basis`, is reported; whether each building or group holds one is judged by eye (spec FR-029, FR-050) | FR-049, SC-013; R-17 |
+| `use`, `basis` (of a part) | `use` is one of `Housing`, `ShopFront`, `Workshop`, `Tavern`, `Market`, `Public`, `AnnexOrAttic` or `Unclear`; `basis` is one sentence | in a reading from a picture only: a building or group holds both; a `use` outside the list, or a `use` without its `basis`, is reported; the form records no kind of piece, so whether each building or group holds one is judged by eye (spec FR-029, FR-049, SC-013) | FR-049, SC-013; R-17 |
 
 **Thing**: an element named by its `ThingDef`, holding `position`, `rotation`, `stuff` where the definition takes one,
 and `rect` where the definition's `size` is larger than one cell.
@@ -138,11 +138,12 @@ come (FR-020). The picture files are listed in [contracts/check-command.md](cont
 | unknown definition | a name found neither in `Data/` nor in the `Defs/` of the mods given | FR-013 |
 | wrong kind | a name where its kind cannot go: not a terrain in `terrain`, not natural in a terrain shape, not a wall in a `wallDef`, not a `BiomeDef` in `allowedBiomes`, not a `RiverDef` in `allowedRivers`, not a `RulePackDef` in `nameMaker`, an unknown part or relation kind, a relation missing the field its kind needs | FR-014; R-4, R-5 |
 | wrong form | a value not in its field's form: an attitude field that is not `true` or `false`; a rect, position, size or `minMapSize` not in its form; a rotation or `flowsFrom` that is not `North`, `East`, `South` or `West` | FR-014; R-3 |
+| wrong scale, region or use | in a reading: a `pixelsPerCell` or `referenceCell` that is not a positive number; a `scale` with no `measured` thing, or a `measured` thing without its `name` or pixel `rect`; a pixel `rect` of a `measured` thing or a `from` that lies outside the reference picture where the picture is given; a `use` outside the list; a `use` without its `basis` | FR-019, FR-048, FR-049 |
 | not square | a `minMapSize` or a city's `size` whose `x` and `z` differ | FR-003, FR-014 |
 | missing field | a required field left out: a template's `kit` or `minMapSize`; a laid-out city's `template`, `kit` or `size`; a reading's `reference` or `size` | FR-001, FR-003, FR-008, FR-014 |
 | other expansion | a definition of an expansion that the mod holding the file, as FR-015 sets for laid-out cities and readings, does not require, without that expansion's `MayRequire` | FR-015 |
 | outside the map | a cell past `minMapSize`, past 350×350 or past a city's `size`; a cell of a group or spec card past its `size`; a thing whose cells reach past the map | FR-007, FR-016, FR-018 |
-| no terrain | a cell inside the map with no terrain | FR-016 |
+| no terrain | a cell inside the map with no terrain, in a laid-out city and in a template whose `terrain` holds any cell; a template whose `terrain` holds none leaves the land to generation and has none to report | FR-016, FR-036; R-18 |
 | unknown name | a relation naming a part or feature neither skeleton nor the terrain shape holds; a duplicate name | FR-017 |
 | no kit | a template whose `kit` does not exist; a laid-out city whose `kit` is not its template's | FR-017 |
 | affordance | a thing on a cell whose terrain lacks the affordance it needs, or its material's when its definition uses the material's | FR-018 |
@@ -151,6 +152,10 @@ come (FR-020). The picture files are listed in [contracts/check-command.md](cont
 | missing part | a part that is not optional and has no cells in a laid-out city | FR-029 |
 | broken relation | a relation that does not hold in a laid-out city | FR-029 |
 | no comparison | a template or laid-out city with a reference picture label given no picture, or one that cannot be read; it does not stop the run | spec, Edge Cases |
+
+The check does not report a reading that lacks a `scale`, a `from` or a `use`: it cannot tell a reading from a picture
+except by its `scale`, and whether each traced piece holds them is judged by the maintainer's eye (spec SC-013;
+FR-029).
 
 The check stops, and reports nothing as passing, when `Data/` is missing or not of version 1.7 (spec, Edge Cases).
 

@@ -126,10 +126,11 @@ template ships with Imperium as a regular template, as it stands [Roadmap: R15].
 The tribal culture's first templates, one for each attitude, and its kit are taken the same way from cities of
 Anno 117's Albion built only in the Celtic way, neither Romanized nor mixed, at the scale of a tribal settlement and
 shown from above, either player-built and publicly shared or preset by the game for a governor or an AI rival. The
-maintainer chose among the candidates three cities that a player shared on Steam: Tir Uisce for the gentle tribe's
-open village, a Celtic oppidum for the fierce tribe's walled stronghold and a small Celtic hillfort for the savage
-tribe's fortress, with an agricultural island looked at beside them as supplementary material only, from which
-nothing is taken (FR-037) [Direction].
+maintainer first chose among the candidates three cities that a player shared on Steam: Tir Uisce for the gentle
+tribe's open village, a Celtic oppidum for the fierce tribe's walled stronghold and a small Celtic hillfort for the
+savage tribe's fortress, with an agricultural island looked at beside them as supplementary material only, from which
+nothing is taken. Those pictures are oblique, not shown from above, so they are not read; the references shown from
+above that replace them are open (FR-037, FR-052) [Direction].
 
 A city that Anno 117 presets, on an AI rival's or a third party's island, can be read from the game's own data
 [Direction]. Only the game's own files are read: its file index, `file_h.db`, and its `.rda` packages, which hold each
@@ -189,10 +190,12 @@ template (FR-030), and the check in the game, the final one, still follows [Test
 - Q: Where do the tribal culture's first templates come from? → A: From cities of Anno 117's Albion built only in the
   Celtic way, neither Romanized nor mixed, at the scale of a tribal settlement, and shown from above so that their
   layout can be read: player-built cities shared publicly from any source, or cities the game itself presets for a
-  governor or an AI rival. The maintainer chose one for each attitude among the candidates, all shared by one player
-  as Steam screenshots: Tir Uisce (3639186959) for the gentle tribe, a Celtic oppidum (3625652909) for the fierce
-  tribe and a small Celtic hillfort (3621994739) for the savage tribe, with an agricultural island (3639163413) beside
-  them as supplementary material only (the maintainer's broad direction).
+  governor or an AI rival. The maintainer first chose one for each attitude among the candidates, all shared by one
+  player as Steam screenshots: Tir Uisce (3639186959) for the gentle tribe, a Celtic oppidum (3625652909) for the
+  fierce tribe and a small Celtic hillfort (3621994739) for the savage tribe, with an agricultural island
+  (3639163413) beside them as supplementary material only. Those pictures are oblique, not shown from above, so they
+  are not read, and the references shown from above that replace them are open (the maintainer's broad direction,
+  2026-11-24; FR-052).
 - Q: Is a calibrated template's content changed before it ships? → A: No. Its reading lies on RimWorld's flat cells
   and is built from Imperium's own kit, so all it reproduces of the reference is the skeleton, the general way the
   city is laid out, and none of Anno's own expression; once its skeleton relations pass the check and the maintainer
@@ -243,6 +246,12 @@ template (FR-030), and the check in the game, the final one, still follows [Test
   the maintainer's broad direction (the maintainer's broad direction, 2026-11-24; design archive `cities.md`, The size
   of a cell, and `cities-forms.md` lines 123, 199 and 475; constitution, Principles IV and V). A first reading of the
   open village, made with a camera guessed from a screenshot, was removed because no source supports that method.
+- Q: What is taken from a preset island once it is read? → A: Only its skeleton, the parts and the relations among
+  them. Its ground, sea and shore are not taken: the land is generated first from the world tile and the city is laid
+  out following the terrain, the city yielding to the terrain first and the terrain to the city only at problem
+  segments; the parts tied to a coast are optional slots (the maintainer's broad direction [Direction, 2026-11-24];
+  design archive `cities-siting.md`, Terrain before the city, which cites `Imperium-Knowledge/现行/城/地形与选址.md`
+  lines 22 and 31; FR-002).
 
 ## Sources
 
@@ -340,9 +349,10 @@ Each requirement below names its source in brackets. The sources are those the c
   - The tribal culture's references are cities of Anno 117's Albion, built only in the Celtic way, neither Romanized
     nor mixed, at the scale of a tribal settlement, and shown from above so that their layout can be read:
     player-built cities shared publicly from any source, or cities the game presets for a governor or an AI rival.
-    Candidates go to the maintainer, who chose one for each attitude: Tir Uisce for the gentle tribe, a Celtic oppidum
-    for the fierce tribe and a small Celtic hillfort for the savage tribe, each a player's Steam screenshot, with an
-    agricultural island as supplementary material only.
+    Candidates go to the maintainer, who first chose one for each attitude: Tir Uisce for the gentle tribe, a Celtic
+    oppidum for the fierce tribe and a small Celtic hillfort for the savage tribe, each a player's Steam screenshot,
+    with an agricultural island as supplementary material only. Those pictures are oblique, so they are not read, and
+    the references shown from above that replace them are open.
   - A settlement is built from three layers: Mantle's, shared by every culture; the culture's kit, shared by all its
     factions; and the faction's templates, picked by attitude and terrain, of which each culture uses only what it
     needs. The tribal culture picks by attitude, as its factions' descriptions in `Data/` set, which the maintainer
@@ -570,7 +580,9 @@ and confirm that no shared file was changed.
   [Data: `Dialogs_Various.xml` line 153], and a site's map takes its own size [Data: `WorldObjects.xml` line 205].
 - **FR-004**: A terrain shape MUST hold, for each cell of the site, the terrain there, any natural rock, and the roof
   over it, each as a definition the game holds [Data: terrain, natural rock, roofs], so that it can be checked against
-  `Data/` [Testing].
+  `Data/` [Testing]. A template taken from a preset island holds no terrain, rock or roof: the land is generated first
+  from the world tile, and the template's terrain shape holds only the features its skeleton relations name (FR-036)
+  [Direction, 2026-11-24; Design archive: `cities-siting.md`, Terrain before the city].
 - **FR-005**: A skeleton MUST hold the fixed parts of a city's layout, such as its core, palace quarter, gates and
   main street [Design: line 204], and the wall line, districts, plazas and public buildings read from the reference
   city [Direction], and MUST record them as their relations to each other and to the terrain, not as coordinates
@@ -624,7 +636,8 @@ and confirm that no shared file was changed.
   every expansion's definition in it MUST be marked.
 - **FR-016**: The check MUST report each cell of a terrain shape that lies outside the smallest map its template
   states or outside a city's 350×350 map, each cell of a laid-out city that lies outside its map, and each cell of
-  either that has no terrain [Data; Direction].
+  either that has no terrain, a terrain shape that holds no terrain at all, as FR-004 allows, having none to report
+  [Data; Direction].
 - **FR-017**: The check MUST report each skeleton relation that names a part the skeleton does not hold, or a terrain
   the terrain shape does not hold [Design: line 204], and each template whose culture has no kit [Direction].
 - **FR-018**: The check MUST report each thing in a laid-out city that stands on a terrain lacking the affordance the
@@ -717,7 +730,11 @@ and confirm that no shared file was changed.
   templates and kit MUST be taken from its reference city's reading: the reference is read onto the game's cells, and
   the reading is set beside its pictures until the maintainer, judging it by eye beside them, accepts it, recorded as
   FR-029 sets, as the river-bend town's render was judged; then the template's terrain shape and skeleton, and what the
-  kit's groups, fill and wall settings hold, are taken apart from the reading [Direction]. A new reading MUST be written
+  kit's groups, fill and wall settings hold, are taken apart from the reading [Direction]. From the reading of a preset
+  island only the skeleton is taken, the parts and the relations among them: the island's ground, sea and shore are
+  not, since terrain is generated first from the world tile and the city follows it, yielding to the terrain first;
+  the parts tied to a coast are optional slots (FR-002) [Direction, 2026-11-24; Design archive: `cities-siting.md`,
+  Terrain before the city]. A new reading MUST be written
   in the laid-out city's form (FR-008), naming the reference city it reads in place of a template and kit, so that the
   check checks it and draws it beside the reference pictures as it does a laid-out city (FR-025) [Direction; Spec Kit];
   the river-bend town's reading is its render, which already exists (FR-031). A reading written in that form MUST be
@@ -731,12 +748,12 @@ and confirm that no shared file was changed.
   maintainer chose: Tir Uisce for the gentle tribe's open village, a Celtic oppidum for the fierce tribe's walled
   stronghold and a small Celtic hillfort for the savage tribe's fortress, Steam screenshots 3639186959, 3625652909 and
   3621994739, whose pictures are kept in `template-references/部落城-凯尔特/` in the project's files and never in the
-  repository (FR-028). These pictures are oblique, not shown from above, so they are read only where FR-052 allows;
-  the references shown from above that the maintainer chooses instead, among the candidates found, are open
-  [Direction, 2026-11-24]. An agricultural island, 3639163413, MAY be looked at beside them as supplementary material only,
+  repository (FR-028). These pictures are oblique, not shown from above, so they are not read (FR-052); the references
+  shown from above that replace them, chosen by the maintainer among the candidates found, are open [Direction,
+  2026-11-24]. An agricultural island, 3639163413, MAY be looked at beside them as supplementary material only,
   to help read them: no reading is written of it, and it is the source of no template and of nothing in the kit
-  [Direction]. A tribal template's extent MUST be its reading's, laid on the game's cells with things of the sizes their
-  definitions give (FR-036) [Data], and is stated as its smallest map, no larger than a city's 350×350 map (FR-003); a
+  [Direction]. A tribal template's extent MUST be its reading's, the settlement's and not the island's ground, laid on the game's
+  cells with things of the sizes their definitions give (FR-036) [Data], and is stated as its smallest map, no larger than a city's 350×350 map (FR-003); a
   tribal settlement's map is a city's map, since the design's city building is the generation of every settlement
   [Design: line 173; Direction].
 - **FR-038**: Settlements MUST be built from three layers [Direction]: Mantle's, the same for every culture (FR-033);
@@ -828,42 +845,67 @@ and confirm that no shared file was changed.
   in the picture a door, a figure or a tree is one RimWorld cell, which gives how many pixels one cell is; then how many
   RimWorld cells the reference game's own cell is; and only then are sizes compared and things laid out. The other
   game's cell MUST NOT be mapped one to one, and the size of one of Imperium's households MUST NOT size a reference's
-  houses [Design archive: `cities.md`, The size of a cell]. The scale MUST name the things it was got from, each with
-  its region of the picture [constitution, Principle VI].
-- **FR-049**: A reference MUST be traced into cells only as far as blocks, house groups, yards and roads, not building
-  by building, and, where FR-047 leaves a template to a reading, a template candidate MUST come only from tracing an
-  accepted reference [Design archive: `cities-forms.md` lines 123 and 475]. Each traced piece MUST name the region of
-  the picture it was read from [constitution, Principle VI]. Each building or group MUST be given a use first, one of
-  housing, shop front, workshop, tavern, market, public, annex or attic, or unclear, with a one-sentence basis [Design
-  archive: `cities-forms.md` lines 475-477]. What is done with an area of which more than three tenths is unclear is
+  houses [Design archive: `cities.md`, The size of a cell]. The scale is those two results, the pixels one cell is and
+  the RimWorld cells one cell of the reference game is, and it MUST name the things it was got from, each with its
+  region of the picture [constitution, Principle VI]. Where a door, a figure and a tree give different sizes, the
+  figure's governs, as in the design's own sizing of the in-game screenshots (`cities.md` lines 183-189) [constitution,
+  Principle V]; no source says how many things to measure, so the scale names each one it used, and at least one. The
+  design takes one Anno cell provisionally as 3.7 "trace cells", measured from the river-bend original and to be
+  checked (`cities.md` line 176); whether a trace cell is a RimWorld cell is [NEEDS CLARIFICATION: the archive never
+  says; only a research page does, which is not design meaning; no value is taken from it, and each picture's second
+  result is measured by these steps (constitution, Principle V)].
+- **FR-049**: A reference need not be traced finer than blocks, house groups, yards and roads: the tracing stops
+  there and is not carried on building by building, and, where FR-047 leaves a template to a reading, a template
+  candidate MUST come only from tracing an accepted reference [Design archive: `cities-forms.md` lines 123 and 475].
+  The design defines none of the four as a piece and the form records no kind of piece, so whether a traced piece is no
+  finer than they are is judged by the maintainer's eye (FR-029, FR-050) [constitution, Principle V]. Each traced piece
+  MUST name the region of the picture it was read from [constitution, Principle VI]. Each building or group MUST be
+  given a use first, one of housing, shop front, workshop, tavern, market, public, annex or attic, or unclear (eight
+  classes, annex or attic being one), with a one-sentence basis, and an item with no use is not laid out [Design
+  archive: `cities-forms.md` lines 475-477 and 480-482]. The design settles a use against the wiki (`cities-forms.md`
+  lines 476-478), which the Source Register does not list, so the wiki is not a source of a use here, and each use
+  names its source in its basis (constitution, Principles I and VI). What is done with an area of which more than three tenths is unclear is
   [NEEDS CLARIFICATION: the design archive sends the area's image to the maintainer to mark (`cities-forms.md` lines
   478-479), but he judges only broad direction (constitution, Principle IV), and no other source gives a form; none is
   written (Principle V)]. The old project's legend of the river-bend screenshot is classed `research` in the archive
   (`specs/005-imperium-design-archive/research/C19.md` line 11) and describes that one picture, so it is not design
   meaning and is not taken.
-- **FR-050**: A reading MUST be made one area at a time, and the maintainer MUST see each area's picture once after it
-  is traced and once after it is laid out, before the next area is begun [Design archive: `cities-forms.md` line 199;
-  FR-044]. An area is 2800 to 9200 cells, floating with the attraction field's weight so that areas near the core and
-  the main street are small and outlying ones large, the strength of the weighting being a trial value [Design archive:
-  `cities-forms.md` line 487].
-- **FR-051**: The check MUST draw a tracing over its reference picture at the same scale, compare each traced piece with
-  the colour and shape of the picture where it lies, and mark each piece that does not match as a candidate for the
-  maintainer's attention, with what differs. It MUST NOT decide that a piece is wrong or that the reading matches
-  (FR-029) [Direction: the effect of the old project's preview tool is kept, 2026-11-24; Design archive: `cities.md`,
-  the Anno sample "kept for side-by-side comparison"]. What counts as a piece not matching the picture in colour and
+- **FR-050**: A reading from a picture MUST be made one area at a time, and the maintainer MUST see each area's picture
+  once after it is traced and once after it is laid out, before the next area is begun [Design archive:
+  `cities-forms.md` line 199; Direction: the last entry of Clarifications, which makes it the rule for every reading
+  from a picture; FR-044]. The first picture is the tracing laid over the reference picture (FR-051); the second is the
+  area laid out, drawn beside the reference picture (FR-025); the maintainer's acceptance of each is an item of
+  `checklists/acceptance.md` (FR-029). An area is a district of the reference city's own zoning, which the design says
+  the list of districts follows (`cities.md` lines 63-66); the sizes of 2800 to 9200 cells and the weighting that the
+  design uses to divide a generated city (`cities-forms.md` lines 487-489) are not taken for a reading, since no source
+  gives the weighting for a picture (constitution, Principle V). FR-044 governs the drawing of a preset from its data
+  and FR-050 the making of a reading from a picture; the river-bend town's render, which already exists (FR-031), is
+  outside FR-050.
+- **FR-051**: The check MUST draw a tracing over its reference picture at the scale FR-048 gives, the pixels one cell
+  is, compare each traced piece with the colour and shape of the picture where it lies, and mark each piece that does
+  not match as a candidate for the maintainer's attention, with what differs. It MUST NOT decide that a piece is wrong
+  or that the reading matches (FR-029) [Direction: the effect of the old project's preview tool is kept, 2026-11-24,
+  for the drawing and the comparison; Design archive: `cities.md` lines 335-337, where the differences are listed for
+  the user to judge by the picture, for marking and never deciding]. What counts as a piece not matching the picture in colour and
   shape is [NEEDS CLARIFICATION: no source gives it. The design and the maintainer's direction state the effect only;
   the old tool's criteria are implementation, which the Source Register excludes; none is written (constitution,
-  Principle V)].
-- **FR-052**: Where FR-048 to FR-051 give no form for a picture, such as one not shown from above (FR-037), it MUST NOT
-  be read by a method of its own; which picture to use instead is the maintainer's broad direction [constitution,
-  Principles IV and V; FR-037].
+  Principle V)]. Until it is given, the check marks no piece, and the report MUST say that mismatches are not marked
+  and that a picture without marks is not a match (FR-020, FR-029).
+- **FR-052**: Where FR-048 to FR-051 give no form for a picture, such as one not shown from above (FR-037) or one
+  showing none of a door, a figure or a tree to size a cell by, it MUST NOT be read by a method of its own; which
+  picture to use instead is the maintainer's broad direction [constitution, Principles IV and V; FR-037]. The reason is
+  that the design archive gives no method of straightening an oblique picture, and takes from its one oblique view only
+  what that view can give (`cities.md` lines 319-321), while the maintainer's direction is that references be shown
+  from above (FR-037; Clarifications, 2026-11-24). Whether a candidate is shown from above is judged by the maintainer,
+  who chooses among the candidates (FR-037) [Direction]; no source gives a test.
 
 ### Key Entities *(include if feature involves data)*
 
 - **Template**: the designed layout of a whole city site: its terrain shape, its skeleton, what it is picked by, among
   it the attitude of the factions it serves and the biomes it suits, the smallest map it needs, its culture and the
   reference city it is drawn from. It places no thing a city is built of.
-- **Terrain shape**: the site's cells, each with its terrain, any natural rock and its roof, as the game defines them.
+- **Terrain shape**: the site's cells, each with its terrain, any natural rock and its roof, as the game defines them;
+  none, for a template taken from a preset island, whose land generation makes first (FR-004).
 - **Skeleton**: the fixed parts of a city's layout and their relations to each other and to the terrain. A kit holds
   one too [Design: line 184].
 - **Kit**: one culture's fixed set of generation data: word list, skeleton, groups, fill and wall settings, and
@@ -883,7 +925,10 @@ and confirm that no shared file was changed.
   both mods' released files (FR-028).
 - **Reading**: a reference city drawn on the game's cells and set beside its pictures until it matches them, in the
   laid-out city's form, from which a culture's templates and kit are taken; for the river-bend town, its render. It is
-  kept in the repository as its template's source; its reference pictures are not.
+  kept in the repository as its template's source; its reference pictures are not. A reading is the whole and its file;
+  a reading from a picture is made by tracing the picture into cells (FR-049) and then laying out what is traced
+  (the next stage of FR-050); a preset's objects are read from its data (FR-041); and drawing is what the check draws
+  (FR-023, FR-025) and the top-down pictures of a preset (FR-043).
 - **Top-down view**: a preset reference city read from its game's own data and drawn from above: its objects, each
   with its two categories and its position, as a skeleton picture, the same laid over the game's image, `objects.json`
   and a summary, kept in the project's files and used as the reference's pictures (FR-041 to FR-044).
@@ -928,10 +973,18 @@ and confirm that no shared file was changed.
 - **SC-012**: In the Empire's kit and the river-bend town's template, and in the tribal culture's kit and first
   templates, 100% of the parts name their source, every part Imperium-old's design defines is taken from it, and no
   part filled from a reading contradicts the design or the maintainer's recorded direction (FR-047).
-- **SC-013**: For every reference read from its picture, its reading holds a `scale` that names the things it was got
-  from, 100% of its traced pieces name their regions of the picture and every building or group has a use from the
-  design's list with a basis, and the maintainer saw each area's picture after it was traced and after it was laid out
-  before the next area was begun (FR-048 to FR-050).
+- **SC-013**: For every reading from a picture, by inspection of the reading and the items of
+  `checklists/acceptance.md` (FR-029): it holds a `scale` of the pixels one cell is and the RimWorld cells one cell of
+  the reference game is, naming each thing it was got from with its region (FR-048); 100% of its traced pieces name
+  their regions and every building or group has a use from the design's eight with a basis (FR-049); the order of
+  FR-048's steps and the stopping of the tracing at FR-049's pieces are as the maintainer judges by eye; the maintainer
+  saw each area's picture after it was traced and after it was laid out before the next area was begun (FR-050); and
+  no reading is written of a picture FR-048 to FR-051 give no form for (FR-052). The check itself reports each
+  `scale`, `from`, `use` and `basis` that is malformed (FR-019).
+- **SC-014**: For every reading from a picture given with its reference picture, the side-by-side picture shows the
+  reading's cells over the reference picture at the reading's scale, no piece is reported as a match and the report
+  says that mismatches are not marked, and neither the reference picture nor any picture drawn from it is in the
+  repository (FR-028, FR-051).
 
 ## Assumptions
 
@@ -960,7 +1013,8 @@ and confirm that no shared file was changed.
   source asks for a tool in the repository that reads another game's data, so this feature adds none; the check takes
   the pictures such a reading gives as reference pictures, as it takes any other (FR-028, FR-043) [constitution,
   Principle V].
-- None of the tribal culture's chosen references is a preset city, so its readings are drawn from the Steam
-  screenshots (FR-037); a preset city read from the game's data serves as a reference once the maintainer chooses it
-  among candidates, as FR-037 sets for the tribal references [Direction].
+- None of the three Steam screenshots first chosen for the tribal culture is a preset city, and they are oblique, so
+  they are not read (FR-037, FR-052); a preset city read from the game's data, or another picture shown from above,
+  serves as a reference once the maintainer chooses it among candidates, as FR-037 sets for the tribal references
+  [Direction].
 - How the forms are written, and the pictures' look and file format, are chosen in `/speckit-plan`.

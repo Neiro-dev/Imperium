@@ -344,7 +344,7 @@ files, to `Neiro-dev/Imperium-old` at 20a052b, to Spec Kit at v1.4.3 and to Harm
   cut files as input. Rejected by the direction (FR-041). FileDBReader as the reader. Rejected: by the direction it
   only cross-checks (FR-045).
 - **In this feature**: none of the tribal references the maintainer chose first is a preset city (spec FR-037); they
-  are screenshots, read by R-17's steps only where a screenshot is shown from above (FR-052). The steps above run for a
+  are oblique screenshots and are not read (FR-052). The steps above run for a
   preset city once the maintainer chooses it as a reference (spec, Assumptions); the presets of Albion that have not
   been read are being read, to give him top-down candidates to choose among (2026-11-24).
 
@@ -368,26 +368,32 @@ files, to `Neiro-dev/Imperium-old` at 20a052b, to Spec Kit at v1.4.3 and to Harm
 ## R-17: Reading a reference from its picture
 
 - **Decision**: a reference that exists only as a picture is read in the steps of spec FR-048 to FR-052:
-  1. the cell is sized first: things the size of a person in the picture (a door, a figure or a tree is one cell) are
-     measured to give how many pixels one cell is, and from it how many RimWorld cells the other game's cell is; the
-     reading records the pixels per cell and the things measured, each with its region of the picture (FR-048);
+  1. the cell is sized first: things the size of a person in the picture (a door, a figure or a tree is one cell, the
+     figure's size governing where they differ) are measured to give how many pixels one cell is, and from it how many
+     RimWorld cells the other game's cell is; the reading records both numbers and the things measured, at least one,
+     each with its region of the picture (FR-048);
   2. the picture is traced into cells only as far as blocks, house groups, yards and roads, each traced piece records
      the region of the picture it was read from, and each building or group is given a use from the design's list with
      a one-sentence basis (FR-049);
   3. the check lays the reading's cells over its reference picture at the same scale, in the side-by-side picture it
      already draws of a reading beside its reference pictures (R-11; FR-025, FR-051);
-  4. one area, of 2800 to 9200 cells, is read at a time, and the maintainer sees its picture after it is traced and
-     again after it is laid out, before the next area is begun, each recorded as an item of
+  4. one area, a district of the reference city's own zoning, is read at a time, and the maintainer sees its
+     picture after it is traced (the tracing over the reference picture) and again after it is laid out (the area
+     beside the reference picture), before the next area is begun, each recorded as an item of
      `checklists/acceptance.md` (FR-050; FR-029).
-  A picture these steps give no form for, such as one not shown from above, is not read (FR-052). Two things are open
+  A picture these steps give no form for, such as one not shown from above, is not read (FR-052). Three things are open
   and have no form here: what is done with an area of which more than three tenths is unclear (the design sends its
-  image to the maintainer to mark, which Principle IV does not allow), and what counts as a piece not matching the
-  picture in colour and shape; so no task builds either (spec FR-049, FR-051, marked NEEDS CLARIFICATION;
-  constitution, Principles IV and V).
+  image to the maintainer to mark, which Principle IV does not allow), what counts as a piece not matching the
+  picture in colour and shape, and whether the design's provisional 3.7 "trace cells" per Anno cell is in RimWorld
+  cells; so no task builds the first two, and no value is taken from the third (spec FR-048, FR-049, FR-051, marked
+  NEEDS CLARIFICATION; constitution, Principles IV and V).
 - **Form**: a reading is a laid-out city (R-7), so the record sits in it: the root holds `scale`, the pixels per cell
-  and a list of the things measured, each a `name` and its `rect` in the picture's pixels; each part and feature may
+  (`pixelsPerCell`), the RimWorld cells one cell of the reference game is (`referenceCell`) and a list of the things
+  measured, at least one, each a `name` and its `rect` in the picture's pixels; each part and feature may
   hold `from`, its region of the picture as `rect`s in pixels, and a part that is a building or group holds `use`, one
-  of the design's nine, and `basis`, one sentence (data-model.md, `LaidOutCity`). The pictures stay what
+  of the design's eight classes, and `basis`, one sentence (data-model.md, `LaidOutCity`). The form records no kind
+  of piece and no check tells a reading from a picture except by its `scale`, so that a piece holds its `from` and a
+  building or group its `use` is judged by eye (spec SC-013). The pictures stay what
   R-11 draws, one PNG and one side-by-side PNG; where a reading holds a `scale`, the reference picture in the
   side-by-side PNG carries the reading's cells laid over it where the `scale` places them, so that no picture or file
   name is added (FR-025, FR-051).
@@ -406,5 +412,24 @@ files, to `Neiro-dev/Imperium-old` at 20a052b, to Spec Kit at v1.4.3 and to Harm
   already draws pictures beside reference pictures. The old project's tool. Rejected as a source: its code, settings
   and numbers are not taken (spec, Sources); only its effect is kept (FR-051). A method of its own for straightening
   an oblique picture. Rejected: no source gives one (FR-052), and the design archive names none.
-- **Open**: which reference each tribe is read from (spec FR-037), since the screenshots chosen first are read only
-  where shown from above (FR-052); T040 to T042 wait for it.
+- **Open**: which reference each tribe is read from (spec FR-037), since the three screenshots chosen first are
+  oblique and are not read (FR-052); T040 to T042 wait for it.
+
+## R-18: A template taken from a preset island leaves the land to generation
+
+- **Decision**: from the reading of a preset island only the skeleton is taken, the parts and the relations among them,
+  and no cell of the island's ground, sea or shore. The template's `terrain`, `rocks` and `roofs` are left empty and
+  its `features` hold only what its skeleton relations name; the land is generated first from the world tile, and the
+  city is laid out following it. The parts tied to a coast are optional slots (`optional`, R-5). The check reports a
+  cell with no terrain only where `terrain` holds some cell, as before, and in every laid-out city (spec FR-004,
+  FR-016, FR-036). The Empire's river-bend template, which has a terrain shape, is unchanged.
+- **Rationale**: the maintainer's direction on 2026-11-24 (spec, Clarifications) and the design archive's order,
+  terrain first and the city yielding to it (`cities-siting.md`, Terrain before the city, citing
+  `Imperium-Knowledge/现行/城/地形与选址.md` lines 22 and 31; The landform of a city site, where a template fixes only
+  the big shape and never down to the cell). A data-driven rule, a terrain layer that holds none or all of its cells,
+  needs no new field to say that a template is from a preset island (constitution, Principle V).
+- **Alternatives considered**: a field that names a template as taken from a preset island. Rejected: no requirement
+  asks for it, and the empty layer says it. Keeping the island's ground as the terrain shape. Rejected by the
+  direction.
+- **Open**: which coast-related parts a template holds, and what generation does with them (R2); none is written
+  here, since no reading of a preset island has been made.

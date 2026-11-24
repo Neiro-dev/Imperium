@@ -31,8 +31,11 @@ from above, in steps the maintainer sees one by one, into the project's files an
 takes those drawings as reference pictures, as it takes a screenshot (R-15). A reference that exists only as a picture is
 read in the design's steps: the cell sized first by things the size of a person, the picture traced only to blocks,
 house groups, yards and roads, the reading's cells laid over the picture in the side-by-side picture, and each area shown to the maintainer
-after tracing and after laying out, each building or group given a use from the design's list; what is done with an
-area more than three tenths unclear, and the marks of a mismatch, have no source and are left open (R-17). The industrial (outlander) and pirate
+after tracing and after laying out, each building or group given a use from the design's eight classes; what is done with an area more than three
+tenths unclear, the marks of a mismatch, and whether 3.7 "trace cells" are RimWorld cells have no source and are left
+open (R-17). A template taken from a preset island
+takes only its skeleton and leaves the land to generation, which makes terrain first (R-18). The industrial
+(outlander) and pirate
 cultures' kits and templates, which the alpha opens too, are R16's, in these forms; the later cultures' references are
 recorded for them (R-13, R-16). It is validated by tests outside the game, then by a load in the game
 ([quickstart.md](quickstart.md)).
@@ -91,9 +94,13 @@ templates, and the Empire kit with the river-bend town's template; test fixtures
 Post-design re-check (after Phase 1): unchanged. Re-checked after the update that added R-15 and R-16 and moved the
 industrial (outlander) and pirate cultures to R16 (2026-11-24): unchanged. Re-checked after the update that added R-17
 (2026-11-24): the steps come from the design archive and the maintainer's direction (I, VI); an existing tool was looked
-for first and none does the job (R-17, Alternatives considered); the two things no source gives, what is done with an area more than three tenths unclear (the design's way, to send
-it to the maintainer to mark, is not allowed by IV) and the marks of a mismatch, are left open and built by no task (V); no question is asked of the
-maintainer, since the references to read are his choice among candidates (IV): unchanged.
+for first and none does the job (R-17, Alternatives considered); the three things no source gives, what is done with an area more than three tenths unclear (the design's way, to send
+it to the maintainer to mark, is not allowed by IV), the marks of a mismatch, and the unit of the design's 3.7, are
+left open, the first two built by no task and no value taken from the third (V); no question is asked of the
+maintainer, since the references to read are his choice among candidates (IV): unchanged. Re-checked after the
+review of `checklists/picture-reading.md` and the maintainer's direction on a preset island (2026-11-24): a template
+from a preset island takes the skeleton only and the land is generated first, as the design orders and the maintainer
+directed (I, VI; R-18): unchanged.
 
 ## Project Structure
 

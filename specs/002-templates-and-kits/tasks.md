@@ -318,6 +318,16 @@ so far is one (spec, Assumptions). On the maintainer's computer, outside every r
   FileDBReader, taking nothing from them, and confirm that neither the packages nor anything read or drawn is in the
   repository (spec FR-041, FR-045; quickstart.md step 10; SC-011)
 
+### A template that leaves the land to generation, before the tribal templates
+
+For T044, since the tribal references are preset islands read for their skeleton only (spec FR-036; research R-18).
+
+- [ ] T062 Write, in `tests/fixtures/us1/` and `tests/test_templates_and_kits.py`, a template whose `terrain` holds no
+  cell and one whose `terrain` holds some cells but not all, and report "no terrain" only for the second; then change
+  the check in `src/mantle_check/checks.py` to that rule, keeping the report for every laid-out city; the picture of
+  the first shows its features without terrain (data-model.md `TemplateDef.terrainShape`, What the check reports; spec
+  FR-004, FR-016, FR-023, FR-036; research R-18)
+
 ### A reference that exists only as a picture, before its reading
 
 For T040 to T042, in the steps of spec FR-048 to FR-052 (research R-17). They come before those three tasks, and the
@@ -326,21 +336,27 @@ tests come first and fail before the code, as in each story.
 - [ ] T059 Write a test reading, with a small reference picture the test makes itself and never a reference picture, and
   readings each holding one problem, in `tests/fixtures/us2/`; then write `tests/test_picture_reading.py`: a known
   `scale` puts a known cell at a known pixel of the reference picture in the side-by-side picture; a `pixelsPerCell`
-  that is not a positive number, a `measured` thing without a `rect`, a `from` whose pixel rect lies outside the
-  picture, a `use` outside the design's nine and a `use` without its `basis` are each reported, with the file, part and
-  what is wrong; a reading without a `scale` is drawn as before; and the same inputs give identical pictures (spec
-  FR-019, FR-022, FR-028, FR-048, FR-049, FR-051; contracts/laid-out-city.md, A reading)
-- [ ] T060 Implement reading `scale` and its `measured` things, `from` of a part or feature, and `use` and `basis` of a
-  part in `src/mantle_check/forms.py`, and report each malformed one in `src/mantle_check/checks.py`, as T059 sets
-  (data-model.md `LaidOutCity`, Common forms; spec FR-019, FR-048, FR-049; research R-17)
+  or `referenceCell` that is not a positive number, a `scale` with no `measured` thing, a `measured` thing without a
+  `name` or a `rect`, a pixel `rect` of a `measured` thing or a `from` that lies outside the picture, a `use` outside
+  the design's eight and a `use` without its `basis` are each reported, with the file, part and what is wrong; a
+  reading without a `scale` is drawn as before and reported as before; and the same inputs give identical pictures
+  and reports (spec FR-019, FR-022, FR-028, FR-048, FR-049, FR-051; SC-013; contracts/laid-out-city.md, A reading)
+- [ ] T060 Implement reading `scale`, with its `measured` things, `from` of a part or feature, and `use` and `basis` of
+  a part in `src/mantle_check/forms.py`, and report each malformed one in `src/mantle_check/checks.py` as the problem
+  "wrong scale, region or use", as T059 sets (data-model.md `LaidOutCity`, Common forms, What the check reports; spec
+  FR-019, FR-048, FR-049; research R-17)
 - [ ] T061 In `src/mantle_check/pictures.py`, lay the cells of a reading that holds a `scale` over its reference
-  picture in the side-by-side picture, at the pixels the `scale` gives, adding no picture or file name; report it in
-  `src/mantle_check/report.py`; and pass T059 (research R-11, R-17; spec FR-025, FR-051)
+  picture in the side-by-side picture, at the pixels the `scale` gives, adding no picture or file name; in
+  `src/mantle_check/report.py`, say for such a reading that mismatches are not marked and that no picture is reported
+  as a match (contracts/check-command.md, Output); and pass T059 (research R-11, R-17; spec FR-020, FR-025, FR-029,
+  FR-051; SC-014)
 
 Not tasks: what is done with an area of which more than three tenths is unclear, and the marks of a piece that does
 not match its picture in colour and shape. No source gives either form (spec FR-049, FR-051, marked NEEDS
 CLARIFICATION; constitution, Principles IV and V). They are built only after a source or the maintainer's recorded
-direction gives them, through the spec, plan and tasks again.
+direction gives them, through the spec, plan and tasks again. No value is taken from the design's 3.7 "trace cells"
+either, since no source says whether they are RimWorld cells (spec FR-048); `referenceCell` is written for each picture
+by FR-048's steps.
 
 **Checkpoint**: Both cultures' kits and first templates pass the check outside the game
 
@@ -404,7 +420,7 @@ checked, and no shared file changes (spec, User Story 5)
 - **The first kits and templates (Phase 7)**: depends on User Stories 1 to 3; the river-bend town (T035 to T039)
   comes before the tribal culture (T040 to T045) (spec FR-031, SC-008); T054 to T058 depend on nothing in the
   repository, and come before the reading of the preset reference they draw (spec FR-043); T059 to T061 come before
-  T040 to T042 (spec FR-048 to FR-051; research R-17)
+  T040 to T042 (spec FR-048 to FR-051; research R-17), and T062 before T044 (spec FR-036; research R-18)
 - **User Story 5 (Phase 8)**: depends on the Empire kit and the river-bend town's template (T037, T038)
 - **Polish (Phase 9)**: depends on all before it; T051 and T052 need the maintainer's computer, with the clone moved
   out of `Mods` as R14's T007 sets up

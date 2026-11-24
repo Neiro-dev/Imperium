@@ -49,8 +49,8 @@ name the template's `reference` gives the city, in place of `template` and `kit`
 </LaidOutCity>
 ```
 
-A reading from a reference that exists only as a picture also holds `scale`, the pixels one cell is and the things the
-size of a person it was got from, and each part or feature it traces holds `from`, the region of the picture it was read
+A reading from a reference that exists only as a picture also holds `scale`: the pixels one cell is, the RimWorld cells
+one cell of the reference game is, and the things it was got from, at least one, and each part or feature it traces holds `from`, the region of the picture it was read
 from, as pixel rects (the form of data-model.md, Common forms; spec FR-048, FR-049; research R-17):
 
 ```xml
@@ -59,6 +59,7 @@ from, as pixel rects (the form of data-model.md, Common forms; spec FR-048, FR-0
   <size>(350,350)</size>
   <scale>
     <pixelsPerCell>9.5</pixelsPerCell>
+    <referenceCell>4</referenceCell>
     <measured><li><name>door</name><rect>(412,288,421,297)</rect></li></measured>
   </scale>
   ...
@@ -70,8 +71,8 @@ from, as pixel rects (the form of data-model.md, Common forms; spec FR-048, FR-0
 </LaidOutCity>
 ```
 
-A building or group holds `use`, one of `Housing`, `ShopFront`, `Workshop`, `Tavern`, `Market`, `Public`, `Annex`,
-`Attic` or `Unclear`, and `basis`, one sentence (spec FR-049, from the design's list). What is done with an area of
+A building or group holds `use`, one of `Housing`, `ShopFront`, `Workshop`, `Tavern`, `Market`, `Public`,
+`AnnexOrAttic` or `Unclear`, and `basis`, one sentence (spec FR-049, the design's eight classes). What is done with an area of
 which more than three tenths is unclear has no form (spec FR-049, marked NEEDS CLARIFICATION).
 
 It is kept in `readings/` at the repository root, outside both mod folders, as the template's source, so it is in

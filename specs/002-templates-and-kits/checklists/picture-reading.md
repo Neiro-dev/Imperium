@@ -330,3 +330,15 @@ mean implementation work is complete.
   author's (Spec Kit `templates/commands/checklist.md` lines 32-36). Open points with no source (CHK006, CHK007,
   CHK009, CHK011, CHK014, CHK024) may be marked NEEDS CLARIFICATION under Principle V, as FR-049 and FR-051 are,
   instead of being written.
+- Author's fixes after the review (the author marks nothing; the reviewer re-ticks): CHK001 FR-050 names [Direction]
+  and FR-051 cites `cities.md` lines 335-337 for marking, [Direction] for the drawing; CHK006 FR-048 holds the second
+  result (`referenceCell`) and a marker for the unit of the design's 3.7; CHK007 the figure governs, at least one thing;
+  CHK009 an area is a district of the reference's own zoning, the 2800 to 9200 rule not taken; CHK010 FR-050 says what
+  each picture shows; CHK011 and CHK014 FR-049 says the design defines no piece kind and the tracing need not go
+  finer; CHK013 FR-051 names the scale; CHK015 the three screenshots are said to be oblique and not read in Purpose,
+  Clarifications, Sources, Assumptions, FR-037 and R-15 and R-17; CHK017 Key Entities, Reading; CHK018 FR-050 is for a
+  reading from a picture; CHK023 FR-049 (no use, not laid out) and FR-051 (the report says mismatches are not marked);
+  CHK024 FR-052 gives the reason and says the maintainer judges; CHK025 and CHK026 SC-013 and SC-014, data-model
+  "What the check reports"; CHK027 eight classes (`AnnexOrAttic`) and the wiki's place. CHK004's and CHK019's notes:
+  T061 and `contracts/check-command.md`, Output. New since the review: a preset island is read for its skeleton only
+  (Clarifications; FR-004, FR-016, FR-036, FR-037; R-18; T062).
