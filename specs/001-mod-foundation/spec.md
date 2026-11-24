@@ -27,6 +27,8 @@ Each requirement below names its source in brackets. The sources are those the c
 - **[EULA]**: `EULA.txt` of RimWorld (last updated April 7, 2022), which is always followed (constitution, Source
   Register).
 - **[Readme]**: `Readme.txt` of the same install, the first testing source (constitution, Source Register).
+- **[Test]**: what the game logged in this feature's in-game checks (quickstart.md), run with the testing sources on
+  2026-11-24.
 
 Imperium is a remake of Royalty and requires only Royalty [Design: glossary line 35], and in later entries it
 replaces the base game's Empire [Design: setting.md line 83]. Game content is judged by what the official
@@ -47,7 +49,7 @@ Principle IV).
 - Q: How is "no errors or warnings from Imperium" checked? → A: In the game's log [Readme: line 21], which the plan
   locates and reads, against the same launch without Imperium as the baseline, since
   Imperium is measured against the official expansions (Sources, above). Imperium passes when its launch adds no
-  error or warning line to the baseline.
+  error or warning line to the baseline, other than the report FR-005 expects while this feature adds no content.
 - Q: Which game versions does Imperium support? → A: 1.7 only, as each official expansion lists only `1.7` among its
   supported versions [Data: each expansion's `About/About.xml`; `Version.txt`].
 - Q: What happens when Imperium is turned on or off for a save made with a different set of mods? → A: The game shows
@@ -155,7 +157,9 @@ after the last official expansion, ahead of an ordinary mod; the mod list shows 
   after every one that came before it [Data: `About/About.xml` lines 9-12 of Ideology, 9-13 of Biotech, 9-14 of
   Anomaly and 9-15 of Odyssey], and because it adds content to each other active expansion [Design: line 110].
 - **FR-005**: With Core, Royalty and Imperium active, starting a new game and loading a saved one MUST produce no
-  errors or warnings from Imperium [Design: line 109, complete with Royalty alone].
+  errors or warnings from Imperium [Design: line 109, complete with Royalty alone], except the one error in which the
+  game reports that Imperium loaded no content [Test: quickstart check 1, "Mod Imperium did not load any content"].
+  That report states what FR-007 sets for this feature, and the first roadmap entry that adds content removes it.
 - **FR-006**: With any combination of the other official expansions also active, FR-005 MUST still hold
   [Design: lines 108 and 110].
 - **FR-007**: The mod MUST add no game content in this feature; content belongs to later roadmap entries
@@ -193,17 +197,20 @@ after the last official expansion, ahead of an ordinary mod; the mod list shows 
 ### Measurable Outcomes
 
 - **SC-001**: With Core, Royalty and Imperium active, a new game starts and a save loads, and the game's log
-  [Readme: line 21] has zero error or warning lines beyond the same launch with Core and Royalty alone.
+  [Readme: line 21] has zero error or warning lines beyond the same launch with Core and Royalty alone, other than
+  the no-content report (FR-005).
 - **SC-002**: With Royalty off, Imperium shows a missing requirement for Royalty in 100% of attempts, and for no other
   expansion.
-- **SC-003**: Across every combination of the four other official expansions added to Core and Royalty, none
-  included (16 combinations), every one loads with zero error lines in the log beyond the same combination without
-  Imperium, with Imperium after every active official expansion and no load-order warning for it.
+- **SC-003**: Across every combination of the four other official expansions added to Core and Royalty, none included
+  (16 combinations), every one loads with zero error or warning lines in the log beyond the same combination without
+  Imperium, other than the no-content report (FR-005), with Imperium after every active official expansion and no
+  load-order warning for it.
 - **SC-004**: Nothing the game shows for Imperium states or implies that it is official or made by Ludeon, and the
   EULA's disclaimer is displayed with it.
-- **SC-005**: With an ordinary mod active, Imperium placed directly after the last active official expansion and
-  ahead of that mod loads with zero error lines beyond the same launch without Imperium and with no load-order
-  warning, and the place is stated where players read about Imperium.
+- **SC-005**: With an ordinary mod active, Imperium placed directly after the last active official expansion and ahead
+  of that mod loads with zero error or warning lines beyond the same launch without Imperium, other than the
+  no-content report (FR-005), and with no load-order warning, and the place is stated where players read about
+  Imperium.
 
 ## Assumptions
 

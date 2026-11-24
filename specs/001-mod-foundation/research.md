@@ -126,7 +126,8 @@ project files.
   `rimbridge/list_logs`, the next testing source (constitution, Principle III).
 - **Rationale**: the constitution's testing order (Source Register, Testing in the game).
 - **Note**: RimBridgeServer is a mod and writes its own log lines, so each baseline launch also runs it, and a
-  launch passes when it adds no error or warning line to that baseline (spec, Clarifications).
+  launch passes when it adds no error or warning line to that baseline (spec, Clarifications), other than the game's
+  report that Imperium loaded no content, which R1 expects because it adds none (spec FR-005, FR-007).
 - **Where checks run**: the game does not run in the cloud container, so the in-game checks wait for the
   maintainer's computer. The cloud can check that the XML is well-formed and that the identifier meets the game's
   format.

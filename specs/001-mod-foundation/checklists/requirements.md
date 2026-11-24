@@ -65,6 +65,10 @@
     load-order entry either. The assumption now says so.
   - The clarification on the log no longer names `output_log.txt`, which 1.7.5014 does not write; the plan locates
     the log (research.md R-10).
+- Fifth review, from `/speckit-checklist` (checklists/compatibility.md, CHK003, CHK010, CHK011) and in-game check 1:
+  the game logs an error for a mod that loads no content, so FR-005's "no errors" could not hold while FR-007 keeps
+  R1 without content. FR-005 now expects that one report, which leaves with the first entry that adds content, and
+  SC-001, SC-003 and SC-005 count errors and warnings alike, as FR-005 does.
 - Bracketed source names in the spec name where each requirement comes from; they do not prescribe a technology.
 - No game content in this feature is left to the maintainer: the design settles the requirements, and the mod's
   form is left to `/speckit-plan` from the constitution's sources.

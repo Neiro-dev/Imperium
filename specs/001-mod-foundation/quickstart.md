@@ -24,7 +24,8 @@ are in [research.md](research.md) R-10.
 ## Checks in the game
 
 Each launch below runs once without Imperium as the baseline and once with it; a launch passes when Imperium's adds
-no error or warning line to the baseline's log (spec, Clarifications).
+no error or warning line to the baseline's log, other than the game's report that Imperium loaded no content (spec,
+Clarifications; FR-005).
 
 1. **Mod list** (spec US1.1): Imperium is listed by its name. Expect no warning on it with Core and Royalty on
    (`rimworld/list_mods`, `rimworld/get_mod_configuration_status`).
