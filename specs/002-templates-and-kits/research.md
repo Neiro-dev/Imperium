@@ -3,8 +3,8 @@
 Each decision names its source, from the constitution's Source Register, in the order the register gives: `Data/` of
 RimWorld 1.7.5014, then `ModUpdating.txt`, then Harmony (`pardeike/HarmonyRimWorld`), for the released mod; `EULA.txt`
 always; `Data/` for testing outside the game; `Readme.txt`, then RimBridgeServer with GABS, for testing in the game;
-Spec Kit for the development workflow; GitHub Docs for repository files; Imperium-old `main` (20a052b), then the
-maintainer's broad direction, for Imperium's own design. Line numbers refer to those files as copied into the project
+Spec Kit for the development workflow; GitHub Docs for repository files; Imperium-old `main` (20a052b) for Imperium's own design,
+and the maintainer's broad direction under Principle IV. Line numbers refer to those files as copied into the project
 files, to `Neiro-dev/Imperium-old` at 20a052b, to Spec Kit at v1.4.3 and to HarmonyRimWorld at `master`. `[Design]`,
 `[Direction]` and the FR numbers point to [spec.md](spec.md).
 

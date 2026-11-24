@@ -91,7 +91,7 @@ What is fixed and what is left to generation [Design: lines 184, 209; Direction]
 Generation never designs a city: it fills a fixed skeleton.
 
 A culture's kit and templates are derived in a fixed order (FR-047) [Direction; constitution, Source Register, row
-Imperium's own design]. First comes Imperium-old's design, and everything it defines for them is reused [Design]. Where
+Imperium's own design; Principle IV]. First comes Imperium-old's design, and everything it defines for them is reused [Design]. Where
 it is silent, the maintainer's broad direction comes next, as this repository's merged specs and roadmap record it
 [Direction; Roadmap]. Only where both are silent is the gap filled from the reference city's reading, and what is
 taken from it is marked [Direction], for the maintainer to judge its broad direction. A reading never overrides the
@@ -202,7 +202,7 @@ template (FR-030), and the check in the game, the final one, still follows [Test
   meaning, reusing everything it defines; then, where it is silent, the maintainer's broad direction as the merged
   specs and roadmap record it; and only where both are silent, the reference city's reading, marked [Direction] for
   his judgment of its broad direction. A reading never overrides the design or his recorded direction (the
-  maintainer's broad direction; constitution, Source Register, row Imperium's own design).
+  maintainer's broad direction; constitution, Source Register, row Imperium's own design; Principle IV).
 - Q: Does this feature hold the kits and templates of every culture the alpha opens? → A: No. The alpha opens every
   culture of the base game whose factions have settlements, but this feature holds the tribal culture's; the industrial
   (outlander) and pirate cultures' kits and templates are R16's, written in this feature's forms and checked by its
@@ -261,7 +261,7 @@ Each requirement below names its source in brackets. The sources are those the c
   (`Core/Defs/Misc/FeatureDefs/Features.xml` line 268); and each expansion's `About/About.xml`.
 - **[EULA]**: `EULA.txt`, which is always followed (constitution, Source Register).
 - **[Direction]**: the maintainer's broad direction on where template layouts come from and how they are accepted,
-  which Imperium-old's design leaves open (constitution, Source Register, row Imperium's own design; Principle IV):
+  which Imperium-old's design leaves open (constitution, Principle IV):
   - Templates are drawn, as reference only, from player-built cities of Anno 117 that are publicly shared, whether
     Ubisoft features them through its channels or players share them, or from cities Anno 117 itself presets for
     governors and AI rivals. The layout relationships read from such a city, its river, walls, districts, streets,
@@ -722,7 +722,7 @@ and confirm that no shared file was changed.
 **The order of derivation**
 
 - **FR-047**: A culture's kit and templates MUST be derived in this order [Direction; constitution, Source Register,
-  row Imperium's own design]:
+  row Imperium's own design; Principle IV]:
   1. Imperium-old's default-branch design meaning, reusing everything it defines for them, such as the parts and
      relations of a skeleton and what a kit holds [Design: lines 184, 193, 204, 209];
   2. where that design is silent, the maintainer's broad direction, as this repository's merged specs and roadmap
