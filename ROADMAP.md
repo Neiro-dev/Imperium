@@ -18,7 +18,7 @@ not design. Where a design document points to one of them, the slice lists it as
 | ID | Sub-feature | Intent | Scope boundary | Depends on | Status | Sub-spec |
 |----|-------------|--------|----------------|-----------|--------|----------|
 | R1 | Mod foundation | Imperium loads as a mod that requires Royalty and no other expansion, and is complete with Royalty alone (`docs/imperium.md` lines 108-109) | In: a loadable mod and its requirements. Deferred: all content | — | in-progress | specs/001-mod-foundation/ |
-| R2 | Mantle | Mantle generates the world the parts take place in, and runs whether Empire content is on or off (`docs/imperium.md` lines 91-92; glossary "Mantle", "city building") | In: the generation layer and its on/off independence. Open: what it generates beyond R4 (the section Mantle of draft #132) | R1 | planned | — |
+| R2 | Mantle | Mantle generates the world the parts take place in, and runs whether Empire content is on or off (`docs/imperium.md` lines 91-92; glossary "Mantle", "city building") | In: the generation layer, its on/off independence, the templates and kits it generates from (glossary "template", "kit"), the settlements it generates with no Empire content, which the alpha opens (glossary "city building"), and the alpha's description, which says that it holds only part of Imperium (`EULA.txt` line 79; `specs/001-mod-foundation/research.md` R-8). Open: what else it generates (the section Mantle of draft #132) | R1 | planned | — |
 | R3 | The Empire faction | The present Empire replaces the base game's Empire, leans toward New Rome, carries no guns (`docs/setting.md` sections Rome, Weapons, Politics) | In: the faction and its rules. Open: mechanoids, appearance, honor guard (drafts #63, #133) | R1 | planned | — |
 | R4 | Starting ruins | A non-expiring quest leads to ruins near the colony that Mantle generates as a decayed town, different each game, which hold the core and disappear once it is taken (`docs/core.md` lines 59-63) | In: quest, site, town generation. Deferred: the core's uses | R2 | planned | — |
 | R5 | The core | The core cannot be destroyed, drops or returns with its building, and can be sold (`docs/core.md` lines 73-80) | In: keeping and selling. Deferred: insignia (R6), analysis device (R7), ultraheavy mechanoid (R9) | R4 | planned | — |
@@ -31,4 +31,16 @@ not design. Where a design document points to one of them, the slice lists it as
 | R12 | The end | One of two ends decides the Empire's rule on this planet (`docs/imperium.md` lines 83-88, 93) | Open: how either end is reached (Imperium-old issue #164) | R6, R8 | planned | — |
 
 The first slice is R1, the only one with no dependencies. City building, Mantle's generation of settlements, starts
-in R2 and is first used by R4.
+in R2; R4 is its first use by the Empire content.
+
+## Releases
+
+The first release is an alpha of Imperium that opens part of its content: Mantle (R2), on the mod foundation (R1).
+Which content a release opens is game content that no design document settles, so it follows the maintainer's broad
+direction (constitution, Principle IV). It changes no dependency: R2 depends on no slice of the Empire content, so it
+can be built before them (spec-of-specs, The roadmap pass, step 4), and Mantle must already run with the Empire content
+off (`docs/imperium.md` lines 91-92), which is how the alpha has it.
+
+The alpha is the same mod as every later release, so it requires Royalty (`docs/imperium.md` line 108), and its
+description says that it holds only part of Imperium (`EULA.txt` line 79). Later releases add the slices of the Empire
+content.
