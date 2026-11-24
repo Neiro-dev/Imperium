@@ -27,7 +27,7 @@ The next level MUST be used only when the previous one gives no form.
 When no source settles a game-content question, the agent MUST ask the maintainer and MUST act
 only after the maintainer decides.
 
-### V. The Project Logic Settles Everything Else
+### V. Questions Outside Game Content
 
 Questions other than game content MUST NOT be put to the maintainer. Rules, files, and practices
 that no fixed source supports MUST be removed. When no fixed source settles such a question, the
