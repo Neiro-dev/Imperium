@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+
+  <!-- Empire settlements. The names are the Latin names of settlements that the Barrington Atlas of the Greek and
+       Roman World gives for the Late Antique period (AD 300-640), in the provinces governed from Constantinople, as
+       Pleiades (pleiades.stoa.org, CC BY 3.0) lists them. -->
+  <RulePackDef>
+    <defName>NamerSettlementEmpireImperium</defName>
+    <rulePack>
+      <rulesStrings>
+        <li>r_name->[townname_fixed]</li>
+      </rulesStrings>
+      <rulesFiles>
+        <li>townname_fixed->Names/EmpireTown_Imperium</li>
+      </rulesFiles>
+    </rulePack>
+  </RulePackDef>
+
+</Defs>
