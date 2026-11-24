@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LaidOutCity>
+  <size>(20,20)</size>
+  <terrain>
+    <Soil><rects><li>(0,0,19,19)</li></rects></Soil>
+  </terrain>
+  <roofs />
+  <things>
+  </things>
+  <parts />
+  <features />
+</LaidOutCity>

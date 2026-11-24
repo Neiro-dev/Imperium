@@ -1,12 +1,19 @@
 """Shared test setup: the game's Data/ folder and small reference pictures."""
 
 import os
+import re
+from dataclasses import dataclass
 from pathlib import Path
 
 import pytest
 from PIL import Image
 
+from mantle_check import cli
+
 FIXTURES = Path(__file__).parent / "fixtures"
+MODS = FIXTURES / "mods"
+NO_EXPANSION = MODS / "NoExpansion"
+NEEDS_ROYALTY = MODS / "NeedsRoyalty"
 
 
 @pytest.fixture(scope="session")
@@ -28,3 +35,47 @@ def make_picture(tmp_path):
         return path
 
     return make
+
+
+PROBLEM_LINE = re.compile(
+    r"^(?P<number>\d+)\. \[(?P<kind>[^\]]+)\] (?P<file>[^,]+), (?P<owner>[^,]+), (?P<where>.+?)"
+    r"(?: at (?P<cell>\(\d+, \d+\)(?:-\(\d+, \d+\))?))?: (?P<message>.*)$"
+)
+
+
+@dataclass
+class CheckResult:
+    status: int
+    report: str
+    out: Path
+
+    @property
+    def problems(self) -> list[dict]:
+        found = []
+        for line in self.report.splitlines():
+            match = PROBLEM_LINE.match(line)
+            if match:
+                found.append(match.groupdict())
+        return found
+
+    def kinds(self) -> list[str]:
+        return [p["kind"] for p in self.problems]
+
+
+@pytest.fixture
+def run_check(data_dir, tmp_path, capsys):
+    """Runs the check as the command does, in the test's own output folder, and gives the exit status and report."""
+
+    def run(files, mods=(), references=(), out: Path | None = None) -> CheckResult:
+        out = out or tmp_path / "out"
+        status = cli.run([Path(f) for f in files], data_dir, out, [Path(m) for m in mods], list(references))
+        captured = capsys.readouterr()
+        report_file = out / "report.txt"
+        result = CheckResult(status, captured.out + captured.err, out)
+        if status != 2:
+            assert report_file.read_text(encoding="utf-8") == captured.out
+            header = re.search(r"^Problems: (\d+)$", captured.out, re.MULTILINE)
+            assert len(result.problems) == (int(header.group(1)) if header else 0), captured.out
+        return result
+
+    return run

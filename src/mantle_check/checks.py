@@ -62,21 +62,21 @@ class Checker:
         source = self.game.source_of(origin)
         return source.name if source is not None else origin
 
-    def lookup(self, named: Named, short_type: str, what: str) -> Definition | None:
+    def lookup(self, named: Named, short_type: str, what: str, cell: Rect | None = None) -> Definition | None:
         found = self.game.find(named.name)
         if not found:
-            self.problem("unknown definition", named.where, f"{named.name} is in neither Data/ nor the mods given")
+            self.problem("unknown definition", named.where, f"{named.name} is in neither Data/ nor the mods given", cell)
             return None
         typed = [d for d in found if d.short_type == short_type]
         if not typed:
             kinds = ", ".join(sorted({d.short_type for d in found}))
-            self.problem("wrong kind", named.where, f"{named.name} is a {kinds}, not {what}")
+            self.problem("wrong kind", named.where, f"{named.name} is a {kinds}, not {what}", cell)
             return None
         definition = typed[-1]
-        self.other_expansion(named, definition)
+        self.other_expansion(named, definition, cell)
         return definition
 
-    def other_expansion(self, named: Named, definition: Definition) -> None:
+    def other_expansion(self, named: Named, definition: Definition, cell: Rect | None = None) -> None:
         if not definition.is_expansion:
             return
         if definition.origin in self.holder.requires or definition.origin in named.marked:
@@ -88,25 +88,27 @@ class Checker:
             held = f"{expansion} content in a file no mod holds, which requires no expansion,"
         else:
             held = f"{expansion} content, which {self.holder.name} does not require,"
-        self.problem("other expansion", named.where, f'{named.name} is {held} and is not marked MayRequire="{package}"')
+        self.problem(
+            "other expansion", named.where, f'{named.name} is {held} and is not marked MayRequire="{package}"', cell
+        )
 
-    def terrain(self, named: Named, natural_only: bool) -> Definition | None:
-        definition = self.lookup(named, "TerrainDef", "a terrain")
+    def terrain(self, named: Named, natural_only: bool, cell: Rect | None = None) -> Definition | None:
+        definition = self.lookup(named, "TerrainDef", "a terrain", cell)
         if definition is not None and natural_only:
             if not is_true(text(self.game.resolved(definition), "natural")):
-                self.problem("wrong kind", named.where, f"{named.name} is not natural terrain")
+                self.problem("wrong kind", named.where, f"{named.name} is not natural terrain", cell)
         return definition
 
-    def rock(self, named: Named) -> None:
-        definition = self.lookup(named, "ThingDef", "a rock")
+    def rock(self, named: Named, cell: Rect | None = None) -> None:
+        definition = self.lookup(named, "ThingDef", "a rock", cell)
         if definition is not None and not is_true(text(self.game.resolved(definition), "building/isNaturalRock")):
-            self.problem("wrong kind", named.where, f"{named.name} is not natural rock")
+            self.problem("wrong kind", named.where, f"{named.name} is not natural rock: a template holds no building", cell)
 
-    def roof(self, named: Named, natural_only: bool) -> None:
-        definition = self.lookup(named, "RoofDef", "a roof")
+    def roof(self, named: Named, natural_only: bool, cell: Rect | None = None) -> None:
+        definition = self.lookup(named, "RoofDef", "a roof", cell)
         if definition is not None and natural_only:
             if not is_true(text(self.game.resolved(definition), "isNatural")):
-                self.problem("wrong kind", named.where, f"{named.name} is not a natural roof")
+                self.problem("wrong kind", named.where, f"{named.name} is not a natural roof", cell)
 
     def wall(self, named: Named | None, where: str) -> None:
         if named is None:
@@ -116,21 +118,21 @@ class Checker:
         if definition is not None and not is_true(text(self.game.resolved(definition), "building/isWall")):
             self.problem("wrong kind", named.where, f"{named.name} is not a wall")
 
-    def material(self, thing: Thing, definition: Definition) -> Definition | None:
+    def material(self, thing: Thing, definition: Definition, cell: Rect | None = None) -> Definition | None:
         resolved = self.game.resolved(definition)
         categories = set(list_values(resolved, "stuffCategories"))
         if thing.stuff is None:
             if categories:
-                self.problem("material", thing.where, f"{definition.name} takes a material and none is given")
+                self.problem("material", thing.where, f"{definition.name} takes a material and none is given", cell)
             return None
-        stuff = self.lookup(thing.stuff, "ThingDef", "a material")
+        stuff = self.lookup(thing.stuff, "ThingDef", "a material", cell)
         if stuff is None:
             return None
         stuff_categories = set(list_values(self.game.resolved(stuff), "stuffProps/categories"))
         if not categories:
-            self.problem("material", thing.stuff.where, f"{definition.name} takes no material")
+            self.problem("material", thing.stuff.where, f"{definition.name} takes no material", cell)
         elif not categories & stuff_categories:
-            self.problem("material", thing.stuff.where, f"{definition.name} does not take {stuff.name}")
+            self.problem("material", thing.stuff.where, f"{definition.name} does not take {stuff.name}", cell)
         return stuff
 
     # Cells (FR-007, FR-016)
@@ -156,7 +158,11 @@ class Checker:
 
     # Skeletons (FR-005, FR-017)
 
-    def skeleton(self, skeleton: Skeleton, kit_skeleton: Skeleton | None, features: dict[str, object] | None) -> None:
+    def skeleton(
+        self, skeleton: Skeleton, kit_skeleton: Skeleton | None, features: dict[str, object] | None, kit_known: bool = True
+    ) -> None:
+        """Checks a skeleton's names. While a template's kit is unknown, a name that may be the kit's part is not
+        reported: the missing or unknown kit is."""
         kit_parts = {p.name: p.kind for p in kit_skeleton.parts} if kit_skeleton is not None else {}
         own: dict[str, str] = {}
         for part in skeleton.parts:
@@ -184,7 +190,7 @@ class Checker:
                     self.problem("wrong kind", where, f"{relation.kind} needs {needed}")
             for key in ("a", "b", "than"):
                 value = getattr(relation, key)
-                if value is not None and value not in names and value not in feature_names:
+                if value is not None and value not in names and value not in feature_names and kit_known:
                     holder = "the skeletons and the terrain shape hold" if features is not None else "the kit holds"
                     self.problem("unknown name", where, f"{key} names {value}, which no part {holder} is")
             if relation.feature is not None and RELATION_NEEDS[relation.kind].count("feature"):
@@ -214,27 +220,37 @@ class Checker:
         for named in template.allowed_rivers:
             self.lookup(named, "RiverDef", "a river")
         for entry in template.terrain:
-            self.terrain(entry.ref, natural_only=True)
+            self.terrain(entry.ref, natural_only=True, cell=bounding_rects(entry.rects))
         for entry in template.rocks:
-            self.rock(entry.ref)
+            self.rock(entry.ref, cell=bounding_rects(entry.rects))
         for entry in template.roofs:
-            self.roof(entry.ref, natural_only=True)
-        bounds = template.min_map_size or (MAX_MAP, MAX_MAP)
-        if bounds[0] > MAX_MAP or bounds[1] > MAX_MAP:
-            self.problem("outside the map", "minMapSize", f"the smallest map is larger than {MAX_MAP}×{MAX_MAP}")
-        past = f"the smallest map ({bounds[0]}×{bounds[1]})"
+            self.roof(entry.ref, natural_only=True, cell=bounding_rects(entry.rects))
+        for thing in template.buildings:
+            cell = (*thing.position, *thing.position) if thing.position is not None else thing.rect
+            self.problem("wrong kind", thing.where, f"{thing.ref.name} is placed on the template's cells: a template "
+                         "holds no building", cell)
+        if template.min_map_size is None:
+            # With no smallest map stated, only the largest map bounds the cells; the missing or wrong minMapSize is
+            # reported, and cells without terrain cannot be told.
+            bounds, past = (MAX_MAP, MAX_MAP), f"the largest map ({MAX_MAP}×{MAX_MAP})"
+        else:
+            bounds = template.min_map_size
+            if bounds[0] > MAX_MAP or bounds[1] > MAX_MAP:
+                self.problem("outside the map", "minMapSize", f"the smallest map is larger than {MAX_MAP}×{MAX_MAP}")
+            past = f"the smallest map ({bounds[0]}×{bounds[1]})"
         for layer in (template.terrain, template.rocks, template.roofs):
             for entry in layer:
                 self.outside(entry.rects, bounds, entry.ref.where + " " + entry.ref.name, past)
         for feature in template.features:
             self.outside(feature.rects, bounds, f"feature {feature.name}", past)
-        self.no_terrain(template.terrain, (min(bounds[0], MAX_MAP), min(bounds[1], MAX_MAP)), "terrainShape terrain")
+        if template.min_map_size is not None:
+            self.no_terrain(template.terrain, (min(bounds[0], MAX_MAP), min(bounds[1], MAX_MAP)), "terrainShape terrain")
         features = {}
         for feature in template.features:
             if feature.name in features:
                 self.problem("unknown name", f"feature {feature.name}", f"{feature.name} is named twice")
             features[feature.name] = feature
-        self.skeleton(template.skeleton, kit.skeleton if kit is not None else None, features)
+        self.skeleton(template.skeleton, kit.skeleton if kit is not None else None, features, kit_known=kit is not None)
 
     # Kits
 
@@ -267,9 +283,10 @@ class Checker:
 
     def placed_things(self, things: list[Thing], bounds: tuple[int, int] | None, past: str) -> None:
         for thing in things:
-            definition = self.lookup(thing.ref, "ThingDef", "a thing")
+            cell = (*thing.position, *thing.position) if thing.position is not None else thing.rect
+            definition = self.lookup(thing.ref, "ThingDef", "a thing", cell)
             if definition is not None:
-                self.material(thing, definition)
+                self.material(thing, definition, cell)
             if bounds is None:
                 continue
             if thing.position is not None:
@@ -280,7 +297,7 @@ class Checker:
 
     def group(self, group: Group) -> None:
         for entry in group.terrain:
-            self.terrain(entry.ref, natural_only=False)
+            self.terrain(entry.ref, natural_only=False, cell=bounding_rects(entry.rects))
             if group.size is not None:
                 self.outside(entry.rects, group.size, f"{entry.ref.where} {entry.ref.name}", "the group's size")
         self.placed_things(group.things, group.size, "the group's size")
@@ -288,7 +305,7 @@ class Checker:
     def spec_card(self, card: SpecCard) -> None:
         past = "its plot"
         for entry in card.terrain:
-            self.terrain(entry.ref, natural_only=False)
+            self.terrain(entry.ref, natural_only=False, cell=bounding_rects(entry.rects))
             if card.size is not None:
                 self.outside(entry.rects, card.size, f"{entry.ref.where} {entry.ref.name}", past)
         for room in card.rooms:
@@ -323,10 +340,10 @@ class Checker:
         past = f"the map ({size[0]}×{size[1]})"
         terrain_defs: list[Definition | None] = []
         for entry in city.terrain:
-            terrain_defs.append(self.terrain(entry.ref, natural_only=False))
+            terrain_defs.append(self.terrain(entry.ref, natural_only=False, cell=bounding_rects(entry.rects)))
             self.outside(entry.rects, size, f"{entry.ref.where} {entry.ref.name}", past)
         for entry in city.roofs:
-            self.roof(entry.ref, natural_only=False)
+            self.roof(entry.ref, natural_only=False, cell=bounding_rects(entry.rects))
             self.outside(entry.rects, size, f"{entry.ref.where} {entry.ref.name}", past)
         for area in city.parts + city.features:
             self.outside(area.rects, size, f"{area.name}", past)
@@ -339,8 +356,11 @@ class Checker:
             self.city_skeleton(city, template, kit, bounds)
 
     def city_thing(self, thing, size, past, grid, terrain_defs, layers) -> None:
-        definition = self.lookup(thing.ref, "ThingDef", "a thing")
-        stuff = self.material(thing, definition) if definition is not None else None
+        cell = thing.rect if thing.rect is not None else (
+            (*thing.position, *thing.position) if thing.position is not None else None
+        )
+        definition = self.lookup(thing.ref, "ThingDef", "a thing", cell)
+        stuff = self.material(thing, definition, cell) if definition is not None else None
         cells: list[tuple[int, int]] = []
         if thing.rect is not None:
             self.outside([thing.rect], size, thing.where, past)
@@ -503,6 +523,12 @@ def uncovered_rects(covered: bytearray, w: int, h: int) -> list[Rect]:
         for run in runs:
             open_runs.setdefault(run, z)
     return sorted(rects, key=lambda r: (r[1], r[0], r[3], r[2]))
+
+
+def bounding_rects(rects: list[Rect]) -> Rect | None:
+    if not rects:
+        return None
+    return (min(r[0] for r in rects), min(r[1] for r in rects), max(r[2] for r in rects), max(r[3] for r in rects))
 
 
 def bounding(cells: set[tuple[int, int]]) -> Rect | None:

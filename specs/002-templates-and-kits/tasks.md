@@ -100,9 +100,9 @@ checked, and each report lists exactly the problems its file holds (spec, User S
 
 ### Tests for User Story 1
 
-- [ ] T013 [P] [US1] Write two test mods in `tests/fixtures/mods/`: one whose `About/About.xml` requires no
+- [X] T013 [P] [US1] Write two test mods in `tests/fixtures/mods/`: one whose `About/About.xml` requires no
   expansion, as Mantle's does, and one that requires Royalty, as Imperium does (spec FR-015)
-- [ ] T014 [P] [US1] Write test templates, kits and readings in `tests/fixtures/us1/`, each holding one problem of
+- [X] T014 [P] [US1] Write test templates, kits and readings in `tests/fixtures/us1/`, each holding one problem of
   data-model.md, What the check reports: unknown definition; wrong kind (a terrain that is not natural, a `wallDef` that
   is not a wall, a name that is not a `BiomeDef` in `allowedBiomes`, one that is not a `RiverDef` in `allowedRivers`,
   one that is not a `RulePackDef` in `nameMaker`, an unknown part or relation kind, a relation missing its field); wrong
@@ -112,30 +112,30 @@ checked, and each report lists exactly the problems its file holds (spec, User S
   unmarked, a Royalty definition unmarked in a kit of each test mod, and a Biotech definition unmarked in a reading that
   no template names); outside the map; no terrain; unknown name; duplicate name; no kit; a building on a template's
   cell; and one template and kit with none
-- [ ] T015 [US1] Write `tests/test_templates_and_kits.py`: each fixture of T014 gives exactly its problem, with its cell
+- [X] T015 [US1] Write `tests/test_templates_and_kits.py`: each fixture of T014 gives exactly its problem, with its cell
   where it has one, the Royalty definition is reported only in the kit of the mod that does not require Royalty, the
   Biotech definition in the reading that no template names is reported (spec FR-015), the clean pair gives none and exit
   status 0, and every report ends with the statement of FR-020 (spec, User Story 1, scenarios 1-6; SC-001, SC-004)
-- [ ] T016 [P] [US1] Write `tests/test_command.py`: `Data/` missing, `Version.txt` of another version, a `--mod`
+- [X] T016 [P] [US1] Write `tests/test_command.py`: `Data/` missing, `Version.txt` of another version, a `--mod`
   folder without `About/About.xml`, an output folder inside the repository and a file that is not XML each give exit
   status 2 and report nothing as passing (contracts/check-command.md, Exit status; spec, Edge Cases)
 
 ### Implementation for User Story 1
 
-- [ ] T017 [US1] Implement unknown definition and wrong kind in `src/mantle_check/checks.py`: names found
+- [X] T017 [US1] Implement unknown definition and wrong kind in `src/mantle_check/checks.py`: names found
   neither in `Data/` nor in the given mods' `Defs/`, and names where their kind cannot go: natural terrain, rock and
   roofs only in data-model.md `TerrainShape.terrain`, `TerrainShape.rocks` and `TerrainShape.roofs`, a wall in
   `KitDef.wallSettings` and in `KitDef.fill`'s `wallDef`, a material `doorDef` takes in `KitDef.fill`'s
   `doorStuffDef`, a `BiomeDef` in `TemplateDef.allowedBiomes`, a `RiverDef` in `TemplateDef.allowedRivers`, a
   `RulePackDef` in `KitDef.nameMaker`, and a known `Part.kind` and `Relation.relation`; and wrong form, not square and
   missing field as data-model.md, What the check reports, lists them (spec FR-013, FR-014; research R-4)
-- [ ] T018 [US1] Implement other expansion in `src/mantle_check/checks.py`: a definition of an expansion that
+- [X] T018 [US1] Implement other expansion in `src/mantle_check/checks.py`: a definition of an expansion that
   the mod holding the file does not require, without that expansion's `MayRequire`, a laid-out city or reading held
   as spec FR-015 sets (spec FR-015; research R-3)
-- [ ] T019 [US1] Implement outside the map, no terrain, unknown name and no kit for templates and kits in
+- [X] T019 [US1] Implement outside the map, no terrain, unknown name and no kit for templates and kits in
   `src/mantle_check/checks.py`, against data-model.md `TemplateDef.kit`, `TemplateDef.minMapSize`,
   `TerrainShape.features`, `Skeleton.parts`, `Skeleton.relations` and `Group.size` (spec FR-016, FR-017)
-- [ ] T020 [US1] Run the checks of T017 to T019 from `src/mantle_check/cli.py` on each template and kit file
+- [X] T020 [US1] Run the checks of T017 to T019 from `src/mantle_check/cli.py` on each template and kit file
   given, and pass T015 and T016
 
 **Checkpoint**: User Story 1 works on its own: the MVP

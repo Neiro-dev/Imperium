@@ -142,6 +142,7 @@ class Template:
     roofs: list[LayerEntry]
     features: list[Area]
     skeleton: Skeleton
+    buildings: list[Thing] = field(default_factory=list)
 
     @property
     def owner(self) -> str:
@@ -403,6 +404,8 @@ def read_template(node: ET.Element, file: str) -> tuple[Template, list[Problem]]
         roofs=reader.layer(shape.find("roofs") if shape is not None else None, "terrainShape roofs", marked),
         features=reader.areas(shape.find("features") if shape is not None else None, "terrainShape features", True),
         skeleton=reader.skeleton(node.find("skeleton")),
+        buildings=reader.things(node.find("things"), "things", marked)
+        + reader.things(shape.find("things") if shape is not None else None, "terrainShape things", marked),
     )
     return template, reader.problems
 

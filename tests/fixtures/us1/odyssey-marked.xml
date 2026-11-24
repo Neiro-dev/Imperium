@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+  <Mantle.TemplateDef>
+    <defName>TestOdysseyMarked</defName>
+    <label>TestOdysseyMarked</label>
+    <kit>TestTribal</kit>
+    <reference>
+      <name>TestOdysseyMarked</name>
+    </reference>
+    <naturalEnemy>true</naturalEnemy>
+    <minMapSize>(40, 1, 40)</minMapSize>
+    <terrainShape>
+      <terrain>
+        <Soil><rects><li>(0,0,39,39)</li></rects></Soil>
+        <WaterMovingShallow><rects><li>(18,0,21,39)</li></rects></WaterMovingShallow>
+        <GrasslandSoil MayRequire="Ludeon.RimWorld.Odyssey"><rects><li>(30,30,35,35)</li></rects></GrasslandSoil>
+      </terrain>
+      <rocks>
+        <Granite><rects><li>(0,30,5,39)</li></rects></Granite>
+      </rocks>
+      <roofs>
+        <RoofRockThin><rects><li>(0,34,3,39)</li></rects></RoofRockThin>
+      </roofs>
+      <features>
+        <li><name>stream</name><rects><li>(18,0,21,39)</li></rects><flowsFrom>North</flowsFrom></li>
+      </features>
+    </terrainShape>
+    <skeleton>
+      <parts>
+        <li><name>westField</name><kind>District</kind></li>
+        <li><name>eastField</name><kind>District</kind></li>
+        <li><name>ford</name><kind>Bridge</kind></li>
+      </parts>
+      <relations>
+        <li><relation>Across</relation><a>westField</a><b>eastField</b><feature>stream</feature></li>
+        <li><relation>Adjoins</relation><a>ford</a><b>westField</b></li>
+        <li><relation>SameSide</relation><a>core</a><b>westField</b><feature>stream</feature></li>
+        <li><relation>Upstream</relation><a>gate</a><b>core</b><feature>stream</feature></li>
+      </relations>
+    </skeleton>
+  </Mantle.TemplateDef>
+</Defs>

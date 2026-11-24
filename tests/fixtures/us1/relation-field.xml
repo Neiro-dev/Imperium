@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+  <Mantle.TemplateDef>
+    <defName>TestRelationField</defName>
+    <label>TestRelationField</label>
+    <kit>TestTribal</kit>
+    <reference>
+      <name>TestRelationField</name>
+    </reference>
+    <naturalEnemy>true</naturalEnemy>
+    <minMapSize>(40, 1, 40)</minMapSize>
+    <terrainShape>
+      <terrain>
+        <Soil><rects><li>(0,0,39,39)</li></rects></Soil>
+        <WaterMovingShallow><rects><li>(18,0,21,39)</li></rects></WaterMovingShallow>
+      </terrain>
+      <rocks>
+        <Granite><rects><li>(0,30,5,39)</li></rects></Granite>
+      </rocks>
+      <roofs>
+        <RoofRockThin><rects><li>(0,34,3,39)</li></rects></RoofRockThin>
+      </roofs>
+      <features>
+        <li><name>stream</name><rects><li>(18,0,21,39)</li></rects><flowsFrom>North</flowsFrom></li>
+      </features>
+    </terrainShape>
+    <skeleton>
+      <parts>
+        <li><name>westField</name><kind>District</kind></li>
+        <li><name>eastField</name><kind>District</kind></li>
+        <li><name>ford</name><kind>Bridge</kind></li>
+      </parts>
+      <relations>
+        <li><relation>Across</relation><a>westField</a><b>eastField</b></li>
+        <li><relation>Adjoins</relation><a>ford</a><b>westField</b></li>
+      </relations>
+    </skeleton>
+  </Mantle.TemplateDef>
+</Defs>

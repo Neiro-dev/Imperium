@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+  <Mantle.KitDef>
+    <defName>TestEmpireRoyalNamer</defName>
+    <label>TestEmpireRoyalNamer</label>
+    <nameMaker>NamerSettlementEmpire</nameMaker>
+    <skeleton>
+      <parts>
+        <li><name>core</name><kind>Core</kind></li>
+        <li><name>gate</name><kind>Gate</kind></li>
+        <li><name>walls</name><kind>WallLine</kind><optional>true</optional></li>
+      </parts>
+      <relations>
+        <li><relation>Adjoins</relation><a>gate</a><b>walls</b></li>
+        <li><relation>Farther</relation><a>core</a><b>gate</b><than>walls</than></li>
+      </relations>
+    </skeleton>
+    <wallSettings>
+      <wallDef>Wall</wallDef>
+    </wallSettings>
+    <groups>
+      <li>
+        <name>hut</name>
+        <size>(5,5)</size>
+        <terrain>
+          <WoodPlankFloor><rects><li>(0,0,4,4)</li></rects></WoodPlankFloor>
+        </terrain>
+        <things>
+          <Wall><position>(0,0,0)</position><rotation>North</rotation><stuff>WoodLog</stuff></Wall>
+          <Door><position>(2,0,0)</position><rotation>North</rotation><stuff>WoodLog</stuff></Door>
+        </things>
+      </li>
+    </groups>
+    <fill>
+      <wallDef>Wall</wallDef>
+      <doorDef>Door</doorDef>
+      <doorStuffDef>WoodLog</doorStuffDef>
+      <plots />
+    </fill>
+  </Mantle.KitDef>
+</Defs>
