@@ -4,11 +4,10 @@
 
 ### I. One Source per Topic
 
-Every answer MUST come from the source the Source Register gives for its topic. When a question
-fits several topics, the answer MUST come from their sources, in the order of their rows. When no
-topic fits, the answer MUST come from the sources the Source Register lists in the question's
-layer, in the order of their rows. Nothing outside the Source Register is a source, except the
-maintainer, who comes last, under Principle IV.
+Every answer MUST come from the source the Source Register gives for its topic. When no topic
+fits, the answer MUST come from the sources the Source Register lists in the question's layer, in
+the order of their rows; the maintainer comes last, under Principle IV. Nothing outside the
+Source Register is a source.
 
 ### II. Other Sources Only Cross-Check
 
@@ -16,8 +15,8 @@ Sources other than those Principle I gives MUST be used only to cross-check.
 
 ### III. Sources in Order
 
-Where a topic lists several sources in order, or Principle I puts them in the order of their
-rows, the next one MUST be used only when the previous one gives no form.
+Where a topic, or a layer under Principle I, lists several sources in order, the next one MUST be
+used only when the previous one gives no form.
 
 ### IV. Asking the Maintainer
 
@@ -64,4 +63,4 @@ Versioning follows semantic versioning:
 
 Compliance is reviewed at each plan's Constitution Check and at pull request review.
 
-**Version**: 2.3.0 | **Ratified**: 2026-11-23 | **Last Amended**: 2026-11-24
+**Version**: 2.2.1 | **Ratified**: 2026-11-23 | **Last Amended**: 2026-11-24
