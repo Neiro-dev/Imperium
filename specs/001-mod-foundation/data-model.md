@@ -15,8 +15,8 @@ on is in [contracts/about-xml.md](contracts/about-xml.md).
 | `modDependencies` | one Royalty dependency (below) | each entry has `packageId`, `displayName`, and `downloadUrl` or `steamWorkshopUrl` | R-7; `ModUpdating.txt` lines 266-275 |
 | `forceLoadAfter` | `Ludeon.RimWorld`, `Ludeon.RimWorld.Royalty`, `Ludeon.RimWorld.Ideology`, `Ludeon.RimWorld.Biotech`, `Ludeon.RimWorld.Anomaly`, `Ludeon.RimWorld.Odyssey` | package identifiers | R-6 |
 
-Fields left out in R1: `description`, `url`, `steamAppId`, `forceLoadBefore`, `loadBefore`, `loadAfter`,
-`incompatibleWith`, and the versioned fields (R-2, R-6, R-8).
+Fields left out in R1: `description`, `url`, `steamAppId`, `forceLoadBefore`, `loadBefore`, `incompatibleWith`,
+the versioned fields (R-2, R-6, R-8), and `loadAfter` unless research R-6's fallback replaces `forceLoadAfter` with it.
 
 ## Royalty dependency (one entry of `modDependencies`)
 

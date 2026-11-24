@@ -178,9 +178,9 @@ Odyssey added; each loads with no errors from Imperium and shows no missing requ
   [Readme: line 21] has zero error or warning lines beyond the same launch with Core and Royalty alone.
 - **SC-002**: With Royalty off, Imperium shows a missing requirement for Royalty in 100% of attempts, and for no other
   expansion.
-- **SC-003**: Across Royalty alone and every combination of the four other official expansions added to it (16
-  combinations), every one loads with zero error lines in the log beyond the same combination without Imperium,
-  with Imperium after every active official expansion and no load-order warning for it.
+- **SC-003**: Across every combination of the four other official expansions added to Core and Royalty, none
+  included (16 combinations), every one loads with zero error lines in the log beyond the same combination without
+  Imperium, with Imperium after every active official expansion and no load-order warning for it.
 - **SC-004**: Nothing the game shows for Imperium states or implies that it is official or made by Ludeon, and the
   EULA's disclaimer is displayed with it.
 
@@ -189,10 +189,9 @@ Odyssey added; each loads with no errors from Imperium and shows no missing requ
 - The mod's name in the mod list is Imperium, the name the design uses throughout [Design: `docs/imperium.md` title].
 - Each official expansion presents itself with a label, a description of what it contains, an icon and preview
   images [Data: ExpansionDefs.xml lines 13-39 for Royalty, and the same parts for each other expansion]. Imperium's
-  description and images take that form, within FR-008. Because each official description lists only what that
-  expansion contains, and this feature adds no content, they are written with the content they describe in later
-  entries [Roadmap: R1, "Deferred: all content"]. How Imperium shows them, given that the base game defines its own
-  expansions, belongs to `/speckit-plan`.
+  description and images take the parts of that form a community mod can use, within FR-008 (research.md R-8).
+  Because each official description lists only what that expansion contains, and this feature adds no content, they
+  are written with the content they describe in later entries [Roadmap: R1, "Deferred: all content"].
 - Whether Harmony is needed is an implementation question for `/speckit-plan`; this feature adds no code that needs
   it unless the plan finds otherwise.
 - Testing in the game follows the constitution's testing sources: first `Readme.txt` line 58 (the `-quicktest`

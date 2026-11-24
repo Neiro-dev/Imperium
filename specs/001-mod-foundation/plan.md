@@ -27,7 +27,7 @@ to R-8). No code, content or Harmony (R-9). It is validated in the game on the m
 line 21), then RimBridgeServer 2.4.0 or later with GABS for what `Readme.txt` gives no form for (research R-10)
 
 **Target Platform**: RimWorld 1.7 only (research R-5), tested on the maintainer's Windows install at
-`D:\Steam\steamapps\common\RimWorld` (project instructions)
+`D:\Steam\steamapps\common\RimWorld`, the only install of the game the project has
 
 **Project Type**: RimWorld mod folder (`ModUpdating.txt` lines 68-81)
 
