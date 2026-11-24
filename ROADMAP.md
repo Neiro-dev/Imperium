@@ -50,14 +50,14 @@ comes as a mod of its own that other mods depend on, as Harmony does (`pardeike/
 The alpha requires no expansion. The requirement of Royalty binds Imperium (`docs/imperium.md` line 108), and a mod is
 the one its `packageId` names, whose requirements are the mods it needs to function (`ModUpdating.txt` lines 230 and
 267), so Mantle's own mod is not bound by it. Mantle must already run with the Empire content off (`docs/imperium.md`
-lines 91-92), which is how the alpha has it. Imperium is a remake of Royalty (glossary "Royalty"), Mantle comes with it,
-and Mantle generates the world Imperium's parts take place in (`docs/imperium.md` line 91), in which the base game's
-Empire does not exist (`docs/setting.md` line 83). So where Royalty is active, Mantle creates its worlds without the
-base game's Empire, as the game does when a player turns a faction off in world creation
-(`Royalty/Defs/FactionDefs/Faction_Empire.xml` lines 184-185; `Core/Languages/English/Keyed/Menus_Main.xml` line 409),
-and an empire appears only with Imperium (R3). Mantle's settlements go to every faction that has a kit. The alpha's
-description says that it is Mantle alone, a part of Imperium, and that its worlds hold no base-game Empire (`EULA.txt`
-line 79).
+lines 91-92), which is how the alpha has it. Imperium is a remake of Royalty (glossary "Royalty"), Mantle comes with it
+as the framework layer of its code (glossary "Mantle"), and Mantle generates the world Imperium's parts take place in
+(`docs/imperium.md` line 91), in which the base game's Empire does not exist (`docs/setting.md` line 83). So where
+Royalty is active, Mantle creates its worlds without the base game's Empire, as the game does when a player turns a
+faction off in world creation (`Royalty/Defs/FactionDefs/Faction_Empire.xml` lines 184-185;
+`Core/Languages/English/Keyed/Menus_Main.xml` line 409), and an empire appears only with Imperium (R3). Mantle's
+settlements go to every faction that has a kit. The alpha's description says that it is Mantle alone, a part of
+Imperium, and that its worlds hold no base-game Empire (`EULA.txt` line 79).
 
 Imperium requires Royalty and no other expansion (R1), and requires Mantle from the first slice whose content uses it,
 as the mods built on Harmony depend on Harmony, of which one copy is enabled (the same README lines; constitution,
