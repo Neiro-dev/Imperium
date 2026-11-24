@@ -31,7 +31,15 @@
 
 ## Notes
 
-- FR-007 names `Data/`, `ModUpdating.txt` and Harmony on purpose: it restates the constitution's source order for the
-  released mod, not a technology choice.
+- Review of the first draft (PR #8) against the constitution:
+  - Principle VI: the requirements, edge cases and assumptions now name their sources in brackets.
+  - The first draft's FR-007 restated the constitution's source order as a product requirement. It was removed:
+    compliance with the constitution is checked at the plan's Constitution Check (constitution, Governance), and a
+    spec describes what the player needs, not how it is built (`/speckit-specify`, Quick Guidelines). Its FR-008 is
+    now FR-007.
+  - SC-003 covered 6 expansion combinations while FR-006 requires any combination; it now covers all 16.
+  - `ROADMAP.md` R1 now links this spec and is in progress, as Spec Kit's roadmap convention asks
+    (`docs/how-to/spec-of-specs.md` v1.4.3, sections The roadmap artifact and Linking sub-specs to the roadmap).
+- Bracketed source names in the spec name where each requirement comes from; they do not prescribe a technology.
 - No game content in this feature is left to the maintainer: the design settles the requirements, and the mod's
   form is left to `/speckit-plan` from the constitution's sources.
