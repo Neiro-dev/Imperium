@@ -72,8 +72,8 @@ Common forms, all from `Data/` (R-3):
 | `nameMaker` | a `RulePackDef` | the word list | FR-006, FR-011; R-3 |
 | `skeleton` | Skeleton | what every city of the culture has; parts only | FR-006; R-5 |
 | `wallSettings` | `wallDef`, a `ThingDef` | a wall (`building/isWall`) | FR-006, FR-014; R-3 |
-| `groups` | list of Group | the sets of things placed together that the culture's reading shows (R-8) | FR-006, FR-036 |
-| `fill` | `wallDef`, `doorDef`, `doorStuffDef`, `plots` (list of Group) | what the reading's blocks are built with (R-8); `wallDef` a wall, `doorStuffDef` a material `doorDef` takes | FR-006, FR-014, FR-018, FR-036 |
+| `groups` | list of Group | derived in FR-047's order; where the design and the recorded direction are silent, the sets of things placed together that the culture's reading shows (R-8) | FR-006, FR-036, FR-047 |
+| `fill` | `wallDef`, `doorDef`, `doorStuffDef`, `plots` (list of Group) | derived in FR-047's order; where the design and the recorded direction are silent, what the reading's blocks are built with (R-8); `wallDef` a wall, `doorStuffDef` a material `doorDef` takes | FR-006, FR-014, FR-018, FR-036, FR-047 |
 | `blockLibrary` | list of SpecCard | optional; the Empire has none | FR-006; glossary line 167 |
 
 **Group**: `name`; `size`; `terrain`, a layer; `things`, each in the thing form below, placed from the group's own
@@ -102,6 +102,22 @@ whose `reference` names it, or by no mod, requiring no expansion, while no templ
 **A reading's acceptance**: a reading counts once the check reports no problem in it and the maintainer has accepted
 it beside its reference pictures (FR-036), recorded as an item of `checklists/acceptance.md` that names the reading,
 the commit and where the picture is in the project's files, checked when he accepts it (FR-029).
+
+## Top-down view (in the project's files, not the repository)
+
+The drawing of a preset reference read from its game's own data (spec FR-041 to FR-044; research R-15). The check
+does not read it as data: its two pictures are given to the check as reference pictures (`--reference`).
+
+| Output | Holds | Source |
+|--------|-------|--------|
+| skeleton picture, PNG | each object at its `(x, z)` on the cells, over the island's heightmap, turned to match the game's `mapimage.png`; linear pieces as lines, houses as markers, fields as squares | FR-043 |
+| overlay, PNG | the same laid over the game's `mapimage.png` | FR-043 |
+| `objects.json` | every object read, each with its asset Template, the graphics folder its ConfigFilename names, and its position | FR-042, FR-043 |
+| summary | what was read and drawn | FR-043 |
+
+It is drawn in steps, each seen by the maintainer before the next: dots by category, then the skeleton, then,
+optionally, real footprints from the game's `.ifo` files (FR-044). All of it, and the packages it is read from, stay
+out of the repository (FR-041).
 
 ## Report and pictures
 
@@ -135,7 +151,8 @@ The check stops, and reports nothing as passing, when `Data/` is missing or not 
 
 ## States of a template
 
-1. **Written**: in its mod's `Defs/TemplateDefs/`, taken from its culture's reading (FR-036).
+1. **Written**: in its mod's `Defs/TemplateDefs/`, derived in FR-047's order, its culture's reading filling what the
+   design and the recorded direction leave open, each part naming its source (FR-036, FR-047).
 2. **Checked**: the check reports no problem in it or its kit.
 3. **Laid out**: a city generation laid out from it is checked, every relation holds (R2).
 4. **Accepted**: the maintainer has accepted the side-by-side picture, recorded as a checked item of a reviewer-owned

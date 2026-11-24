@@ -241,7 +241,11 @@ hold, one with a room or thing past its plot and one with neither, is checked, a
 ## Phase 7: The first kits and templates
 
 **Purpose**: The game content this feature holds, taken from readings and checked with the stories above (spec FR-031,
-FR-032, FR-036, FR-037, FR-039, FR-040; research R-13, R-14)
+FR-032, FR-036, FR-037, FR-039, FR-040; research R-13, R-14), and the drawing of any preset reference read from its
+game's data (spec FR-041 to FR-045; research R-15). Every kit and template here is derived in the order of spec
+FR-047, Imperium-old's design first, then the maintainer's recorded direction, and a reading only where both are
+silent, each part naming its source (research R-13). The industrial (outlander) and pirate cultures' kits and
+templates are R16's, not this feature's (spec FR-032)
 
 ### The Empire and the river-bend town, which calibrate the method first
 
@@ -278,17 +282,38 @@ FR-032, FR-036, FR-037, FR-039, FR-040; research R-13, R-14)
 - [ ] T042 [P] Write the savage tribe's reading in `readings/`, under the mod's own name for a fortress, from
   `template-references/部落城-凯尔特/野蛮部落-小山堡-3621994739.jpg`, the same way; the agricultural island is only looked
   at beside the three, and nothing is taken from it (spec FR-036, FR-037)
-- [ ] T043 Write the tribal kit in `Mantle/Defs/KitDefs/Kits_Tribal.xml`, taken from the three accepted readings:
-  data-model.md `KitDef.nameMaker` as the base game's `NamerSettlementTribal`, `KitDef.skeleton`,
-  `KitDef.wallSettings`, `KitDef.groups` and `KitDef.fill`, with base-game definitions only, or expansion content
-  marked (spec FR-006, FR-011, FR-015)
+- [ ] T043 Write the tribal kit in `Mantle/Defs/KitDefs/Kits_Tribal.xml`, derived in the order of spec FR-047, with the
+  three accepted readings filling what the design and the recorded direction leave open, each part naming its source
+  (research R-13): data-model.md `KitDef.nameMaker` as the base game's `NamerSettlementTribal`, `KitDef.skeleton`,
+  `KitDef.wallSettings`, `KitDef.groups` and `KitDef.fill`, with base-game definitions only, or expansion content marked
+  (spec FR-006, FR-011, FR-015)
 - [ ] T044 Write the three tribal templates in `Mantle/Defs/TemplateDefs/Templates_Tribal.xml`, one from each reading,
-  each with its reading's extent as data-model.md `TemplateDef.minMapSize` (spec FR-037), `TemplateDef.allowedBiomes`
-  left empty and its tribe's attitude in
+  derived in the order of spec FR-047 as T043 is, each with its reading's extent as data-model.md
+  `TemplateDef.minMapSize` (spec FR-037), `TemplateDef.allowedBiomes` left empty and its tribe's attitude in
   `TemplateDef.naturalEnemy` and `TemplateDef.permanentEnemy`: neither for the open village, `naturalEnemy` for the
   walled stronghold, `permanentEnemy` for the fortress (spec FR-038, FR-039; research R-14)
 - [ ] T045 Check the three readings with their pictures, then T043 and T044, until no problem is reported, and put the
   side-by-side pictures in the project's files for the maintainer (quickstart.md step 6; spec SC-010)
+
+### A preset reference read from its game's data, before its reading
+
+Only for a reference city that Anno 117 presets, once the maintainer chooses it; none of the tribal references chosen
+so far is one (spec, Assumptions). On the maintainer's computer, outside every repository (research R-15).
+
+- [ ] T054 Read the island from the game's own `file_h.db` and `.rda` packages, never the old project's index, cfg or
+  cut files, and give each object its asset Template and the graphics folder its ConfigFilename names (spec FR-041,
+  FR-042)
+- [ ] T055 Draw step 1 into `template-references/`: each object as a dot coloured by category at its `(x, z)` on the
+  cells, over the island's heightmap, turned to match the game's `mapimage.png`; the maintainer sees it before step 2
+  (spec FR-043, FR-044)
+- [ ] T056 Draw step 2 into `template-references/`: the skeleton, with linear pieces as lines, houses as markers and
+  fields as squares, as a skeleton PNG and an overlay on `mapimage.png`, with `objects.json` and a summary; the
+  maintainer sees it before step 3 (spec FR-043, FR-044; SC-011)
+- [ ] T057 Optionally, once the packages holding the buildings' `.ifo` files are on the maintainer's computer, draw step
+  3, each building's real footprint (spec FR-044; Edge Cases)
+- [ ] T058 Cross-check what T054 to T056 read against the old project's output and images and, where it is at hand,
+  FileDBReader, taking nothing from them, and confirm that neither the packages nor anything read or drawn is in the
+  repository (spec FR-041, FR-045; quickstart.md step 10; SC-011)
 
 **Checkpoint**: Both cultures' kits and first templates pass the check outside the game
 
@@ -350,7 +375,8 @@ checked, and no shared file changes (spec, User Story 5)
 - **User Stories 1 to 4 (Phases 3 to 6)**: depend on Foundational; User Story 2 uses the check of User Story 1, and
   User Stories 3 and 4 use the grid drawing of User Story 2 (T025)
 - **The first kits and templates (Phase 7)**: depends on User Stories 1 to 3; the river-bend town (T035 to T039)
-  comes before the tribal culture (T040 to T045) (spec FR-031, SC-008)
+  comes before the tribal culture (T040 to T045) (spec FR-031, SC-008); T054 to T058 depend on nothing in the
+  repository, and come before the reading of the preset reference they draw (spec FR-043)
 - **User Story 5 (Phase 8)**: depends on the Empire kit and the river-bend town's template (T037, T038)
 - **Polish (Phase 9)**: depends on all before it; T051 and T052 need the maintainer's computer, with the clone moved
   out of `Mods` as R14's T007 sets up
@@ -405,6 +431,9 @@ Task: "Write tests/test_command.py"
 
 - [P] tasks touch different files and depend on no unfinished task
 - [Story] labels map tasks to the spec's user stories
-- Reference pictures, side-by-side pictures and the game's files never go into a repository (spec FR-021, FR-028)
+- Reference pictures, side-by-side pictures and the game's files never go into a repository (spec FR-021, FR-028),
+  nor does another game's package or anything read or drawn from it (spec FR-041)
+- Spec FR-046 and FR-032's industrial (outlander) and pirate cultures record work for R16 and later slices, so no task
+  here writes them (ROADMAP R16)
 - Placing templates on a map in the game, the final check, comes with R2 for the tribal culture and R15 for the
   Empire (spec, Assumptions)
