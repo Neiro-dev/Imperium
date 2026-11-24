@@ -67,6 +67,14 @@ project files.
 - **Effect on the spec's edge case**: with `forceLoadAfter` the game may refuse the move
   (`Menus_Main.xml` line 95, `ModReorderConflict_MustLoadAfter`); with `loadAfter` it warns and offers auto-sort
   (lines 139 and 143). Either shows that Imperium must load after the expansion; the spec's edge case names both.
+- **Among ordinary mods** (spec FR-011): no load-order field names a package that is not Ludeon's, so `loadBefore`
+  and `forceLoadBefore` stay out, `loadAfter` holds only the fallback above, and nothing is added for the Harmony
+  mod, which loads before Core by its own `loadBefore` (Harmony `About/About.xml`). Each load-order field names
+  single packages (`Data/*/About/About.xml`; `ModUpdating.txt` lines 300-314), so none can place Imperium ahead of
+  every ordinary mod, and neither `Data/` nor `ModUpdating.txt` gives a form for telling players a place. The next
+  source does: the Harmony mod's `README.md` tells players where to enable it ("Enable it above Core and mods that
+  depend on Harmony"). `README.md` therefore says: "Enable Imperium directly below the official expansions and
+  above the mods that come after them." The quickstart checks that the game accepts that place with no warning.
 
 ## R-7: Requirement on Royalty
 
@@ -95,6 +103,11 @@ project files.
 - **Rationale**: R1 adds no content (spec FR-007), and the official expansions' folders hold no assemblies
   (`Data/*/`). Harmony is the third source and is used only where `Data/` and `ModUpdating.txt` give no form
   (Principle III); R1 needs nothing from it.
+- **Harmony as a requirement**: none in R1. A requirement is a mod that must be active for Imperium to function
+  (`ModUpdating.txt` lines 266-267), and the Harmony mod is enabled above the mods that depend on it (Harmony
+  `README.md`); R1 has no code that could depend on it. The first entry whose code uses Harmony adds `brrainz.harmony`
+  to `modDependencies`, in the form of `ModUpdating.txt` lines 266-275, and no load-order entry, since the Harmony mod
+  loads before Core (Harmony `About/About.xml`, `loadBefore` `Ludeon.RimWorld`).
 
 ## R-10: Testing
 

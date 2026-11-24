@@ -94,9 +94,10 @@ errors or warnings from it (spec US1, FR-001, FR-004, FR-005).
 ## Phase 5: User Story 3 - No other expansion is required (Priority: P3)
 
 **Goal**: Imperium requires nothing but Royalty and loads with any combination of the other official expansions,
-after every active one (spec US3, FR-003, FR-004, FR-006).
+after every active one, and can sit directly after them, ahead of every ordinary mod placed after them (spec US3,
+FR-003, FR-004, FR-006, FR-011).
 
-**Independent Test**: quickstart.md, Checks in the game, 6 and 7.
+**Independent Test**: quickstart.md, Checks in the game, 6, 7 and 10.
 
 ### Implementation for User Story 3
 
@@ -105,6 +106,12 @@ after every active one (spec US3, FR-003, FR-004, FR-006).
   holds none of the content folders `Defs`, `Patches`, `Languages`, `Textures`, `Sounds`, `Assemblies`
   (`ModUpdating.txt` lines 96-139), so that R1 adds no content (spec FR-007)
 - [ ] T010 [US3] On the maintainer's computer, run quickstart.md, Checks in the game, 6 (all 16 combinations) and 7
+- [X] T011 [US3] Add to `README.md` the sentence research.md R-6 (Among ordinary mods) gives for Imperium's place in
+  the mod list, in the form of the Harmony mod's `README.md` (spec FR-011)
+- [X] T012 [US3] Check in the cloud that no load-order field in `About/About.xml` names a package that is not Ludeon's
+  (data-model.md `Mod metadata.forceLoadAfter`; spec FR-011) and that `README.md` states Imperium's place
+  (quickstart.md, Checks in the cloud, 3)
+- [ ] T013 [US3] On the maintainer's computer, run quickstart.md, Checks in the game, 10
 
 **Checkpoint**: All user stories should now be independently functional
 
@@ -114,12 +121,12 @@ after every active one (spec US3, FR-003, FR-004, FR-006).
 
 **Purpose**: Improvements that affect multiple user stories
 
-- [ ] T011 On the maintainer's computer, run quickstart.md, Checks in the game, 8 (a save made with a different set
+- [ ] T014 On the maintainer's computer, run quickstart.md, Checks in the game, 8 (a save made with a different set
   of mods)
-- [X] T012 [P] Check in the cloud that nothing in `About/About.xml` names Ludeon as maker or adds an `ExpansionDef`,
+- [X] T015 [P] Check in the cloud that nothing in `About/About.xml` names Ludeon as maker or adds an `ExpansionDef`,
   and that `README.md` holds the EULA's disclaimer (spec FR-008, FR-009; research.md R-8)
-- [ ] T013 On the maintainer's computer, run quickstart.md, Checks in the game, 9
-- [ ] T014 Set R1's status to `done` in `ROADMAP.md` once T001 to T013 pass (Spec Kit `docs/how-to/spec-of-specs.md`
+- [ ] T016 On the maintainer's computer, run quickstart.md, Checks in the game, 9
+- [ ] T017 Set R1's status to `done` in `ROADMAP.md` once T001 to T016 pass (Spec Kit `docs/how-to/spec-of-specs.md`
   v1.4.3, section Specifying each sub-feature, step 4)
 
 ---
@@ -133,15 +140,15 @@ after every active one (spec US3, FR-003, FR-004, FR-006).
 - **User Stories (Phase 3+)**: all depend on Phase 2
   - They edit the same file, `About/About.xml`, so their implementation tasks run one after another in priority
     order (P1 → P2 → P3)
-- **Polish (Final Phase)**: T011 depends on T005's saved game; T014 depends on every other task
+- **Polish (Final Phase)**: T014 depends on T005's saved game; T017 depends on every other task
 
 ### User Story Dependencies
 
 - **User Story 1 (P1)**: after Phase 2; no dependency on other stories
 - **User Story 2 (P2)**: after Phase 2; its check (T008) needs Imperium to load, so it runs after T004 settles the
   load-order field
-- **User Story 3 (P3)**: after Phase 2; its checks (T010) need T003, T004 and T006 in place, because they look for
-  Imperium after every expansion and no missing requirement
+- **User Story 3 (P3)**: after Phase 2; its checks (T010, T013) need T003, T004 and T006 in place, because they look
+  for Imperium after every expansion and no missing requirement; T012 and T013 follow T011
 
 ### Within Each User Story
 
@@ -150,7 +157,7 @@ after every active one (spec US3, FR-003, FR-004, FR-006).
 
 ### Parallel Opportunities
 
-- T012 only reads `About/About.xml` and `README.md` in the cloud, so it can run alongside any in-game check
+- T015 only reads `About/About.xml` and `README.md` in the cloud, so it can run alongside any in-game check
 - All other tasks edit or test the one file and run in order
 
 ---
@@ -158,9 +165,9 @@ after every active one (spec US3, FR-003, FR-004, FR-006).
 ## Parallel Example: User Story 1
 
 ```bash
-# User Story 1 has one file and runs in order; T012 can run beside its in-game checks:
+# User Story 1 has one file and runs in order; T015 can run beside its in-game checks:
 Task: "T005 Run quickstart.md, Checks in the game, 1 to 3"
-Task: "T012 Check About/About.xml and README.md in the cloud"
+Task: "T015 Check About/About.xml and README.md in the cloud"
 ```
 
 ---
@@ -178,7 +185,7 @@ Task: "T012 Check About/About.xml and README.md in the cloud"
 1. Foundational → `About/About.xml` with identity and version
 2. User Story 1 → load order, checked in the game (MVP)
 3. User Story 2 → the Royalty requirement
-4. User Story 3 → all 16 combinations
+4. User Story 3 → all 16 combinations, and the place ahead of ordinary mods
 5. Polish → saves with a different mod set, community presentation, roadmap status
 
 ---
@@ -188,8 +195,9 @@ Task: "T012 Check About/About.xml and README.md in the cloud"
 - [P] tasks = different files, no dependencies
 - [Story] label maps task to specific user story for traceability
 - Each user story should be independently completable and testable
-- The file edits (T001, T003, T006) can all be written in the cloud; every in-game check waits for the maintainer's
-  computer
+- The file edits (T001, T003, T006, T011) can all be written in the cloud; every in-game check waits for the
+  maintainer's computer
+
 - The spec's edge cases for a game version other than 1.7 and for two installed copies are met by T001's
   `supportedVersions` and `packageId`; neither can be produced on the test install, which runs only 1.7 and has no
   Workshop copy of Imperium

@@ -22,6 +22,8 @@ Each requirement below names its source in brackets. The sources are those the c
   `Data/Core/Languages/English/Keyed/Menus_Main.xml` and `Dialogs_Various.xml`.
 - **[ModUpdating]**: `ModUpdating.txt` of the same release, sections MOD FILE STRUCTURE and MOD METADATA. Used only
   where [Data] gives no form.
+- **[Harmony]**: the Harmony mod (`pardeike/HarmonyRimWorld`, default branch on 2026-11-24): `README.md` and
+  `About/About.xml`. Used only where [Data] and [ModUpdating] give no form.
 - **[EULA]**: `EULA.txt` of RimWorld (last updated April 7, 2022), which is always followed (constitution, Source
   Register).
 - **[Readme]**: `Readme.txt` of the same install, the first testing source (constitution, Source Register).
@@ -42,8 +44,8 @@ against the official expansions does not make Imperium look official: it is pres
 Each answer comes from the source named with it; none is game content left to the maintainer (constitution,
 Principle IV).
 
-- Q: How is "no errors or warnings from Imperium" checked? → A: In the game's log, `output_log.txt` in the `_Data`
-  folder of the game install [Readme: line 21], against the same launch without Imperium as the baseline, since
+- Q: How is "no errors or warnings from Imperium" checked? → A: In the game's log [Readme: line 21], which the plan
+  locates and reads, against the same launch without Imperium as the baseline, since
   Imperium is measured against the official expansions (Sources, above). Imperium passes when its launch adds no
   error or warning line to the baseline.
 - Q: Which game versions does Imperium support? → A: 1.7 only, as each official expansion lists only `1.7` among its
@@ -107,7 +109,8 @@ A player who owns only Royalty can use Imperium, and a player who owns more expa
 that is active [Design: lines 108 and 110].
 
 **Independent Test**: load Imperium with Royalty alone, then with every combination of Ideology, Biotech, Anomaly and
-Odyssey added; each loads with no errors from Imperium and shows no missing requirement.
+Odyssey added; each loads with no errors from Imperium and shows no missing requirement. Then place Imperium directly
+after the last official expansion, ahead of an ordinary mod; the mod list shows no load-order warning.
 
 **Acceptance Scenarios**:
 
@@ -116,6 +119,9 @@ Odyssey added; each loads with no errors from Imperium and shows no missing requ
 2. **Given** any of Ideology, Biotech, Anomaly or Odyssey are also active, **When** the game loads, **Then** Imperium
    loads with no errors, after every active official expansion, and the mod list shows no load-order warning for it
    [Data: Menus_Main.xml line 143, `ModOrderingWarning`].
+3. **Given** an ordinary mod is also active, **When** Imperium is placed directly after the last active official
+   expansion and ahead of that mod, **Then** the mod list shows no load-order warning and the game loads with no
+   errors from Imperium [Data: Menus_Main.xml line 143].
 
 ---
 
@@ -124,6 +130,8 @@ Odyssey added; each loads with no errors from Imperium and shows no missing requ
 - Imperium is placed above an official expansion in the load order: the game shows that it must be loaded after that
   expansion, either by refusing the move or by a load-order warning with auto-sort, as it does for any mod out of
   order [Data: Menus_Main.xml lines 95, 139 and 143].
+- An ordinary mod builds on Imperium and must load after it: that mod says so with its own `loadAfter`, as any mod
+  does for a mod it must follow [ModUpdating: lines 308-309]; Imperium names no ordinary mod (FR-011).
 - The game version is not 1.7: the mod list shows that Imperium was not made for that version, as it does for other
   mods [Data: Menus_Main.xml line 147, `ModNotMadeForThisVersion`; ModUpdating: line 253].
 - Two copies of Imperium are installed (one local, one from the Workshop): only one of them can be active, as for any
@@ -159,6 +167,13 @@ Odyssey added; each loads with no errors from Imperium and shows no missing requ
 - **FR-010**: Imperium MUST have one package identifier that is unique, meets the game's format, does not contain
   "Ludeon", and does not change once released, because the game and other mods refer to it by that identifier
   [ModUpdating: lines 229-237].
+- **FR-011**: Imperium MUST be able to load directly after the last active official expansion and ahead of every
+  ordinary mod placed after them, the place nearest to the official expansions' own that a mod can take, since
+  Imperium is measured against them (Sources, above). Its load order MUST name no package that is not Ludeon's, so
+  that nothing puts it behind an ordinary mod. The game's load-order fields each name single packages, and none places
+  a mod ahead of every other [Data: each expansion's `About/About.xml`; ModUpdating: lines 300-314], so players are
+  told where to place it, as the Harmony mod tells players its own place [Harmony: `README.md`, "Enable it above Core
+  and mods that depend on Harmony"].
 
 ### Key Entities
 
@@ -169,6 +184,9 @@ Odyssey added; each loads with no errors from Imperium and shows no missing requ
   [Design: line 108; glossary line 35].
 - **Other official expansions**: Ideology, Biotech, Anomaly and Odyssey, none of which Imperium requires and all of
   which it loads after [Data: the expansion folders in `Data/` and their `About/About.xml`; Design: line 108].
+- **Ordinary mods**: every mod that is not Ludeon's. The Harmony mod is one, and loads before Core by its own
+  `loadBefore` [Harmony: `About/About.xml`]; the ordinary mods FR-011 concerns are those placed after the official
+  expansions.
 
 ## Success Criteria *(mandatory)*
 
@@ -183,6 +201,9 @@ Odyssey added; each loads with no errors from Imperium and shows no missing requ
   Imperium, with Imperium after every active official expansion and no load-order warning for it.
 - **SC-004**: Nothing the game shows for Imperium states or implies that it is official or made by Ludeon, and the
   EULA's disclaimer is displayed with it.
+- **SC-005**: With an ordinary mod active, Imperium placed directly after the last active official expansion and
+  ahead of that mod loads with zero error lines beyond the same launch without Imperium and with no load-order
+  warning, and the place is stated where players read about Imperium.
 
 ## Assumptions
 
@@ -192,8 +213,11 @@ Odyssey added; each loads with no errors from Imperium and shows no missing requ
   description and images take the parts of that form a community mod can use, within FR-008 (research.md R-8).
   Because each official description lists only what that expansion contains, and this feature adds no content, they
   are written with the content they describe in later entries [Roadmap: R1, "Deferred: all content"].
-- Whether Harmony is needed is an implementation question for `/speckit-plan`; this feature adds no code that needs
-  it unless the plan finds otherwise.
+- Imperium lists the Harmony mod as a requirement only from the first entry whose code uses Harmony, because a
+  requirement is a mod that must be active for Imperium to function [ModUpdating: lines 266-267] and the Harmony mod
+  is enabled above the mods that depend on it [Harmony: `README.md`]; this feature adds no code (FR-007). The Harmony
+  mod loads before Core [Harmony: `About/About.xml`, `loadBefore` `Ludeon.RimWorld`], so Imperium, which loads after
+  Core, needs no load-order entry for it.
 - Testing in the game follows the constitution's testing sources: first `Readme.txt` line 58 (the `-quicktest`
   launch option starts the game into a tiny, fast-loading map), then RimBridgeServer with GABS; the setup belongs
   to the plan.

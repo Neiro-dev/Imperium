@@ -18,6 +18,8 @@ are in [research.md](research.md) R-10.
 
 1. `About/About.xml` is well-formed XML with the declaration the official files use.
 2. The package identifier meets the format in [data-model.md](data-model.md).
+3. No load-order field names a package that is not Ludeon's, and `README.md` states Imperium's place (research R-6,
+   Among ordinary mods).
 
 ## Checks in the game
 
@@ -41,3 +43,7 @@ no error or warning line to the baseline's log (spec, Clarifications).
    warning and the save loads.
 9. **Community content** (FR-008, FR-009, SC-004): nothing shown for Imperium names Ludeon as its maker or places it
    among the official expansions; `README.md` in the mod's folder holds the EULA's disclaimer.
+10. **Ahead of ordinary mods** (FR-011, SC-005): with all expansions on, place Imperium directly after Odyssey and
+    ahead of RimBridgeServer, an ordinary mod (`rimworld/reorder_mod`); the mod list shows no load-order warning and
+    the launch passes against its baseline. Record where the game puts Imperium when it is turned on
+    (`rimworld/set_mod_enabled`).

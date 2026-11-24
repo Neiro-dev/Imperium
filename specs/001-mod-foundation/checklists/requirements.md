@@ -54,6 +54,17 @@
 - Third review, against `EULA.txt` (always followed, constitution, Source Register): FR-008 and SC-004 keep Imperium
   presented as community-created content, never as official or made by Ludeon (EULA lines 57 and 78), and FR-009
   displays the EULA's disclaimer with it (lines 32-34). The testing assumption now cites `Readme.txt` line 58.
+- Fourth review, Imperium's place among ordinary mods and the Harmony requirement:
+  - FR-004 placed Imperium after the official expansions but said nothing about ordinary mods. Measured against the
+    official expansions, Imperium takes the place nearest to theirs, directly after them and ahead of every ordinary
+    mod (FR-011, US3 scenario 3, SC-005). The game's load-order fields name single packages and none can place a mod
+    ahead of every other (`Data/*/About/About.xml`; `ModUpdating.txt` lines 300-314), so Imperium names no ordinary
+    mod and tells players its place, in the form of the Harmony mod's `README.md`, the next source (Principle III).
+  - Harmony is not a requirement in R1: a requirement is a mod Imperium needs to function (`ModUpdating.txt` lines
+    266-267), and R1 has no code. The Harmony mod loads before Core by its own `loadBefore`, so it needs no
+    load-order entry either. The assumption now says so.
+  - The clarification on the log no longer names `output_log.txt`, which 1.7.5014 does not write; the plan locates
+    the log (research.md R-10).
 - Bracketed source names in the spec name where each requirement comes from; they do not prescribe a technology.
 - No game content in this feature is left to the maintainer: the design settles the requirements, and the mod's
   form is left to `/speckit-plan` from the constitution's sources.
