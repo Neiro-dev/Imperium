@@ -5,7 +5,8 @@
 ### I. One Fixed Source per Topic
 
 Every answer MUST come from the fixed source for its topic in the Source Register. Each topic
-has one source.
+has one source. For the released mod, that one source is the ordered sequence in
+Principle III.
 
 ### II. Other Sources Only Cross-Check
 
@@ -31,7 +32,8 @@ only after the maintainer decides.
 The project logic is this constitution and the fixed sources in its Source Register. Every
 development question other than game content MUST be settled from the project logic, not by
 asking the maintainer. Rules, files, and practices that the project logic does not support MUST
-be removed.
+be removed. When the project logic does not settle such a question, the agent MUST NOT act
+on it.
 
 ### VI. Every Conclusion Names Its Source
 
@@ -41,8 +43,8 @@ source. When the source allows the agent to judge, the agent MUST judge without 
 ### VII. The Maintainer's Words Are Not a Rule
 
 The maintainer's words MUST NOT be recorded as a rule, or as a source for any topic other than
-game content. Only a cleaned-up, unambiguous statement of a game-content decision's meaning MAY
-be written.
+game content, except as principles adopted into this constitution through Governance. Only a
+cleaned-up, unambiguous statement of a game-content decision's meaning MAY be written.
 
 ## Source Register
 
@@ -51,7 +53,7 @@ Each topic and its one fixed source:
 | Topic | Fixed source |
 |-------|--------------|
 | Game content | The maintainer (recorded decisions: see Game Content Records) |
-| The released mod | Core and the official DLCs, then `ModUpdating.txt`, then Harmony (Principle III) |
+| The released mod | The Principle III sequence: Core and the official DLCs, then `ModUpdating.txt`, then Harmony |
 | Development process | Spec Kit |
 | The agent and the files it reads | Claude's official documentation |
 | Repository | GitHub Docs |
@@ -60,7 +62,8 @@ Each topic and its one fixed source:
 ## Game Content Records
 
 The maintainer's game-content decisions in force are the design documents on the default branch
-of `Neiro-dev/Imperium-old`.
+of `Neiro-dev/Imperium-old`. Imperium-old's design supersedes the designs in
+`Neiro-dev/Imperium-Knowledge` and `Neiro-dev/RimWorld-Imperium`.
 
 - Content that Imperium-old's design deleted, including old-repository content
   (`Neiro-dev/Imperium-Knowledge`, `Neiro-dev/RimWorld-Imperium`) on a deleted topic, is void.
