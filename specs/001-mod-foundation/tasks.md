@@ -43,10 +43,10 @@ No setup tasks: the mod's folder is the repository root, which exists, and R1 ad
 
 **⚠️ CRITICAL**: No user story work can begin until this phase is complete
 
-- [ ] T001 Create `About/About.xml` with the XML declaration of the official `About.xml` files and one `ModMetaData`
+- [X] T001 Create `About/About.xml` with the XML declaration of the official `About.xml` files and one `ModMetaData`
   element holding data-model.md `Mod metadata.name`, `Mod metadata.author`, `Mod metadata.packageId` and
   `Mod metadata.supportedVersions` (research.md R-2 to R-5)
-- [ ] T002 Check `About/About.xml` in the cloud: well-formed XML, and the identifier meets data-model.md
+- [X] T002 Check `About/About.xml` in the cloud: well-formed XML, and the identifier meets data-model.md
   `Mod metadata.packageId` (quickstart.md, Checks in the cloud, 1 and 2)
 
 **Checkpoint**: Foundation ready - user story implementation can now begin in parallel
@@ -62,7 +62,7 @@ errors or warnings from it (spec US1, FR-001, FR-004, FR-005).
 
 ### Implementation for User Story 1
 
-- [ ] T003 [US1] Add data-model.md `Mod metadata.forceLoadAfter` to `About/About.xml` (research.md R-6)
+- [X] T003 [US1] Add data-model.md `Mod metadata.forceLoadAfter` to `About/About.xml` (research.md R-6)
 - [ ] T004 [US1] On the maintainer's computer, check that the game honors `forceLoadAfter` from Imperium
   (quickstart.md, Checks in the game, 5); if it does not, replace it in `About/About.xml` with `loadAfter` holding the
   same identifiers, as research.md R-6 gives, and repeat
@@ -81,10 +81,10 @@ errors or warnings from it (spec US1, FR-001, FR-004, FR-005).
 
 ### Implementation for User Story 2
 
-- [ ] T006 [US2] Add data-model.md `Mod metadata.modDependencies` to `About/About.xml`, one entry holding
+- [X] T006 [US2] Add data-model.md `Mod metadata.modDependencies` to `About/About.xml`, one entry holding
   data-model.md `Royalty dependency.packageId`, `Royalty dependency.displayName`,
   `Royalty dependency.steamWorkshopUrl` and `Royalty dependency.downloadUrl` (research.md R-7)
-- [ ] T007 [US2] Repeat T002 for the changed `About/About.xml`
+- [X] T007 [US2] Repeat T002 for the changed `About/About.xml`
 - [ ] T008 [US2] On the maintainer's computer, run quickstart.md, Checks in the game, 4
 
 **Checkpoint**: At this point, User Stories 1 AND 2 should both work independently
@@ -100,7 +100,7 @@ after every active one (spec US3, FR-003, FR-004, FR-006).
 
 ### Implementation for User Story 3
 
-- [ ] T009 [US3] Check that `About/About.xml` holds no field data-model.md lists as left out in R1, so that Royalty
+- [X] T009 [US3] Check that `About/About.xml` holds no field data-model.md lists as left out in R1, so that Royalty
   is its only requirement (data-model.md, Mod metadata, fields left out; spec FR-003), and that the mod's folder
   holds none of the content folders `Defs`, `Patches`, `Languages`, `Textures`, `Sounds`, `Assemblies`
   (`ModUpdating.txt` lines 96-139), so that R1 adds no content (spec FR-007)
@@ -116,7 +116,7 @@ after every active one (spec US3, FR-003, FR-004, FR-006).
 
 - [ ] T011 On the maintainer's computer, run quickstart.md, Checks in the game, 8 (a save made with a different set
   of mods)
-- [ ] T012 [P] Check in the cloud that nothing in `About/About.xml` names Ludeon as maker or adds an `ExpansionDef`,
+- [X] T012 [P] Check in the cloud that nothing in `About/About.xml` names Ludeon as maker or adds an `ExpansionDef`,
   and that `README.md` holds the EULA's disclaimer (spec FR-008, FR-009; research.md R-8)
 - [ ] T013 On the maintainer's computer, run quickstart.md, Checks in the game, 9
 - [ ] T014 Set R1's status to `done` in `ROADMAP.md` once T001 to T013 pass (Spec Kit `docs/how-to/spec-of-specs.md`
