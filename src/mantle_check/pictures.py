@@ -22,6 +22,8 @@ STRONG = (0, 0, 0, 110)
 PROBLEM = (215, 25, 32)
 AREA = (20, 70, 200)
 FEATURE = (0, 130, 140)
+# A reference picture laid over is enlarged by a whole number to about this many pixels on its longer side.
+OVERLAY_SIZE = 1100
 
 
 def font(size: int = 12):
@@ -272,11 +274,16 @@ class Painter:
     def over_picture(self, picture: Image.Image, city: City, numbered: list[tuple[int, Problem]]) -> Image.Image:
         """The reference picture with the reading's cells laid over it at the reading's scale: one cell is the
         scale's pixels per cell over its reference cell, cell (0, 0) at the picture's lower left corner and z growing
-        up the picture, as in the drawing, or at the scale's `origin` where it has one. Each piece carries its name and
-        number, the problems at its cells their numbers, and a legend names the colours. Nothing is marked as matching
-        or not (spec FR-051; research R-17)."""
-        side = city.scale.pixels_per_rimworld_cell()
-        origin_x, origin_y = city.scale.origin if city.scale.origin is not None else (0, picture.height)
+        up the picture, as in the drawing, or at the scale's `origin` where it has one. A small picture is first
+        enlarged by a whole number so that the names, numbers and legend are drawn at a readable size. Each piece
+        carries its name and number, an outline round all its cells, the problems at its cells their numbers, and a
+        legend names the colours. Nothing is marked as matching or not (spec FR-051; research R-17)."""
+        zoom = max(1, OVERLAY_SIZE // max(picture.size))
+        if zoom > 1:
+            picture = picture.resize((picture.width * zoom, picture.height * zoom), Image.Resampling.LANCZOS)
+        side = city.scale.pixels_per_rimworld_cell() * zoom
+        origin_x, origin_y = city.scale.origin if city.scale.origin is not None else (0, picture.height // zoom)
+        origin_x, origin_y = origin_x * zoom, origin_y * zoom
         base = picture.convert("RGBA")
         overlay = Image.new("RGBA", base.size, (0, 0, 0, 0))
         draw = ImageDraw.Draw(overlay)
@@ -287,7 +294,6 @@ class Painter:
                     round(origin_x + (x2 + 1) * side) - 1, round(origin_y - z1 * side) - 1)
 
         legend = Legend()
-
         for layers, short_type, blend in ((city.terrain, "TerrainDef", 0.35), (city.roofs, "RoofDef", 0.2)):
             for entry in layers:
                 definition = self.definition(entry.ref.name, short_type)
@@ -298,12 +304,17 @@ class Painter:
         legend.add("feature", "feature", FEATURE, "terrain feature, outlined")
         legend.add("part", "part", AREA, "part, outlined and numbered")
         labels = []
+        outlines = []
         for areas, colour in ((city.features, FEATURE), (city.parts, AREA)):
             for number, area in enumerate(sorted(areas, key=lambda a: a.name), start=1):
+                cells = set()
                 for rect in area.rects:
-                    draw.rectangle(box(rect), fill=(*colour, 110), outline=(*colour, 255))
+                    draw.rectangle(box(rect), fill=(*colour, 110))
+                    x1, z1, x2, z2 = rect
+                    cells.update((x, z) for x in range(x1, x2 + 1) for z in range(z1, z2 + 1))
                 if area.rects:
                     labels.append((box(area.rects[0]), f"{number} {area.name}", colour))
+                    outlines.append((cells, colour))
         for thing in city.things:
             rect = thing.rect or ((*thing.position, *thing.position) if thing.position is not None else None)
             if rect is not None:
@@ -313,7 +324,22 @@ class Painter:
                 draw.rectangle(box(rect), fill=(*colour, 220), outline=INK)
         image = Image.alpha_composite(base, overlay).convert("RGB")
         draw = ImageDraw.Draw(image)
+        for cells, colour in outlines:
+            # The outline of all a piece's cells together, so that a piece written as many rects reads as one.
+            for x, z in sorted(cells):
+                left, top, right, bottom = box((x, z, x, z))
+                if (x - 1, z) not in cells:
+                    draw.line([(left, top), (left, bottom)], fill=colour, width=2)
+                if (x + 1, z) not in cells:
+                    draw.line([(right, top), (right, bottom)], fill=colour, width=2)
+                if (x, z + 1) not in cells:
+                    draw.line([(left, top), (right, top)], fill=colour, width=2)
+                if (x, z - 1) not in cells:
+                    draw.line([(left, bottom), (right, bottom)], fill=colour, width=2)
         for (left, top, _, _), caption, colour in labels:
+            # On a plain label so that it reads over the picture.
+            text = draw.textbbox((left + 3, top + 2), caption, font=font(12))
+            draw.rectangle((text[0] - 1, text[1] - 1, text[2] + 1, text[3] + 1), fill=BACKGROUND)
             self.write(draw, (left + 3, top + 2), caption, colour, 12)
         for number, problem in numbered:
             if problem.cell is not None:

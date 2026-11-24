@@ -33,7 +33,7 @@ mantle-check --data <Data folder> --out <output folder> --mod <mod folder>... [-
 - `<out>/<defName>.png` for each template, and `<out>/<city file name>.png` for each laid-out city and reading
   (FR-023, FR-025 to FR-027).
 - `<out>/<defName or city file name>.side-by-side.png` when reference pictures are given (FR-025); where a reading
-  holds a `scale`, the reference picture in it carries the reading's cells laid over it at the scale, and the report
+  holds a `scale`, the reference picture in it carries the reading's cells laid over it at the scale (a small picture enlarged by a whole number first, so that the names, numbers and legend are readable), and the report
   says that mismatches are not marked and that no picture is reported as a match (FR-020, FR-029, FR-051).
 - The same inputs give the same files, byte for byte (FR-022).
 
