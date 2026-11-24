@@ -481,3 +481,21 @@ Task: "Write tests/test_command.py"
   here writes them (ROADMAP R16)
 - Placing templates on a map in the game, the final check, comes with R2 for the tribal culture and R15 for the
   Empire (spec, Assumptions)
+
+## Handoff after T059 to T062 (left unbuilt, none of it is committed)
+
+T059 to T062 are done and tested, with the scale's `origin` and the names, numbers, grid-less legend, enlarged-picture overlay of
+T061. Left, each to be written first as a test and each needing its source named (constitution, Principle VI):
+
+- The design's nine classes of a piece (`class`), found in the old design's legend (Imperium-old,
+  `designs/研究/城/纪元117-图例-2026-11-12.md`, section 二) and drawn in one colour each with a count of pieces.
+- A household (`household`, `yardOf`) of pieces whose roofs are one building, outlined and named once, from Imperium-old
+  `做法史/城建·生成流程.md` R-1112-2214 and `研究/城/纪元资料/民居与变体.md`; and the building kind and variant
+  (`kind`, `variant`) of the legend's table of kinds, section 二·7.
+- An `uncertain` mark (dashed outline, with `because`) from the legend's section 三, "拿不准".
+- `anchors` (at least four pixel and cell-corner pairs) fitting a homography to straighten a slanted picture, from the
+  research page `研究/城/纪元资料/河湾聚落尺度查证.md`, which names the homography ("单应"); how many points to take is
+  not given there.
+- A pixel ruler and grid on the picture, counts in the legend, and a `--font` option for Chinese names; none needs a source.
+- Not buildable now: what counts as a piece not matching its picture (FR-051), which is only in the old tool's own
+  documentation (`tools/city/说明/sample.md`), not in design meaning.
