@@ -245,25 +245,25 @@ FR-032, FR-036, FR-037, FR-039, FR-040; research R-13, R-14)
 
 ### The Empire and the river-bend town, which calibrate the method first
 
-- [ ] T035 Add Mantle to `Imperium/About/About.xml`: a `modDependencies` entry with `Neiro.RimWorld.Mantle`, the
+- [X] T035 Add Mantle to `Imperium/About/About.xml`: a `modDependencies` entry with `Neiro.RimWorld.Mantle`, the
   `displayName` `Mantle` and the repository's page as `downloadUrl`, and `Neiro.RimWorld.Mantle` in `loadAfter`
   (research R-1); and change the place sentence of `Imperium/README.md` so that Imperium is enabled directly below
   Mantle (R14 research R-7)
-- [ ] T036 [P] Write the Empire's word list as a `RulePackDef` in
+- [X] T036 [P] Write the Empire's word list as a `RulePackDef` in
   `Imperium/Defs/RulePackDefs/RulePacks_Namers_Empire.xml`, named by type and then by what it holds, as `Data/` names
   its own (`Royalty/Defs/RulePackDefs/RulePacks_Namers_Factions.xml`), with its words in
   `Imperium/Languages/English/Strings/`, from sources on Rome leaning toward New Rome (spec FR-011; research R-3)
-- [ ] T037 Write the Empire kit in `Imperium/Defs/KitDefs/Kits_Empire.xml`, taken from the river-bend town's
+- [X] T037 Write the Empire kit in `Imperium/Defs/KitDefs/Kits_Empire.xml`, taken from the river-bend town's
   screenshot and render in `template-references/河湾城-原图与描线/` and `template-references/河湾城-最新版-1112/`:
   data-model.md `KitDef.nameMaker` (T036), `KitDef.skeleton`, `KitDef.wallSettings`, `KitDef.groups` and `KitDef.fill`
   (spec FR-006, FR-036; research R-8)
-- [ ] T038 Write the river-bend town's template in `Imperium/Defs/TemplateDefs/Templates_Empire.xml`: its terrain shape
+- [X] T038 Write the river-bend town's template in `Imperium/Defs/TemplateDefs/Templates_Empire.xml`: its terrain shape
   inside 350×350 cells, its skeleton as research R-13 lists it, data-model.md `TemplateDef.allowedBiomes` set to
   `TemperateForest`, `TemperateSwamp`, `BorealForest`, `Tundra`, `ColdBog`, `IceSheet`, `SeaIce` and `GlacialPlain`, the
   last marked `MayRequire="Ludeon.RimWorld.Odyssey"` (research R-14), `TemplateDef.allowedRivers`,
   `TemplateDef.naturalEnemy` and `TemplateDef.permanentEnemy` left out, and `TemplateDef.reference` with the labels
   `screenshot` and `render` (spec FR-015, FR-031, FR-040)
-- [ ] T039 Check T037 and T038 with `--mod` for `Mantle/` and `Imperium/` and `--reference` for both pictures until no
+- [X] T039 Check T037 and T038 with `--mod` for `Mantle/` and `Imperium/` and `--reference` for both pictures until no
   problem is reported, and put the side-by-side picture in the project's files for the maintainer, not in the pull
   request (quickstart.md step 5; spec SC-007, SC-008)
 
