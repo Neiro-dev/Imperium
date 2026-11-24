@@ -35,4 +35,6 @@
   [Data], not implementation choices; how the forms are written and the pictures' look and file format are left to
   `/speckit-plan`.
 - No question goes to the maintainer at this step: each requirement comes from a source the constitution's Source
-  Register gives, and which templates and kits the alpha holds is deferred to R2 (constitution, Principle IV).
+  Register gives. Where template layouts come from, which the design leaves open, follows the maintainer's broad
+  direction ([Direction], FR-008), and which templates and kits the alpha holds is deferred to R2 (constitution,
+  Principle IV).

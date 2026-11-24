@@ -22,7 +22,8 @@ Each requirement below names its source in brackets. The sources are those the c
 - **[Roadmap]**: `ROADMAP.md`, entries R13 (intent and scope boundary) and R2.
 - **[Design]**: Imperium's own design, Imperium-old `main` (20a052b), `docs/glossary.md`, section City building and
   generation: block library (line 167), kit (line 184), piece (line 194), skeleton (line 204), spec card (line 206)
-  and template (line 209); and `docs/imperium.md`, section Expansions (lines 108-110).
+  and template (line 209); `docs/imperium.md`, section Expansions (lines 108-110); and `docs/setting.md`, section
+  Rome (lines 56 and 59-60).
 - **[Testing]**: the constitution's Source Register, row Testing outside the game: the base game and official
   expansions in `Data/`; testing outside the game comes before testing in the game and does not replace it, and
   testing in the game is the final check.
@@ -33,6 +34,13 @@ Each requirement below names its source in brackets. The sources are those the c
   line 153), positions on a map as `(x, 0, z)` (`Odyssey/Defs/PrefabDefs/AncientPrefabs.xml` line 12), and each
   expansion's `About/About.xml`.
 - **[EULA]**: `EULA.txt`, which is always followed (constitution, Source Register).
+- **[Direction]**: the maintainer's broad direction on where template layouts come from, which Imperium-old's design
+  leaves open (constitution, Source Register, row Imperium's own design; Principle IV). Templates are drawn from
+  player-built cities that Ubisoft officially features as recommended Anno 117 cities, as reference only: the layout
+  relationships read from such a city, its river, walls, districts, streets and public buildings, are expressed as
+  Imperium's own templates in the design's form. Nothing of Anno's art, names, models or code is used, and no
+  reference image is traced cell by cell. Two pictures of one such city, a town at a river bend, are in the project's
+  files (`uploads/hearth/`), kept only for comparison.
 - **[Spec Kit]**: the feature description given to `/speckit-specify` (Input, above), the development workflow's
   source for what a feature is for.
 
@@ -150,42 +158,48 @@ compare the report and the two pictures with the cards.
 - **FR-006**: A spec card MUST fix one building: its plot, its rooms and their contents [Design: line 206].
 - **FR-007**: Templates and kits MUST be data that Imperium holds and Mantle's generation reads, and MUST NOT hold
   generation itself: picking, mirroring, turning and stretching belong to R2 [Roadmap: R13, R2; Design: line 209].
+- **FR-008**: A template's layout MUST be Imperium's own: the relations of its terrain shape and skeleton may be drawn
+  from a reference city's layout relationships, but a template MUST NOT hold another game's art, names, models or
+  code, and MUST NOT be a cell-by-cell tracing of a reference image [Direction; EULA: line 76].
+- **FR-009**: The Empire's elements in a template or kit, such as the names in a word list and its public buildings,
+  MUST come from Rome as reliable sources describe it, leaning toward New Rome, and not from popular images of Rome
+  or from a reference city [Design: setting.md lines 56, 59-60; Direction].
 
 **The check**
 
-- **FR-008**: The check MUST run outside the game, reading templates, kits and the game's definitions in `Data/`,
+- **FR-010**: The check MUST run outside the game, reading templates, kits and the game's definitions in `Data/`,
   without starting the game [Testing].
-- **FR-009**: The check MUST report each name of a definition that it finds neither in `Data/` nor among Imperium's own
+- **FR-011**: The check MUST report each name of a definition that it finds neither in `Data/` nor among Imperium's own
   definitions [Testing; Data].
-- **FR-010**: The check MUST report each name that stands where its kind of definition cannot go, such as a
+- **FR-012**: The check MUST report each name that stands where its kind of definition cannot go, such as a
   definition that is not a terrain in a terrain shape, or one that is not a wall in wall settings [Data].
-- **FR-011**: The check MUST accept definitions of the base game and Royalty, and MUST report a definition of any other
+- **FR-013**: The check MUST accept definitions of the base game and Royalty, and MUST report a definition of any other
   expansion unless the template or kit marks it as that expansion's content, since Imperium requires Royalty alone and
   other expansions add content [Design: imperium.md lines 108-110; Data: each expansion's `About/About.xml`].
-- **FR-012**: The check MUST report each cell of a terrain shape that lies outside the smallest map the template states,
+- **FR-014**: The check MUST report each cell of a terrain shape that lies outside the smallest map the template states,
   or that has no terrain [Data].
-- **FR-013**: The check MUST report each skeleton relation that names a part the skeleton does not hold, or a terrain
+- **FR-015**: The check MUST report each skeleton relation that names a part the skeleton does not hold, or a terrain
   the terrain shape does not hold [Design: line 204].
-- **FR-014**: Each problem MUST be reported with its template or kit, the part it is in and, where it has one, its cell
+- **FR-016**: Each problem MUST be reported with its template or kit, the part it is in and, where it has one, its cell
   [Spec Kit].
-- **FR-015**: Every result MUST state that testing in the game is the final check and that it is still to come; a
+- **FR-017**: Every result MUST state that testing in the game is the final check and that it is still to come; a
   template or kit with no problem found MUST NOT be reported as final [Testing; Roadmap: R13].
-- **FR-016**: The check MUST read the game's files where they are installed, and MUST NOT copy them into Imperium or
+- **FR-018**: The check MUST read the game's files where they are installed, and MUST NOT copy them into Imperium or
   its results, beyond the names and labels it reports [EULA: line 86].
-- **FR-017**: The same template or kit, checked against the same `Data/`, MUST always give the same report and the
+- **FR-019**: The same template or kit, checked against the same `Data/`, MUST always give the same report and the
   same pictures [Testing].
 
 **The pictures**
 
-- **FR-018**: The check MUST draw each template as a picture of its site: every cell of the terrain shape in its place
+- **FR-020**: The check MUST draw each template as a picture of its site: every cell of the terrain shape in its place
   on a grid, the coordinates along the edges as the game gives positions, `x` and `z`
   [Data: `AncientPrefabs.xml` line 12], and the skeleton's parts and relations shown and named on it [Spec Kit].
-- **FR-019**: The check MUST draw each spec card as a picture of its building: its plot, rooms and contents on the
+- **FR-021**: The check MUST draw each spec card as a picture of its building: its plot, rooms and contents on the
   same kind of grid [Design: line 206; Spec Kit].
-- **FR-020**: Each picture MUST hold a legend that names each terrain, rock, roof and thing it shows under the label
+- **FR-022**: Each picture MUST hold a legend that names each terrain, rock, roof and thing it shows under the label
   its definition gives, and names the expansion of any definition from an expansion other than Royalty [Data;
   Design: imperium.md line 110].
-- **FR-021**: Each problem that has a cell MUST be marked at that cell in the picture, with what it is [Spec Kit].
+- **FR-023**: Each problem that has a cell MUST be marked at that cell in the picture, with what it is [Spec Kit].
 
 ### Key Entities *(include if feature involves data)*
 
@@ -206,7 +220,7 @@ compare the report and the two pictures with the cards.
 
 ### Measurable Outcomes
 
-- **SC-001**: For a set of test templates and kits holding one problem of each kind that FR-009 to FR-013 name, the
+- **SC-001**: For a set of test templates and kits holding one problem of each kind that FR-011 to FR-015 name, the
   check reports 100% of the problems, and reports none for the test template and kit that hold no problem.
 - **SC-002**: For every reported problem that has a cell, a developer finds that cell in the picture from the report
   alone, without reading the template.
