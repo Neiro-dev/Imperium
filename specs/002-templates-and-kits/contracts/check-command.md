@@ -6,14 +6,14 @@ Developers run the check outside the game (spec FR-012); every culture uses the 
 ## Install and run
 
 ```text
-pip install -e ".[test]"          # from the root of Mantle's repository
+pip install -e ".[test]"          # from the repository root
 mantle-check --data <Data folder> --out <output folder> --mod <mod folder>... [--reference <name>:<label>=<picture>]...
              <file>...
 ```
 
 - `--data`: the game's `Data/` folder; `Version.txt` beside it must name version 1.7.
 - `--out`: the folder for the report and pictures; it must not lie inside the repository (FR-028).
-- `--mod`: the folder of a mod whose definitions are read, repeatable: Mantle's mod, and Imperium for the Empire's.
+- `--mod`: the folder of a mod whose definitions are read, repeatable: `Mantle/`, and `Imperium/` for the Empire's.
   Each mod's `About/About.xml` gives its package identifier and what it requires (FR-015).
 - `--reference`: a reference picture, by the template's `reference` name and the picture's label, such as
   `RiverBendTown:screenshot=<path>`; repeatable. JPEG, PNG and WebP are read.

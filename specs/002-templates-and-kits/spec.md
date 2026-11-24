@@ -170,6 +170,9 @@ template (FR-030), and the check in the game, the final one, still follows [Test
 Each requirement below names its source in brackets. The sources are those the constitution's Source Register gives:
 
 - **[Roadmap]**: `ROADMAP.md`, entries R13 (intent and scope boundary), R2, R14 and R15, and its section Releases.
+- **[R14]**: Mantle as a mod of its own, `specs/003-mantle-mod/`: `contracts/repository-layout.md`, which places each
+  mod's files in its folder, `Mantle/` or `Imperium/`, and the files that serve both at the repository root, and
+  `contracts/about-xml.md`, which gives Mantle's package identifier.
 - **[Design]**: Imperium's own design, Imperium-old `main` (20a052b), `docs/glossary.md`, section City building and
   generation: block library (line 167), city building (line 173), kit (line 184), piece (line 194), skeleton
   (line 204), spec card (line 206), template (line 209) and Mantle (line 221); `docs/imperium.md`, section Expansions
@@ -493,8 +496,8 @@ and confirm that no shared file was changed.
   has one, its cell [Spec Kit].
 - **FR-020**: Every result MUST state that testing in the game is the final check and that it is still to come; a
   template, kit or laid-out city with no problem found MUST NOT be reported as final [Testing; Roadmap: R13].
-- **FR-021**: The check MUST read the game's files where they are installed, and MUST NOT copy them into Mantle's or
-  Imperium's repositories or its results, beyond the names and labels it reports [EULA: line 86].
+- **FR-021**: The check MUST read the game's files where they are installed, and MUST NOT copy them into the repository
+  or its results, beyond the names and labels it reports [EULA: line 86].
 - **FR-022**: The same template, kit or laid-out city, checked against the same `Data/` with the same reference
   picture, MUST always give the same report and the same pictures [Testing].
 
@@ -514,7 +517,7 @@ and confirm that no shared file was changed.
   imperium.md line 110].
 - **FR-027**: Each problem that has a cell MUST be marked at that cell in the picture, with what it is [Spec Kit].
 - **FR-028**: The check MUST read a reference picture where the developer keeps it, and MUST NOT put it into
-  Mantle's or Imperium's repository or their released files [Direction; EULA: line 76].
+  the repository or either mod's released files [Direction; EULA: line 76].
 
 **The comparison**
 
@@ -566,9 +569,9 @@ and confirm that no shared file was changed.
   apart from the reading [Direction]. A new reading MUST be written in the laid-out city's form (FR-008), naming the
   reference city it reads in place of a template and kit, so that the check checks it and draws it beside the
   reference pictures as it does a laid-out city (FR-025) [Direction; Spec Kit]; the river-bend town's reading is its
-  render, which already exists (FR-031). A reading written in that form MUST be kept in the repository of the mod
-  that holds the template taken from it, outside that mod's released files, as the template's source; its reference
-  pictures MUST NOT be (FR-028) [Direction; EULA: line 76].
+  render, which already exists (FR-031). A reading written in that form MUST be kept in the repository, outside both
+  mod folders and so outside their released files, as the template's source; its reference pictures MUST NOT be
+  (FR-028) [Direction; R14; EULA: line 76].
 - **FR-037**: The tribal culture's first templates and its kit MUST be taken from cities of Anno 117's Albion built
   only in the Celtic way, neither Romanized nor mixed, at the scale of a tribal settlement, and shown from above so
   that their layout can be read: player-built cities shared publicly from any source, or cities the game presets for
@@ -664,7 +667,8 @@ and confirm that no shared file was changed.
 - The alpha opens the tribal culture's kit and templates; generation is R2's [Roadmap: R13, R2, Releases]. The form of
   a laid-out city is set here so that R2's generation writes it and the check reads it.
 - Mantle's own mod holds what every culture shares and the tribal culture's kit and templates; Imperium holds the
-  Empire's kit and templates [Roadmap: R14, R15, Releases].
+  Empire's kit and templates [Roadmap: R14, R15, Releases]. Both mod folders lie side by side in this repository, with
+  the check and the readings at its root, and Mantle's package identifier is `Neiro.RimWorld.Mantle` [R14].
 - Which culture a faction's settlements take, and the picking itself, are generation's; this feature gives templates
   the attitude and biomes that picking reads [Roadmap: R2].
 - Until R2 generates cities, the laid-out cities the check is tested with are written by hand from test templates and

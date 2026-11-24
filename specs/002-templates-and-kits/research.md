@@ -16,8 +16,10 @@ files, to `Neiro-dev/Imperium-old` at 20a052b, to Spec Kit at v1.4.3 and to Harm
   (`Defs/KitDefs/Kits_Tribal.xml`, `Defs/TemplateDefs/Templates_Tribal.xml`). Imperium holds the Empire's kit and the
   river-bend town's template (`Defs/KitDefs/Kits_Empire.xml`, `Defs/TemplateDefs/Templates_Empire.xml`), and from the
   same pull request its `About/About.xml` requires Mantle: an entry in `modDependencies` with Mantle's `packageId`, a
-  `displayName` and a download link, and Mantle's `packageId` in `loadAfter`. Paths in Mantle's mod are relative to its
-  folder, and its `packageId`, from R14; the implement step for this feature waits for R14.
+  `displayName` and a `downloadUrl`, and Mantle's `packageId` in `loadAfter`. Mantle's mod folder is `Mantle/` and
+  Imperium's `Imperium/`, side by side at the repository root, and Mantle's `packageId` is `Neiro.RimWorld.Mantle`, as
+  R14 sets (`specs/003-mantle-mod/research.md` R-1, R-4). Mantle has no Workshop page, so its entry gives the
+  repository's page as `downloadUrl`, which `ModUpdating.txt` accepts in place of `steamWorkshopUrl` (lines 266-275).
 - **Rationale**: templates and kits are data that the mod holding them carries and Mantle's generation reads (FR-009),
   and a mod's new XML definitions go in `Defs/`, laid out as the base game lays out its own (`ModUpdating.txt` lines
   98-106). A definition the game loads has a class, as `ThingDef`, `PawnKindDef` and `JobDef` do (line 98), and a mod's
@@ -38,21 +40,23 @@ files, to `Neiro-dev/Imperium-old` at 20a052b, to Spec Kit at v1.4.3 and to Harm
 ## R-2: Building Mantle's assembly
 
 - **Decision**: in Mantle's mod, `Source/Mantle/Mantle.csproj` targets `net10.0` and references the game's own
-  assemblies where the game is installed, through a `RimWorldAssemblyDir` property that a `Directory.Build.props` at
-  that repository's root sets. It is built on the maintainer's computer through Remote Control, and the built
+  assemblies where the game is installed, through a `RimWorldAssemblyDir` property that a `Directory.Build.props` in
+  `Mantle/Source/` sets. It is built on the maintainer's computer through Remote Control, and the built
   `Assemblies/Mantle.dll` is committed. No Harmony and no other package. Imperium holds no code for this feature.
 - **Rationale**: `Data/` and `ModUpdating.txt` give no form for building a mod's code, so it comes from Harmony
   (Principle III). RimWorld 1.7 runs on .NET 10 (`README.md` line 6), Harmony's 1.7 build selects the `net10.0` asset
   (`BUILDING.md` line 12; `Source/packages.lock.json`) and compiles against the installed game's assemblies, found
-  through `RIMWORLD_ASSEMBLY_DIR` (`BUILDING.md` lines 18-19) and `RimWorldAssemblyDir` in `Directory.Build.props`
-  (line 17). Harmony commits its built assemblies, and its release packages that committed payload rather than
-  rebuilding against the game's files (`BUILDING.md` lines 14 and 38-39); the maintainer's `Mods\Imperium` is a clone,
-  so the game loads `Mantle.dll` after a pull. The game's assemblies exist only in the maintainer's install, and are
-  neither copied into the repository nor into the cloud (`EULA.txt` line 86). Def classes patch nothing, so Harmony is
-  still not a requirement (R1 research R-9). `Assemblies/` sits at the root, since Imperium supports 1.7 only and has no
-  load folders (R1 research R-1, R-5).
+  through `RIMWORLD_ASSEMBLY_DIR` (`BUILDING.md` lines 18-19) and `RimWorldAssemblyDir` in `Directory.Build.props` (line
+  17), which sits at the root of Harmony's mod folder; in this repository a mod's files for its code go in its `Source/`
+  (R14 `contracts/repository-layout.md`). Harmony commits its built assemblies, and its release packages that committed
+  payload rather than rebuilding against the game's files (`BUILDING.md` lines 14 and 38-39); the maintainer's clone
+  holds the built `Mantle.dll`, and the game loads it once `Mantle/` is copied into `Mods` (R14 research R-9). The
+  game's assemblies exist only in the maintainer's install, and are neither copied into the repository nor into the
+  cloud (`EULA.txt` line 86). Def classes patch nothing, so Harmony is still not a requirement (R1 research R-9).
+  `Assemblies/` sits at the root of `Mantle/`, since Mantle supports 1.7 only and has no load folders, as R1 set for
+  Imperium (R1 research R-1, R-5; R14 research R-5).
 - **Alternatives considered**: a `1.7/Assemblies/` folder, as Harmony has. Rejected: Harmony supports several game
-  versions; Imperium supports one, and `ModUpdating.txt` lines 173-180 put `Assemblies/` at the root.
+  versions; Mantle supports one, and `ModUpdating.txt` lines 173-180 put `Assemblies/` at the root.
 - **Open for implement**: whether the maintainer's computer has the .NET 10 SDK, and where the 1.7 install keeps its
   assemblies. If the SDK is missing, the implement step says so and stops there.
 
@@ -145,11 +149,12 @@ files, to `Neiro-dev/Imperium-old` at 20a052b, to Spec Kit at v1.4.3 and to Harm
   mirrored, turned and stretched it, with each river's `flowsFrom`. The game does not load it and the mod does not
   ship it.
 - **A reading**: written in the same form, with `reference`, the reference city's name as the template's `reference`
-  gives it, in place of `template` and `kit`, and the parts and features it reads. It is kept in a `readings/` folder of
-  the repository of the mod whose template is taken from it, as that template's source, and is not in the mod's
-  released files; its reference pictures are not kept there (FR-036, FR-028). The folder sits beside the check's
-  `src/` and `tests/` and is named in lower case, as Spec Kit's own repository names every top-level folder
-  (`docs/`, `scripts/`, `src/`, `templates/`, `tests/` at v1.4.3).
+  gives it, in place of `template` and `kit`, and the parts and features it reads. It is kept in `readings/` at the
+  repository root, as its template's source: a mod folder holds only its folders for the game and its code, its README
+  and its license, and the check that reads the readings sits at the root (R14 `contracts/repository-layout.md`), so a
+  reading is in neither mod's released files; its reference pictures are not kept there (FR-036, FR-028). The folder
+  sits beside the check's `src/` and `tests/` and is named in lower case, as Spec Kit's own repository names every
+  top-level folder (`docs/`, `scripts/`, `src/`, `templates/`, `tests/` at v1.4.3).
 - **Rationale**: FR-008 lists what it holds, in the forms of R-3; generation writes it in R2 and the check reads it now.
   The covered cells are written by generation, which has them from the game, so the check does not have to rebuild the
   game's rule for where a large thing's cells lie; it checks that they match the definition's `size`, crosswise when
@@ -184,8 +189,9 @@ files, to `Neiro-dev/Imperium-old` at 20a052b, to Spec Kit at v1.4.3 and to Harm
   package declared in `pyproject.toml`, with `requires-python = ">=3.11"`, Typer for its command line, a
   `[project.scripts]` entry, Hatchling, and pytest over `tests/` (`pyproject.toml` lines 1-26, 39-55; `.gitignore`
   lines 1-27). Pillow is needed to read the reference pictures, which are JPEG, PNG and WebP files
-  (`template-references/`), and to write PNG (R-11). XML is read with Python's own library. The package is Mantle's,
-  at the root of its repository, since every culture shares the check (FR-033).
+  (`template-references/`), and to write PNG (R-11). XML is read with Python's own library. The package sits at
+  the repository root, outside both mod folders, as a development tool that checks both mods (R14
+  `contracts/repository-layout.md`), and every culture shares it (FR-033).
 - **Ignored files**: `.gitignore` adds Spec Kit's Python lines (`.gitignore` lines 1-27) and Harmony's lines for the
   C# build's output, `[Bb]in/` and `[Oo]bj/` (Harmony `.gitignore` lines 13-23), since `Data/` and `ModUpdating.txt`
   give no form for ignored files.
@@ -247,16 +253,16 @@ files, to `Neiro-dev/Imperium-old` at 20a052b, to Spec Kit at v1.4.3 and to Harm
 
 - **Decision**: in implement, the river-bend town first: its template and the Empire kit are taken from the screenshot
   (`template-references/河湾城-原图与描线/原图-1596x1017.png`) and the newest render, its reading
-  (`template-references/河湾城-最新版-1112/1比1整城样张.png`). Its terrain shape is drawn inside 350×350 cells, and its
-  skeleton holds the river bend, the wall line, the districts on each bank and inside the bend, the main streets with
-  their bridges and gates, the plazas, and the public buildings, by the relations of R-5. The check's picture of it
-  beside both references is given to the maintainer in the project's files, not in the pull request, since it holds
-  the screenshot (FR-028). Once it passes the check, the tribal culture's three readings are written from the
-  references the maintainer chose, whose pictures are in `template-references/部落城-凯尔特/`, in `readings/` of
-  Mantle's repository: the gentle tribe's open village from Tir Uisce, the fierce tribe's walled stronghold from a
-  Celtic oppidum and the savage tribe's fortress from a small Celtic hillfort, with the agricultural island consulted
-  as supplementary material only. A template is taken from each, stating its tribe's attitude (R-14), and the one
-  tribal kit from all three. Each template ships as it stands once it passes (FR-010, FR-031).
+  (`template-references/河湾城-最新版-1112/1比1整城样张.png`). Its terrain shape is drawn inside 350×350 cells, and its skeleton
+  holds the river bend, the wall line, the districts on each bank and inside the bend, the main streets with their
+  bridges and gates, the plazas, and the public buildings, by the relations of R-5. The check's picture of it beside
+  both references is given to the maintainer in the project's files, not in the pull request, since it holds the
+  screenshot (FR-028). Once it passes the check, the tribal culture's three readings are written from the references the
+  maintainer chose, whose pictures are in `template-references/部落城-凯尔特/`, in `readings/`: the gentle tribe's open
+  village from Tir Uisce, the fierce tribe's walled stronghold from a Celtic oppidum and the savage tribe's fortress
+  from a small Celtic hillfort, with the agricultural island consulted as supplementary material only. A template is
+  taken from each, stating its tribe's attitude (R-14), and the one tribal kit from all three. Each template ships as it
+  stands once it passes (FR-010, FR-031).
 - **Rationale**: FR-031, FR-036, FR-037, FR-039, Clarifications; [Direction].
 
 ## R-14: Picking a template by attitude and terrain
