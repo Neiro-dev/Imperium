@@ -13,7 +13,7 @@
 
 ## Requirement Completeness
 
-- [x] No [NEEDS CLARIFICATION] markers remain
+- [ ] No [NEEDS CLARIFICATION] markers remain
 - [x] Requirements are testable and unambiguous
 - [x] Success criteria are measurable
 - [x] Success criteria are technology-agnostic (no implementation details)
@@ -34,7 +34,10 @@
 - Game names such as `Data/`, terrain, natural rock, roof and the `x` and `z` coordinates are the domain's own words
   [Data], not implementation choices; how the forms are written and the pictures' look and file format are left to
   `/speckit-plan`.
-- No question goes to the maintainer at this step: each requirement comes from a source the constitution's Source
-  Register gives. Where template layouts come from, which the design leaves open, follows the maintainer's broad
-  direction ([Direction], FR-008), and which templates and kits the alpha holds is deferred to R2 (constitution,
-  Principle IV).
+- Where template layouts come from, what is fixed and what is left to generation beyond the parts the design names,
+  and how a template is accepted follow the maintainer's broad direction ([Direction]; Purpose; FR-005, FR-010,
+  FR-029, FR-030), since the design leaves them open; which templates and kits the alpha holds is deferred to R2
+  (constitution, Principle IV).
+- One marker remains, in FR-029: how a laid-out city is judged to match its reference. It concerns what a generated
+  city looks like, which is game content, so `/speckit-clarify` puts it to the maintainer for broad direction
+  (constitution, Principle IV).

@@ -8,12 +8,52 @@
 
 **Input**: Parent roadmap: `ROADMAP.md` → entry **R13**, Templates and kits. The designed layouts of city sites, each a
 terrain shape with a skeleton (templates), and each culture's fixed set of generation data (kits) are data that
-Mantle's generation uses, checked outside the game against the game's own definitions before Mantle uses them
-(Imperium-old glossary "template", "kit", "skeleton"; constitution, Source Register, "Testing outside the
-game"). Scope: the forms of templates and kits, and their check outside the game against `Data/`. Deferred: which
-templates and kits the alpha holds, and generation, which picks templates and may mirror, turn and stretch them (R2);
-the check in the game, which is the final one, once R2 places them (R2). As requested for this feature, the check
-shows a template as a picture of its site, so that the developer can see it without starting the game.
+Mantle's generation uses, checked outside the game against the game's own definitions before Mantle uses them, and the
+cities Mantle lays out from them are compared outside the game with the reference cities the templates are drawn from
+(Imperium-old glossary "template", "kit", "skeleton"; constitution, Source Register, "Testing outside the game"; the
+maintainer's broad direction). Scope: the forms of templates, kits and the cities laid out from them, and their check
+outside the game against `Data/`, which sets a laid-out city beside its reference. Deferred: which templates and kits
+the alpha holds, and generation, which picks templates, may mirror, turn and stretch them, and lays out cities from
+them (R2); the check in the game, which is the final one, once R2 places them (R2). As requested for this feature, the
+check shows a template as a picture of its site, so that the developer can see it without starting the game, and sets
+the city that generation lays out from a template and a kit beside a picture of the reference city, so that the two
+can be compared.
+
+## Purpose
+
+Mantle is the framework layer that Imperium's content builds on [Design: line 221], so a template is not a drawn map
+of one city. It is a terrain shape and a skeleton, the fixed parts of a city's layout recorded as relations rather
+than coordinates, which generation picks by world tile and size, may mirror, turn and stretch, and fills from a kit,
+one culture's fixed set of generation data [Design: lines 184, 204, 209]. A template is picked by world tile and size,
+not by culture, so one template serves the Roman, medieval, industrial and tribal kits alike [Design: lines 184, 209].
+
+What is fixed and what is left to generation [Design: lines 184, 209; Direction]:
+
+- **Fixed**, defined by people and abstracted from the reference city: the template, meaning its terrain shape with
+  its river, and its skeleton with the wall line, the districts and their relations, the main streets, the plazas and
+  the places of the public buildings; and the kits.
+- **Left to generation**, and only within those bounds: picking a template, mirroring, turning and stretching it to
+  fit the site, and filling its blocks with the kit's buildings.
+
+Generation never designs a city: it fills a fixed skeleton.
+
+Templates are drawn from reference cities in four steps [Direction]:
+
+1. A reference city is chosen from the player-built cities that Ubisoft officially features as recommended Anno 117
+   cities.
+2. Its layout relationships are read and written as a template in this feature's form, as Imperium's own (FR-010).
+3. Generation lays out a city from the template and a kit [Roadmap: R2].
+4. The check draws the laid-out city beside a picture of the reference city, and the two are compared (FR-025,
+   FR-029).
+
+The comparison is why the check outside the game exists [Direction]. Generation that is not held to a fixed skeleton,
+and a developer, a person or an AI, working toward a target, take shortcuts toward abstract geometric layouts, such as
+squares and octagons, since nothing in them carries how real towns grow around rivers, terrain, walls and streets. The
+base game offers no large town to draw from: it lays out a faction base by a single generation step [Direction; Data:
+`BaseFactionMapGenerator.xml` lines 14-21]. The reference cities are placed by hand around their rivers, terrain,
+walls and streets, and the recommended ones are curated and publicly shared. So a template counts only once the check
+has drawn the city laid out from it and that city has passed the comparison with its reference, whoever wrote the
+template (FR-030), and the check in the game, the final one, still follows [Testing].
 
 ## Sources
 
@@ -21,26 +61,37 @@ Each requirement below names its source in brackets. The sources are those the c
 
 - **[Roadmap]**: `ROADMAP.md`, entries R13 (intent and scope boundary) and R2.
 - **[Design]**: Imperium's own design, Imperium-old `main` (20a052b), `docs/glossary.md`, section City building and
-  generation: block library (line 167), kit (line 184), piece (line 194), skeleton (line 204), spec card (line 206)
-  and template (line 209); `docs/imperium.md`, section Expansions (lines 108-110); and `docs/setting.md`, section
-  Rome (lines 56 and 59-60).
+  generation: block library (line 167), city building (line 173), kit (line 184), piece (line 194), skeleton
+  (line 204), spec card (line 206), template (line 209) and Mantle (line 221); `docs/imperium.md`, section Expansions
+  (lines 108-110); and `docs/setting.md`, section Rome (lines 56 and 59-60).
 - **[Testing]**: the constitution's Source Register, row Testing outside the game: the base game and official
   expansions in `Data/`; testing outside the game comes before testing in the game and does not replace it, and
   testing in the game is the final check.
 - **[Data]**: the base game and official expansions in `Data/` of RimWorld 1.7.5014: terrain
-  (`Core/Defs/TerrainDefs/`), natural rock (`Core/Defs/ThingDefs_Buildings/Buildings_Natural.xml` line 47), roofs
-  (`Core/Defs/Misc/RoofDefs/Roofs.xml` lines 5, 14 and 24), the smallest map a site needs
-  (`Ideology/Defs/Sites/AncientComplex.xml` line 15), square maps (`Core/Languages/English/Keyed/Dialogs_Various.xml`
-  line 153), positions on a map as `(x, 0, z)` (`Odyssey/Defs/PrefabDefs/AncientPrefabs.xml` line 12), and each
-  expansion's `About/About.xml`.
+  (`Core/Defs/TerrainDefs/`), and the affordances a terrain gives (`Terrain_Natural.xml` lines 5-7, 51-55 and
+  126-131); natural rock (`Core/Defs/ThingDefs_Buildings/Buildings_Natural.xml` line 47); roofs
+  (`Core/Defs/Misc/RoofDefs/Roofs.xml` lines 5, 14 and 24); the affordance a thing needs
+  (`Core/Defs/ThingDefs_Buildings/Buildings_Base.xml` line 11), or its material needs when the thing says so
+  (`Buildings_Structure.xml` lines 277-278; `Core/Defs/ThingDefs_Misc/Various_Stone.xml` line 88); the materials a
+  thing takes (`Buildings_Structure.xml` lines 286-290); a faction base's generation
+  (`Core/Defs/MapGeneration/BaseFactionMapGenerator.xml` lines 14-21); the smallest map a site needs
+  (`Ideology/Defs/Sites/AncientComplex.xml` line 15); square maps (`Core/Languages/English/Keyed/Dialogs_Various.xml`
+  line 153); a thing placed by its position as `(x, 0, z)`, its rotation and its material
+  (`Odyssey/Defs/PrefabDefs/AncientPrefabs.xml` lines 12, 13 and 23); and each expansion's `About/About.xml`.
 - **[EULA]**: `EULA.txt`, which is always followed (constitution, Source Register).
-- **[Direction]**: the maintainer's broad direction on where template layouts come from, which Imperium-old's design
-  leaves open (constitution, Source Register, row Imperium's own design; Principle IV). Templates are drawn from
-  player-built cities that Ubisoft officially features as recommended Anno 117 cities, as reference only: the layout
-  relationships read from such a city, its river, walls, districts, streets and public buildings, are expressed as
-  Imperium's own templates in the design's form. Nothing of Anno's art, names, models or code is used, and no
-  reference image is traced cell by cell. Two pictures of one such city, a town at a river bend, are in the project's
-  files (`uploads/hearth/`), kept only for comparison.
+- **[Direction]**: the maintainer's broad direction on where template layouts come from and how they are accepted,
+  which Imperium-old's design leaves open (constitution, Source Register, row Imperium's own design; Principle IV):
+  - Templates are drawn from player-built cities that Ubisoft officially features as recommended Anno 117 cities, as
+    reference only. The layout relationships read from such a city, its river, walls, districts, streets, plazas and
+    public buildings, are expressed as Imperium's own templates in the design's form, and kits fill them. Nothing of
+    Anno's art, names, models or code is used, and no reference image is traced cell by cell.
+  - The template's skeleton holds the wall line, districts, main streets, plazas and public buildings read from the
+    reference, beside the parts the design names; generation only picks, mirrors, turns and stretches a template and
+    fills it from a kit.
+  - The city laid out from a template is compared with its reference, and a template counts only once that comparison
+    passes, whoever wrote it, since generation and developers alike tend toward geometric layouts.
+  - Two pictures of a town at a river bend laid out on the game's cells, drawn from one such city, are in the
+    project's files (`uploads/hearth/`). They show what generation should produce, and are kept only for comparison.
 - **[Spec Kit]**: the feature description given to `/speckit-specify` (Input, above), the development workflow's
   source for what a feature is for.
 
@@ -72,20 +123,53 @@ none; run the check on each, and compare what it reports with what each holds.
 3. **Given** a template that names a definition only Biotech holds, without marking it as Biotech's content, **When**
    the check runs, **Then** it reports it, since Imperium is complete with Royalty alone [Design: imperium.md lines
    108-110].
-4. **Given** a template and a kit with no problem, **When** the check runs, **Then** it reports none, and says that
+4. **Given** a template that places a building on a cell, **When** the check runs, **Then** it reports it, since a
+   template holds no building (FR-002).
+5. **Given** a template and a kit with no problem, **When** the check runs, **Then** it reports none, and says that
    the check in the game, which is the final one, is still to come.
 
 ---
 
-### User Story 2 - See a template as a picture of its site (Priority: P2)
+### User Story 2 - Compare a laid-out city with its reference (Priority: P2)
+
+Generation lays out a city on a map from a template and a kit [Roadmap: R2]. The developer gives the check that
+laid-out city and a picture of the reference city the template is drawn from. The check checks the laid-out city
+against the game's definitions, draws it on the game's cells, and sets the drawing beside the reference picture, so
+that the developer can see whether the city keeps its reference's river, walls, districts, streets, plazas and public
+buildings in their relations, or has fallen back to geometric shapes.
+
+**Why this priority**: The comparison is why templates are drawn from reference cities and why the check outside the
+game exists, and a template counts only once it passes [Direction]. It uses the check of User Story 1, so it comes
+after it.
+
+**Independent Test**: Until R2 generates cities, write two small laid-out cities by hand from a test template and a
+test kit, one with a known problem and one with none, and give each with a test reference picture; compare the report
+and the side-by-side picture with what each holds.
+
+**Acceptance Scenarios**:
+
+1. **Given** a laid-out city and a picture of its reference city, **When** the check runs, **Then** the drawing of the
+   whole city, with its grid, coordinates and legend, and the whole reference picture are shown side by side.
+2. **Given** a laid-out city, **When** the developer opens its drawing, **Then** each part of the template's skeleton
+   is named where it lies, so that the same part can be found in the reference picture.
+3. **Given** a laid-out city with a granite block wall on marshy soil, **When** the check runs, **Then** it reports
+   the wall, the terrain and the cell, since stone blocks need heavy ground and marshy soil gives only light
+   [Data: `Buildings_Structure.xml` lines 277-278; `Various_Stone.xml` line 88; `Terrain_Natural.xml` lines 126-131].
+4. **Given** a laid-out city with no problem, **When** the check runs, **Then** it reports none, and says that the
+   check in the game, which is the final one, is still to come.
+
+---
+
+### User Story 3 - See a template as a picture of its site (Priority: P3)
 
 The developer gets each checked template as a picture of its site: its terrain shape on the game's cells, with a grid
 and coordinates, the parts of its skeleton and their relations to each other and to the terrain, a legend, and each
-problem the check found marked where it is. The developer changes the template and checks it again until it is right.
+problem the check found marked where it is, beside a picture of its reference city where one is given. The developer
+changes the template and checks it again until it is right.
 
 **Why this priority**: A template is a designed layout [Design: line 209], and the request for this feature is to see
 it without starting the game [Spec Kit]. The report of User Story 1 says what is wrong; the picture shows the layout
-as a whole.
+as a whole, before generation fills it.
 
 **Independent Test**: Write a small test template with a known terrain shape and skeleton, check it, and compare each
 cell, part and relation in the picture with the template.
@@ -101,7 +185,7 @@ cell, part and relation in the picture with the template.
 
 ---
 
-### User Story 3 - Check and see a kit's buildings (Priority: P3)
+### User Story 4 - Check and see a kit's buildings (Priority: P4)
 
 Where a kit has a block library, the ready-made blocks built from spec cards, the developer checks each spec card,
 the design card that fixes one building's plot, rooms and contents, and gets it as a picture of the building on the
@@ -124,16 +208,18 @@ compare the report and the two pictures with the cards.
 
 ### Edge Cases
 
-- A template or kit names one of Imperium's own definitions, such as a piece, a generic building element the base game
-  lacks [Design: line 194]: the check looks for it among Imperium's own definitions, and reports it when it is not
-  there.
-- A terrain shape reaches past the map size the template states, or leaves a cell with no terrain: the check reports
-  each such cell.
+- A template, kit or laid-out city names one of Imperium's own definitions, such as a piece, a generic building
+  element the base game lacks [Design: line 194]: the check looks for it among Imperium's own definitions, and reports
+  it when it is not there.
+- A terrain shape reaches past the map size the template states, a laid-out city reaches past its map, or either
+  leaves a cell with no terrain: the check reports each such cell.
 - A skeleton relation names a part the skeleton does not hold, or a terrain the terrain shape does not hold: the check
   reports the relation.
 - A definition from an expansion other than Royalty, marked as that expansion's content: the check accepts it, and the
   picture's legend names the expansion [Design: imperium.md line 110].
-- `Data/` cannot be found or is of another game version: the check stops and says so, and reports no template as
+- A laid-out city is given without a reference picture, or with one the check cannot read: the check checks and draws
+  the city, says that no comparison was made, and does not count its template as passing the comparison.
+- `Data/` cannot be found or is of another game version: the check stops and says so, and reports nothing as
   passing.
 
 ## Requirements *(mandatory)*
@@ -142,69 +228,103 @@ compare the report and the two pictures with the cards.
 
 **The forms**
 
-- **FR-001**: A template MUST hold its terrain shape and its skeleton together, and what generation picks it by, the
-  world tile and size it suits [Design: line 209].
-- **FR-002**: A template MUST state the smallest map it needs, as an official site states the smallest map it needs
+- **FR-001**: A template MUST hold its terrain shape and its skeleton together, what generation picks it by, the world
+  tile and size it suits [Design: line 209], and the reference city it is drawn from [Direction].
+- **FR-002**: A template MUST NOT be a drawn map of a city: it MUST NOT place on its cells the things a city is built
+  of, such as buildings, walls and paving, which a kit gives when generation lays out a city, and it MUST NOT be tied
+  to one culture, so that one template serves every kit [Design: lines 184, 204, 209, 221].
+- **FR-003**: A template MUST state the smallest map it needs, as an official site states the smallest map it needs
   [Data: `AncientComplex.xml` line 15]; maps are square [Data: `Dialogs_Various.xml` line 153].
-- **FR-003**: A terrain shape MUST hold, for each cell of the site, the terrain there, any natural rock, and the roof
+- **FR-004**: A terrain shape MUST hold, for each cell of the site, the terrain there, any natural rock, and the roof
   over it, each as a definition the game holds [Data: terrain, natural rock, roofs], so that it can be checked against
   `Data/` [Testing].
-- **FR-004**: A skeleton MUST hold the fixed parts of a city's layout, such as its core, palace quarter, gates and
-  main street, and record them as their relations to each other and to the terrain, not as coordinates
+- **FR-005**: A skeleton MUST hold the fixed parts of a city's layout, such as its core, palace quarter, gates and
+  main street [Design: line 204], and the wall line, districts, plazas and public buildings read from the reference
+  city [Direction], and MUST record them as their relations to each other and to the terrain, not as coordinates
   [Design: line 204].
-- **FR-005**: A kit MUST hold its culture and its fixed generation data: its word list, skeleton, groups, fill and wall
+- **FR-006**: A kit MUST hold its culture and its fixed generation data: its word list, skeleton, groups, fill and wall
   settings [Design: line 184], and, where it uses one, a block library of ready-made blocks built from spec cards
   [Design: line 167].
-- **FR-006**: A spec card MUST fix one building: its plot, its rooms and their contents [Design: line 206].
-- **FR-007**: Templates and kits MUST be data that Imperium holds and Mantle's generation reads, and MUST NOT hold
-  generation itself: picking, mirroring, turning and stretching belong to R2 [Roadmap: R13, R2; Design: line 209].
-- **FR-008**: A template's layout MUST be Imperium's own: the relations of its terrain shape and skeleton may be drawn
+- **FR-007**: A spec card MUST fix one building: its plot, its rooms and their contents [Design: line 206].
+- **FR-008**: A laid-out city, the city that generation lays out on a map from a template and a kit, MUST be written in
+  one form that holds the template and kit it comes from, its map size, each cell's terrain, natural rock and roof,
+  each thing that stands on the map with its definition, cell, rotation and, where its definition takes one, its
+  material, and where each part of the template's skeleton lies, so that the check reads what generation writes
+  [Roadmap: R2; Design: lines 173, 204; Data: `AncientPrefabs.xml` lines 12, 13 and 23].
+- **FR-009**: Templates and kits MUST be data that Imperium holds and Mantle's generation reads, and MUST NOT hold
+  generation itself. Picking a template, mirroring, turning and stretching it to fit the site, and filling its blocks
+  with the kit's buildings belong to R2, and generation does nothing else to a template [Roadmap: R13, R2;
+  Design: lines 184, 209; Direction].
+- **FR-010**: A template's layout MUST be Imperium's own: the relations of its terrain shape and skeleton may be drawn
   from a reference city's layout relationships, but a template MUST NOT hold another game's art, names, models or
   code, and MUST NOT be a cell-by-cell tracing of a reference image [Direction; EULA: line 76].
-- **FR-009**: The Empire's elements in a template or kit, such as the names in a word list and its public buildings,
+- **FR-011**: The Empire's elements in a template or kit, such as the names in a word list and its public buildings,
   MUST come from Rome as reliable sources describe it, leaning toward New Rome, and not from popular images of Rome
   or from a reference city [Design: setting.md lines 56, 59-60; Direction].
 
 **The check**
 
-- **FR-010**: The check MUST run outside the game, reading templates, kits and the game's definitions in `Data/`,
-  without starting the game [Testing].
-- **FR-011**: The check MUST report each name of a definition that it finds neither in `Data/` nor among Imperium's own
+- **FR-012**: The check MUST run outside the game, reading templates, kits, laid-out cities and the game's definitions
+  in `Data/`, without starting the game [Testing].
+- **FR-013**: The check MUST report each name of a definition that it finds neither in `Data/` nor among Imperium's own
   definitions [Testing; Data].
-- **FR-012**: The check MUST report each name that stands where its kind of definition cannot go, such as a
-  definition that is not a terrain in a terrain shape, or one that is not a wall in wall settings [Data].
-- **FR-013**: The check MUST accept definitions of the base game and Royalty, and MUST report a definition of any other
-  expansion unless the template or kit marks it as that expansion's content, since Imperium requires Royalty alone and
-  other expansions add content [Design: imperium.md lines 108-110; Data: each expansion's `About/About.xml`].
-- **FR-014**: The check MUST report each cell of a terrain shape that lies outside the smallest map the template states,
-  or that has no terrain [Data].
-- **FR-015**: The check MUST report each skeleton relation that names a part the skeleton does not hold, or a terrain
+- **FR-014**: The check MUST report each name that stands where its kind of definition cannot go, such as a
+  definition that is not a terrain in a terrain shape, one that is not a wall in wall settings, or any thing a city is
+  built of placed on a template's cells (FR-002) [Data; Design: line 209].
+- **FR-015**: The check MUST accept definitions of the base game and Royalty, and MUST report a definition of any other
+  expansion unless the template, kit or laid-out city marks it as that expansion's content, since Imperium requires
+  Royalty alone and other expansions add content [Design: imperium.md lines 108-110; Data: each expansion's
+  `About/About.xml`].
+- **FR-016**: The check MUST report each cell of a terrain shape that lies outside the smallest map its template
+  states, each cell of a laid-out city that lies outside its map, and each cell of either that has no terrain [Data].
+- **FR-017**: The check MUST report each skeleton relation that names a part the skeleton does not hold, or a terrain
   the terrain shape does not hold [Design: line 204].
-- **FR-016**: Each problem MUST be reported with its template or kit, the part it is in and, where it has one, its cell
-  [Spec Kit].
-- **FR-017**: Every result MUST state that testing in the game is the final check and that it is still to come; a
-  template or kit with no problem found MUST NOT be reported as final [Testing; Roadmap: R13].
-- **FR-018**: The check MUST read the game's files where they are installed, and MUST NOT copy them into Imperium or
+- **FR-018**: The check MUST report each thing in a laid-out city that stands on a terrain lacking the affordance the
+  thing needs, which is its material's when its definition says so [Data: `Buildings_Base.xml` line 11;
+  `Buildings_Structure.xml` lines 277-278; `Various_Stone.xml` line 88; `Terrain_Natural.xml`]; each thing whose
+  cells, by its definition's size, reach past the map; and each material its definition does not take
+  [Data: `Buildings_Structure.xml` lines 286-290].
+- **FR-019**: Each problem MUST be reported with its template, kit or laid-out city, the part it is in and, where it
+  has one, its cell [Spec Kit].
+- **FR-020**: Every result MUST state that testing in the game is the final check and that it is still to come; a
+  template, kit or laid-out city with no problem found MUST NOT be reported as final [Testing; Roadmap: R13].
+- **FR-021**: The check MUST read the game's files where they are installed, and MUST NOT copy them into Imperium or
   its results, beyond the names and labels it reports [EULA: line 86].
-- **FR-019**: The same template or kit, checked against the same `Data/`, MUST always give the same report and the
-  same pictures [Testing].
+- **FR-022**: The same template, kit or laid-out city, checked against the same `Data/` with the same reference
+  picture, MUST always give the same report and the same pictures [Testing].
 
 **The pictures**
 
-- **FR-020**: The check MUST draw each template as a picture of its site: every cell of the terrain shape in its place
+- **FR-023**: The check MUST draw each template as a picture of its site: every cell of the terrain shape in its place
   on a grid, the coordinates along the edges as the game gives positions, `x` and `z`
   [Data: `AncientPrefabs.xml` line 12], and the skeleton's parts and relations shown and named on it [Spec Kit].
-- **FR-021**: The check MUST draw each spec card as a picture of its building: its plot, rooms and contents on the
+- **FR-024**: The check MUST draw each spec card as a picture of its building: its plot, rooms and contents on the
   same kind of grid [Design: line 206; Spec Kit].
-- **FR-022**: Each picture MUST hold a legend that names each terrain, rock, roof and thing it shows under the label
+- **FR-025**: The check MUST draw each laid-out city on the same kind of grid, with each thing where it stands and each
+  part of the template's skeleton named where it lies, and MUST set the whole drawing beside the whole reference
+  picture, so that both are seen at once; a template's picture MUST be set beside the reference picture in the same
+  way when one is given [Direction; Spec Kit].
+- **FR-026**: Each picture MUST hold a legend that names each terrain, rock, roof and thing it shows under the label
   its definition gives, and names the expansion of any definition from an expansion other than Royalty [Data;
   Design: imperium.md line 110].
-- **FR-023**: Each problem that has a cell MUST be marked at that cell in the picture, with what it is [Spec Kit].
+- **FR-027**: Each problem that has a cell MUST be marked at that cell in the picture, with what it is [Spec Kit].
+- **FR-028**: The check MUST read a reference picture where the developer keeps it, and MUST NOT put it into
+  Imperium's repository or its released files [Direction; EULA: line 76].
+
+**The comparison**
+
+- **FR-029**: A laid-out city MUST be judged to match its reference city or not, from the side-by-side picture
+  [Direction]. [NEEDS CLARIFICATION: Is a laid-out city judged to match its reference by the developer comparing the
+  two pictures, or also by something the check measures, such as whether each relation of the template's skeleton
+  holds in the laid-out city?]
+- **FR-030**: A template MUST count as passing only once the check has drawn a city laid out from it and that city
+  has been judged to match its reference as FR-029 sets, whoever wrote the template, and the check in the game still
+  follows [Direction; Testing].
 
 ### Key Entities *(include if feature involves data)*
 
-- **Template**: the designed layout of a whole city site: its terrain shape, its skeleton, what it is picked by and
-  the smallest map it needs.
+- **Template**: the designed layout of a whole city site: its terrain shape, its skeleton, what it is picked by, the
+  smallest map it needs and the reference city it is drawn from. It places no thing a city is built of.
 - **Terrain shape**: the site's cells, each with its terrain, any natural rock and its roof, as the game defines them.
 - **Skeleton**: the fixed parts of a city's layout and their relations to each other and to the terrain. A kit holds
   one too [Design: line 184].
@@ -212,21 +332,29 @@ compare the report and the two pictures with the cards.
   possibly a block library.
 - **Block library**: a kit's ready-made blocks, built from spec cards.
 - **Spec card**: one building's plot, rooms and contents.
+- **Laid-out city**: the city generation lays out on a map from a template and a kit: each cell's terrain, rock and
+  roof, each thing that stands there, and where each part of the skeleton lies.
+- **Reference city**: the player-built city a template is drawn from, and its **reference picture**, which the
+  developer keeps outside Imperium's files.
 - **Report**: what one run of the check found, each problem with its place, and the statement that the check in the
   game is still to come.
-- **Picture**: the drawing of one template or spec card, with grid, coordinates, legend and marked problems.
+- **Picture**: the drawing of one template, laid-out city or spec card, with grid, coordinates, legend and marked
+  problems, and for a template or laid-out city, the reference picture beside it.
 
 ## Success Criteria *(mandatory)*
 
 ### Measurable Outcomes
 
-- **SC-001**: For a set of test templates and kits holding one problem of each kind that FR-011 to FR-015 name, the
-  check reports 100% of the problems, and reports none for the test template and kit that hold no problem.
+- **SC-001**: For a set of test templates, kits and laid-out cities holding one problem of each kind that FR-013 to
+  FR-018 name, the check reports 100% of the problems, and reports none for those that hold no problem.
 - **SC-002**: For every reported problem that has a cell, a developer finds that cell in the picture from the report
-  alone, without reading the template.
-- **SC-003**: Checking and drawing one template finishes before the game, started on the same computer, reaches its
-  main menu.
+  alone, without reading the template or laid-out city.
+- **SC-003**: Checking and drawing one template, or one laid-out city beside its reference, finishes before the game,
+  started on the same computer, reaches its main menu.
 - **SC-004**: 100% of reports state that testing in the game is the final check and is still to come.
+- **SC-005**: For every laid-out city given with a reference picture, the developer sees the whole city and the whole
+  reference at once, side by side, and can name in both where each part of the skeleton lies.
+- **SC-006**: No template counts as passing without a laid-out city from it judged to match its reference (FR-030).
 
 ## Assumptions
 
@@ -235,7 +363,10 @@ compare the report and the two pictures with the cards.
 - The check runs where `Data/` is available: on the maintainer's computer, in the game's install folder, and in cloud
   threads, from the project's copy of RimWorld 1.7.5014's `Data/`.
 - Which templates and kits the alpha holds, the map size each template needs, and generation are R2's
-  [Roadmap: R13, R2]. Test templates and kits written for this feature are not game content.
+  [Roadmap: R13, R2]. The form of a laid-out city is set here so that R2's generation writes it and the check reads it.
+- Until R2 generates cities, the laid-out cities the check is tested with are written by hand from test templates and
+  kits. Test templates, kits and laid-out cities written for this feature are not game content.
 - The check in the game, the final one, comes when R2 places templates on a map [Roadmap: R13; Testing].
-- The forms hold the parts the design names, and take further parts when the design names them [Design].
+- The forms hold the parts the design and the maintainer's direction name, and take further parts when either names
+  them [Design; Direction].
 - How the forms are written, and the pictures' look and file format, are chosen in `/speckit-plan`.
