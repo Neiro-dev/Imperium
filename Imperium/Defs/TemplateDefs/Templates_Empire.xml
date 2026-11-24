@@ -1,10 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Defs>
 
+  <!-- The river-bend town, the Empire's first template. Each part names where it comes from, in the order the Empire's
+       kit gives (Kits_Empire.xml): "Design", a line of Imperium-old's docs at 20a052b, the glossary unless another file
+       is named; "Spec", an entry of specs/002-templates-and-kits/spec.md; and only where both are silent,
+       "[Direction]", read off the river-bend town's render, for the maintainer to judge. -->
   <Mantle.TemplateDef>
     <defName>RiverBendTown</defName>
     <label>river-bend town</label>
     <kit>Empire</kit>
+    <!-- Spec: FR-028 and FR-031 (the town's screenshot and render, kept in the project's files). -->
     <reference>
       <name>RiverBendTown</name>
       <pictures>
@@ -12,6 +17,8 @@
         <li>render</li>
       </pictures>
     </reference>
+    <!-- Design: line 208 (the temperate look, for temperate and cold regions); Spec: FR-040, with the biomes as Data/
+         describes them. -->
     <allowedBiomes>
       <li>TemperateForest</li>
       <li>TemperateSwamp</li>
@@ -22,10 +29,10 @@
       <li>SeaIce</li>
       <li MayRequire="Ludeon.RimWorld.Odyssey">GlacialPlain</li>
     </allowedBiomes>
-    <allowedRivers>
-      <li>LargeRiver</li>
-    </allowedRivers>
+    <!-- Spec: FR-003 (a city's map is 350 by 350 cells). -->
     <minMapSize>(350, 1, 350)</minMapSize>
+    <!-- [Direction]: the site, its soil, the river with its shallow and deep water, and the edge it flows from, read
+         off the render and fitted to 350 by 350 cells (Spec: FR-031, FR-036). -->
     <terrainShape>
       <terrain>
         <Soil>
@@ -1286,31 +1293,51 @@
       </features>
     </terrainShape>
     <skeleton>
+      <!-- Read with the Empire kit's skeleton: core, firstSquare, mainStreet, mainGate, palaceQuarter and walls are the
+           kit's. -->
       <parts>
+        <!-- Design: line 178 (the district). That the town has three, one on each bank and one on the island:
+             [Direction]. -->
         <li><name>westDistrict</name><kind>District</kind></li>
         <li><name>islandDistrict</name><kind>District</kind></li>
         <li><name>eastDistrict</name><kind>District</kind></li>
+        <!-- Design: lines 183 and 188 (gates of a walled city, which the main street runs from). That the town has five
+             gates besides its main gate, and where: [Direction]. -->
         <li><name>westGate</name><kind>Gate</kind></li>
+        <li><name>northGate</name><kind>Gate</kind></li>
+        <li><name>northEastGate</name><kind>Gate</kind></li>
+        <li><name>northWestGate</name><kind>Gate</kind></li>
+        <li><name>southGate</name><kind>Gate</kind></li>
+        <!-- Design: line 215 (a water gate lets the river into or out of the city), where the river crosses the walls. -->
+        <li><name>upperWaterGate</name><kind>WaterGate</kind></li>
+        <li><name>lowerWaterGate</name><kind>WaterGate</kind></li>
+        <!-- [Direction]: the crossings between the districts. -->
         <li><name>mainBridge</name><kind>Bridge</kind></li>
         <li><name>northBridge</name><kind>Bridge</kind></li>
         <li><name>westIslandBridge</name><kind>Bridge</kind></li>
         <li><name>eastIslandBridge</name><kind>Bridge</kind></li>
+        <!-- Design: line 199 (a shorter second axis beside the main street, which ends at the palace). -->
         <li><name>secondaryAxis</name><kind>SecondaryAxis</kind></li>
+        <!-- Design: line 182 (each square a forum). That the town has these two besides its first square: [Direction]. -->
         <li><name>westSquare</name><kind>Plaza</kind></li>
         <li><name>islandSquare</name><kind>Plaza</kind></li>
-        <li><name>sanctuary</name><kind>PublicBuilding</kind></li>
-        <li><name>grammarSchool</name><kind>PublicBuilding</kind></li>
-        <li><name>market</name><kind>PublicBuilding</kind></li>
-        <li><name>islandMarket</name><kind>PublicBuilding</kind></li>
-        <li><name>garrison</name><kind>PublicBuilding</kind></li>
-        <li><name>fireStation</name><kind>PublicBuilding</kind></li>
-        <li><name>charcoalKiln</name><kind>PublicBuilding</kind></li>
-        <li><name>clayPit</name><kind>PublicBuilding</kind></li>
       </parts>
       <relations>
+        <!-- [Direction]: the districts on either side of the river and on the island. -->
         <li><relation>Across</relation><a>westDistrict</a><b>eastDistrict</b><feature>river</feature></li>
         <li><relation>Across</relation><a>islandDistrict</a><b>westDistrict</b><feature>river</feature></li>
         <li><relation>Across</relation><a>islandDistrict</a><b>eastDistrict</b><feature>river</feature></li>
+        <!-- Design: line 178 (the walls protect the district). -->
+        <li><relation>Inside</relation><a>westDistrict</a><b>walls</b></li>
+        <li><relation>Inside</relation><a>islandDistrict</a><b>walls</b></li>
+        <li><relation>Inside</relation><a>eastDistrict</a><b>walls</b></li>
+        <!-- Design: line 178 (the district grows outward from its core). In which district: [Direction]. -->
+        <li><relation>Inside</relation><a>core</a><b>eastDistrict</b></li>
+        <!-- Design: line 193 (upstream on the river). -->
+        <li><relation>Upstream</relation><a>palaceQuarter</a><b>core</b><feature>river</feature></li>
+        <!-- [Direction]: the palace quarter's district. -->
+        <li><relation>Inside</relation><a>palaceQuarter</a><b>eastDistrict</b></li>
+        <!-- [Direction]: the crossings and what they join. -->
         <li><relation>Adjoins</relation><a>mainBridge</a><b>westDistrict</b></li>
         <li><relation>Adjoins</relation><a>mainBridge</a><b>eastDistrict</b></li>
         <li><relation>Adjoins</relation><a>northBridge</a><b>westDistrict</b></li>
@@ -1319,32 +1346,38 @@
         <li><relation>Adjoins</relation><a>westIslandBridge</a><b>islandDistrict</b></li>
         <li><relation>Adjoins</relation><a>eastIslandBridge</a><b>islandDistrict</b></li>
         <li><relation>Adjoins</relation><a>eastIslandBridge</a><b>eastDistrict</b></li>
+        <!-- Design: line 188 (from its gates through its squares). Its course, from the west gate through the west square
+             and over the main bridge: [Direction]. -->
         <li><relation>Adjoins</relation><a>mainStreet</a><b>westGate</b></li>
         <li><relation>Adjoins</relation><a>mainStreet</a><b>westSquare</b></li>
         <li><relation>Adjoins</relation><a>mainStreet</a><b>mainBridge</b></li>
+        <!-- Design: line 183 (a gatehouse holds a gate of a walled city). -->
         <li><relation>Adjoins</relation><a>westGate</a><b>walls</b></li>
+        <li><relation>Adjoins</relation><a>northGate</a><b>walls</b></li>
+        <li><relation>Adjoins</relation><a>northEastGate</a><b>walls</b></li>
+        <li><relation>Adjoins</relation><a>northWestGate</a><b>walls</b></li>
+        <li><relation>Adjoins</relation><a>southGate</a><b>walls</b></li>
+        <!-- [Direction]: the bank each gate lies on; the main gate on the core's, at the main street's other end. -->
         <li><relation>SameSide</relation><a>westGate</a><b>westDistrict</b><feature>river</feature></li>
+        <li><relation>SameSide</relation><a>northWestGate</a><b>westDistrict</b><feature>river</feature></li>
+        <li><relation>SameSide</relation><a>northGate</a><b>eastDistrict</b><feature>river</feature></li>
+        <li><relation>SameSide</relation><a>northEastGate</a><b>eastDistrict</b><feature>river</feature></li>
+        <li><relation>SameSide</relation><a>southGate</a><b>eastDistrict</b><feature>river</feature></li>
         <li><relation>SameSide</relation><a>mainGate</a><b>eastDistrict</b><feature>river</feature></li>
+        <!-- Design: line 215 (a gate in a city wall at the water, letting the river in upstream and out downstream). -->
+        <li><relation>Adjoins</relation><a>upperWaterGate</a><b>walls</b></li>
+        <li><relation>Adjoins</relation><a>upperWaterGate</a><b>river</b></li>
+        <li><relation>Adjoins</relation><a>lowerWaterGate</a><b>walls</b></li>
+        <li><relation>Adjoins</relation><a>lowerWaterGate</a><b>river</b></li>
+        <li><relation>Upstream</relation><a>upperWaterGate</a><b>lowerWaterGate</b><feature>river</feature></li>
+        <!-- [Direction]: the squares' districts. -->
         <li><relation>Inside</relation><a>westSquare</a><b>westDistrict</b></li>
-        <li><relation>Inside</relation><a>core</a><b>eastDistrict</b></li>
         <li><relation>Inside</relation><a>islandSquare</a><b>islandDistrict</b></li>
+        <!-- Design: line 199 (ends at the palace). Its course, over the island and its square: [Direction]. -->
+        <li><relation>Adjoins</relation><a>secondaryAxis</a><b>palaceQuarter</b></li>
         <li><relation>Adjoins</relation><a>secondaryAxis</a><b>westIslandBridge</b></li>
         <li><relation>Adjoins</relation><a>secondaryAxis</a><b>islandSquare</b></li>
         <li><relation>Adjoins</relation><a>secondaryAxis</a><b>eastIslandBridge</b></li>
-        <li><relation>Adjoins</relation><a>secondaryAxis</a><b>palaceQuarter</b></li>
-        <li><relation>Inside</relation><a>palaceQuarter</a><b>eastDistrict</b></li>
-        <li><relation>Upstream</relation><a>palaceQuarter</a><b>core</b><feature>river</feature></li>
-        <li><relation>Inside</relation><a>sanctuary</a><b>westDistrict</b></li>
-        <li><relation>Inside</relation><a>grammarSchool</a><b>westDistrict</b></li>
-        <li><relation>Adjoins</relation><a>grammarSchool</a><b>westSquare</b></li>
-        <li><relation>Inside</relation><a>market</a><b>eastDistrict</b></li>
-        <li><relation>Adjoins</relation><a>market</a><b>mainStreet</b></li>
-        <li><relation>Inside</relation><a>garrison</a><b>eastDistrict</b></li>
-        <li><relation>Inside</relation><a>fireStation</a><b>islandDistrict</b></li>
-        <li><relation>Inside</relation><a>charcoalKiln</a><b>islandDistrict</b></li>
-        <li><relation>Inside</relation><a>islandMarket</a><b>islandDistrict</b></li>
-        <li><relation>Adjoins</relation><a>islandMarket</a><b>islandSquare</b></li>
-        <li><relation>Inside</relation><a>clayPit</a><b>eastDistrict</b></li>
       </relations>
     </skeleton>
   </Mantle.TemplateDef>

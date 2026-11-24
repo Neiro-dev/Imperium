@@ -1,30 +1,66 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Defs>
 
+  <!-- The Empire's kit: what every city of the Empire has. Each part names where it comes from, in this order
+       (specs/002-templates-and-kits/spec.md, FR-047): "Design", a line of Imperium-old's docs at 20a052b, the glossary
+       unless another file is named; "Spec", an entry of that spec recording the maintainer's direction; and only where
+       both are silent, "[Direction]", read off the river-bend town's render, for the maintainer to judge. -->
   <Mantle.KitDef>
     <defName>Empire</defName>
     <label>Empire</label>
+    <!-- Design: line 184 (a kit holds its culture's word list); setting.md lines 57, 59 and 60-61; Spec: FR-011.
+         Taking the Late Antique names of the provinces governed from Constantinople as the lean toward New Rome:
+         [Direction]. -->
     <nameMaker>NamerSettlementEmpireImperium</nameMaker>
     <skeleton>
       <parts>
+        <!-- Design: lines 174 (the civic core, around its first square) and 182 (each square a forum). -->
         <li><name>core</name><kind>Core</kind></li>
         <li><name>firstSquare</name><kind>Plaza</kind></li>
+        <!-- Design: line 188 (the one main street, from its gates through its squares). -->
         <li><name>mainStreet</name><kind>MainStreet</kind></li>
+        <!-- Design: lines 193 and 204 (the main gate). -->
         <li><name>mainGate</name><kind>Gate</kind></li>
+        <!-- Design: lines 185 (the city's landmark) and 193 (the quarter around the governor's residence). -->
         <li><name>palaceQuarter</name><kind>PalaceQuarter</kind></li>
-        <li><name>walls</name><kind>WallLine</kind><optional>true</optional></li>
+        <!-- Design: line 178 (the walls protect the district), so every city of the Empire has them. -->
+        <li><name>walls</name><kind>WallLine</kind></li>
+        <!-- Design: line 200 (a secondary core, which small cities do not have): a slot. -->
+        <li><name>secondaryCore</name><kind>SecondaryCore</kind><optional>true</optional></li>
+        <!-- Design: line 161 (an acropolis, which a city may have where its terrain can be defended): a slot. -->
+        <li><name>acropolis</name><kind>Acropolis</kind><optional>true</optional></li>
+        <!-- Design: lines 165 (a basilica beside the forum) and 174 (public buildings gather in the civic core): a slot,
+             since the design does not say every city has one. -->
+        <li><name>basilica</name><kind>PublicBuilding</kind><optional>true</optional></li>
       </parts>
       <relations>
+        <!-- Design: line 174. -->
         <li><relation>Inside</relation><a>firstSquare</a><b>core</b></li>
+        <!-- Design: line 188. -->
         <li><relation>Adjoins</relation><a>mainStreet</a><b>mainGate</b></li>
         <li><relation>Adjoins</relation><a>mainStreet</a><b>firstSquare</b></li>
+        <!-- Design: line 193 (in a corner far from the main gate): farther from it than the core is, and at the walls. -->
         <li><relation>Farther</relation><a>palaceQuarter</a><b>mainGate</b><than>core</than></li>
+        <li><relation>Adjoins</relation><a>palaceQuarter</a><b>walls</b></li>
+        <!-- Design: line 183 (a gatehouse holds a gate of a walled city). -->
         <li><relation>Adjoins</relation><a>mainGate</a><b>walls</b></li>
+        <!-- Design: line 178 (the district grows outward from its core, within the walls). -->
+        <li><relation>Inside</relation><a>core</a><b>walls</b></li>
+        <!-- Design: lines 178 and 200 (a smaller center of the city, which lies within its walls). -->
+        <li><relation>Inside</relation><a>secondaryCore</a><b>walls</b></li>
+        <!-- Design: lines 165 and 174. -->
+        <li><relation>Adjoins</relation><a>basilica</a><b>firstSquare</b></li>
+        <li><relation>Inside</relation><a>basilica</a><b>core</b></li>
       </relations>
     </skeleton>
+    <!-- Design: lines 177 (curtain walls) and 178; Spec: FR-014 (a wall of Data/). -->
     <wallSettings>
       <wallDef>Wall</wallDef>
     </wallSettings>
+    <!-- [Direction]: the dwellings and annexes, their sizes, walls and doors, read off the river-bend town's render
+         (Spec: FR-036), since the design is silent on the Empire's dwellings. Their materials, limestone blocks and
+         wooden doors, are the render's too: the design leaves the Empire's look to the artist (setting.md lines
+         88-89). -->
     <groups>
       <li>
         <name>dwelling5x9</name>
@@ -685,6 +721,7 @@
         </things>
       </li>
     </groups>
+    <!-- [Direction]: what the render's blocks are built with (Spec: FR-036), as the groups above. -->
     <fill>
       <wallDef>Wall</wallDef>
       <doorDef>Door</doorDef>
