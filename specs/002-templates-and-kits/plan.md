@@ -25,12 +25,10 @@ attitude, from the references the maintainer chose, and each ships as it stands 
 template is derived in a fixed order: Imperium-old's design first, then the maintainer's recorded direction, and a
 reading only where both are silent, which never overrides either, each part naming its source (spec FR-047; R-13). A
 template states the attitude of the factions it serves in `FactionDef`'s own `naturalEnemy` and `permanentEnemy`, and
-the biomes it suits in `allowedBiomes`; the tribal culture picks by the first, the Empire by the second (R-14). A
-reference city that Anno 117 presets may also be read from the game's own data on the maintainer's computer and drawn
-from above, in steps the maintainer sees one by one, into the project's files and never into the repository; the check
-takes those drawings as reference pictures, as it takes a screenshot (R-15). The industrial (outlander) and pirate
-cultures' kits and templates, which the alpha opens too, are R16's, in these forms; the later cultures' references are
-recorded for them (R-13, R-16). It is validated by tests outside the game, then by a load in the game
+the biomes it suits in `allowedBiomes`; the tribal culture picks by the first, the Empire by the second (R-14). No
+reference city is read from its game's own data, since no source supports it (R-15). The industrial (outlander) and
+pirate cultures' kits and templates, which the alpha opens too, are R16's, in these forms; the later cultures'
+references are recorded for them (R-13, R-16). It is validated by tests outside the game, then by a load in the game
 ([quickstart.md](quickstart.md)).
 
 ## Technical Context
@@ -43,8 +41,8 @@ definitions, laid-out cities and readings (R-1, R-7); Python 3.11 or later for t
 check, Typer and Pillow (R-9); no Harmony (R-2)
 
 **Storage**: files: definitions in each mod's `Defs/`; laid-out cities as XML files; readings in `readings/` at the
-repository root (R-7); reports and pictures in a folder outside the repository (R-11); reference pictures, among them
-the drawings of preset islands read from a game's data, in `template-references/` in the project's files (R-15)
+repository root (R-7); reports and pictures in a folder outside the repository (R-11); reference pictures in
+`template-references/` in the project's files (R-11)
 
 **Testing**: outside the game first, with pytest against `Data/` 1.7.5014 (`RIMWORLD_DATA_DIR`), on test templates,
 kits and laid-out cities written by hand (R-12); then in the game, `-quicktest` with `-savedatafolder=SaveData`
@@ -61,10 +59,9 @@ check wherever Python and `Data/` are, on the maintainer's computer and in cloud
 the game reaches its main menu on the same computer (SC-003)
 
 **Constraints**: reference pictures and the game's files stay out of the repository and the released files (FR-021,
-FR-028; `EULA.txt` lines 76, 86), and so do another game's packages and what is read or drawn from them (FR-041); the
-same inputs give the same files (FR-022); city maps are 350×350 (FR-003); Mantle's kits use base-game definitions, and
-expansion content only when marked (FR-015); the mod folders `Mantle/` and `Imperium/` and Mantle's `packageId` come
-from R14 (R-1)
+FR-028; `EULA.txt` lines 76, 86); the same inputs give the same files (FR-022); city maps are 350×350 (FR-003);
+Mantle's kits use base-game definitions, and expansion content only when marked (FR-015); the mod folders
+`Mantle/` and `Imperium/` and Mantle's `packageId` come from R14 (R-1)
 
 **Scale/Scope**: two definition types, one laid-out city form, one command; the tribal culture's kit and three first
 templates, and the Empire kit with the river-bend town's template; test fixtures for every kind of problem
@@ -76,16 +73,17 @@ templates, and the Empire kit with the river-bend town's template; test fixtures
 | Principle | Check | Result |
 |-----------|-------|--------|
 | I. One Source per Topic | Design from Imperium-old `main` and the maintainer's direction (spec, Sources), kits and templates derived in that order with a reading only where both are silent (spec FR-047; R-13); which mod holds what from the roadmap's R13, R14, R15 and Releases, and where each file goes from R14's layout; the released mod's forms from `Data/`, `ModUpdating.txt`, Harmony; testing outside the game from `Data/`; testing in the game from `Readme.txt`; the check's form and its ignored files from Spec Kit, the build's from Harmony | Pass |
-| II. Other Sources Only Cross-Check | No decision rests on a source outside its topic's register entry; the reference pictures are the maintainer's direction's material, not a source of form; the old project's output and images, and FileDBReader, only cross-check a reading of a game's data (R-15) | Pass |
+| II. Other Sources Only Cross-Check | No decision rests on a source outside its topic's register entry; the reference pictures are the maintainer's direction's material, not a source of form | Pass |
 | III. Sources in Order | Every field takes `Data/`'s form first (R-3); `Defs/`, `Source/` and `Assemblies/` come from `ModUpdating.txt` because `Data/` holds no mod layout (R-1); the build comes from Harmony because neither earlier source gives one (R-2) | Pass |
-| IV. Asking the Maintainer | No question is asked: what a kit's groups and fill hold comes from its culture's reading, by his direction (R-8); his choice of the tribal references among candidates, one for each attitude, gates only the tribal readings, kit and templates (R-13); which layout each attitude gets comes from the tribes' descriptions in `Data/`, which the maintainer confirmed (R-14); how a preset reference is read from its game's data, and the later cultures' references, are his direction, which Imperium-old's design leaves open (R-15, R-16) | Pass |
-| V. When a Source Gives No Form | The check takes Spec Kit's own options (R-9), and `readings/` is named in lower case as Spec Kit's repository names its folders (R-7); no CI, no version folders, no `LoadFolders.xml`, no Harmony, since nothing here needs them; no reader of another game's data in the repository, since no source asks for one (R-15) | Pass |
+| IV. Asking the Maintainer | No question is asked: what a kit's groups and fill hold comes from its culture's reading, by his direction (R-8); his choice of the tribal references among candidates, one for each attitude, gates only the tribal readings, kit and templates (R-13); which layout each attitude gets comes from the tribes' descriptions in `Data/`, which the maintainer confirmed (R-14); the later cultures' references are his direction, which Imperium-old's design leaves open (R-16); reading a preset reference from its game's data is not game content, so it is not put to him (R-15) | Pass |
+| V. When a Source Gives No Form | The check takes Spec Kit's own options (R-9), and `readings/` is named in lower case as Spec Kit's repository names its folders (R-7); no CI, no version folders, no `LoadFolders.xml`, no Harmony, since nothing here needs them; no reference is read from its game's data, since no source gives a form for it (R-15) | Pass |
 | VI. Every Conclusion Names Its Source | Every decision in research.md and every row in data-model.md names its source | Pass |
-| Source Register, `EULA.txt` always followed | No reference picture, Anno name, art or game file in the repository or released files, nor any package of Anno 117 or anything read or drawn from one (R-7, R-9, R-11, R-13, R-15); a reading lies on the game's flat cells with the culture's own kit and carries only the reference's skeleton (spec FR-010, FR-036); the game's assemblies only referenced (R-2) | Pass |
+| Source Register, `EULA.txt` always followed | No reference picture, Anno name, art or game file in the repository or released files (R-7, R-9, R-11, R-13); a reading lies on the game's flat cells with the culture's own kit and carries only the reference's skeleton (spec FR-010, FR-036); the game's assemblies only referenced (R-2) | Pass |
 | Source Register, testing outside the game | The check and its tests run outside the game against `Data/` first, and the load in the game follows; placing templates in the game stays the final check (quickstart.md; R-12) | Pass |
 
 Post-design re-check (after Phase 1): unchanged. Re-checked after the update that added R-15 and R-16 and moved the
-industrial (outlander) and pirate cultures to R16 (2026-11-24): unchanged.
+industrial (outlander) and pirate cultures to R16 (2026-11-24): unchanged. Re-checked after the update that stopped
+reading a preset reference from its game's data, which no source supports (2026-11-24): every row still passes.
 
 ## Project Structure
 

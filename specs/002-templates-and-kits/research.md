@@ -313,36 +313,16 @@ files, to `Neiro-dev/Imperium-old` at 20a052b, to Spec Kit at v1.4.3 and to Harm
 
 ## R-15: Reading a preset reference from its game's own data
 
-- **Decision**: a reference city that Anno 117 presets, on an AI rival's or a third party's island, may be read from
-  the game's own data (spec FR-041). The reading runs on the maintainer's computer, where the game's packages are, and
-  reads only the game's own files: its file index, `file_h.db`, to find the `.rda` package that holds the island, and
-  in that package the island's `.a7m` file; never the old project's index, cfg or cut files. Each object found takes
-  two categories from the game data, its asset Template and the graphics folder its ConfigFilename names (FR-042). The
-  island is drawn from above in steps, and the maintainer sees each step's picture before the next is drawn (FR-044):
-  1. each object as a dot coloured by its category, at its `(x, z)` on the cells, over the island's heightmap, turned
-     to match the game's own top-down image of the island, `mapimage.png`;
-  2. the skeleton: linear pieces as lines, houses as markers, fields as squares (FR-043);
-  3. optionally, each building's real footprint from the game's `.ifo` files, once the packages that hold them are on
-     the maintainer's computer (spec, Edge Cases).
-  For each island it writes into `template-references/` in the project's files a skeleton PNG, the same laid over
-  `mapimage.png`, `objects.json`, which lists every object with its two categories and its position, and a summary
-  (FR-043). None of it goes into the repository: not the packages, not what is read or drawn, and not the tool that
-  reads them. The check takes the two PNGs as reference pictures through `--reference`, under the reference's name and
-  a label for each (contracts/check-command.md), as it takes a screenshot; `objects.json` and the summary are for the
-  people who write the reading. The old project's output and images, and FileDBReader, only cross-check what is read
-  (FR-045).
-- **Rationale**: the maintainer's direction (spec, Clarifications; [Direction]), which Imperium-old's design leaves
-  open (checked at 20a052b). The check already reads PNG reference pictures (R-11), so the drawing of a preset island
-  needs no new input or form. Keeping the packages and what is read from them out of the repository follows the
-  direction and spec FR-028 (`EULA.txt` line 76). Sources other than the game's own files only cross-check
-  (constitution, Principle II).
-- **Alternatives considered**: a reader in the repository beside the check. Rejected: no source asks for one, and
-  nothing it reads may enter the repository (constitution, Principle V; spec FR-041). The old project's index, cfg and
-  cut files as input. Rejected by the direction (FR-041). FileDBReader as the reader. Rejected: by the direction it
-  only cross-checks (FR-045).
+- **Decision**: a reference city's layout is not read from its game's own data (spec, Clarifications).
+- **Rationale**: Imperium-old's design says nothing on reading a game's data (checked at 20a052b), and no row of the
+  constitution's Source Register covers another game's files. The maintainer is a source only under Principle IV, for
+  game content, and reading another game's files is not game content, which is judged by what the official expansions
+  contain (Source Register, row Game content and the released mod). With no source, the agent does not act on it, and
+  a practice no source supports is removed (constitution, Principle V).
+- **Alternatives considered**: reading Anno 117's `file_h.db` and `.rda` packages on the maintainer's computer and
+  drawing a preset island from above. Rejected: no source supports it (above).
 - **In this feature**: none of the tribal references the maintainer chose is a preset city (spec FR-037), so R13's
-  readings are drawn from their screenshots; the steps above run for a preset city once the maintainer chooses it as
-  a reference (spec, Assumptions).
+  readings are drawn from their screenshots.
 
 ## R-16: The later cultures' references
 

@@ -103,22 +103,6 @@ whose `reference` names it, or by no mod, requiring no expansion, while no templ
 it beside its reference pictures (FR-036), recorded as an item of `checklists/acceptance.md` that names the reading,
 the commit and where the picture is in the project's files, checked when he accepts it (FR-029).
 
-## Top-down view (in the project's files, not the repository)
-
-The drawing of a preset reference read from its game's own data (spec FR-041 to FR-044; research R-15). The check
-does not read it as data: its two pictures are given to the check as reference pictures (`--reference`).
-
-| Output | Holds | Source |
-|--------|-------|--------|
-| skeleton picture, PNG | each object at its `(x, z)` on the cells, over the island's heightmap, turned to match the game's `mapimage.png`; linear pieces as lines, houses as markers, fields as squares | FR-043 |
-| overlay, PNG | the same laid over the game's `mapimage.png` | FR-043 |
-| `objects.json` | every object read, each with its asset Template, the graphics folder its ConfigFilename names, and its position | FR-042, FR-043 |
-| summary | what was read and drawn | FR-043 |
-
-It is drawn in steps, each seen by the maintainer before the next: dots by category, then the skeleton, then,
-optionally, real footprints from the game's `.ifo` files (FR-044). All of it, and the packages it is read from, stay
-out of the repository (FR-041).
-
 ## Report and pictures
 
 A **problem** has a number, the file, the template, kit, city or spec card, the part or field, the cell where it has

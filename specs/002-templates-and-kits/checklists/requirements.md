@@ -58,3 +58,6 @@
   order in which kits and templates are derived (Imperium-old's design first, then his recorded direction where it is
   silent, a reading only where both are silent, never overriding either), and FR-006, FR-031, FR-036 and FR-037 follow
   it, with SC-012. No marker was added.
+- Updated again 2026-11-24 and validated, every item still passing: reading a preset reference from its game's own
+  data is removed, FR-041 to FR-045 and SC-011 with it, since no source the constitution gives supports it (spec,
+  Clarifications; constitution, Principles I, IV and V). No marker was added.
