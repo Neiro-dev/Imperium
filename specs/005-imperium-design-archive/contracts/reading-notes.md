@@ -33,6 +33,11 @@ Paths are relative to the root of Imperium-old.
 10. Keep ruling ids, dates and the decider the passage names (用户, 设计会话定, and the like) in the pointer line as
     `[R-1028-2127, 用户 10-28]`; they are not part of the statement.
 11. A line that the reading tool shows cut short is read in full by another means before it is noted.
+12. A path that a file names is relative to the folder of the repository it came from, `Imperium-Knowledge/` or
+    `RimWorld-Imperium/`, unless it starts with that folder or the file is at the root. Record the full path from
+    Imperium-old's root, and check that it exists before calling it missing.
+13. Release packaging, licences of borrowed material and how the old projects stored, built or tested things are
+    process or implementation, not design; record no statement for them.
 
 ## Layout
 

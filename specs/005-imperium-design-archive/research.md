@@ -97,5 +97,41 @@ terms in force (spec FR-011, Clarifications).
 
 ## Reading log
 
-| Chunk | Files | Contents | Notes | Status |
+Every chunk was read in full on 2026-11-24, every line of every file, by one subagent on Sonnet. The last column counts
+the statements, conflicts and open points its notes hold. Pointers in the notes were checked to resolve at the pinned
+commit; those that named a file by a short name (C06, C16, C19, C22, C28) were written out in full.
+
+| Chunk | Files | Folders | Notes | Statements / conflicts / open points |
 |---|---|---|---|---|
+| C01 | 26 | `.claude/rules`; `.github`; (root); `Imperium-Knowledge/.claude/agents`; `Imperium-Knowledge/.github/ISSUE_TEMPLATE`; `Imperium-Knowledge/.github`; `Imperium-Knowledge` | [C01.md](research/C01.md) | 313 / 4 / 15 |
+| C02 | 1 | `Imperium-Knowledge` | [C02.md](research/C02.md) | 119 / 3 / 13 |
+| C03 | 1 | `Imperium-Knowledge/09_地图生成与CBF技术.md lines 1-735` | [C03.md](research/C03.md) | 246 / 10 / 13 |
+| C04 | 1 | `Imperium-Knowledge/09_地图生成与CBF技术.md lines 736-978` | [C04.md](research/C04.md) | 180 / 2 / 15 |
+| C05 | 4 | `Imperium-Knowledge` | [C05.md](research/C05.md) | 77 / 2 / 15 |
+| C06 | 1 | `Imperium-Knowledge/14_来源同步与权威.md lines 1-249` | [C06.md](research/C06.md) | 36 / 3 / 5 |
+| C07 | 1 | `Imperium-Knowledge/14_来源同步与权威.md lines 250-394` | [C07.md](research/C07.md) | 13 / 1 / 2 |
+| C08 | 23 | `Imperium-Knowledge`; `Imperium-Knowledge/designs/ICF`; `Imperium-Knowledge/designs`; `Imperium-Knowledge/designs/city-plans/blocks/roman/modules`; `Imperium-Knowledge/designs/city-plans/constantinople/data`; `Imperium-Knowledge/designs/city-plans/constantinople`; `Imperium-Knowledge/designs/city-plans/handcity/2026-11-03/住宅`; `Imperium-Knowledge/designs/city-plans/handcity/2026-11-03/整城v3`; `Imperium-Knowledge/designs/city-plans/handcity/2026-11-03`; `Imperium-Knowledge/designs/city-plans/history/塞萨洛尼基/data`; `Imperium-Knowledge/designs/city-plans/history/塞萨洛尼基`; `Imperium-Knowledge/designs/city-plans/history`; `Imperium-Knowledge/designs/city-plans/kit` | [C08.md](research/C08.md) | 188 / 5 / 12 |
+| C09 | 29 | `Imperium-Knowledge/designs/city-plans/kit`; `Imperium-Knowledge/designs/city-plans/rome/data`; `Imperium-Knowledge/designs/city-plans/templates`; `Imperium-Knowledge/designs/city-plans`; `Imperium-Knowledge/designs/city-plans/量城`; `Imperium-Knowledge/designs/instructions` | [C09.md](research/C09.md) | 195 / 5 / 13 |
+| C10 | 13 | `Imperium-Knowledge/designs/instructions`; `Imperium-Knowledge/designs/medieval-cards`; `Imperium-Knowledge/designs/reviews`; `Imperium-Knowledge/designs/roman-cards` | [C10.md](research/C10.md) | 167 / 8 / 9 |
+| C11 | 5 | `Imperium-Knowledge/designs/roman-cards`; `Imperium-Knowledge/designs/tools`; `Imperium-Knowledge/designs/tools/city` | [C11.md](research/C11.md) | 83 / 2 / 7 |
+| C12 | 11 | `Imperium-Knowledge/designs/tools/city`; `Imperium-Knowledge/designs/tools/city/说明` | [C12.md](research/C12.md) | 68 / 4 / 9 |
+| C13 | 26 | `Imperium-Knowledge/designs/tools/city/说明`; `Imperium-Knowledge/designs/tools/plugins/imperium`; `Imperium-Knowledge/designs/tools/plugins/imperium/agents`; `Imperium-Knowledge/designs/tools/prompts`; `Imperium-Knowledge/designs/tools` | [C13.md](research/C13.md) | 85 / 5 / 4 |
+| C14 | 23 | `Imperium-Knowledge/designs/tools`; `Imperium-Knowledge/designs/做法史` | [C14.md](research/C14.md) | 85 / 2 / 12 |
+| C15 | 18 | `Imperium-Knowledge/designs/做法史`; `Imperium-Knowledge/designs`; `Imperium-Knowledge/designs/待用` | [C15.md](research/C15.md) | 226 / 8 / 14 |
+| C16 | 12 | `Imperium-Knowledge/designs/待用`; `Imperium-Knowledge/designs/整理`; `Imperium-Knowledge/designs/整理/回报` | [C16.md](research/C16.md) | 149 / 7 / 13 |
+| C17 | 14 | `Imperium-Knowledge/designs/整理`; `Imperium-Knowledge/designs/派活` | [C17.md](research/C17.md) | 60 / 2 / 10 |
+| C18 | 37 | `Imperium-Knowledge/designs/派活`; `Imperium-Knowledge/designs/研究`; `Imperium-Knowledge/designs/研究/原版数据`; `Imperium-Knowledge/designs/研究/参照模组`; `Imperium-Knowledge/designs/研究/城` | [C18.md](research/C18.md) | 135 / 6 / 13 |
+| C19 | 17 | `Imperium-Knowledge/designs/研究/城`; `Imperium-Knowledge/designs/研究/城/纪元资料`; `Imperium-Knowledge/designs/研究`; `Imperium-Knowledge/designs/研究/帝国`; `Imperium-Knowledge/designs/研究/机械` | [C19.md](research/C19.md) | 116 / 7 / 13 |
+| C20 | 17 | `Imperium-Knowledge/designs/研究/机械`; `Imperium-Knowledge/designs/研究/美术`; `Imperium-Knowledge/designs`; `Imperium-Knowledge/designs/美术`; `Imperium-Knowledge/designs/聚落设计图`; `Imperium-Knowledge/synced`; `Imperium-Knowledge/现行/城` | [C20.md](research/C20.md) | 250 / 9 / 15 |
+| C21 | 20 | `Imperium-Knowledge/现行/城`; `Imperium-Knowledge/现行/机械体`; `Imperium-Knowledge/现行/流程` | [C21.md](research/C21.md) | 265 / 1 / 11 |
+| C22 | 32 | `Imperium-Knowledge/现行`; `Imperium-Knowledge/目录` | [C22.md](research/C22.md) | 114 / 1 / 10 |
+| C23 | 27 | `Imperium-Knowledge/裁定归档`; (root); `RimWorld-Imperium/.claude/agents`; `RimWorld-Imperium`; `RimWorld-Imperium/docs/claude`; `RimWorld-Imperium/docs`; `RimWorld-Imperium/tools/TestHarness17/Cli`; `RimWorld-Imperium/tools/TestHarness17`; `RimWorld-Imperium/tools/sync`; `docs` | [C23.md](research/C23.md) | 377 / 6 / 11 |
+| C24 | 4 | `docs` | [C24.md](research/C24.md) | 69 / 1 / 5 |
+| C25 | 31 | `Imperium-Knowledge/designs/回报` | [C25.md](research/C25.md) | 41 / 3 / 10 |
+| C26 | 24 | `Imperium-Knowledge/designs/回报`; `Imperium-Knowledge/designs/回报/tidy文档`; `Imperium-Knowledge/designs/回报/参照只取继承`; `Imperium-Knowledge/designs/回报/基准改外缘`; `Imperium-Knowledge/designs/回报/基准改门`; `Imperium-Knowledge/designs/回报/复刻-Anno117真实尺度` | [C26.md](research/C26.md) | 51 / 3 / 13 |
+| C27 | 6 | `Imperium-Knowledge/designs/回报` | [C27.md](research/C27.md) | 34 / 3 / 7 |
+| C28 | 15 | `Imperium-Knowledge/designs/回报`; `Imperium-Knowledge/designs/回报/斜卡试做`; `Imperium-Knowledge/designs/回报/斜街错开摆卡`; `Imperium-Knowledge/designs/回报/纪元城分区`; `Imperium-Knowledge/designs/回报/纪元城放法`; `Imperium-Knowledge/designs/回报/纪元城读房型`; `Imperium-Knowledge/designs/回报/规矩落地与流程工具` | [C28.md](research/C28.md) | 22 / 0 / 6 |
+| C29 | 14 | `Imperium-Knowledge/designs/回报/规矩落地与流程工具`; `Imperium-Knowledge/designs/回报`; `Imperium-Knowledge/designs/回报/试做-城区清障`; `Imperium-Knowledge/designs/回报/试做-外形顺路临水` | [C29.md](research/C29.md) | 11 / 1 / 6 |
+| C30 | 7 | `Imperium-Knowledge/designs/回报` | [C30.md](research/C30.md) | 37 / 1 / 10 |
+| C31 | 29 | `Imperium-Knowledge/designs/回报` | [C31.md](research/C31.md) | 38 / 3 / 9 |
+| C32 | 31 | `Imperium-Knowledge/designs/回报`; `Imperium-Knowledge/designs/回报/配套表` | [C32.md](research/C32.md) | 53 / 6 / 11 |
