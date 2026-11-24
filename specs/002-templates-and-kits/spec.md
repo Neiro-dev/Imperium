@@ -24,8 +24,10 @@ can be compared.
 Mantle is the framework layer that Imperium's content builds on [Design: line 221], so a template is not a drawn map
 of one city. It is a terrain shape and a skeleton, the fixed parts of a city's layout recorded as relations rather
 than coordinates, which generation picks by world tile and size, may mirror, turn and stretch, and fills from a kit,
-one culture's fixed set of generation data [Design: lines 184, 204, 209]. A template is picked by world tile and size,
-not by culture, so one template serves the Roman, medieval, industrial and tribal kits alike [Design: lines 184, 209].
+one culture's fixed set of generation data [Design: lines 184, 204, 209]. Each kit holds a skeleton and wall settings
+of its own [Design: line 184], while a template is picked by world tile and size [Design: line 209]. Whether one
+template serves the kits of several cultures, or each culture has its own templates, the design does not settle
+(FR-002).
 
 What is fixed and what is left to generation [Design: lines 184, 209; Direction]:
 
@@ -43,8 +45,17 @@ Templates are drawn from reference cities in four steps [Direction]:
    cities.
 2. Its layout relationships are read and written as a template in this feature's form, as Imperium's own (FR-010).
 3. Generation lays out a city from the template and a kit [Roadmap: R2].
-4. The check draws the laid-out city beside a picture of the reference city, and the two are compared (FR-025,
+4. The check measures whether each relation of the template's skeleton holds in the laid-out city and draws the city
+   beside a picture of the reference city; once every relation holds, the maintainer judges the two pictures (FR-025,
    FR-029).
+
+The first case is the river-bend town, whose two renders on the game's cells are in the project's files
+(`uploads/hearth/`) [Direction]. Its skeleton, the river bend, the wall line, the districts and their relations, the
+main streets, the plazas and the places of the public buildings, is abstracted from the renders, not traced from them
+cell by cell, and written as this feature's first template (FR-031). It runs the whole flow: this feature writes and
+checks the template and sets its picture beside the renders, and R2's generation lays out the town from it with a kit,
+which is then compared with the renders as FR-029 sets [Roadmap: R2]. A laid-out town written by hand from the renders
+would be a tracing of them (FR-010), so that comparison waits for R2's generation.
 
 The comparison is why the check outside the game exists [Direction]. Generation that is not held to a fixed skeleton,
 and a developer, a person or an AI, working toward a target, take shortcuts toward abstract geometric layouts, such as
@@ -54,6 +65,15 @@ base game offers no large town to draw from: it lays out a faction base by a sin
 walls and streets, and the recommended ones are curated and publicly shared. So a template counts only once the check
 has drawn the city laid out from it and that city has passed the comparison with its reference, whoever wrote the
 template (FR-030), and the check in the game, the final one, still follows [Testing].
+
+## Clarifications
+
+### Session 2026-11-24
+
+- Q: How is a laid-out city judged to match its reference city? → A: The check first measures whether each relation of
+  the template's skeleton holds in the laid-out city and reports each one that does not; once every relation holds,
+  the maintainer looks at the side-by-side picture and decides whether it passes (the maintainer's broad direction,
+  constitution, Principle IV).
 
 ## Sources
 
@@ -84,14 +104,18 @@ Each requirement below names its source in brackets. The sources are those the c
   - Templates are drawn from player-built cities that Ubisoft officially features as recommended Anno 117 cities, as
     reference only. The layout relationships read from such a city, its river, walls, districts, streets, plazas and
     public buildings, are expressed as Imperium's own templates in the design's form, and kits fill them. Nothing of
-    Anno's art, names, models or code is used, and no reference image is traced cell by cell.
+    Anno's art, names, models or code is used, and no reference picture is traced cell by cell.
   - The template's skeleton holds the wall line, districts, main streets, plazas and public buildings read from the
     reference, beside the parts the design names; generation only picks, mirrors, turns and stretches a template and
     fills it from a kit.
   - The city laid out from a template is compared with its reference, and a template counts only once that comparison
-    passes, whoever wrote it, since generation and developers alike tend toward geometric layouts.
+    passes, whoever wrote it, since generation and developers alike tend toward geometric layouts. The check measures
+    whether the skeleton's relations hold in the laid-out city, and once they all hold, the maintainer judges the
+    side-by-side picture (Clarifications).
   - Two pictures of a town at a river bend laid out on the game's cells, drawn from one such city, are in the
     project's files (`uploads/hearth/`). They show what generation should produce, and are kept only for comparison.
+  - The river-bend town is the first case: its skeleton is abstracted from the two renders, not traced, it is laid out
+    with a kit, and the result is compared with the renders.
 - **[Spec Kit]**: the feature description given to `/speckit-specify` (Input, above), the development workflow's
   source for what a feature is for.
 
@@ -142,9 +166,9 @@ buildings in their relations, or has fallen back to geometric shapes.
 game exists, and a template counts only once it passes [Direction]. It uses the check of User Story 1, so it comes
 after it.
 
-**Independent Test**: Until R2 generates cities, write two small laid-out cities by hand from a test template and a
-test kit, one with a known problem and one with none, and give each with a test reference picture; compare the report
-and the side-by-side picture with what each holds.
+**Independent Test**: Until R2 generates cities, write small laid-out cities by hand from a test template and a test
+kit: one with a known problem, one that breaks a relation of the template's skeleton, and one with neither; give each
+with a test reference picture, and compare the report and the side-by-side picture with what each holds.
 
 **Acceptance Scenarios**:
 
@@ -182,6 +206,8 @@ cell, part and relation in the picture with the template.
    picture, **Then** both parts and the relation are shown and named.
 3. **Given** a template with a problem at one cell, **When** the developer opens its picture, **Then** that cell is
    marked and the mark names the problem.
+4. **Given** the river-bend town's template and its two renders, **When** the developer opens its picture, **Then**
+   the picture and each render are side by side, and each part of the skeleton can be found in both.
 
 ---
 
@@ -231,8 +257,10 @@ compare the report and the two pictures with the cards.
 - **FR-001**: A template MUST hold its terrain shape and its skeleton together, what generation picks it by, the world
   tile and size it suits [Design: line 209], and the reference city it is drawn from [Direction].
 - **FR-002**: A template MUST NOT be a drawn map of a city: it MUST NOT place on its cells the things a city is built
-  of, such as buildings, walls and paving, which a kit gives when generation lays out a city, and it MUST NOT be tied
-  to one culture, so that one template serves every kit [Design: lines 184, 204, 209, 221].
+  of, such as buildings, walls and paving, which a kit gives when generation lays out a city [Design: lines 184, 204,
+  209, 221]. [NEEDS CLARIFICATION: Are a skeleton's parts culture-neutral places that each kit fills, replaces or
+  leaves empty, such as a boundary that becomes walls, a palisade or nothing, so that one template serves every
+  culture's kit; or does each culture have its own skeletons and templates?]
 - **FR-003**: A template MUST state the smallest map it needs, as an official site states the smallest map it needs
   [Data: `AncientComplex.xml` line 15]; maps are square [Data: `Dialogs_Various.xml` line 153].
 - **FR-004**: A terrain shape MUST hold, for each cell of the site, the terrain there, any natural rock, and the roof
@@ -257,7 +285,7 @@ compare the report and the two pictures with the cards.
   Design: lines 184, 209; Direction].
 - **FR-010**: A template's layout MUST be Imperium's own: the relations of its terrain shape and skeleton may be drawn
   from a reference city's layout relationships, but a template MUST NOT hold another game's art, names, models or
-  code, and MUST NOT be a cell-by-cell tracing of a reference image [Direction; EULA: line 76].
+  code, and MUST NOT be a cell-by-cell tracing of a reference picture [Direction; EULA: line 76].
 - **FR-011**: The Empire's elements in a template or kit, such as the names in a word list and its public buildings,
   MUST come from Rome as reliable sources describe it, leaning toward New Rome, and not from popular images of Rome
   or from a reference city [Design: setting.md lines 56, 59-60; Direction].
@@ -313,13 +341,19 @@ compare the report and the two pictures with the cards.
 
 **The comparison**
 
-- **FR-029**: A laid-out city MUST be judged to match its reference city or not, from the side-by-side picture
-  [Direction]. [NEEDS CLARIFICATION: Is a laid-out city judged to match its reference by the developer comparing the
-  two pictures, or also by something the check measures, such as whether each relation of the template's skeleton
-  holds in the laid-out city?]
-- **FR-030**: A template MUST count as passing only once the check has drawn a city laid out from it and that city
-  has been judged to match its reference as FR-029 sets, whoever wrote the template, and the check in the game still
-  follows [Direction; Testing].
+- **FR-029**: The check MUST measure whether each relation of the template's skeleton holds in the laid-out city, and
+  MUST report each one that does not, with the parts it relates and where they lie [Design: line 204; Direction]. A
+  laid-out city in which every relation holds MUST then be judged by the maintainer, who looks at the side-by-side
+  picture and accepts or rejects it; the check MUST NOT report a match by itself [Direction].
+- **FR-030**: A template MUST count as passing only once the check has drawn a city laid out from it, every relation
+  of its skeleton holds there, and the maintainer has accepted the comparison with its reference as FR-029 sets,
+  whoever wrote the template; the check in the game still follows [Direction; Testing].
+- **FR-031**: The first template written in this feature's form MUST be the river-bend town's: its terrain shape with
+  the river bend, and its skeleton with the wall line, the districts and their relations, the main streets, the plazas
+  and the places of the public buildings, abstracted from the two renders in the project's files and not traced from
+  them cell by cell. The check MUST pass it and draw its picture beside each render. Its laid-out town MUST come from
+  R2's generation, not be written by hand from the renders, and is the first to be compared under FR-029 and FR-030
+  [Direction; Roadmap: R2; FR-010, FR-025].
 
 ### Key Entities *(include if feature involves data)*
 
@@ -346,7 +380,7 @@ compare the report and the two pictures with the cards.
 ### Measurable Outcomes
 
 - **SC-001**: For a set of test templates, kits and laid-out cities holding one problem of each kind that FR-013 to
-  FR-018 name, the check reports 100% of the problems, and reports none for those that hold no problem.
+  FR-018 and FR-029 name, the check reports 100% of the problems, and reports none for those that hold no problem.
 - **SC-002**: For every reported problem that has a cell, a developer finds that cell in the picture from the report
   alone, without reading the template or laid-out city.
 - **SC-003**: Checking and drawing one template, or one laid-out city beside its reference, finishes before the game,
@@ -354,7 +388,10 @@ compare the report and the two pictures with the cards.
 - **SC-004**: 100% of reports state that testing in the game is the final check and is still to come.
 - **SC-005**: For every laid-out city given with a reference picture, the developer sees the whole city and the whole
   reference at once, side by side, and can name in both where each part of the skeleton lies.
-- **SC-006**: No template counts as passing without a laid-out city from it judged to match its reference (FR-030).
+- **SC-006**: No template counts as passing without a laid-out city from it in which every skeleton relation holds
+  and whose comparison with its reference the maintainer has accepted (FR-030).
+- **SC-007**: The river-bend town's template passes the check, and in its picture beside each render, every part of
+  its skeleton is found in the render in the same relations to the river and to the other parts.
 
 ## Assumptions
 
@@ -365,7 +402,8 @@ compare the report and the two pictures with the cards.
 - Which templates and kits the alpha holds, the map size each template needs, and generation are R2's
   [Roadmap: R13, R2]. The form of a laid-out city is set here so that R2's generation writes it and the check reads it.
 - Until R2 generates cities, the laid-out cities the check is tested with are written by hand from test templates and
-  kits. Test templates, kits and laid-out cities written for this feature are not game content.
+  kits. Test templates, kits and laid-out cities written for this feature are not game content. The river-bend town's
+  template is the first template of game content; whether the alpha holds it is R2's [Roadmap: R2].
 - The check in the game, the final one, comes when R2 places templates on a map [Roadmap: R13; Testing].
 - The forms hold the parts the design and the maintainer's direction name, and take further parts when either names
   them [Design; Direction].
