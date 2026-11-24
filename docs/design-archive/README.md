@@ -62,3 +62,31 @@ City building:
 - [cities-inside.md](cities-inside.md): the core, the palace district, streets, housing, groups and buildings
 - [cities-outside.md](cities-outside.md): the land outside the walls, and rivers, banks, bridges and harbours
 - [cities-forms.md](cities-forms.md): templates, kits, skeletons, spec cards and the city grammar
+
+Imperium and the Empire:
+
+- [imperium.md](imperium.md): what Imperium is, its parts, requirements, playstyles, expansions, rhythm and end
+- [world.md](world.md): the world Imperium is set in
+- [empire.md](empire.md): the Empire, its people, ranks and politics
+- [military.md](military.md): forces and weapons
+- [mechanoids.md](mechanoids.md): the imperial mechanoids
+- [core.md](core.md): the core
+- [relations.md](relations.md): contact and relations with the Empire
+- [orders.md](orders.md): orders and quests
+- [ruins-and-technology.md](ruins-and-technology.md): ruins, excavations and technology
+- [administration.md](administration.md): administration and regions
+- [industry.md](industry.md): mechanized industry
+- [water.md](water.md): the hydraulics axis, deleted
+
+Beyond the Empire, and across the design:
+
+- [cultures.md](cultures.md): settlements of the other cultures
+- [mantle.md](mantle.md): Mantle, the framework layer, and the world it generates
+- [art.md](art.md): appearance and the reference images
+- [text.md](text.md): game text and naming
+- [terms.md](terms.md): the terms in force and the names they replaced
+
+Indexes:
+
+- [open-points.md](open-points.md): every conflict and unverified point, with a link to where it stands
+- [coverage.md](coverage.md): every file at the pinned commit, its class and the sections that cite it

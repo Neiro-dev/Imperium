@@ -71,23 +71,23 @@ unsettled points as they are.
 
 ### The rest of the design
 
-- [ ] T012 [P] [US1] Write `docs/design-archive/cultures.md`: settlements of the cultures other than the Empire
-- [ ] T013 [P] [US1] Write `docs/design-archive/mantle.md`: the framework layer and the world it generates
-- [ ] T014 [P] [US1] Write `docs/design-archive/mechanoids.md`
-- [ ] T015 [P] [US1] Write `docs/design-archive/empire.md` and `docs/design-archive/military.md`
-- [ ] T016 [P] [US1] Write `docs/design-archive/imperium.md` and `docs/design-archive/world.md`: what Imperium is, its
+- [X] T012 [P] [US1] Write `docs/design-archive/cultures.md`: settlements of the cultures other than the Empire
+- [X] T013 [P] [US1] Write `docs/design-archive/mantle.md`: the framework layer and the world it generates
+- [X] T014 [P] [US1] Write `docs/design-archive/mechanoids.md`
+- [X] T015 [P] [US1] Write `docs/design-archive/empire.md` and `docs/design-archive/military.md`
+- [X] T016 [P] [US1] Write `docs/design-archive/imperium.md` and `docs/design-archive/world.md`: what Imperium is, its
   parts, requirements, playstyles, expansions, rhythm and end; the world it is set in
-- [ ] T017 [P] [US1] Write `docs/design-archive/core.md`, `docs/design-archive/relations.md` and
+- [X] T017 [P] [US1] Write `docs/design-archive/core.md`, `docs/design-archive/relations.md` and
   `docs/design-archive/orders.md`
-- [ ] T018 [P] [US1] Write `docs/design-archive/ruins-and-technology.md`
-- [ ] T019 [P] [US1] Write `docs/design-archive/administration.md`, `docs/design-archive/industry.md` and
+- [X] T018 [P] [US1] Write `docs/design-archive/ruins-and-technology.md`
+- [X] T019 [P] [US1] Write `docs/design-archive/administration.md`, `docs/design-archive/industry.md` and
   `docs/design-archive/water.md`
-- [ ] T020 [P] [US1] Write `docs/design-archive/art.md`, with the reference images the sources name
-- [ ] T021 [P] [US1] Write `docs/design-archive/text.md` and `docs/design-archive/terms.md`
-- [ ] T022 [US2] Find the conflicts between sections written by different tasks and record each in both places
-- [ ] T023 [US2] Write `docs/design-archive/open-points.md` from every Conflict and Unverified alert in the sections
+- [X] T020 [P] [US1] Write `docs/design-archive/art.md`, with the reference images the sources name
+- [X] T021 [P] [US1] Write `docs/design-archive/text.md` and `docs/design-archive/terms.md`
+- [X] T022 [US2] Find the conflicts between sections written by different tasks and record each in both places
+- [X] T023 [US2] Write `docs/design-archive/open-points.md` from every Conflict and Unverified alert in the sections
   (data-model.md, Open-points index)
-- [ ] T024 [US1] Run quickstart.md checks 1, 4, 5 and 6 and correct what they find
+- [X] T024 [US1] Run quickstart.md checks 1, 4, 5 and 6 and correct what they find
 
 **Checkpoint**: every subject of the notes has its section; every pointer resolves; 30 sampled statements match their
 passages.
@@ -100,8 +100,8 @@ passages.
 
 **Independent Test**: quickstart.md check 3; reading any section shows no rule list, ruling card or session record.
 
-- [ ] T025 [US3] Run quickstart.md checks 3 and 8 on `docs/design-archive/` and rewrite every passage they find
-- [ ] T026 [US3] Read each section once through for rule lists and session narration and rewrite them as prose
+- [X] T025 [US3] Run quickstart.md checks 3 and 8 on `docs/design-archive/` and rewrite every passage they find
+- [X] T026 [US3] Read each section once through for rule lists and session narration and rewrite them as prose
 
 ---
 
@@ -111,17 +111,17 @@ passages.
 
 **Independent Test**: quickstart.md check 2.
 
-- [ ] T027 [US4] Write `docs/design-archive/coverage.md` from the path classes of research.md R-2, the Files tables of
+- [X] T027 [US4] Write `docs/design-archive/coverage.md` from the path classes of research.md R-2, the Files tables of
   the 32 notes and their images and data tables, with the sections that use each file (data-model.md, Coverage record)
-- [ ] T028 [US4] Run quickstart.md check 2 and add what it finds missing
+- [X] T028 [US4] Run quickstart.md check 2 and add what it finds missing
 
 ---
 
 ## Phase 6: Polish
 
-- [ ] T029 Finish `docs/design-archive/README.md` with the list of sections
-- [ ] T030 Run quickstart.md check 7 and record which section covers each roadmap slice in the pull request
-- [ ] T031 Set R17 to done in `ROADMAP.md`
+- [X] T029 Finish `docs/design-archive/README.md` with the list of sections
+- [X] T030 Run quickstart.md check 7 and record which section covers each roadmap slice in the pull request
+- [X] T031 Set R17 to done in `ROADMAP.md`
 
 ---
 

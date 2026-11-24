@@ -135,3 +135,21 @@ commit; those that named a file by a short name (C06, C16, C19, C22, C28) were w
 | C30 | 7 | `Imperium-Knowledge/designs/回报` | [C30.md](research/C30.md) | 37 / 1 / 10 |
 | C31 | 29 | `Imperium-Knowledge/designs/回报` | [C31.md](research/C31.md) | 38 / 3 / 9 |
 | C32 | 31 | `Imperium-Knowledge/designs/回报`; `Imperium-Knowledge/designs/回报/配套表` | [C32.md](research/C32.md) | 53 / 6 / 11 |
+
+## Verification log
+
+The archive was checked against its sources after it was written (quickstart.md, check 6). A first random sample of 30
+statements from the city sections found 3 that went further than their passages, so every pointer-bearing sentence of
+every section was then set beside the lines it cites and compared, by subagents on Sonnet (costs.md, line 278), in 34
+batches:
+
+| Sections | Sentences | Flagged | Fixed or removed | Not applied |
+|---|---|---|---|---|
+| City building (6 files) | 1,515 | 242 | 221 | 21 |
+| The other 17 files | 1,901 | 238 | 238 | 0 |
+
+The faults were a status the source gives being lost (inferred, trial value, proposal, undecided, postponed), a
+condition dropped, an interpretation added, a number or name changed, or a tool document as the only source. The 21 not
+applied were misreadings of sentences split at a decimal point, or requests to drop the attribution of hydraulics to the
+maintainer's deletion. Fresh samples of 30 drawn after the fixes, with seeds 2026 (city sections) and 2027 (the others),
+matched their passages in every case.

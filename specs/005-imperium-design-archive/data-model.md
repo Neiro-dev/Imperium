@@ -38,7 +38,8 @@ The entities of spec.md, Key Entities, as files and parts of files. Their forms 
 - One row per file or path pattern at the pinned commit: **path**, **class** (design, research, process,
   implementation, code, configuration, base game, navigation, reference image, data), **reason**, **chunk** (for files
   read) and **sections** (for files the archive uses).
-- Complete when every path of `git ls-tree -r` at the pinned commit matches exactly one row (quickstart.md, check 2).
+- Complete when every path of `git ls-tree -r` at the pinned commit matches a row (quickstart.md, check 2); a text file
+  that was read has a row of its own even where a path pattern also covers its folder.
 
 ## Relationships
 
