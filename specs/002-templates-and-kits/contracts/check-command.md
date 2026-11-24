@@ -6,16 +6,20 @@ Developers run the check outside the game (spec FR-012); every culture uses the 
 ## Install and run
 
 ```text
-pip install -e ".[test]"          # from the repository root
-mantle-check --data <Data folder> --out <output folder> [--reference <name>:<label>=<picture>]... <file>...
+pip install -e ".[test]"          # from the root of Mantle's repository
+mantle-check --data <Data folder> --out <output folder> --mod <mod folder>... [--reference <name>:<label>=<picture>]...
+             <file>...
 ```
 
 - `--data`: the game's `Data/` folder; `Version.txt` beside it must name version 1.7.
 - `--out`: the folder for the report and pictures; it must not lie inside the repository (FR-028).
+- `--mod`: the folder of a mod whose definitions are read, repeatable: Mantle's mod, and Imperium for the Empire's.
+  Each mod's `About/About.xml` gives its package identifier and what it requires (FR-015).
 - `--reference`: a reference picture, by the template's `reference` name and the picture's label, such as
   `RiverBendTown:screenshot=<path>`; repeatable. JPEG, PNG and WebP are read.
-- `<file>`: definition files from `Defs/` and laid-out city files. Imperium's own `Defs/` is always read for names
-  (FR-013); the files given are the ones checked and drawn.
+- `<file>`: definition files from a mod's `Defs/`, laid-out city files and readings. Every given mod's `Defs/` is read
+  for names (FR-013), and a definition file belongs to the mod whose folder holds it; the files given are the ones
+  checked and drawn.
 
 ## Output
 
@@ -33,5 +37,5 @@ mantle-check --data <Data folder> --out <output folder> [--reference <name>:<lab
 
 - `0`: no problem found. The report still says the check in the game is to come; nothing is final (FR-020).
 - `1`: problems found.
-- `2`: the check could not run: `Data/` missing or not 1.7, an output folder inside the repository, or a file that is
-  not XML. Nothing is reported as passing.
+- `2`: the check could not run: `Data/` missing or not 1.7, a `--mod` folder with no `About/About.xml`, an output
+  folder inside the repository, or a file that is not XML. Nothing is reported as passing.

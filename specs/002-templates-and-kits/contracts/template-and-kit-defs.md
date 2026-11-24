@@ -1,7 +1,8 @@
 # Contract: template and kit definitions
 
 Other authors add a culture by writing these two kinds of definition and nothing else (spec FR-033, FR-034). The
-game loads them from `Defs/`, Mantle's generation reads them (R2), and the check reads them outside the game. Field
+game loads them from the `Defs/` of the mod that holds them, Mantle's for the tribal culture and Imperium for the
+Empire, Mantle's generation reads them (R2), and the check reads them outside the game. Field
 rules are in [../data-model.md](../data-model.md); sources in [../research.md](../research.md) R-1, R-3 to R-5 and
 R-8. The examples are shapes, not content.
 
@@ -32,8 +33,21 @@ R-8. The examples are shapes, not content.
     <wallSettings>
       <wallDef>Wall</wallDef>
     </wallSettings>
-    <groups />
-    <fill />
+    <groups>
+      <li>
+        <name>exampleGroup</name>
+        <size>(9,7)</size>
+        <things>
+          <Wall><position>(0,0,0)</position><rotation>North</rotation><stuff>WoodLog</stuff></Wall>
+        </things>
+      </li>
+    </groups>
+    <fill>
+      <wallDef>Wall</wallDef>
+      <doorDef>Door</doorDef>
+      <doorStuffDef>WoodLog</doorStuffDef>
+      <plots />
+    </fill>
   </Mantle.KitDef>
 </Defs>
 ```
@@ -96,5 +110,6 @@ the same kind.
 
 ## May change in later entries
 
-- The fields of `groups` and `fill`, once the maintainer has said what they hold (R-8) and R2's generation uses them.
+- Further fields of `groups` and `fill`, when R2's generation uses them; what they hold is taken from each culture's
+  reading (R-8).
 - Further wall settings, such as the spacing of towers (glossary line 213), when generation uses them.

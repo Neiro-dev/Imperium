@@ -8,30 +8,39 @@ maintainer's broad direction, for Imperium's own design. Line numbers refer to t
 files, to `Neiro-dev/Imperium-old` at 20a052b, to Spec Kit at v1.4.3 and to HarmonyRimWorld at `master`. `[Design]`,
 `[Direction]` and the FR numbers point to [spec.md](spec.md).
 
-## R-1: Templates and kits are Defs of Mantle's own types
+## R-1: Templates and kits are Defs of Mantle's own types, in two mods
 
-- **Decision**: a template is a `Mantle.TemplateDef` and a kit a `Mantle.KitDef`, written as XML in `Defs/TemplateDefs/`
-  and `Defs/KitDefs/`. Their C# classes are Mantle's, in `Source/Mantle/`, compiled into `Assemblies/Mantle.dll`. The
-  Empire kit (`Defs/KitDefs/Kits_Empire.xml`) and the river-bend town's template
-  (`Defs/TemplateDefs/Templates_Empire.xml`) are Imperium's content in those types.
-- **Rationale**: templates and kits are data that Imperium holds and Mantle's generation reads (FR-009), and a mod's
-  new XML definitions go in `Defs/`, laid out as the base game lays out its own (`ModUpdating.txt` lines 98-106). A
-  definition the game loads has a class, as `ThingDef`, `PawnKindDef` and `JobDef` do (line 98), and a mod's classes
-  are a C# project in `Source/` compiled into `Assemblies/` (lines 139-151, 173-182). The types are Mantle's because
-  Mantle is the framework layer of Imperium's code [Design: line 221] and the forms are shared by every culture
-  (FR-033); the content is Imperium's. The files are named by type and then by what they hold, as `Data/` names its
-  own (`Core/Defs/RiverDefs/RiverDefs.xml`, `Odyssey/Defs/LayoutDefs/Layouts_Misc.xml`).
+- **Decision**: a template is a `Mantle.TemplateDef` and a kit a `Mantle.KitDef`, written as XML in a mod's
+  `Defs/TemplateDefs/` and `Defs/KitDefs/`. Their C# classes are Mantle's, in `Source/Mantle/` of Mantle's own mod,
+  compiled into its `Assemblies/Mantle.dll`. Mantle's mod also holds the tribal culture's kit and first template
+  (`Defs/KitDefs/Kits_Tribal.xml`, `Defs/TemplateDefs/Templates_Tribal.xml`). Imperium holds the Empire's kit and the
+  river-bend town's template (`Defs/KitDefs/Kits_Empire.xml`, `Defs/TemplateDefs/Templates_Empire.xml`), and from the
+  same pull request its `About/About.xml` requires Mantle: an entry in `modDependencies` with Mantle's `packageId`, a
+  `displayName` and a download link, and Mantle's `packageId` in `loadAfter`. Paths in Mantle's mod are relative to its
+  folder, and its `packageId`, from R14; the implement step for this feature waits for R14.
+- **Rationale**: templates and kits are data that the mod holding them carries and Mantle's generation reads (FR-009),
+  and a mod's new XML definitions go in `Defs/`, laid out as the base game lays out its own (`ModUpdating.txt` lines
+  98-106). A definition the game loads has a class, as `ThingDef`, `PawnKindDef` and `JobDef` do (line 98), and a mod's
+  classes are a C# project in `Source/` compiled into `Assemblies/` (lines 139-151, 173-182). The classes are Mantle's
+  because every culture shares the forms (FR-033) and Mantle is a mod of its own that requires no expansion, which the
+  mods built on it depend on (ROADMAP R14, Releases). The tribal culture's kit and template open Mantle's alpha, and the
+  Empire's come with Imperium (FR-032; ROADMAP R13, R15). A mod whose definitions use another mod's types needs that mod
+  active and loaded first, which `modDependencies` and `loadAfter` say (`ModUpdating.txt` lines 266-289, 309-316); so
+  Imperium requires Mantle from the first slice whose content uses it (ROADMAP, Releases). The files are named by type
+  and then by what they hold, as `Data/` names its own (`Core/Defs/RiverDefs/RiverDefs.xml`,
+  `Odyssey/Defs/LayoutDefs/Layouts_Misc.xml`).
 - **Alternatives considered**: `PrefabDef`, which holds a size, terrain and things (`Data/`: its fields across Core,
   Biotech and Odyssey are `size`, `things`, `terrain`, `edgeOnly`, `rotations`, `prefabs`). Rejected: it holds no roof
-  and no skeleton (FR-004, FR-005). Data kept outside `Defs/` until R2. Rejected: neither `Data/` nor `ModUpdating.txt`
-  gives a form for data a mod holds but the game does not load as definitions.
+  and no skeleton (FR-004, FR-005). The Empire's kit and template kept out of Imperium's `Defs/` until R15. Rejected:
+  neither `Data/` nor `ModUpdating.txt` gives a form for data a mod holds but the game does not load as definitions,
+  and loading them is what shows that they load (R-12).
 
 ## R-2: Building Mantle's assembly
 
-- **Decision**: `Source/Mantle/Mantle.csproj` targets `net10.0` and references the game's own assemblies where the game
-  is installed, through a `RimWorldAssemblyDir` property that a `Directory.Build.props` at the repository root sets. It
-  is built on the maintainer's computer through Remote Control, and the built `Assemblies/Mantle.dll` is committed. No
-  Harmony and no other package.
+- **Decision**: in Mantle's mod, `Source/Mantle/Mantle.csproj` targets `net10.0` and references the game's own
+  assemblies where the game is installed, through a `RimWorldAssemblyDir` property that a `Directory.Build.props` at
+  that repository's root sets. It is built on the maintainer's computer through Remote Control, and the built
+  `Assemblies/Mantle.dll` is committed. No Harmony and no other package. Imperium holds no code for this feature.
 - **Rationale**: `Data/` and `ModUpdating.txt` give no form for building a mod's code, so it comes from Harmony
   (Principle III). RimWorld 1.7 runs on .NET 10 (`README.md` line 6), Harmony's 1.7 build selects the `net10.0` asset
   (`BUILDING.md` line 12; `Source/packages.lock.json`) and compiles against the installed game's assemblies, found
@@ -57,9 +66,11 @@ files, to `Neiro-dev/Imperium-old` at 20a052b, to Spec Kit at v1.4.3 and to Harm
     (`AncientPrefabs.xml` lines 10-13), and its rotation by `Rot4` name (`North`, line 8);
   - a map size as `(x, z)` (`AncientPrefabs.xml` line 9), and the smallest map a site needs as `minMapSize`
     `(x, 1, z)` (`Ideology/Defs/Sites/AncientComplex.xml` line 15);
-  - another expansion's content marked with `MayRequire="<packageId>"` on the element that names it
-    (`Odyssey/Defs/PrefabDefs/CommonRoomPrefabs.xml` line 225; `Core/Defs/CultureDefs/Cultures.xml` line 43), each
-    package identifier from that expansion's `About/About.xml`;
+  - content of an expansion that the mod holding the file does not require marked with `MayRequire="<packageId>"` on
+    the element that names it (`Odyssey/Defs/PrefabDefs/CommonRoomPrefabs.xml` line 225;
+    `Core/Defs/CultureDefs/Cultures.xml` line 43), each package identifier from that expansion's `About/About.xml`;
+    what a mod requires is its `About/About.xml`'s `modDependencies` (`ModUpdating.txt` lines 266-289), which is none
+    for Mantle's mod and Royalty for Imperium (FR-015);
   - the world tiles a template suits as `allowedBiomes` (`Core/Defs/Storyteller/Incidents_Map_Misc.xml` line 56) and,
     in the same form, `allowedRivers`, from the river definitions (`Core/Defs/RiverDefs/RiverDefs.xml` lines 4, 33,
     52, 71);
@@ -133,6 +144,12 @@ files, to `Neiro-dev/Imperium-old` at 20a052b, to Spec Kit at v1.4.3 and to Harm
   and `parts` and `features`, where each part and terrain feature of the template lies after generation picked,
   mirrored, turned and stretched it, with each river's `flowsFrom`. The game does not load it and the mod does not
   ship it.
+- **A reading**: written in the same form, with `reference`, the reference city's name as the template's `reference`
+  gives it, in place of `template` and `kit`, and the parts and features it reads. It is kept in a `readings/` folder of
+  the repository of the mod whose template is taken from it, as that template's source, and is not in the mod's
+  released files; its reference pictures are not kept there (FR-036, FR-028). The folder is named in lower case beside
+  `src/` and `tests/`, as Spec Kit's own repository names the folders the product does not load (`src/`, `tests/`,
+  `scripts/`, `templates/`).
 - **Rationale**: FR-008 lists what it holds, in the forms of R-3; generation writes it in R2 and the check reads it now.
   The covered cells are written by generation, which has them from the game, so the check does not have to rebuild the
   game's rule for where a large thing's cells lie; it checks that they match the definition's `size`, crosswise when
@@ -141,17 +158,20 @@ files, to `Neiro-dev/Imperium-old` at 20a052b, to Spec Kit at v1.4.3 and to Harm
 
 ## R-8: A kit's groups and fill
 
-- **Decision (pending the maintainer's answer)**: the design names a kit's groups and fill [Design: line 184] without
-  saying what they hold, which is game content, so the maintainer was asked (Principle IV). Until he answers, the plan
-  takes the recommended reading: `groups` lists `PrefabDef`s, each a set of buildings placed together, such as a forum
-  with its basilica [185, "a building or group"; 165]; `fill` holds what the blocks' plots are built with, in
-  `StructureLayoutDef`'s fields `wallDef`, `doorDef` and `doorStuffDef` (`Layouts_Misc.xml` lines 19-22) and a list of
-  `LayoutRoomDef`s (`Data/`: their fields `prefabs`, `floorTypes`, `parts`). This plan is not merged before the answer.
-- **Rationale**: generation fills a template's blocks from its kit [Direction; FR-009] and a block is divided into
-  plots for its households [Design: line 166].
-- **What R13 writes**: the forms of all five fields (FR-006). The Empire kit holds its skeleton and wall settings;
-  its word list, groups and fill are written when R2's generation lays out the river-bend town with them, since the
-  town takes Imperium's own buildings, materials and names once its calibration passes (FR-031).
+- **Decision**: what a kit's groups and fill hold is taken apart from its culture's reading, as its skeleton is (spec,
+  Clarifications; FR-006, FR-036), and written in `Data/`'s forms for what they are: `groups` is a list of named sets
+  of things placed together, each in `PrefabDef`'s form (`size`, `things` with `position`, `rotation` and `stuff`,
+  `terrain`; `AncientPrefabs.xml` lines 8-13), so a set read off a reading's things is written with no conversion;
+  `fill`, what a block's plots are built with, holds `StructureLayoutDef`'s `wallDef`, `doorDef` and `doorStuffDef`
+  (`Layouts_Misc.xml` lines 19-22) and a list of plot sets in the same `PrefabDef` form.
+- **Rationale**: the design names a kit's groups and fill [Design: line 184], a building or group [185] and a block
+  divided into plots for its households [166], without saying what they hold; the maintainer's direction is that they
+  come from the reference city, as the skeleton does, and are never asked. The base game ships `PrefabDef` and
+  `StructureLayoutDef` in its own assembly and uses them in Core (`Core/Defs/PrefabDefs/CommonRoomPrefabs.xml`), so
+  Mantle's mod needs no expansion for them (FR-015).
+- **What R13 writes**: the forms of all five fields (FR-006); the tribal kit's and the Empire kit's skeletons, wall
+  settings, groups and fill, each from its culture's reading (the river-bend town's is its render, FR-031); and each
+  culture's word list, from its culture's sources (FR-011).
 
 ## R-9: The check is a Python package in Spec Kit's form
 
@@ -164,7 +184,7 @@ files, to `Neiro-dev/Imperium-old` at 20a052b, to Spec Kit at v1.4.3 and to Harm
   `[project.scripts]` entry, Hatchling, and pytest over `tests/` (`pyproject.toml` lines 1-26, 39-55; `.gitignore`
   lines 1-27). Pillow is needed to read the reference pictures, which are JPEG, PNG and WebP files
   (`template-references/`), and to write PNG (R-11). XML is read with Python's own library. The package is Mantle's,
-  since every culture shares the check (FR-033).
+  at the root of its repository, since every culture shares the check (FR-033).
 - **Ignored files**: `.gitignore` adds Spec Kit's Python lines (`.gitignore` lines 1-27) and Harmony's lines for the
   C# build's output, `[Bb]in/` and `[Oo]bj/` (Harmony `.gitignore` lines 13-23), since `Data/` and `ModUpdating.txt`
   give no form for ignored files.
@@ -174,13 +194,16 @@ files, to `Neiro-dev/Imperium-old` at 20a052b, to Spec Kit at v1.4.3 and to Harm
 ## R-10: Reading `Data/`
 
 - **Decision**: the check takes the path of `Data/` (on the maintainer's computer,
-  `D:\Steam\steamapps\common\RimWorld\Data`; in a cloud thread, the project's copy unpacked). It reads `Version.txt`
-  beside it and stops unless the version is 1.7. It reads every XML file under each expansion's `Defs/` and Imperium's
-  own `Defs/`, and resolves inheritance: an abstract parent (`Name`, `Abstract`) gives its fields to each child that
-  names it (`ParentName`), a child's field replaces the parent's, and a child's list adds to the parent's unless it is
-  marked `Inherit="False"` (`Core/Defs/ThingDefs_Buildings/Buildings_Base.xml` line 4 and `Buildings_Structure.xml`
-  lines 218 and 277-278, where `Wall` replaces `BuildingBase`'s affordance; `Apparel_Headgear.xml` line 552). Each
-  definition's expansion is the folder it is read from, with that folder's `About/About.xml` package identifier.
+  `D:\Steam\steamapps\common\RimWorld\Data`; in a cloud thread, the project's copy unpacked) and the folder of each
+  mod whose definitions it reads, Mantle's and, for the Empire's, Imperium's. It reads `Version.txt` beside `Data/` and
+  stops unless the version is 1.7. It reads every XML file under each expansion's `Defs/` and each mod's `Defs/`, and
+  each mod's `About/About.xml` for its `packageId` and `modDependencies` (FR-015), and resolves inheritance: an
+  abstract parent (`Name`, `Abstract`) gives its fields to each child that names it (`ParentName`), a child's field
+  replaces the parent's, and a child's list adds to the parent's unless it is marked `Inherit="False"`
+  (`Core/Defs/ThingDefs_Buildings/Buildings_Base.xml` line 4 and `Buildings_Structure.xml` lines 218 and 277-278, where
+  `Wall` replaces `BuildingBase`'s affordance; `Apparel_Headgear.xml` line 552). Each
+  definition's expansion or mod is the folder it is read from, with that folder's `About/About.xml` package identifier;
+  a file given to the check belongs to the mod whose folder holds it.
 - **Rationale**: testing outside the game reads `Data/` [Testing]; R1 supports 1.7 only (R1 research R-5); the files
   are read where they are and nothing of them is copied (FR-021; `EULA.txt` line 86).
 - **What it reads from each definition**: `label`; a terrain's `natural` and `affordances`; a thing's `size`,
@@ -212,18 +235,22 @@ files, to `Neiro-dev/Imperium-old` at 20a052b, to Spec Kit at v1.4.3 and to Harm
   hand in `tests/fixtures/`, each holding one known kind of problem or none, against `Data/` 1.7.5014, whose path the
   tests take from `RIMWORLD_DATA_DIR`. A test makes its own small reference picture, so none is committed. In the game:
   `Mantle.dll` is built and the game is launched with `-quicktest` (`Readme.txt` lines 58-60) and
-  `-savedatafolder=SaveData` (lines 27-38), and `Player.log` shows that Imperium's definitions load with no error.
-  Placing templates on a map, the final check, comes with R2 (spec, Assumptions).
+  `-savedatafolder=SaveData` (lines 27-38), first with Mantle's mod alone and no expansion, then with Royalty, Mantle
+  and Imperium, and `Player.log` shows that each mod's definitions load with no error. Placing templates on a map, the
+  final check, comes with R2 for the tribal culture and R15 for the Empire (spec, Assumptions).
 - **Rationale**: testing outside the game comes first and testing in the game is the final check [Testing]; the
   variable is named as Harmony names its own (`RIMWORLD_ASSEMBLY_DIR`, `BUILDING.md` line 18); test templates and kits
   are not game content (spec, Assumptions).
 
-## R-13: The river-bend town's template
+## R-13: The first templates
 
-- **Decision**: written in implement from the screenshot (`template-references/河湾城-原图与描线/原图-1596x1017.png`)
-  and the newest render (`template-references/河湾城-最新版-1112/1比1整城样张.png`). Its terrain shape is drawn inside
-  350×350 cells from the pictures, and its skeleton holds the river bend, the wall line, the districts on each bank and
-  inside the bend, the main streets with their bridges and gates, the plazas, and the public buildings, by the relations
-  of R-5. The check's picture of it beside both references is given to the maintainer in the project's files, not in
-  the pull request, since it holds the screenshot (FR-028).
-- **Rationale**: FR-031, Clarifications; [Direction].
+- **Decision**: in implement, the river-bend town first: its template and the Empire kit are taken from the screenshot
+  (`template-references/河湾城-原图与描线/原图-1596x1017.png`) and the newest render, its reading
+  (`template-references/河湾城-最新版-1112/1比1整城样张.png`). Its terrain shape is drawn inside 350×350 cells, and its
+  skeleton holds the river bend, the wall line, the districts on each bank and inside the bend, the main streets with
+  their bridges and gates, the plazas, and the public buildings, by the relations of R-5. The check's picture of it
+  beside both references is given to the maintainer in the project's files, not in the pull request, since it holds
+  the screenshot (FR-028). Once it passes the check, the tribal culture's reading is written from the reference the
+  maintainer chooses, in `readings/` of Mantle's repository, and its template and kit are taken from it the same way.
+  Each template ships as it stands once it passes (FR-010, FR-031).
+- **Rationale**: FR-031, FR-036, FR-037, Clarifications; [Direction].

@@ -34,3 +34,20 @@ Field rules are in [../data-model.md](../data-model.md).
 - A thing larger than one cell holds `rect`, the cells it covers as the game gives them.
 - The form follows the template and kit forms: a field added there for generation is added here when the check needs
   it.
+
+## A reading
+
+A reading is a reference city drawn on the game's cells in the same form, set beside its reference pictures until it
+matches them; the culture's template and kit are taken from it (spec FR-036; research R-7). It holds `reference`, the
+name the template's `reference` gives the city, in place of `template` and `kit`, and the parts and features it reads:
+
+```xml
+<LaidOutCity>
+  <reference>ExampleHillfort</reference>
+  <size>(350,350)</size>
+  ...
+</LaidOutCity>
+```
+
+It is kept in `readings/` of the repository of the mod that holds the template, as the template's source, and is not
+in the mod's released files; its reference pictures are kept outside the repository (FR-028).
