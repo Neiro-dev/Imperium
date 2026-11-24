@@ -4,11 +4,14 @@ The rebuild implements the design on Neiro-dev/Imperium-old's default branch (`m
 for one Spec Kit cycle. It is split into slices as Spec Kit's
 [How to break a large feature into smaller specifications](https://github.com/github/spec-kit/blob/v1.4.3/docs/how-to/spec-of-specs.md)
 describes, ordered so that prerequisites come first. This file names and orders the slices; it does not design them.
-Each slice is designed when it runs through `/speckit-specify`, and game content its source does not settle is
-marked `[NEEDS CLARIFICATION]` for the maintainer.
+Each slice is designed when it runs through `/speckit-specify`, from the sources the constitution's Source Register
+gives: Imperium's own design from Imperium-old, and other game content from `Data/`, then `ModUpdating.txt`, then
+Harmony. Only what none of these settles is marked `[NEEDS CLARIFICATION]` for the maintainer's broad direction
+(constitution, Principle IV).
 
-Sources: the design documents in `docs/` on Imperium-old `main`. Its unmerged design-draft pull requests are not
-design. Where a design document points to one of them, the slice lists it as open.
+Sources for the slices: the meaning of the design documents in `docs/` on Imperium-old `main`, not its code or
+implementation (constitution, Source Register, "Imperium's own design"). Its unmerged design-draft pull requests are
+not design. Where a design document points to one of them, the slice lists it as open.
 
 **Status legend**: planned · in-progress · done
 
