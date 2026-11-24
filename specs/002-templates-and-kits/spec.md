@@ -46,16 +46,17 @@ Templates are drawn from reference cities in four steps [Direction]:
 2. Its layout relationships are read and written as a template in this feature's form, as Imperium's own (FR-010).
 3. Generation lays out a city from the template and a kit [Roadmap: R2].
 4. The check measures whether each relation of the template's skeleton holds in the laid-out city and draws the city
-   beside a picture of the reference city; once every relation holds, the maintainer judges the two pictures (FR-025,
+   beside pictures of the reference city; once every relation holds, the maintainer judges them side by side (FR-025,
    FR-029).
 
-The first case is the river-bend town, whose two renders on the game's cells are in the project's files
-(`uploads/hearth/`) [Direction]. Its skeleton, the river bend, the wall line, the districts and their relations, the
-main streets, the plazas and the places of the public buildings, is abstracted from the renders, not traced from them
-cell by cell, and written as this feature's first template (FR-031). It runs the whole flow: this feature writes and
-checks the template and sets its picture beside the renders, and R2's generation lays out the town from it with a kit,
-which is then compared with the renders as FR-029 sets [Roadmap: R2]. A laid-out town written by hand from the renders
-would be a tracing of them (FR-010), so that comparison waits for R2's generation.
+The first case is the river-bend town, a player-built city of which the project holds a screenshot, the source, and
+two renders on the game's cells, an earlier reading of that single 2D screenshot whose heights, hidden areas and exact
+sizes were guessed [Direction]. It calibrates the method before anything else (FR-031). Its template is written from
+these pictures. R2's generation lays out the town from it with a kit [Roadmap: R2]. Every relation of its skeleton
+must hold in the laid-out town, and the maintainer then judges the town beside the screenshot and the renders. No
+cell-exact match to the renders is asked for, since they are guesses too. If the method cannot express the town, the
+method is fixed first. Once the calibration passes, the town ships as a regular template, laid out with Imperium's
+own buildings, materials and names.
 
 The comparison is why the check outside the game exists [Direction]. Generation that is not held to a fixed skeleton,
 and a developer, a person or an AI, working toward a target, take shortcuts toward abstract geometric layouts, such as
@@ -104,7 +105,8 @@ Each requirement below names its source in brackets. The sources are those the c
   - Templates are drawn from player-built cities that Ubisoft officially features as recommended Anno 117 cities, as
     reference only. The layout relationships read from such a city, its river, walls, districts, streets, plazas and
     public buildings, are expressed as Imperium's own templates in the design's form, and kits fill them. Nothing of
-    Anno's art, names, models or code is used, and no reference picture is traced cell by cell.
+    Anno's art, names, models or code is used, and no reference picture is traced cell by cell, apart from the
+    river-bend town below.
   - The template's skeleton holds the wall line, districts, main streets, plazas and public buildings read from the
     reference, beside the parts the design names; generation only picks, mirrors, turns and stretches a template and
     fills it from a kit.
@@ -112,10 +114,15 @@ Each requirement below names its source in brackets. The sources are those the c
     passes, whoever wrote it, since generation and developers alike tend toward geometric layouts. The check measures
     whether the skeleton's relations hold in the laid-out city, and once they all hold, the maintainer judges the
     side-by-side picture (Clarifications).
-  - Two pictures of a town at a river bend laid out on the game's cells, drawn from one such city, are in the
-    project's files (`uploads/hearth/`). They show what generation should produce, and are kept only for comparison.
-  - The river-bend town is the first case: its skeleton is abstracted from the two renders, not traced, it is laid out
-    with a kit, and the result is compared with the renders.
+  - The river-bend town is the first case, and it calibrates the method before anything else. Its reference pictures
+    are the screenshot of the player-built city, which is the source and which a separate thread may recover into
+    `template-references/` in the project's files, and two renders of it on the game's cells (`uploads/hearth/`), an
+    earlier reading of that single 2D screenshot whose heights, hidden areas and exact sizes were guessed. The
+    calibration checks that the method can express the town. Every relation of the skeleton must hold in the town that
+    generation lays out, and the maintainer then judges it by eye beside the screenshot and the renders, with no
+    cell-exact match to the renders. A method that cannot express the town is fixed first. Once the calibration
+    passes, the town's content is Imperium's own buildings, materials and names, and it ships as a regular template,
+    with no credit line.
 - **[Spec Kit]**: the feature description given to `/speckit-specify` (Input, above), the development workflow's
   source for what a feature is for.
 
@@ -206,8 +213,9 @@ cell, part and relation in the picture with the template.
    picture, **Then** both parts and the relation are shown and named.
 3. **Given** a template with a problem at one cell, **When** the developer opens its picture, **Then** that cell is
    marked and the mark names the problem.
-4. **Given** the river-bend town's template and its two renders, **When** the developer opens its picture, **Then**
-   the picture and each render are side by side, and each part of the skeleton can be found in both.
+4. **Given** the river-bend town's template and its reference pictures, the screenshot and the two renders, **When**
+   the developer opens its picture, **Then** the picture and each reference picture are side by side, and each part
+   of the skeleton can be found in each.
 
 ---
 
@@ -245,6 +253,9 @@ compare the report and the two pictures with the cards.
   picture's legend names the expansion [Design: imperium.md line 110].
 - A laid-out city is given without a reference picture, or with one the check cannot read: the check checks and draws
   the city, says that no comparison was made, and does not count its template as passing the comparison.
+- The river-bend town's screenshot is not yet in the project's files: the check draws the template beside the renders
+  alone and says that the screenshot is missing, and the maintainer's judgment of the calibration waits for it
+  [Direction].
 - `Data/` cannot be found or is of another game version: the check stops and says so, and reports nothing as
   passing.
 
@@ -285,7 +296,8 @@ compare the report and the two pictures with the cards.
   Design: lines 184, 209; Direction].
 - **FR-010**: A template's layout MUST be Imperium's own: the relations of its terrain shape and skeleton may be drawn
   from a reference city's layout relationships, but a template MUST NOT hold another game's art, names, models or
-  code, and MUST NOT be a cell-by-cell tracing of a reference picture [Direction; EULA: line 76].
+  code, and MUST NOT be a cell-by-cell tracing of a reference picture, apart from the river-bend town's, which may
+  follow its reference pictures closely (FR-031) [Direction; EULA: line 76].
 - **FR-011**: The Empire's elements in a template or kit, such as the names in a word list and its public buildings,
   MUST come from Rome as reliable sources describe it, leaning toward New Rome, and not from popular images of Rome
   or from a reference city [Design: setting.md lines 56, 59-60; Direction].
@@ -329,9 +341,9 @@ compare the report and the two pictures with the cards.
 - **FR-024**: The check MUST draw each spec card as a picture of its building: its plot, rooms and contents on the
   same kind of grid [Design: line 206; Spec Kit].
 - **FR-025**: The check MUST draw each laid-out city on the same kind of grid, with each thing where it stands and each
-  part of the template's skeleton named where it lies, and MUST set the whole drawing beside the whole reference
-  picture, so that both are seen at once; a template's picture MUST be set beside the reference picture in the same
-  way when one is given [Direction; Spec Kit].
+  part of the template's skeleton named where it lies, and MUST set the whole drawing beside the whole of each
+  reference picture given, so that all are seen at once; a template's picture MUST be set beside its reference
+  pictures in the same way when they are given [Direction; Spec Kit].
 - **FR-026**: Each picture MUST hold a legend that names each terrain, rock, roof and thing it shows under the label
   its definition gives, and names the expansion of any definition from an expansion other than Royalty [Data;
   Design: imperium.md line 110].
@@ -348,12 +360,21 @@ compare the report and the two pictures with the cards.
 - **FR-030**: A template MUST count as passing only once the check has drawn a city laid out from it, every relation
   of its skeleton holds there, and the maintainer has accepted the comparison with its reference as FR-029 sets,
   whoever wrote the template; the check in the game still follows [Direction; Testing].
-- **FR-031**: The first template written in this feature's form MUST be the river-bend town's: its terrain shape with
-  the river bend, and its skeleton with the wall line, the districts and their relations, the main streets, the plazas
-  and the places of the public buildings, abstracted from the two renders in the project's files and not traced from
-  them cell by cell. The check MUST pass it and draw its picture beside each render. Its laid-out town MUST come from
-  R2's generation, not be written by hand from the renders, and is the first to be compared under FR-029 and FR-030
-  [Direction; Roadmap: R2; FR-010, FR-025].
+- **FR-031**: The first template MUST be the river-bend town's, and it MUST calibrate the method before any other
+  template of game content is written [Direction]:
+  - Its template MUST be written from its reference pictures: the screenshot of the player-built city, which is the
+    source, and the two renders on the game's cells in the project's files, an earlier reading of that screenshot
+    with its heights, hidden areas and exact sizes guessed. The check MUST pass the template and draw it beside them
+    [Direction; FR-025].
+  - The town that R2's generation lays out from it with a kit MUST keep every relation of its skeleton, as FR-029
+    measures: the river bend, the wall line, which districts adjoin, how the main streets connect, and where the
+    plazas and public buildings lie. The town MUST come from generation, not be written by hand, since only generation
+    tests the method [Direction; Roadmap: R2].
+  - The maintainer MUST then judge the laid-out town by eye beside the screenshot and the renders. A cell-exact match
+    to the renders MUST NOT be required, since they are guesses too [Direction].
+  - If the method cannot express the town, the method MUST be fixed before anything else [Direction].
+  - Once the calibration passes, the town MUST be laid out with Imperium's own buildings, materials and names, and its
+    template MUST then ship as a regular template [Direction; FR-011].
 
 ### Key Entities *(include if feature involves data)*
 
@@ -368,8 +389,9 @@ compare the report and the two pictures with the cards.
 - **Spec card**: one building's plot, rooms and contents.
 - **Laid-out city**: the city generation lays out on a map from a template and a kit: each cell's terrain, rock and
   roof, each thing that stands there, and where each part of the skeleton lies.
-- **Reference city**: the player-built city a template is drawn from, and its **reference picture**, which the
-  developer keeps outside Imperium's files.
+- **Reference city**: the player-built city a template is drawn from, and its **reference pictures**, such as a
+  screenshot of it or, for the river-bend town, the renders of an earlier reading, which the developer keeps outside
+  Imperium's files.
 - **Report**: what one run of the check found, each problem with its place, and the statement that the check in the
   game is still to come.
 - **Picture**: the drawing of one template, laid-out city or spec card, with grid, coordinates, legend and marked
@@ -390,8 +412,11 @@ compare the report and the two pictures with the cards.
   reference at once, side by side, and can name in both where each part of the skeleton lies.
 - **SC-006**: No template counts as passing without a laid-out city from it in which every skeleton relation holds
   and whose comparison with its reference the maintainer has accepted (FR-030).
-- **SC-007**: The river-bend town's template passes the check, and in its picture beside each render, every part of
-  its skeleton is found in the render in the same relations to the river and to the other parts.
+- **SC-007**: The river-bend town's template passes the check, and in its picture beside each reference picture,
+  every part of its skeleton is found in the same relations to the river and to the other parts.
+- **SC-008**: Before any other template of game content is written, a town that generation lays out from the
+  river-bend town's template keeps 100% of its skeleton relations, and the maintainer has accepted it beside the
+  screenshot and the renders (FR-031).
 
 ## Assumptions
 
@@ -403,7 +428,8 @@ compare the report and the two pictures with the cards.
   [Roadmap: R13, R2]. The form of a laid-out city is set here so that R2's generation writes it and the check reads it.
 - Until R2 generates cities, the laid-out cities the check is tested with are written by hand from test templates and
   kits. Test templates, kits and laid-out cities written for this feature are not game content. The river-bend town's
-  template is the first template of game content; whether the alpha holds it is R2's [Roadmap: R2].
+  template is the first template of game content, and it ships once its calibration passes (FR-031), in a release
+  that R2 sets [Roadmap: R2].
 - The check in the game, the final one, comes when R2 places templates on a map [Roadmap: R13; Testing].
 - The forms hold the parts the design and the maintainer's direction name, and take further parts when either names
   them [Design; Direction].
