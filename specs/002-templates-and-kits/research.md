@@ -12,7 +12,7 @@ files, to `Neiro-dev/Imperium-old` at 20a052b, to Spec Kit at v1.4.3 and to Harm
 
 - **Decision**: a template is a `Mantle.TemplateDef` and a kit a `Mantle.KitDef`, written as XML in a mod's
   `Defs/TemplateDefs/` and `Defs/KitDefs/`. Their C# classes are Mantle's, in `Source/Mantle/` of Mantle's own mod,
-  compiled into its `Assemblies/Mantle.dll`. Mantle's mod also holds the tribal culture's kit and first template
+  compiled into its `Assemblies/Mantle.dll`. Mantle's mod also holds the tribal culture's kit and first templates
   (`Defs/KitDefs/Kits_Tribal.xml`, `Defs/TemplateDefs/Templates_Tribal.xml`). Imperium holds the Empire's kit and the
   river-bend town's template (`Defs/KitDefs/Kits_Empire.xml`, `Defs/TemplateDefs/Templates_Empire.xml`), and from the
   same pull request its `About/About.xml` requires Mantle: an entry in `modDependencies` with Mantle's `packageId`, a
@@ -23,11 +23,11 @@ files, to `Neiro-dev/Imperium-old` at 20a052b, to Spec Kit at v1.4.3 and to Harm
   98-106). A definition the game loads has a class, as `ThingDef`, `PawnKindDef` and `JobDef` do (line 98), and a mod's
   classes are a C# project in `Source/` compiled into `Assemblies/` (lines 139-151, 173-182). The classes are Mantle's
   because every culture shares the forms (FR-033) and Mantle is a mod of its own that requires no expansion, which the
-  mods built on it depend on (ROADMAP R14, Releases). The tribal culture's kit and template open Mantle's alpha, and the
-  Empire's come with Imperium (FR-032; ROADMAP R13, R15). A mod whose definitions use another mod's types needs that mod
-  active and loaded first, which `modDependencies` and `loadAfter` say (`ModUpdating.txt` lines 266-289, 309-316); so
-  Imperium requires Mantle from the first slice whose content uses it (ROADMAP, Releases). The files are named by type
-  and then by what they hold, as `Data/` names its own (`Core/Defs/RiverDefs/RiverDefs.xml`,
+  mods built on it depend on (ROADMAP R14, Releases). The tribal culture's kit and templates open Mantle's alpha, and
+  the Empire's come with Imperium (FR-032; ROADMAP R13, R15). A mod whose definitions use another mod's types needs that
+  mod active and loaded first, which `modDependencies` and `loadAfter` say (`ModUpdating.txt` lines 266-289, 309-316);
+  so Imperium requires Mantle from the first slice whose content uses it (ROADMAP, Releases). The files are named by
+  type and then by what they hold, as `Data/` names its own (`Core/Defs/RiverDefs/RiverDefs.xml`,
   `Odyssey/Defs/LayoutDefs/Layouts_Misc.xml`).
 - **Alternatives considered**: `PrefabDef`, which holds a size, terrain and things (`Data/`: its fields across Core,
   Biotech and Odyssey are `size`, `things`, `terrain`, `edgeOnly`, `rotations`, `prefabs`). Rejected: it holds no roof
@@ -170,8 +170,8 @@ files, to `Neiro-dev/Imperium-old` at 20a052b, to Spec Kit at v1.4.3 and to Harm
   `StructureLayoutDef` in its own assembly and uses them in Core (`Core/Defs/PrefabDefs/CommonRoomPrefabs.xml`), so
   Mantle's mod needs no expansion for them (FR-015).
 - **What R13 writes**: the forms of all five fields (FR-006); the tribal kit's and the Empire kit's skeletons, wall
-  settings, groups and fill, each from its culture's reading (the river-bend town's is its render, FR-031); and each
-  culture's word list, from its culture's sources (FR-011).
+  settings, groups and fill, each from its culture's readings, the tribal culture's three (R-13) and the river-bend
+  town's render (FR-031); and each culture's word list, from its culture's sources (FR-011).
 
 ## R-9: The check is a Python package in Spec Kit's form
 
@@ -250,7 +250,36 @@ files, to `Neiro-dev/Imperium-old` at 20a052b, to Spec Kit at v1.4.3 and to Harm
   skeleton holds the river bend, the wall line, the districts on each bank and inside the bend, the main streets with
   their bridges and gates, the plazas, and the public buildings, by the relations of R-5. The check's picture of it
   beside both references is given to the maintainer in the project's files, not in the pull request, since it holds
-  the screenshot (FR-028). Once it passes the check, the tribal culture's reading is written from the reference the
-  maintainer chooses, in `readings/` of Mantle's repository, and its template and kit are taken from it the same way.
-  Each template ships as it stands once it passes (FR-010, FR-031).
-- **Rationale**: FR-031, FR-036, FR-037, Clarifications; [Direction].
+  the screenshot (FR-028). Once it passes the check, the tribal culture's three readings are written from the
+  references the maintainer chose, whose pictures are in `template-references/部落城-凯尔特/`, in `readings/` of
+  Mantle's repository: the gentle tribe's open village from Tir Uisce, the fierce tribe's walled stronghold from a
+  Celtic oppidum and the savage tribe's fortress from a small Celtic hillfort, with the agricultural island consulted
+  as supplementary material only. A template is taken from each, stating its tribe's attitude (R-14), and the one
+  tribal kit from all three. Each template ships as it stands once it passes (FR-010, FR-031).
+- **Rationale**: FR-031, FR-036, FR-037, FR-039, Clarifications; [Direction].
+
+## R-14: Picking a template by attitude and terrain
+
+- **Decision**: a `TemplateDef` states the attitude of the factions it serves with two fields that take `FactionDef`'s
+  own names and form, `naturalEnemy` and `permanentEnemy`, each `true` or, when left out, `false`
+  (`Core/Defs/FactionDefs/Factions_Misc.xml` lines 202, 462, 485 and 529), and serves the factions whose definitions
+  hold the same two values. It names no faction. The biomes it suits are its `allowedBiomes` (R-3), empty for any. The
+  tribal culture's three templates leave `allowedBiomes` empty and set the attitude: neither field for the gentle
+  tribe's open village, `naturalEnemy` for the fierce tribe's walled stronghold, `permanentEnemy` for the savage
+  tribe's fortress. The Empire's templates leave both fields out and set `allowedBiomes`: the river-bend town's
+  `TemperateForest` and `TemperateSwamp` (`Core/Defs/BiomeDefs/Biomes_Temperate.xml` lines 5 and 210). Which culture
+  a faction takes, and picking among the templates that serve it, are generation's (ROADMAP R2).
+- **Rationale**: Principle III: `Data/` already writes a faction's attitude in these two fields, so a template that
+  states the attitude it serves writes it the same way. The tribes' descriptions set which layout each attitude gets:
+  the gentle tribe is open to trade and alliances, the fierce tribe values warlike dominance, the savage tribe has a
+  blood-and-honor culture that cannot be allied with (same file, lines 445, 480 and 504), which the maintainer
+  confirmed (spec FR-039). The Empire holds neither field, only `permanentEnemyToEveryoneExcept`
+  (`Royalty/Defs/FactionDefs/Faction_Empire.xml` lines 57-67), so its templates differ by terrain alone (spec FR-040).
+  Naming no faction lets factions that other mods add, such as medieval ones, pick by the same fields; that those
+  mods set them is an inference, checked when their culture's kit comes (spec, Edge Cases).
+- **Alternatives considered**: a list of the `FactionDef`s a template serves. Rejected: it binds a template to faction
+  names (spec FR-039). The faction category tags that `Data/` filters by (`allowedFactionCategoryTags`,
+  `Ideology/Defs/PreceptDefs/Precepts_Role.xml` line 120). Rejected: a tag names a kind of faction, not its attitude,
+  and the three tribes share `Tribal` (`Factions_Misc.xml` line 222). The quest filter `mustBePermanentEnemy`
+  (`Royalty/Defs/QuestScriptDefs/RewardThreat/Scripts_JoinerThreat.xml` line 458). Rejected: `Data/` has no such
+  filter for `naturalEnemy`, and it cannot state a template that serves only factions holding neither field.

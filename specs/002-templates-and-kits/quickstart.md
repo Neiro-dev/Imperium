@@ -12,7 +12,8 @@ Source Register). Sources for each step are in [research.md](research.md) R-10 t
   unpacked outside the repository.
 - `RIMWORLD_DATA_DIR` set to that `Data/` folder for the tests.
 - For the river-bend town: its two reference pictures in `template-references/` in the project's files; for the
-  tribal culture, the reference pictures of the city the maintainer chose, kept there too.
+  tribal culture, the reference pictures of the three cities the maintainer chose, in
+  `template-references/部落城-凯尔特/`.
 - An output folder outside the repository.
 
 ## Outside the game
@@ -31,9 +32,11 @@ Source Register). Sources for each step are in [research.md](research.md) R-10 t
    problem, and `<out>/RiverBendTown.side-by-side.png` with the template's picture beside both references. Each part
    of the skeleton is named in the picture and can be found in each reference. Give the picture to the maintainer in
    the project's files, not in the pull request, since it holds the screenshot.
-6. **The tribal culture** (SC-010, FR-036, FR-037): run the check on the tribal reading in `readings/` with its
-   reference pictures; expect no problem and a side-by-side picture the maintainer accepts. Then run it on Mantle's
-   tribal template and kit; expect no problem, and no definition of any expansion that is not marked (FR-015).
+6. **The tribal culture** (SC-010, FR-036, FR-037, FR-039): run the check on each of the three tribal readings in
+   `readings/` with its reference pictures; expect no problem and a side-by-side picture the maintainer accepts. Then
+   run it on Mantle's tribal templates and kit; expect no problem, no definition of any expansion that is not marked
+   (FR-015), and each template stating its tribe's attitude: neither field for the open village, `naturalEnemy` for
+   the walled stronghold, `permanentEnemy` for the fortress, as `Factions_Misc.xml` lines 445, 480 and 504 set.
 7. **Expansion content by mod** (FR-015): a test kit in Mantle's mod that names a Royalty definition without
    `MayRequire` is reported; the same kit in Imperium is not.
 8. **A copied culture** (SC-009): copy the kit and the river-bend template under a test culture's name in a scratch

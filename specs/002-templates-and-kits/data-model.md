@@ -25,7 +25,8 @@ Common forms, all from `Data/` (R-3):
 | `defName`, `label` | text | as every definition | `Data/` |
 | `kit` | a `KitDef` | required; the culture whose kit fills it; the check reports a template whose kit does not exist | FR-001, FR-002, FR-017 |
 | `reference` | `name` and `pictures` | the mod's own name for the reference city and a label for each of its reference pictures, such as `screenshot` and `render`; no name of another game | FR-001, FR-010, FR-028 |
-| `allowedBiomes`, `allowedRivers` | lists of `BiomeDef`, `RiverDef` | the world tiles it suits; empty means any | FR-001; R-3 |
+| `allowedBiomes`, `allowedRivers` | lists of `BiomeDef`, `RiverDef` | the world tiles it suits; empty means any; the Empire's templates state the biomes, the tribal culture's leave them empty | FR-001, FR-040; R-3, R-14 |
+| `naturalEnemy`, `permanentEnemy` | `true` or `false`, `false` when left out | the attitude of the factions it serves: those whose `FactionDef` holds the same two values; no faction is named | FR-039; R-14 |
 | `minMapSize` | `(x, 1, z)` | required; square; no larger than `(350, 1, 350)` | FR-003 |
 | `terrainShape` | TerrainShape | every cell inside `minMapSize` has a terrain; nothing outside it | FR-004, FR-016 |
 | `skeleton` | Skeleton | read together with its kit's skeleton | FR-005; R-5 |

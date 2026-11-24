@@ -14,9 +14,10 @@ cities Mantle lays out from them are compared outside the game with the referenc
 maintainer's broad direction). Scope: the forms of templates, kits and the cities laid out from them, and their check
 outside the game against `Data/`, which sets a laid-out city beside its reference; the Empire's kit and the river-bend
 town's template, written from its screenshot and render, which calibrate the method first and come with Imperium (R15);
-and the tribal culture's kit and first template, which the alpha opens. Deferred: the other cultures' kits and
-templates; generation, which picks templates, may mirror, turn and stretch them, and lays out cities from them (R2);
-the check in the game, which is the final one, once R2 places the tribal culture's settlements and R15 the Empire's.
+and the tribal culture's kit and its first templates, one for each attitude of its factions, which the alpha opens.
+Deferred: the other cultures' kits and templates; generation, which picks templates, may mirror, turn and stretch
+them, and lays out cities from them (R2); the check in the game, which is the final one, once R2 places the tribal
+culture's settlements and R15 the Empire's.
 Depends on R1 and R14, Mantle as a mod of its own. As requested for this feature, the
 check shows a template as a picture of its site, so that the developer can see it without starting the game, and sets
 the city that generation lays out from a template and a kit beside a picture of the reference city, so that the two
@@ -44,6 +45,27 @@ Mantle, a mod of its own, opens [Roadmap: R14, Releases; Direction], and the Emp
 template, which calibrate the method first and come with Imperium [Roadmap: R15]. The other cultures' kits and
 templates are later work [Direction].
 
+A settlement is built from three layers [Direction]. The first is Mantle's and the same for every culture: the forms,
+the check, generation and the pieces each faction skins (FR-033). The second is the culture's: one kit, which all of
+its factions share. The third is the faction's: which of its culture's templates its settlements are laid out from,
+picked on two dimensions, of which each culture uses only those it needs (FR-038 to FR-040):
+
+- **Attitude**, by the two fields with which a faction's definition says how it stands toward others, `naturalEnemy`
+  and `permanentEnemy` [Data: `Core/Defs/FactionDefs/Factions_Misc.xml` lines 202, 462, 485 and 529], read from the
+  definition rather than bound to a faction's name. The tribal culture picks by it, as its factions' descriptions set:
+  the gentle tribe, with neither field, is open to trade and alliances and gets an open village; the fierce tribe, a
+  natural enemy, values warlike dominance and gets a walled stronghold; the savage tribe, a permanent enemy, is driven
+  by a blood-and-honor culture that cannot be allied with and gets a fortress [Data: same file, lines 445, 480 and
+  504, confirmed by the maintainer]. Since every faction's definition can hold the two fields, a faction another mod
+  adds picks the same way; that the medieval factions of other mods set them as the base game's factions do is an
+  inference, not yet checked.
+- **Terrain**, by the biomes a template suits (FR-001). The Empire picks by it alone, since its definition holds
+  neither attitude field, only the factions it is not a permanent enemy of [Data:
+  `Royalty/Defs/FactionDefs/Faction_Empire.xml` lines 57-67]: in the temperate biomes the river-bend town [Data:
+  `Core/Defs/BiomeDefs/Biomes_Temperate.xml` lines 5 and 210], and in the desert and arid biomes a Romanized Egyptian
+  city, which is later work [Data: `Core/Defs/BiomeDefs/Biomes_WarmArid.xml` lines 5, 172 and 322; Direction;
+  Roadmap: R15].
+
 Mantle is a framework that other authors build on too [Design: line 221], so adding a culture asks only for its
 skeletons and its kit [Direction]. Everything else is shared and the same for every culture: the forms of templates
 and kits, the check outside the game and its pictures, generation's picking, mirroring, turning, stretching and
@@ -63,9 +85,9 @@ Generation never designs a city: it fills a fixed skeleton.
 
 Templates are drawn from reference cities in four steps [Direction]:
 
-1. A reference city is chosen: a player-built city that Ubisoft officially features through its channels for Anno 117,
-   such as the Anno Union and Anno's official social accounts, or a city Anno 117 itself presets for a governor or an
-   AI rival.
+1. A reference city is chosen: a player-built city of Anno 117 that is publicly shared, whether Ubisoft features it
+   through its channels, such as the Anno Union, or a player shares it, such as on Steam, or a city Anno 117 itself
+   presets for a governor or an AI rival.
 2. It is read onto the game's cells, and the reading is set beside its pictures until it matches them, as the
    river-bend town's render was. Its layout relationships are then taken apart from the reading as a template, and what
    fills them as its culture's kit, in this feature's form. Since the reading lies on the game's flat cells and is
@@ -78,17 +100,19 @@ Templates are drawn from reference cities in four steps [Direction]:
 
 The first case is the river-bend town, a player-built city of which the project holds a screenshot, the source, and a
 render on the game's cells, an earlier reading of that single 2D screenshot whose heights, hidden areas and exact sizes
-were guessed [Direction]. It calibrates the method first, before the tribal culture's kit and template are written
+were guessed [Direction]. It calibrates the method first, before the tribal culture's kit and templates are written
 (FR-031) [Roadmap: R13]. Its template and the Empire's kit are taken from these pictures. Generation lays out the town
 from them [Roadmap: R2, R15]. Every relation of its skeleton must hold in the laid-out town, and the maintainer then
 judges the town beside the screenshot and the render. No cell-exact match to the render is asked for, since it is a
 guess too. If the method cannot express the town, the method is fixed first. Once the calibration passes, the town's
 template ships with Imperium as a regular template, as it stands [Roadmap: R15].
 
-The tribal culture's first template and kit are taken the same way from a city of Anno 117's Albion built only in the
-Celtic way, neither Romanized nor mixed, at the scale of a tribal settlement and shown from above, either player-built
-and officially featured or preset by the game for a governor or an AI rival; candidates are put to the maintainer, who
-chooses (FR-037) [Direction].
+The tribal culture's first templates, one for each attitude, and its kit are taken the same way from cities of
+Anno 117's Albion built only in the Celtic way, neither Romanized nor mixed, at the scale of a tribal settlement and
+shown from above, either player-built and publicly shared or preset by the game for a governor or an AI rival. The
+maintainer chose among the candidates three cities that a player shared on Steam: Tir Uisce for the gentle tribe's
+open village, a Celtic oppidum for the fierce tribe's walled stronghold and a small Celtic hillfort for the savage
+tribe's fortress, with an agricultural island beside them as supplementary material only (FR-037) [Direction].
 
 The comparison is why the check outside the game exists [Direction]. Generation that is not held to a fixed skeleton,
 and a developer, a person or an AI, working toward a target, take shortcuts toward abstract geometric layouts, such as
@@ -122,15 +146,24 @@ template (FR-030), and the check in the game, the final one, still follows [Test
   the template's skeleton and the kit's contents, its groups and fill among them, are then taken apart from that
   reading (the maintainer's broad direction, constitution, Principle IV; Imperium-old glossary line 184 names groups and
   fill without saying what they hold, and `Data/` has no kit).
-- Q: Where does the tribal culture's first template come from? → A: From a city of Anno 117's Albion built only in the
-  Celtic way, neither Romanized nor mixed, at the scale of a tribal settlement, and shown from above so that its layout
-  can be read: a player-built city that Ubisoft officially features through any of its channels for the game, or a
-  city the game itself presets for a governor or an AI rival. Candidates are put to the maintainer, who chooses (the
-  maintainer's broad direction).
+- Q: Where do the tribal culture's first templates come from? → A: From cities of Anno 117's Albion built only in the
+  Celtic way, neither Romanized nor mixed, at the scale of a tribal settlement, and shown from above so that their
+  layout can be read: player-built cities shared publicly from any source, or cities the game itself presets for a
+  governor or an AI rival. The maintainer chose one for each attitude among the candidates, all shared by one player
+  as Steam screenshots: Tir Uisce (3639186959) for the gentle tribe, a Celtic oppidum (3625652909) for the fierce
+  tribe and a small Celtic hillfort (3621994739) for the savage tribe, with an agricultural island (3639163413) beside
+  them as supplementary material only (the maintainer's broad direction).
 - Q: Is a calibrated template's content changed before it ships? → A: No. Its reading lies on RimWorld's flat cells
   and is built from Imperium's own kit, so all it reproduces of the reference is the skeleton, the general way the
   city is laid out, and none of Anno's own expression; once its skeleton relations pass the check and the maintainer
   accepts it by eye, the template ships as it is (the maintainer's broad direction).
+- Q: How does a faction's settlement pick among its culture's templates? → A: On two dimensions, of which each culture
+  uses only those it needs: attitude, by the `naturalEnemy` and `permanentEnemy` fields of the faction's definition,
+  never by its name, and terrain, by the biomes a template suits. The tribal culture picks by attitude, as its
+  factions' descriptions set: an open village for the gentle tribe, a walled stronghold for the fierce tribe and a
+  fortress for the savage tribe (`Data/`, `Factions_Misc.xml` lines 445, 480 and 504, confirmed by the maintainer).
+  The Empire, which holds neither field (`Faction_Empire.xml` lines 57-67), picks by terrain: the river-bend town in
+  temperate biomes, and a Romanized Egyptian city in desert and arid ones later (the maintainer's broad direction).
 
 ## Sources
 
@@ -157,31 +190,42 @@ Each requirement below names its source in brackets. The sources are those the c
   by its position as `(x, 0, z)`, its rotation and its material (`Odyssey/Defs/PrefabDefs/AncientPrefabs.xml` lines
   12, 13 and 23); the factions that have settlements (`Royalty/Defs/FactionDefs/Faction_Empire.xml` line 5;
   `Core/Defs/FactionDefs/Factions_Misc.xml` lines 185, 443, 511 and 517; `Odyssey/Defs/FactionDefs/Factions_Misc.xml`
-  lines 5, 17, 40-42, 168, 188 and 202-204); and each expansion's `About/About.xml`.
+  lines 5, 17, 40-42, 168, 188 and 202-204); a faction's attitude (`Core/Defs/FactionDefs/Factions_Misc.xml` lines
+  202, 462, 485 and 529) and the descriptions of the gentle, fierce and savage tribes (same file, lines 445, 480 and
+  504); the factions the Empire is not a permanent enemy of (`Royalty/Defs/FactionDefs/Faction_Empire.xml` lines
+  57-67); the temperate biomes (`Core/Defs/BiomeDefs/Biomes_Temperate.xml` lines 5 and 210) and the desert and arid
+  ones (`Biomes_WarmArid.xml` lines 5, 172 and 322); and each expansion's `About/About.xml`.
 - **[EULA]**: `EULA.txt`, which is always followed (constitution, Source Register).
 - **[Direction]**: the maintainer's broad direction on where template layouts come from and how they are accepted,
   which Imperium-old's design leaves open (constitution, Source Register, row Imperium's own design; Principle IV):
-  - Templates are drawn, as reference only, from player-built cities that Ubisoft officially features through its
-    channels for Anno 117, or from cities Anno 117 itself presets for governors and AI rivals. The layout
-    relationships read from such a city, its river, walls, districts, streets, plazas and public buildings, are
-    expressed as templates in the design's form, and kits fill them. Nothing of Anno's art, names, models or code is
-    used. A reading lies on RimWorld's flat cells, without heights, and is built from Imperium's own kits, so it
-    reproduces only the reference's skeleton, the general way the city is laid out, and none of Anno's own
-    expression; the template taken from it ships as it is once it passes.
+  - Templates are drawn, as reference only, from player-built cities of Anno 117 that are publicly shared, whether
+    Ubisoft features them through its channels or players share them, or from cities Anno 117 itself presets for
+    governors and AI rivals. The layout relationships read from such a city, its river, walls, districts, streets,
+    plazas and public buildings, are expressed as templates in the design's form, and kits fill them. Nothing of
+    Anno's art, names, models or code is used. A reading lies on RimWorld's flat cells, without heights, and is built
+    from Imperium's own kits, so it reproduces only the reference's skeleton, the general way the city is laid out,
+    and none of Anno's own expression; the template taken from it ships as it is once it passes.
   - Imperium's city maps are 350×350 cells.
   - Each culture has its own skeletons and templates; slots vary only within a culture. The old design's Roman kit is
     the Empire kit, also in Imperium's files.
   - Every faction that has settlements gets its own, on the surface and in orbit: the Empire, tribal, industrial
     (outlander), pirate, medieval (for medieval mods), and Odyssey's Traders Guild and Salvagers. This feature holds
-    the tribal culture's kit and first template, which the alpha opens, and the Empire's kit with the river-bend
-    town's template; the rest is later work.
+    the tribal culture's kit and its first templates, one for each attitude, which the alpha opens, and the Empire's
+    kit with the river-bend town's template; the rest is later work.
   - A culture's kit and templates are taken from its reference city: the reference is read onto the game's cells and
     the reading set beside its pictures until it matches, as the river-bend town's render was, and then its skeleton
     and its kit, groups and fill among them, are taken apart from that reading.
-  - The tribal culture's reference is a city of Anno 117's Albion, built only in the Celtic way, neither Romanized nor
-    mixed, at the scale of a tribal settlement, and shown from above so that its layout can be read: a player-built
-    city that Ubisoft features through any of its official channels, or a city the game presets for a governor or an
-    AI rival. Candidates go to the maintainer, who chooses.
+  - The tribal culture's references are cities of Anno 117's Albion, built only in the Celtic way, neither Romanized
+    nor mixed, at the scale of a tribal settlement, and shown from above so that their layout can be read:
+    player-built cities shared publicly from any source, or cities the game presets for a governor or an AI rival.
+    Candidates go to the maintainer, who chose one for each attitude: Tir Uisce for the gentle tribe, a Celtic oppidum
+    for the fierce tribe and a small Celtic hillfort for the savage tribe, each a player's Steam screenshot, with an
+    agricultural island as supplementary material only.
+  - A settlement is built from three layers: Mantle's, shared by every culture; the culture's kit, shared by all its
+    factions; and the faction's templates, picked by attitude and terrain, of which each culture uses only what it
+    needs. The tribal culture picks by attitude, as its factions' descriptions in `Data/` set, which the maintainer
+    confirmed; the Empire picks by terrain, the river-bend town in temperate biomes and a Romanized Egyptian city in
+    desert and arid ones, later.
   - Lowering the barrier for other authors is necessary: a new culture needs only its skeletons and kit, everything
     else is shared and identical across cultures, an author can copy an existing culture as a starting point, and the
     river-bend town is the complete worked example.
@@ -355,8 +399,15 @@ and confirm that no shared file was changed.
 - A definition from an expansion that the mod holding the template, kit or laid-out city does not require, marked as
   that expansion's content: the check accepts it, and the picture's legend names the expansion [Design: imperium.md
   line 110; Roadmap: R14].
-- The tribal culture's reference is not yet chosen: its reading, kit and template wait for the maintainer's choice;
-  the forms, the check, the Empire's kit and the river-bend town's template do not [Direction].
+- The pictures of the tribal culture's references are not yet in `template-references/`: its readings, kit and
+  templates wait for them; the forms, the check, the Empire's kit and the river-bend town's template do not
+  [Direction].
+- A faction holds an attitude that no template of its culture serves, or settles in a biome that none suits, such as
+  the Empire in a boreal forest before its other templates come: this feature gives it no template, and what
+  generation does then is R2's [Roadmap: R2, R15].
+- A faction another mod adds, such as a medieval mod's, holds the two attitude fields as every faction's definition
+  can, and picks its culture's templates by them; that those mods set the fields as the base game's factions do is an
+  inference, to be checked when the medieval culture's kit comes [Direction].
 - A laid-out city is given without a reference picture, or with one the check cannot read: the check checks and draws
   the city, says that no comparison was made, and does not count its template as passing the comparison.
 - One of the river-bend town's reference pictures is not yet in `template-references/`: the check draws the template
@@ -372,7 +423,8 @@ and confirm that no shared file was changed.
 **The forms**
 
 - **FR-001**: A template MUST hold its terrain shape and its skeleton together, what generation picks it by, the world
-  tile and size it suits [Design: line 209], its culture, and the reference city it is drawn from [Direction].
+  tile and size it suits [Design: line 209] and the attitude of the factions it serves (FR-039), its culture, and the
+  reference city it is drawn from [Direction].
 - **FR-002**: A template MUST NOT be a drawn map of a city: it MUST NOT place on its cells the things a city is built
   of, such as buildings, walls and paving, which a kit gives when generation lays out a city [Design: lines 184, 204,
   209, 221]. A template MUST belong to one culture, whose kit fills it, and each culture MUST have its own skeletons and
@@ -473,7 +525,7 @@ and confirm that no shared file was changed.
   whoever wrote the template; the check in the game still follows [Direction; Testing].
 - **FR-031**: The first template MUST be the river-bend town's, with the Empire's kit, and they MUST calibrate the
   method first [Direction; Roadmap: R13]:
-  - In this feature, before the tribal culture's kit and template are written, its template and the Empire's kit
+  - In this feature, before the tribal culture's kit and templates are written, its template and the Empire's kit
     MUST be taken from its reference pictures: the screenshot of the player-built city, which is the source, and the
     newest render on the game's cells, the town's reading, with its heights, hidden areas and exact sizes guessed, both
     in `template-references/` in the project's files (FR-036). The template MUST fit a city's 350×350 map, whatever
@@ -494,10 +546,10 @@ and confirm that no shared file was changed.
   `Core/Defs/FactionDefs/Factions_Misc.xml` lines 185 and 443], pirate [Data: same file, lines 511 and 517], medieval,
   for the medieval factions other mods add [Direction], and Odyssey's Traders Guild and Salvagers, whose settlements lie
   on the Orbit layer [Data: `Odyssey/Defs/FactionDefs/Factions_Misc.xml` lines 5, 17, 40-42, 168, 188 and 202-204]
-  [Design: line 184; Direction]. This feature MUST hold the tribal culture's kit and first template, which Mantle's
-  alpha opens as a mod of its own [Roadmap: R13, R14, Releases; Direction], and the Empire's kit with the river-bend
-  town's template, which come with Imperium [Roadmap: R15]; the other cultures' kits and templates are later work
-  [Direction; Roadmap: R13].
+  [Design: line 184; Direction]. This feature MUST hold the tribal culture's kit and its first templates, one for each
+  attitude (FR-039), which Mantle's alpha opens as a mod of its own [Roadmap: R13, R14, Releases; Direction], and the
+  Empire's kit with the river-bend town's template, which come with Imperium [Roadmap: R15]; the other cultures' kits
+  and templates are later work [Direction; Roadmap: R13].
 - **FR-033**: Adding a culture MUST need only its skeletons, in its templates, and its kit [Direction]. Everything else
   MUST be shared and the same for every culture: the forms of templates and kits, the check outside the game and its
   pictures, generation's picking, mirroring, turning, stretching and filling [Roadmap: R2], and the pieces, which every
@@ -515,16 +567,38 @@ and confirm that no shared file was changed.
   render, which already exists (FR-031). A reading written in that form MUST be kept in the repository of the mod
   that holds the template taken from it, outside that mod's released files, as the template's source; its reference
   pictures MUST NOT be (FR-028) [Direction; EULA: line 76].
-- **FR-037**: The tribal culture's first template and its kit MUST be taken from a city of Anno 117's Albion built
+- **FR-037**: The tribal culture's first templates and its kit MUST be taken from cities of Anno 117's Albion built
   only in the Celtic way, neither Romanized nor mixed, at the scale of a tribal settlement, and shown from above so
-  that its layout can be read: a player-built city that Ubisoft features through any of its official channels for the
-  game, or a city the game presets for a governor or an AI rival. Candidates MUST be put to the maintainer, who
-  chooses, before its reading is written [Direction].
+  that their layout can be read: player-built cities shared publicly from any source, or cities the game presets for
+  a governor or an AI rival, which the maintainer chooses among candidates before their readings are written
+  [Direction]. There MUST be one for each attitude (FR-039), from the references the maintainer chose: Tir Uisce for the
+  gentle tribe's open village, a Celtic oppidum for the fierce tribe's walled stronghold and a small Celtic hillfort for
+  the savage tribe's fortress, whose pictures are kept in `template-references/` in the project's files; an agricultural
+  island MAY be consulted beside them as supplementary material only [Direction].
+- **FR-038**: Settlements MUST be built from three layers [Direction]: Mantle's, the same for every culture (FR-033);
+  the culture's, one kit that all of the culture's factions share (FR-006); and the faction's, the templates of its
+  culture that its settlements are laid out from, picked by attitude (FR-039) and terrain (FR-040). A culture MUST
+  pick only by the dimensions it needs, and its templates MUST leave the other one open [Direction].
+- **FR-039**: A template MUST state the attitude of the factions it serves in the two fields with which a faction's
+  definition states it, `naturalEnemy` and `permanentEnemy`, each false unless set [Data: `Factions_Misc.xml` lines
+  202, 462, 485 and 529], and serves the factions whose definitions hold the same two values; it MUST NOT name a
+  faction, so that factions other mods add pick the same way [Direction]. The tribal culture's templates MUST follow
+  its factions' descriptions: an open village for the gentle tribe, which holds neither field and is open to trade
+  and alliances; a walled stronghold for the fierce tribe, a natural enemy that values warlike dominance; and a
+  fortress for the savage tribe, a permanent enemy driven by a blood-and-honor culture that cannot be allied with
+  [Data: same file, lines 445, 480 and 504, confirmed by the maintainer].
+- **FR-040**: A template MUST state the biomes it suits, or none for any biome (FR-001). The Empire's templates MUST be
+  picked by terrain alone, since the Empire's definition holds neither attitude field, only the factions it is not a
+  permanent enemy of [Data: `Royalty/Defs/FactionDefs/Faction_Empire.xml` lines 57-67]: the river-bend town's MUST
+  suit the temperate biomes [Data: `Core/Defs/BiomeDefs/Biomes_Temperate.xml` lines 5 and 210], and a Romanized
+  Egyptian city's, which is later work, the desert and arid ones [Data: `Biomes_WarmArid.xml` lines 5, 172 and 322;
+  Direction; Roadmap: R15].
 
 ### Key Entities *(include if feature involves data)*
 
-- **Template**: the designed layout of a whole city site: its terrain shape, its skeleton, what it is picked by, the
-  smallest map it needs, its culture and the reference city it is drawn from. It places no thing a city is built of.
+- **Template**: the designed layout of a whole city site: its terrain shape, its skeleton, what it is picked by, among
+  it the attitude of the factions it serves and the biomes it suits, the smallest map it needs, its culture and the
+  reference city it is drawn from. It places no thing a city is built of.
 - **Terrain shape**: the site's cells, each with its terrain, any natural rock and its roof, as the game defines them.
 - **Skeleton**: the fixed parts of a city's layout and their relations to each other and to the terrain. A kit holds
   one too [Design: line 184].
@@ -534,11 +608,13 @@ and confirm that no shared file was changed.
 - **Spec card**: one building's plot, rooms and contents.
 - **Piece**: a generic building element of generated settlements that the base game lacks, shared by every kit and
   skinned by faction [Design: line 194].
-- **Culture**: one kind of settlement with its own kit and its own skeletons and templates, such as the tribal
-  culture's or the Empire's.
+- **Culture**: one kind of settlement with its own kit, which all its factions share, and its own skeletons and
+  templates, such as the tribal culture's or the Empire's.
+- **Attitude**: how a faction stands toward others, by its definition's two fields, natural enemy and permanent enemy;
+  a template serves the factions whose attitude it states.
 - **Laid-out city**: the city generation lays out on a map from a template and a kit: each cell's terrain, rock and
   roof, each thing that stands there, and where each part of the skeleton lies.
-- **Reference city**: the city a template is drawn from, player-built and officially featured or preset by the game,
+- **Reference city**: the city a template is drawn from, player-built and publicly shared or preset by the game,
   and its **reference pictures**, such as a screenshot of it, which the developer keeps outside Imperium's files.
 - **Reading**: a reference city drawn on the game's cells and set beside its pictures until it matches them, in the
   laid-out city's form, from which a culture's templates and kit are taken; for the river-bend town, its render. It is
@@ -565,14 +641,15 @@ and confirm that no shared file was changed.
   and whose comparison with its reference the maintainer has accepted (FR-030).
 - **SC-007**: The river-bend town's template passes the check, and in its picture beside each reference picture,
   every part of its skeleton is found in the same relations to the river and to the other parts.
-- **SC-008**: Before the tribal culture's kit and template are written, the river-bend town's template and the
+- **SC-008**: Before the tribal culture's kit and templates are written, the river-bend town's template and the
   Empire's kit pass the check and the template is drawn beside the screenshot and the render; before the town ships,
   a town that generation lays out from them keeps 100% of its skeleton relations and the maintainer has accepted it
   beside both (FR-031).
 - **SC-009**: A test culture copied from the Empire kit and the river-bend town's template is checked and drawn with no
   change to any shared form, check, picture or piece (FR-033, FR-034).
-- **SC-010**: The tribal culture's kit and first template are taken from the reading of a reference the maintainer
-  chose, and pass the check (FR-036, FR-037).
+- **SC-010**: The tribal culture's kit and its three first templates are taken from the readings of the references
+  the maintainer chose, each template states the attitude of the tribe it serves, and all pass the check (FR-036,
+  FR-037, FR-039).
 
 ## Assumptions
 
@@ -580,10 +657,12 @@ and confirm that no shared file was changed.
   definitions read are those of RimWorld 1.7.5014.
 - The check runs where `Data/` is available: on the maintainer's computer, in the game's install folder, and in cloud
   threads, from the project's copy of RimWorld 1.7.5014's `Data/`.
-- The alpha opens the tribal culture's kit and template; generation is R2's [Roadmap: R13, R2, Releases]. The form of
+- The alpha opens the tribal culture's kit and templates; generation is R2's [Roadmap: R13, R2, Releases]. The form of
   a laid-out city is set here so that R2's generation writes it and the check reads it.
-- Mantle's own mod holds what every culture shares and the tribal culture's kit and template; Imperium holds the
+- Mantle's own mod holds what every culture shares and the tribal culture's kit and templates; Imperium holds the
   Empire's kit and templates [Roadmap: R14, R15, Releases].
+- Which culture a faction's settlements take, and the picking itself, are generation's; this feature gives templates
+  the attitude and biomes that picking reads [Roadmap: R2].
 - Until R2 generates cities, the laid-out cities the check is tested with are written by hand from test templates and
   kits. Test templates, kits and laid-out cities written for this feature are not game content. The river-bend town's
   template is the first template of game content, and it ships with Imperium once its calibration passes (FR-031)

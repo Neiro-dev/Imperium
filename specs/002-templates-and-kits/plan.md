@@ -10,7 +10,7 @@
 
 Templates and kits become definitions of Mantle's own types, `Mantle.TemplateDef` and `Mantle.KitDef`, in a mod's
 `Defs/`, with their classes in Mantle's own mod (R14), built into its `Assemblies/Mantle.dll` against the installed
-game (research R-1, R-2). Mantle's mod holds the tribal culture's kit and first template, which open its alpha;
+game (research R-1, R-2). Mantle's mod holds the tribal culture's kit and first templates, which open its alpha;
 Imperium holds the Empire's kit and the river-bend town's template, and requires Mantle from then on (R-1). Their
 fields take `Data/`'s own forms wherever `Data/` writes the same thing (R-3): a template is a terrain shape of natural
 terrain, rock and roofs (R-4) and a skeleton of named parts and relations taken from the design's definitions (R-5); a
@@ -20,9 +20,11 @@ taken from, is a file in the same form (R-7). The check is a Python package in S
 reads `Data/` 1.7.5014 and each mod's `About/About.xml` and `Defs/`, reports every problem of the spec's kinds, accepts
 expansion content by what the holding mod requires, measures each skeleton relation in a laid-out city, and draws PNG
 pictures with a grid, coordinates and a legend beside the reference pictures, outside the repository (R-6, R-9 to
-R-11). The river-bend town's template and the Empire kit are taken first, then the tribal culture's from the reference
-the maintainer chooses, and each ships as it stands once it passes (R-13). It is validated by tests outside the game,
-then by a load in the game ([quickstart.md](quickstart.md)).
+R-11). The river-bend town's template and the Empire kit are taken first, then the tribal culture's three, one for each
+attitude, from the references the maintainer chose, and each ships as it stands once it passes (R-13). A template
+states the attitude of the factions it serves in `FactionDef`'s own `naturalEnemy` and `permanentEnemy`, and the
+biomes it suits in `allowedBiomes`; the tribal culture picks by the first, the Empire by the second (R-14). It is
+validated by tests outside the game, then by a load in the game ([quickstart.md](quickstart.md)).
 
 ## Technical Context
 
@@ -55,8 +57,8 @@ FR-028; `EULA.txt` lines 76, 86); the same inputs give the same files (FR-022); 
 Mantle's kits use base-game definitions, and expansion content only when marked (FR-015); the paths and `packageId`
 of Mantle's mod come from R14, which this feature's implement step waits for (R-1)
 
-**Scale/Scope**: two definition types, one laid-out city form, one command; the tribal culture's kit and first
-template, and the Empire kit with the river-bend town's template; test fixtures for every kind of problem
+**Scale/Scope**: two definition types, one laid-out city form, one command; the tribal culture's kit and three first
+templates, and the Empire kit with the river-bend town's template; test fixtures for every kind of problem
 
 ## Constitution Check
 
@@ -67,7 +69,7 @@ template, and the Empire kit with the river-bend town's template; test fixtures 
 | I. One Source per Topic | Design from Imperium-old `main` and the maintainer's direction (spec, Sources); which mod holds what from the roadmap's R13, R14, R15 and Releases; the released mod's forms from `Data/`, `ModUpdating.txt`, Harmony; testing outside the game from `Data/`; testing in the game from `Readme.txt`; the check's form and its ignored files from Spec Kit, the build's from Harmony | Pass |
 | II. Other Sources Only Cross-Check | No decision rests on a source outside its topic's register entry; the reference pictures are the maintainer's direction's material, not a source of form | Pass |
 | III. Sources in Order | Every field takes `Data/`'s form first (R-3); `Defs/`, `Source/` and `Assemblies/` come from `ModUpdating.txt` because `Data/` holds no mod layout (R-1); the build comes from Harmony because neither earlier source gives one (R-2) | Pass |
-| IV. Asking the Maintainer | No question is asked: what a kit's groups and fill hold comes from its culture's reading, by his direction (R-8); his one choice is the tribal reference among candidates, which gates only the tribal reading, kit and template (R-13) | Pass |
+| IV. Asking the Maintainer | No question is asked: what a kit's groups and fill hold comes from its culture's reading, by his direction (R-8); his choice of the tribal references among candidates, one for each attitude, gates only the tribal readings, kit and templates (R-13); which layout each attitude gets comes from the tribes' descriptions in `Data/`, which the maintainer confirmed (R-14) | Pass |
 | V. When a Source Gives No Form | The check takes Spec Kit's own options (R-9), and `readings/` is named in lower case as Spec Kit's repository names its folders (R-7); no CI, no version folders, no `LoadFolders.xml`, no Harmony, since nothing here needs them | Pass |
 | VI. Every Conclusion Names Its Source | Every decision in research.md and every row in data-model.md names its source | Pass |
 | Source Register, `EULA.txt` always followed | No reference picture, Anno name, art or game file in the repositories or released files (R-7, R-9, R-11, R-13); a reading lies on the game's flat cells with the culture's own kit and carries only the reference's skeleton (spec FR-010, FR-036); the game's assemblies only referenced (R-2) | Pass |
@@ -104,7 +106,7 @@ Defs/
 ├── KitDefs/
 │   └── Kits_Tribal.xml            # the tribal culture's kit (R-8)
 └── TemplateDefs/
-    └── Templates_Tribal.xml       # the tribal culture's first template (R-13)
+    └── Templates_Tribal.xml       # the tribal culture's three first templates (R-13, R-14)
 Source/
 └── Mantle/
     ├── Mantle.csproj              # net10.0, the game's assemblies by RimWorldAssemblyDir
@@ -114,7 +116,7 @@ Source/
     └── Cells.cs                   # rects, layers, features, groups
 Directory.Build.props              # RimWorldAssemblyDir (R-2)
 readings/
-└── <reference name>.xml           # the tribal reading, the template's source (R-7)
+└── <reference name>.xml           # the tribal readings, one for each template, its source (R-7)
 pyproject.toml                     # the check's package (R-9)
 src/
 └── mantle_check/
@@ -144,7 +146,7 @@ Defs/
 ```
 
 **Structure Decision**: each repository root stays its mod's folder (R1 research R-1). Mantle's code, its check and
-the tribal culture's kit, template and reading go with Mantle's own mod, since every culture shares the forms and the
+the tribal culture's kit, templates and readings go with Mantle's own mod, since every culture shares the forms and the
 check and the alpha is Mantle alone (ROADMAP R14, Releases); its `Source/` and `Assemblies/` follow
 `ModUpdating.txt`, its definitions sit in `Defs/` with folders named as `Data/` names its own, and the check sits
 beside them as a Python package in Spec Kit's layout. Imperium holds only the Empire's kit and template. The game loads

@@ -67,6 +67,10 @@ R-8. The examples are shapes, not content.
         <li>screenshot</li>
       </pictures>
     </reference>
+    <allowedBiomes>
+      <li>TemperateForest</li>
+      <li>TemperateSwamp</li>
+    </allowedBiomes>
     <allowedRivers>
       <li>River</li>
     </allowedRivers>
@@ -100,6 +104,20 @@ R-8. The examples are shapes, not content.
 The template names its kit's parts (`palaceQuarter`, `core`) without listing them again; it may list one again with
 the same kind.
 
+The Empire's templates leave `naturalEnemy` and `permanentEnemy` out, since the Empire holds neither, and differ by
+`allowedBiomes` (research R-14). A tribal template leaves `allowedBiomes` out and states the attitude of the tribe it
+serves, as a fierce tribe's walled stronghold does:
+
+```xml
+  <Mantle.TemplateDef>
+    <defName>ExampleStronghold</defName>
+    <label>example stronghold</label>
+    <kit>Tribal</kit>
+    <naturalEnemy>true</naturalEnemy>
+    <!-- reference, minMapSize, terrainShape and skeleton as above -->
+  </Mantle.TemplateDef>
+```
+
 ## Stable from R13 on
 
 - The two definition types, their field names, the rect, layer, position and rotation forms, the part kinds and the
@@ -107,6 +125,8 @@ the same kind.
   without a deprecation in the same pull request.
 - Another expansion's definition is marked with `MayRequire` on the element that names it, as `Data/` marks its own.
 - A culture is its kit's `defName`; its templates name that kit.
+- A template states the attitude it serves in `FactionDef`'s own `naturalEnemy` and `permanentEnemy`, and never names
+  a faction.
 
 ## May change in later entries
 
