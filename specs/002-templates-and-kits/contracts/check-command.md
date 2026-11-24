@@ -24,11 +24,12 @@ mantle-check --data <Data folder> --out <output folder> --mod <mod folder>... [-
 
 ## Output
 
-- The report, on standard output and in `<out>/report.txt`: each problem numbered, with its file, its template, kit,
-  city or spec card, its part or field, its cell where it has one, and what is wrong; for each laid-out city, every
-  relation with `holds`, `broken` or `not measured`; for each template and city, the reference pictures it was set
-  beside or which were missing; and, last, that testing in the game is the final check and is still to come (FR-019,
-  FR-020, FR-029).
+- The report, on standard output and in `<out>/report.txt`: each culture the files name, by its kit's `defName`, with
+  the file that holds its kit, its word list, its walls and its templates (FR-033, FR-034); each problem numbered, with
+  its file, its template, kit, city or spec card, its part or field, its cell where it has one, and what is wrong; for
+  each laid-out city, every relation with `holds`, `broken` or `not measured`; for each template and city, the reference
+  pictures it was set beside or which were missing; and, last, that testing in the game is the final check and is still
+  to come (FR-019, FR-020, FR-029).
 - `<out>/<defName>.png` for each template, and `<out>/<city file name>.png` for each laid-out city and reading
   (FR-023, FR-025 to FR-027).
 - `<out>/<defName or city file name>.side-by-side.png` when reference pictures are given (FR-025).

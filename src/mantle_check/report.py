@@ -1,5 +1,5 @@
-"""The report: every problem numbered, each relation's result, the reference pictures, and the closing statement
-(spec FR-019, FR-020, FR-022, FR-029)."""
+"""The report: the cultures checked, every problem numbered, each relation's result, the reference pictures, and the
+closing statement (spec FR-019, FR-020, FR-022, FR-029, FR-033, FR-034)."""
 
 from __future__ import annotations
 
@@ -47,11 +47,33 @@ class RelationResult:
 
 
 @dataclass
+class Culture:
+    """A culture, named by its kit's defName (data-model.md, KitDef), with what its kit holds and its templates."""
+
+    name: str
+    kit: str | None = None
+    word_list: str | None = None
+    walls: str | None = None
+    templates: set[str] = field(default_factory=set)
+
+    def line(self) -> str:
+        if self.kit is None:
+            held = "no kit"
+        else:
+            held = f"kit in {self.kit}, word list {self.word_list or '-'}, walls {self.walls or '-'}"
+        return f"- {self.name}: {held}, templates {', '.join(sorted(self.templates)) or 'none'}"
+
+
+@dataclass
 class Report:
     problems: list[Problem] = field(default_factory=list)
     relations: list[RelationResult] = field(default_factory=list)
     pictures: list[str] = field(default_factory=list)
     checked: list[str] = field(default_factory=list)
+    cultures: dict[str, Culture] = field(default_factory=dict)
+
+    def culture(self, name: str) -> Culture:
+        return self.cultures.setdefault(name, Culture(name))
 
     def numbered(self) -> list[tuple[int, Problem]]:
         unique = sorted(set(self.problems), key=Problem.sort_key)
@@ -63,6 +85,11 @@ class Report:
         for name in sorted(set(self.checked)):
             lines.append(f"- {name}")
         lines.append("")
+        if self.cultures:
+            lines.append("Cultures:")
+            for name in sorted(self.cultures):
+                lines.append(self.cultures[name].line())
+            lines.append("")
         numbered = self.numbered()
         if numbered:
             lines.append(f"Problems: {len(numbered)}")

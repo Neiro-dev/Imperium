@@ -303,16 +303,16 @@ checked, and no shared file changes (spec, User Story 5)
 
 ### Tests for User Story 5
 
-- [ ] T046 [P] [US5] Write a test piece, a definition of a test mod in `tests/fixtures/mods/`, and a test kit
+- [X] T046 [P] [US5] Write a test piece, a definition of a test mod in `tests/fixtures/mods/`, and a test kit
   that names it in `tests/fixtures/us5/` (spec, User Story 5, scenario 2)
-- [ ] T047 [US5] Write `tests/test_copied_culture.py`: copy `Kits_Empire.xml` and `Templates_Empire.xml` into a
+- [X] T047 [US5] Write `tests/test_copied_culture.py`: copy `Kits_Empire.xml` and `Templates_Empire.xml` into a
   temporary folder under a test culture's name, change its word list, wall settings and one relation, and check that
   the report and pictures follow the changes and name the new culture, that the piece of T046 is found, and that no
   shared file changed (spec, User Story 5, scenario 1; SC-009)
 
 ### Implementation for User Story 5
 
-- [ ] T048 [US5] Name each template's and kit's culture by data-model.md `KitDef.defName` in
+- [X] T048 [US5] Name each template's and kit's culture by data-model.md `KitDef.defName` in
   `src/mantle_check/report.py` and `src/mantle_check/pictures.py`, so that a copy is reported and drawn
   under its new culture, with nothing a culture must define added to the shared check, and pass T047 (spec FR-033,
   FR-034)

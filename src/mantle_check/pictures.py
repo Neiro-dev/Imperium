@@ -236,7 +236,7 @@ class Painter:
     def template(self, template: Template, numbered: list[tuple[int, Problem]], kit_skeleton: Skeleton | None) -> Image.Image:
         bounds = template.min_map_size or (MAX_MAP, MAX_MAP)
         bounds = (min(bounds[0], MAX_MAP), min(bounds[1], MAX_MAP))
-        image, cell = self.grid(bounds, f"{template.owner}: {template.label} (kit {template.kit.name if template.kit else '-'})")
+        image, cell = self.grid(bounds, f"{template.owner}: {template.label} (culture {template.kit.name if template.kit else '-'})")
         legend = Legend()
         self.fill_layer(image, cell, bounds, template.terrain, "TerrainDef", legend, "terrain")
         self.fill_layer(image, cell, bounds, template.rocks, "ThingDef", legend, "rock")
@@ -257,7 +257,7 @@ class Painter:
         if city.is_reading:
             title = f"{city.owner}: reading of {city.reference or '-'}"
         else:
-            title = f"{city.owner}: template {city.template or '-'}, kit {city.kit or '-'}"
+            title = f"{city.owner}: template {city.template or '-'}, culture {city.kit or '-'}"
         image, cell = self.grid(bounds, title)
         legend = Legend()
         self.fill_layer(image, cell, bounds, city.terrain, "TerrainDef", legend, "terrain")

@@ -9,10 +9,10 @@ import typer
 from PIL import Image, UnidentifiedImageError
 
 from .checks import Checker, Known
-from .forms import read_city, read_kit, read_template
+from .forms import Kit, read_city, read_kit, read_template
 from .gamedata import NO_MOD, CannotRun, GameData, Source, parse_xml
 from .pictures import Painter, save, side_by_side
-from .report import Problem, Report
+from .report import Culture, Problem, Report
 
 app = typer.Typer(add_completion=False, help="Check templates, kits and laid-out cities against RimWorld's Data/.")
 
@@ -48,6 +48,13 @@ def parse_references(values: list[str]) -> dict[tuple[str, str], Path]:
         label, path = rest.split("=", 1)
         references[(name.strip(), label.strip())] = Path(path)
     return references
+
+
+def describe(culture: Culture, kit: Kit) -> None:
+    """Names what a culture's kit holds that a copy changes: its file, word list and walls (spec FR-034)."""
+    culture.kit = kit.file
+    culture.word_list = kit.name_maker.name if kit.name_maker else None
+    culture.walls = kit.wall_def.name if kit.wall_def else None
 
 
 def run(files: list[Path], data: Path, out: Path, mods: list[Path], references: list[str]) -> int:
@@ -94,16 +101,22 @@ def run(files: list[Path], data: Path, out: Path, mods: list[Path], references: 
                     template, problems = read_template(node, label)
                     report.problems.extend(problems)
                     checker.template(template, holder or NO_MOD)
+                    if template.kit is not None:
+                        report.culture(template.kit.name).templates.add(template.def_name)
                     drawings.append(("template", template))
                 elif node.tag == "Mantle.KitDef":
                     kit, problems = read_kit(node, label)
                     report.problems.extend(problems)
                     checker.kit(kit, holder or NO_MOD)
+                    describe(report.culture(kit.def_name), kit)
         else:
             city, problems = read_city(root, label)
             report.problems.extend(problems)
             checker.city(city)
             drawings.append(("city", city))
+    for culture in report.cultures.values():
+        if culture.kit is None and culture.name in known.kits:
+            describe(culture, known.kits[culture.name][0])
     report.problems.extend(checker.problems)
     report.relations.extend(checker.relations)
 
