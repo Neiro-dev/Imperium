@@ -50,6 +50,13 @@ Roman, medieval, industrial and tribal settlements (lines 173 and 184). The main
 - Q: Which name does the archive use where the sources use several for one thing? → A: The term in force in
   Imperium-old's glossary, with the others beside it on first use (`docs/glossary.md`, lines 3-4). Answered from the
   source, not asked.
+- Q: Where passages disagree, does the archive leave every disagreement open? → A: No. Where they carry different
+  dates, the later passage is the design and the earlier is named as replaced; for looks the latest holds. A conflict
+  stays only where the dates are equal or unknown (the maintainer's broad direction, 2026-11-24, constitution,
+  Principle IV).
+- Q: Is the hydraulics axis (水利, the imperial aqueducts) part of the design? → A: No; the maintainer deleted it
+  (2026-11-24). The archive records it as deleted and writes none of it as design. Imperium-old's glossary dropping the
+  fluid-powered equipment on 2026-11-21 (Imperium-old PR #269) cross-checks it.
 
 ## User Scenarios & Testing *(mandatory)*
 
@@ -77,8 +84,9 @@ same.
 
 ### User Story 2 - See conflicts and gaps instead of decisions made for the maintainer (Priority: P1)
 
-Where the old repository says two things about one subject, the archive shows both, each with its source, and does not
-pick one. Where the meaning cannot be worked out from the sources, the archive marks it unverified and leaves it
+Where the old repository says two things about one subject at different dates, the archive gives the later as the
+design and names the earlier; where the dates are the same or unknown, it shows both, each with its source, and does
+not pick one (Clarifications). Where the meaning cannot be worked out from the sources, the archive marks it unverified and leaves it
 unfilled.
 
 **Why this priority**: an archive that settles conflicts or fills gaps silently would put the agent's guesses in place
@@ -89,8 +97,9 @@ neither side as the design. For each place marked unverified, no source passage 
 
 **Acceptance Scenarios**:
 
-1. **Given** two passages that disagree, **When** the archive covers that subject, **Then** both are stated side by side
-   with their sources, under a conflict marking, and neither is presented as the design.
+1. **Given** two passages of the same date or of no date that disagree, **When** the archive covers that subject,
+   **Then** both are stated side by side with their sources, under a conflict marking, and neither is presented as
+   the design; if their dates differ, the later is the design and the earlier is named as replaced.
 2. **Given** a subject the sources leave open, **When** the archive reaches it, **Then** it is marked unverified, and
    nothing from the base game's Empire, from history or from the writer's own examples is put in its place.
 
@@ -137,10 +146,11 @@ holds it, with its class and, for a design source, the archive sections that use
 
 - A source marks one of its own passages as replaced, such as a ruling moved to Imperium-Knowledge's archive of
   superseded rulings (`Imperium-Knowledge/README.md`, line 74): the archive gives the meaning that replaces it and
-  names the replaced passage beside it. Where nothing in the sources says which of two passages holds, they are a
-  conflict.
-- The three bodies of text disagree: none ranks above another unless a source passage says so; the disagreement is
-  listed as a conflict.
+  names the replaced passage beside it. Where nothing in the sources says which of two passages holds, the later one
+  does; if they have the same date or none, they are a conflict.
+- The three bodies of text disagree: the later passage holds. Imperium-old's root `docs/` (2026-11-16 to 2026-11-21) is
+  later than `Imperium-Knowledge/` (to 2026-11-15) and `RimWorld-Imperium/` (to 2026-11-11), as their last commits
+  show (commit history only cross-checks the dates, constitution, Principle II).
 - A passage mixes design and implementation, such as a design document that names Defs or code: only the design meaning
   is taken; the implementation is not a source.
 - A passage refers to the base game's Empire or Royalty: what it says Imperium is or is not is design meaning; the base
@@ -171,8 +181,9 @@ holds it, with its class and, for a design source, the archive sections that use
 - **FR-004**: The archive MUST be written as connected prose organized by subject, stating what things are and how they
   relate, not as MUST rules, ruling cards or session records; ruling numbers and dates appear only inside source
   pointers.
-- **FR-005**: Where passages conflict, the archive MUST state each side with its source under a conflict marking and
-  MUST NOT choose between them.
+- **FR-005**: Where passages conflict and carry different dates, the archive MUST give the later as the design and name
+  the earlier as replaced; where the dates are equal or unknown, it MUST state each side with its source under a
+  conflict marking and MUST NOT choose between them (Clarifications).
 - **FR-006**: Where the sources do not settle a point the archive reaches, it MUST mark the point unverified and leave it
   unfilled.
 - **FR-007**: The archive MUST NOT fill a gap with traits of the base game's Empire, such as hypertech,
@@ -186,6 +197,8 @@ holds it, with its class and, for a design source, the archive sections that use
 - **FR-011**: The archive MUST keep the sources' own names for things; where it translates a name, it MUST give the
   original beside it on first use. Where Imperium-old's glossary names the term in force for a thing, the archive MUST
   use it and give the other names the sources use beside it on first use (`docs/glossary.md`, lines 3-4).
+- **FR-012**: The archive MUST NOT describe the deleted hydraulics as design, and MUST mark what rests on it as
+  deleted (Clarifications).
 
 ### Key Entities
 

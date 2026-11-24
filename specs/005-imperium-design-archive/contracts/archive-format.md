@@ -26,6 +26,9 @@ gives it.>
 
 > [!NOTE]
 > **Base game**: <the fact the design rests on>, to be checked against `Data/` (`<path>` L<a>-<b>).
+
+> [!NOTE]
+> **Deleted**: <what rested on the hydraulics the maintainer deleted> (`<path>` L<a>-<b>).
 ```
 
 Rules:
@@ -34,8 +37,8 @@ Rules:
    inside a quotation, and no ruling-card or session-record layout (spec FR-004, SC-003).
 2. A sentence without a pointer states no design: it is a heading, a link between sections or this file's opening
    paragraph.
-3. Where a source marks a passage as replaced, the prose gives the replacing meaning and adds "(replaces
-   `<pointer>`)" (spec FR-009).
+3. Where a source marks a passage as replaced, or a later passage disagrees with an earlier one, the prose gives the
+   replacing meaning and adds "(replaces `<pointer>`)" (spec FR-005, FR-009).
 4. Looks are given by naming the reference images the sources point to, with their paths; history only as the concept
    the source names (spec FR-008).
 5. Nothing the cited passages do not say: no traits of the base game's Empire, no examples of the writer's own (spec
