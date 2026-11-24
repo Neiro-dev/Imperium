@@ -6,14 +6,15 @@
 
 **Status**: Draft
 
-**Input**: Description: "An archive of Imperium's design, written from the meaning of the design on the default branch
-of Neiro-dev/Imperium-old, which now holds Imperium-Knowledge/ and RimWorld-Imperium/ as they were (Imperium-old PR
-#291). The old content is right but was written in the wrong form: MUST rules, ruling cards and session records. The
-archive writes the meaning behind them as a coherent setting, not as copied rules. Conflicts are listed as they are,
-not decided; what the sources cannot settle is marked unverified. The base game's Empire (hypertech, techno-feudalism,
-titles, peerage and the like) is not used to fill gaps, and the archive gives no examples of its own. History is only a
-reference for concepts; concrete appearance follows the reference images. Code and implementation are not sources;
-commit history, other branches, issues and pull requests only cross-check."
+**Input**: Parent roadmap: `ROADMAP.md` → entry **R17**. Description: "An archive of Imperium's design, written from the
+meaning of the design on the default branch of Neiro-dev/Imperium-old, which now holds Imperium-Knowledge/ and
+RimWorld-Imperium/ as they were (Imperium-old PR #291). The old content is right but was written in the wrong form: MUST
+rules, ruling cards and session records. The archive writes the meaning behind them as a coherent setting, not as copied
+rules. Conflicts are listed as they are, not decided; what the sources cannot settle is marked unverified. The base
+game's Empire (hypertech, techno-feudalism, titles, peerage and the like) is not used to fill gaps, and the archive
+gives no examples of its own. History is only a reference for concepts; concrete appearance follows the reference
+images. Code and implementation are not sources; commit history, other branches, issues and pull requests only
+cross-check."
 
 ## Why
 
@@ -26,6 +27,29 @@ The design is on Imperium-old's default branch (constitution, Source Register, "
 `b218bdcbaf5a9f6253d747399986bfd30cabc243` (2026-11-24, PR #291). It is spread over three bodies of text: `docs/` at the
 root, `Imperium-Knowledge/` and `RimWorld-Imperium/`, which PR #291 merged in unchanged and unreconciled, with
 "content that contradicts across the three repositories ... left as it is" (PR #291 description).
+
+## Scope
+
+The archive covers all of the design on that branch, not the Empire alone: the Empire, Mantle and the settlements of
+the other cultures it lays out, and every other part the branch designs. The Source Register's topic is Imperium's own
+design on that branch, and it retires Imperium-old "once the rebuild covers all of it" (constitution, Source
+Register, "Imperium's own design"); Imperium-old's glossary makes Mantle part of Imperium ("The framework layer of
+Imperium's code", `docs/glossary.md`, line 221) and city building Imperium's generation of settlements, with kits for
+Roman, medieval, industrial and tribal settlements (lines 173 and 184). The maintainer confirmed this scope.
+
+## Clarifications
+
+### Session 2026-11-24
+
+- Q: Does the archive cover only the Empire, or all of the design on Imperium-old's default branch? → A: All of it,
+  as Scope states (constitution, Source Register, "Imperium's own design", its retirement sentence; confirmed by the
+  maintainer).
+- Q: Where a passage states a fact about the base game or an expansion, is it part of the archive's design? → A: No;
+  its source is `Data/`. The archive keeps the design point and marks the fact as a claim to check (constitution,
+  Source Register, "Game content and the released mod"). Answered from the source, not asked.
+- Q: Which name does the archive use where the sources use several for one thing? → A: The term in force in
+  Imperium-old's glossary, with the others beside it on first use (`docs/glossary.md`, lines 3-4). Answered from the
+  source, not asked.
 
 ## User Scenarios & Testing *(mandatory)*
 
@@ -127,15 +151,19 @@ holds it, with its class and, for a design source, the archive sections that use
   to; where it points to none, the look is marked unverified.
 - An unmerged draft, an issue, a pull request or a commit message says something the default branch does not: it is
   not design (constitution, Principle II; `ROADMAP.md`, lines 13-14), and the archive uses it only to cross-check.
+- A passage states a fact about the base game or an official expansion, such as what one of its definitions holds:
+  that fact is not Imperium's design, and its source is `Data/` (constitution, Source Register, "Game content and the
+  released mod"). The archive gives the design point that rests on it and marks the fact as the old repository's
+  claim, to be checked against `Data/`.
 - Imperium-old's default branch moves after the pinned commit: the archive stays at the pinned commit and says so.
 
 ## Requirements *(mandatory)*
 
 ### Functional Requirements
 
-- **FR-001**: The archive MUST describe Imperium's design as the default branch of Neiro-dev/Imperium-old means it at
-  the pinned commit, across all three bodies of text and the reference images (constitution, Source Register,
-  "Imperium's own design").
+- **FR-001**: The archive MUST describe all of the design on the default branch of Neiro-dev/Imperium-old as that
+  branch means it at the pinned commit, across all three bodies of text and the reference images, as Scope states
+  (constitution, Source Register, "Imperium's own design").
 - **FR-002**: Code and implementation MUST NOT be a source of the archive; commit history, other branches, issues and
   pull requests MUST be used only to cross-check (constitution, Source Register and Principle II).
 - **FR-003**: Every statement of the archive MUST name the passage it comes from, as a file at the pinned commit and a
@@ -156,7 +184,8 @@ holds it, with its class and, for a design source, the archive sections that use
 - **FR-010**: A coverage record MUST class every file at the pinned commit as a design source, a reference image or not
   a source, with the reason, and MUST name, for each design source, the archive sections that use it.
 - **FR-011**: The archive MUST keep the sources' own names for things; where it translates a name, it MUST give the
-  original beside it on first use.
+  original beside it on first use. Where Imperium-old's glossary names the term in force for a thing, the archive MUST
+  use it and give the other names the sources use beside it on first use (`docs/glossary.md`, lines 3-4).
 
 ### Key Entities
 
