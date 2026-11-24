@@ -164,13 +164,14 @@ template (FR-030), and the check in the game, the final one, still follows [Test
   accepts it by eye, the template ships as it is (the maintainer's broad direction).
 - Q: How does a faction's settlement pick among its culture's templates? → A: On two dimensions, of which each culture
   uses only those it needs: attitude, by the `naturalEnemy` and `permanentEnemy` fields of the faction's definition,
-  never by its name, and terrain, by the biomes a template suits. The tribal culture picks by attitude, as its
-  factions' descriptions set: an open village for the gentle tribe, a walled stronghold for the fierce tribe and a
-  fortress for the savage tribe (`Data/`, `Factions_Misc.xml` lines 445, 480 and 504, confirmed by the maintainer).
-  The Empire, which holds neither field (`Faction_Empire.xml` lines 57-67), picks by terrain: the river-bend town in
-  temperate biomes, and a Romanized Egyptian city in desert and arid ones later (the maintainer's broad direction).
-  These are the design's two looks of imperial cities, temperate for temperate and cold regions and arid for hot, dry
-  ones (Imperium-old `docs/glossary.md` lines 208 and 162), so the river-bend town suits the cold biomes too (FR-040).
+  never by its name, and terrain, by the biomes a template suits. The tribal culture picks by attitude, as its factions'
+  descriptions set: an open village for the gentle tribe, a walled stronghold for the fierce tribe and a fortress for
+  the savage tribe (`Data/`, `Factions_Misc.xml` lines 445, 480 and 504, confirmed by the maintainer). The Empire, which
+  holds neither field (`Faction_Empire.xml` lines 57-67), picks by terrain: the river-bend town in temperate biomes, and
+  a Romanized Egyptian city in desert and arid ones later (the maintainer's broad direction). These are the design's two
+  looks of imperial cities, temperate for temperate and cold regions and arid for hot, dry ones (Imperium-old
+  `docs/glossary.md` lines 208 and 162), so the river-bend town suits the cold biomes too, Odyssey's glacial plain among
+  them (FR-040).
 
 ## Sources
 
@@ -208,7 +209,12 @@ Each requirement below names its source in brackets. The sources are those the c
   and 504); the factions the Empire is not a permanent enemy of (`Royalty/Defs/FactionDefs/Faction_Empire.xml` lines
   57-67); the temperate biomes (`Core/Defs/BiomeDefs/Biomes_Temperate.xml` lines 5 and 210), the cold ones
   (`Biomes_Cold.xml` lines 5, 198, 371, 586 and 710), the desert and arid ones (`Biomes_WarmArid.xml` lines 5, 172 and
-  322) and the tropical ones (`Biomes_Warm.xml` lines 5 and 203); and each expansion's `About/About.xml`.
+  322), the tropical ones (`Biomes_Warm.xml` lines 5 and 203), the water ones (`Biomes_Water.xml` lines 7 and 22) and
+  the underground (`Biomes_Misc.xml` line 7); the expansions' biomes (`Odyssey/Defs/BiomeDefs/GlacialPlain.xml`,
+  `Glowforest.xml`, `Grasslands.xml`, `LavaField.xml` and `Scarlands.xml`, each line 7, and `Space.xml` lines 7 and 45;
+  `Anomaly/Defs/MapGeneration/LabyrinthMapGenerator.xml` line 32, `MetalHellMapGenerator.xml` line 31 and
+  `UndercaveMapGenerator.xml` line 105, whose parent is the underground) and the form that marks one in a list
+  (`Core/Defs/Misc/FeatureDefs/Features.xml` line 268); and each expansion's `About/About.xml`.
 - **[EULA]**: `EULA.txt`, which is always followed (constitution, Source Register).
 - **[Direction]**: the maintainer's broad direction on where template layouts come from and how they are accepted,
   which Imperium-old's design leaves open (constitution, Source Register, row Imperium's own design; Principle IV):
@@ -368,8 +374,8 @@ the design card that fixes one building's plot, rooms and contents.
 **Why this priority**: A block library belongs to a kit, though the Empire's cities do not use one [Design: lines 167,
 206], so it comes after the checks every kit needs.
 
-**Independent Test**: Write a test kit with a block library of two spec cards, one with a known problem; check it and
-compare the report with the cards.
+**Independent Test**: Write a test kit with a block library of three spec cards, one naming a definition `Data/` does
+not hold, one with a room or thing past its plot and one with neither; check it and compare the report with the cards.
 
 **Acceptance Scenarios**:
 
@@ -635,11 +641,20 @@ and confirm that no shared file was changed.
   [Design: lines 208 and 162], which the direction's temperate and desert and arid biomes name. The river-bend town's
   MUST suit the temperate look's biomes: temperate forest and temperate swamp [Data:
   `Core/Defs/BiomeDefs/Biomes_Temperate.xml` lines 5 and 210] and boreal forest, tundra, cold bog, ice sheet and sea ice
-  [Data: `Core/Defs/BiomeDefs/Biomes_Cold.xml` lines 5, 198, 371, 586 and 710] [Direction]. A Romanized Egyptian city's,
-  which is later work, MUST suit the arid look's: arid shrubland, desert and extreme desert [Data: `Biomes_WarmArid.xml`
-  lines 5, 172 and 322; Direction; Roadmap: R15]. "Temperate" here is the design's look, which is wider than the biomes
-  `Data/` calls temperate; the tropical biomes, hot and wet, belong to neither look [Data: `Biomes_Warm.xml` lines 5 and
-  203], and expansion biomes, which `Data/` places in neither file, are in neither list.
+  [Data: `Core/Defs/BiomeDefs/Biomes_Cold.xml` lines 5, 198, 371, 586 and 710], and Odyssey's glacial plain, a region
+  scraped clean by glaciers and so cold, marked as Odyssey's content (FR-015) [Data:
+  `Odyssey/Defs/BiomeDefs/GlacialPlain.xml` line 7] [Direction]. A Romanized Egyptian city's, which is later work, MUST
+  suit the arid look's: arid shrubland, desert and extreme desert [Data: `Biomes_WarmArid.xml` lines 5, 172 and 322;
+  Direction; Roadmap: R15]. "Temperate" here is the design's look, which is wider than the biomes `Data/` calls
+  temperate. The other biomes are in neither list: the tropical ones, hot and wet [Data: `Biomes_Warm.xml` lines 5 and
+  203]; Odyssey's grasslands, glowforest and scarlands, whose descriptions name no region, and its lava field, whose
+  description names volcanic heat but no region's climate, since no source places them (Principle V) [Data:
+  `Odyssey/Defs/BiomeDefs/Grasslands.xml`, `Glowforest.xml`, `Scarlands.xml` and `LavaField.xml`, each line 7]; the
+  ocean and the lake, which are water [Data: `Core/Defs/BiomeDefs/Biomes_Water.xml` lines 7 and 22]; Odyssey's space and
+  orbit, which are empty space [Data: `Space.xml` lines 7 and 45]; and the underground and Anomaly's labyrinth, metal
+  hell and undercave, which never generate on the world [Data: `Core/Defs/BiomeDefs/Biomes_Misc.xml` line 7;
+  `Anomaly/Defs/MapGeneration/LabyrinthMapGenerator.xml` line 32, `MetalHellMapGenerator.xml` line 31 and
+  `UndercaveMapGenerator.xml` line 105].
 
 ### Key Entities *(include if feature involves data)*
 
