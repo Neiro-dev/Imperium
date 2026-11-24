@@ -263,7 +263,9 @@ files, to `Neiro-dev/Imperium-old` at 20a052b, to Spec Kit at v1.4.3 and to Harm
   from a small Celtic hillfort, with the agricultural island only looked at beside them, as supplementary material, and
   nothing taken from it. Each reading counts once the maintainer accepts it beside its pictures, recorded in
   `checklists/acceptance.md` (spec FR-029, FR-036). A template is taken from each, stating its tribe's attitude (R-14),
-  and the one tribal kit from all three. Each template ships as it stands once it passes (FR-010, FR-031).
+  and the one tribal kit from all three. Each template ships as it stands once it passes (FR-010, FR-031). The
+  industrial (outlander) and pirate cultures' kits and templates, which the alpha opens too, are R16's, written in
+  these forms and checked by this check; R13 writes none of them (ROADMAP R13, R16, Releases; spec FR-032).
 - **Rationale**: FR-031, FR-036, FR-037, FR-039, Clarifications; [Direction].
 
 ## R-14: Picking a template by attitude and terrain
@@ -297,3 +299,52 @@ files, to `Neiro-dev/Imperium-old` at 20a052b, to Spec Kit at v1.4.3 and to Harm
   and the three tribes share `Tribal` (`Factions_Misc.xml` line 222). The quest filter `mustBePermanentEnemy`
   (`Royalty/Defs/QuestScriptDefs/RewardThreat/Scripts_JoinerThreat.xml` line 458). Rejected: `Data/` has no such
   filter for `naturalEnemy`, and it cannot state a template that serves only factions holding neither field.
+
+## R-15: Reading a preset reference from its game's own data
+
+- **Decision**: a reference city that Anno 117 presets, on an AI rival's or a third party's island, may be read from
+  the game's own data (spec FR-041). The reading runs on the maintainer's computer, where the game's packages are, and
+  reads only the game's own files: its file index, `file_h.db`, to find the `.rda` package that holds the island, and
+  in that package the island's `.a7m` file; never the old project's index, cfg or cut files. Each object found takes
+  two categories from the game data, its asset Template and the graphics folder its ConfigFilename names (FR-042). The
+  island is drawn from above in steps, and the maintainer sees each step's picture before the next is drawn (FR-044):
+  1. each object as a dot coloured by its category, at its `(x, z)` on the cells, over the island's heightmap, turned
+     to match the game's own top-down image of the island, `mapimage.png`;
+  2. the skeleton: linear pieces as lines, houses as markers, fields as squares (FR-043);
+  3. optionally, each building's real footprint from the game's `.ifo` files, once the packages that hold them are on
+     the maintainer's computer (spec, Edge Cases).
+  For each island it writes into `template-references/` in the project's files a skeleton PNG, the same laid over
+  `mapimage.png`, `objects.json`, which lists every object with its two categories and its position, and a summary
+  (FR-043). None of it goes into the repository: not the packages, not what is read or drawn, and not the tool that
+  reads them. The check takes the two PNGs as reference pictures through `--reference`, under the reference's name and
+  a label for each (contracts/check-command.md), as it takes a screenshot; `objects.json` and the summary are for the
+  people who write the reading. The old project's output and images, and FileDBReader, only cross-check what is read
+  (FR-045).
+- **Rationale**: the maintainer's direction (spec, Clarifications; [Direction]), which Imperium-old's design leaves
+  open (checked at 20a052b). The check already reads PNG reference pictures (R-11), so the drawing of a preset island
+  needs no new input or form. Keeping the packages and what is read from them out of the repository follows the
+  direction and spec FR-028 (`EULA.txt` line 76). Sources other than the game's own files only cross-check
+  (constitution, Principle II).
+- **Alternatives considered**: a reader in the repository beside the check. Rejected: no source asks for one, and
+  nothing it reads may enter the repository (constitution, Principle V; spec FR-041). The old project's index, cfg and
+  cut files as input. Rejected by the direction (FR-041). FileDBReader as the reader. Rejected: by the direction it
+  only cross-checks (FR-045).
+- **In this feature**: none of the tribal references the maintainer chose is a preset city (spec FR-037), so R13's
+  readings are drawn from their screenshots; the steps above run for a preset city once the maintainer chooses it as
+  a reference (spec, Assumptions).
+
+## R-16: The later cultures' references
+
+- **Decision**: R13 records where the later cultures' references come from, and writes nothing from them (spec
+  FR-046): Anno 1800's Bright Sands for the civil outlanders and Wormways for the rough, and Anne Harlow's and Jean La
+  Fortune's islands for the pirates, all three cultures' kits and templates being R16's (ROADMAP R16); Odyssey's own
+  form of an orbital settlement for the Traders Guild, and for the Salvagers if they really get settlements, later.
+  Their templates state their factions' attitude as FR-039 sets for every template: the civil outlanders hold neither
+  field (`Core/Defs/FactionDefs/Factions_Misc.xml` lines 184-195), the rough outlanders `naturalEnemy` (lines 202 and
+  211), the pirates `permanentEnemy` (line 529).
+- **Rationale**: the maintainer's direction (spec, Clarifications); Odyssey lays out an orbital settlement as one
+  enclosed platform whose rooms open off corridors of a few fixed shapes
+  (`Odyssey/Defs/LayoutDefs/Layouts_OrbitalPlatform.xml` lines 5, 7, 23 and 158-194;
+  `Odyssey/Defs/MapGeneration/SpaceMapGenerator.xml` lines 82-87), on a map of 200×200 cells (`Odyssey/Defs/WorldObjectDefs/WorldObjects.xml` lines 44 and 50), and the
+  Salvagers are hidden (`Odyssey/Defs/FactionDefs/Factions_Misc.xml` line 172), so whether they get settlements is
+  checked in the game (spec FR-032, Edge Cases).

@@ -47,3 +47,10 @@
   from, and that a calibrated template ships as it stands. The maintainer then chose the tribal references, one for each
   attitude (FR-037), and confirmed the skeleton selection rules: three layers, and picking by attitude, from the
   tribes' descriptions in `Data/`, and by terrain (FR-038 to FR-040).
+- Updated 2026-11-24 and validated again, every item still passing. The maintainer's direction on reading a preset
+  reference from its game's own data, Anno 117's `file_h.db` and `.rda` packages, is recorded under [Direction] and in
+  FR-041 to FR-045, with SC-011; the file names, `mapimage.png`, `objects.json` and the PNG pictures are named by that
+  direction as its inputs and outputs, as `Data/`'s names are the domain's own words, and the pictures' look beyond them
+  stays with `/speckit-plan`. The later cultures' references are recorded in FR-046. The spec was reconciled with the
+  roadmap's R16, which holds the industrial (outlander) and pirate cultures' kits and templates that the alpha opens
+  too, while R13 keeps the tribal culture's (Input, Purpose, FR-032). No marker was added.
