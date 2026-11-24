@@ -18,12 +18,13 @@ Each requirement below names its source in brackets. The sources are those the c
 - **[Roadmap]**: `ROADMAP.md`, entry R1, scope boundary.
 - **[Data]**: the base game and official expansions in `Data/` of RimWorld 1.7.5014 (`Version.txt`: 1.7.5014
   rev1195): each expansion's `About/About.xml`; the base game's definitions of its expansions in
-  `Data/Core/Defs/Misc/ExpansionDefs/ExpansionDefs.xml`; and the base game's mod list text in
-  `Data/Core/Languages/English/Keyed/Menus_Main.xml`.
+  `Data/Core/Defs/Misc/ExpansionDefs/ExpansionDefs.xml`; and the base game's mod list and save dialog text in
+  `Data/Core/Languages/English/Keyed/Menus_Main.xml` and `Dialogs_Various.xml`.
 - **[ModUpdating]**: `ModUpdating.txt` of the same release, sections MOD FILE STRUCTURE and MOD METADATA. Used only
   where [Data] gives no form.
 - **[EULA]**: `EULA.txt` of RimWorld (last updated April 7, 2022), which is always followed (constitution, Source
   Register).
+- **[Readme]**: `Readme.txt` of the same install, the first testing source (constitution, Source Register).
 
 Imperium is a remake of Royalty and requires only Royalty [Design: glossary line 35], and in later entries it
 replaces the base game's Empire [Design: setting.md line 83]. Game content is judged by what the official
@@ -33,6 +34,28 @@ expansion: its package identifier may not contain "Ludeon" [ModUpdating: line 23
 form is open only to Ludeon's own packages, the next source applies (constitution, Principle III). Being measured
 against the official expansions does not make Imperium look official: it is presented as community-created content
 [EULA: line 78].
+
+## Clarifications
+
+### Session 2026-11-24
+
+Each answer comes from the source named with it; none is game content left to the maintainer (constitution,
+Principle IV).
+
+- Q: How is "no errors or warnings from Imperium" checked? → A: In the game's log, `output_log.txt` in the `_Data`
+  folder of the game install [Readme: line 21], against the same launch without Imperium as the baseline, since
+  Imperium is measured against the official expansions (Sources, above). Imperium passes when its launch adds no
+  error or warning line to the baseline.
+- Q: Which game versions does Imperium support? → A: 1.7 only, as each official expansion lists only `1.7` among its
+  supported versions [Data: each expansion's `About/About.xml`; `Version.txt`].
+- Q: What happens when Imperium is turned on or off for a save made with a different set of mods? → A: The game shows
+  its mods-mismatch warning, as it does for any change in the active set, official expansions included
+  [Data: Dialogs_Various.xml line 126, `ModsMismatchWarningText`]. Because this feature adds no content, the save
+  then loads with no errors from Imperium [Roadmap: R1].
+- Q: What keeps Imperium the same mod across releases? → A: Its package identifier, by which the game and other mods
+  refer to it [ModUpdating: line 230]. It is unique, follows the format the game requires and does not contain
+  "Ludeon" [ModUpdating: lines 231-237], and it does not change once released. Its exact value belongs to
+  `/speckit-plan`.
 
 ## User Scenarios & Testing *(mandatory)*
 
@@ -104,13 +127,17 @@ Odyssey added; each loads with no errors from Imperium and shows no missing requ
   mods [Data: Menus_Main.xml line 147, `ModNotMadeForThisVersion`; ModUpdating: line 253].
 - Two copies of Imperium are installed (one local, one from the Workshop): only one of them can be active, as for any
   package that is not Ludeon's [ModUpdating: line 244; Data: Menus_Main.xml line 144, `ModWithSameIdAlreadyActive`].
+- Imperium is turned on or off for a save made with a different set of mods: the game shows its mods-mismatch
+  warning, as for any change in the active set, and the save loads with no errors from Imperium [Data:
+  Dialogs_Various.xml line 126; Roadmap: R1].
 
 ## Requirements *(mandatory)*
 
 ### Functional Requirements
 
-- **FR-001**: Imperium MUST be listed in RimWorld 1.7's mod list and load, as each official expansion is
-  [Data: `Version.txt`; each expansion's `About/About.xml` lists `1.7` as its supported version].
+- **FR-001**: Imperium MUST be listed in RimWorld 1.7's mod list and load, and MUST support 1.7 only, as each
+  official expansion does [Data: `Version.txt`; each expansion's `About/About.xml` lists only `1.7` as its supported
+  version].
 - **FR-002**: Imperium MUST require Royalty, so that the game shows it as a missing requirement when Royalty is not
   active [Design: line 108; Data: Menus_Main.xml line 146]. No official expansion requires another, so [Data] gives
   no form for a requirement, and the form comes from [ModUpdating: lines 266-268].
@@ -128,11 +155,15 @@ Odyssey added; each loads with no errors from Imperium and shows no missing requ
   official or made by Ludeon [EULA: lines 57 and 78].
 - **FR-009**: The disclaimer the EULA gives MUST be displayed on or reasonably in connection with Imperium
   [EULA: lines 32-34].
+- **FR-010**: Imperium MUST have one package identifier that is unique, meets the game's format, does not contain
+  "Ludeon", and does not change once released, because the game and other mods refer to it by that identifier
+  [ModUpdating: lines 229-237].
 
 ### Key Entities
 
 - **Imperium**: a remake of Royalty, measured against the official expansions; it holds Mantle and the Empire content
-  in later entries [Design: glossary lines 35 and 221; line 109, "Imperium, Mantle included"].
+  in later entries [Design: glossary lines 35 and 221; line 109, "Imperium, Mantle included"]. It is identified by
+  its package identifier (FR-010).
 - **Royalty**: the official expansion Imperium remakes and requires, and the closest one to measure it against
   [Design: line 108; glossary line 35].
 - **Other official expansions**: Ideology, Biotech, Anomaly and Odyssey, none of which Imperium requires and all of
@@ -142,13 +173,13 @@ Odyssey added; each loads with no errors from Imperium and shows no missing requ
 
 ### Measurable Outcomes
 
-- **SC-001**: With Core, Royalty and Imperium active, a new game starts and a save loads with zero errors or warnings
-  from Imperium in the game's log.
+- **SC-001**: With Core, Royalty and Imperium active, a new game starts and a save loads, and the game's log
+  [Readme: line 21] has zero error or warning lines beyond the same launch with Core and Royalty alone.
 - **SC-002**: With Royalty off, Imperium shows a missing requirement for Royalty in 100% of attempts, and for no other
   expansion.
 - **SC-003**: Across Royalty alone and every combination of the four other official expansions added to it (16
-  combinations), every one loads with zero errors from Imperium, with Imperium after every active official expansion
-  and no load-order warning for it.
+  combinations), every one loads with zero error lines in the log beyond the same combination without Imperium,
+  with Imperium after every active official expansion and no load-order warning for it.
 - **SC-004**: Nothing the game shows for Imperium states or implies that it is official or made by Ludeon, and the
   EULA's disclaimer is displayed with it.
 
