@@ -371,24 +371,28 @@ files, to `Neiro-dev/Imperium-old` at 20a052b, to Spec Kit at v1.4.3 and to Harm
   1. the cell is sized first: things the size of a person in the picture (a door, a figure or a tree is one cell) are
      measured to give how many pixels one cell is, and from it how many RimWorld cells the other game's cell is; the
      reading records the pixels per cell and the things measured, each with its region of the picture (FR-048);
-  2. the picture is traced into cells only as far as blocks, house groups, yards and roads, and each traced piece
-     records the region of the picture it was read from (FR-049);
+  2. the picture is traced into cells only as far as blocks, house groups, yards and roads, each traced piece records
+     the region of the picture it was read from, and each building or group is given a use from the design's list with
+     a one-sentence basis (FR-049);
   3. the check lays the reading's cells over its reference picture at the same scale, in the side-by-side picture it
      already draws of a reading beside its reference pictures (R-11; FR-025, FR-051);
-  4. one area is read at a time, and the maintainer sees its picture after it is traced and again after it is laid out,
-     before the next area is begun, each recorded as an item of `checklists/acceptance.md` (FR-050; FR-029).
+  4. one area, of 2800 to 9200 cells, is read at a time, and the maintainer sees its picture after it is traced and
+     again after it is laid out, before the next area is begun, each recorded as an item of
+     `checklists/acceptance.md` (FR-050; FR-029).
   A picture these steps give no form for, such as one not shown from above, is not read (FR-052). Two things are open
-  and have no form here: the classes a piece is traced in, and what counts as a piece not matching the picture in
-  colour and shape; so no task builds the classes or the marks of mismatching pieces (spec FR-049, FR-051, marked
-  NEEDS CLARIFICATION; constitution, Principle V).
+  and have no form here: what is done with an area of which more than three tenths is unclear (the design sends its
+  image to the maintainer to mark, which Principle IV does not allow), and what counts as a piece not matching the
+  picture in colour and shape; so no task builds either (spec FR-049, FR-051, marked NEEDS CLARIFICATION;
+  constitution, Principles IV and V).
 - **Form**: a reading is a laid-out city (R-7), so the record sits in it: the root holds `scale`, the pixels per cell
   and a list of the things measured, each a `name` and its `rect` in the picture's pixels; each part and feature may
-  hold `from`, its region of the picture as `rect`s in pixels (data-model.md, `LaidOutCity`). The pictures stay what
+  hold `from`, its region of the picture as `rect`s in pixels, and a part that is a building or group holds `use`, one
+  of the design's nine, and `basis`, one sentence (data-model.md, `LaidOutCity`). The pictures stay what
   R-11 draws, one PNG and one side-by-side PNG; where a reading holds a `scale`, the reference picture in the
   side-by-side PNG carries the reading's cells laid over it where the `scale` places them, so that no picture or file
   name is added (FR-025, FR-051).
 - **Rationale**: spec FR-048 to FR-052, which take the steps from the design archive (`cities.md`, The size of a cell;
-  `cities-forms.md` lines 123, 199 and 475) and keep the effect of the old project's preview tool as the maintainer
+  `cities-forms.md` lines 123, 199, 475-477 and 487) and keep the effect of the old project's preview tool as the maintainer
   directed (spec, Clarifications). R-7 already gives a reading its form and R-11 the check its pictures, so only the
   record of the scale and of where a piece was read from is new, and each is asked for by an FR (constitution,
   Principles V and VI).

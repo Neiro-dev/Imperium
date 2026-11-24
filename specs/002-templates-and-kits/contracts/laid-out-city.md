@@ -64,12 +64,15 @@ from, as pixel rects (the form of data-model.md, Common forms; spec FR-048, FR-0
   ...
   <parts>
     <li><name>innerYard</name><rects><li>(120,100,160,140)</li></rects><from><li>(380,260,760,640)</li></from></li>
+    <li><name>eastHouses</name><rects><li>(60,20,100,60)</li></rects><from><li>(120,60,500,440)</li></from>
+      <use>Housing</use><basis>Rows of one-storey houses with small yards.</basis></li>
   </parts>
 </LaidOutCity>
 ```
 
-The classes a piece is traced in are not given, so the form has no field for them (spec FR-049, marked NEEDS
-CLARIFICATION).
+A building or group holds `use`, one of `Housing`, `ShopFront`, `Workshop`, `Tavern`, `Market`, `Public`, `Annex`,
+`Attic` or `Unclear`, and `basis`, one sentence (spec FR-049, from the design's list). What is done with an area of
+which more than three tenths is unclear has no form (spec FR-049, marked NEEDS CLARIFICATION).
 
 It is kept in `readings/` at the repository root, outside both mod folders, as the template's source, so it is in
 neither mod's released files (research R-7); its reference pictures are kept outside the repository (FR-028).

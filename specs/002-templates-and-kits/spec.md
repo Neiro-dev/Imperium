@@ -731,7 +731,9 @@ and confirm that no shared file was changed.
   maintainer chose: Tir Uisce for the gentle tribe's open village, a Celtic oppidum for the fierce tribe's walled
   stronghold and a small Celtic hillfort for the savage tribe's fortress, Steam screenshots 3639186959, 3625652909 and
   3621994739, whose pictures are kept in `template-references/部落城-凯尔特/` in the project's files and never in the
-  repository (FR-028). An agricultural island, 3639163413, MAY be looked at beside them as supplementary material only,
+  repository (FR-028). These pictures are oblique, not shown from above, so they are read only where FR-052 allows;
+  the references shown from above that the maintainer chooses instead, among the candidates found, are open
+  [Direction, 2026-11-24]. An agricultural island, 3639163413, MAY be looked at beside them as supplementary material only,
   to help read them: no reading is written of it, and it is the source of no template and of nothing in the kit
   [Direction]. A tribal template's extent MUST be its reading's, laid on the game's cells with things of the sizes their
   definitions give (FR-036) [Data], and is stated as its smallest map, no larger than a city's 350×350 map (FR-003); a
@@ -829,15 +831,21 @@ and confirm that no shared file was changed.
   houses [Design archive: `cities.md`, The size of a cell]. The scale MUST name the things it was got from, each with
   its region of the picture [constitution, Principle VI].
 - **FR-049**: A reference MUST be traced into cells only as far as blocks, house groups, yards and roads, not building
-  by building, and a template candidate MUST come only from tracing an accepted reference [Design archive:
-  `cities-forms.md` lines 123 and 475]. Each traced piece MUST name the region of the picture it was read from
-  [constitution, Principle VI]. The classes a piece is traced in are [NEEDS CLARIFICATION: no source gives them. The
-  design archive names no list; the old project's legend of the river-bend screenshot is classed `research` in the
-  archive (`specs/005-imperium-design-archive/research/C19.md` line 11) and describes that one picture, so it is not
-  design meaning; none is written (constitution, Principle V)].
+  by building, and, where FR-047 leaves a template to a reading, a template candidate MUST come only from tracing an
+  accepted reference [Design archive: `cities-forms.md` lines 123 and 475]. Each traced piece MUST name the region of
+  the picture it was read from [constitution, Principle VI]. Each building or group MUST be given a use first, one of
+  housing, shop front, workshop, tavern, market, public, annex or attic, or unclear, with a one-sentence basis [Design
+  archive: `cities-forms.md` lines 475-477]. What is done with an area of which more than three tenths is unclear is
+  [NEEDS CLARIFICATION: the design archive sends the area's image to the maintainer to mark (`cities-forms.md` lines
+  478-479), but he judges only broad direction (constitution, Principle IV), and no other source gives a form; none is
+  written (Principle V)]. The old project's legend of the river-bend screenshot is classed `research` in the archive
+  (`specs/005-imperium-design-archive/research/C19.md` line 11) and describes that one picture, so it is not design
+  meaning and is not taken.
 - **FR-050**: A reading MUST be made one area at a time, and the maintainer MUST see each area's picture once after it
   is traced and once after it is laid out, before the next area is begun [Design archive: `cities-forms.md` line 199;
-  FR-044].
+  FR-044]. An area is 2800 to 9200 cells, floating with the attraction field's weight so that areas near the core and
+  the main street are small and outlying ones large, the strength of the weighting being a trial value [Design archive:
+  `cities-forms.md` line 487].
 - **FR-051**: The check MUST draw a tracing over its reference picture at the same scale, compare each traced piece with
   the colour and shape of the picture where it lies, and mark each piece that does not match as a candidate for the
   maintainer's attention, with what differs. It MUST NOT decide that a piece is wrong or that the reading matches
@@ -920,6 +928,10 @@ and confirm that no shared file was changed.
 - **SC-012**: In the Empire's kit and the river-bend town's template, and in the tribal culture's kit and first
   templates, 100% of the parts name their source, every part Imperium-old's design defines is taken from it, and no
   part filled from a reading contradicts the design or the maintainer's recorded direction (FR-047).
+- **SC-013**: For every reference read from its picture, its reading holds a `scale` that names the things it was got
+  from, 100% of its traced pieces name their regions of the picture and every building or group has a use from the
+  design's list with a basis, and the maintainer saw each area's picture after it was traced and after it was laid out
+  before the next area was begun (FR-048 to FR-050).
 
 ## Assumptions
 

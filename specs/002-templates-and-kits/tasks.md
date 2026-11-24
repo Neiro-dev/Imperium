@@ -325,21 +325,22 @@ tests come first and fail before the code, as in each story.
 
 - [ ] T059 Write a test reading, with a small reference picture the test makes itself and never a reference picture, and
   readings each holding one problem, in `tests/fixtures/us2/`; then write `tests/test_picture_reading.py`: a known
-  `scale` puts a known cell at a known pixel of the reference picture in the side-by-side picture;
-  a `pixelsPerCell` that is not a positive number, a `measured` thing without a `rect`, and a `from` whose pixel rect
-  lies outside the picture are each reported, with the file, part and what is wrong; a reading without a `scale` is
-  drawn as before; and the same inputs give identical pictures (spec FR-019, FR-022, FR-028, FR-048, FR-049,
-  FR-051; contracts/laid-out-city.md, A reading)
-- [ ] T060 Implement reading `scale` and its `measured` things, and `from` of a part or feature, in
-  `src/mantle_check/forms.py`, and report each malformed one in `src/mantle_check/checks.py`, as T059 sets
+  `scale` puts a known cell at a known pixel of the reference picture in the side-by-side picture; a `pixelsPerCell`
+  that is not a positive number, a `measured` thing without a `rect`, a `from` whose pixel rect lies outside the
+  picture, a `use` outside the design's nine and a `use` without its `basis` are each reported, with the file, part and
+  what is wrong; a reading without a `scale` is drawn as before; and the same inputs give identical pictures (spec
+  FR-019, FR-022, FR-028, FR-048, FR-049, FR-051; contracts/laid-out-city.md, A reading)
+- [ ] T060 Implement reading `scale` and its `measured` things, `from` of a part or feature, and `use` and `basis` of a
+  part in `src/mantle_check/forms.py`, and report each malformed one in `src/mantle_check/checks.py`, as T059 sets
   (data-model.md `LaidOutCity`, Common forms; spec FR-019, FR-048, FR-049; research R-17)
 - [ ] T061 In `src/mantle_check/pictures.py`, lay the cells of a reading that holds a `scale` over its reference
   picture in the side-by-side picture, at the pixels the `scale` gives, adding no picture or file name; report it in
   `src/mantle_check/report.py`; and pass T059 (research R-11, R-17; spec FR-025, FR-051)
 
-Not tasks: the classes a piece is traced in, and the marks of a piece that does not match its picture in colour and
-shape. No source gives either (spec FR-049, FR-051, marked NEEDS CLARIFICATION; constitution, Principle V). They are
-built only after a source or the maintainer's recorded direction gives them, through the spec, plan and tasks again.
+Not tasks: what is done with an area of which more than three tenths is unclear, and the marks of a piece that does
+not match its picture in colour and shape. No source gives either form (spec FR-049, FR-051, marked NEEDS
+CLARIFICATION; constitution, Principles IV and V). They are built only after a source or the maintainer's recorded
+direction gives them, through the spec, plan and tasks again.
 
 **Checkpoint**: Both cultures' kits and first templates pass the check outside the game
 
