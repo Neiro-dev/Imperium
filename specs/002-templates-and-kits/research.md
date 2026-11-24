@@ -147,9 +147,9 @@ files, to `Neiro-dev/Imperium-old` at 20a052b, to Spec Kit at v1.4.3 and to Harm
 - **A reading**: written in the same form, with `reference`, the reference city's name as the template's `reference`
   gives it, in place of `template` and `kit`, and the parts and features it reads. It is kept in a `readings/` folder of
   the repository of the mod whose template is taken from it, as that template's source, and is not in the mod's
-  released files; its reference pictures are not kept there (FR-036, FR-028). The folder is named in lower case beside
-  `src/` and `tests/`, as Spec Kit's own repository names the folders the product does not load (`src/`, `tests/`,
-  `scripts/`, `templates/`).
+  released files; its reference pictures are not kept there (FR-036, FR-028). The folder sits beside the check's
+  `src/` and `tests/` and is named in lower case, as Spec Kit's own repository names every top-level folder
+  (`docs/`, `scripts/`, `src/`, `templates/`, `tests/` at v1.4.3).
 - **Rationale**: FR-008 lists what it holds, in the forms of R-3; generation writes it in R2 and the check reads it now.
   The covered cells are written by generation, which has them from the game, so the check does not have to rebuild the
   game's rule for where a large thing's cells lie; it checks that they match the definition's `size`, crosswise when
