@@ -15,7 +15,7 @@ mean implementation work is complete.
 
 ## Source Traceability
 
-- [ ] CHK001 Does each of FR-048 to FR-052 name a source from the constitution's Source Register, and is each reached
+- [x] CHK001 Does each of FR-048 to FR-052 name a source from the constitution's Source Register, and is each reached
   from that source rather than only labelled with it? [Traceability, Spec §FR-048 to FR-052; Constitution Principle VI]
   - **Review**: Not satisfied for FR-050 and FR-051; FR-048, FR-049 and FR-052 are.
     - FR-048 is reached from `cities.md` lines 151-155, which Imperium-old b218bdc backs in `Imperium-Knowledge/14_来源同步与权威.md`
@@ -49,6 +49,12 @@ mean implementation work is complete.
       sample and `cities-forms.md` 123, 199 and 475; FR-050's `cities.md` 63-66, FR-049's `cities-forms.md` 480-482,
       FR-052's `cities.md` 319-321 and the `cities-siting.md` passage of FR-004 and FR-036 are cited in their
       requirements but not listed there.
+  - **Re-review (3387d52)**: Satisfied. FR-050 (spec 871-883) now names [Direction] by the entry's question, "the
+    clarification on how a reference city that exists only as a picture is read onto the game's cells", which is
+    the Clarifications entry at spec 239 (Q: "How is a reference city that exists only as a picture read onto the
+    game's cells?"); that entry says each area is shown once after it is traced and once after it is laid out, which
+    is what FR-050 makes the rule. It points at no place, so it keeps reaching its source when entries are added
+    (constitution, Principle VI).
 - [x] CHK002 Do the design archive's cited places (`cities.md`, The size of a cell; `cities-forms.md` lines 123, 199
   and 475) say what FR-048 to FR-050 attribute to them, at the commit the Sources entry names? [Traceability, Spec
   §Sources, Design archive]
@@ -229,7 +235,7 @@ mean implementation work is complete.
 
 ## Requirement Consistency
 
-- [ ] CHK015 Is the status of the three Steam screenshots consistent across FR-037, which names them as the references
+- [x] CHK015 Is the status of the three Steam screenshots consistent across FR-037, which names them as the references
   the maintainer chose, FR-052, which reads only pictures shown from above, and tasks T040 to T042, which wait for a
   reference he chooses? [Conflict, Spec §FR-037, FR-052; tasks.md]
   - **Review**: Not satisfied. FR-037 (line 734), FR-052, T040 to T042 and R-17 say that the three are oblique and not
@@ -258,6 +264,13 @@ mean implementation work is complete.
       start the MUST at the references shown from above.
     - Also read ambiguously without "first": plan.md Summary (24) and SC-010 (966-967), "the references the maintainer
       chose"; they now mean the replacements, which can be said in one word each.
+  - **Re-review (3387d52)**: Satisfied. research.md R-13 (270-277) now has the three readings written from references
+    "shown from above" and says the three Steam screenshots chosen first are oblique and not read; quickstart.md
+    Prerequisites (14-15) names the references chosen among candidates shown from above; FR-037 (747-752) says "first
+    chose", says the three are oblique and not read (FR-052) and the replacements are open, so one requirement no
+    longer holds both. A search of spec, plan, research, quickstart, tasks, data-model and contracts finds no
+    remaining reading of the three. Plan.md Summary (24) and SC-010 (965) still say "the references the maintainer
+    chose", which now means the replacements; the earlier re-review called that a one-word matter, not a ground.
 - [x] CHK016 Does FR-049's "a template candidate MUST come only from tracing an accepted reference" agree with FR-047's
   order, in which a reading is used only where the design and the recorded direction are silent? [Conflict, Spec
   §FR-047, FR-049]
@@ -267,7 +280,7 @@ mean implementation work is complete.
     step 1), not "left to a reading", so the two do not meet. "Accepted reference" is the design's word for the
     reference chosen (cities.md, Approved reference images; FR-037), not the reading accepted by eye (FR-036, FR-029);
     the spec uses "accepted" for both, which is harmless here but see CHK017.
-- [ ] CHK017 Are "reading", "tracing" and "drawing" used for distinct things across FR-036, FR-043 and FR-049, or do
+- [x] CHK017 Are "reading", "tracing" and "drawing" used for distinct things across FR-036, FR-043 and FR-049, or do
   they name the same thing in different words? [Consistency, Spec §FR-036, FR-043, FR-049]
   - **Review**: Not satisfied. The words overlap and are not told apart. "Read" names extracting a preset's objects from
     its data (FR-041, FR-043), making a reading from a picture (FR-036, FR-048, "read onto the game's cells") and, as a
@@ -286,6 +299,10 @@ mean implementation work is complete.
       "drawn" for the reading itself, the sense its own last sentence takes from it, and `contracts/laid-out-city.md`
       line 40 says "A reading is a reference city drawn on the game's cells in the same form". The first review named
       both. Use "read onto the game's cells" in the two places, as FR-036 and FR-048 do.
+  - **Re-review (3387d52)**: Satisfied. Key Entities, Reading (spec 924) says "read onto the game's cells" and
+    `contracts/laid-out-city.md` line 40 says "read onto the game's cells", as FR-036 and FR-048 do; "drawn" now
+    names only the check's and the preset's pictures. Nit, not a ground: plan.md line 18 still says "the reference
+    city drawn on the game's cells" for a reading; it is outside FR-036, FR-043 and FR-049 and the two places named.
 - [x] CHK018 Are FR-050 (one area at a time, shown twice) and FR-044 (each step's picture seen before the next)
   consistent about when the maintainer sees a picture, and about which of them applies to which kind of reference?
   [Consistency, Spec §FR-044, FR-050]
@@ -508,3 +525,5 @@ mean implementation work is complete.
     shape, never down to the cell (`cities-siting.md`, The landform of a city site). It needs a source or the
     maintainer's recorded direction before the first preset-island template is written (T044); Spec Kit allows no
     further marker (three stand).
+- Re-reviewed again at 3387d52 by an independent reviewer (2026-11-24): CHK001, CHK015 and CHK017 are ticked, each with
+  its reason under it as "Re-review (3387d52)"; 27 of 27 satisfied. The spec, plan and tasks were not changed.
