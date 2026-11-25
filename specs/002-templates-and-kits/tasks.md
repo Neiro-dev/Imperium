@@ -373,12 +373,15 @@ areas are accepted (spec FR-031). Each test is written first and fails before it
   counts as no road (spec FR-054, FR-055; SC-001)
 - [ ] T064 Read `kind`, `uncertain`, `because`, a road's `grade`, `width`, `widthFrom`, `line` and `leadsTo`, and
   `household` in `src/mantle_check/forms.py`, reporting each value not in its form (data-model.md; spec FR-014)
-- [ ] T065 Check roads in `src/mantle_check/roads.py`: lay each road's cells from its line and width, and report a grade
-  or width not the culture's, a segment off the eight directions, a road on a house or plot, an end that lands
-  nowhere, a destination that does not touch it, and a network that is not one piece reaching the map's edge (spec
-  FR-054; research R-21)
-- [ ] T066 Check households in `src/mantle_check/roads.py`: a house against no road, yard or porch, a household with no
-  plot, a house cell outside its plot, a cell in two plots (spec FR-055; research R-21)
+- [ ] T065 Read `KitDef.roads` and `KitDef.households` (data-model.md) into Mantle's `KitDef` and the check, and set
+  the Empire's in `Imperium/Defs/KitDefs/Kits_Empire.xml`; check roads in `src/mantle_check/roads.py`: lay each road's
+  cells from its line and width, and report, in every reading, a road on a house or plot, a destination that does not
+  touch it or its extension, and a network that is not one piece reaching the map's edge, and, where the reading's
+  kit sets them, a grade or width not the kit's, a segment off the eight directions and an end that lands nowhere
+  (spec FR-006, FR-054; research R-21)
+- [ ] T066 Check households in `src/mantle_check/roads.py`: in every reading a house against no road, plaza, yard or
+  porch; where the kit gives every household a plot, a household with no plot, a house cell outside its plot and a cell
+  in two plots; in the Empire's, a house reached only through another household's (spec FR-054, FR-055; research R-21)
 - [ ] T067 [P] Write `tests/test_reading_picture.py` for FR-053's drawing and shares: each household's colour and
   plot, house and yard lines, one outline per building with an inner court open, grade labels, route lines and unsure
   pieces dashed, a legend with counts, a pixel ruler on the reference picture, and shares that add up to one; then
@@ -388,16 +391,16 @@ areas are accepted (spec FR-031). Each test is written first and fails before it
   `tests/test_templates_and_kits.py`, a share under one half, over two thirds and between, and a wall line 9 and 10
   cells from the edge; then report them in `src/mantle_check/checks.py`, only reporting for a reading (spec FR-056;
   research R-23)
-- [ ] T069 Once spec FR-052's question is answered: if it is the recommended option, write
-  `tests/test_ground.py` (a test picture the test draws at a known slant, four or more pairs, each pair's error
-  reported, the tracing laid over the picture where the mapping puts it) and build `src/mantle_check/ground.py`, and
-  use it in `src/mantle_check/pictures.py`; if it is another option, rewrite this task from the answer (research R-20)
+- [ ] T069 Write `tests/test_ground.py` (a test picture the test draws in a known perspective, four or more pairs,
+  each pair's error reported, the tracing laid over the picture where the mapping puts it) and build
+  `src/mantle_check/ground.py`, used by `src/mantle_check/pictures.py` (spec FR-052; research R-20)
 - [ ] T070 Read the East Square area into `readings/RiverBendTown.xml` from
   `template-references/河湾城-原图与描线/原图-1596x1017.png` alone: scale by person-sized things (FR-048), roads first
   with grades and destinations, then households with plots, each piece with its region and each building or group with
   its use; open the render's same area and the old tracing only after the tracing is drawn; check and draw it with
   `--reference` and `--crop` for the screenshot and `template-references/河湾城-最新版-1112/1比1整城样张.png` until no
-  problem is reported; record the minutes spent (spec FR-049, FR-050, FR-053, SC-015, SC-016). Waits for T069
+  problem is reported; lay the old project's mapping of the screenshot beside the new fit as a cross-check; record the
+  minutes spent (spec FR-049, FR-050, FR-052, FR-053, SC-015, SC-016). Waits for T069
 - [ ] T071 Put the East Square tracing over the screenshot, and later the area laid out beside the screenshot and the
   render, in the project's files, and add one item for each to `checklists/acceptance.md`, naming the reading, the
   commit, the pictures, the minutes and the pictures seen before acceptance, for the maintainer to check (spec FR-029,
@@ -466,7 +469,7 @@ checked, and no shared file changes (spec, User Story 5)
 - **The first kits and templates (Phase 7)**: depends on User Stories 1 to 3; the river-bend town (T035 to T039)
   comes before the tribal culture (T040 to T045) (spec FR-031, SC-008); T054 to T058 depend on nothing in the
   repository, and come before the reading of the preset reference they draw (spec FR-043); T059 to T061 come before
-  T040 to T042 (spec FR-048 to FR-051; research R-17), and T062 before T044 (spec FR-036; research R-18); T063 to T068 depend on T059 to T061, T069 on the answer to spec FR-052's question, T070 on T063 to T069, T071 on
+  T040 to T042 (spec FR-048 to FR-051; research R-17), and T062 before T044 (spec FR-036; research R-18); T063 to T068 depend on T059 to T061, T069 on T061, T070 on T063 to T069, T071 on
   T070, T072 on each area's acceptance, T073 on T072, and User Story 5 (T046 to T048) is rerun on T073's kit and
   template
 - **User Story 5 (Phase 8)**: depends on the Empire kit and the river-bend town's template (T037, T038)

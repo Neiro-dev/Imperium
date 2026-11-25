@@ -467,25 +467,29 @@ files, to `Neiro-dev/Imperium-old` at 20a052b, to Spec Kit at v1.4.3 and to Harm
 
 ## R-20: Laying the oblique screenshot's ground onto the cells
 
-- **Open** (spec FR-052, NEEDS CLARIFICATION, put to the maintainer as his broad direction, Principle IV): no source in
-  the Source Register gives a way of laying an oblique picture's ground onto cells.
-- **Recommended option, which the plan is written to until he answers**: ground points the picture shows clearly, such
-  as road corners, plaza corners and bridge ends, each paired with the cell corner it lies on, at least four, give a
-  projective fit from the picture's pixels to the cells; houses are placed by where their walls meet the ground, and
-  no height is read. A reading that uses it holds a `ground` element with the pairs (data-model.md); the check fits the
-  mapping from them and uses it both to lay the tracing over the screenshot (FR-051) and to cut the screenshot's area
-  for the side-by-side picture (FR-053). The fit needs no new dependency: eight unknowns solved by least squares over
-  the pairs with Python's own library, so R-9's dependencies stay. Each pair's error after the fit is reported, in
-  cells, and no threshold is set, since no source gives one (Principle V).
-- **Rationale for recommending it**: a flat ground seen at a slant differs from a top-down view by exactly such a
-  mapping, found from points on that ground; the design takes from the oblique view only its layout and slanted blocks
-  (design archive `cities.md` lines 319-320), which lie on the ground; and the old project read this screenshot the
-  same way (Imperium-old `designs/tools/city/说明/sample.md` lines 12, 21 and 238-241), which only cross-checks
-  (Principle II).
-- **Alternatives offered**: B, reading the old project's straightened base image, which is its output and so only
-  cross-checks (Principle II) unless the maintainer directs its use; C, reading each area unstraightened with a scale
-  measured in two directions, which distorts away from the picture's centre.
-- **Until it is answered**: no area of the screenshot is read (spec, Edge Cases), and the tasks that read it wait.
+- **Decision**: the reader sizes cells by person-sized things (FR-048) at several places of the area, places ground
+  points the picture shows clearly, such as road corners, plaza corners and bridge ends, each on the cell corner that
+  sizing gives it, at least four, and the reading holds them in `ground` (data-model.md). The check fits a perspective
+  mapping of the ground from pixels to cells from them, reports each pair's error in cells with no threshold, and uses
+  it both to lay the tracing over the screenshot (FR-051) and to cut the screenshot's area for the side-by-side picture
+  (FR-053). Houses are placed by where their walls meet the ground, and no height is read. The fit needs no new
+  dependency: eight unknowns solved by least squares over the pairs with Python's own library, so R-9's dependencies
+  stay. The old project's mapping of this screenshot is laid beside the new one as a cross-check: for each ground
+  point, how far apart the two put it.
+- **Rationale**: the screenshot is in perspective: the old project's measurement of it found one cell spanning about
+  3.8 pixels across near its lower edge and 2.7 far up, and its people and doors agreeing with its mapping (Imperium-old
+  `designs/研究/城/纪元资料/河湾聚落尺度查证.md` lines 11, 35 and 50); the new sizing measures this again on the
+  picture. One `pixelsPerCell` would misplace pieces by about three tenths at the area's edges, so FR-048's sizing has
+  to be applied place by place, and points of one flat ground seen through one camera are related by a perspective
+  mapping, which four points fix. The design sizes a cell by person-sized things (design archive `cities.md`, The size
+  of a cell) and takes from the oblique view its layout and slanted blocks (`cities.md` lines 319-320), which lie on the
+  ground. The old project read this screenshot the same way, with a mapping fitted from 262 points (Imperium-old
+  `designs/tools/city/说明/sample.md` lines 12, 21 and 238-241); its coefficients are that project's numbers and
+  cross-check the new fit (constitution, Principle II).
+- **Alternatives considered**: reading the old project's straightened base image. Not taken as the reading's picture:
+  it is the old project's output, so it only cross-checks (Principle II), and the new fit gives the same kind of picture
+  from the screenshot itself. One scale for the whole area, measured in two directions. Rejected: the measured change
+  of scale across the picture.
 
 ## R-21: Roads and households in a reading
 
@@ -503,12 +507,23 @@ files, to `Neiro-dev/Imperium-old` at 20a052b, to Spec Kit at v1.4.3 and to Harm
   centred, an even one one cell more to the east or north) and reports, as problems with their cells (FR-019): a grade
   outside the list or a width not its grade's (FR-054); a line segment not along one of the eight directions; a road
   cell on a house or plot cell; an end of a line that lands on no other road's cell, no gate and not the map's edge, a
-  plaza not counting; a road with no `leadsTo`, or whose `leadsTo` names a piece that, its yards included, does not
-  touch it; roads, gates and plazas not forming one network that reaches the map's edge; a house none of whose cells
-  shares an edge with a road, a yard or a porch; a household with no plot; a
+  plaza not counting, and its destination or its yard counting as a door; a road with no `leadsTo`, or whose
+  `leadsTo` names a piece that, its yards included, touches neither it nor its extension, 2 cells on from an end in
+  the direction of the last segment, stopping at the first house; roads, gates and plazas not forming one network that
+  reaches the map's edge; a house none of whose cells, or of its household's, shares an edge with a road, a plaza, a
+  yard or a porch; a household with no plot; a
   house cell outside its household's plot; and a cell in two households' plots (FR-055). The shares of FR-053 count
   each cell of the area once, by its piece's kind, a cell of several taking the first in the order water, wall, house,
   yard and yard path, the rest of the plot, road and plaza, tree, unclear.
+- **Shared checks and kit settings**: the check holds every road and household check; each kit says which apply to
+  its culture and with what values, in `KitDef.roads` and `KitDef.households` (data-model.md), as the design keeps the
+  mechanism shared and lets each culture's kit set its values (Imperium-old `Imperium-Knowledge/designs/ICF/ICF设计.md` lines 93 and
+  120-122; glossary line 184, a kit being a culture's fixed generation data). A network reaching the map's edge, one
+  piece to a cell, a destination for every road and an entrance for every building are checked in every reading; the
+  grades and widths, the eight directions, no dead ends and a plot for every household are the Empire kit's settings
+  (Imperium-old `Imperium-Knowledge/现行/城/罗马城-做法与顺序.md` lines 41 and 156; `罗马城-城内.md` line 78). Which
+  culture's kit sets what beyond the Empire's is settled when its kit is written, and where the shared checks sit
+  among Mantle's layers with R14.
 - **Rationale**: spec FR-054 and FR-055, which take the rules from the design archive (`cities-inside.md` lines
   182-203 and 485-500; `cities-forms.md` lines 491-493); the grade names and widths are the design's (lines 185-186); a
   road's cells follow from its line and width because the design sets the width by grade, never by a band measured on
@@ -522,13 +537,26 @@ files, to `Neiro-dev/Imperium-old` at 20a052b, to Spec Kit at v1.4.3 and to Harm
 - **Alternatives considered**: a road as rects only, as parts have been. Rejected: eight directions and landing ends
   cannot be told from rects. Recording a road's ends as names of what they land on (the old tool's way). Rejected: the
   design asks that ends land, which the cells show; a name the reader writes could be wrong while the cells are right.
-  Counting a plaza beside a building as a road for the building's access, and a building reached through a neighbour
-  across a shared wall (both in the old tool's manual only). Rejected: the design names road, yard and porch only.
-- **Open**: the road grades and widths, the eight directions and the list of a plot's contents come from rulings made
-  before 2026-11-14; the maintainer's later direction keeps from those only what he confirmed after that date, and his
-  direction of 2026-11-25 confirms the network laid first, houses along roads and plots apart, but not these details
-  one by one. Whether they are part of what he confirmed is put to him with the question of R-20; T065 and T066 build
-  the rules with the Empire's values as data, so that his answer changes data, not code.
+  Reaching a building through another household's building across a shared wall, as the old project wrote for two
+  buildings whose own doors it could not see (Imperium-old `designs/city-plans/anno117/宫区描线.json` and
+  `东广场布置.json`, each marked as an inference). Rejected: the design keeps households apart by a one-cell gap and
+  joins side walls only within a household (`cities-forms.md` lines 374-375), and a door the picture does not show is
+  written as unclear (spec, Edge Cases).
+- **Why the old rules hold for this reading** (Imperium-old `Imperium-Knowledge/09_地图生成与CBF技术.md`; each rule
+  is kept because the problem it was made for is the problem of this reading): eight directions, because the cells are
+  a jigsaw and houses along a street fit only if the street runs as they do (line 846), and so that roads in a tracing
+  read as built for a reason and cross no house (line 900); a road's grade from its use and its width from its grade,
+  so that lanes, streets and the main street can be told apart in one network rather than by a band measured on the
+  picture (line 924); odd widths, for a centre line to lay houses against (line 927); an even width only with its
+  pixels (line 929); the destination on the road or its 2-cell extension, made after a destination was changed only to
+  pass the check (line 923); a yard counting toward its building (lines 925 and 928); the network first and plazas
+  added beside it, after a tracing whose roads did not form a network (lines 944 and 949); tightly adjoining roofs as
+  one building, after households were split into roof blocks (line 953); one household one plot, and a road into a
+  yard not a house, after a road was read as a house (line 962). Each was made in tracing this town's screenshot, the
+  task this reading repeats, so each reason still holds. These rules come from before 2026-11-14, and the maintainer's
+  later direction keeps such rules where he has confirmed them since; his direction of 2026-11-25 sets the target as a
+  reading like the render, which was traced under these rules, roads first as one network, houses along roads and
+  plots apart, so they are part of what he confirmed.
 
 ## R-22: The check stays the Python package
 

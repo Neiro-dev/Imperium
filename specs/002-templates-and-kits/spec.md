@@ -276,8 +276,9 @@ template (FR-030), and the check in the game, the final one, still follows [Test
   FR-052 fit? → A: FR-052 leaves which picture to use to the maintainer, and he has directed that the river-bend town
   be read from its screenshot, so that picture is read. The design takes from its oblique view what that view can
   give, its layout with its slanted blocks, and not the look of its roofs or its tree shadows (design archive
-  `cities.md` lines 319-320). How the screenshot's ground is laid onto the game's cells is still open (FR-052), and
-  the East Square reading waits for it.
+  `cities.md` lines 319-320). Its ground is laid onto the cells by sizing cells by person-sized things at several
+  places, as the design sizes a cell, since the screenshot is in perspective and one scale does not fit it; those
+  points fix a perspective mapping of the ground (FR-052).
 
 ## Sources
 
@@ -597,8 +598,6 @@ and confirm that no shared file was changed.
   both [Direction].
 - `Data/` cannot be found or is of another game version: the check stops and says so, and reports nothing as
   passing.
-- How the river-bend screenshot's ground is laid onto the cells has not been given (FR-052): no area of it is read,
-  and nothing is read by a method of the reader's own in its place [constitution, Principle V].
 - In the oblique screenshot a roof stands above its plot and shows displaced from where its walls meet the ground: a
   house is placed by where it meets the ground, and the look of its roof is not taken [Design archive: `cities.md`
   lines 319-320].
@@ -656,8 +655,9 @@ and confirm that no shared file was changed.
   city [Direction], and MUST record them as their relations to each other and to the terrain, not as coordinates
   [Design: line 204].
 - **FR-006**: A kit MUST hold its culture and its fixed generation data: its word list, skeleton, groups, fill and wall
-  settings [Design: line 184], and, where it uses one, a block library of ready-made blocks built from spec cards
-  [Design: line 167]. What its groups, fill and wall settings hold MUST be taken in the order of FR-047, and so from
+  settings [Design: line 184], its road and household settings for readings and for generation (FR-054, FR-055), and,
+  where it uses one, a block library of ready-made blocks built from spec cards, which the Empire's does not [Design:
+  line 167]. What its groups, fill and wall settings hold MUST be taken in the order of FR-047, and so from
   its culture's reference city, as its skeleton is (FR-036), wherever the design and the maintainer's recorded
   direction leave them open [Direction].
 - **FR-007**: A spec card MUST fix one building: its plot, its rooms and their contents [Design: line 206].
@@ -932,10 +932,10 @@ and confirm that no shared file was changed.
   classes, annex or attic being one), with a one-sentence basis, and an item with no use is not laid out [Design
   archive: `cities-forms.md` lines 475-477 and 480-482]. The design settles a use against the wiki (`cities-forms.md`
   lines 476-478), which the Source Register does not list, so the wiki is not a source of a use here, and each use
-  names its source in its basis (constitution, Principles I and VI). What is done with an area of which more than three tenths is unclear is
-  [NEEDS CLARIFICATION: the design archive sends the area's image to the maintainer to mark (`cities-forms.md` lines
-  478-479), but he judges only broad direction (constitution, Principle IV), and no other source gives a form; none is
-  written (Principle V)]. The old project's legend of the river-bend screenshot is classed `research` in the archive
+  names its source in its basis (constitution, Principles I and VI). Where more than three tenths of an area is unclear,
+  the area's picture goes to the maintainer to mark, as the design does (`cities-forms.md` lines 478-479), in the form
+  of a `/speckit-clarify` question, the unclear pieces shown with a recommended reading for each, since what a
+  reference city's pieces are is game content (constitution, Principle IV) [Spec Kit: `templates/commands/clarify.md`]. The old project's legend of the river-bend screenshot is classed `research` in the archive
   (`specs/005-imperium-design-archive/research/C19.md` line 11) and describes that one picture, so it is not design
   meaning and is not taken.
 - **FR-050**: A reading from a picture MUST be made one area at a time, and the maintainer MUST see each area's picture
@@ -974,13 +974,16 @@ and confirm that no shared file was changed.
   who chooses among the candidates (FR-037) [Direction]; no source gives a test. The river-bend town's screenshot is
   oblique, and the maintainer has directed that the town be read from it (FR-053), so which picture to use is settled
   for it [Direction, 2026-11-25]. From its oblique view a reading takes what that view can give, the layout with its
-  slanted blocks, and not the look of its roofs or its tree shadows [Design archive: `cities.md` lines 319-320]. How
-  the screenshot's ground is laid onto the game's cells is [NEEDS CLARIFICATION: neither the design archive nor any
-  other source the Source Register gives names a way of laying an oblique picture's ground onto cells; the old project
-  did it for this screenshot with a fitted transform, which is its implementation and only cross-checks (constitution,
-  Principles II and V); it is game content, how a reference city is read into a template, and so the maintainer's
-  broad direction (Principle IV)]. Until it is given, no area of the screenshot is read, and FR-048 to FR-051 still
-  hold for every other picture.
+  slanted blocks, and not the look of its roofs or its tree shadows [Design archive: `cities.md` lines 319-320]. Its
+  ground is laid onto the cells by FR-048's own sizing, done at several places: the screenshot is in perspective, so a
+  person-sized thing spans more pixels near its lower edge than far up it, and one `pixelsPerCell` cannot place the
+  reading. Points on its ground that the reader can place, such as road corners, plaza corners and bridge ends, each
+  given the cell corner it lies on by the sizing near it, at least four, fix a perspective mapping of the ground from
+  pixels to cells; a house is placed by where its walls meet the ground, and no height is read [Design archive:
+  `cities.md`, The size of a cell; FR-048]. The old project read this screenshot the same way, and found its cell
+  spanning about 3.8 pixels across near the lower edge and 2.7 far up, matching its people and doors (Imperium-old
+  `designs/研究/城/纪元资料/河湾聚落尺度查证.md` lines 11 and 35); that reading and its numbers only cross-check the new
+  fit (constitution, Principle II). FR-048 to FR-051 hold for every other picture.
 
 **The river-bend town's reading from its screenshot**
 
@@ -1010,36 +1013,43 @@ and confirm that no shared file was changed.
   screenshot: the render, its cells and the old project's tracings MUST be
   used only to cross-check a reading, and nothing is copied from them [constitution, Principle II; Direction,
   2026-11-25].
-- **FR-054**: In a reading from a picture, roads MUST be traced as the design traces them, and the check MUST report
-  each one that breaks a rule [Design archive: `cities-inside.md` lines 182-187 and 191-203]:
-  - a road MUST hold its grade, and where the reading's culture gives its grades and their widths, its width MUST be
-    its grade's. The Empire's are the design's: main street 5 or 7, old road 5, secondary street 5, lane 3, ring road 3
-    and narrow way 1; an even width is allowed only where the reading states the width in pixels that the picture gives
-    it and that width lies within one cell of its grade's. A culture whose grades are not yet given has no width
-    checked [Design archive: same lines; FR-047];
-  - a road MUST run in the eight directions only;
-  - a road cell MUST NOT cover a house cell or a household's plot;
-  - both ends of every road MUST land on another road, a gate or the edge of the reading's map; a plaza is not a node
-    of the network and only has to touch a road;
-  - every road MUST name the building or plaza it leads to, and that building, its yard included, or that plaza MUST
-    touch the road;
-  - every building MUST have at least one side against a road, a yard or a porch, a wall between not counting;
-  - the roads, gates and plazas MUST form one network, reaching the edge of the reading's map.
-  The design gives no length for the extension of a road that a destination may touch instead of the road, so only
-  touching the road counts (constitution, Principle V).
-- **FR-055**: In a reading from a picture, houses MUST be traced by household: roof blocks that adjoin tightly with
-  slightly offset positions are one household and one building whose outline they make together, and a yard joined to
-  them belongs to that household, as do its annexes and attics, a building with its annex and small yard counting as
-  one item [Design archive: `cities-forms.md` lines 490-493; `cities-inside.md` lines 497-499; FR-049, use
-  `AnnexOrAttic`].
-  Each household MUST hold one plot and what the plot holds, each named as the design names it (yard, garden, vine
-  trellis, colonnade, shrine, workshop yard, stock pen, shed, yard path, front steps) or as unclear; the house on it may
-  be L-shaped, stepped or of several blocks [Design archive: `cities-inside.md` lines 494-497]; a road that reaches
-  into a yard is not a house [Design: Imperium-old b218bdc, `Imperium-Knowledge/现行/城/罗马城-做法与顺序.md` line 156]. The
-  check MUST report a household with no plot, a house cell outside its
-  household's plot, and a cell in the plots of two households, since the land the streets enclose is divided into
-  households [Design archive: `cities-inside.md` lines 485-487]. Whether a plot is regular is judged by the maintainer's
-  eye, since the design defines "regular" by no shape (FR-029) [constitution, Principle V].
+- **FR-054**: The check MUST hold road checks that every culture shares, and each culture's kit MUST say which of them
+  apply to its readings and with what values, as a kit holds its culture's fixed generation data (FR-006) [Design:
+  glossary line 184; Imperium-old b218bdc, `Imperium-Knowledge/designs/ICF/ICF设计.md` lines 93 and 120-122, where the mechanism is shared and
+  each culture's kit sets its values]. In every reading from a picture the check MUST report: roads, gates and plazas
+  that do not form one network reaching the edge of the reading's map; a road cell on a house or plot cell, since a cell
+  holds one piece; a road that names no building or plaza it leads to, or whose destination, its yard included, does
+  not touch it or its extension, the road carried on beyond an end in the direction of its last segment for 2 cells,
+  stopping at the first house it meets; and a building with no entrance, no side against a road, a plaza, a yard or a
+  porch, a wall between not counting and the parts of one building joined through their own shared walls counting as
+  one [Design archive: `cities-inside.md` lines 191-203; `cities-forms.md` lines 371-375, where a street face joins a
+  street or a square; Design: `Imperium-Knowledge/09_地图生成与CBF技术.md` lines 900 and 923, the second made so that a
+  destination is not changed only to pass the check]. Where a kit sets them, the check MUST also report: a road whose
+  grade is not one of the kit's grades or whose width is not its grade's, an even width being allowed only where the
+  reading states the width in pixels that the picture gives it and that width lies within one cell of its grade's; a
+  road off the eight directions; and, where the kit allows no dead ends, a road end that lands on no other road, not
+  the edge of the reading's map and not a door, which in a reading is the building or yard the road leads to, a plaza
+  not being a node of the network [Design: same file, lines 924, 927, 929, 846, 944 and 949]. The Imperium kit, the
+  Empire's, sets them all as the design lays roads: grades main street 5 or 7, old road 5, secondary street 5, lane 3,
+  ring road 3 and narrow way 1, the eight directions, and no dead ends; and a building is never reached through another
+  household's, since households are kept apart by a one-cell gap [Design archive: `cities-inside.md` lines 182-187;
+  `cities-forms.md` lines 374-375; Imperium-old `Imperium-Knowledge/现行/城/罗马城-城内.md` line 78].
+- **FR-055**: In every reading from a picture, each piece MUST be traced as what it is, a house, a yard, a road, a
+  plaza, a tree, a wall and so on (FR-049), and a building with its annex and small yard counts as one item [Design
+  archive: `cities-forms.md` lines 490-491]. The forms of a household and its plot MUST be shared by every culture: a
+  household is one building with what belongs to it, and its plot holds the house and what the plot holds, each named
+  as the design names it (yard, garden, vine trellis, colonnade, shrine, workshop yard, stock pen, shed, yard path,
+  front steps) or as unclear; the house on it may be L-shaped, stepped or of several blocks [Design archive:
+  `cities-inside.md` lines 494-497; glossary line 206, where a plot is a spec card's]. Whether every household gets a
+  plot is the kit's to say. The Imperium kit says so, and in its readings houses MUST be traced by household: roof
+  blocks that adjoin tightly with slightly offset positions are one household and one building whose outline they
+  make together, and a yard joined to them belongs to that household, as do its annexes and attics; a road that
+  reaches into a yard is not a house [Design archive: `cities-forms.md` lines 491-493; `cities-inside.md` lines
+  497-499; FR-049, use `AnnexOrAttic`; Design: Imperium-old `Imperium-Knowledge/现行/城/罗马城-做法与顺序.md` lines 41,
+  153 and 156]. Where a kit gives every household a plot, the check MUST report a household with no plot, a house cell
+  outside its household's plot, and a cell in the plots of two households, since the land the streets enclose is
+  divided into households [Design archive: `cities-inside.md` lines 485-487]. Whether a plot is regular is judged by
+  the maintainer's eye, since the design defines "regular" by no shape (FR-029) [constitution, Principle V].
 - **FR-056**: For an Empire template on a city's 350×350 map, the check MUST report the share of the map that its wall
   circle takes, the river through it included, and the least distance from its wall line to the map's edge, and MUST
   report as a problem a share outside one half to two thirds or a distance under 10 cells; for a reading, which is at
@@ -1139,8 +1149,8 @@ and confirm that no shared file was changed.
   reading's cells over the reference picture at the reading's scale, no piece is reported as a match and the report
   says that mismatches are not marked, and neither the reference picture nor any picture drawn from it is in the
   repository (FR-028, FR-051).
-- **SC-015**: The East Square area of the river-bend town is read from its screenshot, once FR-052's open question is
-  answered: by inspection, every piece of it is traced from the screenshot and names its region (FR-049, FR-053); the
+- **SC-015**: The East Square area of the river-bend town is read from its screenshot through FR-052's ground mapping:
+  by inspection, every piece of it is traced from the screenshot and names its region (FR-049, FR-053); the
   check reports no problem in it, none of FR-054 or FR-055 among them; its drawing shows each household's plot, house
   and yards as FR-053 sets and is set beside the screenshot's area and the render's same area with each kind of
   piece's share of the land; and the maintainer has accepted it once after tracing and once after laying out, each an

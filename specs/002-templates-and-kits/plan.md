@@ -48,9 +48,8 @@ households with one plot each and its contents; the check reports every road and
 a piece it touches, each house against a road, yard or porch, a plot for each household, no house outside its plot,
 no cell in two plots), draws each household with its plot, house and yards, and reports each kind of piece's share of
 the area beside the screenshot's area and the render's (R-21). An Empire template's wall circle share and its distance
-from the map's edge are reported (R-23). How the oblique screenshot's ground is laid onto the cells is put to the
-maintainer; the plan is written to the recommended option, a projective fit from ground points, and no area is read
-until he answers (R-20). Everything stays in the Python check (R-22).
+from the map's edge are reported (R-23). The oblique screenshot's ground is laid onto the cells by a perspective
+mapping fitted from ground points placed by person-sized sizing, since the picture's scale changes across it (R-20). Everything stays in the Python check (R-22).
 
 ## Technical Context
 
@@ -119,10 +118,10 @@ directed (I, VI; R-18): unchanged. Re-checked after the update of 2026-11-25 (R-
 reading of the river-bend screenshot beside the render, comes from the maintainer's direction and the design archive
 (I, VI); every road and household rule the check adds is a sentence of the design archive, with its line (I, VI);
 the old project's tools, render, tracings, legend and straightened base image are used only to cross-check, or for
-the effect the maintainer directed to keep (II); the one question no source answers, how the oblique ground is laid
-onto cells, is game content and is put to the maintainer with a recommended option, and nothing is read until he
-answers (IV, V); numbers the design does not give, such as how far beyond a road's end a destination may lie, are not
-set (V); the shares are reported with no threshold (V): unchanged.
+the effect the maintainer directed to keep (II); the oblique ground is laid onto cells by the design's own sizing done
+place by place, the old project's mapping only cross-checking (I, II, R-20); each old rule is kept for the reason the
+old ledger records, which still holds for this reading (I, VI, R-21); the shares are reported with no threshold (V); no
+question goes to the maintainer (IV): unchanged.
 
 ## Project Structure
 
@@ -189,7 +188,7 @@ src/
     ├── checks.py                  # the problems (data-model.md)
     ├── relations.py               # measuring relations (R-6)
     ├── roads.py                   # roads and households of a reading, and the shares (R-21)
-    ├── ground.py                  # the ground fit of an oblique picture, once FR-052 is answered (R-20)
+    ├── ground.py                  # the ground fit of a picture in perspective (R-20)
     ├── pictures.py                # PNG pictures (R-11)
     └── report.py
 tests/
