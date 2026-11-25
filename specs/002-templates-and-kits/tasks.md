@@ -623,3 +623,40 @@ A longer write-up in Chinese, with its sources, is in the project's files as
 - [X] T077 Trace the courtyard building east of the fountain (`n4`) with its inner court left open in `readings/RiverBendTown.xml` per FR-053 (partial)
 - [X] T078 Add to `tests/test_reading_picture.py` checks that a road's grade is written on the drawing and that a route line is drawn dashed per T067 (partial)
 - [X] T079 Align data-model.md's `line` wording with research R-21: a point names the cell whose lower left corner it is, and the road is centred on the cells the line runs through per plan: data model (partial)
+
+## Handoff: reading by the game's own buildings and road pieces (2026-11-25, evening)
+
+**State**: T063 to T079 are built and pass on branch `claude/east-square-spec` (the check's findings, ground fit, old
+sample, pictures; the kit's `cultures`; the Empire's word list on its faction; Mantle and Imperium load in the game
+with no new error). The East Square area was read once (`readings/RiverBendTown.xml`) and drawn beside the screenshot
+and the old sample (CHK002). The maintainer looked at it and did not accept it: its buildings are roof outlines of
+measured size, not the game's buildings, and its roads were read by eye and joined only through the square. The spec
+now says how the area is read again: FR-058 and SC-020, FR-049, FR-052 and FR-054 changed, and the two clarifications
+of 2026-11-25 on Anno pictures and on a plaza.
+
+**Next, in Spec Kit's order** (a new thread, Opus, on the maintainer's computer):
+
+1. `/speckit-plan`: research entries for (a) the catalog: which files of the game hold each building's footprint
+   (`.ifo` `BuildBlocker`; on the maintainer's computer `D:\anno117data\maindata`, whose `file_h.db` lists about 400
+   production, 27 public, 84 residence, and the institution, logistics and ornament `.ifo` files in `graphics_roman.rda`
+   and `zz_patchfiles_150/200/300.rda`, all on disk; `shared_configs.rda`, not on disk, holds meshes, which FR-058 does
+   not need), how a building's name and kind are found in `config.rda`'s asset definitions, which assets are road
+   pieces and their widths, and whether a plaza's tiles count as road there; (b) the Anno grid laid on the screenshot
+   (its turn and origin, from street edges and buildings standing at 0, 45 or 90 degrees), with `referenceCell`
+   measured from identified buildings of known size; (c) the identification record's form, kept outside the
+   repository; (d) how the reading's ground fit is checked against the old mapping as R-20 asks (the review of
+   2026-11-25 found the fit affine and from one sizing). The tools that read the game's files stay outside the
+   repository (spec, Assumptions; FR-041); the drawings go to `template-references/`.
+2. `/speckit-tasks` and `/speckit-analyze`.
+3. `/speckit-implement`: build the catalog once, draw its top-down sheets (every building and road piece of each
+   kind, at every turn the game allows), read the East Square area again: the Anno grid first, roads as road pieces
+   joined on their own, then each building identified against the whole catalog of its kind and placed by its
+   footprint, a residence with its modules and yard; then check and draw it with the old sample as before.
+4. `/speckit-converge` until Converged, the checks with their output, one fresh reviewer, and the pictures before the
+   maintainer as CHK003.
+
+**Open from the review of 2026-11-25 that the new reading must answer** (the review's text is in the thread's
+report): the old sample's area and the new reading's area must be the same extent (sample cells x 276-393, y 196-289
+mapped to the screenshot); walls other than the city wall are pieces; untraced land and the "nothing traced" share
+against FR-049's three tenths; yards computed as plot minus house only for residences (FR-055); the ground fit sized at
+several places (FR-052).

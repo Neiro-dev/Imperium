@@ -15,7 +15,7 @@ KIT_FILE = ROADS / "TestRoadKit.xml"
 
 # Each variant of the clean reading and a word of the finding it must give, with the piece it is found at.
 ONE_FINDING = {
-    "network-in-pieces": ("the road network", "not joined to the main network"),
+    "network-in-pieces": ("parts plaza", "joins no road, gate or bridge"),
     "road-on-house": ("parts lane", "lies on a house or plot cell"),
     "dangling": ("parts spur end at (34,4)", "a dangling road"),
     "no-way-in": ("parts street", "no region where the way in"),
@@ -26,7 +26,7 @@ ONE_FINDING = {
     "off-eight-directions": ("parts lane", "off the eight directions"),
     "wrong-grade": ("parts street", "Avenue is not one of the kit's grades"),
     "yard-cut-off": ("parts looseYard", "touches no house"),
-    "route-line-is-no-road": ("the road network", "not joined to the main network"),
+    "route-line-is-no-road": ("parts plaza", "joins no road, gate or bridge"),
 }
 
 

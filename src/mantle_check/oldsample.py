@@ -22,7 +22,7 @@ KINDS = {
     "%": "AnnexOrAttic", ",": "AnnexOrAttic",
     "y": "Yard", "r": "YardPath",
     "w": "YardWall", "g": "YardWall",
-    "o": "Tree", "q": "Tree", "c": "Tree", "T": "Tree", "t": "Tree",
+    "o": "Garden", "q": "Garden", "c": "Garden", "T": "Tree", "t": "Tree",
     "J": "LargePiece",
     "W": "CityWall", "R": "CityWall", "U": "CityWall", "G": "CityWall", "d": "CityWall", "O": "CityWall",
     "=": "Water", "~": "Water",

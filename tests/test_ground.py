@@ -46,7 +46,7 @@ READING = """<?xml version="1.0" encoding="utf-8"?>
   <reference>TestPerspective</reference>
   <size>(40,40)</size>
   <scale>
-    <pixelsPerCell>12</pixelsPerCell>
+    <pixelsPerCell>4</pixelsPerCell>
     <referenceCell>3</referenceCell>
     <measured><li><name>figure</name><rect>(100,100,103,103)</rect></li></measured>
   </scale>

@@ -6,7 +6,7 @@
   <reference>RiverBendTown</reference>
   <size>(118,118)</size>
   <scale>
-    <pixelsPerCell>10.6</pixelsPerCell>
+    <pixelsPerCell>3.2</pixelsPerCell>
     <referenceCell>3.3</referenceCell>
     <measured>
       <li><name>figure beside the east fountain</name><rect>(1075,520,1078,530)</rect></li>

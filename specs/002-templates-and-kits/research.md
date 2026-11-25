@@ -514,7 +514,8 @@ files, to `Neiro-dev/Imperium-old` at 20a052b, to Spec Kit at v1.4.3 and to Harm
   yard or a porch; a household with no plot; a
   house cell outside its household's plot; and a cell in two households' plots (FR-055). The shares of FR-053 count
   each cell of the area once, by its piece's kind, a cell of several taking the first in the order water, wall, house,
-  yard and yard path, the rest of the plot, road and plaza, tree, unclear.
+  yard and yard path, garden and tree, the rest of the plot, road and plaza, unclear, so that gardens, the old sample's
+  shortfall S9, are counted in one column for both readings wherever they lie (spec FR-057).
 - **Shared checks and kit settings**: the check holds every road and household check; each kit says which apply to
   its culture and with what values, in `KitDef.roads` and `KitDef.households` (data-model.md), as the design keeps the
   mechanism shared and lets each culture's kit set its values (Imperium-old `Imperium-Knowledge/designs/ICF/ICF设计.md` lines 93 and

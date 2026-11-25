@@ -3,7 +3,7 @@
   <reference>TestPicture</reference>
   <size>(40,40)</size>
   <scale>
-    <pixelsPerCell>20</pixelsPerCell>
+    <pixelsPerCell>5</pixelsPerCell>
     <referenceCell>4</referenceCell>
     <measured><li><name>door</name><rect>(40,40,59,59)</rect></li></measured>
   </scale>

@@ -76,7 +76,7 @@ def test_a_known_scale_puts_a_known_cell_at_a_known_pixel_of_the_reference_pictu
     result = run_check([READINGS / "clean.xml"], references=references(make_picture))
     drawing = Image.open(result.out / "clean.png")
     side = Image.open(result.out / "clean.side-by-side.png").convert("RGB")
-    # 20 pixels a cell of the reference game and 4 RimWorld cells to it give 5 pixels a RimWorld cell, the reading's
+    # 5 pixels a RimWorld cell, as a figure sizes it (spec FR-048), with the reading's
     # cell (0, 0) at the picture's lower left corner: the part's cells (10, 10) to (19, 19) fill the pixels
     # x 50 to 99 and y 200 to 249 of the 400×300 picture.
     inside_part = side.getpixel(placed(drawing, side, 75, 225))

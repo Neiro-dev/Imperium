@@ -313,6 +313,23 @@ template (FR-030), and the check in the game, the final one, still follows [Test
   pictures, the new reading against the old sample and the screenshot. The road and household checks of a reading
   only point at places to look again, and shares are only reported. Reproducing the town better than the old preview
   comes first; variants come after (the maintainer's broad direction, 2026-11-25; SC-017 to SC-019).
+- Q: The East Square's first tracing drew roofs as free shapes of any size: is that how an Anno 117 picture is read?
+  → A: No. Every building and every road piece of Anno 117 stands on the game's grid with a footprint fixed by the
+  game's own files, so a reading of an Anno 117 picture identifies each building and road piece as the game's own and
+  takes its footprint, and for a residence its modules and yard, from those files, placed and turned on the Anno grid
+  where the picture shows it; the picture decides which building it is, where it stands and how it is turned, and the
+  game's files decide its size and shape. The candidates come from one catalog of the game's buildings and road pieces,
+  built once from its files and looked at whole, not from packages read piece by piece for each tracing, which is how
+  candidates were skipped on 2026-11-24 (FR-058) [the maintainer's broad direction, 2026-11-25; evidence: the first
+  tracing's plots were 2 to 8 estates large because their sizes were measured, not taken from the buildings
+  (acceptance CHK002); the game's residences are 3×3 Anno cells with their modules in their files (FR-055)].
+- Q: Does a plaza join the roads that reach it? → A: No: roads form one network on their own, running on through a
+  plaza where they meet in it, and a plaza lies beside them. The design made the plaza no node of the network and the
+  roads connect by themselves [Design: Imperium-old b218bdc, `Imperium-Knowledge/09_地图生成与CBF技术.md` line 949],
+  its reading of Anno 117 found plazas opening where three or four streets meet (`纪元117-设计理念-地图与城建-2026-11-11.md`
+  lines 43-44), which a road running through the plaza agrees with, and the maintainer's direction of 2026-11-25 says
+  the same; the screenshot's paving does not show whether a road's own tiles run under a plaza, and whether the game's
+  files count a plaza's tiles as road is to be read from the catalog (FR-058) and recorded there.
 - Q: Is a culture the game's culture definition, and how does a faction find its kit? → A: A culture is the lineage
   of factions the game groups under one culture definition in their `allowedCultures`, which the bases set and their
   kin inherit; a kit names the culture definitions it serves and a faction takes the kit that names one of its own.
@@ -674,9 +691,11 @@ and confirm that no shared file was changed.
   screenshot that shows it or leaves it with that region; acceptance is the maintainer's eye alone (SC-017, SC-019).
 - The render's same area cannot be found, or the render is missing from `template-references/`: the check draws the
   area beside the screenshot alone, says the render is missing, and the area's comparison waits for it.
-- A road ends at a plaza, or a lane ends at a door or inside a yard rather than running through to another road: the
-  check counts the end in its class of FR-054 and does not report it as a problem, since whether a plaza is a node of
-  the network and whether the Empire's lanes must run through at both ends are verified first against the pictures:
+- A road ends at a plaza: it is a dead end, since a plaza is no node (FR-054); in an Anno 117 reading the road is
+  traced on through the plaza where the picture and the catalog show its pieces running on.
+- A lane ends at a door or inside a yard rather than running through to another road: the
+  check counts the end in its class of FR-054 and does not report it as a problem, since whether the Empire's lanes
+  must run through at both ends is verified first against the pictures:
   the counts for the screenshot's reading and for the old sample are set side by side, each end at a plaza or a door
   marked on the overlay, and the rule is settled by the spec again only after the maintainer has looked at them
   [Design: `09_地图生成与CBF技术.md` lines 473 and 949, and `纪元117-设计理念-地图与城建-2026-11-11.md` lines 43-44;
@@ -1026,7 +1045,8 @@ and confirm that no shared file was changed.
   says; only a research page does, which is not design meaning; no value is taken from it, and each picture's second
   result is measured by these steps (constitution, Principle V)].
 - **FR-049**: A reference need not be traced finer than blocks, house groups, yards and roads: the tracing stops
-  there and is not carried on building by building, and, where FR-047 leaves a template to a reading, a template
+  there and is not carried on building by building, except in a reading of an Anno 117 picture, where each building and
+  road piece is identified as the game's own (FR-058), and, where FR-047 leaves a template to a reading, a template
   candidate MUST come only from tracing an accepted reference [Design archive: `cities-forms.md` lines 123 and 475].
   The design defines none of the four as a piece and the form records no kind of piece, so whether a traced piece is no
   finer than they are is judged by the maintainer's eye (FR-029, FR-050) [constitution, Principle V]. Each traced piece
@@ -1077,7 +1097,9 @@ and confirm that no shared file was changed.
   who chooses among the candidates (FR-037) [Direction]; no source gives a test. The river-bend town's screenshot is
   oblique, and the maintainer has directed that the town be read from it (FR-053), so which picture to use is settled
   for it [Direction, 2026-11-25]. From its oblique view a reading takes what that view can give, the layout with its
-  slanted blocks, and not the look of its roofs or its tree shadows [Design archive: `cities.md` lines 319-320]. Its
+  slanted blocks, and not the look of its roofs or its tree shadows as pieces [Design archive: `cities.md` lines
+  319-320]; a building's roof massing serves only to identify which of the game's buildings it is, whose footprint is
+  then taken from the game's files and never traced from the roof (FR-058) [Direction, 2026-11-25]. Its
   ground is laid onto the cells by FR-048's own sizing, done at several places: the screenshot is in perspective, so a
   person-sized thing spans more pixels near its lower edge than far up it, and one `pixelsPerCell` cannot place the
   reading. Points on its ground that the reader can place, such as road corners, plaza corners and bridge ends, each
@@ -1119,8 +1141,9 @@ and confirm that no shared file was changed.
 - **FR-054**: The check MUST hold road checks that every culture shares, and each culture's kit MUST say which of them
   apply to its readings and with what values, as a kit holds its culture's fixed generation data (FR-006) [Design:
   glossary line 184; Imperium-old b218bdc, `Imperium-Knowledge/designs/ICF/ICF设计.md` lines 93 and 120-122, where the mechanism is shared and
-  each culture's kit sets its values]. In every reading from a picture the check MUST report: roads, gates and plazas
-  that do not form one network reaching the edge of the reading's map; a road cell on a house or plot cell, since a cell
+  each culture's kit sets its values]. In every reading from a picture the check MUST report: roads, gates and bridges
+  that do not form one network reaching the edge of the reading's map, a plaza joining none of them (Clarifications,
+  2026-11-25, on a plaza); a road cell on a house or plot cell, since a cell
   holds one piece; a road that names no building or plaza it leads to, or whose destination, its yard included, does
   not touch it or its extension, the road carried on beyond an end in the direction of its last segment for 2 cells,
   stopping at the first house it meets; a dangling road, an end of a road that, with its 2-cell extension, touches no
@@ -1144,13 +1167,12 @@ and confirm that no shared file was changed.
   problems, the first shared and the second the kit's. The check MUST also sort every road end into one of: through
   (to a road, gate or the map's edge), way in (to its destination or its yard), into a yard (an end inside a yard of a
   household it does not lead to), at a plaza, dead end and dangling, and report the count of each class for each
-  grade. The design makes a plaza no node of the network and has lanes run through to streets at both ends (same file,
-  lines 949 and 473; Design archive: `cities-inside.md` lines 150-151 and 183), while its own reading of Anno 117 found
-  Anno's plazas opening at junctions of three or four streets and at diagonal streets' cut corners (Imperium-old
-  `Imperium-Knowledge/designs/研究/城/纪元117-设计理念-地图与城建-2026-11-11.md` lines 43-44). Old rules are kept by
-  the evidence behind them, not by being recorded [Direction, 2026-11-25], so these two are verified against the
-  pictures before the check judges them, as an edge case sets; until then an end at a plaza and a lane that does not
-  run through are counted in their classes and not reported. The Imperium kit, the
+  grade. A plaza is no node of the network: a road that meets others in a plaza runs on through it, and an end at a
+  plaza is a dead end (Clarifications, 2026-11-25, on a plaza). The design also has lanes run through to streets at
+  both ends (same file, line 473; Design archive: `cities-inside.md` lines 150-151); old rules are kept by the evidence
+  behind them, not by being recorded [Direction, 2026-11-25], so that one is verified against the pictures before the
+  check judges it, as an edge case sets, and until then a lane that does not run through is counted in its class and
+  not reported. The Imperium kit, the
   Empire's, sets them all as the design lays roads: grades main street 5 or 7, old road 5, secondary street 5, lane 3,
   ring road 3 and narrow way 1, the eight directions, and no dead ends; and a building is never reached through another
   household's, since households are kept apart by a one-cell gap [Design archive: `cities-inside.md` lines 182-187;
@@ -1232,6 +1254,24 @@ and confirm that no shared file was changed.
   original case was never exercised]. Shortfalls of how the reader works, S6 and S12, are met by SC-019 and by how the reading is made,
   not by a number.
 
+**Reading by the game's own buildings**
+
+- **FR-058**: A reading of an Anno 117 picture MUST identify each building and each road piece it holds as one of the
+  game's own, and MUST take its footprint from the game's files: a building's from its `.ifo` file's `BuildBlocker`, in
+  Anno cells, a residence's modules, props and yard from its estate's `.cfg` (FR-055), and a road piece's from the
+  game's road definitions; the piece is placed and turned on the Anno grid where the picture shows it, the grid laid on
+  the reading's cells by its `referenceCell` (FR-048, FR-052), and so its size and shape are never measured on the
+  picture [Direction, 2026-11-25]. The candidates MUST come from one catalog of the game's buildings and road pieces,
+  built once from the game's files on the maintainer's computer and kept there as a reference input of the tools, with
+  the drawings made from it in `template-references/` in the project's files, never in the repository or a mod's
+  released files, as FR-041 keeps what is read from the game's data [Direction, 2026-11-25; EULA: line 76; FR-041]. The catalog holds, for each, its name in the
+  game, its kind, its footprint, the turns the game allows, a residence's modules, and a top-down drawing of its
+  footprint and modules to recognise it by; nothing is projected through a camera and no candidate is chosen by a
+  score (research R-22; FR-057, S12). Each identification MUST be recorded outside the repository with the region of
+  the picture it was made from, every candidate looked at, and why the one taken fits; the reading in the repository
+  holds the footprint's cells, the piece's kind and use, and a basis that names the footprint's size in Anno cells,
+  not the game's name for it [EULA: line 76; FR-010]. A building that no candidate fits is written as `Unclear`, with
+  what was compared, and its traced outline is kept only until the catalog is extended [constitution, Principle V].
 ### Key Entities *(include if feature involves data)*
 
 - **Template**: the designed layout of a whole city site: its terrain shape, its skeleton, what it is picked by, among
@@ -1357,6 +1397,12 @@ and confirm that no shared file was changed.
   check and the reading, no piece is placed by a colour class, a score, a flood fill or a reshaping of a traced
   outline, every piece names its region, and the minutes each area took are recorded with no time target (S12;
   FR-049; SC-016).
+
+- **SC-020**: In each area of a reading of an Anno 117 picture, by inspection of the identification record and the
+  reading: every building and road piece is identified or written as `Unclear` with what was compared; the record
+  lists every candidate of the catalog looked at for it, the whole catalog of its kind having been looked at; and
+  every identified piece's cells match its game footprint in Anno cells times `referenceCell`, placed on the Anno grid
+  (FR-058).
 
 ## Assumptions
 

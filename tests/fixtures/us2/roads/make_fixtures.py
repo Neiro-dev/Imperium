@@ -59,7 +59,7 @@ def write(name, pieces):
   <reference>TestRoadTown</reference>
   <size>(40,40)</size>
   <scale>
-    <pixelsPerCell>9</pixelsPerCell>
+    <pixelsPerCell>3</pixelsPerCell>
     <referenceCell>3</referenceCell>
     <measured><li><name>figure</name><rect>(5,5,7,7)</rect></li></measured>
   </scale>

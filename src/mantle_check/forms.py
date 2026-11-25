@@ -254,7 +254,9 @@ class Scale:
         )
 
     def pixels_per_rimworld_cell(self) -> float:
-        return self.pixels_per_cell / self.reference_cell
+        """The pixels one RimWorld cell is: a door, a figure or a tree is one cell (spec FR-048), so `pixelsPerCell`
+        is that number itself; `referenceCell` sizes the reference game's own cell and plays no part here."""
+        return self.pixels_per_cell
 
 
 @dataclass

@@ -16,7 +16,8 @@ from .report import Problem, Rect
 Cell = tuple[int, int]
 
 ROAD_LIKE = ("Road", "Gate", "Bridge")
-NETWORK = ("Road", "Gate", "Bridge", "Plaza")
+# A plaza is no node: roads, gates and bridges form the network on their own (spec FR-054, Clarifications 2026-11-25).
+NETWORK = ("Road", "Gate", "Bridge")
 BUILDING = ("House", "AnnexOrAttic", "LargePiece")
 YARDS = ("Yard", "YardPath")
 FRONTAGE = ("Road", "Plaza", "Yard", "YardPath", "Porch", "Gate", "Bridge")
@@ -28,9 +29,9 @@ SHARE_ORDER = (
     ("walls", WALLS),
     ("houses", BUILDING),
     ("yards and yard paths", YARDS),
-    ("rest of the plots", ("Plot",) + PLOT_CONTENTS),
+    ("gardens and trees", ("Tree", "Garden")),
+    ("rest of the plots", ("Plot",) + tuple(k for k in PLOT_CONTENTS if k != "Garden")),
     ("roads and plazas", ("Road", "Plaza", "Gate", "Bridge", "Porch")),
-    ("gardens and trees", ("Tree",)),
     ("unclear", ("Unclear", "Ruin", "RouteLine")),
 )
 ROAD_KIND = "road"
@@ -223,8 +224,12 @@ class Reader:
         pieces = sorted(components(cells), key=lambda c: (-len(c), bounding(c)))
         w, h = self.size
         if not any(x in (0, w - 1) or z in (0, h - 1) for piece in pieces for x, z in piece):
-            self.find(ROAD_KIND, "the road network", "the roads, gates and plazas reach no edge of the reading's map",
+            self.find(ROAD_KIND, "the road network", "the roads, gates and bridges reach no edge of the reading's map",
                       bounding(cells))
+        for piece in self.pieces:
+            if piece.kind == "Plaza" and not touches(self.cells[id(piece)], cells):
+                self.find(ROAD_KIND, f"parts {piece.name}", "the plaza joins no road, gate or bridge; a plaza is no "
+                          "node of the network and lies beside roads", bounding(self.cells[id(piece)]))
         for piece in pieces[1:]:
             self.find(ROAD_KIND, "the road network", f"this piece of {len(piece)} cells is not joined to the main "
                       f"network of {len(pieces[0])} cells", bounding(piece))
@@ -281,8 +286,10 @@ class Reader:
             if kind == "dangling":
                 self.find(ROAD_KIND, where, "the end, with its 2-cell extension, touches no road, plaza, gate, bridge, "
                           "building, yard or edge of the map: a dangling road", bounding(tip))
-            elif kind in ("dead end", "into a yard") and self.kit is not None and self.kit.roads is not None \
-                    and self.kit.roads.dead_ends == "None":
+            elif kind in ("dead end", "into a yard", "at a plaza") and road.grade != "Lane" and self.kit is not None \
+                    and self.kit.roads is not None and self.kit.roads.dead_ends == "None":
+                # A lane that does not run through is counted in its class and not reported until the Empire's
+                # lane rule is verified against the pictures (spec FR-054, Edge Cases).
                 self.find(ROAD_KIND, where, f"the end is {kind}: it touches no other road, gate or map edge and is not "
                           "at its destination, and the kit allows no dead ends", bounding(tip))
 

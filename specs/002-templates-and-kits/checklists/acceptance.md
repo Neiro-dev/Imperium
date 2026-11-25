@@ -22,7 +22,8 @@ check never reports a match by itself.
 
 ### The river-bend town's reading from its screenshot, area by area (spec FR-050, FR-053, FR-057, SC-015 to SC-019)
 
-- [ ] CHK002 Does the East Square area of `readings/RiverBendTown.xml`, traced at 51d28fd, reproduce the screenshot
+- [ ] CHK002 Does the East Square area of `readings/RiverBendTown.xml`, traced at 51d28fd and drawn at befc9a5 (its
+  court opened), reproduce the screenshot
   better than the old sample's same area (sample cells x 276-393, y 196-289), judged in the two pictures of SC-018?
   This is the first look, after tracing (FR-050). [SC-017, SC-018, FR-053, FR-057]
   - Pictures in the project's files: `RiverBendTown.compare-over.png` (the new tracing over the screenshot, beside the
@@ -44,7 +45,11 @@ check never reports a match by itself.
     - S9 (1000,560,1060,660) and (1060,600,1140,680): shadowed paved ground beside the workshop is garden in the old
       sample.
     - S1 and S3: the old sample's road network is in five pieces and two of its yards touch no house (report,
-      findings of the old sample).
+      findings of the old sample, boxed in the sample's cells on its own drawing).
+  - Maintainer's look, 2026-11-25: somewhat better than the old sample, but the buildings are guessed from their roofs
+    rather than reproduced as the game's own buildings, and the roads were not read from any road source and do not
+    connect on their own. Not accepted; the area is read again by the game's own buildings and road pieces (spec
+    FR-058, SC-020; tasks, Handoff of 2026-11-25, evening).
   - Findings of the new reading, places to look again and no condition (SC-019): residence plots over one and a half
     estates (the long roofs and wide yards may be two or more households each), and the east street's north end,
     which a tree crown hides (left as read, marked unsure). Each is left with its region; none was changed to make a
