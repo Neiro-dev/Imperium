@@ -10,10 +10,12 @@
   <Mantle.KitDef>
     <defName>Empire</defName>
     <label>Empire</label>
-    <!-- Design: line 184 (a kit holds its culture's word list); setting.md lines 57, 59 and 60-61; Spec: FR-011.
-         Taking the Late Antique names of the provinces governed from Constantinople as the lean toward New Rome:
-         [Direction]. -->
-    <nameMaker>NamerSettlementEmpireImperium</nameMaker>
+    <!-- Spec: FR-032 (a kit names the culture definitions it serves; the Empire's faction names Sophian, Data:
+         Royalty/Defs/FactionDefs/Faction_Empire.xml line 22). The Empire's word list is no longer the kit's: it is set
+         on the Empire's faction by Imperium/Patches/Faction_Empire_Names.xml (Spec: FR-006, FR-011). -->
+    <cultures>
+      <li>Sophian</li>
+    </cultures>
     <skeleton>
       <parts>
         <!-- Design: lines 174 (the civic core, around its first square) and 182 (each square a forum). -->
@@ -823,6 +825,27 @@
       <doorStuffDef>BlocksSandstone</doorStuffDef>
       <plots />
     </fill>
+    <!-- Spec: FR-054 (the Empire kit's road settings: the design's grades and widths, cities-inside.md lines 182-187;
+         the eight directions and no dead ends, cities-forms.md lines 374-375 and 09_地图生成与CBF技术.md lines 846 and
+         473). Whether a plaza is a node and whether lanes run through at both ends are verified against the pictures
+         first; until then those ends are only counted (Spec: FR-054, Edge Cases). -->
+    <roads>
+      <grades>
+        <li><name>MainStreet</name><widths><li>5</li><li>7</li></widths></li>
+        <li><name>OldRoad</name><widths><li>5</li></widths></li>
+        <li><name>SecondaryStreet</name><widths><li>5</li></widths></li>
+        <li><name>Lane</name><widths><li>3</li></widths></li>
+        <li><name>RingRoad</name><widths><li>3</li></widths></li>
+        <li><name>NarrowWay</name><widths><li>1</li></widths></li>
+      </grades>
+      <eightDirections>true</eightDirections>
+      <deadEnds>None</deadEnds>
+    </roads>
+    <!-- Spec: FR-055 (the land the streets enclose is divided into households, each with its plot; cities-inside.md
+         lines 485-487). -->
+    <households>
+      <plotEach>true</plotEach>
+    </households>
   </Mantle.KitDef>
 
 </Defs>

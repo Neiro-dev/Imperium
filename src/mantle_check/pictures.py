@@ -425,3 +425,300 @@ def side_by_side(drawing: Image.Image, pictures: list[Image.Image]) -> Image.Ima
 def save(image: Image.Image, path: Path) -> None:
     path.parent.mkdir(parents=True, exist_ok=True)
     image.save(path, format="PNG", optimize=False)
+
+
+# A reading's pieces by kind, the old sample beside it, and the screenshot's area (spec FR-053, FR-057, SC-018;
+# research R-24, R-27). The same colours serve the new reading and the old sample, so that the two compare by eye.
+
+KIND_COLOURS = {
+    "Road": (135, 135, 135), "RouteLine": (160, 160, 160), "Plaza": (205, 200, 190), "Gate": (150, 110, 70),
+    "Bridge": (150, 110, 70), "House": (214, 170, 120), "AnnexOrAttic": (185, 175, 210), "Plot": (238, 230, 205),
+    "Yard": (226, 205, 150), "YardPath": (212, 192, 140), "Porch": (200, 182, 150), "CityWall": (95, 85, 75),
+    "YardWall": (125, 95, 65), "LowWall": (125, 95, 65), "Railing": (150, 120, 90), "Fence": (150, 120, 90),
+    "LargePiece": (232, 192, 64), "Tree": (88, 140, 72), "Garden": (150, 190, 110), "Water": (72, 122, 172),
+    "Bank": (182, 172, 142), "Ruin": (150, 150, 150), "Unclear": (235, 120, 200), "VineTrellis": (170, 190, 120),
+    "Colonnade": (220, 215, 200), "Shrine": (200, 170, 200), "WorkshopYard": (190, 170, 120),
+    "StockPen": (175, 160, 110), "Shed": (170, 150, 120), "FrontSteps": (220, 210, 190),
+}
+# Kinds drawn first are covered by those drawn later, so that a house shows over its plot.
+KIND_ORDER = (
+    "Plot", "Garden", "VineTrellis", "WorkshopYard", "StockPen", "Shed", "Colonnade", "Shrine", "FrontSteps", "Yard",
+    "YardPath", "Porch", "Bank", "Water", "Plaza", "Road", "Bridge", "Gate", "Tree", "Ruin", "Unclear", "LargePiece",
+    "AnnexOrAttic", "House", "YardWall", "LowWall", "Railing", "Fence", "CityWall",
+)
+FINDING = (240, 130, 0)
+UNSURE = (200, 0, 160)
+
+
+def kind_rank(kind: str | None) -> int:
+    return KIND_ORDER.index(kind) if kind in KIND_ORDER else len(KIND_ORDER)
+
+
+def dashed(draw: ImageDraw.ImageDraw, start, end, fill, width: int = 1, dash: int = 4) -> None:
+    (x0, y0), (x1, y1) = start, end
+    length = math.hypot(x1 - x0, y1 - y0)
+    if length == 0:
+        return
+    steps = max(1, int(length // dash))
+    for i in range(0, steps, 2):
+        a, b = i / steps, min(1.0, (i + 1) / steps)
+        draw.line([(x0 + (x1 - x0) * a, y0 + (y1 - y0) * a), (x0 + (x1 - x0) * b, y0 + (y1 - y0) * b)],
+                  fill=fill, width=width)
+
+
+def outline_edges(cells: set):
+    """The edges of a set of cells that face no other cell of it, as pairs of cell corners."""
+    for x, z in sorted(cells):
+        if (x - 1, z) not in cells:
+            yield (x, z), (x, z + 1)
+        if (x + 1, z) not in cells:
+            yield (x + 1, z), (x + 1, z + 1)
+        if (x, z - 1) not in cells:
+            yield (x, z), (x + 1, z)
+        if (x, z + 1) not in cells:
+            yield (x, z + 1), (x + 1, z + 1)
+
+
+def household_colour(name: str) -> tuple[int, int, int]:
+    digest = hashlib.md5(("household " + name).encode("utf-8")).digest()
+    return tuple(40 + digest[i] * 150 // 255 for i in range(3))
+
+
+@dataclass
+class Piece:
+    """What is drawn of one piece: its cells, kind, name, household, and whether the reader is unsure of it."""
+
+    cells: set
+    kind: str
+    name: str = ""
+    household: str | None = None
+    unsure: bool = False
+    grade: str | None = None
+    line: list = field(default_factory=list)
+
+
+def pieces_of(city: City, road_cells: dict) -> list[Piece]:
+    from .roads import area_cells
+
+    size = city.size or (MAX_MAP, MAX_MAP)
+    found = []
+    for area in city.parts + city.features:
+        if area.kind is None:
+            continue
+        if area.kind == "Road" and area.name in road_cells:
+            cells = road_cells[area.name]
+        else:
+            cells = area_cells(area, size)
+        found.append(Piece(cells, area.kind, area.name, area.household, area.uncertain, area.grade, list(area.line)))
+    return found
+
+
+class KindPainter:
+    """Draws pieces by kind on a grid of cells (spec FR-053)."""
+
+    def __init__(self, size: tuple[int, int], cell: int):
+        self.w, self.h = size
+        self.cell = cell
+        self.top = 30
+
+    def corner(self, x: float, z: float) -> tuple[float, float]:
+        return (MARGIN + x * self.cell, self.top + (self.h - z) * self.cell)
+
+    def draw(self, pieces: list[Piece], title: str, households: bool, marks: list) -> Image.Image:
+        image = Image.new("RGB", (self.w * self.cell + 2 * MARGIN, self.h * self.cell + self.top + MARGIN), BACKGROUND)
+        draw = ImageDraw.Draw(image)
+        draw.text((MARGIN, 8), title, fill=INK, font=font(14))
+        for piece in sorted(pieces, key=lambda p: kind_rank(p.kind)):
+            if piece.kind == "RouteLine":
+                continue
+            colour = KIND_COLOURS.get(piece.kind, (200, 200, 200))
+            if households and piece.household and piece.kind in ("House", "AnnexOrAttic"):
+                base = household_colour(piece.household)
+                colour = tuple((c + 2 * b) // 3 for c, b in zip(colour, base))
+            for x, z in piece.cells:
+                left, top = self.corner(x, z + 1)
+                draw.rectangle([left, top, left + self.cell - 1, top + self.cell - 1], fill=colour)
+        # A thin line every 10 cells, so that sizes read without hiding the pieces.
+        for x in range(0, self.w + 1, 10):
+            draw.line([self.corner(x, 0), self.corner(x, self.h)], fill=(200, 200, 195))
+            draw.text((self.corner(x, self.h)[0], self.top - 12), str(x), fill=INK, font=font(9))
+        for z in range(0, self.h + 1, 10):
+            draw.line([self.corner(0, z), self.corner(self.w, z)], fill=(200, 200, 195))
+            draw.text((MARGIN - 22, self.corner(0, z)[1] - 6), str(z), fill=INK, font=font(9))
+        for piece in pieces:
+            self.piece_lines(draw, piece, households)
+        for label, rect, colour in marks:
+            x1, z1, x2, z2 = rect
+            left, top = self.corner(x1, z2 + 1)
+            right, bottom = self.corner(x2 + 1, z1)
+            draw.rectangle([left, top, right, bottom], outline=colour, width=2)
+            draw.text((left + 2, top - 12), label, fill=colour, font=font(11))
+        return image
+
+    def piece_lines(self, draw, piece: Piece, households: bool) -> None:
+        if piece.kind == "RouteLine":
+            for a, b in zip(piece.line, piece.line[1:]):
+                dashed(draw, self.corner(a[0] + 0.5, a[1] + 0.5), self.corner(b[0] + 0.5, b[1] + 0.5),
+                       (110, 110, 110), 2)
+            return
+        colour = household_colour(piece.household) if households and piece.household else INK
+        width, dash = 0, False
+        if piece.kind == "Plot" and households:
+            width = 3
+        elif piece.kind in ("House", "AnnexOrAttic", "LargePiece"):
+            width = 1
+            if not (households and piece.household):
+                colour = (70, 45, 25)
+        elif piece.kind in ("Yard", "YardPath") and households:
+            width, dash = 1, True
+        if piece.unsure:
+            colour, width, dash = UNSURE, 2, True
+        if width:
+            for a, b in outline_edges(piece.cells):
+                if dash:
+                    dashed(draw, self.corner(*a), self.corner(*b), colour, width, 3)
+                else:
+                    draw.line([self.corner(*a), self.corner(*b)], fill=colour, width=width)
+        if piece.cells and ((piece.kind == "Plot" and households) or piece.unsure):
+            x1 = min(c[0] for c in piece.cells)
+            z2 = max(c[1] for c in piece.cells)
+            label = (piece.household or piece.name) + (" ?" if piece.unsure else "")
+            left, top = self.corner(x1, z2 + 1)
+            draw.text((left + 2, top + 1), label, fill=colour, font=font(10))
+        if piece.kind == "Road" and piece.grade and len(piece.line) >= 2:
+            a, b = piece.line[(len(piece.line) - 1) // 2], piece.line[(len(piece.line) - 1) // 2 + 1]
+            place = self.corner((a[0] + b[0]) / 2 + 0.5, (a[1] + b[1]) / 2 + 0.5)
+            text_box = draw.textbbox(place, piece.grade, font=font(10))
+            draw.rectangle(text_box, fill=BACKGROUND)
+            draw.text(place, piece.grade, fill=INK, font=font(10))
+
+
+def legend_counts(pieces: list[Piece], extra: list[str]) -> Image.Image:
+    counts: dict = {}
+    for piece in pieces:
+        counts[piece.kind] = counts.get(piece.kind, 0) + 1
+    rows = [(kind, counts[kind]) for kind in sorted(counts, key=kind_rank)]
+    image = Image.new("RGB", (620, 22 + 16 * (len(rows) + len(extra)) + 8), BACKGROUND)
+    draw = ImageDraw.Draw(image)
+    draw.text((8, 4), "Legend: pieces by kind, with how many", fill=INK, font=font(12))
+    y = 22
+    for kind, count in rows:
+        draw.rectangle([8, y + 2, 20, y + 13], fill=KIND_COLOURS.get(kind, (200, 200, 200)), outline=INK)
+        draw.text((26, y), f"{kind}: {count}", fill=INK, font=font(11))
+        y += 16
+    for line in extra:
+        draw.text((8, y), line, fill=INK, font=font(11))
+        y += 16
+    return image
+
+
+def below(image: Image.Image, under: Image.Image) -> Image.Image:
+    out = Image.new("RGB", (max(image.width, under.width), image.height + under.height), BACKGROUND)
+    out.paste(image, (0, 0))
+    out.paste(under, (0, image.height))
+    return out
+
+
+def area_drawing(pieces: list[Piece], size: tuple[int, int], title: str, households: bool, marks: list,
+                 extra: list[str]) -> Image.Image:
+    cell = max(3, min(12, 1000 // max(size)))
+    image = KindPainter(size, cell).draw(pieces, title, households, marks)
+    return below(image, legend_counts(pieces, extra))
+
+
+def zoom_of(crop: tuple[int, int, int, int]) -> int:
+    x0, y0, x1, y1 = crop
+    return max(1, OVERLAY_SIZE // max(1, max(x1 - x0, y1 - y0)))
+
+
+def over_picture_cells(picture: Image.Image, crop: tuple[int, int, int, int], to_pixel, pieces: list[Piece],
+                       households: bool, marks: list, title: str) -> Image.Image:
+    """The picture's area, enlarged by a whole number, with each piece's cells laid over it where `to_pixel` puts the
+    cell corners: pieces filled lightly in their kind's colour and outlined, findings and problems boxed with their
+    numbers. Nothing is marked as matching or not (spec FR-051, FR-052)."""
+    x0, y0, x1, y1 = crop
+    zoom = zoom_of(crop)
+    base = picture.crop((x0, y0, x1 + 1, y1 + 1)).resize(((x1 - x0 + 1) * zoom, (y1 - y0 + 1) * zoom),
+                                                            Image.Resampling.LANCZOS).convert("RGBA")
+    overlay = Image.new("RGBA", base.size, (0, 0, 0, 0))
+    draw = ImageDraw.Draw(overlay)
+
+    def place(x: float, z: float) -> tuple[float, float]:
+        px, py = to_pixel((x, z))
+        return ((px - x0) * zoom, (py - y0) * zoom)
+
+    for piece in sorted(pieces, key=lambda p: kind_rank(p.kind)):
+        if piece.kind == "RouteLine":
+            continue
+        colour = KIND_COLOURS.get(piece.kind, (200, 200, 200))
+        for x, z in piece.cells:
+            draw.polygon([place(x, z), place(x + 1, z), place(x + 1, z + 1), place(x, z + 1)], fill=(*colour, 70))
+    image = Image.alpha_composite(base, overlay).convert("RGB")
+    draw = ImageDraw.Draw(image)
+    for piece in pieces:
+        if piece.kind == "RouteLine":
+            for a, b in zip(piece.line, piece.line[1:]):
+                dashed(draw, place(a[0] + 0.5, a[1] + 0.5), place(b[0] + 0.5, b[1] + 0.5), (235, 235, 235), 2)
+            continue
+        colour = KIND_COLOURS.get(piece.kind, (200, 200, 200))
+        if households and piece.household and piece.kind in ("Plot", "House", "AnnexOrAttic"):
+            colour = household_colour(piece.household)
+        width = 3 if piece.kind in ("House", "AnnexOrAttic", "LargePiece") else 2 if piece.kind == "Plot" else 1
+        if piece.kind in ("House", "AnnexOrAttic", "LargePiece") and not (households and piece.household):
+            colour = (255, 245, 220)
+        for a, b in outline_edges(piece.cells):
+            if piece.unsure or piece.kind in ("Yard", "YardPath"):
+                dashed(draw, place(*a), place(*b), UNSURE if piece.unsure else colour, width, 4)
+            else:
+                draw.line([place(*a), place(*b)], fill=colour, width=width)
+    for label, rect, colour in marks:
+        xa, za, xb, zb = rect
+        corners = [place(xa, za), place(xb + 1, za), place(xb + 1, zb + 1), place(xa, zb + 1)]
+        draw.polygon(corners, outline=colour, width=2)
+        left = min(c[0] for c in corners)
+        top = min(c[1] for c in corners)
+        draw.text((left + 2, top - 13), label, fill=colour, font=font(12))
+    box = draw.textbbox((6, 4), title, font=font(13))
+    draw.rectangle([0, 0, box[2] + 4, box[3] + 4], fill=BACKGROUND)
+    draw.text((6, 4), title, fill=INK, font=font(13))
+    return image
+
+
+def with_ruler(picture: Image.Image, crop: tuple[int, int, int, int], title: str) -> Image.Image:
+    """The screenshot's area, enlarged as over_picture_cells enlarges it, with a ruler of its own pixels on two
+    sides (spec FR-053)."""
+    x0, y0, x1, y1 = crop
+    zoom = zoom_of(crop)
+    base = picture.crop((x0, y0, x1 + 1, y1 + 1)).resize(((x1 - x0 + 1) * zoom, (y1 - y0 + 1) * zoom),
+                                                            Image.Resampling.LANCZOS)
+    pad = 34
+    out = Image.new("RGB", (base.width + pad, base.height + pad), BACKGROUND)
+    out.paste(base, (pad, pad))
+    draw = ImageDraw.Draw(out)
+    for x in range((x0 // 10 + 1) * 10, x1 + 1, 10):
+        px = pad + (x - x0) * zoom
+        long = x % 50 == 0
+        draw.line([(px, pad - (10 if long else 5)), (px, pad)], fill=INK)
+        if long:
+            draw.text((px + 2, 4), str(x), fill=INK, font=font(10))
+    for y in range((y0 // 10 + 1) * 10, y1 + 1, 10):
+        py = pad + (y - y0) * zoom
+        long = y % 50 == 0
+        draw.line([(pad - (10 if long else 5), py), (pad, py)], fill=INK)
+        if long:
+            draw.text((2, py + 2), str(y), fill=INK, font=font(10))
+    box = draw.textbbox((pad + 4, pad + 4), title, font=font(13))
+    draw.rectangle(box, fill=BACKGROUND)
+    draw.text((pad + 4, pad + 4), title, fill=INK, font=font(13))
+    return out
+
+
+def same_width(images: list[Image.Image], width: int, gap: int = 16) -> Image.Image:
+    """The pictures side by side, each scaled to the same width, so that an area's proportions compare by eye
+    (spec FR-053, SC-018)."""
+    scaled = [image.resize((width, max(1, round(image.height * width / image.width))), Image.Resampling.LANCZOS)
+              for image in images]
+    out = Image.new("RGB", (width * len(scaled) + gap * (len(scaled) - 1), max(i.height for i in scaled)), BACKGROUND)
+    for index, image in enumerate(scaled):
+        out.paste(image, (index * (width + gap), 0))
+    return out

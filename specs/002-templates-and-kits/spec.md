@@ -1223,7 +1223,14 @@ and confirm that no shared file was changed.
   what went wrong, not a source of any piece (constitution, Principle II). The old sample is laid over the screenshot
   through the old project's own mapping of the screenshot to the sample's cells, recorded with the tracing it was made
   from, and is measured by the check after it is converted into a reading's form; neither is copied into a reading
-  (FR-053).
+  (FR-053) Each shortfall is a criterion, not an entry of a growing list: a
+  later error that a criterion already covers is a case of that criterion and is tested as one, and a row is added
+  only for an error no criterion covers [Spec Kit: `docs/how-to/evolving-specs.md`, a discovery is placed in the artifact of
+  the behaviour, strategy or tasks it changes]. The old sample is the counter-example: for each area, the check run on the old sample's same area is
+  recorded with the area's evidence, and each shortfall a check can find there is shown found in it before the new
+  reading's findings are trusted [Spec Kit: `docs/guides/bugfix.md`, a passing test suite is not enough where the
+  original case was never exercised]. Shortfalls of how the reader works, S6 and S12, are met by SC-019 and by how the reading is made,
+  not by a number.
 
 ### Key Entities *(include if feature involves data)*
 

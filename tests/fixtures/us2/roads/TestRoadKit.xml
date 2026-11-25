@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+  <!-- A test kit and template for the road and household findings of a reading (not game content). -->
+  <Mantle.KitDef>
+    <defName>TestRoads</defName>
+    <label>TestRoads</label>
+    <cultures><li>Rustican</li></cultures>
+    <skeleton>
+      <parts>
+        <li><name>core</name><kind>Core</kind></li>
+      </parts>
+    </skeleton>
+    <wallSettings>
+      <wallDef>Wall</wallDef>
+    </wallSettings>
+    <roads>
+      <grades>
+        <li><name>Street</name><widths><li>5</li></widths></li>
+        <li><name>Lane</name><widths><li>3</li></widths></li>
+      </grades>
+      <eightDirections>true</eightDirections>
+      <deadEnds>None</deadEnds>
+    </roads>
+    <households>
+      <plotEach>true</plotEach>
+    </households>
+  </Mantle.KitDef>
+  <Mantle.TemplateDef>
+    <defName>TestRoadTown</defName>
+    <label>TestRoadTown</label>
+    <kit>TestRoads</kit>
+    <reference>
+      <name>TestRoadTown</name>
+      <pictures><li>screenshot</li></pictures>
+    </reference>
+    <minMapSize>(40, 1, 40)</minMapSize>
+    <terrainShape>
+      <terrain>
+        <Soil><rects><li>(0,0,39,39)</li></rects></Soil>
+      </terrain>
+    </terrainShape>
+    <skeleton>
+      <parts>
+        <li><name>core</name><kind>Core</kind></li>
+      </parts>
+    </skeleton>
+  </Mantle.TemplateDef>
+</Defs>

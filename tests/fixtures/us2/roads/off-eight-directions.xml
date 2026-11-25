@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LaidOutCity>
+  <reference>TestRoadTown</reference>
+  <size>(40,40)</size>
+  <scale>
+    <pixelsPerCell>9</pixelsPerCell>
+    <referenceCell>3</referenceCell>
+    <measured><li><name>figure</name><rect>(5,5,7,7)</rect></li></measured>
+  </scale>
+  <terrain>
+    <Soil><rects><li>(0,0,39,39)</li></rects></Soil>
+  </terrain>
+  <roofs />
+  <parts>
+    <li><name>street</name><kind>Road</kind><grade>Street</grade><line><li>(0,20)</li><li>(39,20)</li></line><leadsTo>westHouse</leadsTo><wayInFrom><li>(100,150,110,160)</li></wayInFrom><from><li>(10,10,20,20)</li></from></li>
+    <li><name>lane</name><kind>Road</kind><grade>Lane</grade><line><li>(20,22)</li><li>(23,39)</li></line><leadsTo>eastHouse</leadsTo><wayInFrom><li>(200,100,210,110)</li></wayInFrom><from><li>(10,10,20,20)</li></from></li>
+    <li><name>westPlot</name><kind>Plot</kind><household>west</household><rects><li>(5,23,14,32)</li></rects><from><li>(10,10,20,20)</li></from></li>
+    <li><name>westHouse</name><kind>House</kind><household>west</household><rects><li>(7,23,12,28)</li></rects><use>Housing</use><basis>A red roof facing the street.</basis><from><li>(10,10,20,20)</li></from></li>
+    <li><name>westYard</name><kind>Yard</kind><household>west</household><rects><li>(7,29,12,31)</li></rects><from><li>(10,10,20,20)</li></from></li>
+    <li><name>eastPlot</name><kind>Plot</kind><household>east</household><rects><li>(22,23,31,32)</li></rects><from><li>(10,10,20,20)</li></from></li>
+    <li><name>eastHouse</name><kind>House</kind><household>east</household><rects><li>(22,23,27,28)</li></rects><use>Housing</use><basis>A red roof facing the lane.</basis><from><li>(10,10,20,20)</li></from></li>
+    <li><name>eastYard</name><kind>Yard</kind><household>east</household><rects><li>(28,23,31,28)</li></rects><from><li>(10,10,20,20)</li></from></li>
+  </parts>
+</LaidOutCity>

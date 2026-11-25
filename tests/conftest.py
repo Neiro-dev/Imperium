@@ -43,6 +43,12 @@ PROBLEM_LINE = re.compile(
 )
 
 
+FINDING_LINE = re.compile(
+    r"^(?P<number>L\d+)\. \[(?P<kind>[^\]]+)\] (?P<file>[^,]+), (?P<owner>.+?), (?P<where>(?:parts|household|plots|the road network)[^:]*?)"
+    r"(?: at (?P<cell>\(\d+, \d+\)(?:-\(\d+, \d+\))?))?: (?P<message>.*)$"
+)
+
+
 @dataclass
 class CheckResult:
     status: int
@@ -61,14 +67,23 @@ class CheckResult:
     def kinds(self) -> list[str]:
         return [p["kind"] for p in self.problems]
 
+    @property
+    def findings(self) -> list[dict]:
+        found = []
+        for line in self.report.splitlines():
+            match = FINDING_LINE.match(line)
+            if match:
+                found.append(match.groupdict())
+        return found
+
 
 @pytest.fixture
 def run_check(data_dir, tmp_path, capsys):
     """Runs the check as the command does, in the test's own output folder, and gives the exit status and report."""
 
-    def run(files, mods=(), references=(), out: Path | None = None) -> CheckResult:
+    def run(files, mods=(), references=(), out: Path | None = None, **options) -> CheckResult:
         out = out or tmp_path / "out"
-        status = cli.run([Path(f) for f in files], data_dir, out, [Path(m) for m in mods], list(references))
+        status = cli.run([Path(f) for f in files], data_dir, out, [Path(m) for m in mods], list(references), **options)
         captured = capsys.readouterr()
         report_file = out / "report.txt"
         result = CheckResult(status, captured.out + captured.err, out)

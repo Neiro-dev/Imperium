@@ -22,11 +22,11 @@ SHARED = [ROOT / "src", MANTLE, IMPERIUM, SHARED_PIECES]
 
 FARTHER = "<li><relation>Farther</relation><a>palaceQuarter</a><b>mainGate</b><than>{}</than></li>"
 
-# The copy's changes: its name, its word list, its wall settings and one relation of its skeleton.
+# The copy's changes: its name, the culture definitions it serves, its wall settings and one relation of its skeleton.
 KIT_CHANGES = [
     ("<defName>Empire</defName>", "<defName>TestCulture</defName>"),
     ("<label>Empire</label>", "<label>test culture</label>"),
-    ("<nameMaker>NamerSettlementEmpireImperium</nameMaker>", "<nameMaker>NamerSettlementOutlander</nameMaker>"),
+    ("<cultures>\n      <li>Sophian</li>", "<cultures>\n      <li>Rustican</li>"),
     ("<wallSettings>\n      <wallDef>Wall</wallDef>", "<wallSettings>\n      <wallDef>TestPieceWall</wallDef>"),
     (FARTHER.format("core"), FARTHER.format("firstSquare")),
 ]
@@ -93,7 +93,7 @@ def test_a_copied_culture_is_checked_and_drawn_under_its_new_name(run_check, mak
     assert copy.status == 0, copy.report
     assert copy.problems == []
     line = culture_line(copy.report, "TestCulture")
-    assert "word list NamerSettlementOutlander" in line
+    assert "cultures Rustican" in line
     assert "walls TestPieceWall" in line
     assert line.endswith("templates TestCultureTown")
     assert "- Empire: " not in copy.report

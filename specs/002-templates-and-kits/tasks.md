@@ -423,8 +423,9 @@ again, and no number is a condition (SC-019; R-24). Each test is written first a
 - [ ] T071 Put the East Square pictures of SC-018 in the project's files, and add one item to
   `checklists/acceptance.md` naming the reading, the commit, the pictures, the minutes and, with its pixel region, each
   place where the old sample's same area shows a shortfall of FR-057, listed after the tracing was drawn, for the
-  maintainer to judge whether the new reading reproduces the screenshot better than the old sample (spec FR-029,
-  FR-050, FR-057, SC-016 to SC-018)
+  maintainer to judge whether the new reading reproduces the screenshot better than the old sample, with the check's run
+  on the old sample's same area as the counter-example, each shortfall the check can find shown found there (spec
+  FR-029, FR-050, FR-057, SC-016 to SC-018)
 - [ ] T072 Read the town's other areas the same way, one at a time, each after the one before is accepted (spec
   FR-050)
 - [ ] T073 Once every area is accepted, take the Empire kit, with the design's area spectra, and the river-bend

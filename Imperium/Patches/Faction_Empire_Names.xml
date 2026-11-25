@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Patch>
+
+  <!-- The Empire's settlements take Imperium's word list, set on the Empire's own faction rather than in its kit, since
+       every faction names its settlements with its own settlementNameMaker (specs/002-templates-and-kits/spec.md,
+       FR-006 and FR-011; Data: Royalty/Defs/FactionDefs/Faction_Empire.xml line 21). The form is the game's own
+       (Data: Biotech/Patches/Apparel_Headgear.xml; ModUpdating.txt line 112). -->
+  <Operation Class="PatchOperationReplace">
+    <xpath>/Defs/FactionDef[defName="Empire"]/settlementNameMaker</xpath>
+    <value>
+      <settlementNameMaker>NamerSettlementEmpireImperium</settlementNameMaker>
+    </value>
+  </Operation>
+
+</Patch>

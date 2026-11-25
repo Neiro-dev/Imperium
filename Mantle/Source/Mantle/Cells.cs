@@ -21,6 +21,7 @@ public abstract class Rects<TDef> where TDef : Def
         {
             rects = DirectXmlToObject.ObjectFromXml<List<CellRect>>(rectsNode, false);
         }
+        UnknownFields.Report(xmlRoot, "rects");
     }
 }
 
@@ -92,6 +93,7 @@ public class PlacedThing
                 this, "stuff", stuffNode.InnerText, stuffNode.Attributes?["MayRequire"]?.Value?.ToLower(),
                 stuffNode.Attributes?["MayRequireAnyOf"]?.Value?.ToLower());
         }
+        UnknownFields.Report(xmlRoot, "position", "rotation", "rect", "stuff");
     }
 }
 
@@ -119,4 +121,27 @@ public class SpecCard
     public List<TerrainRects> terrain = new();
     public List<Room> rooms = new();
     public List<PlacedThing> things = new();
+}
+
+/// <summary>Reports each child element that Mantle's own XML reading does not read, as the game reports a field its
+/// code does not hold, unless the element is marked IgnoreIfNoMatchingField (spec FR-014; research R-25;
+/// ModUpdating.txt lines 356-359).</summary>
+internal static class UnknownFields
+{
+    public static void Report(XmlNode xmlRoot, params string[] known)
+    {
+        foreach (XmlNode child in xmlRoot.ChildNodes)
+        {
+            if (child is not XmlElement element || System.Array.IndexOf(known, element.Name) >= 0)
+            {
+                continue;
+            }
+            if (string.Equals(element.Attributes?["IgnoreIfNoMatchingField"]?.Value, "true",
+                    System.StringComparison.OrdinalIgnoreCase))
+            {
+                continue;
+            }
+            Log.Error($"Mantle: <{xmlRoot.Name}> holds <{element.Name}>, which this form does not hold; it was not read.");
+        }
+    }
 }

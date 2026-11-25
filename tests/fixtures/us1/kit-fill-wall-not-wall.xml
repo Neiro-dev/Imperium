@@ -3,7 +3,7 @@
   <Mantle.KitDef>
     <defName>TestKitFillWallNotWall</defName>
     <label>TestKitFillWallNotWall</label>
-    <nameMaker>NamerSettlementTribal</nameMaker>
+    <cultures><li>Corunan</li></cultures>
     <skeleton>
       <parts>
         <li><name>core</name><kind>Core</kind></li>

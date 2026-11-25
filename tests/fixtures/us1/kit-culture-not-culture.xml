@@ -3,7 +3,7 @@
   <Mantle.KitDef>
     <defName>TestKitNamerNotNamer</defName>
     <label>TestKitNamerNotNamer</label>
-    <nameMaker>Wall</nameMaker>
+    <cultures><li>Wall</li></cultures>
     <skeleton>
       <parts>
         <li><name>core</name><kind>Core</kind></li>

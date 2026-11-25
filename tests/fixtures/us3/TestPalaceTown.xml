@@ -3,7 +3,7 @@
   <Mantle.KitDef>
     <defName>TestPalaceKit</defName>
     <label>test palace kit</label>
-    <nameMaker>NamerSettlementOutlander</nameMaker>
+    <cultures><li>Rustican</li></cultures>
     <skeleton>
       <parts>
         <li><name>core</name><kind>Core</kind></li>

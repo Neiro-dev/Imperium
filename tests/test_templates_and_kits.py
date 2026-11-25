@@ -19,7 +19,7 @@ ONE_PROBLEM = {
     "kit-door-stuff.xml": ("wrong kind", None, "Door does not take Cloth"),
     "biome-not-biome.xml": ("wrong kind", None, "not a biome"),
     "river-not-river.xml": ("wrong kind", None, "not a river"),
-    "kit-namer-not-namer.xml": ("wrong kind", None, "not a word list"),
+    "kit-culture-not-culture.xml": ("wrong kind", None, "not a culture definition"),
     "part-kind.xml": ("wrong kind", None, "'Castle' is not a part kind"),
     "relation-kind.xml": ("wrong kind", None, "'Near' is not a relation kind"),
     "relation-field.xml": ("wrong kind", None, "Across needs feature"),
@@ -80,7 +80,7 @@ def test_royalty_is_reported_only_where_the_mod_does_not_require_it(run_check):
     problem = result.problems[0]
     assert problem["kind"] == "other expansion"
     assert problem["file"] == "NoExpansion/Defs/KitDefs/RoyaltyNamer.xml"
-    assert "NamerSettlementEmpire" in problem["message"]
+    assert "Sophian" in problem["message"]
     assert "Test mod requiring no expansion does not require" in problem["message"]
 
 

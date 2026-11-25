@@ -52,7 +52,7 @@ class Culture:
 
     name: str
     kit: str | None = None
-    word_list: str | None = None
+    cultures: str | None = None
     walls: str | None = None
     templates: set[str] = field(default_factory=set)
 
@@ -60,7 +60,7 @@ class Culture:
         if self.kit is None:
             held = "no kit"
         else:
-            held = f"kit in {self.kit}, word list {self.word_list or '-'}, walls {self.walls or '-'}"
+            held = f"kit in {self.kit}, cultures {self.cultures or '-'}, walls {self.walls or '-'}"
         return f"- {self.name}: {held}, templates {', '.join(sorted(self.templates)) or 'none'}"
 
 
@@ -71,6 +71,10 @@ class Report:
     pictures: list[str] = field(default_factory=list)
     checked: list[str] = field(default_factory=list)
     cultures: dict[str, Culture] = field(default_factory=dict)
+    # A reading's places to look again: never problems, never counted in the exit status (spec SC-019; R-24).
+    findings: list[Problem] = field(default_factory=list)
+    # Lines reported beside the findings: road ends by class, plot sizes and shares, for each reading or old sample.
+    measures: list[str] = field(default_factory=list)
 
     def culture(self, name: str) -> Culture:
         return self.cultures.setdefault(name, Culture(name))
@@ -78,6 +82,10 @@ class Report:
     def numbered(self) -> list[tuple[int, Problem]]:
         unique = sorted(set(self.problems), key=Problem.sort_key)
         return list(enumerate(unique, start=1))
+
+    def numbered_findings(self) -> list[tuple[str, Problem]]:
+        unique = sorted(set(self.findings), key=Problem.sort_key)
+        return [(f"L{n}", f) for n, f in enumerate(unique, start=1)]
 
     def text(self) -> str:
         lines = ["Mantle check", ""]
@@ -101,6 +109,17 @@ class Report:
                 )
         else:
             lines.append("Problems: none found.")
+        findings = self.numbered_findings()
+        if findings or self.measures:
+            lines.append("")
+            lines.append(f"Places to look again: {len(findings)} (findings, not problems: none passes or fails a reading)")
+            for number, finding in findings:
+                cell = f" at {finding.cell_text()}" if finding.cell is not None else ""
+                lines.append(
+                    f"{number}. [{finding.kind}] {finding.file}, {finding.owner}, {finding.where}{cell}: {finding.message}"
+                )
+            for line in self.measures:
+                lines.append(line)
         if self.relations:
             lines.append("")
             lines.append("Relations:")

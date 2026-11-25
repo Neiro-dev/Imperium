@@ -3,7 +3,7 @@
   <Mantle.KitDef>
     <defName>TestKitUnknownName</defName>
     <label>TestKitUnknownName</label>
-    <nameMaker>NamerSettlementTribal</nameMaker>
+    <cultures><li>Corunan</li></cultures>
     <skeleton>
       <parts>
         <li><name>core</name><kind>Core</kind></li>

@@ -257,10 +257,10 @@ class Checker:
 
     def kit(self, kit: Kit, holder: Source) -> None:
         self.start(kit.file, kit.owner, holder)
-        if kit.name_maker is None:
-            self.problem("missing field", "nameMaker", "the kit names no word list")
-        else:
-            self.lookup(kit.name_maker, "RulePackDef", "a word list (RulePackDef)")
+        if not kit.cultures:
+            self.problem("missing field", "cultures", "the kit names no culture definition it serves (spec FR-032)")
+        for named in kit.cultures:
+            self.lookup(named, "CultureDef", "a culture definition (CultureDef)")
         self.wall(kit.wall_def, "wallSettings wallDef")
         for group in kit.groups:
             self.group(group)

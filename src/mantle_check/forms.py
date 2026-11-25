@@ -40,12 +40,39 @@ RELATION_NEEDS = {
 MAX_MAP = 350
 USES = ("Housing", "ShopFront", "Workshop", "Tavern", "Market", "Public", "AnnexOrAttic", "Unclear")
 WRONG_SCALE = "wrong scale, region or use"
+# The kinds of a piece of a reading from a picture (data-model.md, LaidOutCity `kind`; research R-21).
+PIECE_KINDS = (
+    "Road", "RouteLine", "Plaza", "Gate", "Bridge", "House", "AnnexOrAttic", "Plot", "Yard", "YardPath", "Porch",
+    "CityWall", "YardWall", "LowWall", "Railing", "Fence", "LargePiece", "Tree", "Water", "Bank", "Ruin", "Unclear",
+    "Garden", "VineTrellis", "Colonnade", "Shrine", "WorkshopYard", "StockPen", "Shed", "FrontSteps",
+)
+PLOT_CONTENTS = ("Garden", "VineTrellis", "Colonnade", "Shrine", "WorkshopYard", "StockPen", "Shed", "FrontSteps")
+DEAD_ENDS = ("Allowed", "None")
+# Attributes every element may carry: the game's own (research R-25; `Data/`, `ModUpdating.txt` lines 356-359).
+ATTRIBUTES = frozenset({"MayRequire", "MayRequireAnyOf", "IgnoreIfNoMatchingField"})
+DEF_ATTRIBUTES = ATTRIBUTES | {"Name", "ParentName", "Abstract", "Class"}
+DEF_FIELDS = {"defName", "label", "description", "modExtensions"}
+TEMPLATE_FIELDS = DEF_FIELDS | {
+    "kit", "reference", "allowedBiomes", "allowedRivers", "naturalEnemy", "permanentEnemy", "minMapSize",
+    "terrainShape", "skeleton", "things",
+}
+KIT_FIELDS = DEF_FIELDS | {
+    "cultures", "nameMaker", "skeleton", "wallSettings", "groups", "fill", "roads", "households", "blockLibrary",
+}
+CITY_FIELDS = {"template", "kit", "reference", "size", "terrain", "roofs", "things", "parts", "features", "scale", "ground"}
+AREA_FIELDS = {"name", "rects"}
+READING_AREA_FIELDS = AREA_FIELDS | {
+    "from", "use", "basis", "kind", "uncertain", "because", "grade", "width", "widthFrom", "line", "leadsTo",
+    "wayInFrom", "household",
+}
 
 _INT = r"\s*(-?\d+)\s*"
 RECT = re.compile(rf"^\({_INT},{_INT},{_INT},{_INT}\)$")
 POSITION = re.compile(rf"^\({_INT},\s*0\s*,{_INT}\)$")
 SIZE = re.compile(rf"^\({_INT},{_INT}\)$")
 PIXEL = re.compile(rf"^\({_INT},{_INT}\)$")
+_NUM = r"\s*(-?\d+(?:\.\d+)?)\s*"
+NUMBER_PAIR = re.compile(rf"^\({_NUM},{_NUM}\)$")
 MIN_MAP_SIZE = re.compile(rf"^\({_INT},\s*1\s*,{_INT}\)$")
 
 
@@ -73,6 +100,17 @@ class Area:
     from_rects: list[Rect] = field(default_factory=list)
     use: str | None = None
     basis: str | None = None
+    # Typed pieces of a reading (data-model.md, LaidOutCity; research R-21).
+    kind: str | None = None
+    uncertain: bool = False
+    because: str | None = None
+    grade: str | None = None
+    width: int | None = None
+    width_from: Rect | None = None
+    line: list[tuple[int, int]] = field(default_factory=list)
+    leads_to: str | None = None
+    way_in_from: list[Rect] = field(default_factory=list)
+    household: str | None = None
 
 
 @dataclass
@@ -164,7 +202,6 @@ class Kit:
     def_name: str
     label: str
     file: str
-    name_maker: Named | None
     skeleton: Skeleton
     wall_def: Named | None
     groups: list[Group]
@@ -173,10 +210,22 @@ class Kit:
     fill_door_stuff: Named | None
     plots: list[Group]
     block_library: list[SpecCard]
+    cultures: list[Named] = field(default_factory=list)
+    roads: RoadSettings | None = None
+    plot_each: bool | None = None
 
     @property
     def owner(self) -> str:
         return f"kit {self.def_name}"
+
+
+@dataclass
+class RoadSettings:
+    """What a kit holds its culture's readings to beyond the shared road checks (data-model.md, KitDef.roads)."""
+
+    grades: dict[str, tuple[int, ...]] = field(default_factory=dict)
+    eight_directions: bool = False
+    dead_ends: str = "Allowed"
 
 
 @dataclass
@@ -222,6 +271,8 @@ class City:
     parts: list[Area]
     features: list[Area]
     scale: Scale | None = None
+    # A reading of a picture in perspective: pairs of a ground pixel and the cell corner it lies on (R-20).
+    ground: list[tuple[tuple[float, float], tuple[float, float]]] = field(default_factory=list)
 
     @property
     def owner(self) -> str:
@@ -241,6 +292,26 @@ class Reader:
 
     def wrong_form(self, where: str, value: str, form: str) -> None:
         self.problem("wrong form", where, f"'{value}' is not in the form {form}")
+
+    def only(self, node: ET.Element | None, fields: set[str] | frozenset[str], where: str,
+             attributes: frozenset[str] = ATTRIBUTES) -> None:
+        """Reports each child element and attribute the form does not hold, as the game reports a field its code
+        does not hold, unless the element is marked IgnoreIfNoMatchingField (spec FR-014; research R-25)."""
+        if node is None:
+            return
+        for name in sorted(node.attrib):
+            if name not in attributes:
+                self.problem("wrong form", where, f"the attribute {name} is not one this form holds")
+        for child in node:
+            if not isinstance(child.tag, str) or child.tag in fields:
+                continue
+            if (child.get("IgnoreIfNoMatchingField") or "").strip().lower() == "true":
+                continue
+            self.problem("wrong form", where, f"<{child.tag}> is not a field this form holds")
+
+    def only_li(self, node: ET.Element | None, where: str) -> None:
+        """A list holds only `li` elements."""
+        self.only(node, {"li"}, where)
 
     def rect(self, value: str | None, where: str) -> Rect | None:
         match = RECT.match(value or "")
@@ -309,6 +380,7 @@ class Reader:
         holder = node.find(tag)
         if holder is None:
             return []
+        self.only_li(holder, tag)
         inner = marked | may_require(holder)
         found = []
         for li in holder.findall("li"):
@@ -322,20 +394,27 @@ class Reader:
             return []
         inner = marked | may_require(node)
         entries = []
+        self.only(node, {e.tag for e in node if isinstance(e.tag, str)}, where)
         for element in node:
             if not isinstance(element.tag, str):
                 continue
             ref = Named(element.tag, where, inner | may_require(element))
+            self.only(element, {"rects"}, f"{where} {element.tag}")
+            self.only_li(element.find("rects"), f"{where} {element.tag} rects")
             entries.append(LayerEntry(ref, self.rects(element, f"{where} {element.tag}")))
         return entries
 
     def areas(self, node: ET.Element | None, where: str, rivers: bool, reading: bool = False) -> list[Area]:
         if node is None:
             return []
+        self.only_li(node, where)
         areas = []
         for li in node.findall("li"):
             name = (li.findtext("name") or "").strip()
             label = f"{where} {name}" if name else where
+            fields = READING_AREA_FIELDS if reading else AREA_FIELDS
+            self.only(li, fields | ({"flowsFrom"} if rivers else set()), label)
+            self.only_li(li.find("rects"), f"{label} rects")
             if not name:
                 self.problem("missing field", where, "an entry holds no name")
             flows = li.findtext("flowsFrom")
@@ -356,6 +435,7 @@ class Reader:
             rect = self.rect((item.text or "").strip(), f"{label} from")
             if rect is not None:
                 area.from_rects.append(rect)
+        self.only_li(li.find("from"), f"{label} from")
         use = li.findtext("use")
         basis = (li.findtext("basis") or "").strip()
         if use is not None:
@@ -365,6 +445,65 @@ class Reader:
                 self.problem(WRONG_SCALE, f"{label} use", f"'{area.use}' is not one of the design's uses: {', '.join(USES)}")
             elif not basis:
                 self.problem(WRONG_SCALE, f"{label} use", f"{area.use} is given with no basis, one sentence")
+        self.piece(li, label, area)
+
+    def piece(self, li: ET.Element, label: str, area: Area) -> None:
+        """Reads what types a piece of a reading: its kind, whether the reader is unsure and why, a road's grade,
+        width, line, destination and where its way in is seen, and the household a piece belongs to (data-model.md,
+        LaidOutCity; spec FR-053 to FR-055; research R-21)."""
+        kind = li.findtext("kind")
+        if kind is not None:
+            area.kind = kind.strip()
+            if area.kind not in PIECE_KINDS:
+                self.wrong_form(f"{label} kind", area.kind, "one of " + ", ".join(PIECE_KINDS))
+                area.kind = None
+        if li.find("uncertain") is not None:
+            area.uncertain = self.boolean(li, "uncertain")
+        area.because = (li.findtext("because") or "").strip() or None
+        if area.uncertain and area.because is None:
+            self.problem("missing field", f"{label} because", "an unsure piece says what makes it unsure, one sentence")
+        household = li.findtext("household")
+        if household is not None:
+            area.household = household.strip() or None
+        grade = li.findtext("grade")
+        if grade is not None:
+            area.grade = grade.strip() or None
+        width = li.findtext("width")
+        if width is not None:
+            try:
+                area.width = int(width.strip())
+                if area.width < 1:
+                    raise ValueError
+            except ValueError:
+                self.wrong_form(f"{label} width", width.strip(), "a whole number of cells, at least 1")
+                area.width = None
+        width_from = li.findtext("widthFrom")
+        if width_from is not None:
+            area.width_from = self.rect(width_from.strip(), f"{label} widthFrom")
+        line = li.find("line")
+        if line is not None:
+            self.only_li(line, f"{label} line")
+            for point in line.findall("li"):
+                match = PIXEL.match((point.text or "").strip())
+                if match:
+                    area.line.append((int(match.group(1)), int(match.group(2))))
+                else:
+                    self.wrong_form(f"{label} line", (point.text or "").strip(), "(x,z) on a cell corner")
+        leads = li.findtext("leadsTo")
+        if leads is not None:
+            area.leads_to = leads.strip() or None
+        self.only_li(li.find("wayInFrom"), f"{label} wayInFrom")
+        for item in li.findall("wayInFrom/li"):
+            rect = self.rect((item.text or "").strip(), f"{label} wayInFrom")
+            if rect is not None:
+                area.way_in_from.append(rect)
+        if area.kind in ("Road", "RouteLine"):
+            if area.kind == "Road" and area.grade is None:
+                self.problem("missing field", f"{label} grade", "a road holds its grade")
+            if len(area.line) < 2:
+                self.problem("missing field", f"{label} line", "a road holds its centre line, two points or more")
+        elif area.grade is not None or line is not None or leads is not None:
+            self.problem("wrong kind", label, "only a road holds a grade, a line and a destination")
 
     def number(self, node: ET.Element, tag: str, where: str) -> float | None:
         text = node.findtext(tag)
@@ -377,9 +516,37 @@ class Reader:
             return None
         return value
 
+    def ground(self, node: ET.Element | None) -> list[tuple[tuple[float, float], tuple[float, float]]]:
+        """A reading's ground pairs: a pixel of the picture's ground and the cell corner it lies on (R-20)."""
+        if node is None:
+            return []
+        self.only(node, {"pairs"}, "ground")
+        self.only_li(node.find("pairs"), "ground pairs")
+        pairs = []
+        for index, li in enumerate(node.findall("pairs/li"), start=1):
+            label = f"ground pair #{index}"
+            self.only(li, {"pixel", "cell"}, label)
+            points = []
+            for tag in ("pixel", "cell"):
+                value = (li.findtext(tag) or "").strip()
+                match = NUMBER_PAIR.match(value)
+                if not match:
+                    self.wrong_form(f"{label} {tag}", value, "(x,y) of two numbers")
+                    break
+                points.append((float(match.group(1)), float(match.group(2))))
+            if len(points) == 2:
+                pairs.append((points[0], points[1]))
+        if len(pairs) < 4:
+            self.problem(WRONG_SCALE, "ground", f"{len(pairs)} ground pairs are given; a perspective fit needs four or more")
+        return pairs
+
     def scale(self, node: ET.Element | None) -> Scale | None:
         if node is None:
             return None
+        self.only(node, {"pixelsPerCell", "referenceCell", "origin", "measured"}, "scale")
+        self.only_li(node.find("measured"), "scale measured")
+        for li in node.findall("measured/li"):
+            self.only(li, {"name", "rect"}, "scale measured")
         scale = Scale(
             self.number(node, "pixelsPerCell", "scale pixelsPerCell"),
             self.number(node, "referenceCell", "scale referenceCell"),
@@ -417,6 +584,7 @@ class Reader:
                 continue
             label = f"{where} {element.tag} #{index}"
             own = inner | may_require(element)
+            self.only(element, {"position", "rotation", "stuff", "rect"}, label)
             position_text = element.findtext("position")
             position = self.position(position_text.strip(), f"{label} position") if position_text else None
             if position_text is None:
@@ -433,7 +601,13 @@ class Reader:
         skeleton = Skeleton()
         if node is None:
             return skeleton
+        self.only(node, {"parts", "relations"}, "skeleton")
+        self.only_li(node.find("parts"), "skeleton parts")
+        self.only_li(node.find("relations"), "skeleton relations")
+        for li in node.findall("relations/li"):
+            self.only(li, {"relation", "a", "b", "feature", "than"}, "skeleton relations")
         for li in node.findall("parts/li"):
+            self.only(li, {"name", "kind", "optional"}, "skeleton parts")
             name = (li.findtext("name") or "").strip()
             kind = (li.findtext("kind") or "").strip()
             if not name:
@@ -451,6 +625,7 @@ class Reader:
     def group(self, li: ET.Element, where: str, marked: frozenset[str]) -> Group:
         name = (li.findtext("name") or "").strip()
         label = f"{where} {name}" if name else where
+        self.only(li, {"name", "size", "terrain", "things"}, label)
         size_text = li.findtext("size")
         size = self.size(size_text.strip(), f"{label} size") if size_text is not None else None
         if size_text is None:
@@ -470,6 +645,10 @@ def read_template(node: ET.Element, file: str) -> tuple[Template, list[Problem]]
     def_name = (node.findtext("defName") or "").strip()
     reader.owner = f"template {def_name}"
     marked = frozenset(may_require(node))
+    reader.only(node, TEMPLATE_FIELDS, "template", DEF_ATTRIBUTES)
+    reader.only(node.find("reference"), {"name", "pictures"}, "reference")
+    reader.only_li(node.find("reference/pictures"), "reference pictures")
+    reader.only(node.find("terrainShape"), {"terrain", "rocks", "roofs", "features", "things"}, "terrainShape")
     kit = reader.named(node.find("kit"), "kit", marked)
     if kit is None:
         reader.problem("missing field", "kit", "the template names no kit")
@@ -515,6 +694,18 @@ def read_kit(node: ET.Element, file: str) -> tuple[Kit, list[Problem]]:
     def_name = (node.findtext("defName") or "").strip()
     reader.owner = f"kit {def_name}"
     marked = frozenset(may_require(node))
+    reader.only(node, KIT_FIELDS, "kit", DEF_ATTRIBUTES)
+    reader.only(node.find("wallSettings"), {"wallDef"}, "wallSettings")
+    reader.only(node.find("fill"), {"wallDef", "doorDef", "doorStuffDef", "plots"}, "fill")
+    for tag in ("groups", "fill/plots", "blockLibrary"):
+        reader.only_li(node.find(tag), tag.replace("/", " "))
+    for li in node.findall("blockLibrary/li"):
+        reader.only(li, {"name", "size", "terrain", "rooms", "things"}, "spec card")
+    if node.find("nameMaker") is not None:
+        reader.problem(
+            "deprecated field", "nameMaker",
+            "a kit holds no word list: a settlement takes its faction's own settlementNameMaker (spec FR-006)",
+        )
     fill = node.find("fill")
     fill_marked = marked | may_require(fill) if fill is not None else marked
     cards = []
@@ -539,7 +730,6 @@ def read_kit(node: ET.Element, file: str) -> tuple[Kit, list[Problem]]:
         def_name=def_name,
         label=(node.findtext("label") or def_name).strip(),
         file=file,
-        name_maker=reader.named(node.find("nameMaker"), "nameMaker", marked),
         skeleton=reader.skeleton(node.find("skeleton")),
         wall_def=reader.named(node.find("wallSettings/wallDef"), "wallSettings wallDef", marked),
         groups=[reader.group(li, "groups", marked) for li in node.findall("groups/li")],
@@ -550,8 +740,52 @@ def read_kit(node: ET.Element, file: str) -> tuple[Kit, list[Problem]]:
         ),
         plots=[reader.group(li, "fill plots", fill_marked) for li in fill.findall("plots/li")] if fill is not None else [],
         block_library=cards,
+        cultures=reader.named_list(node, "cultures", marked),
+        roads=read_roads(reader, node.find("roads")),
+        plot_each=read_households(reader, node.find("households")),
     )
     return kit, reader.problems
+
+
+def read_roads(reader: Reader, node: ET.Element | None) -> RoadSettings | None:
+    """A kit's road settings: its grades with their widths, eight directions and dead ends (data-model.md, KitDef)."""
+    if node is None:
+        return None
+    reader.only(node, {"grades", "eightDirections", "deadEnds"}, "roads")
+    reader.only_li(node.find("grades"), "roads grades")
+    settings = RoadSettings()
+    for li in node.findall("grades/li"):
+        reader.only(li, {"name", "widths"}, "roads grades")
+        reader.only_li(li.find("widths"), "roads grades widths")
+        name = (li.findtext("name") or "").strip()
+        if not name:
+            reader.problem("missing field", "roads grades", "a grade holds no name")
+            continue
+        widths = []
+        for width in li.findall("widths/li"):
+            value = (width.text or "").strip()
+            if value.isdigit() and int(value) > 0:
+                widths.append(int(value))
+            else:
+                reader.wrong_form(f"roads grades {name} widths", value, "a whole number of cells, at least 1")
+        if not widths:
+            reader.problem("missing field", f"roads grades {name}", "a grade holds its widths")
+        settings.grades[name] = tuple(widths)
+    settings.eight_directions = reader.boolean(node, "eightDirections")
+    dead_ends = node.findtext("deadEnds")
+    if dead_ends is not None:
+        if dead_ends.strip() in DEAD_ENDS:
+            settings.dead_ends = dead_ends.strip()
+        else:
+            reader.wrong_form("roads deadEnds", dead_ends.strip(), "Allowed or None")
+    return settings
+
+
+def read_households(reader: Reader, node: ET.Element | None) -> bool | None:
+    if node is None:
+        return None
+    reader.only(node, {"plotEach"}, "households")
+    return reader.boolean(node, "plotEach")
 
 
 def read_city(root: ET.Element, file: str) -> tuple[City, list[Problem]]:
@@ -578,6 +812,7 @@ def read_city(root: ET.Element, file: str) -> tuple[City, list[Problem]]:
         if size is not None and size[0] != size[1]:
             reader.problem("not square", "size", f"{size_text.strip()} is not square")
     marked = frozenset(may_require(root))
+    reader.only(root, CITY_FIELDS, "the file")
     city = City(
         file=file,
         is_reading=is_reading,
@@ -591,5 +826,10 @@ def read_city(root: ET.Element, file: str) -> tuple[City, list[Problem]]:
         parts=reader.areas(root.find("parts"), "parts", False, is_reading),
         features=reader.areas(root.find("features"), "features", True, is_reading),
         scale=reader.scale(root.find("scale")) if is_reading else None,
+        ground=reader.ground(root.find("ground")) if is_reading else [],
     )
+    if not is_reading:
+        for tag in ("scale", "ground"):
+            if root.find(tag) is not None:
+                reader.problem("wrong kind", tag, f"only a reading holds {tag}")
     return city, reader.problems
