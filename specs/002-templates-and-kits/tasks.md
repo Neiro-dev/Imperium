@@ -369,49 +369,49 @@ areas are accepted (spec FR-031). An area is accepted only by the maintainer's j
 reading against the old sample and the screenshot (SC-017); the road and household checks are findings, places to look
 again, and no number is a condition (SC-019; R-24). Each test is written first and fails before its implementation.
 
-- [ ] T074 [P] Write, in `tests/fixtures/us1/` and `tests/fixtures/us2/readings/`, a template, a kit and a reading
+- [X] T074 [P] Write, in `tests/fixtures/us1/` and `tests/fixtures/us2/readings/`, a template, a kit and a reading
   each holding one misspelled element, one holding an unknown attribute, and one holding an unknown element marked
   `IgnoreIfNoMatchingField="True"`, and `tests/test_unknown_fields.py`: the first two are reported as wrong form with
   the file and the element's name, the third is not; then make every reader in `src/mantle_check/forms.py` report the
   elements and attributes its form does not hold, and make `DefLayer` and `Feature` in `Mantle/Source/Mantle/Cells.cs`
   log each child they do not read with `Log.Error` (spec FR-014; research R-25)
-- [ ] T064 Read a part's `kind`, `uncertain`, `because`, a road's `grade`, `width`, `widthFrom`, `line`, `leadsTo` and
+- [X] T064 Read a part's `kind`, `uncertain`, `because`, a road's `grade`, `width`, `widthFrom`, `line`, `leadsTo` and
   `wayInFrom`, `household`, and the reading's `ground` pairs in `src/mantle_check/forms.py`, reporting each value not in
   its form (data-model.md, LaidOutCity; spec FR-014, FR-052 to FR-055; research R-20, R-21)
-- [ ] T063 [P] Write test readings in `tests/fixtures/us2/roads/`, each holding one road or household finding of
+- [X] T063 [P] Write test readings in `tests/fixtures/us2/roads/`, each holding one road or household finding of
   data-model.md (road, household), among them a dangling road, a `leadsTo` with no `wayInFrom`, a yard outside its plot
   and a residence plot over one and a half estates, and one holding none, and `tests/test_roads.py`: each finding is
   listed with its cells among the findings and none among the problems, the exit status counts no finding, the clean
   reading lists none, a `RouteLine` counts as no road, and the road ends are counted by class and grade (spec FR-054,
   FR-055, SC-019; research R-21, R-24)
-- [ ] T065 Read `KitDef.roads`, `KitDef.households` and `KitDef.cultures` (data-model.md) into Mantle's `KitDef` and
+- [X] T065 Read `KitDef.roads`, `KitDef.households` and `KitDef.cultures` (data-model.md) into Mantle's `KitDef` and
   the check, reporting a `cultures` entry that is not a `CultureDef`, a kit with none, and a `nameMaker` as deprecated;
   set the Empire's in `Imperium/Defs/KitDefs/Kits_Empire.xml` (`Sophian`, the grades and widths, eight directions, no
   dead ends, a plot for every household) without `nameMaker`, update the tests and fixtures that wrote a
   `nameMaker` or read the word list from the report (T046, T047), and add `Imperium/Patches/Faction_Empire_Names.xml`
   setting the Empire faction's `settlementNameMaker` to the Empire's word list (spec FR-006, FR-011, FR-032, FR-054,
   FR-055; research R-21, R-26)
-- [ ] T066 Build `src/mantle_check/roads.py`: lay each road's cells from its line and width; find, as findings, every
+- [X] T066 Build `src/mantle_check/roads.py`: lay each road's cells from its line and width; find, as findings, every
   road and household case of data-model.md (road, household); sort every road end into its class; list every residence
   plot's size in reference cells; and count the shares of FR-053; and show them in `src/mantle_check/report.py` in a
   section of their own, numbered `L1` on, outside the exit status, until T063 passes (spec FR-053 to FR-055, SC-019;
   research R-21, R-24)
-- [ ] T069 Write `tests/test_ground.py` (a test picture the test draws in a known perspective, four or more pairs,
+- [X] T069 Write `tests/test_ground.py` (a test picture the test draws in a known perspective, four or more pairs,
   each pair's error reported, the tracing laid over the picture where the mapping puts it) and build
   `src/mantle_check/ground.py`, used by `src/mantle_check/pictures.py` (spec FR-052; research R-20)
-- [ ] T067 [P] Write `tests/test_reading_picture.py` for FR-053's drawing and shares: each household's colour and
+- [X] T067 [P] Write `tests/test_reading_picture.py` for FR-053's drawing and shares: each household's colour and
   plot, house and yard lines, one outline per building with an inner court open, grade labels, route lines and unsure
   pieces dashed, findings in orange with their `L` numbers, a legend with counts, a pixel ruler on the reference
   picture, and shares that add up to one; then build them in `src/mantle_check/pictures.py` and
   `src/mantle_check/report.py`, with `--crop` in `src/mantle_check/cli.py` (contracts/check-command.md; research R-24)
-- [ ] T075 Write `tests/test_old_sample.py` with a small sample and mapping the test makes itself, never the old
+- [X] T075 Write `tests/test_old_sample.py` with a small sample and mapping the test makes itself, never the old
   project's: its codes sorted into kinds, its findings and shares listed beside the reading's, the sample's area laid
   over the picture where the mapping puts it, and `compare-over.png` and `compare.png` drawn with each panel at the same
   width; then build `src/mantle_check/oldsample.py` and `--old-sample`, `--old-mapping` and `--old-area` in
   `src/mantle_check/cli.py` (spec FR-057, SC-018; research R-27)
-- [ ] T068 Withdrawn: the wall circle's share and distance (spec FR-056) are built with R2's fitting of a town to its
+- [X] T068 Withdrawn: the wall circle's share and distance (spec FR-056) are built with R2's fitting of a town to its
   map; nothing of it is built here
-- [ ] T070 Read the East Square area into `readings/RiverBendTown.xml` from
+- [X] T070 Read the East Square area into `readings/RiverBendTown.xml` from
   `template-references/河湾城-原图与描线/原图-1596x1017.png` alone: size cells by person-sized things at several places
   (FR-048) and place the ground pairs (FR-052); trace each piece as a ground-level polygon of the screenshot in a working
   file kept with the area's pictures outside the repository, roads first as centre lines with grades and destinations,
@@ -420,7 +420,7 @@ again, and no number is a condition (SC-019; R-24). Each test is written first a
   the tracing is drawn; check and draw it with `--reference`, `--crop` and the old sample; answer each finding by a
   change that names its region or by the piece left as read, never to make a finding go away (SC-019); record the
   minutes spent (spec FR-049, FR-050, FR-052, FR-053, FR-057, SC-015, SC-016). Waits for T063 to T069, T074, T075
-- [ ] T071 Put the East Square pictures of SC-018 in the project's files, and add one item to
+- [X] T071 Put the East Square pictures of SC-018 in the project's files, and add one item to
   `checklists/acceptance.md` naming the reading, the commit, the pictures, the minutes and, with its pixel region, each
   place where the old sample's same area shows a shortfall of FR-057, listed after the tracing was drawn, for the
   maintainer to judge whether the new reading reproduces the screenshot better than the old sample, with the check's run
