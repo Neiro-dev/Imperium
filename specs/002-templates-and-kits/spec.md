@@ -15,7 +15,7 @@ maintainer's broad direction). Scope: the forms of templates, kits and the citie
 outside the game against `Data/`, which sets a laid-out city beside its reference; the Empire's kit and the river-bend
 town's template, written from its screenshot and render, which calibrate the method first and come with Imperium (R15);
 and the tribal culture's kit and its first templates, one for each attitude of its factions, which the alpha opens.
-Deferred: the industrial (outlander) and pirate cultures' kits and templates, which the alpha opens too (R16); the
+Deferred: the outlander and pirate cultures' kits and templates, which the alpha opens too (R16); the
 other cultures' kits and templates; generation, which picks templates, may mirror, turn and stretch them, and lays out
 cities from them (R2); the check in the game, which is the final one, once R2 places the tribal culture's settlements
 and R15 the Empire's.
@@ -38,20 +38,27 @@ across cultures are not used, since they would erase each culture's character [D
 design calls the Roman kit (glossary line 184) is the Empire kit, and is named so in Imperium's files too, since no
 other faction uses its style [Direction].
 
-The cultures are those of every faction that has settlements, on the surface and in orbit (FR-032): the Empire,
-tribal, industrial (outlander), pirate and medieval, the last for the medieval factions that other mods add, and
-Odyssey's Traders Guild and Salvagers, whose settlements lie on the Orbit layer [Direction; Design: line 184; Data].
+The cultures are those of every faction that has settlements, on the surface and in orbit (FR-032), each named
+after its factions and each the faction lineage the game itself draws with a culture definition (`CultureDef`), which
+every faction names in `allowedCultures`: the Empire (Sophian), tribal (Corunan), outlander (Rustican), pirate
+(Kriminul), the orbital culture of Odyssey's Traders Guild and Salvagers (Astropolitan), whose settlements lie on the
+Orbit layer, and medieval, the last for the medieval factions that other mods add, under the culture definitions
+those mods give them [Direction; Design: line 184; Data: FR-032]. They are made in this order: the Empire first, the
+end the work is for and the culture Mantle is made for; then the cultures of the base game's own factions, which
+complete a build that the alpha's testers can play; and medieval last, as compatibility for other mods' factions
+[Direction, 2026-11-25]. The orbital culture is not placed in that order and stays later work. That medieval mods
+give their factions culture definitions of their own is an inference, checked when the medieval kit comes.
 This feature holds two cultures' kits and first templates [Roadmap: R13]: the tribal culture's, which the alpha of
 Mantle, a mod of its own, opens [Roadmap: R14, Releases; Direction], and the Empire's, with the river-bend town's
 template, which calibrate the method first and come with Imperium [Roadmap: R15]. The alpha also opens the base
-game's other cultures with settlements, the industrial (outlander) culture for the civil and rough outlanders and the
+game's other cultures with settlements, the outlander culture for the civil and rough outlanders and the
 pirate culture, whose kits and templates are R16's, in this feature's forms and checked by its check [Roadmap: R16,
 Releases; Direction]. The other cultures' kits and templates are later work [Direction].
 
 A settlement is built from three layers [Direction]. The first is Mantle's and the same for every culture: the forms,
 the check, generation and the pieces each faction skins (FR-033). The second is the culture's: one kit, which all of
-its factions share. The third is the faction's: which of its culture's templates its settlements are laid out from,
-picked on two dimensions, of which each culture uses only those it needs (FR-038 to FR-040):
+its factions share. The third is the faction's picking: a faction holds no template of its own (FR-038), and its
+definition's own fields pick which of its culture's templates its settlements are laid out from, on two dimensions, of which each culture uses only those it needs (FR-038 to FR-040):
 
 - **Attitude**, by the two fields with which a faction's definition says how it stands toward others, `naturalEnemy` and
   `permanentEnemy` [Data: `Core/Defs/FactionDefs/Factions_Misc.xml` lines 202, 462, 485 and 529], read from the
@@ -153,7 +160,7 @@ then, if wanted, each building's real footprint from the game's `.ifo` files. Th
 FileDBReader, only cross-check what is read (constitution, Principle II). The pictures drawn this way are the
 reference's pictures, and its reading on RimWorld's cells is set beside them as beside any other (FR-036).
 
-The cultures that come later take their references as follows [Direction]: the industrial (outlander) culture's from
+The cultures that come later take their references as follows [Direction]: the outlander culture's from
 Anno 1800, Bright Sands for the civil outlanders and Wormways for the rough, and the pirate culture's from Anno 1800's
 two pirate islands, Anne Harlow's and Jean La Fortune's [Roadmap: R16]; Odyssey's Traders Guild's from Odyssey's own
 form of an orbital settlement, rooms laid off a spine of corridors on one enclosed platform [Data:
@@ -235,10 +242,10 @@ template (FR-030), and the check in the game, the final one, still follows [Test
   his judgment of its broad direction. A reading never overrides the design or his recorded direction (the
   maintainer's broad direction; constitution, Source Register, row Imperium's own design).
 - Q: Does this feature hold the kits and templates of every culture the alpha opens? → A: No. The alpha opens every
-  culture of the base game whose factions have settlements, but this feature holds the tribal culture's; the industrial
-  (outlander) and pirate cultures' kits and templates are R16's, written in this feature's forms and checked by its
+  culture of the base game whose factions have settlements, but this feature holds the tribal culture's; the outlander
+  and pirate cultures' kits and templates are R16's, written in this feature's forms and checked by its
   check (`ROADMAP.md`, R13, R16 and Releases).
-- Q: Where do the later cultures take their references from? → A: The industrial (outlander) culture from Anno 1800,
+- Q: Where do the later cultures take their references from? → A: The outlander culture from Anno 1800,
   Bright Sands for the civil outlanders and Wormways for the rough; the pirate culture from Anno 1800's pirate islands,
   Anne Harlow's and Jean La Fortune's; Odyssey's Traders Guild from Odyssey's own form of an orbital settlement, rooms
   off a spine of corridors; and the Salvagers the same way only if they really get settlements (the maintainer's broad
@@ -279,6 +286,36 @@ template (FR-030), and the check in the game, the final one, still follows [Test
   `cities.md` lines 319-320). Its ground is laid onto the cells by sizing cells by person-sized things at several
   places, as the design sizes a cell, since the screenshot is in perspective and one scale does not fit it; those
   points fix a perspective mapping of the ground (FR-052).
+- Q: The reading must be of better quality than the old project's preview tool gave, quality coming before speed: what
+  is "better", and how is it checked? → A: Better means not repeating any shortfall the old project recorded in its
+  own sample of the town or that shows when the sample is laid beside the screenshot, each turned into a criterion
+  that a number or a side-by-side picture passes or fails (FR-057; SC-017 to SC-019). The old sample's same area is
+  measured by the same checks and drawn beside the new reading, so that every criterion has the old tool's result
+  next to the new one; the old sample is a comparison only and nothing is copied from it (FR-053; constitution,
+  Principle II). No time target is set for a reading: its minutes are recorded (SC-016) and an area is not shown to
+  the maintainer while any criterion fails [Direction, 2026-11-25; evidence: the old project's records of each
+  shortfall, FR-057].
+- Q: What is one household of a residence in a reading of an Anno 117 picture? → A: One estate, as the game's own
+  files define a residence: a plot of 3×3 Anno cells holding 3 to 4 roof modules, attachments such as a yard wall or
+  archway, props and one ground decal that covers the whole plot, on which the yard is painted; set diagonally it
+  takes 4×4. Roof blocks of residences are joined into one household only within one estate, never across an
+  estate's edge. Workshops and other buildings are not estates, and their footprints are not yet known, so the rule
+  holds for residences only (FR-055) [Design: Imperium-old b218bdc,
+  `Imperium-Knowledge/designs/研究/城/纪元资料/游戏数据-民居定义.md` lines 201-220, read from the game's `.ifo` and `.cfg`
+  files; `民居与变体.md` lines 12-15, which takes the diagonal 4×4 from a data site and leaves workshops unverified].
+- Q: What does the check do with a field it does not know, such as a misspelled one? → A: It reports it, as the game
+  reports a field of `About.xml` its code does not hold unless the element says `IgnoreIfNoMatchingField` [Data:
+  `ModUpdating.txt` lines 356-359]; nothing is dropped without a report (FR-014).
+- Q: Is a culture the game's culture definition, and how does a faction find its kit? → A: A culture is the lineage
+  of factions the game groups under one culture definition in their `allowedCultures`, which the bases set and their
+  kin inherit; a kit names the culture definitions it serves and a faction takes the kit that names one of its own.
+  The Traders Guild and the Salvagers, both Astropolitan, so share one orbital culture, where this spec first counted
+  two. A culture definition itself holds names, ideoligions and styles and no layout, so the kit stays Mantle's own
+  definition keyed to it (FR-032) [Data: the faction and culture definitions FR-032 names; Direction, 2026-11-25].
+- Q: What are the cultures called, and in what order are they made? → A: After their factions, the Empire's being
+  the Empire, never Rome. The Empire comes first, being the end the work is for and the culture Mantle is made for;
+  then the cultures of the base game's own factions, which complete a build the alpha's testers can play; medieval
+  comes last, being compatibility for other mods' medieval factions [Direction, 2026-11-25].
 
 ## Sources
 
@@ -363,11 +400,14 @@ Each requirement below names its source in brackets. The sources are those the c
   - Imperium's city maps are 350×350 cells.
   - Each culture has its own skeletons and templates; slots vary only within a culture. The old design's Roman kit is
     the Empire kit, also in Imperium's files.
-  - Every faction that has settlements gets its own, on the surface and in orbit: the Empire, tribal, industrial
-    (outlander), pirate, medieval (for medieval mods), and Odyssey's Traders Guild and Salvagers. This feature holds
+  - Every faction that has settlements gets its culture's, on the surface and in orbit: the Empire, tribal, outlander,
+    pirate, medieval (for medieval mods), and the orbital culture that Odyssey's Traders Guild and Salvagers share, a
+    culture being the lineage the game groups under one culture definition (FR-032). The Empire comes first, then
+    the base game's own factions' cultures, which complete the alpha's playable build, and medieval last
+    [Direction, 2026-11-25]. This feature holds
     the tribal culture's kit and its first templates, one for each attitude, which the alpha opens, and the Empire's
     kit with the river-bend town's template. The alpha covers every culture of the base game with settlements, so the
-    industrial (outlander) and pirate cultures' kits and templates come for it too, in R16 [Roadmap: R16, Releases];
+    outlander and pirate cultures' kits and templates come for it too, in R16 [Roadmap: R16, Releases];
     the rest is later work.
   - Further references by culture: Anno 1800 for the outlanders, Bright Sands for the civil and Wormways for the
     rough, and for the pirates, Harlow's and La Fortune's islands; Odyssey's own orbital platform form, a spine of
@@ -626,6 +666,21 @@ and confirm that no shared file was changed.
   the cells (FR-054, FR-055), and the reading is not accepted while any is reported (FR-036).
 - The render's same area cannot be found, or the render is missing from `template-references/`: the check draws the
   area beside the screenshot alone, says the render is missing, and the area's comparison waits for it.
+- A road ends at a plaza, or a lane ends at a door or inside a yard rather than running through to another road: the
+  check counts the end in its class of FR-054 and does not report it as a problem, since whether a plaza is a node of
+  the network and whether the Empire's lanes must run through at both ends are verified first against the pictures:
+  the counts for the screenshot's reading and for the old sample are set side by side, each end at a plaza or a door
+  marked on the overlay, and the rule is settled by the spec again only after the maintainer has looked at them
+  [Design: `09_地图生成与CBF技术.md` lines 473 and 949, and `纪元117-设计理念-地图与城建-2026-11-11.md` lines 43-44;
+  Direction, 2026-11-25; FR-054].
+- Two roof blocks adjoin tightly but belong to two buildings, such as two residences on two estates or two
+  workshops built end to end: they are two households, each with its own plot, split where the picture shows a break in the roofs or the ground between them,
+  and a plot more than one and a half estates large is listed for the maintainer's check (FR-055) [Design:
+  `09_地图生成与CBF技术.md` lines 965 and 969].
+- A template, kit or reading holds a misspelled or unknown field: the check reports it as wrong form with its file and
+  element and goes on; nothing in it is read as if it were not there (FR-014).
+- The old project's mapping of the screenshot to the sample's cells is not at hand: the old sample is drawn beside the
+  new reading but not laid over the screenshot, the report says so, and the area's acceptance waits for it (SC-018).
 
 ## Requirements *(mandatory)*
 
@@ -654,12 +709,25 @@ and confirm that no shared file was changed.
   main street [Design: line 204], and the wall line, districts, plazas and public buildings read from the reference
   city [Direction], and MUST record them as their relations to each other and to the terrain, not as coordinates
   [Design: line 204].
-- **FR-006**: A kit MUST hold its culture and its fixed generation data: its word list, skeleton, groups, fill and wall
-  settings [Design: line 184], its road and household settings for readings and for generation (FR-054, FR-055), and,
+- **FR-006**: A kit MUST hold its culture and its fixed generation data: its skeleton, groups, fill and wall settings
+  [Design: line 184], the culture definitions it serves (FR-032), its road and household settings for readings and for generation (FR-054, FR-055), and,
   where it uses one, a block library of ready-made blocks built from spec cards, which the Empire's does not [Design:
   line 167]. What its groups, fill and wall settings hold MUST be taken in the order of FR-047, and so from
   its culture's reference city, as its skeleton is (FR-036), wherever the design and the maintainer's recorded
-  direction leave them open [Direction].
+  direction leave them open [Direction]. A kit MUST hold only what differs from culture to culture; every mechanism
+  that works the same for each culture is Mantle's, and the kit sets only its values [Direction, 2026-11-25: thin kits;
+  Design: Imperium-old b218bdc, `Imperium-Knowledge/designs/ICF/ICF设计.md` lines 93 and 120-122]. Item by item:
+
+  | Item | Whose | Why |
+  |---|---|---|
+  | Word list | the faction's, not the kit's, departing from the glossary's kit (line 184) by the thin-kit direction | every faction already names its settlements with its own `settlementNameMaker`, and kin of one lineage use different lists, such as the Impid and Neanderthal tribes, which a kit's list would overwrite [Data: `Royalty/Defs/FactionDefs/Faction_Empire.xml` line 21; `Core/Defs/FactionDefs/Factions_Misc.xml` line 230; `Biotech/Defs/FactionDefs/Factions_Misc.xml` lines 10 and 303]; the Empire's names from Rome (FR-011) are set on the Empire's faction by Imperium |
+  | Culture definitions served | the kit's | how a faction finds its kit (FR-032) |
+  | Skeleton parts every city has; groups, fill, wall settings, block library | the kit's | what the culture's cities are built of [Design: line 184] |
+  | Road network, one piece per cell, a destination touching its road, an entrance, no dangling road, the grade and width checks themselves | Mantle's | the same for every culture (FR-054) |
+  | Road grades with their widths, eight directions, dead ends allowed or not | the kit's values | the culture's street style (FR-054) |
+  | Whether every household has a plot; a household never reached through another's | the kit's | the Empire's way of dividing land (FR-055) |
+  | A household being one estate of the reference game | the reading's, by its reference game | a fact of Anno 117's files, the same for every culture read from Anno 117 pictures, the tribal culture's Albion references among them (FR-055) |
+
 - **FR-007**: A spec card MUST fix one building: its plot, its rooms and their contents [Design: line 206].
 - **FR-008**: A laid-out city, the city that generation lays out on a map from a template and a kit, MUST be written in
   one form that holds the template and kit it comes from, its map size, each cell's terrain, natural rock and roof,
@@ -676,9 +744,9 @@ and confirm that no shared file was changed.
   EULA: line 76].
 - **FR-011**: The Empire's elements in a template or kit, such as the names in a word list and its public buildings,
   MUST come from Rome as reliable sources describe it, leaning toward New Rome, and not from popular images of Rome
-  or from a reference city [Design: setting.md lines 57, 60-61; Direction]. The tribal culture's word list MUST be
-  the one the base game names its tribes' settlements with [Data: `Core/Defs/FactionDefs/Factions_Misc.xml` line
-  230].
+  or from a reference city [Design: setting.md lines 57, 60-61; Direction]. The Empire's word list is set as its
+  faction's `settlementNameMaker`, and every other faction keeps the one the base game gives it, the tribes'
+  `NamerSettlementTribal` among them (FR-006) [Data: `Core/Defs/FactionDefs/Factions_Misc.xml` line 230].
 
 **The check**
 
@@ -693,7 +761,13 @@ and confirm that no shared file was changed.
   form, such as an attitude field that is neither true nor false, a cell range, position, size or rotation not in the
   form `Data/` writes it in, and a map size that is not square, and each required field left out, such as a template's
   kit or smallest map (FR-001, FR-003) [Data: `AncientPrefabs.xml` lines 12 and 13; `Dialogs_Various.xml` line
-  153].
+  153]. It MUST report, as wrong form, each element or attribute that its field's form does not hold, such as a
+  misspelled field or one a later form renamed, in a template, kit, laid-out city or reading, with the file and the
+  element it stands in, and MUST NOT drop it without a report; an element marked `IgnoreIfNoMatchingField="True"` is
+  passed over, as the game passes it. Mantle's own loading of the same forms in the game MUST log such an element as
+  an error in the same way [Data: `ModUpdating.txt` lines 356-359, where the game reports a field of `About.xml` that
+  its code does not hold unless it is marked so; that its loader does the same for every definition shows only in its
+  assembly, a cross-check (constitution, Principle II)].
 - **FR-015**: The check MUST accept definitions of the base game and of each expansion that the mod holding the
   template, kit or laid-out city requires, none for Mantle's own mod and Royalty for Imperium, and MUST report a
   definition of any other expansion unless it is marked as that expansion's content, since a mod's requirements are
@@ -777,15 +851,34 @@ and confirm that no shared file was changed.
   - Once the calibration passes, the town's template MUST ship with Imperium as a regular template, as it stands, with
     no step that changes its content [Direction; Roadmap: R15].
 - **FR-032**: Kits and templates MUST come, in time, for the culture of every faction that has settlements: the Empire
-  [Data: `Royalty/Defs/FactionDefs/Faction_Empire.xml` lines 5 and 11], tribal and industrial (outlander) [Data:
+  [Data: `Royalty/Defs/FactionDefs/Faction_Empire.xml` lines 5 and 11], tribal and outlander [Data:
   `Core/Defs/FactionDefs/Factions_Misc.xml` lines 9, 185, 224 and 443], pirate [Data: same file, lines 511 and 517],
   medieval, for the medieval factions other mods add [Direction], and Odyssey's Traders Guild and Salvagers, whose
   settlements lie on the Orbit layer [Data: `Odyssey/Defs/FactionDefs/Factions_Misc.xml` lines 5, 17, 40-42, 168, 188
   and 202-204] [Design: line 184; Direction], the Salvagers only if they really get settlements, which their
   definition leaves open, since the faction is hidden [Data: same file, line 172], and which a check in the game is to
-  show [Direction]. This feature MUST hold the tribal culture's kit and its first templates, one for each attitude
+  show [Direction]. A culture MUST be the lineage of factions the game groups under one culture definition: each
+  faction names its culture in `allowedCultures`, set on the abstract base that its kin inherit, so that the Empire is
+  Sophian, the tribes Corunan, the outlanders Rustican, the pirates Kriminul, and the Traders Guild and the Salvagers
+  both Astropolitan [Data: `Royalty/Defs/FactionDefs/Faction_Empire.xml` line 22; `Core/Defs/FactionDefs/Factions_Misc.xml`
+  lines 4, 18, 184, 197, 219, 231, 442, 461, 484, 510 and 531; `Odyssey/Defs/FactionDefs/Factions_Misc.xml` lines
+  43-45 and 205-207; Biotech's and Ideology's tribes, outlanders and pirates inherit the same bases,
+  `Biotech/Defs/FactionDefs/Factions_Misc.xml` lines 4, 153, 297, 462 and 567 and `Ideology/Defs/FactionDefs/Factions_Misc.xml`
+  lines 64, 88 and 115]. The Traders Guild and the Salvagers therefore share one orbital culture and one kit; the
+  Sanguophages, also Astropolitan, hold no settlements: unlike the Salvagers they set no `settlementGenerationWeight`
+  and start with none [Data: `Biotech/Defs/FactionDefs/Factions_Misc.xml` lines 735-763, `requiredCountAtGameStart`
+  0; `Odyssey/Defs/FactionDefs/Factions_Misc.xml` line 188]. A kit MUST name the culture definitions it serves, and a faction's settlements MUST take the
+  kit that names one of the faction's `allowedCultures`, which answers how a faction finds its kit without naming any
+  faction, so that a faction an expansion or another mod adds to a lineage finds its kit through what it inherits and
+  a medieval mod's faction through the culture definition that mod gives it; what generation does for a faction whose
+  culture no kit names, or that names several, is R2's [Data: as above; Direction, 2026-11-25; research R-14 rejects
+  naming factions and gives the picking itself to R2; Roadmap: R2]. The kit's `defName` names the culture after its factions, as `Empire` and `Tribal` do, the other
+  kits' names coming with them (FR-006); a culture definition holds names, ideoligions and styles and no settlement's layout, so Mantle's
+  kit is a definition of its own keyed to it, not a field of it [Data: `Core/Defs/CultureDefs/Cultures.xml`,
+  `Royalty/Defs/CultureDefs/Cultures.xml`]. This
+  feature MUST hold the tribal culture's kit and its first templates, one for each attitude
   (FR-039), which Mantle's alpha opens as a mod of its own [Roadmap: R13, R14, Releases; Direction], and the Empire's
-  kit with the river-bend town's template, which come with Imperium [Roadmap: R15]. The industrial (outlander) and
+  kit with the river-bend town's template, which come with Imperium [Roadmap: R15]. The outlander and
   pirate cultures' kits and templates, which the alpha opens too, are R16's, and MUST be written in this feature's
   forms and checked by its check [Roadmap: R16, Releases]. The other cultures' kits and templates are later work
   [Direction; Roadmap: R13].
@@ -825,8 +918,10 @@ and confirm that no shared file was changed.
   tribal settlement's map is a city's map, since the design's city building is the generation of every settlement
   [Design: line 173; Direction].
 - **FR-038**: Settlements MUST be built from three layers [Direction]: Mantle's, the same for every culture (FR-033);
-  the culture's, one kit that all of the culture's factions share (FR-006); and the faction's, the templates of its
-  culture that its settlements are laid out from, picked by attitude (FR-039) and terrain (FR-040). A template MUST
+  the culture's, one kit and the culture's templates, which all of the culture's factions share (FR-002, FR-006); and
+  the faction's picking, in which the faction's own definition picks, by attitude (FR-039) and terrain (FR-040), which
+  of its culture's templates its settlements are laid out from, the faction owning no template [Data: no faction definition in any
+  expansion's `Defs/FactionDefs/` names a layout or prefab; FR-002]. A template MUST
   serve a faction's settlement only where both hold: its two attitude fields match the faction's, and its biomes,
   where it names any, include the settlement's [Direction; FR-039; FR-040]; which of several such templates
   generation takes is R2's [Roadmap: R2]. A culture MUST
@@ -900,7 +995,7 @@ and confirm that no shared file was changed.
 - **FR-045**: The old project's output and old images, and FileDBReader, MUST be used only to cross-check what a
   reading of the game's data gives, and MUST NOT be what a reference's drawing is taken from [Direction; constitution,
   Principle II].
-- **FR-046**: The later cultures' references MUST come from: Anno 1800 for the industrial (outlander) culture, Bright
+- **FR-046**: The later cultures' references MUST come from: Anno 1800 for the outlander culture, Bright
   Sands for the civil outlanders and Wormways for the rough, and for the pirate culture, Anne Harlow's and Jean La
   Fortune's islands [Direction; Roadmap: R16]; and Odyssey's own form of an orbital settlement, rooms laid off a spine
   of corridors on one enclosed platform, for the Traders Guild, and for the Salvagers if they really get settlements
@@ -1020,16 +1115,34 @@ and confirm that no shared file was changed.
   that do not form one network reaching the edge of the reading's map; a road cell on a house or plot cell, since a cell
   holds one piece; a road that names no building or plaza it leads to, or whose destination, its yard included, does
   not touch it or its extension, the road carried on beyond an end in the direction of its last segment for 2 cells,
-  stopping at the first house it meets; and a building with no entrance, no side against a road, a plaza, a yard or a
+  stopping at the first house it meets; a dangling road, an end of a road that, with its 2-cell extension, touches no
+  road, plaza, gate, bridge, building, yard or edge of the reading's map: the design lets a road end only on a road, a
+  door, a gate or the map's edge, no road left hanging, and an end that touches none of the wider set is hanging however
+  the plaza question below is settled, so it is a misread or an unfinished tracing in any culture [Design:
+  Imperium-old b218bdc, `Imperium-Knowledge/09_地图生成与CBF技术.md` lines 944 and 949; Design archive:
+  `cities-inside.md` line 183]; a `leadsTo` that names neither the pixel
+  region where its way in is seen (`wayInFrom`) nor, where it is not seen, the road as unsure with what makes it so,
+  since the old project once moved a road's destination only so that its check passed (FR-057); and a building with no
+  entrance, no side against a road, a plaza, a yard or a
   porch, a wall between not counting and the parts of one building joined through their own shared walls counting as
   one [Design archive: `cities-inside.md` lines 191-203; `cities-forms.md` lines 371-375, where a street face joins a
   street or a square; Design: `Imperium-Knowledge/09_地图生成与CBF技术.md` lines 900 and 923, the second made so that a
   destination is not changed only to pass the check]. Where a kit sets them, the check MUST also report: a road whose
   grade is not one of the kit's grades or whose width is not its grade's, an even width being allowed only where the
   reading states the width in pixels that the picture gives it and that width lies within one cell of its grade's; a
-  road off the eight directions; and, where the kit allows no dead ends, a road end that lands on no other road, not
-  the edge of the reading's map and not a door, which in a reading is the building or yard the road leads to, a plaza
-  not being a node of the network [Design: same file, lines 924, 927, 929, 846, 944 and 949]. The Imperium kit, the
+  road off the eight directions; and, where the kit allows no dead ends, a dead end: an end that is not dangling but
+  touches no other road, gate or edge of the reading's map and is not at a door, which in a reading is the building or
+  yard the road leads to [Design: same file, lines 924, 927, 929, 846 and 944]. A dangling road and a dead end are two
+  problems, the first shared and the second the kit's. The check MUST also sort every road end into one of: through
+  (to a road, gate or the map's edge), way in (to its destination or its yard), into a yard (an end inside a yard of a
+  household it does not lead to), at a plaza, dead end and dangling, and report the count of each class for each
+  grade. The design makes a plaza no node of the network and has lanes run through to streets at both ends (same file,
+  lines 949 and 473; Design archive: `cities-inside.md` lines 150-151 and 183), while its own reading of Anno 117 found
+  Anno's plazas opening at junctions of three or four streets and at diagonal streets' cut corners (Imperium-old
+  `Imperium-Knowledge/designs/研究/城/纪元117-设计理念-地图与城建-2026-11-11.md` lines 43-44). Old rules are kept by
+  the evidence behind them, not by being recorded [Direction, 2026-11-25], so these two are verified against the
+  pictures before the check judges them, as an edge case sets; until then an end at a plaza and a lane that does not
+  run through are counted in their classes and not reported. The Imperium kit, the
   Empire's, sets them all as the design lays roads: grades main street 5 or 7, old road 5, secondary street 5, lane 3,
   ring road 3 and narrow way 1, the eight directions, and no dead ends; and a building is never reached through another
   household's, since households are kept apart by a one-cell gap [Design archive: `cities-inside.md` lines 182-187;
@@ -1043,12 +1156,25 @@ and confirm that no shared file was changed.
   `cities-inside.md` lines 494-497; glossary line 206, where a plot is a spec card's]. Whether every household gets a
   plot is the kit's to say. The Imperium kit says so, and in its readings houses MUST be traced by household: roof
   blocks that adjoin tightly with slightly offset positions are one household and one building whose outline they
-  make together, and a yard joined to them belongs to that household, as do its annexes and attics; a road that
+  make together, within one estate where the picture is of Anno 117, and a yard joined to them belongs to that household, as do its annexes and attics; a road that
   reaches into a yard is not a house [Design archive: `cities-forms.md` lines 491-493; `cities-inside.md` lines
   497-499; FR-049, use `AnnexOrAttic`; Design: Imperium-old `Imperium-Knowledge/现行/城/罗马城-做法与顺序.md` lines 41,
   153 and 156]. Where a kit gives every household a plot, the check MUST report a household with no plot, a house cell
   outside its household's plot, and a cell in the plots of two households, since the land the streets enclose is
-  divided into households [Design archive: `cities-inside.md` lines 485-487]. Whether a plot is regular is judged by
+  divided into households [Design archive: `cities-inside.md` lines 485-487]. In a reading of an Anno 117 picture a
+  residence's household is one estate, a plot of 3×3 Anno cells, 4×4 set diagonally, its yard painted on the plot's ground, and
+  roof blocks that adjoin tightly are joined into one household only within one estate, never across its edge
+  (Clarifications, 2026-11-25) [Design: Imperium-old b218bdc, `Imperium-Knowledge/designs/研究/城/纪元资料/游戏数据-民居定义.md`
+  lines 201-220 and `民居与变体.md` lines 12-15; other buildings' footprints are unverified there, so they are not
+  measured in estates]. Where a kit gives every household a plot, the check MUST also report a
+  yard, yard path or plot content outside its household's plot, since the old project's yards, flooded outward from
+  each house, ran into the next household's land [Design: `09_地图生成与CBF技术.md` line 965], and MUST report, for
+  the maintainer to check and not as an error, each plot larger than one and a half estates, an estate being 3 by 3,
+  or 4 by 4 set diagonally, times the reading's `referenceCell` squared, as the old project flagged such plots for the
+  maintainer's check, with every plot's size in Anno cells listed in the report: the factor of one and a half is the
+  old project's flag for such plots (same file, line 965), while its unit, a ruler of 20×20 cells whose origin no
+  record gives, is not taken; one estate is measured on each picture instead, from the game's 3×3 and the reading's
+  own `referenceCell` (FR-048), and only a residence's plot is measured so. Whether a plot is regular is judged by
   the maintainer's eye, since the design defines "regular" by no shape (FR-029) [constitution, Principle V].
 - **FR-056**: For an Empire template on a city's 350×350 map, the check MUST report the share of the map that its wall
   circle takes, the river through it included, and the least distance from its wall line to the map's edge, and MUST
@@ -1057,6 +1183,39 @@ and confirm that no shared file was changed.
   lines 250 and 346-347, and `cities.md` lines 212-213, where the share and the distance are judged when templates and
   samples are output and the 1:1 version only reports them]. The wall band, clear strip and moat that the design counts
   inside the 10 cells are generation's, so the check measures from the template's wall line (R2) [Roadmap: R2].
+  The map's size and the town's fitting to it, the wall's distance from the map's edge among them, belong to R2's
+  reproduction in the game and not to the reading's quality work, so FR-056 is built with that fitting [Roadmap: R2;
+  Direction, 2026-11-25].
+
+**Better than the old preview tool**
+
+- **FR-057**: A reading from a picture MUST NOT repeat any shortfall of the old project's preview tool and its sample
+  of the river-bend town, and the check MUST measure each one in the new reading and in the old sample's same area, so
+  that each has the old tool's result beside the new one [Direction, 2026-11-25: quality comes before speed]. The
+  shortfalls, each with the record or picture that shows it, and the criterion that replaces it:
+
+  | # | Shortfall of the old tool or its sample | Evidence | Criterion |
+  |---|---|---|---|
+  | S1 | Roads not joined into one network; road ends left hanging | `09_地图生成与CBF技术.md` line 944; the 2026-11-25 trial, 4 of 7 junctions open (tasks.md, handoff) | SC-017 (a) |
+  | S2 | Households counted by roof blocks, and blocks of two estates merged into one household, such as two rope workshops end to end read as one | same file, lines 953, 955 and 969 | SC-017 (b) |
+  | S3 | Yards cut off from the house they belong to | same file, line 952 | SC-017 (b) |
+  | S4 | Yards flooded outward from each house, first come first served, running into the next household's plot | same file, line 965; `designs/tools/city/说明/sample.md` line 18 | SC-017 (b) |
+  | S5 | A road reaching into a yard read as a house | same file, line 962 | SC-018 |
+  | S6 | A road's destination changed only so that the check passed, where neither building's way in can be seen | `designs/回报/东广场独立核.md` lines 7-17 | SC-017 (c) |
+  | S7 | A dark shadow band read as part of a house, pushing the road off the lit road surface | same file, lines 31-34 | SC-018 |
+  | S8 | House shapes normalized by the tool: slanted houses forced to 45° rectangles by percentiles, cells over streets cut away, all but the largest piece dropped; in the East Square the long narrow roofs became wide squares | `sample.md` line 15; the East Square side by side, `template-references/河湾城-最新版-1112/放大并排-东广场.png` | SC-018 |
+  | S9 | Ground classed by the average colour of pixels, so that shadows between houses and unrecognized ground became gardens and public gardens; every one of nine measured boxes of the sample lies outside the screenshot's range of visible green, the East Square box at 24% against 8–21% | `designs/研究/城/纪元资料/河湾聚落尺度查证.md` lines 81-85 and 94-106, the attribution to shadows marked there as an inference and the range measured by the old tool's own colour classing; `sample.md` lines 11 and 18 | SC-017 (d) |
+  | S10 | Three different sizes of one Anno cell in use at once, 2.44, 3–4 and 3.3 cells, so that households were cut and merged by a number the design had voided | `河湾聚落尺度查证.md` lines 8-18 | SC-017 (e) |
+  | S11 | Railings and fences read as walls | `09_地图生成与CBF技术.md` line 973 | SC-018 |
+  | S12 | Speed taken over quality: pieces placed by colour or score rather than read, and candidates looked at only on the first page | `sample.md` lines 13-22; the 2026-11-25 trial (tasks.md, handoff) | SC-019 |
+
+  The old sample's measuring tool also read the shaded side of roofs as water (`河湾聚落尺度查证.md` lines 109 and
+  111); in a reading water is a traced piece, never a colour class, so that shortfall cannot recur and has no
+  criterion of its own. All paths above are in Imperium-old b218bdc under `Imperium-Knowledge/`; they are evidence of
+  what went wrong, not a source of any piece (constitution, Principle II). The old sample is laid over the screenshot
+  through the old project's own mapping of the screenshot to the sample's cells, recorded with the tracing it was made
+  from, and is measured by the check after it is converted into a reading's form; neither is copied into a reading
+  (FR-053).
 
 ### Key Entities *(include if feature involves data)*
 
@@ -1065,10 +1224,13 @@ and confirm that no shared file was changed.
   reference city it is drawn from. It places no thing a city is built of.
 - **Terrain shape**: the site's cells, each with its terrain, any natural rock and its roof, as the game defines them;
   none, for a template taken from a preset island, whose land generation makes first (FR-004).
-- **Skeleton**: the fixed parts of a city's layout and their relations to each other and to the terrain. A kit holds
-  one too [Design: line 184].
-- **Kit**: one culture's fixed set of generation data: word list, skeleton, groups, fill and wall settings, and
-  possibly a block library.
+- **Skeleton**: the fixed parts of a city's layout and their relations to each other and to the terrain. The template's
+  skeleton is the one source of a site's parts and relations; the kit's holds only the kinds of part every city of the
+  culture has, with no relation and no place, and a template that names a kit's part again takes its kind from the
+  kit, so that neither repeats what the other decides [Design: line 184; data-model.md, Skeleton].
+- **Kit**: one culture's fixed set of generation data: the culture definitions it serves, skeleton, groups, fill and
+  wall settings, road and household settings, and possibly a block library; no word list, which is the faction's
+  (FR-006).
 - **Block library**: a kit's ready-made blocks, built from spec cards.
 - **Spec card**: one building's plot, rooms and contents.
 - **Piece**: a generic building element of generated settlements that the base game lacks, shared by every kit and
@@ -1160,6 +1322,32 @@ and confirm that no shared file was changed.
   pictures the maintainer saw before he accepted each, so that the cost of the town's other areas, and of the tribal
   culture's references, can be told from the East Square area's; and checking and drawing one area stays within
   SC-003's bound (FR-050, FR-053).
+- **SC-017**: For each area of the river-bend town's reading, the check reports the numbers below for the new reading
+  and, beside them, for the old sample's same area converted into a reading's form, and the new reading passes each
+  (FR-057): (a) roads, gates and plazas form one network reaching the area's edge and no road dangles (S1), with the
+  count of road ends in each class of FR-054 for each grade; (b) every household has one plot, no plot is larger than
+  one and a half estates unless the maintainer has checked it, no cell lies in two plots, and no yard, yard path or
+  plot content lies outside its household's plot or apart from it (S2 to S4), with every plot's size in Anno cells;
+  (c) every road's `leadsTo` names the region where its way in is seen, or the road is marked unsure with what makes it
+  so (S6); (d) the share of the area's land that gardens and trees take is reported beside the old sample's and beside the
+  range of visible green the old project measured on the screenshot for the box that holds the area, 8–21% for the
+  East Square, where the old sample has 24%, and [NEEDS CLARIFICATION: does that range pass or fail the area, or is
+  the share only judged by the maintainer in the pictures of SC-018, since the range was itself measured by colour
+  classing, which S9 rejects?], with the share of what is unclear beside it (S9); and (e) the reading holds one `scale`, and every household's size is
+  counted from its one `referenceCell` (S10).
+- **SC-018**: For each area, the check draws two pictures, each at the same width for all its panels: the area's
+  tracing laid over the screenshot through the ground mapping, beside the old sample's same area laid over the same
+  pixels of the screenshot through the old project's mapping; and the area's drawing beside the old sample's same area
+  and the screenshot's area. The area's acceptance item lists each place in the area where the old sample shows a
+  shortfall of FR-057 that only the eye can judge, a road into a yard read as a house (S5), a shadow read as part of a
+  house (S7), a house shape not the roof's (S8) and a railing or fence read as a wall (S11), each with its pixel
+  region, listed after the new tracing is drawn; the area passes only when the maintainer has checked at every listed
+  place that the new tracing follows the screenshot and has accepted the whole area as better than the old sample's
+  (FR-029, FR-050).
+- **SC-019**: By inspection of the check and the reading: no piece of a reading is placed by a colour class, a score,
+  a flood fill or a reshaping of a traced outline; every piece names the region of the screenshot it was read from;
+  and the minutes each area took are recorded with no time target, an area not being shown to the maintainer while
+  any check of SC-017 fails (S12; FR-049, FR-057; SC-016).
 
 ## Assumptions
 
@@ -1192,4 +1380,21 @@ and confirm that no shared file was changed.
   they are not read (FR-037, FR-052); a preset city read from the game's data, or another picture shown from above,
   serves as a reference once the maintainer chooses it among candidates, as FR-037 sets for the tribal references
   [Direction].
+- A template and a kit are Mantle's own definitions, since the game has none for a whole city's site or for a
+  culture's set of generation data: its layout definitions, `StructureLayoutDef` and `LayoutRoomDef`, arrange rooms
+  of one structure, not households or a city. Their bodies are written in the game's forms wherever the game has one:
+  cells, plots and the contents of a household in `PrefabDef`'s form, walls and doors in `StructureLayoutDef`'s
+  (research R-1, R-3, R-8).
+- A kit's fields change for three different reasons: its pieces (groups, fill, wall settings, block library) when the
+  culture's buildings change, its style values (road grades and widths, directions, dead ends, plots) when the
+  culture's way of laying a city changes, and, later, the classes that run each stage of generation, which R2 adds
+  [Design: `ICF设计.md` lines 96 and 161; Roadmap: R2]. They stay in one definition per culture, as the game keeps a
+  structure's pieces, values and worker class in one `StructureLayoutDef` [Data: `Odyssey/Defs/LayoutDefs/Layouts_OrbitalPlatform.xml`
+  lines 4-23]; this spec names the three apart so that a later split can follow them.
+- The forms of a template and a kit are not proven by the Empire's first town alone: the old design counted its
+  framework complete only when a second reference city, another Anno 117 town on different terrain, went through with
+  no new tool, and when a new kind of terrain needed no change of format [Design: Imperium-old b218bdc,
+  `Imperium-Knowledge/现行/城/城建-生成流程.md` lines 36-39]; and this spec asks that adding a culture need only its
+  skeletons and its kit (FR-033), which the second culture written in these forms tests. Until both have passed, the
+  forms are not taken as settled, and a change they then need goes through this spec again.
 - How the forms are written, and the pictures' look and file format, are chosen in `/speckit-plan`.
