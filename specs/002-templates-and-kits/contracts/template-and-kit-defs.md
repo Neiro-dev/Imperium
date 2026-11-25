@@ -124,7 +124,10 @@ serves, as a fierce tribe's walled stronghold does:
   relation kinds. A later entry may add kinds and fields (spec, Assumptions) but does not rename or remove these
   without a deprecation in the same pull request.
 - Another expansion's definition is marked with `MayRequire` on the element that names it, as `Data/` marks its own.
-- A culture is its kit's `defName`; its templates name that kit.
+- A culture is its kit's `defName`; its templates name that kit, and the kit names the culture definitions
+  (`cultures`) whose factions take it (spec FR-032; research R-26).
+- `nameMaker` is deprecated as of this pull request: the check reports it, Mantle's class still reads it for one
+  version, and a settlement takes its faction's own `settlementNameMaker` (spec FR-006; research R-26).
 - A template states the attitude it serves in `FactionDef`'s own `naturalEnemy` and `permanentEnemy`, and never names
   a faction.
 

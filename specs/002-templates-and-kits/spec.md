@@ -288,8 +288,9 @@ template (FR-030), and the check in the game, the final one, still follows [Test
   points fix a perspective mapping of the ground (FR-052).
 - Q: The reading must be of better quality than the old project's preview tool gave, quality coming before speed: what
   is "better", and how is it checked? → A: Better means not repeating any shortfall the old project recorded in its
-  own sample of the town or that shows when the sample is laid beside the screenshot, each turned into a criterion
-  that a number or a side-by-side picture passes or fails (FR-057; SC-017 to SC-019). The old sample's same area is
+  own sample of the town or that shows when the sample is laid beside the screenshot, each looked at in the
+  side-by-side pictures, the only criterion, and those a check can find also shown as places to look again (FR-057;
+  SC-017 to SC-019). The old sample's same area is
   measured by the same checks and drawn beside the new reading, so that every criterion has the old tool's result
   next to the new one; the old sample is a comparison only and nothing is copied from it (FR-053; constitution,
   Principle II). No time target is set for a reading: its minutes are recorded (SC-016) and an area is not shown to
@@ -306,6 +307,12 @@ template (FR-030), and the check in the game, the final one, still follows [Test
 - Q: What does the check do with a field it does not know, such as a misspelled one? → A: It reports it, as the game
   reports a field of `About.xml` its code does not hold unless the element says `IgnoreIfNoMatchingField` [Data:
   `ModUpdating.txt` lines 356-359]; nothing is dropped without a report (FR-014).
+- Q: Is a number, share or count a condition of accepting an area, such as the share of gardens and trees against
+  the range measured on the screenshot? → A: No. A number given as a target is filled by any means, as the old
+  project's moved destination shows (FR-057, S6); the one criterion is the maintainer's judgment of the side-by-side
+  pictures, the new reading against the old sample and the screenshot. The road and household checks of a reading
+  only point at places to look again, and shares are only reported. Reproducing the town better than the old preview
+  comes first; variants come after (the maintainer's broad direction, 2026-11-25; SC-017 to SC-019).
 - Q: Is a culture the game's culture definition, and how does a faction find its kit? → A: A culture is the lineage
   of factions the game groups under one culture definition in their `allowedCultures`, which the bases set and their
   kin inherit; a kit names the culture definitions it serves and a faction takes the kit that names one of its own.
@@ -662,8 +669,9 @@ and confirm that no shared file was changed.
 - Something proposes positions by a score, such as one of roof colours: the check proposes no position and accepts
   nothing; what the reader traces comes from the picture, and the area is accepted only by the maintainer's eye
   (FR-029, FR-051).
-- A plot, a house or a yard of one household reaches into a road or into another household's plot: the check reports
-  the cells (FR-054, FR-055), and the reading is not accepted while any is reported (FR-036).
+- A plot, a house or a yard of one household reaches into a road or into another household's plot: the check shows
+  the cells as a place to look again (FR-054, FR-055), and the reader either changes the piece with the region of the
+  screenshot that shows it or leaves it with that region; acceptance is the maintainer's eye alone (SC-017, SC-019).
 - The render's same area cannot be found, or the render is missing from `template-references/`: the check draws the
   area beside the screenshot alone, says the render is missing, and the area's comparison waits for it.
 - A road ends at a plaza, or a lane ends at a door or inside a yard rather than running through to another road: the
@@ -1196,16 +1204,16 @@ and confirm that no shared file was changed.
 
   | # | Shortfall of the old tool or its sample | Evidence | Criterion |
   |---|---|---|---|
-  | S1 | Roads not joined into one network; road ends left hanging | `09_地图生成与CBF技术.md` line 944; the 2026-11-25 trial, 4 of 7 junctions open (tasks.md, handoff) | SC-017 (a) |
-  | S2 | Households counted by roof blocks, and blocks of two estates merged into one household, such as two rope workshops end to end read as one | same file, lines 953, 955 and 969 | SC-017 (b) |
-  | S3 | Yards cut off from the house they belong to | same file, line 952 | SC-017 (b) |
-  | S4 | Yards flooded outward from each house, first come first served, running into the next household's plot | same file, line 965; `designs/tools/city/说明/sample.md` line 18 | SC-017 (b) |
+  | S1 | Roads not joined into one network; road ends left hanging | `09_地图生成与CBF技术.md` line 944; the 2026-11-25 trial, 4 of 7 junctions open (tasks.md, handoff) | SC-019 |
+  | S2 | Households counted by roof blocks, and blocks of two estates merged into one household, such as two rope workshops end to end read as one | same file, lines 953, 955 and 969 | SC-019 |
+  | S3 | Yards cut off from the house they belong to | same file, line 952 | SC-019 |
+  | S4 | Yards flooded outward from each house, first come first served, running into the next household's plot | same file, line 965; `designs/tools/city/说明/sample.md` line 18 | SC-019 |
   | S5 | A road reaching into a yard read as a house | same file, line 962 | SC-018 |
-  | S6 | A road's destination changed only so that the check passed, where neither building's way in can be seen | `designs/回报/东广场独立核.md` lines 7-17 | SC-017 (c) |
+  | S6 | A road's destination changed only so that the check passed, where neither building's way in can be seen | `designs/回报/东广场独立核.md` lines 7-17 | SC-019 |
   | S7 | A dark shadow band read as part of a house, pushing the road off the lit road surface | same file, lines 31-34 | SC-018 |
   | S8 | House shapes normalized by the tool: slanted houses forced to 45° rectangles by percentiles, cells over streets cut away, all but the largest piece dropped; in the East Square the long narrow roofs became wide squares | `sample.md` line 15; the East Square side by side, `template-references/河湾城-最新版-1112/放大并排-东广场.png` | SC-018 |
-  | S9 | Ground classed by the average colour of pixels, so that shadows between houses and unrecognized ground became gardens and public gardens; every one of nine measured boxes of the sample lies outside the screenshot's range of visible green, the East Square box at 24% against 8–21% | `designs/研究/城/纪元资料/河湾聚落尺度查证.md` lines 81-85 and 94-106, the attribution to shadows marked there as an inference and the range measured by the old tool's own colour classing; `sample.md` lines 11 and 18 | SC-017 (d) |
-  | S10 | Three different sizes of one Anno cell in use at once, 2.44, 3–4 and 3.3 cells, so that households were cut and merged by a number the design had voided | `河湾聚落尺度查证.md` lines 8-18 | SC-017 (e) |
+  | S9 | Ground classed by the average colour of pixels, so that shadows between houses and unrecognized ground became gardens and public gardens; every one of nine measured boxes of the sample lies outside the screenshot's range of visible green, the East Square box at 24% against 8–21% | `designs/研究/城/纪元资料/河湾聚落尺度查证.md` lines 81-85 and 94-106, the attribution to shadows marked there as an inference and the range measured by the old tool's own colour classing; `sample.md` lines 11 and 18 | SC-019 |
+  | S10 | Three different sizes of one Anno cell in use at once, 2.44, 3–4 and 3.3 cells, so that households were cut and merged by a number the design had voided | `河湾聚落尺度查证.md` lines 8-18 | SC-019 |
   | S11 | Railings and fences read as walls | `09_地图生成与CBF技术.md` line 973 | SC-018 |
   | S12 | Speed taken over quality: pieces placed by colour or score rather than read, and candidates looked at only on the first page | `sample.md` lines 13-22; the 2026-11-25 trial (tasks.md, handoff) | SC-019 |
 
@@ -1313,7 +1321,8 @@ and confirm that no shared file was changed.
   repository (FR-028, FR-051).
 - **SC-015**: The East Square area of the river-bend town is read from its screenshot through FR-052's ground mapping:
   by inspection, every piece of it is traced from the screenshot and names its region (FR-049, FR-053); the
-  check reports no problem in it, none of FR-054 or FR-055 among them; its drawing shows each household's plot, house
+  check reports no problem of form in it, and its road and household findings are each answered as SC-019 sets; its
+  drawing shows each household's plot, house
   and yards as FR-053 sets and is set beside the screenshot's area and the render's same area with each kind of
   piece's share of the land; and the maintainer has accepted it once after tracing and once after laying out, each an
   item of `checklists/acceptance.md` (FR-050).
@@ -1322,32 +1331,25 @@ and confirm that no shared file was changed.
   pictures the maintainer saw before he accepted each, so that the cost of the town's other areas, and of the tribal
   culture's references, can be told from the East Square area's; and checking and drawing one area stays within
   SC-003's bound (FR-050, FR-053).
-- **SC-017**: For each area of the river-bend town's reading, the check reports the numbers below for the new reading
-  and, beside them, for the old sample's same area converted into a reading's form, and the new reading passes each
-  (FR-057): (a) roads, gates and plazas form one network reaching the area's edge and no road dangles (S1), with the
-  count of road ends in each class of FR-054 for each grade; (b) every household has one plot, no plot is larger than
-  one and a half estates unless the maintainer has checked it, no cell lies in two plots, and no yard, yard path or
-  plot content lies outside its household's plot or apart from it (S2 to S4), with every plot's size in Anno cells;
-  (c) every road's `leadsTo` names the region where its way in is seen, or the road is marked unsure with what makes it
-  so (S6); (d) the share of the area's land that gardens and trees take is reported beside the old sample's and beside the
-  range of visible green the old project measured on the screenshot for the box that holds the area, 8–21% for the
-  East Square, where the old sample has 24%, and [NEEDS CLARIFICATION: does that range pass or fail the area, or is
-  the share only judged by the maintainer in the pictures of SC-018, since the range was itself measured by colour
-  classing, which S9 rejects?], with the share of what is unclear beside it (S9); and (e) the reading holds one `scale`, and every household's size is
-  counted from its one `referenceCell` (S10).
+- **SC-017**: Every area of the river-bend town's reading is accepted by one criterion only: the maintainer, looking
+  at the pictures of SC-018, judges the new reading a better reproduction of the screenshot than the old sample's same
+  area, and records it as an item of `checklists/acceptance.md` (FR-029, FR-050, FR-057). No number, share, count or
+  score passes or fails an area, and none is a target (Clarifications, 2026-11-25).
 - **SC-018**: For each area, the check draws two pictures, each at the same width for all its panels: the area's
   tracing laid over the screenshot through the ground mapping, beside the old sample's same area laid over the same
   pixels of the screenshot through the old project's mapping; and the area's drawing beside the old sample's same area
   and the screenshot's area. The area's acceptance item lists each place in the area where the old sample shows a
-  shortfall of FR-057 that only the eye can judge, a road into a yard read as a house (S5), a shadow read as part of a
-  house (S7), a house shape not the roof's (S8) and a railing or fence read as a wall (S11), each with its pixel
-  region, listed after the new tracing is drawn; the area passes only when the maintainer has checked at every listed
-  place that the new tracing follows the screenshot and has accepted the whole area as better than the old sample's
-  (FR-029, FR-050).
-- **SC-019**: By inspection of the check and the reading: no piece of a reading is placed by a colour class, a score,
-  a flood fill or a reshaping of a traced outline; every piece names the region of the screenshot it was read from;
-  and the minutes each area took are recorded with no time target, an area not being shown to the maintainer while
-  any check of SC-017 fails (S12; FR-049, FR-057; SC-016).
+  shortfall of FR-057, each with its pixel region, listed after the new tracing is drawn, so that the maintainer can
+  look at each of them in the new tracing (FR-029, FR-050).
+- **SC-019**: The check's road and household findings in a reading, a road network in pieces, a dangling road, a
+  household with no plot or two, a yard outside its plot, a `leadsTo` with no way in seen (FR-054, FR-055, FR-057),
+  are shown beside the pictures as places to look again, for the new reading and the old sample alike, and the shares
+  of the land and the road ends by class are reported beside them; none is a condition of acceptance. Each finding in
+  the new reading is either changed with the region of the screenshot that shows the change, or left with the region
+  that shows the piece as it is read; nothing is changed only so that a finding goes away (S6). By inspection of the
+  check and the reading, no piece is placed by a colour class, a score, a flood fill or a reshaping of a traced
+  outline, every piece names its region, and the minutes each area took are recorded with no time target (S12;
+  FR-049; SC-016).
 
 ## Assumptions
 

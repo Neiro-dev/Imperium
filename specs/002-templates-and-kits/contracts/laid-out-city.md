@@ -77,5 +77,28 @@ left corner where it is left out (spec FR-051). A building or group holds `use`,
 `AnnexOrAttic` or `Unclear`, and `basis`, one sentence (spec FR-049, the design's eight classes). What is done with an area of
 which more than three tenths is unclear has no form (spec FR-049, marked NEEDS CLARIFICATION).
 
+A reading from a picture in perspective also holds `ground`, at least four pairs of a pixel of the picture's ground
+and the cell corner it lies on, and types its pieces (data-model.md, LaidOutCity; spec FR-052 to FR-055):
+
+```xml
+  <ground>
+    <pairs>
+      <li><pixel>(1056,536)</pixel><cell>(40,52)</cell></li>
+      <!-- three or more pairs more -->
+    </pairs>
+  </ground>
+  <parts>
+    <li><name>squareStreet</name><kind>Road</kind><grade>SecondaryStreet</grade><line><li>(10,40)</li><li>(60,40)</li></line>
+      <leadsTo>westHouse</leadsTo><wayInFrom><li>(1010,560,1020,570)</li></wayInFrom><from><li>(980,540,1120,580)</li></from></li>
+    <li><name>westHouse</name><kind>House</kind><household>west</household><rects><li>(12,42,20,50)</li></rects>
+      <from><li>(990,500,1030,540)</li></from><use>Housing</use><basis>A red roof with its yard behind it.</basis></li>
+    <li><name>westPlot</name><kind>Plot</kind><household>west</household><rects><li>(10,42,24,56)</li></rects>
+      <from><li>(985,480,1040,545)</li></from></li>
+    <li><name>westYard</name><kind>Yard</kind><household>west</household><uncertain>true</uncertain>
+      <because>Its far edge is under the roof's shadow.</because><rects><li>(21,42,24,50)</li></rects>
+      <from><li>(1025,505,1040,540)</li></from></li>
+  </parts>
+```
+
 It is kept in `readings/` at the repository root, outside both mod folders, as the template's source, so it is in
 neither mod's released files (research R-7); its reference pictures are kept outside the repository (FR-028).

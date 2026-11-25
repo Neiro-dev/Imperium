@@ -584,3 +584,100 @@ files, to `Neiro-dev/Imperium-old` at 20a052b, to Spec Kit at v1.4.3 and to Harm
 - **Alternatives considered**: counting the wall band, clear strip and moat toward the 10 cells, as the design does.
   Not possible here: a template holds the wall line only, and the band, strip and moat are laid by generation (R2), so
   the check measures from the line and says so.
+
+## R-24: A reading's road and household checks are places to look again, not problems
+
+- **Decision**: in a reading from a picture, every road and household check of R-21, and the dangling-road and
+  `wayInFrom` checks FR-054 adds, give findings, not problems: the report lists them in a section of their own, each
+  numbered `L1`, `L2` and so on with its file, piece and cells, the pictures mark them in orange beside the red of
+  problems, and the exit status counts only problems. The shares of FR-053 and the count of road ends by class and
+  grade are reported beside them. A finding is answered in the reading, either by a changed piece whose `from` shows
+  the change or by the piece left as read; the check records neither. Problems of form, of names and of `Data/`
+  (FR-013 to FR-019) stay problems in a reading as in every other file. R-21's "reports, as problems" reads
+  "shows, as findings" for a reading from now on; R-23's wall circle moves to R2 with the map's fitting (spec
+  FR-056).
+- **Rationale**: the maintainer's direction of 2026-11-25 (spec, Clarifications): a number or a check given as a
+  condition is met by any means, as the old project's destination moved only to pass its check shows (FR-057, S6), so
+  the one criterion is his judgment of the side-by-side pictures (SC-017), and the checks only point at places to
+  look again (SC-019).
+- **Alternatives considered**: keeping them as problems and the exit status `1` until none is left. Rejected for that
+  reason. Dropping them. Rejected: they find misreads the eye can miss, such as a road one cell short of its junction,
+  and the old sample's findings beside them show where it went wrong (FR-057).
+
+## R-25: Every field a form does not hold is reported
+
+- **Decision**: each reader in `forms.py` names the elements each form holds; any other child element, and any
+  attribute other than `MayRequire`, `MayRequireAnyOf`, `IgnoreIfNoMatchingField`, `Name`, `ParentName`, `Abstract`
+  and `Class`, is a problem "wrong form" with its file, its place and the name, unless the element is marked
+  `IgnoreIfNoMatchingField="True"`. Layers, whose children are named by definitions, and lists of `li` are read as
+  before. In the game, Mantle's own XML reading in `Cells.cs` (`DefLayer`'s and `Feature`'s `LoadDataFromXmlCustom`,
+  which read only the children they know) logs each other child with `Log.Error`, naming the element; the fields the
+  game's own loader reads get the game's own report.
+- **Rationale**: spec FR-014; `ModUpdating.txt` lines 356-359, where the game reports a field its code does not hold
+  unless it is marked, which is the game's own way; the Mantle interface report of 2026-11-25 found that the two
+  readings in `Cells.cs` (lines 14-24 and 67-95) skip what they do not know.
+- **Alternatives considered**: an XML schema. No source uses one for definitions, and `Data/` ships none (constitution,
+  Principle V). A warning without a problem. Rejected: a misspelled field read as absent changes what the check
+  reports with no sign.
+
+## R-26: A kit names the culture definitions it serves; the word list is the faction's
+
+- **Decision**: `KitDef.cultures` is a list of `CultureDef`s; the check reports a name that is not a `CultureDef` as
+  wrong kind, as it reports a biome that is not a `BiomeDef`, and a kit with none as a missing field. The Empire's kit
+  names `Sophian` (`Royalty/Defs/FactionDefs/Faction_Empire.xml` line 22). `KitDef.nameMaker` is deprecated in the
+  same pull request, as the contract's stable fields require (contracts/template-and-kit-defs.md, Stable from R13
+  on): the check reports it as "deprecated field", saying that settlements take their faction's `settlementNameMaker`
+  (spec FR-006), and Mantle's class keeps the field one more version so that an older kit still loads. Imperium sets
+  the Empire's word list on the Empire's faction with a `PatchOperationReplace` of `settlementNameMaker` in
+  `Imperium/Patches/`, the folder `ModUpdating.txt` gives for changing another mod's definitions (line 112), so the
+  Empire kit holds no `nameMaker`.
+- **Rationale**: spec FR-006, FR-011 and FR-032 with their `Data/` lines; how a faction finds its kit by its
+  `allowedCultures` at run time stays R2's (research R-14).
+- **Alternatives considered**: a kit naming factions (R-14 rejects it); `categoryTag`, which the pirates lack (Mantle
+  interface report 2026-11-25; `Core/Defs/FactionDefs/Factions_Misc.xml`); keeping the word list in the kit, which
+  overwrites the different lists kin of one lineage use (spec FR-006).
+
+## R-27: The old sample set beside each area
+
+- **Decision**: the check takes the old project's sample of the town and its mapping of the screenshot as inputs that
+  stay outside the repository: `--old-sample <file>`, the sample's cells (`样张格.json`, form `imperium-citysample-1`:
+  `box`, `legend` of one-character codes, `rows` from north to south), `--old-mapping <file>`, a small JSON file
+  holding that project's eight coefficients from its tracing's parameters (`样张·原图到格`, mapping a pixel of its
+  1440×918 copy of the screenshot to a cell of the sample) and the factor from the screenshot's pixels to that copy's,
+  1440/1596, and `--old-area`, the box of the sample's cells an area takes. The check draws the sample's same area in
+  colours by code, lays it through that mapping over the same pixels of the screenshot that the new tracing is laid
+  over, and sets the three side by side (SC-018). For the findings beside the pictures it sorts each code into the
+  reading's kinds: main street, street and lane to `Road`; plaza, marble and fountain to `Plaza`; bridge to `Bridge`;
+  house wall, house floor and door to `House`; annex to `AnnexOrAttic`; yard and yard path to `Yard` and `YardPath`;
+  yard wall and yard gate to `YardWall`; garden, household garden and public garden to `Garden`; tree and shrub to
+  `Tree`; large piece to `LargePiece`; the city wall's codes to `CityWall`; the waters to `Water`; the plot contents to
+  their kinds; the rest to outside. On those kinds it finds what cells alone show: the road network's pieces, houses
+  with no side against a road, plaza, yard or porch, and yards that touch no house; and it reports the shares in the
+  same order as for a reading. Nothing is written from the sample into a reading.
+- **Rationale**: spec FR-057 and SC-018: each shortfall is looked at in the new reading beside the old sample's same
+  area, which is a comparison only (constitution, Principle II; FR-053). The sample's codes and the mapping are the
+  old project's own (Imperium-old b218bdc `Imperium-Knowledge/designs/回报/纪元样张/样张格.json`, legend;
+  `designs/city-plans/anno117/描线.json`, `参数`, `样张·原图到格`; `河湾聚落尺度查证.md` line 4 for the 1440×918 copy);
+  a check on 2026-11-25 put the East Square fountain's sample cell (315, 231) at pixel (1056, 536) of the screenshot,
+  where the fountain is. The sample holds no road lines or destinations, so its road ends and `leadsTo` cannot be
+  judged and are not reported for it.
+- **Alternatives considered**: taking the sample's colours from its own picture (`1比1整城样张.png`), which carries grid
+  lines and labels over its cells. Rejected: the codes give the same pieces without them. Putting the sample and the
+  mapping into the repository. Rejected: they are a reading of the screenshot made by another project's tool and are
+  needed only beside the pictures (FR-028, FR-053).
+
+## R-28: Tracing in the screenshot's pixels, kept in cells
+
+- **Decision**: the reader traces each piece of an area on the screenshot as a polygon of pixels at ground level,
+  where its walls or edges meet the ground, and a road as its centre line; the polygons are laid onto cells through the
+  reading's own `ground` fit (R-20), a cell belonging to a piece where its centre falls inside the piece's polygon, and a
+  line's corners rounded to the nearest cell corner. The reading in `readings/` holds the result in its own form (cells,
+  `from` the polygon's pixel box, kinds, households, roads), as data-model.md sets; the polygons are the reader's
+  working file and stay with the area's pictures in the project's files, so that each piece's region can be looked at
+  again. The laying uses the check's own `ground` module, so that the tracing over the screenshot and the cells agree.
+- **Rationale**: FR-052 places houses where their walls meet the ground and fixes the ground by a perspective mapping;
+  tracing straight into cells by eye would put the perspective's error into every piece. FR-049 asks each piece to name
+  its region, which the polygon gives.
+- **Alternatives considered**: tracing on a straightened picture. Rejected: the only straightened picture is the old
+  project's base image, which cross-checks only (R-20). Writing the polygons into the reading. Not done: the form holds
+  cells (data-model.md), and the region each piece names finds it again.

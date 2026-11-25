@@ -14,7 +14,8 @@ installed game (research R-1, R-2). Mantle's mod holds the tribal culture's kit 
 alpha; Imperium holds the Empire's kit and the river-bend town's template, and requires Mantle from then on (R-1). Their
 fields take `Data/`'s own forms wherever `Data/` writes the same thing (R-3): a template is a terrain shape of natural
 terrain, rock and roofs (R-4) and a skeleton of named parts and relations taken from the design's definitions (R-5); a
-kit holds its word list, skeleton, wall settings, groups and fill (R-8). A laid-out city is one XML file that R2's
+kit holds its skeleton, wall settings, groups and fill (R-8), and, since the second update of 2026-11-25, the culture
+definitions it serves and no word list (R-26). A laid-out city is one XML file that R2's
 generation writes, and a reading, the reference city read onto the game's cells that a culture's template and kit are
 taken from, is a file in the same form (R-7). The check is a Python package in Spec Kit's form, `mantle-check`, that
 reads `Data/` 1.7.5014 and each mod's `About/About.xml` and `Defs/`, reports every problem of the spec's kinds, accepts
@@ -51,6 +52,17 @@ the area beside the screenshot's area and the render's (R-21). An Empire templat
 from the map's edge are reported (R-23). The oblique screenshot's ground is laid onto the cells by a perspective
 mapping fitted from ground points placed by person-sized sizing, since the picture's scale changes across it (R-20). Everything stays in the Python check (R-22).
 
+Second update of 2026-11-25: the reading has to reproduce the town better than the old project's preview tool, and
+the one criterion is the maintainer's judgment of side-by-side pictures (spec FR-057, SC-017 to SC-019). The check
+therefore takes the old sample and that project's mapping of the screenshot as inputs kept outside the repository,
+draws the new tracing over the screenshot beside the old sample over the same pixels, and the area's drawing beside the
+old sample's same area and the screenshot (R-27). The road and household checks of a reading become findings, places
+to look again shown beside the pictures for both readings, never conditions, and shares and counts are only reported
+(R-24). Pieces are traced as ground-level polygons on the screenshot and laid onto cells through the reading's own
+ground fit (R-28). Every field a form does not hold is reported (R-25). A kit names the culture definitions it serves
+and no longer holds the word list, which becomes the faction's (R-26). The wall circle's share and distance move to
+R2 with the map's fitting (spec FR-056).
+
 ## Technical Context
 
 **Language/Version**: C# for Mantle's definition classes, targeting `net10.0` (research R-2); XML 1.0, UTF-8, for
@@ -58,7 +70,8 @@ definitions, laid-out cities and readings (R-1, R-7); Python 3.11 or later for t
 
 **Primary Dependencies**: RimWorld 1.7.5014's assemblies, referenced where the game is installed and never copied
 (R-2); Mantle's mod requires no expansion, and Imperium requires Royalty (R1 spec FR-002) and Mantle (R-1); for the
-check, Typer and Pillow (R-9); no Harmony (R-2)
+check, Typer and Pillow (R-9), the ground fit and the old sample's mapping solved with Python's own library (R-20,
+R-27); no Harmony (R-2)
 
 **Storage**: files: definitions in each mod's `Defs/`; laid-out cities as XML files; readings in `readings/` at the
 repository root (R-7); reports and pictures in a folder outside the repository (R-11); reference pictures, among them
@@ -79,7 +92,8 @@ check wherever Python and `Data/` are, on the maintainer's computer and in cloud
 the game reaches its main menu on the same computer (SC-003); the recurring cost of reading a picture, the time from the start of
 an area's tracing to its two pictures and the number of pictures the maintainer saw before accepting each, is recorded
 for every area in its acceptance items, so that the river-bend town's other areas and the tribal references can be
-costed from the East Square area (SC-016); checking and drawing one area of a reading stays within SC-003's bound
+costed from the East Square area (SC-016), with no time target, since quality comes before speed (SC-019); checking
+and drawing one area of a reading with the old sample beside it stays within SC-003's bound
 
 **Constraints**: reference pictures and the game's files stay out of the repository and the released files (FR-021,
 FR-028; `EULA.txt` lines 76, 86), and so do another game's packages and what is read or drawn from them (FR-041); the
@@ -121,7 +135,14 @@ the old project's tools, render, tracings, legend and straightened base image ar
 the effect the maintainer directed to keep (II); the oblique ground is laid onto cells by the design's own sizing done
 place by place, the old project's mapping only cross-checking (I, II, R-20); each old rule is kept for the reason the
 old ledger records, which still holds for this reading (I, VI, R-21); the shares are reported with no threshold (V); no
-question goes to the maintainer (IV): unchanged.
+question goes to the maintainer (IV): unchanged. Re-checked after the second update of 2026-11-25 (R-24 to R-28):
+each shortfall of FR-057 names the old project's record or the picture that shows it, and each new decision names
+`Data/`, `ModUpdating.txt`, the design or the maintainer's direction (I, VI); the old sample, its mapping and its
+findings only sit beside the new reading as a comparison and nothing of them enters a reading (II); the one question
+put to the maintainer, whether a number may pass an area, was game content no source settled, asked in
+`/speckit-clarify` form and answered (IV); no threshold, target or time limit is set where no source gives one, and the
+findings decide nothing (V); the culture lookup and the thin kit stand on `Data/`'s faction and culture definitions,
+the word list moving by a patch in the folder `ModUpdating.txt` names (I, III): pass.
 
 ## Project Structure
 
@@ -169,7 +190,9 @@ Imperium/                          # Imperium's mod folder
 │   ├── KitDefs/
 │   │   └── Kits_Empire.xml        # the Empire kit (R-8)
 │   ├── RulePackDefs/
-│   │   └── RulePacks_Namers_Empire.xml  # the Empire kit's word list (R-3)
+│   │   └── RulePacks_Namers_Empire.xml  # the Empire's word list (R-3)
+├── Patches/
+│   └── Faction_Empire_Names.xml   # sets the Empire faction's settlementNameMaker to it (R-26)
 │   └── TemplateDefs/
 │       └── Templates_Empire.xml   # the river-bend town's template (R-13)
 └── Languages/
@@ -189,6 +212,7 @@ src/
     ├── relations.py               # measuring relations (R-6)
     ├── roads.py                   # roads and households of a reading, and the shares (R-21)
     ├── ground.py                  # the ground fit of a picture in perspective (R-20)
+    ├── oldsample.py               # the old sample: codes to kinds, findings, drawing, laid over the screenshot (R-27)
     ├── pictures.py                # PNG pictures (R-11)
     └── report.py
 tests/
@@ -201,8 +225,8 @@ tests/
 R14 sets (`specs/003-mantle-mod/research.md` R-1 to R-3). Mantle's code and the tribal culture's kit and templates go
 in `Mantle/`, since every culture shares the forms and the alpha is Mantle alone (ROADMAP R14, Releases); its
 `Source/` and `Assemblies/` follow `ModUpdating.txt`, and its definitions sit in `Defs/` with folders named as `Data/`
-names its own. Imperium holds only the Empire's kit, its word list and template; the tribal kit names the base game's
-own word list (spec FR-011). The check, a development tool that checks both mods, and the readings it reads sit at the
+names its own. Imperium holds only the Empire's kit, its word list, set on the Empire's faction by a patch, and its template;
+the tribes keep the base game's own word list on their factions (spec FR-006, FR-011; R-26). The check, a development tool that checks both mods, and the readings it reads sit at the
 root as a Python package in Spec Kit's layout (R-7, R-9), so that neither mod folder holds them and the game loads none
 of them.
 
