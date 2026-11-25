@@ -616,3 +616,10 @@ Performance Goals or success criteria, then `/speckit-tasks` and `/speckit-analy
 
 A longer write-up in Chinese, with its sources, is in the project's files as
 `东广场纠正-老库整城逻辑与昨晚复盘.md`.
+
+## Phase 10: Convergence
+
+- [ ] T076 Load Mantle and Imperium in the game with `-quicktest` (quickstart.md, steps 2-3) and confirm that the changed `Mantle.dll` (`KitDef.cultures`, `roads`, `households`, the deprecated `nameMaker`, the unknown-field errors of `Cells.cs`) and `Imperium/Patches/Faction_Empire_Names.xml` load with no error in `Player.log`, and that the Empire faction's `settlementNameMaker` is `NamerSettlementEmpireImperium` per Constitution, Source Register (testing in the game) (missing)
+- [X] T077 Trace the courtyard building east of the fountain (`n4`) with its inner court left open in `readings/RiverBendTown.xml` per FR-053 (partial)
+- [X] T078 Add to `tests/test_reading_picture.py` checks that a road's grade is written on the drawing and that a route line is drawn dashed per T067 (partial)
+- [X] T079 Align data-model.md's `line` wording with research R-21: a point names the cell whose lower left corner it is, and the road is centred on the cells the line runs through per plan: data model (partial)

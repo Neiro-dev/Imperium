@@ -29,6 +29,19 @@ def test_a_household_is_drawn_in_its_colour_with_its_plot_outlined_thick():
     assert image.getpixel((int(fx), int(fy))) == FINDING
 
 
+def test_a_road_carries_its_grade_and_a_route_line_is_dashed():
+    road = Piece({(x, 2) for x in range(10)}, "Road", "street", grade="Lane", line=[(0, 2), (9, 2)])
+    route = Piece(set(), "RouteLine", "path", line=[(0, 7), (9, 7)])
+    painter = KindPainter((10, 10), 20)
+    image = painter.draw([road, route], "test", True, [])
+    lx, ly = painter.corner(4.5 + 0.5, 2.5)
+    label = [image.getpixel((int(lx) + dx, int(ly) + dy)) for dx in range(0, 20) for dy in range(2, 9)]
+    assert any(p != KIND_COLOURS["Road"] for p in label)
+    y = int(painter.corner(0, 7.5)[1])
+    row = [image.getpixel((x, y)) for x in range(int(painter.corner(0, 0)[0]) + 12, int(painter.corner(10, 0)[0]) - 12)]
+    assert (110, 110, 110) in row and any(p != (110, 110, 110) for p in row)
+
+
 def test_the_legend_counts_pieces_by_kind():
     pieces = [Piece({(0, 0)}, "House"), Piece({(1, 1)}, "House"), Piece({(2, 2)}, "Yard")]
     legend = legend_counts(pieces, [])
