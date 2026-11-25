@@ -499,3 +499,45 @@ T061. Left, each to be written first as a test and each needing its source named
 - A pixel ruler and grid on the picture, counts in the legend, and a `--font` option for Chinese names; none needs a source.
 - Not buildable now: what counts as a piece not matching its picture (FR-051), which is only in the old tool's own
   documentation (`tools/city/说明/sample.md`), not in design meaning.
+
+## Handoff: the East Square correction (2026-11-25; spec, plan and code not yet changed)
+
+**Target** (the maintainer's broad direction, to be recorded in spec 002 first): the East Square reading delivers a
+top-down picture on the game's cells of the same kind as the river-bend town's newest cell-level render: roads laid
+first as one connected network, houses along the roads, and plots, yards, walls, trees and plazas as separate pieces,
+in the render's proportions. The original screenshot stays the source of the reading and is set beside that render. No
+cell-exact match to the render is asked for (FR-031). Any brief, spec text or acceptance item for this reading names
+the render as a comparison.
+
+**To resolve first**: FR-031 takes the screenshot as the source, while FR-052 forbids reading a picture the spec gives
+no form for, such as one not shown from above, and the screenshot is oblique. The old project read this screenshot
+through a straightened base image (Imperium-old `designs/tools/city/说明/sample.md` lines 6, 13 and 241, a tool
+document). Whether any source gives that form is research for the plan.
+
+**Design sources to read whole** (Imperium-old default branch, commit `b218bdc`, under `Imperium-Knowledge/`):
+`现行/城/城建-生成流程.md` (lines 10-12 and 36); `现行/城/罗马城-做法与顺序.md` (lines 90, 144, 153-156 and
+172-173); `现行/城/罗马城-城内.md` (lines 78, 97-98 and 134); `designs/研究/城/片区谱-广场住片.md`;
+`designs/研究/城/布置思路.md`; `现行/城/地形与选址.md` (lines 33-34 and 83-90). The newest render is
+`designs/回报/纪元样张/整张样张.png` with its cells in `样张格.json`; it is pixel-identical to
+`template-references/河湾城-最新版-1112/` in the project's files. Rulings R-1114-0852 and R-1113-1543
+(`09_地图生成与CBF技术.md` lines 977 and 975) are about plot cards, not about reading a town picture.
+
+**Next, in Spec Kit's order**: update spec 002 (FR-031, FR-052, the clarifications and Edge Cases), then
+`/speckit-plan` with the Constitution Check and `research.md`, with the recurring cost of each reading in the
+Performance Goals or success criteria, then `/speckit-tasks` and `/speckit-analyze`, and only then
+`/speckit-implement`.
+
+**Draft code of the earlier trial**, local to the maintainer's clone and never pushed: `claude/east-square-demo`
+(`f8bd238`) and `claude/east-square-lookup` (`46ba3cd`).
+
+- `46ba3cd` builds with no warnings, and its `check` command runs. Its other commands were not rerun.
+- Usable as a starting point if the plan chooses C#: `Tools/MantleCheck/Game.cs` (boots the installed game outside
+  the game and reads `Data/` with the game's loader) and `Canvas.cs` (the game's PNG and font libraries), both first
+  written in `f8bd238`. The check on this branch is Python (research R-9), and the draft is not wired to it.
+- Not to be reused: its reading (kept outside the repository), where 4 of 7 declared road junctions are open, 8 of 23
+  plots are partly covered by a road and 10 touch neither a road nor a plaza; the roof-colour score (`Sheets.cs`, `Propose.cs`),
+  which proposed plot positions and ordered candidates of which only the first page of five was looked at; and the
+  camera fitted by eye that lays game meshes over the oblique picture (`Camera.cs`, `Raster.cs`; FR-052).
+
+A longer write-up in Chinese, with its sources, is in the project's files as
+`东广场纠正-老库整城逻辑与昨晚复盘.md`.
