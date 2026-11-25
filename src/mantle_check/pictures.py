@@ -448,6 +448,8 @@ KIND_ORDER = (
 )
 FINDING = (240, 130, 0)
 UNSURE = (200, 0, 160)
+# Land of the area that no piece covers: drawn so, not left as paper, and never counted as any kind (FR-053).
+OPEN = (228, 232, 220)
 
 
 def kind_rank(kind: str | None) -> int:
@@ -528,6 +530,7 @@ class KindPainter:
         image = Image.new("RGB", (self.w * self.cell + 2 * MARGIN, self.h * self.cell + self.top + MARGIN), BACKGROUND)
         draw = ImageDraw.Draw(image)
         draw.text((MARGIN, 8), title, fill=INK, font=font(14))
+        draw.rectangle([self.corner(0, self.h), (self.corner(self.w, 0)[0] - 1, self.corner(self.w, 0)[1] - 1)], fill=OPEN)
         for piece in sorted(pieces, key=lambda p: kind_rank(p.kind)):
             if piece.kind == "RouteLine":
                 continue
@@ -551,8 +554,8 @@ class KindPainter:
             x1, z1, x2, z2 = rect
             left, top = self.corner(x1, z2 + 1)
             right, bottom = self.corner(x2 + 1, z1)
-            draw.rectangle([left, top, right, bottom], outline=colour, width=2)
-            draw.text((left + 2, top - 12), label, fill=colour, font=font(11))
+            draw.rectangle([left, top, right, bottom], outline=colour, width=1 if colour == FINDING else 2)
+            draw.text((left + 2, top - 12), label, fill=colour, font=font(10 if colour == FINDING else 11))
         return image
 
     def piece_lines(self, draw, piece: Piece, households: bool) -> None:
@@ -598,7 +601,7 @@ def legend_counts(pieces: list[Piece], extra: list[str]) -> Image.Image:
     for piece in pieces:
         counts[piece.kind] = counts.get(piece.kind, 0) + 1
     rows = [(kind, counts[kind]) for kind in sorted(counts, key=kind_rank)]
-    image = Image.new("RGB", (620, 22 + 16 * (len(rows) + len(extra)) + 8), BACKGROUND)
+    image = Image.new("RGB", (620, 22 + 16 * (len(rows) + len(extra) + 1) + 8), BACKGROUND)
     draw = ImageDraw.Draw(image)
     draw.text((8, 4), "Legend: pieces by kind, with how many", fill=INK, font=font(12))
     y = 22
@@ -606,6 +609,9 @@ def legend_counts(pieces: list[Piece], extra: list[str]) -> Image.Image:
         draw.rectangle([8, y + 2, 20, y + 13], fill=KIND_COLOURS.get(kind, (200, 200, 200)), outline=INK)
         draw.text((26, y), f"{kind}: {count}", fill=INK, font=font(11))
         y += 16
+    draw.rectangle([8, y + 2, 20, y + 13], fill=OPEN, outline=INK)
+    draw.text((26, y), "open ground: land no piece covers", fill=INK, font=font(11))
+    y += 16
     for line in extra:
         draw.text((8, y), line, fill=INK, font=font(11))
         y += 16
@@ -674,7 +680,7 @@ def over_picture_cells(picture: Image.Image, crop: tuple[int, int, int, int], to
     for label, rect, colour in marks:
         xa, za, xb, zb = rect
         corners = [place(xa, za), place(xb + 1, za), place(xb + 1, zb + 1), place(xa, zb + 1)]
-        draw.polygon(corners, outline=colour, width=2)
+        draw.polygon(corners, outline=colour, width=1 if colour == FINDING else 2)
         left = min(c[0] for c in corners)
         top = min(c[1] for c in corners)
         draw.text((left + 2, top - 13), label, fill=colour, font=font(12))

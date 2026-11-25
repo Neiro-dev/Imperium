@@ -32,7 +32,7 @@ def test_a_household_is_drawn_in_its_colour_with_its_plot_outlined_thick():
 def test_the_legend_counts_pieces_by_kind():
     pieces = [Piece({(0, 0)}, "House"), Piece({(1, 1)}, "House"), Piece({(2, 2)}, "Yard")]
     legend = legend_counts(pieces, [])
-    assert legend.height == 22 + 16 * 2 + 8
+    assert legend.height == 22 + 16 * 3 + 8
 
 
 def test_the_reference_picture_carries_a_ruler_of_its_pixels():
