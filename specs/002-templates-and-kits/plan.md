@@ -40,6 +40,18 @@ cultures' kits and templates, which the alpha opens too, are R16's, in these for
 recorded for them (R-13, R-16). It is validated by tests outside the game, then by a load in the game
 ([quickstart.md](quickstart.md)).
 
+Update of 2026-11-25: the river-bend town is read again from its screenshot, one area at a time, the East Square area
+first, and its render becomes the comparison each area is set beside, as the maintainer directed and the design keeps
+it (R-19). A reading from a picture now types its pieces: roads with grade, width, centre line and destination, and
+households with one plot each and its contents; the check reports every road and household rule the design gives
+(eight directions, no road on a house or plot, ends landing on a road, a gate or the map's edge, each road leading to
+a piece it touches, each house against a road, yard or porch, a plot for each household, no house outside its plot,
+no cell in two plots), draws each household with its plot, house and yards, and reports each kind of piece's share of
+the area beside the screenshot's area and the render's (R-21). An Empire template's wall circle share and its distance
+from the map's edge are reported (R-23). How the oblique screenshot's ground is laid onto the cells is put to the
+maintainer; the plan is written to the recommended option, a projective fit from ground points, and no area is read
+until he answers (R-20). Everything stays in the Python check (R-22).
+
 ## Technical Context
 
 **Language/Version**: C# for Mantle's definition classes, targeting `net10.0` (research R-2); XML 1.0, UTF-8, for
@@ -65,7 +77,10 @@ check wherever Python and `Data/` are, on the maintainer's computer and in cloud
 (`ModUpdating.txt` lines 139-151) and Imperium's, and a development tool at the root that neither mod loads
 
 **Performance Goals**: checking and drawing one template, or one laid-out city beside its reference, finishes before
-the game reaches its main menu on the same computer (SC-003)
+the game reaches its main menu on the same computer (SC-003); the recurring cost of reading a picture, the time from the start of
+an area's tracing to its two pictures and the number of pictures the maintainer saw before accepting each, is recorded
+for every area in its acceptance items, so that the river-bend town's other areas and the tribal references can be
+costed from the East Square area (SC-016); checking and drawing one area of a reading stays within SC-003's bound
 
 **Constraints**: reference pictures and the game's files stay out of the repository and the released files (FR-021,
 FR-028; `EULA.txt` lines 76, 86), and so do another game's packages and what is read or drawn from them (FR-041); the
@@ -100,7 +115,14 @@ left open, the first two built by no task and no value taken from the third (V);
 maintainer, since the references to read are his choice among candidates (IV): unchanged. Re-checked after the
 review of `checklists/picture-reading.md` and the maintainer's direction on a preset island (2026-11-24): a template
 from a preset island takes the skeleton only and the land is generated first, as the design orders and the maintainer
-directed (I, VI; R-18): unchanged.
+directed (I, VI; R-18): unchanged. Re-checked after the update of 2026-11-25 (R-19 to R-23): the target, an area-by-area
+reading of the river-bend screenshot beside the render, comes from the maintainer's direction and the design archive
+(I, VI); every road and household rule the check adds is a sentence of the design archive, with its line (I, VI);
+the old project's tools, render, tracings, legend and straightened base image are used only to cross-check, or for
+the effect the maintainer directed to keep (II); the one question no source answers, how the oblique ground is laid
+onto cells, is game content and is put to the maintainer with a recommended option, and nothing is read until he
+answers (IV, V); numbers the design does not give, such as how far beyond a road's end a destination may lie, are not
+set (V); the shares are reported with no threshold (V): unchanged.
 
 ## Project Structure
 
@@ -155,6 +177,7 @@ Imperium/                          # Imperium's mod folder
     └── English/
         └── Strings/               # the words of the Empire's word list (R-3)
 readings/
+├── RiverBendTown.xml              # the river-bend town's reading from its screenshot, grown area by area (R-19)
 └── <reference name>.xml           # the tribal readings, one for each template, its source (R-7)
 pyproject.toml                     # the check's package (R-9)
 src/
@@ -165,6 +188,8 @@ src/
     ├── forms.py                   # reading templates, kits, laid-out cities, readings
     ├── checks.py                  # the problems (data-model.md)
     ├── relations.py               # measuring relations (R-6)
+    ├── roads.py                   # roads and households of a reading, and the shares (R-21)
+    ├── ground.py                  # the ground fit of an oblique picture, once FR-052 is answered (R-20)
     ├── pictures.py                # PNG pictures (R-11)
     └── report.py
 tests/

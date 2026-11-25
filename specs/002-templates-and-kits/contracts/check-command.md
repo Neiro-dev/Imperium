@@ -17,6 +17,10 @@ mantle-check --data <Data folder> --out <output folder> --mod <mod folder>... [-
   Each mod's `About/About.xml` gives its package identifier and what it requires (FR-015).
 - `--reference`: a reference picture, by the template's `reference` name and the picture's label, such as
   `RiverBendTown:screenshot=<path>`; repeatable. JPEG, PNG and WebP are read.
+- `--crop`: the part of a reference picture an area of a reading is set beside, by the same name and label and a pixel
+  box, such as `RiverBendTown:render=x0,y0,x1,y1`; repeatable. Where it is left out for a picture the reading lays its
+  cells over (FR-051), the box is the reading's map as the reading's `scale`, or its `ground` fit, places it on the
+  picture (spec FR-053; research R-19, R-20).
 - `<file>`: definition files from a mod's `Defs/`, laid-out city files and readings. Every given mod's `Defs/` is read
   for names (FR-013), and a definition file belongs to the mod whose folder holds it; a laid-out city belongs to the
   mod that holds its template, and a reading to the mod that holds the template whose reference names it, or to none,
@@ -35,6 +39,11 @@ mantle-check --data <Data folder> --out <output folder> --mod <mod folder>... [-
 - `<out>/<defName or city file name>.side-by-side.png` when reference pictures are given (FR-025); where a reading
   holds a `scale`, the reference picture in it carries the reading's cells laid over it at the scale (a small picture enlarged by a whole number first, so that the names, numbers and legend are readable), and the report
   says that mismatches are not marked and that no picture is reported as a match (FR-020, FR-029, FR-051).
+- For a reading from a picture, beside the side-by-side picture, each kind of piece's share of the reading's land,
+  adding up to one, with no threshold; each piece drawn as spec FR-053 sets; and, for a reading with `ground`, each
+  pair's error in cells after the fit (FR-053; research R-20, R-21).
+- For an Empire template, and for a reading of a town with a wall line, the wall circle's share of the map and its least
+  distance from the map's edge, a problem only for a template (FR-056; research R-23).
 - The same inputs give the same files, byte for byte (FR-022).
 
 ## Exit status

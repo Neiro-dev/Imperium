@@ -362,6 +362,52 @@ by FR-048's steps.
 
 ---
 
+### The river-bend town read again from its screenshot (spec FR-052 to FR-056; research R-19 to R-23)
+
+The render stops being the town's reading and becomes the comparison; T037 and T038 stand as drafts until the reading's
+areas are accepted (spec FR-031). Each test is written first and fails before its implementation.
+
+- [ ] T063 [P] Write test readings in `tests/fixtures/us2/roads/`, each holding one road or household problem of
+  data-model.md (road, household) and one holding none, with test pictures the tests make themselves, and
+  `tests/test_roads.py`: each problem is reported with its cells, the clean reading reports none, and a `RouteLine`
+  counts as no road (spec FR-054, FR-055; SC-001)
+- [ ] T064 Read `kind`, `uncertain`, `because`, a road's `grade`, `width`, `widthFrom`, `line` and `leadsTo`, and
+  `household` in `src/mantle_check/forms.py`, reporting each value not in its form (data-model.md; spec FR-014)
+- [ ] T065 Check roads in `src/mantle_check/roads.py`: lay each road's cells from its line and width, and report a grade
+  or width not the culture's, a segment off the eight directions, a road on a house or plot, an end that lands
+  nowhere, a destination that does not touch it, and a network that is not one piece reaching the map's edge (spec
+  FR-054; research R-21)
+- [ ] T066 Check households in `src/mantle_check/roads.py`: a house against no road, yard or porch, a household with no
+  plot, a house cell outside its plot, a cell in two plots (spec FR-055; research R-21)
+- [ ] T067 [P] Write `tests/test_reading_picture.py` for FR-053's drawing and shares: each household's colour and
+  plot, house and yard lines, one outline per building with an inner court open, grade labels, route lines and unsure
+  pieces dashed, a legend with counts, a pixel ruler on the reference picture, and shares that add up to one; then
+  build them in `src/mantle_check/pictures.py` and `src/mantle_check/report.py`, with `--crop` in
+  `src/mantle_check/cli.py` (contracts/check-command.md)
+- [ ] T068 [P] Write the wall circle's test templates in `tests/fixtures/us1/` and tests in
+  `tests/test_templates_and_kits.py`, a share under one half, over two thirds and between, and a wall line 9 and 10
+  cells from the edge; then report them in `src/mantle_check/checks.py`, only reporting for a reading (spec FR-056;
+  research R-23)
+- [ ] T069 Once spec FR-052's question is answered: if it is the recommended option, write
+  `tests/test_ground.py` (a test picture the test draws at a known slant, four or more pairs, each pair's error
+  reported, the tracing laid over the picture where the mapping puts it) and build `src/mantle_check/ground.py`, and
+  use it in `src/mantle_check/pictures.py`; if it is another option, rewrite this task from the answer (research R-20)
+- [ ] T070 Read the East Square area into `readings/RiverBendTown.xml` from
+  `template-references/河湾城-原图与描线/原图-1596x1017.png` alone: scale by person-sized things (FR-048), roads first
+  with grades and destinations, then households with plots, each piece with its region and each building or group with
+  its use; open the render's same area and the old tracing only after the tracing is drawn; check and draw it with
+  `--reference` and `--crop` for the screenshot and `template-references/河湾城-最新版-1112/1比1整城样张.png` until no
+  problem is reported; record the minutes spent (spec FR-049, FR-050, FR-053, SC-015, SC-016). Waits for T069
+- [ ] T071 Put the East Square tracing over the screenshot, and later the area laid out beside the screenshot and the
+  render, in the project's files, and add one item for each to `checklists/acceptance.md`, naming the reading, the
+  commit, the pictures, the minutes and the pictures seen before acceptance, for the maintainer to check (spec FR-029,
+  FR-050, SC-015, SC-016)
+- [ ] T072 Read the town's other areas the same way, one at a time, each after the one before is accepted (spec
+  FR-050)
+- [ ] T073 Once every area is accepted, take the Empire kit, with the design's area spectra, and the river-bend
+  template again from the reading in FR-047's order, replacing the drafts of T037 and T038, and check them as T039
+  (spec FR-031, FR-053)
+
 ## Phase 8: User Story 5 - Add a culture by copying one (Priority: P5)
 
 **Goal**: An author copies a culture and checks it with nothing shared changed
@@ -420,7 +466,9 @@ checked, and no shared file changes (spec, User Story 5)
 - **The first kits and templates (Phase 7)**: depends on User Stories 1 to 3; the river-bend town (T035 to T039)
   comes before the tribal culture (T040 to T045) (spec FR-031, SC-008); T054 to T058 depend on nothing in the
   repository, and come before the reading of the preset reference they draw (spec FR-043); T059 to T061 come before
-  T040 to T042 (spec FR-048 to FR-051; research R-17), and T062 before T044 (spec FR-036; research R-18)
+  T040 to T042 (spec FR-048 to FR-051; research R-17), and T062 before T044 (spec FR-036; research R-18); T063 to T068 depend on T059 to T061, T069 on the answer to spec FR-052's question, T070 on T063 to T069, T071 on
+  T070, T072 on each area's acceptance, T073 on T072, and User Story 5 (T046 to T048) is rerun on T073's kit and
+  template
 - **User Story 5 (Phase 8)**: depends on the Empire kit and the river-bend town's template (T037, T038)
 - **Polish (Phase 9)**: depends on all before it; T051 and T052 need the maintainer's computer, with the clone moved
   out of `Mods` as R14's T007 sets up
@@ -500,7 +548,10 @@ T061. Left, each to be written first as a test and each needing its source named
 - Not buildable now: what counts as a piece not matching its picture (FR-051), which is only in the old tool's own
   documentation (`tools/city/说明/sample.md`), not in design meaning.
 
-## Handoff: the East Square correction (2026-11-25; spec, plan and code not yet changed)
+## Handoff: the East Square correction (2026-11-25)
+
+Taken up in spec FR-052 to FR-056, research R-19 to R-23 and T063 to T073; what follows is the handoff as it was
+written.
 
 **Target** (the maintainer's broad direction, to be recorded in spec 002 first): the East Square reading delivers a
 top-down picture on the game's cells of the same kind as the river-bend town's newest cell-level render: roads laid

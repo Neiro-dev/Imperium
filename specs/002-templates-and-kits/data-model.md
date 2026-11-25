@@ -97,6 +97,11 @@ thing form below. Every cell of its terrain, rooms and things lies inside its pl
 | `scale` | `pixelsPerCell` and `referenceCell`, positive numbers: the pixels one cell is and the RimWorld cells one cell of the reference game is; `origin`, optional, the pixel `(x,y)` of the picture where cell (0, 0)'s lower left corner lies, the picture's own lower left corner where it is left out; and `measured`, a list of at least one thing it was got from, each a `name` and a pixel `rect` | in a reading from a picture only, which only a `scale` shows: one cell is sized first, by the figure where the sizes differ | FR-048; R-17 |
 | `from` (of a part or feature) | pixel `rect`s in the reference picture | in a reading from a picture only: the region of the picture the piece was read from | FR-049; R-17 |
 | `use`, `basis` (of a part) | `use` is one of `Housing`, `ShopFront`, `Workshop`, `Tavern`, `Market`, `Public`, `AnnexOrAttic` or `Unclear`; `basis` is one sentence | in a reading from a picture only: a building or group holds both; a `use` outside the list, or a `use` without its `basis`, is reported; the form records no kind of piece, so whether each building or group holds one is judged by eye (spec FR-029, FR-049, SC-013) | FR-049, SC-013; R-17 |
+| `ground` | in a reading of an oblique picture only, once spec FR-052 is answered with the recommended option: `pairs`, at least four, each a `pixel` `(x,y)` of a point on the picture's ground and the `cell` corner `(x,z)` it lies on | four pairs or more, no three on one line; the check fits a projective mapping from them and reports each pair's error in cells, with no threshold | FR-052; R-20 |
+| `kind` (of a part) | in a reading from a picture: `Road`, `RouteLine`, `Plaza`, `Gate`, `Bridge`, `House`, `AnnexOrAttic`, `Plot`, `Yard`, `YardPath`, `Porch`, `CityWall`, `YardWall`, `LowWall`, `Railing`, `Fence`, `LargePiece`, `Tree`, `Water`, `Bank`, `Ruin`, `Unclear`, or a plot's content `Garden`, `VineTrellis`, `Colonnade`, `Shrine`, `WorkshopYard`, `StockPen`, `Shed`, `FrontSteps` | optional; a value outside the list is wrong form; a `RouteLine` counts as no road | FR-053 to FR-055; R-21 |
+| `uncertain`, `because` (of a part) | `true` and one sentence | drawn dashed and marked | FR-053; R-21 |
+| `grade`, `width`, `widthFrom`, `line`, `leadsTo` (of a `Road`) | `grade` one of the culture's grades, for the Empire `MainStreet`, `OldRoad`, `SecondaryStreet`, `Lane`, `RingRoad`, `NarrowWay`; `width` cells; `widthFrom` a pixel `rect`; `line` points `(x,z)` on cell corners; `leadsTo` a part's or household's name | `grade` and `line` required; `width` required for `MainStreet` (5 or 7) and for an even width, which needs `widthFrom` and lies within one cell of the grade's; otherwise the grade's width (old road 5, secondary street 5, lane 3, ring road 3, narrow way 1); the road's cells are laid from `line` and `width` | FR-054; R-21 |
+| `household` (of a `House`, `AnnexOrAttic`, `Plot`, `Yard`, `YardPath` or plot content) | a name | each household has one `Plot` | FR-055; R-21 |
 
 **Thing**: an element named by its `ThingDef`, holding `position`, `rotation`, `stuff` where the definition takes one,
 and `rect` where the definition's `size` is larger than one cell.
@@ -151,7 +156,14 @@ come (FR-020). The picture files are listed in [contracts/check-command.md](cont
 | material | a material the definition does not take, or none where it takes one | FR-018 |
 | missing part | a part that is not optional and has no cells in a laid-out city | FR-029 |
 | broken relation | a relation that does not hold in a laid-out city | FR-029 |
+| road | in a reading from a picture: a `grade` outside the culture's list or a width not its grade's, where the culture gives them; roads, gates and plazas not one network reaching the map's edge; a `line` segment not along one of the eight directions; a road cell on a `House` or `Plot` cell; an end of a `line` landing on no other road's cell, no `Gate` and not the map's edge (a `Plaza` not counting); no `leadsTo`, or a `leadsTo` naming a piece that, with its household's yards, does not touch the road | FR-054; R-21 |
+| household | in a reading from a picture: a `House` none of whose cells shares an edge with a `Road`, `Yard` or `Porch`; a household with no `Plot`; a `House` cell outside its household's `Plot`; a cell in the `Plot`s of two households | FR-055; R-21 |
+| wall circle | an Empire template on a 350×350 map whose wall line encloses less than one half or more than two thirds of the map, or lies fewer than 10 cells from its edge; for a reading both numbers are only reported | FR-056; R-23 |
 | no comparison | a template or laid-out city with a reference picture label given no picture, or one that cannot be read; it does not stop the run | spec, Edge Cases |
+
+Beside each area of a reading drawn with its reference pictures, the check reports the share of the area's cells each
+kind takes, each cell counted once in the order water, wall, house, yard and yard path, the rest of the plot, road and
+plaza, tree, unclear, the shares adding up to one, with no threshold (FR-053; R-21).
 
 The check does not report a reading that lacks a `scale`, a `from` or a `use`: it cannot tell a reading from a picture
 except by its `scale`, and whether each traced piece holds them is judged by the maintainer's eye (spec SC-013;

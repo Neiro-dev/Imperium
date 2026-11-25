@@ -434,3 +434,125 @@ files, to `Neiro-dev/Imperium-old` at 20a052b, to Spec Kit at v1.4.3 and to Harm
   direction.
 - **Open**: which coast-related parts a template holds, and what generation does with them (R2); none is written
   here, since no reading of a preset island has been made.
+
+## R-19: The river-bend town is read again from its screenshot, the render being the comparison
+
+- **Decision**: the river-bend town's reading is made again from its screenshot,
+  `template-references/河湾城-原图与描线/原图-1596x1017.png`, one area at a time under spec FR-050, the East Square area
+  first, and is kept as one file in `readings/` that grows by area (R-7). Each area is traced only as far as blocks,
+  house groups, yards and roads (FR-049); roads are traced first, as one network (FR-054), then households along them,
+  each with its plot (FR-055). The check draws each area as R-11 draws a reading, with each household in its own colour,
+  its plot outlined thick, its house thin and its yards dashed, and sets it beside the screenshot's area and the
+  render's same area, `template-references/河湾城-最新版-1112/1比1整城样张.png`, cropped to the box in the render's
+  cells that the developer gives and drawn so that the area has the same width in each; beside them it reports each kind
+  of piece's share of the area's land (FR-053). The render and the old project's tracings are opened for an area only
+  after its tracing is drawn, to cross-check it. Once every area is accepted, the Empire kit and the river-bend
+  template are taken again from the reading in FR-047's order, the kit holding the design's area spectra (FR-031,
+  FR-053); T037 and T038 stand as drafts until then.
+- **Rationale**: the maintainer's broad direction of 2026-11-25 (spec, Clarifications); the design keeps the render
+  for side-by-side comparison and has later layouts follow its proportions (design archive `cities.md` lines 333-337),
+  and does template No. 1 one area at a time, the East Square area first (`cities-forms.md` lines 199-200); the effect
+  of the old preview tool is kept (FR-051), whose per-household picture and land shares give the drawing and the
+  numbers (Imperium-old `designs/tools/city/说明/sample.md` lines 250-253 and 354-356, only for their effect, not their
+  code or numbers); the render and the old tracings only cross-check (constitution, Principle II).
+- **Cross-check aid**: Imperium-old's legend of this screenshot (`designs/研究/城/纪元117-图例-2026-11-12.md`,
+  research class, spec 005 `research/C19.md` line 11) says how its dirt roads, paving, yards, walls, roofs, trees and
+  fields look; the reader may compare a tracing with it, and takes no rule from it (Principle II).
+- **Alternatives considered**: keeping the render as the town's reading, as FR-031 had it. Rejected by the
+  maintainer's direction of 2026-11-25 (spec, Clarifications) and by the design, which keeps the render as the
+  comparison. Copying the render's cells or the old East Square tracing. Rejected: the same direction, and Principle II.
+  A per-building lookup of the original's building variants, as tried on 2026-11-25. Rejected: the design traces no
+  finer than blocks, house groups, yards and roads and identifies no building one by one (`cities-forms.md` line 475;
+  Imperium-old `现行/城/罗马城-做法与顺序.md` line 172).
+
+## R-20: Laying the oblique screenshot's ground onto the cells
+
+- **Open** (spec FR-052, NEEDS CLARIFICATION, put to the maintainer as his broad direction, Principle IV): no source in
+  the Source Register gives a way of laying an oblique picture's ground onto cells.
+- **Recommended option, which the plan is written to until he answers**: ground points the picture shows clearly, such
+  as road corners, plaza corners and bridge ends, each paired with the cell corner it lies on, at least four, give a
+  projective fit from the picture's pixels to the cells; houses are placed by where their walls meet the ground, and
+  no height is read. A reading that uses it holds a `ground` element with the pairs (data-model.md); the check fits the
+  mapping from them and uses it both to lay the tracing over the screenshot (FR-051) and to cut the screenshot's area
+  for the side-by-side picture (FR-053). The fit needs no new dependency: eight unknowns solved by least squares over
+  the pairs with Python's own library, so R-9's dependencies stay. Each pair's error after the fit is reported, in
+  cells, and no threshold is set, since no source gives one (Principle V).
+- **Rationale for recommending it**: a flat ground seen at a slant differs from a top-down view by exactly such a
+  mapping, found from points on that ground; the design takes from the oblique view only its layout and slanted blocks
+  (design archive `cities.md` lines 319-320), which lie on the ground; and the old project read this screenshot the
+  same way (Imperium-old `designs/tools/city/说明/sample.md` lines 12, 21 and 238-241), which only cross-checks
+  (Principle II).
+- **Alternatives offered**: B, reading the old project's straightened base image, which is its output and so only
+  cross-checks (Principle II) unless the maintainer directs its use; C, reading each area unstraightened with a scale
+  measured in two directions, which distorts away from the picture's centre.
+- **Until it is answered**: no area of the screenshot is read (spec, Edge Cases), and the tasks that read it wait.
+
+## R-21: Roads and households in a reading
+
+- **Decision**: a part of a reading from a picture may hold `kind`, one of `Road`, `RouteLine`, `Plaza`, `Gate`,
+  `Bridge`, `House`, `AnnexOrAttic`, `Plot`, `Yard`, `YardPath`, `Porch`, `CityWall`, `YardWall`, `LowWall`, `Railing`,
+  `Fence`, `LargePiece`, `Tree`, `Water`, `Bank`, `Ruin` or `Unclear`, or a plot's other contents by the design's names
+  (`Garden`, `VineTrellis`, `Colonnade`, `Shrine`, `WorkshopYard`, `StockPen`, `Shed`, `FrontSteps`); any piece may hold
+  `uncertain` with `because`, one sentence, and is then drawn dashed and marked (FR-053). A `RouteLine` is drawn as a
+  grey dashed line and counts as no road. A `Road` holds
+  `grade` (for the Empire's reading `MainStreet`, `OldRoad`, `SecondaryStreet`, `Lane`, `RingRoad`, `NarrowWay`, the
+  widths checked only where the culture gives them), `width` where its grade has
+  two or where it is even, `widthFrom` (the pixel rect the picture gives an even width from), `line` (its centre line,
+  points on cell corners) and `leadsTo` (the name of a house, a household or a plaza). A `House`, `Plot`, `Yard`,
+  `YardPath` or plot content holds `household`. The check lays each road's cells from its line and width (an odd width
+  centred, an even one one cell more to the east or north) and reports, as problems with their cells (FR-019): a grade
+  outside the list or a width not its grade's (FR-054); a line segment not along one of the eight directions; a road
+  cell on a house or plot cell; an end of a line that lands on no other road's cell, no gate and not the map's edge, a
+  plaza not counting; a road with no `leadsTo`, or whose `leadsTo` names a piece that, its yards included, does not
+  touch it; roads, gates and plazas not forming one network that reaches the map's edge; a house none of whose cells
+  shares an edge with a road, a yard or a porch; a household with no plot; a
+  house cell outside its household's plot; and a cell in two households' plots (FR-055). The shares of FR-053 count
+  each cell of the area once, by its piece's kind, a cell of several taking the first in the order water, wall, house,
+  yard and yard path, the rest of the plot, road and plaza, tree, unclear.
+- **Rationale**: spec FR-054 and FR-055, which take the rules from the design archive (`cities-inside.md` lines
+  182-203 and 485-500; `cities-forms.md` lines 491-493); the grade names and widths are the design's (lines 185-186); a
+  road's cells follow from its line and width because the design sets the width by grade, never by a band measured on
+  the picture (line 184); a line on cell corners with segments in eight directions is the form the design's own rule
+  speaks of (line 191). No source gives an order for a cell two pieces cover; the order above is the reading's own
+  layering, and since the shares are a comparison and not a threshold (FR-053), the order only makes them add up to
+  one (Principle V: the effect is kept, no number is set). The shares are counted from the reading's pieces, not from the picture's
+  colours: the old tool's colour-based shares misread roof shade as water and so overstated green, by up to six
+  points in one area (Imperium-old `designs/回报/草地量具独立核.md` item 3b; `designs/tools/city/说明/sample.md` line
+  252).
+- **Alternatives considered**: a road as rects only, as parts have been. Rejected: eight directions and landing ends
+  cannot be told from rects. Recording a road's ends as names of what they land on (the old tool's way). Rejected: the
+  design asks that ends land, which the cells show; a name the reader writes could be wrong while the cells are right.
+  Counting a plaza beside a building as a road for the building's access, and a building reached through a neighbour
+  across a shared wall (both in the old tool's manual only). Rejected: the design names road, yard and porch only.
+- **Open**: the road grades and widths, the eight directions and the list of a plot's contents come from rulings made
+  before 2026-11-14; the maintainer's later direction keeps from those only what he confirmed after that date, and his
+  direction of 2026-11-25 confirms the network laid first, houses along roads and plots apart, but not these details
+  one by one. Whether they are part of what he confirmed is put to him with the question of R-20; T065 and T066 build
+  the rules with the Empire's values as data, so that his answer changes data, not code.
+
+## R-22: The check stays the Python package
+
+- **Decision**: everything above is built in the existing `mantle_check` package (R-9); the C# draft of 2026-11-25
+  (local branches `claude/east-square-demo` and `claude/east-square-lookup`) is not taken.
+- **Rationale**: R-9 chose the Python package, and every culture shares one check (FR-033); the C# draft is wired to
+  none of it, and its parts that read pictures are those FR-052 and R-19 reject (a camera fitted by eye, a roof-colour
+  score).
+- **Alternatives considered**: a C# tool that runs the installed game's own loader outside the game, as the tool
+  handoff of 2026-11-24 (project files `tool-handoff-20261124T181554-780f.md` section 5) concluded, reading the tool's
+  behaviour as testing outside the game, whose source is `Data/`, with `ModUpdating.txt`'s C# as the form; the draft's
+  `Game.cs` and `Canvas.cs` do that. Rejected for this feature: spec 002's Assumptions have the check run in cloud
+  threads from the project's copy of `Data/`, where the game's assemblies are not (R-9), and the existing check
+  already reads `Data/` and passes its tests; a C# loader would serve the in-game check, which is R2's and R15's
+  (spec, Assumptions). Using the game's own fonts, picture library and roof-overlay colour, which that handoff also
+  named, needs the installed game for the same reason and is not taken here.
+
+## R-23: The wall circle's share and distance from the map's edge
+
+- **Decision**: for an Empire template whose skeleton holds a wall line on a 350×350 map, the check counts the cells
+  whose centres lie inside the wall line, a river through it included, divides by the map's cells, and finds the least
+  number of cells between the wall line's cells and the map's edge; a share outside one half to two thirds or a
+  distance under 10 cells is a problem. For a reading both numbers are reported and neither is judged (spec FR-056).
+- **Rationale**: design archive `cities-siting.md` lines 250 and 346-347, `cities.md` lines 212-213.
+- **Alternatives considered**: counting the wall band, clear strip and moat toward the 10 cells, as the design does.
+  Not possible here: a template holds the wall line only, and the band, strip and moat are laid by generation (R2), so
+  the check measures from the line and says so.

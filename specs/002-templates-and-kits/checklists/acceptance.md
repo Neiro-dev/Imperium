@@ -15,5 +15,7 @@ check never reports a match by itself.
 - [ ] CHK001 Does the river-bend town's template (`RiverBendTown`, Imperium's `Templates_Empire.xml`) with the Empire's
   kit, drawn at ab5a33d with `mantle-check`, read as the town of its two reference pictures, the screenshot and the
   render? [SC-007, SC-008, FR-030, FR-031]
+  - Note (2026-11-25): the template and kit drawn here are drafts under spec FR-031; they are taken again from the
+    river-bend town's new reading once its areas are accepted (tasks T073), and judged again then.
   - Picture: `r13-check/河湾城-ab5a33d/RiverBendTown.side-by-side.png` in the project's files (a preview, `.preview.png`,
     beside it); the check reports no problem.

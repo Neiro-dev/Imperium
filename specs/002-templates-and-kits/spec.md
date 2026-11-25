@@ -104,7 +104,7 @@ Templates are drawn from reference cities in four steps [Direction]:
    presets for a governor or an AI rival. A preset city's layout may also be read from Anno 117's own data and drawn
    from above, and those drawings are then among its pictures (FR-041 to FR-045).
 2. It is read onto the game's cells, and the reading is set beside its pictures until it matches them, as the
-   river-bend town's render was. Its layout relationships are then taken apart from the reading as a template, and what
+   river-bend town is now read again from its screenshot beside its render (FR-053). Its layout relationships are then taken apart from the reading as a template, and what
    fills them as its culture's kit, in this feature's form, wherever the design and the maintainer's recorded direction
    leave them open (FR-047). Since the reading lies on the game's flat cells and is
    built from the culture's own kit, it carries only the reference's skeleton, the general way the city is laid out,
@@ -115,10 +115,17 @@ Templates are drawn from reference cities in four steps [Direction]:
    FR-029).
 
 The first case is the river-bend town, a player-built city of which the project holds a screenshot, the source, and a
-render on the game's cells, an earlier reading of that single 2D screenshot whose heights, hidden areas and exact sizes
-were guessed [Direction]. It calibrates the method first, before the tribal culture's kit and templates are written
-(FR-031) [Roadmap: R13]. Its template and the Empire's kit are taken from these pictures. Generation lays out the town
-from them [Roadmap: R2, R15]. Every relation of its skeleton must hold in the laid-out town, and the maintainer then
+render on the game's cells, the old project's cell-level sample of the whole town, an earlier reading of that single
+2D screenshot whose heights, hidden areas and exact sizes were guessed [Direction; Design archive: `cities.md`, The
+Anno 117 river-bend settlement]. It calibrates the method first, before the tribal culture's kit and templates are
+written (FR-031) [Roadmap: R13]. The town is read again from its screenshot, one area at a time and the East Square
+area first, and each area's reading is a top-down drawing on the game's cells of the render's kind: roads laid first
+as one connected network, houses along the roads, and each household's plot, yards, walls, trees and plazas as
+separate pieces, in the render's proportions. Each area is set beside the screenshot and the render; the render is
+the comparison, and nothing is copied from its cells (FR-053 to FR-055) [Direction, 2026-11-25; Design archive:
+`cities-forms.md`, Template No. 1]. Its template and the Empire's kit are taken from that reading. Generation lays out
+the town from them [Roadmap: R2, R15]. Every relation of its skeleton must hold in the laid-out town, and the
+maintainer then
 judges the town beside the screenshot and the render. No cell-exact match to the render is asked for, since it is a
 guess too. If the method cannot express the town, the method is fixed first. Once the calibration passes, the town's
 template ships with Imperium as a regular template, as it stands [Roadmap: R15].
@@ -253,6 +260,25 @@ template (FR-030), and the check in the game, the final one, still follows [Test
   design archive `cities-siting.md`, Terrain before the city, which cites `Imperium-Knowledge/现行/城/地形与选址.md`
   lines 22 and 31; FR-002).
 
+### Session 2026-11-25
+
+- Q: What does the reading of the river-bend town deliver, and what is it compared with? → A: It is made again from
+  the screenshot, one area at a time, the East Square area first, and each area delivers a top-down drawing on the
+  game's cells of the same kind as the render, the old project's cell-level sample of the whole town: roads laid
+  first as one connected network, houses along the roads, and each household's plot, yards, walls, trees and plazas
+  as separate pieces, in the render's proportions. Each area is set beside the screenshot and beside the render's same
+  area. The render is the comparison, not the reading, and no cell-exact match to it is asked for, since its cells are
+  a guess too; nothing is copied from its cells or from the old project's tracings (the maintainer's broad direction,
+  2026-11-25; design archive `cities.md`, The Anno 117 river-bend settlement, where the sample is kept for side-by-side
+  comparison and later layouts follow its proportions, and `cities-forms.md`, Template No. 1, where the town is done
+  one area at a time, the East Square area first; constitution, Principle II).
+- Q: The screenshot is oblique, and FR-052 forbids reading a picture the spec gives no form for: how do FR-031 and
+  FR-052 fit? → A: FR-052 leaves which picture to use to the maintainer, and he has directed that the river-bend town
+  be read from its screenshot, so that picture is read. The design takes from its oblique view what that view can
+  give, its layout with its slanted blocks, and not the look of its roofs or its tree shadows (design archive
+  `cities.md` lines 319-320). How the screenshot's ground is laid onto the game's cells is still open (FR-052), and
+  the East Square reading waits for it.
+
 ## Sources
 
 Each requirement below names its source in brackets. The sources are those the constitution's Source Register gives:
@@ -270,7 +296,13 @@ Each requirement below names its source in brackets. The sources are those the c
   Imperium-old b218bdc (`specs/005-imperium-design-archive/`): `cities.md`, sections The size of a cell and the Anno
   sample, which the settlement grafted onto RimWorld's logic is kept as "for side-by-side comparison"; and
   `cities-forms.md`, lines 123 (a template candidate comes only from tracing an accepted reference), 199 (each area shown
-  once after tracing and once after layout) and 475 (traced only as far as blocks, house groups, yards and roads).
+  once after tracing and once after layout) and 475 (traced only as far as blocks, house groups, yards and roads);
+  `cities.md`, The Anno 117 river-bend settlement, lines 319-320 (what the oblique view gives and what it does not) and
+  333-337 (the sample kept for side-by-side comparison, later layouts following its proportions); `cities-forms.md`,
+  Template No. 1, lines 157-160 and 199-200 (the town done one area at a time, the East Square area first), and lines
+  491-493 (tightly adjoining roofs as one household and one building); and `cities-inside.md`, Street network, sections
+  Road grades and widths (lines 182-187) and Roads reaching buildings (lines 191-203), and Rings, field and households,
+  section Placing by household (lines 485-500).
 - **[Testing]**: the constitution's Source Register, row Testing outside the game: the base game and official
   expansions in `Data/`; testing outside the game comes before testing in the game and does not replace it, and
   testing in the game is the final check.
@@ -376,6 +408,11 @@ Each requirement below names its source in brackets. The sources are those the c
     maintainer then judges it by eye beside the screenshot and the render, with no cell-exact match to the render. A
     method that cannot express the town is fixed first. Once the calibration passes, the town's template ships as a
     regular template, as it stands, with no credit line.
+  - The river-bend town is read again from its screenshot, which is the source, one area at a time, the East Square
+    area first, and the render is the comparison each area is set beside, not the reading. Each area delivers a
+    top-down drawing on the game's cells of the render's kind: roads laid first as one connected network, houses along
+    the roads, and each household's plot, yards, walls, trees and plazas as separate pieces, in the render's
+    proportions, with no cell-exact match. Copying the render's cells is not the goal (2026-11-25).
 - **[Spec Kit]**: the feature description given to `/speckit-specify` (Input, above), the development workflow's
   source for what a feature is for; and Spec Kit v1.4.3's own forms where the Input gives none: a report's findings
   each with its location (`templates/commands/analyze.md` line 181), a rerun without changes giving the same results
@@ -560,6 +597,36 @@ and confirm that no shared file was changed.
   both [Direction].
 - `Data/` cannot be found or is of another game version: the check stops and says so, and reports nothing as
   passing.
+- How the river-bend screenshot's ground is laid onto the cells has not been given (FR-052): no area of it is read,
+  and nothing is read by a method of the reader's own in its place [constitution, Principle V].
+- In the oblique screenshot a roof stands above its plot and shows displaced from where its walls meet the ground: a
+  house is placed by where it meets the ground, and the look of its roof is not taken [Design archive: `cities.md`
+  lines 319-320].
+- The screenshot draws its people small, a house being six to eight people wide [Design archive: `cities.md` line
+  190], so a person-sized thing spans few pixels and FR-048's scale is coarse: the scale names each thing it was got
+  from, and a scale that makes houses far too large or too small shows in the side-by-side picture beside the render,
+  where the maintainer judges it (FR-029, FR-053).
+- A road runs under a tree, a roof or a shadow, or a building's way in cannot be seen: the hidden stretch is not
+  invented; the road's end is reported as not landing (FR-054), and a way in that cannot be seen is written as unclear
+  with the region looked at, so that the maintainer sees it at the area's first look (FR-050).
+- A road reaches the edge of the area being read and goes on beyond it: the edge of the reading's map is the map edge
+  for FR-054, and the next area's reading takes it up.
+- A dark band beside a roof is a shadow, falling westward or eastward with the picture's light, not part of a house or
+  a wall: it is read as the ground it lies on, and where that ground cannot be told it is written as unclear; a roof's
+  edge is taken at its eave, not at the shadow's edge.
+- A piece is changed only so that the check stops reporting it, such as a road's destination moved to a building the
+  picture does not show it leading to: each piece names the region of the picture it was read from (FR-049), and a way
+  in that the picture does not show is written as unclear, not chosen to pass a rule (FR-054).
+- A reading is traced after looking at the render's cells or the old project's tracing of the same area: what is
+  traced may be copied from them, which FR-053 forbids; they are opened for an area only to cross-check its tracing
+  [constitution, Principle II].
+- Something proposes positions by a score, such as one of roof colours: the check proposes no position and accepts
+  nothing; what the reader traces comes from the picture, and the area is accepted only by the maintainer's eye
+  (FR-029, FR-051).
+- A plot, a house or a yard of one household reaches into a road or into another household's plot: the check reports
+  the cells (FR-054, FR-055), and the reading is not accepted while any is reported (FR-036).
+- The render's same area cannot be found, or the render is missing from `template-references/`: the check draws the
+  area beside the screenshot alone, says the render is missing, and the area's comparison waits for it.
 
 ## Requirements *(mandatory)*
 
@@ -691,10 +758,13 @@ and confirm that no shared file was changed.
 - **FR-031**: The first template MUST be the river-bend town's, with the Empire's kit, and they MUST calibrate the
   method first [Direction; Roadmap: R13]:
   - In this feature, before the tribal culture's kit and templates are written, its template and the Empire's kit MUST
-    be derived in the order of FR-047, and where that order leaves them to a reading, taken from its reference pictures:
-    the screenshot of the player-built city, which is the source, and the newest render on the game's cells, the town's
-    reading, with its heights, hidden areas and exact sizes guessed, both in `template-references/` in the project's
-    files (FR-036). The template MUST fit a city's 350×350 map, whatever size the render was drawn at, keeping the same
+    be derived in the order of FR-047, and where that order leaves them to a reading, taken from the town's reading,
+    made from its reference pictures as FR-053 sets: the screenshot of the player-built city, which is the source the
+    reading is made from, and the newest render on the game's cells, the old project's reading, with its heights,
+    hidden areas and exact sizes guessed, which is the comparison each area of the reading is set beside, both in
+    `template-references/` in the project's files (FR-036). A template and kit written from the render before the
+    reading count as drafts, and are taken again from the reading once its areas are accepted. The template MUST fit a
+    city's 350×350 map, whatever size the render was drawn at, keeping the same
     skeleton relations (Clarifications). The check MUST pass the template and kit and draw the template beside both
     pictures; if the forms cannot express the town, they MUST be fixed first [Direction; FR-003; FR-025].
   - Once generation lays the town out from them [Roadmap: R2, R15], the town MUST keep every relation of its skeleton,
@@ -730,7 +800,7 @@ and confirm that no shared file was changed.
 - **FR-036**: Wherever the design and the maintainer's recorded direction leave them open (FR-047), a culture's
   templates and kit MUST be taken from its reference city's reading: the reference is read onto the game's cells, and
   the reading is set beside its pictures until the maintainer, judging it by eye beside them, accepts it, recorded as
-  FR-029 sets, as the river-bend town's render was judged; then the template's terrain shape and skeleton, and what the
+  FR-029 sets, as each area of the river-bend town's reading is (FR-050, FR-053); then the template's terrain shape and skeleton, and what the
   kit's groups, fill and wall settings hold, are taken apart from the reading [Direction]. From the reading of a preset
   island only the skeleton is taken, the parts and the relations among them: the island's ground, sea and shore are
   not, since terrain is generated first from the world tile and the city follows it, yielding to the terrain first;
@@ -738,9 +808,9 @@ and confirm that no shared file was changed.
   Terrain before the city]. A new reading MUST be written
   in the laid-out city's form (FR-008), naming the reference city it reads in place of a template and kit, so that the
   check checks it and draws it beside the reference pictures as it does a laid-out city (FR-025) [Direction; Spec Kit];
-  the river-bend town's reading is its render, which already exists (FR-031). A reading written in that form MUST be
-  kept in the repository, outside both mod folders and so outside their released files, as the template's source; its
-  reference pictures MUST NOT be (FR-028) [Direction; R14; EULA: line 76].
+  the river-bend town's reading is made from its screenshot, and its render is the comparison (FR-031, FR-053). A
+  reading written in that form MUST be kept in the repository, outside both mod folders and so outside their released
+  files, as the template's source; its reference pictures MUST NOT be (FR-028) [Direction; R14; EULA: line 76].
 - **FR-037**: Where FR-047 leaves them to a reading, the tribal culture's first templates and its kit MUST be taken from
   cities of Anno 117's Albion built only in the Celtic way, neither Romanized nor mixed, at the scale of a tribal
   settlement, and shown from above so that their layout can be read: player-built cities shared publicly from any
@@ -877,8 +947,8 @@ and confirm that no shared file was changed.
   the list of districts follows (`cities.md` lines 63-66); the sizes of 2800 to 9200 cells and the weighting that the
   design uses to divide a generated city (`cities-forms.md` lines 487-489) are not taken for a reading, since no source
   gives the weighting for a picture (constitution, Principle V). FR-044 governs the drawing of a preset from its data
-  and FR-050 the making of a reading from a picture; the river-bend town's render, which already exists (FR-031), is
-  outside FR-050.
+  and FR-050 the making of a reading from a picture; the river-bend town's reading is made under FR-050, the East
+  Square area first (FR-053).
 - **FR-051**: The check MUST draw a tracing over its reference picture at the scale FR-048 gives, the pixels one cell
   is, compare each traced piece with the colour and shape of the picture where it lies, and mark each piece that does
   not match as a candidate for the maintainer's attention, with what differs. It MUST NOT decide that a piece is wrong
@@ -901,7 +971,82 @@ and confirm that no shared file was changed.
   that the design archive gives no method of straightening an oblique picture, and takes from its one oblique view only
   what that view can give (`cities.md` lines 319-321), while the maintainer's direction is that references be shown
   from above (FR-037; Clarifications, 2026-11-24). Whether a candidate is shown from above is judged by the maintainer,
-  who chooses among the candidates (FR-037) [Direction]; no source gives a test.
+  who chooses among the candidates (FR-037) [Direction]; no source gives a test. The river-bend town's screenshot is
+  oblique, and the maintainer has directed that the town be read from it (FR-053), so which picture to use is settled
+  for it [Direction, 2026-11-25]. From its oblique view a reading takes what that view can give, the layout with its
+  slanted blocks, and not the look of its roofs or its tree shadows [Design archive: `cities.md` lines 319-320]. How
+  the screenshot's ground is laid onto the game's cells is [NEEDS CLARIFICATION: neither the design archive nor any
+  other source the Source Register gives names a way of laying an oblique picture's ground onto cells; the old project
+  did it for this screenshot with a fitted transform, which is its implementation and only cross-checks (constitution,
+  Principles II and V); it is game content, how a reference city is read into a template, and so the maintainer's
+  broad direction (Principle IV)]. Until it is given, no area of the screenshot is read, and FR-048 to FR-051 still
+  hold for every other picture.
+
+**The river-bend town's reading from its screenshot**
+
+- **FR-053**: The river-bend town's reading MUST be made from its screenshot, one area at a time under FR-050, the
+  East Square area first [Design archive: `cities-forms.md` lines 199-200; Direction, 2026-11-25]. Each area MUST give
+  a top-down drawing on the game's cells of the same kind as the render: roads laid first as one connected network,
+  houses along the roads, and each household's plot, its yards, the walls, the trees and the plazas as separate pieces
+  [Direction, 2026-11-25; Design archive: `cities-inside.md`, Road grades and widths, Roads reaching buildings and
+  Placing by household]. The drawing MUST show each household in a colour of its own, its plot outlined thick, its
+  house thin and its yards and yard paths dashed, and named; one outline for each building, an inner court left open;
+  each road labelled with its grade; a route line, a way seen in the picture that is not a road's surface, as a grey
+  dashed line that no rule counts as a road; a piece the reader is not sure of drawn dashed and marked, with what makes
+  it unsure; and a legend that counts the pieces of each kind. The screenshot's area beside it MUST carry a ruler of its
+  pixels [Direction: the effect of the old project's preview tool is kept, 2026-11-24 (FR-051), whose per-household
+  picture, overlay and rulers draw them so]. The check MUST set each area's drawing
+  beside the screenshot's area and beside the render's same area, each drawn so that the area has the same width, so
+  that the proportions can be compared by eye, and MUST report beside them the share of the area's land each kind of
+  piece of FR-054 and FR-055 takes, roads and plazas, houses, yards, the rest of the plots, walls, trees and water,
+  and what is unclear, the shares adding up to one [Direction: the same preview tool's effect, which reports such
+  shares for comparing areas and not as a cell-exact truth]; later layouts follow the render's proportions, which the
+  maintainer judges by the picture, and no share is a threshold and no cell-exact match to the render is required,
+  since its cells are a guess too [Design archive: `cities.md` lines 333-337; Direction; FR-029, FR-031]. Where the
+  Empire kit is taken again from this reading, what the design defines for a kit is reused under FR-047, the area
+  spectra among them: for each type of area, what it holds, how many households of what size, and the relations of its
+  pieces, the East Square area's spectrum serving as the spectrum of small squares with housing [Design archive:
+  `cities-forms.md`, Area spectra and fragments, lines 462-471 and 500-501]. Every piece MUST be traced from the
+  screenshot: the render, its cells and the old project's tracings MUST be
+  used only to cross-check a reading, and nothing is copied from them [constitution, Principle II; Direction,
+  2026-11-25].
+- **FR-054**: In a reading from a picture, roads MUST be traced as the design traces them, and the check MUST report
+  each one that breaks a rule [Design archive: `cities-inside.md` lines 182-187 and 191-203]:
+  - a road MUST hold its grade, and where the reading's culture gives its grades and their widths, its width MUST be
+    its grade's. The Empire's are the design's: main street 5 or 7, old road 5, secondary street 5, lane 3, ring road 3
+    and narrow way 1; an even width is allowed only where the reading states the width in pixels that the picture gives
+    it and that width lies within one cell of its grade's. A culture whose grades are not yet given has no width
+    checked [Design archive: same lines; FR-047];
+  - a road MUST run in the eight directions only;
+  - a road cell MUST NOT cover a house cell or a household's plot;
+  - both ends of every road MUST land on another road, a gate or the edge of the reading's map; a plaza is not a node
+    of the network and only has to touch a road;
+  - every road MUST name the building or plaza it leads to, and that building, its yard included, or that plaza MUST
+    touch the road;
+  - every building MUST have at least one side against a road, a yard or a porch, a wall between not counting;
+  - the roads, gates and plazas MUST form one network, reaching the edge of the reading's map.
+  The design gives no length for the extension of a road that a destination may touch instead of the road, so only
+  touching the road counts (constitution, Principle V).
+- **FR-055**: In a reading from a picture, houses MUST be traced by household: roof blocks that adjoin tightly with
+  slightly offset positions are one household and one building whose outline they make together, and a yard joined to
+  them belongs to that household, as do its annexes and attics, a building with its annex and small yard counting as
+  one item [Design archive: `cities-forms.md` lines 490-493; `cities-inside.md` lines 497-499; FR-049, use
+  `AnnexOrAttic`].
+  Each household MUST hold one plot and what the plot holds, each named as the design names it (yard, garden, vine
+  trellis, colonnade, shrine, workshop yard, stock pen, shed, yard path, front steps) or as unclear; the house on it may
+  be L-shaped, stepped or of several blocks [Design archive: `cities-inside.md` lines 494-497]; a road that reaches
+  into a yard is not a house [Design: Imperium-old b218bdc, `Imperium-Knowledge/现行/城/罗马城-做法与顺序.md` line 156]. The
+  check MUST report a household with no plot, a house cell outside its
+  household's plot, and a cell in the plots of two households, since the land the streets enclose is divided into
+  households [Design archive: `cities-inside.md` lines 485-487]. Whether a plot is regular is judged by the maintainer's
+  eye, since the design defines "regular" by no shape (FR-029) [constitution, Principle V].
+- **FR-056**: For an Empire template on a city's 350×350 map, the check MUST report the share of the map that its wall
+  circle takes, the river through it included, and the least distance from its wall line to the map's edge, and MUST
+  report as a problem a share outside one half to two thirds or a distance under 10 cells; for a reading, which is at
+  1:1 and not fitted to the map, it MUST report both numbers and judge neither [Design archive: `cities-siting.md`
+  lines 250 and 346-347, and `cities.md` lines 212-213, where the share and the distance are judged when templates and
+  samples are output and the 1:1 version only reports them]. The wall band, clear strip and moat that the design counts
+  inside the 10 cells are generation's, so the check measures from the template's wall line (R2) [Roadmap: R2].
 
 ### Key Entities *(include if feature involves data)*
 
@@ -928,11 +1073,16 @@ and confirm that no shared file was changed.
   and its **reference pictures**, such as a screenshot of it, which the developer keeps outside the repository and
   both mods' released files (FR-028).
 - **Reading**: a reference city read onto the game's cells and set beside its pictures until it matches them, in the
-  laid-out city's form, from which a culture's templates and kit are taken; for the river-bend town, its render. It is
+  laid-out city's form, from which a culture's templates and kit are taken; for the river-bend town, the reading made
+  again from its screenshot, area by area, its render being the comparison (FR-053). It is
   kept in the repository as its template's source; its reference pictures are not. A reading is the whole and its file;
   a reading from a picture is made by tracing the picture into cells (FR-049) and then laying out what is traced
   (the next stage of FR-050); a preset's objects are read from its data (FR-041); and drawing is what the check draws
   (FR-023, FR-025) and the top-down pictures of a preset (FR-043).
+- **Road**: in a reading from a picture, a piece with its grade, its width, the place it leads to and its two ends,
+  which land on another road, a gate or the map's edge (FR-054).
+- **Household**: in a reading from a picture, one building, made of the roof blocks that adjoin tightly, with its one
+  plot and what the plot holds, yards and yard paths among it (FR-055).
 - **Top-down view**: a preset reference city read from its game's own data and drawn from above: its objects, each
   with its two categories and its position, as a skeleton picture, the same laid over the game's image, `objects.json`
   and a summary, kept in the project's files and used as the reference's pictures (FR-041 to FR-044).
@@ -983,12 +1133,23 @@ and confirm that no shared file was changed.
   their regions and every building or group has a use from the design's eight with a basis (FR-049); the order of
   FR-048's steps and the stopping of the tracing at FR-049's pieces are as the maintainer judges by eye; the maintainer
   saw each area's picture after it was traced and after it was laid out before the next area was begun (FR-050); and
-  no reading is written of a picture FR-048 to FR-051 give no form for (FR-052). The check itself reports each
+  no reading is written of a picture FR-048 to FR-052 give no form for (FR-052). The check itself reports each
   `scale`, `from`, `use` and `basis` that is malformed (FR-019).
 - **SC-014**: For every reading from a picture given with its reference picture, the side-by-side picture shows the
   reading's cells over the reference picture at the reading's scale, no piece is reported as a match and the report
   says that mismatches are not marked, and neither the reference picture nor any picture drawn from it is in the
   repository (FR-028, FR-051).
+- **SC-015**: The East Square area of the river-bend town is read from its screenshot, once FR-052's open question is
+  answered: by inspection, every piece of it is traced from the screenshot and names its region (FR-049, FR-053); the
+  check reports no problem in it, none of FR-054 or FR-055 among them; its drawing shows each household's plot, house
+  and yards as FR-053 sets and is set beside the screenshot's area and the render's same area with each kind of
+  piece's share of the land; and the maintainer has accepted it once after tracing and once after laying out, each an
+  item of `checklists/acceptance.md` (FR-050).
+- **SC-016**: The recurring cost of a reading is recorded for every area: its acceptance items record the time from
+  the start of its tracing to its picture after tracing, and from then to its picture after laying out, and how many
+  pictures the maintainer saw before he accepted each, so that the cost of the town's other areas, and of the tribal
+  culture's references, can be told from the East Square area's; and checking and drawing one area stays within
+  SC-003's bound (FR-050, FR-053).
 
 ## Assumptions
 
