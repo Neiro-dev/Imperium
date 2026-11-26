@@ -6,7 +6,7 @@
 
 **Status**: Draft
 
-**Input**: Parent roadmap: `ROADMAP.md` → entry **R1**. Imperium loads in RimWorld as a mod that requires Royalty and does not require any other expansion, and is complete with Royalty alone (Imperium-old main, docs/imperium.md lines 108-109). Scope: a loadable mod and its expansion requirements only; all content (Mantle, the Empire faction, starting ruins and the rest) is deferred to later roadmap entries. Game content and the released mod's form follow the base game and official expansions in Data/, then ModUpdating.txt, then Harmony.
+**Input**: Imperium loads in RimWorld as a mod that requires Royalty and does not require any other expansion, and is complete with Royalty alone (Imperium-old main, docs/imperium.md lines 108-109). Scope: a loadable mod and its expansion requirements only; all content (Mantle, the Empire faction, starting ruins and the rest) is deferred to later features. Game content and the released mod's form follow the base game and official expansions in Data/, then ModUpdating.txt, then Harmony.
 
 ## Sources
 
@@ -15,7 +15,8 @@ Each requirement below names its source in brackets. The sources are those the c
 - **[Design]**: Imperium's own design, Imperium-old `main` (20a052b): `docs/imperium.md`, section Expansions
   (lines 108-110); `docs/glossary.md`, Royalty (line 35) and Mantle (line 221); `docs/setting.md`, Politics
   (line 83).
-- **[Roadmap]**: `ROADMAP.md`, entry R1, scope boundary.
+- **[Scope]**: this feature's scope as its Input states it: a loadable mod and its expansion requirements only,
+  with all content deferred to later features.
 - **[Data]**: the base game and official expansions in `Data/` of RimWorld 1.7.5014 (`Version.txt`: 1.7.5014
   rev1195): each expansion's `About/About.xml`; the base game's definitions of its expansions in
   `Data/Core/Defs/Misc/ExpansionDefs/ExpansionDefs.xml`; and the base game's mod list and save dialog text in
@@ -30,7 +31,7 @@ Each requirement below names its source in brackets. The sources are those the c
 - **[Test]**: what the game logged in this feature's in-game checks (quickstart.md), run with the testing sources on
   2026-11-24.
 
-Imperium is a remake of Royalty and requires only Royalty [Design: glossary line 35], and in later entries it
+Imperium is a remake of Royalty and requires only Royalty [Design: glossary line 35], and in later features it
 replaces the base game's Empire [Design: setting.md line 83]. Game content is judged by what the official
 expansions contain (constitution, Source Register), so each requirement below is measured against what the official
 expansions do, Royalty first, and not against what an ordinary mod may do. Imperium cannot itself be an official
@@ -55,7 +56,7 @@ Principle IV).
 - Q: What happens when Imperium is turned on or off for a save made with a different set of mods? → A: The game shows
   its mods-mismatch warning, as it does for any change in the active set, official expansions included
   [Data: Dialogs_Various.xml line 126, `ModsMismatchWarningText`]. Because this feature adds no content, the save
-  then loads with no errors from Imperium [Roadmap: R1].
+  then loads with no errors from Imperium [Scope].
 - Q: What keeps Imperium the same mod across releases? → A: Its package identifier, by which the game and other mods
   refer to it [ModUpdating: line 230]. It is unique, follows the format the game requires and does not contain
   "Ludeon" [ModUpdating: lines 231-237], and it does not change once released. Its exact value belongs to
@@ -68,8 +69,8 @@ Principle IV).
 A player who owns Royalty finds Imperium in the game's mod list, where the official expansions are listed too, turns
 it on together with Royalty, and starts or loads a game without problems.
 
-**Why this priority**: every later roadmap entry is content inside this mod, so nothing else can be played or tested
-until the mod loads [Roadmap: every other entry depends on R1, directly or through another entry].
+**Why this priority**: every later feature is content inside this mod, so nothing else can be played or tested
+until the mod loads [Scope].
 
 **Independent Test**: put Imperium in the game's mods, turn on Core, Royalty and Imperium only, restart, and start a new
 game; the game loads with no errors from Imperium, as it does with Royalty alone.
@@ -140,7 +141,7 @@ after the last official expansion, ahead of an ordinary mod; the mod list shows 
   package that is not Ludeon's [ModUpdating: line 244; Data: Menus_Main.xml line 144, `ModWithSameIdAlreadyActive`].
 - Imperium is turned on or off for a save made with a different set of mods: the game shows its mods-mismatch
   warning, as for any change in the active set, and the save loads with no errors from Imperium [Data:
-  Dialogs_Various.xml line 126; Roadmap: R1].
+  Dialogs_Various.xml line 126; Scope].
 
 ## Requirements *(mandatory)*
 
@@ -159,11 +160,11 @@ after the last official expansion, ahead of an ordinary mod; the mod list shows 
 - **FR-005**: With Core, Royalty and Imperium active, starting a new game and loading a saved one MUST produce no
   errors or warnings from Imperium [Design: line 109, complete with Royalty alone], except the one error in which the
   game reports that Imperium loaded no content [Test: quickstart check 1, "Mod Imperium did not load any content"].
-  That report states what FR-007 sets for this feature, and the first roadmap entry that adds content removes it.
+  That report states what FR-007 sets for this feature, and the first feature that adds content removes it.
 - **FR-006**: With any combination of the other official expansions also active, FR-005 MUST still hold
   [Design: lines 108 and 110].
-- **FR-007**: The mod MUST add no game content in this feature; content belongs to later roadmap entries
-  [Roadmap: R1, "Deferred: all content"].
+- **FR-007**: The mod MUST add no game content in this feature; content belongs to later features
+  [Scope].
 - **FR-008**: Wherever the game shows Imperium, it MUST be presented as community-created content, and never as
   official or made by Ludeon [EULA: lines 57 and 78].
 - **FR-009**: The disclaimer the EULA gives MUST be displayed on or reasonably in connection with Imperium
@@ -182,7 +183,7 @@ after the last official expansion, ahead of an ordinary mod; the mod list shows 
 ### Key Entities
 
 - **Imperium**: a remake of Royalty, measured against the official expansions; it holds Mantle and the Empire content
-  in later entries [Design: glossary lines 35 and 221; line 109, "Imperium, Mantle included"]. It is identified by
+  in later features [Design: glossary lines 35 and 221; line 109, "Imperium, Mantle included"]. It is identified by
   its package identifier (FR-010).
 - **Royalty**: the official expansion Imperium remakes and requires, and the closest one to measure it against
   [Design: line 108; glossary line 35].
@@ -219,8 +220,8 @@ after the last official expansion, ahead of an ordinary mod; the mod list shows 
   images [Data: ExpansionDefs.xml lines 13-39 for Royalty, and the same parts for each other expansion]. Imperium's
   description and images take the parts of that form a community mod can use, within FR-008 (research.md R-8).
   Because each official description lists only what that expansion contains, and this feature adds no content, they
-  are written with the content they describe in later entries [Roadmap: R1, "Deferred: all content"].
-- Imperium lists the Harmony mod as a requirement only from the first entry whose code uses Harmony, because a
+  are written with the content they describe in later features [Scope].
+- Imperium lists the Harmony mod as a requirement only from the first feature whose code uses Harmony, because a
   requirement is a mod that must be active for Imperium to function [ModUpdating: lines 266-267] and the Harmony mod
   is enabled above the mods that depend on it [Harmony: `README.md`]; this feature adds no code (FR-007). The Harmony
   mod loads before Core [Harmony: `About/About.xml`, `loadBefore` `Ludeon.RimWorld`], so Imperium, which loads after
