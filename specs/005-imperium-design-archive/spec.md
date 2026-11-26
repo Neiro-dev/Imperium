@@ -6,7 +6,7 @@
 
 **Status**: Draft
 
-**Input**: Description: "An archive of Imperium's design, written from the
+**Input**: Parent roadmap: `ROADMAP.md` → entry **R17**. Description: "An archive of Imperium's design, written from the
 meaning of the design on the default branch of Neiro-dev/Imperium-old, which now holds Imperium-Knowledge/ and
 RimWorld-Imperium/ as they were (Imperium-old PR #291). The old content is right but was written in the wrong form: MUST
 rules, ruling cards and session records. The archive writes the meaning behind them as a coherent setting, not as copied
@@ -73,7 +73,7 @@ to the passage of Imperium-old that says it, so the reader can check it in the s
 **Why this priority**: this is the reason for the archive; without it, each slice has to read the whole old repository
 again.
 
-**Independent Test**: take any subject the design names (for example the Empire faction) and read its part of the
+**Independent Test**: take any subject the roadmap names (for example R3, the Empire faction) and read its part of the
 archive; every statement names a file and place at the pinned commit, and opening it shows a passage that says the
 same.
 
@@ -164,7 +164,7 @@ holds it, with its class and, for a design source, the archive sections that use
 - Appearance: where a source describes how something looks, the archive names the reference images that source points
   to; where it points to none, the look is marked unverified.
 - An unmerged draft, an issue, a pull request or a commit message says something the default branch does not: it is
-  not design (constitution, Principle II), and the archive uses it only to cross-check.
+  not design (constitution, Principle II; `ROADMAP.md`, lines 13-14), and the archive uses it only to cross-check.
 - A passage states a fact about the base game or an official expansion, such as what one of its definitions holds:
   that fact is not Imperium's design, and its source is `Data/` (constitution, Source Register, "Game content and the
   released mod"). The archive gives the design point that rests on it and marks the fact as the old repository's
@@ -226,6 +226,8 @@ holds it, with its class and, for a design source, the archive sections that use
   and no ruling-card or session-record layout.
 - **SC-004**: Every conflict found while reading the sources appears in the archive with each side's pointer, and the
   archive resolves none of them.
+- **SC-005**: For each slice in `ROADMAP.md` (R1 to R16), the archive has a section that covers the design its intent
+  names, or marks it unverified.
 - **SC-006**: No trait of the base game's Empire appears in the archive unless a cited passage states it of Imperium.
 
 ## Assumptions
