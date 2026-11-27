@@ -54,7 +54,10 @@ Every conclusion, including a judgment, MUST name its source and MUST be reached
 Imperium's own design is game content. A part of it holds while the reason it was set holds against what
 the base game and official expansions contain and against the rest of the design; where it is recorded, or
 who proposed it, does not make it hold. Where a part is found not to hold, the agent MUST name what defeats
-its reason and MUST NOT build on it.
+its reason and MUST NOT build on it. Before a part of Imperium's design is specified, the agent MUST read in
+`Data/` how the base game and the official expansions do the same thing, and MUST show, from those Defs and the
+places that use them, whether the part reuses that form, extends it, or, as each expansion does for the core of
+its theme, needs a form of its own.
 
 **Rationale:** Imperium is measured against the official expansions. Judging a design by its reason, not
 by its record, keeps a mistake from being carried forward because it was written down once.
@@ -90,4 +93,4 @@ artifacts are revised in place, `spec.md` first, and the plan and tasks follow f
   redefinitions. MINOR: a new principle or section, or materially expanded guidance. PATCH: clarifications,
   wording, typo fixes, non-semantic refinements.
 
-**Version**: 3.0.0 | **Ratified**: 2026-11-23 | **Last Amended**: 2026-11-25
+**Version**: 3.1.0 | **Ratified**: 2026-11-23 | **Last Amended**: 2026-11-27
